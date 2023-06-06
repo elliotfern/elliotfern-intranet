@@ -134,6 +134,7 @@ class Route {
         /// add customer invoice
         $route->add("/control/accounting/invoice-customer/new","php-forms/accounting/invoice-customer-add.php");
         $route->add("/control/accounting/process/invoice-customer/new","php-process/accounting/customer-invoice-insert.php");
+        $route->add("/control/accounting/invoice/pdf/{id}", "php-forms/accounting/generate_pdf.php");
 
         /// add company supply
         $route->add("/control/accounting/supply/new","php-forms/accounting/company-supply-add.php");

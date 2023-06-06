@@ -272,3 +272,30 @@ function viewDetailInvoicec(idInvoice) {
     },
   });
 }
+
+// AJAX CREATE PDF INVOICE
+
+function btnCreatePDFInvoice(id) {
+  // Send an AJAX request to the server-side script with the invoice ID
+  var server = window.location.hostname;
+  var xhr = new XMLHttpRequest();
+  xhr.open(
+    "GET",
+    "https://" + server + "/control/accounting/invoice/pdf/" + id,
+    true
+  );
+  xhr.responseType = "blob";
+
+  xhr.onload = function (e) {
+    if (this.status === 200) {
+      // Create a blob URL from the received blob data
+      var blob = new Blob([this.response], { type: "application/pdf" });
+      var url = URL.createObjectURL(blob);
+
+      // Open the PDF in a new tab or window
+      window.open(url);
+    }
+  };
+
+  xhr.send();
+}

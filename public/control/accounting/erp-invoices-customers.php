@@ -80,7 +80,7 @@ echo "<hr>";
                                     }
                                 html += '</td>';
                                 html += '<td>'+data[i].tipusNom+'</td>';
-                                html += '<td><button type="button" onclick="btnUpdateBook('+data[i].id+')" id="btnUpdateBook" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalUpdateBook" data-id="'+data[i].id+ '" value="'+data[i].id+ '" data-title="'+data[i].id+ '" data-slug="'+data[i].id+ '" data-text="'+data[i].id+ '">PDF</button>';
+                                html += '<td><button type="button" class="btn btn-sm btn-warning" onclick="bntCreatePDFInvoice('+data[i].id+')" id="pdfButton' + data[i].id +'">PDF</button>';
                                 html += '</td>';
                                 html += '<td><button type="button" onclick="btnUpdateBook('+data[i].id+')" id="btnUpdateBook" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalUpdateBook" data-id="'+data[i].id+ '" value="'+data[i].id+ '" data-title="'+data[i].id+ '" data-slug="'+data[i].id+ '" data-text="'+data[i].id+ '">Update</button>';
                                 html += '</td>';
