@@ -1,18 +1,15 @@
 {
-    "name": "myvendor/elliot",
-    "description": "My package composer",
-    "type": "project",
-    "require": {
-        "php": "^8.1"
-    },
-    "require-dev": {
-        "php": "^8.1"
-    },
-    "license": "GPL",
-    "authors": [
-        {
-            "name": "Elliot Fernandez",
-            "email": "elliot@hispantic.com"
-        }
-    ]
+  "name": "myvendor/elliot",
+  "description": "My package composer",
+  "type": "project",
+  "require": {
+    "php": "^8.1"
+  },
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Elliot Fernandez",
+      "email": "elliot@hispantic.com"
+    }
+  ]
 }

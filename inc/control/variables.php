@@ -5,7 +5,7 @@ $url_root = $_SERVER['DOCUMENT_ROOT'];
 define("APP_ROOT", $url_root); 
 
 $rootDirectory = $_SERVER['DOCUMENT_ROOT'];
-$updatedPath = str_replace('/control/inc/', '', $rootDirectory);
+$updatedPath = str_replace('/httpdocs', '', $rootDirectory);
 
 define("APP_ROOT_CONNECTION", $updatedPath); 
 
