@@ -1,11 +1,8 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+$rootDirectory = $_SERVER['DOCUMENT_ROOT'];
+$updatedPath = str_replace('/httpdocs', '', $rootDirectory);
 
-$url_root = $_SERVER['DOCUMENT_ROOT'];
-
-require_once($url_root . '/inc/connection.php');
+require_once($updatedPath . '/pass/connection.php');
 
 // JSON of Links > all categories
 if ( (isset($_GET['type']) && $_GET['type'] == 'book') && (isset($_GET['slug']) ) ) {

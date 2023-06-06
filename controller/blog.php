@@ -1,7 +1,8 @@
 <?php
-$url_root = $_SERVER['DOCUMENT_ROOT'];
+$rootDirectory = $_SERVER['DOCUMENT_ROOT'];
+$updatedPath = str_replace('/httpdocs', '', $rootDirectory);
 
-require_once($url_root . '/inc/connection.php');
+require_once($updatedPath . '/pass/connection.php');
 
 // JSON of Links > all categories
 if ( (isset($_GET['type']) && $_GET['type'] == 'blog') && (isset($_GET['slug']) ) && (isset($_GET['lang']) ) ) {
