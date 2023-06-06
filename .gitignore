@@ -2,3 +2,5 @@
 /media/
 /wp-content/
 .htaccess
+
+/vendor/
