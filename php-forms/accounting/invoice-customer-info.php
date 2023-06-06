@@ -6,7 +6,7 @@ if (isset($_POST['idInvoice'])) {
 }
 
 //call api
-$url = APP_SERVER . "/controller/route.php?type=customers-invoices&id=" .$idInvoice;
+$url = APP_SERVER . "/controller/control/route.php?type=customers-invoices&id=" .$idInvoice;
 $input = file_get_contents($url);
 $arr = json_decode($input, true);
 $obj = $arr[0];
@@ -33,7 +33,7 @@ $subTotal = $obj['facSubtotal'];
 $facVAT = $obj['facVAT'];
 $malt = $obj['facFees'];
 
-$url2 = APP_SERVER . "/controller/route.php?type=invoice-products&id=" . $idInvoice;
+$url2 = APP_SERVER . "/controller/control/route.php?type=invoice-products&id=" . $idInvoice;
 //call api
 $input2 = file_get_contents($url2);
 $arr2 = json_decode($input2, true);

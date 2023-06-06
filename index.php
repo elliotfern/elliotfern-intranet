@@ -123,9 +123,49 @@ class Route {
         $rootDirectory = $_SERVER['DOCUMENT_ROOT'];
         $updatedPath = str_replace('/httpdocs', '', $rootDirectory);
         require_once($updatedPath . '/pass/connection.php');
-        $rootDirectory = $_SERVER['DOCUMENT_ROOT'];       
+        $rootDirectory = $_SERVER['DOCUMENT_ROOT'];
+        require_once($rootDirectory . '/inc/control/variables.php');   
+
+        // accounting-elliot
+        /// add customer
+        $route->add("/control/accounting/customer/new","php-forms/accounting/customer-add.php");
+        $route->add("/control/accounting/process/customer/new","php-process/accounting/customer-insert.php");
+
+        /// add customer invoice
+        $route->add("/control/accounting/invoice-customer/new","php-forms/accounting/invoice-customer-add.php");
+        $route->add("/control/accounting/process/invoice-customer/new","php-process/accounting/customer-invoice-insert.php");
+
+        /// add company supply
+        $route->add("/control/accounting/supply/new","php-forms/accounting/company-supply-add.php");
+        $route->add("/control/accounting/process/supply/new","php-process/accounting/supply-company-insert.php");
+
+        /// add company supply invoice
+        $route->add("/control/accounting/supply/invoice/new","php-forms/accounting/invoice-supply-add.php");
+        $route->add("/control/accounting/process/supply/invoice/new","php-process/accounting/supply-invoice-insert-process-form.php");
+        
+        /// info customer invoice
+        $route->add("/control/accounting/invoice-customer/info/","php-forms/accounting/invoice-customer-info.php");
+
+        // users
+        $route->add("/control/users/update","php-forms/users/users-update.php");
+        $route->add("/control/users/process/update","php-process/users/users-update-process-form.php");
+
+        //links
+        $route->add("/control/links/update","php-forms/links/links-update-link.php");
+        $route->add("/control/links/process/update","php-process/links/update-link.php");
+
+        $route->add("/control/links/new","php-forms/links/links-add-new.php");
+        $route->add("/control/links/process/new","php-process/links/add-new-link.php");
+
+        // vault
+        $route->add("/control/vault/new","php-forms/vault/vault-add.php");
+        $route->add("/control/vault/process/new","php-process/vault/vault-insert-process-form.php");
+
+        $route->add("/control/vault/update","php-forms/vault/vault-update.php");
+        $route->add("/control/vault/process/update","php-process/vault/vault-update-process-form.php");
+
+            
         require_once($rootDirectory . '/inc/control/header.php');
-        require_once($rootDirectory . '/inc/control/variables.php');
         require_once(APP_ROOT . '/inc/control/functions.php');
         require_once(APP_ROOT . '/inc/control/header_html.php');
         require_once(APP_ROOT . '/inc/control/header_nav.php');
@@ -195,49 +235,6 @@ class Route {
         // projects
         $route->add("/control/projects","public/control/projects/index.php");
 
-        $route->notFound("404.php");
-    } elseif  (strpos($url,'update') OR (strpos($url,'delete')) OR (strpos($url,'new')) OR (strpos($url,'info')) !== false ) {
-        $rootDirectory = $_SERVER['DOCUMENT_ROOT'];
-        $updatedPath = str_replace('/httpdocs', '', $rootDirectory);
-        require_once($updatedPath . '/pass/connection.php');
-        //links
-        $route->add("/control/links/update","php-forms/links/links-update-link.php");
-        $route->add("/control/links/process/update","php-process/links/update-link.php");
-
-        $route->add("/control/links/new","php-forms/links/links-add-new.php");
-        $route->add("/control/links/process/new","php-process/links/add-new-link.php");
-
-        // vault
-        $route->add("/control/vault/new","php-forms/vault/vault-add.php");
-        $route->add("/control/vault/process/new","php-process/vault/vault-insert-process-form.php");
-
-        $route->add("/control/vault/update","php-forms/vault/vault-update.php");
-        $route->add("/control/vault/process/update","php-process/vault/vault-update-process-form.php");
-
-        // accounting-elliot
-        /// add customer
-        $route->add("/control/accounting/customer/new","php-forms/accounting/customer-add.php");
-        $route->add("/control/accounting/process/customer/new","php-process/accounting/customer-insert.php");
-
-        /// add customer invoice
-        $route->add("/control/accounting/invoice-customer/new","php-forms/accounting/invoice-customer-add.php");
-        $route->add("/control/accounting/process/invoice-customer/new","php-process/accounting/customer-invoice-insert.php");
-
-        /// add company supply
-        $route->add("/control/accounting/supply/new","php-forms/accounting/company-supply-add.php");
-        $route->add("/control/accounting/process/supply/new","php-process/accounting/supply-company-insert.php");
-
-        /// add company supply invoice
-        $route->add("/control/accounting/supply/invoice/new","php-forms/accounting/invoice-supply-add.php");
-        $route->add("/control/accounting/process/supply/invoice/new","php-process/accounting/supply-invoice-insert-process-form.php");
-        
-        /// info customer invoice
-        $route->add("/control/accounting/invoice-customer/info/","php-forms/accounting/invoice-customer-info.php");
-
-        // users
-        $route->add("/control/users/update","php-forms/users/users-update.php");
-        $route->add("/control/users/process/update","php-process/users/users-update-process-form.php");
-  
     } else {
 
     // constants

@@ -67,11 +67,11 @@ echo '
 	</div>
 
 	<div class="container-fluid text-center" style="padding-top:20px;padding-bottom:25px">
-		<a href="'.APP_SERVER.'/admin"><img src="'.APP_SERVER.'/inc/control/img/logo.png" alt="HispanTIC" width="300" height="64"></a>
+		<a href="'.APP_SERVER.'/control/admin"><img src="'.APP_SERVER.'/inc/control/img/logo.png" alt="HispanTIC" width="300" height="64"></a>
 	</div>
 
 	<div class="container-fluid text-center" style="padding-top:20px;padding-bottom:25px">
-		<h1 class="text-center"><a href="'.APP_SERVER.'/admin">Intranet</a></h1>
+		<h1 class="text-center"><a href="'.APP_SERVER.'/control/admin">Intranet</a></h1>
 	</div>
 	
 	<div class="container-fluid text-center">
