@@ -4,7 +4,7 @@ $(document).ready(function () {});
 // INPUT OPEN MODAL FORM - CREATE SUPPLY COMPANY
 function btnCreateSupplyCompany() {
   var server = window.location.hostname;
-  var urlAjax = "https://" + server + "/accounting/supply/new";
+  var urlAjax = "https://" + server + "/control/accounting/supply/new";
   $.ajax({
     url: urlAjax, //the page containing php script
     type: "post", //request type,
@@ -27,7 +27,8 @@ $(function () {
     $("#createSupplyCompanyMessageErr").hide();
 
     var server = window.location.hostname;
-    var urlAjax = "https://" + server + "/accounting/process/supply/new";
+    var urlAjax =
+      "https://" + server + "/control/accounting/process/supply/new";
     // Stop form from submitting normally
     event.preventDefault();
 
@@ -60,7 +61,7 @@ $(function () {
 // INPUT OPEN MODAL FORM - CREATE SUPPLY INVOICE
 function btnCreateSupplyInvoice() {
   var server = window.location.hostname;
-  var urlAjax = "https://" + server + "/accounting/supply/invoice/new";
+  var urlAjax = "https://" + server + "/control/accounting/supply/invoice/new";
   $.ajax({
     url: urlAjax, //the page containing php script
     type: "post", //request type,
@@ -86,7 +87,7 @@ $(function () {
     event.preventDefault();
     var server = window.location.hostname;
     var urlAjax =
-      "https://" + server + "/accounting/process/supply/invoice/new";
+      "https://" + server + "/control/accounting/process/supply/invoice/new";
     $.ajax({
       type: "POST",
       url: urlAjax,
@@ -121,7 +122,7 @@ $(function () {
 // INPUT OPEN MODAL FORM - CREATE NEW CUSTOMER
 function btnCreateCustomer() {
   var server = window.location.hostname;
-  var urlAjax = "https://" + server + "/accounting/customer/new";
+  var urlAjax = "https://" + server + "/control/accounting/customer/new";
   $.ajax({
     url: urlAjax, //the page containing php script
     type: "post", //request type,
@@ -139,7 +140,8 @@ function btnCreateCustomer() {
 // AJAX PROCESS > PHP - MODAL FORM - CREATE NEW CUSTOMER
 $(function () {
   var server = window.location.hostname;
-  var urlAjax = "https://" + server + "/accounting/process/customer/new";
+  var urlAjax =
+    "https://" + server + "/control/accounting/process/customer/new";
   $("#btnAddCustomer").click(function () {
     // check values
     $("#createCustomerMessageOk").hide();
@@ -186,7 +188,8 @@ $(function () {
 // INPUT OPEN MODAL FORM - CREATE CUSTOMER INVOICE
 function btnCreateCustomInvoice() {
   var server = window.location.hostname;
-  var urlAjax = "https://" + server + "/accounting/invoice-customer/new";
+  var urlAjax =
+    "https://" + server + "/control/accounting/invoice-customer/new";
   $.ajax({
     url: urlAjax, //the page containing php script
     type: "post", //request type,
@@ -206,7 +209,7 @@ function btnCreateCustomInvoice() {
 $(function () {
   var server = window.location.hostname;
   var urlAjax =
-    "https://" + server + "/accounting/process/invoice-customer/new";
+    "https://" + server + "/control/accounting/process/invoice-customer/new";
   $("#btnAddNewCustomerInvoice").click(function () {
     // check values
     $("#createCustomerInvoiceMessageOk").hide();
@@ -253,7 +256,8 @@ $(function () {
 function viewDetailInvoicec(idInvoice) {
   var idInvoice = idInvoice;
   var server = window.location.hostname;
-  var urlAjax = "https://" + server + "/accounting/invoice-customer/info";
+  var urlAjax =
+    "https://" + server + "/control/accounting/invoice-customer/info";
   $.ajax({
     url: urlAjax, //the page containing php script
     type: "post", //request type,

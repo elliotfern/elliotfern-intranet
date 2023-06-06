@@ -35,7 +35,7 @@ echo "<p><button type='button' class='btn btn-light btn-sm' id='btnCreateSupplyC
             $(document).ready(function(){
                 function fetch_data(){
                     var urlRoot = $("#url").val();
-                    var urlAjax = urlRoot + "/controller/route.php?type=accounting-elliotfernandez-supplies-invoices";
+                    var urlAjax = urlRoot + "/controller/control/route.php?type=accounting-elliotfernandez-supplies-invoices";
                     $.ajax({
                         url:urlAjax,
                         method:"POST",
@@ -79,4 +79,4 @@ echo "<p><button type='button' class='btn btn-light btn-sm' id='btnCreateSupplyC
 include_once('modals-accounting.php');
 
 # footer
-include_once(APP_ROOT. '/inc/footer.php');
+include_once(APP_ROOT. '/inc/control/footer.php');

@@ -38,4 +38,4 @@ echo "<p></p>";
 include_once('modals-accounting.php');
 
 # footer
-include_once(APP_ROOT. '/inc/footer.php');
+include_once(APP_ROOT. '/inc/control/footer.php');

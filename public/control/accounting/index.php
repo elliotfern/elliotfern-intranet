@@ -85,7 +85,7 @@ $stmt->execute();
 }
                 
 
-echo "<p class='text-right'><a href='".APP_SERVER."/accounting/customers' class='btn btn-info btn-sm' role='button' aria-pressed='true'>Customers list &rarr;</a>
+echo "<p class='text-right'><a href='".APP_SERVER."/control/accounting/customers' class='btn btn-info btn-sm' role='button' aria-pressed='true'>Customers list &rarr;</a>
       <a href='#' class='btn btn-dark btn-sm' role='button' aria-pressed='true'>Add new customer &rarr;</a></p>";
 echo "</div>";
 
@@ -270,7 +270,7 @@ $stmt->execute();
             echo "</table>";
             echo "</div>";
   }
-echo "<p class='text-right'><a href='".APP_SERVER."/accounting/customers/invoices' class='btn btn-info btn-sm' role='button' aria-pressed='true'>Customers invoices &rarr;</a>
+echo "<p class='text-right'><a href='".APP_SERVER."/control/accounting/customers/invoices' class='btn btn-info btn-sm' role='button' aria-pressed='true'>Customers invoices &rarr;</a>
     <a href='' class='btn btn-dark btn-sm' role='button' aria-pressed='true'>Create invoice &rarr;</a></p>";
 echo "</div>";
 echo "</div>";
@@ -426,7 +426,7 @@ $stmt->execute();
   }
 
 
-echo "<p><a href='".APP_SERVER."/accounting/supplies/invoices' class='btn btn-info btn-sm' role='button' aria-pressed='true'>Invoices Supplies &rarr;</a>
+echo "<p><a href='".APP_SERVER."/control/accounting/supplies/invoices' class='btn btn-info btn-sm' role='button' aria-pressed='true'>Invoices Supplies &rarr;</a>
     <a href='#' class='btn btn-dark btn-sm' role='button' aria-pressed='true'>Create invoice supply &rarr;</a></p>";
 echo '</div>'; 
 
@@ -538,4 +538,4 @@ echo '</div>';
 include_once('modals-accounting.php');
 
 # footer
-include_once(APP_ROOT. '/inc/footer.php');
+include_once(APP_ROOT. '/inc/control/footer.php');

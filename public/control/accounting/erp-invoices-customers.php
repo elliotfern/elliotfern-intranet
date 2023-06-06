@@ -34,7 +34,7 @@ echo "<hr>";
             $(document).ready(function(){
                 function fetch_data(){
                     var urlRoot = $("#url").val();
-                    var urlAjax = urlRoot + "/controller/route.php?type=accounting-elliotfernandez-customers-invoices";
+                    var urlAjax = urlRoot + "/controller/control/route.php?type=accounting-elliotfernandez-customers-invoices";
                     $.ajax({
                         url:urlAjax,
                         method:"POST",
@@ -104,4 +104,4 @@ echo "<hr>";
 include_once('modals-accounting.php');
 
 # footer
-include_once(APP_ROOT. '/inc/footer.php');
+include_once(APP_ROOT. '/inc/control/footer.php');

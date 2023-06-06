@@ -55,7 +55,7 @@ echo '
 
 
 	$loggedInUser = ($_SESSION['user']['id']);
-	$url = APP_SERVER . "/controller/route.php?type=user&id=" . $loggedInUser;
+	$url = APP_SERVER . "/controller/control/route.php?type=user&id=" . $loggedInUser;
 	//call api
 	$input = file_get_contents($url);
 	$arr = json_decode($input, true);
@@ -67,7 +67,7 @@ echo '
 	</div>
 
 	<div class="container-fluid text-center" style="padding-top:20px;padding-bottom:25px">
-		<a href="'.APP_SERVER.'/admin"><img src="'.APP_SERVER.'/inc/img/logo.png" alt="HispanTIC" width="300" height="64"></a>
+		<a href="'.APP_SERVER.'/admin"><img src="'.APP_SERVER.'/inc/control/img/logo.png" alt="HispanTIC" width="300" height="64"></a>
 	</div>
 
 	<div class="container-fluid text-center" style="padding-top:20px;padding-bottom:25px">
@@ -82,54 +82,54 @@ echo '
 		<div class="collapse navbar-collapse justify-content-center menuHeader" id="navbarTogglerDemo01">
 		<ul class="navbar-nav text-center">
 				<li class="nav-item">
-					<a class="nav-link '.$activePageAccount.'" id="accounting" href="'.APP_SERVER.'/accounting-hispantic">HispanTIC ERP & CRM</a>
+					<a class="nav-link '.$activePageAccount.'" id="accounting" href="'.APP_SERVER.'/control/accounting-hispantic">HispanTIC ERP & CRM</a>
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link '.$activePageAccountElliotFernandez.'" id="accounting" href="'.APP_SERVER.'/accounting">SoleTrade ERP & CRM</a>
+					<a class="nav-link '.$activePageAccountElliotFernandez.'" id="accounting" href="'.APP_SERVER.'/control/accounting">SoleTrade ERP & CRM</a>
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link '.$activePageProjects.'" href="'.APP_SERVER.'/projects">Projects</a>
+					<a class="nav-link '.$activePageProjects.'" href="'.APP_SERVER.'/control/projects">Projects</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link '.$activePageOpenHistory.'" href="'.APP_SERVER.'/history-web">OpenHistory web</a>
+					<a class="nav-link '.$activePageOpenHistory.'" href="'.APP_SERVER.'/control/history-web">OpenHistory web</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link '.$activePageElliotfernWeb.'" href="'.APP_SERVER.'/elliotfern-web">Elliotfern.com</a>
+					<a class="nav-link '.$activePageElliotfernWeb.'" href="'.APP_SERVER.'/control/elliotfern-web">Elliotfern.com</a>
 				</li>		
 				<li class="nav-item">
-					<a class="nav-link '.$activePageHistory.'" href="'.APP_SERVER.'/history">History</a>
+					<a class="nav-link '.$activePageHistory.'" href="'.APP_SERVER.'/control/history">History</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link '.$activePageContacts.'" href="'.APP_SERVER.'/contacts">Contacts</a>
+					<a class="nav-link '.$activePageContacts.'" href="'.APP_SERVER.'/control/contacts">Contacts</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link '.$activePageLibrary.'" href="'.APP_SERVER.'/library">Library</a>
+					<a class="nav-link '.$activePageLibrary.'" href="'.APP_SERVER.'/control/library">Library</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link '.$activePageImages.'" href="'.APP_SERVER.'/images">Images</a>
+					<a class="nav-link '.$activePageImages.'" href="'.APP_SERVER.'/control/images">Images</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link '.$activePageTravels.'" href="'.APP_SERVER.'/travels">Travels</a>
+					<a class="nav-link '.$activePageTravels.'" href="'.APP_SERVER.'/control/travels">Travels</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link '.$activePageLinks.'" href="'.APP_SERVER.'/links/">Links</a>
+					<a class="nav-link '.$activePageLinks.'" href="'.APP_SERVER.'/control/links/">Links</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link '.$activePageCinema.'" href="'.APP_SERVER.'/cinema">Cinema</a>
+					<a class="nav-link '.$activePageCinema.'" href="'.APP_SERVER.'/control/cinema">Cinema</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link '.$activePageMusic.'" href="'.APP_SERVER.'/music">Music</a>
+					<a class="nav-link '.$activePageMusic.'" href="'.APP_SERVER.'/control/music">Music</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link '.$activePageVault.'" href="'.APP_SERVER.'/vault/">Vault</a>
+					<a class="nav-link '.$activePageVault.'" href="'.APP_SERVER.'/control/vault/">Vault</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link '.$activePageProgramming.'" href="'.APP_SERVER.'/programming/">Programming</a>
+					<a class="nav-link '.$activePageProgramming.'" href="'.APP_SERVER.'/control/programming/">Programming</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link '.$activePageContactForm.'" href="'.APP_SERVER.'/contact-form">Contact form</a>
+					<a class="nav-link '.$activePageContactForm.'" href="'.APP_SERVER.'/control/contact-form">Contact form</a>
 				</li>
 			</ul>
 		</nav>

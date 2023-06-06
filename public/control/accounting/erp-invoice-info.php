@@ -5,7 +5,7 @@ if (isset($_GET['id']) ) {
     $id = $_GET['id'];
 }
 
-$url = APP_SERVER . "/controller/route.php?type=customers-invoices&id=" . $id;
+$url = APP_SERVER . "/controller/control/route.php?type=customers-invoices&id=" . $id;
 
 echo '<div class="container">';
 echo '<h1>HispanTIC - Elliot Fernandez - Accounting & CRM</h1>';
@@ -44,4 +44,4 @@ echo "Id factura: " . $obj['id'] . "/" . $obj['yearInvoice']; // Output: 31
 	"clientEmpresa": ""
 */
 # footer
-include_once(APP_ROOT. '/inc/footer.php');
+include_once(APP_ROOT. '/inc/control/footer.php');
