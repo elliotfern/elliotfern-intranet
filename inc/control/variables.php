@@ -1,8 +1,19 @@
 <?php
 
 // HISPANTIC URL
+$url_root = $_SERVER['DOCUMENT_ROOT'];
+define("APP_ROOT", $url_root); 
+
+$rootDirectory = $_SERVER['DOCUMENT_ROOT'];
+$updatedPath = str_replace('/control/inc/', '', $rootDirectory);
+
+define("APP_ROOT_CONNECTION", $updatedPath); 
+
+$url_server = "https://" . $_SERVER['HTTP_HOST'];
+define("APP_SERVER", $url_server); 
+
 // WP-CONTENT
-define('IMG_URL', APP_SERVER . '/img/');
+define('IMG_URL', APP_SERVER . 'img/');
 define('IMG_DEFAULT', APP_SERVER . 'img/default-image.jpg');
 
 // Variables generals

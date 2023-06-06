@@ -1,56 +1,43 @@
+<?php
+$titolPB = "We release the contents to the Public Domain";
+$PBurl = "https://creativecommons.org/publicdomain/zero/1.0/deed.en";
+$textPB = "All the contents of this web page are published and sent to the public domain by renouncing all rights to the work in relation to intellectual property, including related rights, as far as it is possible with the applicable law applicable. You can copy, modify, distribute the work and make public communication, even for commercial purposes, without asking for any kind of permission.";
+$textAbout = "Open History is an independent publishing project that offers readers free access history courses.";
+$year = date("Y");
+$webPath = APP_SERVER;
 
-<div class="container-fluid text-center" style="padding-bottom:50px">
+?>
+<!-- Footer -->
+<div class="container-amplada-total-footer">
+    <div id="footer-elliotfern">
+      <div class="menu-separacio">
+        <a href="<?php echo APP_SERVER;?>">About me</a>
+      </div>
 
-<hr>
+      <div class="menu-separacio">
+        <a href="<?php echo APP_SERVER; ?>">Privacy policy</a>
+      </div>
 
-<h5>2023 - HispanTIC</h5>
-</div>
+      <div class="menu-separacio">
+        <a href="<?php echo APP_SERVER; ?>">Contact</a>
+      </div>
+    </div>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+      <hr>
 
-<link href="<?php echo APP_SERVER;?>/inc/css/style.css" rel="stylesheet">
-
-<?php 
+      <div id="footer-elliotfern-petit">
+            <a href="<?php echo $PBurl;?>" aria-label="Creative Commons" target='_blank' rel='noopener' title="Creative commons"><img class="mx-auto d-block" src="<?php echo $webPath ?>/img/elliotfern-icon/domini-public.gif" alt="Creative Commons" title='Public Domain' width='88' height='31'></a>
+            
+            <p><?php echo $textPB;?></p>
   
-  if ($activePage == "library") {
-  ?>
-    <script src="<?php APP_SERVER;?>/inc/js/library/library.js"></script>
-  <?php
-  } elseif ($activePage == "accounting-hispantic"){
-    ?>
-    <script src="<?php APP_SERVER;?>/inc/js/accounting-hispantic/accounting.js"></script>
-  <?php 
-   } elseif ($activePage == "accounting"){
-    ?>
-    <script src="<?php APP_SERVER;?>/inc/js/accounting/accounting-elliotfernandez.js"></script>
-  <?php 
-  } elseif ($activePage == "vault"){
-    ?>
-    <script src="<?php APP_SERVER;?>/inc/js/vault/vault.js"></script>
-  <?php 
-   } elseif ($activePage == "links"){
-    ?>
-    <script src="<?php echo APP_SERVER;?>/inc/js/links/links.js"></script>
-  <?php 
-  } elseif ($activePage == "cinema") {
-    ?>
-    <script src="<?php APP_SERVER;?>/inc/js/cinema/cinema.js"></script>
-  <?php 
-  } elseif ($activePage == "openhistory") {
-    ?>
-    <script src="<?php APP_SERVER;?>/inc/js/history-web/history.js"></script>
-  <?php   
-  } elseif ($activePage == "elliotfern") {
-    ?>
-    <script src="<?php APP_SERVER;?>/inc/js/elliotfern-web/elliotfern.js"></script>
-  <?php
-  } elseif ($activePage == "users") {
-    ?>
-    <script src="<?php APP_SERVER;?>/inc/js/users/users.js"></script>
-  <?php   
-  } else {
-    
-  }
-  ?>
+            <p>Elliot Fernandez (2002 - <?php echo $year;?>)</p>
+    </div>
+
+</div>
+<!-- ./Footer -->
+
+<link href="https://media.elliotfern.com/css/style.css" rel="stylesheet">
+<script src="<?php echo APP_SERVER;?>/inc/matomo.js" async></script>
 </body>
 </html>
+

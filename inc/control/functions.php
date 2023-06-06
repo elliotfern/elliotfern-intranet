@@ -1,11 +1,5 @@
 <?php
 
-$url_root = $_SERVER['DOCUMENT_ROOT'];
-define("APP_ROOT", $url_root); 
-
-require_once(APP_ROOT . '/inc/connection.php');
-require_once(APP_ROOT . '/inc/variables.php');
-
 /* format arrays */
 function formatcode($arr) {
     echo '<pre>';

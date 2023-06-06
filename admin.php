@@ -1,9 +1,4 @@
 <?php
-
-# conectare la base de datos
-$activePage = "";
-
-
 echo '<div class="container">';
 ?>
 

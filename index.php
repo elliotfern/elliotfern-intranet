@@ -1,16 +1,13 @@
 <?php
-$url_server = "https://control.elliotfern.com/";
+$lang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
 
-session_start();
-if(!isset($_SESSION['user'])){
-    header('Location: '.$url_server. 'login.php');
-    exit;
-} else {  
-    class Route {
+$url_root = $_SERVER['DOCUMENT_ROOT'];
+$url_server = "https://" . $_SERVER['HTTP_HOST'];
+define("APP_SERVER", $url_server); 
+define("APP_ROOT", $url_root);
 
+class Route {
         private function simpleRoute($file, $route){
-    
-            
             //replacing first and last forward slashes
             //$_REQUEST['uri'] will be empty if req uri is /
     
@@ -118,122 +115,91 @@ if(!isset($_SESSION['user'])){
             exit();
         }
     }
-    
-    // constants
-    require_once('./inc/variables.php');
-    $url = 'https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-    
+
     $route = new Route();
-        
-    if (strpos($url,'update') OR (strpos($url,'delete')) OR (strpos($url,'new')) OR (strpos($url,'info')) !== false ) {
-        require_once('./inc/connection.php');
-        //links
-        $route->add("/links/update","php-forms/links/links-update-link.php");
-        $route->add("/links/process/update","php-process/links/update-link.php");
 
-        $route->add("/links/new","php-forms/links/links-add-new.php");
-        $route->add("/links/process/new","php-process/links/add-new-link.php");
-
-        // vault
-        $route->add("/vault/new","php-forms/vault/vault-add.php");
-        $route->add("/vault/process/new","php-process/vault/vault-insert-process-form.php");
-
-        $route->add("/vault/update","php-forms/vault/vault-update.php");
-        $route->add("/vault/process/update","php-process/vault/vault-update-process-form.php");
-
-        // accounting-elliot
-        /// add customer
-        $route->add("/accounting/customer/new","php-forms/accounting/customer-add.php");
-        $route->add("/accounting/process/customer/new","php-process/accounting/customer-insert.php");
-
-        /// add customer invoice
-        $route->add("/accounting/invoice-customer/new","php-forms/accounting/invoice-customer-add.php");
-        $route->add("/accounting/process/invoice-customer/new","php-process/accounting/customer-invoice-insert.php");
-
-        /// add company supply
-        $route->add("/accounting/supply/new","php-forms/accounting/company-supply-add.php");
-        $route->add("/accounting/process/supply/new","php-process/accounting/supply-company-insert.php");
-
-        /// add company supply invoice
-        $route->add("/accounting/supply/invoice/new","php-forms/accounting/invoice-supply-add.php");
-        $route->add("/accounting/process/supply/invoice/new","php-process/accounting/supply-invoice-insert-process-form.php");
-        
-        /// info customer invoice
-        $route->add("/accounting/invoice-customer/info/","php-forms/accounting/invoice-customer-info.php");
-
-        // users
-        $route->add("/users/update","php-forms/users/users-update.php");
-        $route->add("/users/process/update","php-process/users/users-update-process-form.php");
-
-    } else {
-        require_once('./inc/header.php');
+    if (strpos($_SERVER['REQUEST_URI'], '/control/') !== false) {
+        // Route for paths containing '/control/'
+         require_once('./control/inc/header.php');
         // homepage
-        $route->add("/","admin.php");
-        $route->add("/admin","admin.php");
+        $route->add("/control","public/control/index.php");
+        $route->add("/control/admin","public/control/admin.php");
+    } else {
 
-        // user info
-        $route->add("/user/{id}","user.php");
-        $route->add("/login","login.php");
-        $route->add("/logout","logout.php");
+    // constants
+    require_once('./inc/variables.php');   
+    
+   $route->add("/book","public/book/index.php");
+    $route->add("/book/list","public/book/index.php");
+    $route->add("/book/{slug}","public/book/llibre.php");
+    $route->add("/author","public/author/index.php");
+    $route->add("/author/list","public/author/index.php");
+    $route->add("/author/{slug}","public/book/author.php");
+    
+
+    $route->add("/ca","public/homepage.php");
+    $route->add("/en","public/homepage.php");
+    $route->add("/fr","public/homepage.php");
+    $route->add("/es","public/homepage.php");
+    $route->add("/it","public/homepage.php");
+
+    $route->add("/{slug}","public/homepage.php");
+    
+    $route->add("/en/homepage/","public/homepage.php");
+    $route->add("/en/{slug}","public/homepage.php");
+    
+    $route->add("/fr/accueil/","public/homepage.php");
+    $route->add("/fr/{slug}","public/homepage.php");
+
+    $route->add("/ca/inici","public/homepage.php");
+    $route->add("/ca/{slug}","public/homepage.php");
+
+    $route->add("/es/inicio","public/homepage.php");
+    $route->add("/es/{slug}","public/homepage.php");
+
+    $route->add("/it/homepage","public/homepage.php");
+    $route->add("/it/{slug}","public/homepage.php");
+   
+        // Initialize the language code variable
+        $lc = ""; 
+        // Check to see that the global language server variable isset()
+        // If it is set, we cut the first two characters from that string
+    
+        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+            $lc = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        }
         
-        // accounting
-        $route->add("/accounting","public/accounting/index.php");
-        $route->add("/accounting/customers","public/accounting/costumers.php");
-        $route->add("/accounting/customers/invoices","public/accounting/erp-invoices-customers.php");
-
-        $route->add("/accounting/supplies/","public/accounting/supplies.php");
-        $route->add("/accounting/supplies/invoices","public/accounting/erp-invoices-supplies.php");
-
-        // links
-        $route->add("/links","public/links/index.php");
-        $route->add("/links/categories","public/links/categories.php");
-        $route->add("/links/category/{id}","public/links/category.php");
-        $route->add("/links/topics","public/links/topics.php");
-        $route->add("/links/topic/{id}","public/links/topic.php");
-        $route->add("/links/all-links","public/links/all-links.php");
-        $route->add("/links/update","php-forms/links/links-update-link.php");
-
-        //vault
-        $route->add("/vault","public/vault/index.php");
-        $route->add("/vault/customer/{id}","public/vault/customer.php");
-        $route->add("/vault/elliot/{id}","public/vault/vault-elliot.php");
-
-        //blog
-        $route->add("/blog/{slug}","public/blog/blog.php");
-        $route->add("/blog/{slug}/editor","public/blog/editor.php");
-
-        //programming
-        $route->add("/programming","public/programming/index.php");
-        $route->add("/programming/links","public/programming/links.php");
-        $route->add("/programming/links/{id}","public/programming/links-detail.php");
-        $route->add("/programming/daw","public/programming/daw.php");
-
-        //webmail
-        $route->add("/mail/send","public/webmail/send.php");
-        $route->add("/mail/inbox","public/webmail/inbox.php");
-
-        //contacts
-        $route->add("/contacts","public/contacts/index.php");
-        $route->add("/contacts/personal","public/contacts/personal-contacts.php");
-
-        //jobs
-        $route->add("/jobs","public/jobs/index.php");
-
-        //library
-        $route->add("/library","public/library/index.php");
-        $route->add("/library/books","public/library/books.php");
-        $route->add("/library/authors","public/library/authors.php");
+    
+    // Now we simply evaluate that variable to detect specific languages
+        if ($lc == "ca") {
+            $route->add("/","public/homepage.php");
+            $route->add("/ca","public/homepage.php");
+            
+            exit();
+        } elseif ($lc == "es"){
+            $route->add("/","public/homepage.php");
+            $route->add("/es","public/homepage.php");
+            exit();
+        } elseif ($lc == "en"){
+            $route->add("/","public/homepage.php");
+            $route->add("/en","public/homepage.php");
+            exit();
+        } elseif ($lc == "fr"){
+            $route->add("/","public/homepage.php");
+            $route->add("/fr","public/homepage.php");
+            exit();
+        } elseif ($lc == "it"){
+            $route->add("/","public/homepage.php");
+            $route->add("/it","public/homepage.php");
+            exit();
+        } else { // don't forget the default case if $lc is empty
+            $route->add("/","public/homepage.php");
+            exit();
+        }
         
-        //users
-        $route->add("/users","public/users/index.php");
-        $route->add("/users/list","public/users/users-list.php");
-
-        // projects
-        $route->add("/projects","public/projects/index.php");
-
-        $route->notFound("404.php");
-
+    $route->notFound("404.php");
     }
-}
+
+    
 
 ?>

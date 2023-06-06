@@ -1,6 +1,9 @@
 <?php
 
-require_once('./inc/connection.php');
+$rootDirectory = $_SERVER['DOCUMENT_ROOT'];
+$updatedPath = str_replace('/httpdocs', '', $rootDirectory);
+
+require_once($updatedPath . '/pass/connection.php');
 
 if (isset($_POST['userName'])) {
     $username = $_POST['userName'];
