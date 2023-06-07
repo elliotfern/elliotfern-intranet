@@ -103,7 +103,11 @@ price
              <tbody>";
              foreach ($arr2 as $obj2) {
          echo "<tr>";
-         echo "<td>".$obj2['product']." (".$obj2['notes'].")</td>";
+         echo "<td>".$obj2['product']." ";
+         if (!empty($obj2['notes'])) {
+          echo '(' . $obj2['notes'] . ')';
+      }
+         echo "</td>";
          echo "<td>€".$obj2['price']."</td>";
          echo "</tr>";
         }

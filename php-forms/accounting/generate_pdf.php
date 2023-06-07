@@ -48,6 +48,22 @@ $arr2 = json_decode($input2, true);
 // Use the $idInvoice to fetch the necessary data for the PDF generation
 // ... (code to fetch invoice data)
 
+// Extend the TCPDF class to create custom Header and Footer
+class MYPDF extends TCPDF {
+
+  // Page footer
+  public function Footer() {
+      // Position at 15 mm from bottom
+      $this->SetY(-15);
+      // Set font
+      $this->SetFont('helvetica', 'I', 8);
+      // Page number
+      $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+      // Custom footer text
+      $this->Cell(0, 10, '<strong>Elliot Fernandez<br>Tax Reference Number: 9323971DA</strong>', 0, false, 'C', 0, '', 0, false, 'T', 'M');
+  }
+}
+
 // Create a new TCPDF instance
 $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
 
@@ -62,6 +78,18 @@ $pdf->AddPage();
 // Add the image to the PDF
 $imagePath = APP_SERVER . '/inc/img/hispantic_logo.jpg';
 $pdf->Image($imagePath, $x = 10, $y = 10, $w = 100, $h = 0, $type = '', $link = '', $align = '', $resize = false, $dpi = 300, $palign = '', $ismask = false, $imgmask = false, $border = 0, $fitbox = false, $hidden = false, $fitonpage = false, $alt = '');
+
+// set header and footer fonts
+$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+
+// set margins
+$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
+// set auto page breaks
+$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
 // Write HTML content to the PDF
 
@@ -132,7 +160,11 @@ $html .= '
 
 foreach ($arr2 as $obj2) {
     $html .= '<tr>
-                    <td style="padding: 5px; border: 1px solid black;">' . $obj2['product'] . ' (' . $obj2['notes'] . ')</td>
+                    <td style="padding: 5px; border: 1px solid black;">' . $obj2['product'] . ' ';
+                    if (!empty($obj2['notes'])) {
+                      $html .= '(' . $obj2['notes'] . ')';
+                  }
+                  $html .= '</td>
                     <td style="padding: 5px; border: 1px solid black;">€' . $obj2['price'] . '</td>
                </tr>';
 }
@@ -164,7 +196,7 @@ $html .= '</td>
 
           <tr>
             <th scope="row">Total</th>
-            <td>€'.$total.'</td>
+            <td><strong>€'.$total.'</strong></td>
           </tr>
   </table>
 </div>';
@@ -191,11 +223,6 @@ if ($idPayment == 6) {
   BIC-SWIFT: NTSBDEB1XXX</span>
   </div>';
 }
-
-$html .= '<hr>
-<h6 style="text-align: center;">
-<strong>Elliot Fernandez<br>
-Tax Reference Number: 9323971DA</strong></h2>';
 
 // Establecer el espaciado vertical entre las celdas
 $pdf->SetHtmlVSpace(array(0, 0, 0, 0));
