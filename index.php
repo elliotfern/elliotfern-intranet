@@ -173,6 +173,7 @@ class Route {
 
 
         // homepage
+        $route->add("/admin","public/control/admin.php");
         $route->add("/control","public/control/admin.php");
         $route->add("/control/admin","public/control/admin.php");
         $route->add("/control/login","public/control/login.php");

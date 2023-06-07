@@ -141,7 +141,7 @@ if ( (isset($_GET['type']) && $_GET['type'] == 'user') && (isset($_GET['id']) ) 
                 global $conn;
                 $data = array();
                 $stmt = $conn->prepare(
-                    "SELECT ic.id, ic.idUser, ic.facConcepte, ic.facData, YEAR(ic.facData) AS yearInvoice,  ic.facDueDate, ic.facSubtotal, ic.facFees, ic.facTotal, ic.facVAT, ic.facIva, ic.facEstat, ic.facPaymentType, vt.ivaPercen, ist.estat, pt.tipusNom, c.clientNom, c.clientCognoms, c.clientEmpresa, c.clientEmail, c.clientWeb, c.clientNIF, c.clientAdreca, ciu.city AS clientCiutat, pro.county AS clientProvincia, pa.country AS clientPais, c.clientCP
+                    "SELECT ic.id, ic.idUser, ic.facConcepte, ic.facData, YEAR(ic.facData) AS yearInvoice,  ic.facDueDate, ic.facSubtotal, ic.facFees, ic.facTotal, ic.facVAT, ic.facIva, ic.facEstat, ic.facPaymentType, vt.ivaPercen, ist.estat, pt.tipusNom, pt.id AS idPayment, c.clientNom, c.clientCognoms, c.clientEmpresa, c.clientEmail, c.clientWeb, c.clientNIF, c.clientAdreca, ciu.city AS clientCiutat, pro.county AS clientProvincia, pa.country AS clientPais, c.clientCP
                     FROM db_accounting_soletrade_invoices_customers  AS ic
                     LEFT JOIN db_accounting_hispantic_vat_type AS vt ON ic.facIva = vt.id
                     LEFT JOIN db_accounting_hispantic_invoices_status AS ist ON ist.id = ic.facEstat

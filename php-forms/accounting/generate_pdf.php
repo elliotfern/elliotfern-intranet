@@ -33,6 +33,7 @@ $date2 = $obj['id'];
 $facDueDate2 = $obj['facDueDate'];
 $facDueDate_net = date('d/m/Y', strtotime($facDueDate2));
 $pagament = $obj['tipusNom'];
+$idPayment = $obj['idPayment'];
 
 $total = $obj['facTotal'];
 $subTotal = $obj['facSubtotal'];
@@ -117,7 +118,7 @@ $html .= '<div class="container">
 
 $html = $styles . $html;
 $html .= '
-<div class="container" style="margin-top:20px;margin-bottom:25px">
+<div class="container">
 <h2 style="text-align: center;"><strong>INVOICE DETAILS</strong></h2>
     <div class="table-responsive">
         <table class="table">
@@ -150,7 +151,6 @@ $html .= '<div class="container">
           </tr>
           </thead>
           <tbody>
-
           <tr>
             <th scope="row">VAT</th>
             <td>';
@@ -169,8 +169,30 @@ $html .= '</td>
   </table>
 </div>';
 
+if ($idPayment == 6) {
+    $html .= '
+  <div class="container">
+  <h2 style="text-align: center;">PAID BY BANK TRANSFER</h2>
+  <span style="text-align: center;"><strong>BANK: AIB Bank (Ireland)</strong><br>
+  IBAN: IE80AIBK93356246103042<br>
+  BIC-SWIFT: AIBKIE2D</span>
+  </div>';
+} elseif ($idPayment == 5) {
+  $html .= '
+  <div class="container">
+  <h2 style="text-align: center;">PAID BY STRIPE (Credit/Debit Card)</h2>
+  </div>';
+} elseif ($idPayment == 2) {
+  $html .= '
+  <div class="container">
+  <h2 style="text-align: center;">PAID BY BANK TRANSFER</h2>
+  <span style="text-align: center;"><strong>BANK: N26 (Germany)</strong><br>
+  IBAN: DE56100110012620403754<br>
+  BIC-SWIFT: NTSBDEB1XXX</span>
+  </div>';
+}
 
-$html .= '<br><br><br><hr>
+$html .= '<hr>
 <h6 style="text-align: center;">
 <strong>Elliot Fernandez<br>
 Tax Reference Number: 9323971DA</strong></h2>';
