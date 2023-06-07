@@ -29,7 +29,6 @@ $clientEmail = $obj['clientEmail'];
 $clientWeb = $obj['clientWeb'];
 $clientCP = $obj['clientCP'];
 $any = $obj['yearInvoice'];
-$date2 = $obj['id'];
 $facDueDate2 = $obj['facDueDate'];
 $facDueDate_net = date('d/m/Y', strtotime($facDueDate2));
 $pagament = $obj['tipusNom'];

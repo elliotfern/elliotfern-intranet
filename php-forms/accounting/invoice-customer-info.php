@@ -24,8 +24,10 @@ $clientEmail = $obj['clientEmail'];
 $clientWeb = $obj['clientWeb'];
 $clientCP = $obj['clientCP'];
 $any = $obj['yearInvoice'];
-$date2 = $obj['id'];
-$facDueDate2 = $obj['facDueDate'];
+$facData = $obj['facData'];
+$facData_net = date('d/m/Y', strtotime($facData));
+$facDueDate = $obj['facDueDate'];
+$facDueDate_net = date('d/m/Y', strtotime($facDueDate));
 $pagament = $obj['tipusNom'];
 
 $total = $obj['facTotal'];
@@ -66,12 +68,12 @@ echo '<div class="container-fluid">';
 
              <tr>
                <th scope="row">Invoice Date</th>
-               <td>'.$date2.'</td>
+               <td>'.$facData_net.'</td>
              </tr>
 
               <tr>
                <th scope="row">Due Date</th>
-               <td>'.$facDueDate2.'</td>
+               <td>'.$facDueDate_net.'</td>
              </tr>
 
              <tr>
