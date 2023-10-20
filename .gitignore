@@ -9,6 +9,7 @@ Thumbs.db
 # Ignorar directorio de dependencias (ejemplo para PHP y Composer)
 /vendor/
 /node_modules/
+/public/img/
 
 # Ignorar archivos de configuración local (ejemplo para PHP)
 .env
