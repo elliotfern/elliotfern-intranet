@@ -1,318 +1,285 @@
 <?php
-$lang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
 
-$url_root = $_SERVER['DOCUMENT_ROOT'];
-$url_server = "https://" . $_SERVER['HTTP_HOST'];
-define("APP_SERVER", $url_server); 
-define("APP_ROOT", $url_root);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require 'vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+$token = $_ENV['TOKEN'];
+define("APP_TOKEN",$token );
 
 class Route {
-        private function simpleRoute($file, $route){
-            //replacing first and last forward slashes
-            //$_REQUEST['uri'] will be empty if req uri is /
-    
-            if(!empty($_REQUEST['uri'])){
-                $route = preg_replace("/(^\/)|(\/$)/","",$route);
-                $reqUri =  preg_replace("/(^\/)|(\/$)/","",$_REQUEST['uri']);
-            }else{
-                $reqUri = "/";
-            }
-    
-            if($reqUri == $route){
-                $params = [];
-                include($file);
-                exit();
-    
-            }
-    
+    private function simpleRoute($file, $route){
+        //replacing first and last forward slashes
+        //$_REQUEST['uri'] will be empty if req uri is /
+
+        if(!empty($_REQUEST['uri'])){
+            $route = preg_replace("/(^\/)|(\/$)/","",$route);
+            $reqUri =  preg_replace("/(^\/)|(\/$)/","",$_REQUEST['uri']);
+        }else{
+            $reqUri = "/";
         }
-    
-        function add($route,$file){
-    
-            //will store all the parameters value in this array
+
+        if($reqUri == $route){
             $params = [];
-    
-            //will store all the parameters names in this array
-            $paramKey = [];
-    
-            //finding if there is any {?} parameter in $route
-            preg_match_all("/(?<={).+?(?=})/", $route, $paramMatches);
-    
-            //if the route does not contain any param call simpleRoute();
-            if(empty($paramMatches[0])){
-                $this->simpleRoute($file,$route);
-                return;
-            }
-    
-            //setting parameters names
-            foreach($paramMatches[0] as $key){
-                $paramKey[] = $key;
-            }
-    
-           
-            //replacing first and last forward slashes
-            //$_REQUEST['uri'] will be empty if req uri is /
-    
-            if(!empty($_REQUEST['uri'])){
-                $route = preg_replace("/(^\/)|(\/$)/","",$route);
-                $reqUri =  preg_replace("/(^\/)|(\/$)/","",$_REQUEST['uri']);
-            }else{
-                $reqUri = "/";
-            }
-    
-            //exploding route address
-            $uri = explode("/", $route);
-    
-            //will store index number where {?} parameter is required in the $route 
-            $indexNum = []; 
-    
-            //storing index number, where {?} parameter is required with the help of regex
-            foreach($uri as $index => $param){
-                if(preg_match("/{.*}/", $param)){
-                    $indexNum[] = $index;
-                }
-            }
-    
-            //exploding request uri string to array to get
-            //the exact index number value of parameter from $_REQUEST['uri']
-            $reqUri = explode("/", $reqUri);
-    
-            //running for each loop to set the exact index number with reg expression
-            //this will help in matching route
-            foreach($indexNum as $key => $index){
-    
-                 //in case if req uri with param index is empty then return
-                //because url is not valid for this route
-                if(empty($reqUri[$index])){
-                    return;
-                }
-    
-                //setting params with params names
-                $params[$paramKey[$key]] = $reqUri[$index];
-    
-                //this is to create a regex for comparing route address
-                $reqUri[$index] = "{.*}";
-            }
-    
-            //converting array to sting
-            $reqUri = implode("/",$reqUri);
-    
-            //replace all / with \/ for reg expression
-            //regex to match route is ready !
-            $reqUri = str_replace("/", '\\/', $reqUri);
-    
-            //now matching route with regex
-            if(preg_match("/$reqUri/", $route))
-            {
-                include($file);
-                exit();
-    
-            }
-        }
-    
-        function notFound($file){
             include($file);
             exit();
+
+        }
+
+    }
+
+    function add($route,$file){
+
+        //will store all the parameters value in this array
+        $params = [];
+
+        //will store all the parameters names in this array
+        $paramKey = [];
+
+        //finding if there is any {?} parameter in $route
+        preg_match_all("/(?<={).+?(?=})/", $route, $paramMatches);
+
+        //if the route does not contain any param call simpleRoute();
+        if(empty($paramMatches[0])){
+            $this->simpleRoute($file,$route);
+            return;
+        }
+
+        //setting parameters names
+        foreach($paramMatches[0] as $key){
+            $paramKey[] = $key;
+        }
+
+       
+        //replacing first and last forward slashes
+        //$_REQUEST['uri'] will be empty if req uri is /
+
+        if(!empty($_REQUEST['uri'])){
+            $route = preg_replace("/(^\/)|(\/$)/","",$route);
+            $reqUri =  preg_replace("/(^\/)|(\/$)/","",$_REQUEST['uri']);
+        }else{
+            $reqUri = "/";
+        }
+
+        //exploding route address
+        $uri = explode("/", $route);
+
+        //will store index number where {?} parameter is required in the $route 
+        $indexNum = []; 
+
+        //storing index number, where {?} parameter is required with the help of regex
+        foreach($uri as $index => $param){
+            if(preg_match("/{.*}/", $param)){
+                $indexNum[] = $index;
+            }
+        }
+
+        //exploding request uri string to array to get
+        //the exact index number value of parameter from $_REQUEST['uri']
+        $reqUri = explode("/", $reqUri);
+
+        //running for each loop to set the exact index number with reg expression
+        //this will help in matching route
+        foreach($indexNum as $key => $index){
+
+             //in case if req uri with param index is empty then return
+            //because url is not valid for this route
+            if(empty($reqUri[$index])){
+                return;
+            }
+
+            //setting params with params names
+            $params[$paramKey[$key]] = $reqUri[$index];
+
+            //this is to create a regex for comparing route address
+            $reqUri[$index] = "{.*}";
+        }
+
+        //converting array to sting
+        $reqUri = implode("/",$reqUri);
+
+        //replace all / with \/ for reg expression
+        //regex to match route is ready !
+        $reqUri = str_replace("/", '\\/', $reqUri);
+
+        //now matching route with regex
+        if(preg_match("/$reqUri/", $route))
+        {
+            include($file);
+            exit();
+
         }
     }
 
-    $route = new Route();
+    function notFound($file){
+        include($file);
+        exit();
+    }
+}
 
-    if (strpos($_SERVER['REQUEST_URI'], '/control') !== false) {
-        // Route for paths containing '/control/'
-        $rootDirectory = $_SERVER['DOCUMENT_ROOT'];
-        $updatedPath = str_replace('/httpdocs', '', $rootDirectory);
-        require_once($updatedPath . '/pass/connection.php');
-        $rootDirectory = $_SERVER['DOCUMENT_ROOT'];
-        require_once($rootDirectory . '/inc/control/variables.php');   
+$route = new Route(); 
 
-        // accounting-elliot
+$url_root = $_SERVER['DOCUMENT_ROOT'];
+$url_server = $_SERVER['HTTP_HOST'];
+$dev = "/elliotfern";
+
+define("APP_SERVER", $url_server); 
+define("APP_ROOT", $url_root);
+define("APP_DEV",$dev);
+
+// Route for paths containing '/control/'
+require_once(APP_ROOT . APP_DEV . '/connection.php');
+require_once(APP_ROOT . APP_DEV . '/public/php/variables.php'); 
+require_once(APP_ROOT . APP_DEV . '/public/php/functions.php');
+
+$route->add("/login","public/pages/auth/login.php");
+$route->add("/api/auth/login","php-process/auth/login-process.php");
+
+ // API SERVER 
+ $route->add("/api/projects","api/projects.php");
+ $route->add("/api/auth","api/auth.php");
+ $route->add("/api/accounting","api/accounting.php");
+
+ $route->add("/api/links/get","api/link/get-link.php");
+ $route->add("/api/links/put","api/link/put-link.php");
+ $route->add("/api/links/post","api/link/post-link.php");
+
+ // links
+ $route->add("/api/library/new/{author}","api/library/post-library.php");
+ $route->add("/api/library/update/{author}","api/library/put-library.php");
+ $route->add("/api/library/authors/{allAuthors}","api/library/get-library.php");
+ $route->add("/api/library/author/{slugAuthors}","api/library/get-library.php");
+ $route->add("/api/library/author/books/{authorId}","api/library/get-library.php");
+ $route->add("/api/library/profession/{profession}","api/library/get-library.php");
+ $route->add("/api/library/movement/{movement}","api/library/get-library.php");
+ $route->add("/api/library/image/author/{imageAuthor}","api/library/get-library.php");
+
+ $route->add("/api/library/{topics}","api/library/get-library.php");
+ $route->add("/api/library/books/{allBooks}","api/library/get-library.php");
+ $route->add("/api/library/book/{slugBook}","api/library/get-library.php");
+
+ $route->add("/api/places/{country}","api/library/get-library.php");
+
+// aqui comença la lògica del sistema
+
+session_set_cookie_params([
+    'lifetime' => 60 * 60 * 24 * 30,  // Duración de la cookie en segundos
+    'path' => '/',
+    'domain' => $url_server,  // Reemplaza con tu dominio real
+    'secure' => true,
+    'httponly' => true
+]);
+session_start();
+
+if (empty($_SESSION['user']) || !session_id()) {
+
+    header('Location: ' .$dev . '/login');
+    exit(); 
+
+} else {
+        // Header (solo para las paginas)
+        require_once(APP_ROOT . APP_DEV . '/public/php/header.php');
+    
+        // homepage
+        $route->add("/","public/pages/homepage/admin.php");
+        $route->add("/admin","public/pages/homepage/admin.php");
+
+        // 1) accounting-elliot
         /// add customer
-        $route->add("/control/accounting/customer/new","php-forms/accounting/customer-add.php");
+        $route->add("/accounting/customer/new","php-forms/accounting/customer-add.php");
         $route->add("/control/accounting/process/customer/new","php-process/accounting/customer-insert.php");
 
         /// add customer invoice
-        $route->add("/control/accounting/invoice-customer/new","php-forms/accounting/invoice-customer-add.php");
-        $route->add("/control/accounting/process/invoice-customer/new","php-process/accounting/customer-invoice-insert.php");
-        $route->add("/control/accounting/invoice/pdf/{id}", "php-forms/accounting/generate_pdf.php");
+        $route->add("/accounting/invoice-customer/new","php-forms/accounting/invoice-customer-add.php");
+        $route->add("/accounting/process/invoice-customer/new","php-process/accounting/customer-invoice-insert.php");
+        $route->add("/accounting/invoice/pdf/{id}", "php-forms/accounting/generate_pdf.php");
 
         /// add company supply
-        $route->add("/control/accounting/supply/new","php-forms/accounting/company-supply-add.php");
-        $route->add("/control/accounting/process/supply/new","php-process/accounting/supply-company-insert.php");
+        $route->add("/accounting/supply/new","php-forms/accounting/company-supply-add.php");
+        $route->add("/accounting/process/supply/new","php-process/accounting/supply-company-insert.php");
 
         /// add company supply invoice
-        $route->add("/control/accounting/supply/invoice/new","php-forms/accounting/invoice-supply-add.php");
-        $route->add("/control/accounting/process/supply/invoice/new","php-process/accounting/supply-invoice-insert-process-form.php");
+        $route->add("/accounting/supply/invoice/new","php-forms/accounting/invoice-supply-add.php");
+        $route->add("/accounting/process/supply/invoice/new","php-process/accounting/supply-invoice-insert-process-form.php");
         
         /// info customer invoice
-        $route->add("/control/accounting/invoice-customer/info/","php-forms/accounting/invoice-customer-info.php");
+        $route->add("/accounting/invoice-customer/info/","php-forms/accounting/invoice-customer-info.php");
 
-        // users
-        $route->add("/control/users/update","php-forms/users/users-update.php");
-        $route->add("/control/users/process/update","php-process/users/users-update-process-form.php");
+        // 2) users
+        $route->add("/users/update","php-forms/users/users-update.php");
+        $route->add("/users/process/update","php-process/users/users-update-process-form.php");
 
-        //links
-        $route->add("/control/links/update","php-forms/links/links-update-link.php");
-        $route->add("/control/links/process/update","php-process/links/update-link.php");
+        // 3) vault
+        $route->add("/vault/new","php-forms/vault/vault-add.php");
+        $route->add("/vault/process/new","php-process/vault/vault-insert-process-form.php");
 
-        $route->add("/control/links/new","php-forms/links/links-add-new.php");
-        $route->add("/control/links/process/new","php-process/links/add-new-link.php");
-
-        // vault
-        $route->add("/control/vault/new","php-forms/vault/vault-add.php");
-        $route->add("/control/vault/process/new","php-process/vault/vault-insert-process-form.php");
-
-        $route->add("/control/vault/update","php-forms/vault/vault-update.php");
-        $route->add("/control/vault/process/update","php-process/vault/vault-update-process-form.php");
-
-            
-        require_once($rootDirectory . '/inc/control/header.php');
-        require_once(APP_ROOT . '/inc/control/functions.php');
-        require_once(APP_ROOT . '/inc/control/header_html.php');
-        require_once(APP_ROOT . '/inc/control/header_nav.php');
+        $route->add("/vault/update","php-forms/vault/vault-update.php");
+        $route->add("/vault/process/update","php-process/vault/vault-update-process-form.php");
 
 
-        // homepage
-        $route->add("/admin","public/control/admin.php");
-        $route->add("/control","public/control/admin.php");
-        $route->add("/control/admin","public/control/admin.php");
-        $route->add("/control/login","public/control/login.php");
-
+        // PAGES
         // user info
-        $route->add("/control/user/{id}","control/user.php");
-        $route->add("/control/login","control/login.php");
-        $route->add("/control/logout","control/logout.php");
+        $route->add("/user/{id}","public/pages/user.php");
+        $route->add("/logout","public/auth/logout.php");
         
         // accounting
-        $route->add("/control/accounting","public/control/accounting/index.php");
-        $route->add("/control/accounting/customers","public/control/accounting/costumers.php");
-        $route->add("/control/accounting/customers/invoices","public/control/accounting/erp-invoices-customers.php");
+        $route->add("/accounting","public/pages/accounting/index.php");
+        $route->add("/accounting/customers","public/pages/accounting/costumers.php");
+        $route->add("/accounting/customers/invoices","public/pages/accounting/erp-invoices-customers.php");
 
-        $route->add("/control/accounting/supplies/","public/control/accounting/supplies.php");
-        $route->add("/control/accounting/supplies/invoices","public/control/accounting/erp-invoices-supplies.php");
+        $route->add("/accounting/supplies/","public/pages/accounting/supplies.php");
+        $route->add("/accounting/supplies/invoices","public/pages/accounting/erp-invoices-supplies.php");
 
-        // links
-        $route->add("/control/links","public/control/links/index.php");
-        $route->add("/control/links/categories","public/control/links/categories.php");
-        $route->add("/control/links/category/{id}","public/control/links/category.php");
-        $route->add("/control/links/topics","public/control/links/topics.php");
-        $route->add("/control/links/topic/{id}","public/control/links/topic.php");
-        $route->add("/control/links/all-links","public/control/links/all-links.php");
+        // 4) links
+        $route->add("/links","public/pages/links/index.php");
+        $route->add("/links/categories","public/pages/links/page-all-categories.php");
+        $route->add("/links/category/{id}","public/pages/links/page-category-id.php");
+        $route->add("/links/topics","public/pages/links/page-all-topics.php");
+        $route->add("/links/topic/{id}","public/pages/links/page-topic-all-links.php");
+        $route->add("/links/update/{id}","php-forms/links/links-update-link.php");
 
         //vault
-        $route->add("/control/vault","public/control/vault/index.php");
-        $route->add("/control/vault/customer/{id}","public/control/vault/customer.php");
-        $route->add("/control/vault/elliot/{id}","public/control/vault/vault-elliot.php");
+        $route->add("/vault","public/control/vault/index.php");
+        $route->add("/vault/customer/{id}","public/control/vault/customer.php");
+        $route->add("/vault/elliot/{id}","public/control/vault/vault-elliot.php");
 
-        //blog
-        $route->add("/control/blog/{slug}","public/control/blog/blog.php");
-        $route->add("/control/blog/{slug}/editor","public/control/blog/editor.php");
 
         //programming
-        $route->add("/control/programming","public/control/programming/index.php");
-        $route->add("/control/programming/links","public/control/programming/links.php");
-        $route->add("/control/programming/links/{id}","public/control/programming/links-detail.php");
-        $route->add("/control/programming/daw","public/control/programming/daw.php");
-
-        //webmail
-        $route->add("/control/mail/send","public/control/webmail/send.php");
-        $route->add("/control/mail/inbox","public/control/webmail/inbox.php");
+        $route->add("/programming","public/control/programming/index.php");
+        $route->add("/programming/links","public/control/programming/links.php");
+        $route->add("/programming/links/{id}","public/control/programming/links-detail.php");
+        $route->add("/programming/daw","public/control/programming/daw.php");
 
         //contacts
-        $route->add("/control/contacts","public/control/contacts/index.php");
-        $route->add("/control/contacts/personal","public/control/contacts/personal-contacts.php");
+        $route->add("/contacts","public/control/contacts/index.php");
+        $route->add("/contacts/personal","public/control/contacts/personal-contacts.php");
 
         //jobs
-        $route->add("/control/jobs","public/jobs/index.php");
+        $route->add("/jobs","public/control/jobs/index.php");
 
-        //library
-        $route->add("/control/library","public/control/library/index.php");
-        $route->add("/control/library/books","public/control/library/books.php");
-        $route->add("/control/library/authors","public/control/library/authors.php");
+        // 5) library
+        $route->add("/library","public/pages/library/index.php");
+        $route->add("/library/book/all","public/pages/library/books.php");
+        $route->add("/library/book/{slug}","public/pages/library/book-page.php");
+
+        $route->add("/library/author/all","public/pages/library/authors.php");
+        $route->add("/library/author/new","public/pages/library/form-author-new.php");
+        $route->add("/library/author/update/{slug}","public/pages/library/form-author-update.php");
+        $route->add("/library/author/{slug}","public/pages/library/author-page.php");
+        $route->add("/library/author/by-country/{country}","public/pages/library/author-page.php");
         
         //users
-        $route->add("/control/users","public/control/users/index.php");
-        $route->add("/control/users/list","public/control/users/users-list.php");
+        $route->add("/users","public/control/users/index.php");
+        $route->add("/users/list","public/control/users/users-list.php");
 
         // projects
-        $route->add("/control/projects","public/control/projects/index.php");
+        $route->add("/projects","public/control/projects/index.php");
 
-    } else {
-
-    // constants
-    require_once('./inc/variables.php');   
-    
-   $route->add("/book","public/book/index.php");
-    $route->add("/book/list","public/book/index.php");
-    $route->add("/book/{slug}","public/book/llibre.php");
-    $route->add("/author","public/author/index.php");
-    $route->add("/author/list","public/author/index.php");
-    $route->add("/author/{slug}","public/book/author.php");
-    
-
-    $route->add("/ca","public/homepage.php");
-    $route->add("/en","public/homepage.php");
-    $route->add("/fr","public/homepage.php");
-    $route->add("/es","public/homepage.php");
-    $route->add("/it","public/homepage.php");
-
-    $route->add("/{slug}","public/homepage.php");
-    
-    $route->add("/en/homepage/","public/homepage.php");
-    $route->add("/en/{slug}","public/homepage.php");
-    
-    $route->add("/fr/accueil/","public/homepage.php");
-    $route->add("/fr/{slug}","public/homepage.php");
-
-    $route->add("/ca/inici","public/homepage.php");
-    $route->add("/ca/{slug}","public/homepage.php");
-
-    $route->add("/es/inicio","public/homepage.php");
-    $route->add("/es/{slug}","public/homepage.php");
-
-    $route->add("/it/homepage","public/homepage.php");
-    $route->add("/it/{slug}","public/homepage.php");
-   
-        // Initialize the language code variable
-        $lc = ""; 
-        // Check to see that the global language server variable isset()
-        // If it is set, we cut the first two characters from that string
-    
-        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-            $lc = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-        }
-        
-    
-    // Now we simply evaluate that variable to detect specific languages
-        if ($lc == "ca") {
-            $route->add("/","public/homepage.php");
-            $route->add("/ca","public/homepage.php");
-            
-            exit();
-        } elseif ($lc == "es"){
-            $route->add("/","public/homepage.php");
-            $route->add("/es","public/homepage.php");
-            exit();
-        } elseif ($lc == "en"){
-            $route->add("/","public/homepage.php");
-            $route->add("/en","public/homepage.php");
-            exit();
-        } elseif ($lc == "fr"){
-            $route->add("/","public/homepage.php");
-            $route->add("/fr","public/homepage.php");
-            exit();
-        } elseif ($lc == "it"){
-            $route->add("/","public/homepage.php");
-            $route->add("/it","public/homepage.php");
-            exit();
-        } else { // don't forget the default case if $lc is empty
-            $route->add("/","public/homepage.php");
-            exit();
-        }
-        
-    $route->notFound("404.php");
-    }
-
-    
+}
 
 ?>

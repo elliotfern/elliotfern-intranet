@@ -1,8 +1,6 @@
 <?php
 # conectare la base de datos
 global $conn;
-include_once(APP_SERVER . '/inc/connection.php');
-
 
 // some action goes here under php
     echo '<div class="container-fluid">';

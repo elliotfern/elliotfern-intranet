@@ -1,6 +1,2 @@
-Sitemap: https://elliotfern.com/wp-sitemap.xml
-
 User-agent: *
-
-Disallow: /wp-admin/
-Allow: /wp-admin/admin-ajax.php
+Disallow: /

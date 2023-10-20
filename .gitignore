@@ -1,6 +1,14 @@
-/matomo/
-/media/
-/wp-content/
-.htaccess
+# Ignorar archivos y directorios generados por el sistema operativo
+.DS_Store
+Thumbs.db
 
+# Ignorar logs y archivos temporales
+/logs/
+/temp/
+
+# Ignorar directorio de dependencias (ejemplo para PHP y Composer)
 /vendor/
+/node_modules/
+
+# Ignorar archivos de configuración local (ejemplo para PHP)
+.env
