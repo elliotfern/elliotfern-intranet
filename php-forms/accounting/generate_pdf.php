@@ -1,7 +1,7 @@
 <?php
 
-$rootDirectory = $_SERVER['DOCUMENT_ROOT'];
-require_once($rootDirectory . '/vendor/tcpdf/tcpdf.php');
+require_once(APP_ROOT . APP_DEV . '/vendor/tcpdf/tcpdf.php');
+
 
 if(isset($params['id'])){
     $id = $params['id'];
@@ -11,7 +11,8 @@ if(isset($params['id'])){
 $idInvoice = $id;
 
 //call api
-$url = APP_SERVER . "/controller/control/route.php?type=customers-invoices&id=" .$idInvoice;
+// http://127.0.0.1/elliotfern/api/accounting/
+$url = "http://localhost/" . APP_DEV . "/api/accounting/?type=customers-invoices&id=" .$idInvoice;
 $input = file_get_contents($url);
 $arr = json_decode($input, true);
 $obj = $arr[0];
@@ -39,7 +40,7 @@ $subTotal = $obj['facSubtotal'];
 $facVAT = $obj['facVAT'];
 $malt = $obj['facFees'];
 
-$url2 = APP_SERVER . "/controller/control/route.php?type=invoice-products&id=" . $idInvoice;
+$url2 = "http://localhost/" . APP_DEV . "/api/accounting/?type=invoice-products&id=" . $idInvoice;
 //call api
 $input2 = file_get_contents($url2);
 $arr2 = json_decode($input2, true);
@@ -75,7 +76,7 @@ $pdf->SetTitle('Invoice PDF');
 $pdf->AddPage();
 
 // Add the image to the PDF
-$imagePath = APP_SERVER . '/inc/img/hispantic_logo.jpg';
+$imagePath = "http://localhost/" . APP_DEV . '/public/img/hispantic_logo.jpg';
 $pdf->Image($imagePath, $x = 10, $y = 10, $w = 100, $h = 0, $type = '', $link = '', $align = '', $resize = false, $dpi = 300, $palign = '', $ismask = false, $imgmask = false, $border = 0, $fitbox = false, $hidden = false, $fitonpage = false, $alt = '');
 
 // set header and footer fonts

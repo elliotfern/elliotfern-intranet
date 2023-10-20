@@ -182,6 +182,9 @@ if (empty($_SESSION['user']) || !session_id()) {
     exit(); 
 
 } else {
+
+        $route->add("/accounting/invoice/pdf/{id}", "php-forms/accounting/generate_pdf.php");
+
         // Header (solo para las paginas)
         require_once(APP_ROOT . APP_DEV . '/public/php/header.php');
     
@@ -197,7 +200,6 @@ if (empty($_SESSION['user']) || !session_id()) {
         /// add customer invoice
         $route->add("/accounting/invoice-customer/new","php-forms/accounting/invoice-customer-add.php");
         $route->add("/accounting/process/invoice-customer/new","php-process/accounting/customer-invoice-insert.php");
-        $route->add("/accounting/invoice/pdf/{id}", "php-forms/accounting/generate_pdf.php");
 
         /// add company supply
         $route->add("/accounting/supply/new","php-forms/accounting/company-supply-add.php");

@@ -98,9 +98,6 @@ echo "<hr>";
                     });
                 }
                 fetch_data();
-                setInterval(function(){
-                    fetch_data();
-                }, 5000);
             });
        </script>
 </div>

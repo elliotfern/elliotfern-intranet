@@ -3,8 +3,8 @@ $(document).ready(function () {});
 // COMPANY SUPPLY FUNCTIONS
 // INPUT OPEN MODAL FORM - CREATE SUPPLY COMPANY
 function btnCreateSupplyCompany() {
-  var server = window.location.hostname;
-  var urlAjax = "https://" + server + "/control/accounting/supply/new";
+  let urlAjax = devDirectory + "/accounting/supply/new";
+
   $.ajax({
     url: urlAjax, //the page containing php script
     type: "post", //request type,
@@ -26,9 +26,7 @@ $(function () {
     $("#createSupplyCompanyMessageOk").hide();
     $("#createSupplyCompanyMessageErr").hide();
 
-    var server = window.location.hostname;
-    var urlAjax =
-      "https://" + server + "/control/accounting/process/supply/new";
+    let urlAjax = devDirectory + "/accounting/process/supply/new";
     // Stop form from submitting normally
     event.preventDefault();
 
@@ -60,8 +58,7 @@ $(function () {
 
 // INPUT OPEN MODAL FORM - CREATE SUPPLY INVOICE
 function btnCreateSupplyInvoice() {
-  var server = window.location.hostname;
-  var urlAjax = "https://" + server + "/control/accounting/supply/invoice/new";
+  let urlAjax = devDirectory + "/accounting/supply/invoice/new";
   $.ajax({
     url: urlAjax, //the page containing php script
     type: "post", //request type,
@@ -85,9 +82,7 @@ $(function () {
 
     // Stop form from submitting normally
     event.preventDefault();
-    var server = window.location.hostname;
-    var urlAjax =
-      "https://" + server + "/control/accounting/process/supply/invoice/new";
+    let urlAjax = devDirectory + "/accounting/process/supply/invoice/new";
     $.ajax({
       type: "POST",
       url: urlAjax,
@@ -121,8 +116,7 @@ $(function () {
 
 // INPUT OPEN MODAL FORM - CREATE NEW CUSTOMER
 function btnCreateCustomer() {
-  var server = window.location.hostname;
-  var urlAjax = "https://" + server + "/control/accounting/customer/new";
+  let urlAjax = devDirectory + "/accounting/customer/new";
   $.ajax({
     url: urlAjax, //the page containing php script
     type: "post", //request type,
@@ -139,9 +133,7 @@ function btnCreateCustomer() {
 
 // AJAX PROCESS > PHP - MODAL FORM - CREATE NEW CUSTOMER
 $(function () {
-  var server = window.location.hostname;
-  var urlAjax =
-    "https://" + server + "/control/accounting/process/customer/new";
+  let urlAjax = devDirectory + "/accounting/process/customer/new";
   $("#btnAddCustomer").click(function () {
     // check values
     $("#createCustomerMessageOk").hide();
@@ -187,9 +179,7 @@ $(function () {
 
 // INPUT OPEN MODAL FORM - CREATE CUSTOMER INVOICE
 function btnCreateCustomInvoice() {
-  var server = window.location.hostname;
-  var urlAjax =
-    "https://" + server + "/control/accounting/invoice-customer/new";
+  let urlAjax = devDirectory + "/accounting/invoice-customer/new";
   $.ajax({
     url: urlAjax, //the page containing php script
     type: "post", //request type,
@@ -207,9 +197,7 @@ function btnCreateCustomInvoice() {
 
 // AJAX PROCESS > PHP - MODAL FORM - CREATE NEW INVOICE CUSTOMER - ELLIOT FERNANDEZ SOLE TRADE
 $(function () {
-  var server = window.location.hostname;
-  var urlAjax =
-    "https://" + server + "/control/accounting/process/invoice-customer/new";
+  let urlAjax = devDirectory + "/accounting/process/invoice-customer/new";
   $("#btnAddNewCustomerInvoice").click(function () {
     // check values
     $("#createCustomerInvoiceMessageOk").hide();
@@ -255,9 +243,7 @@ $(function () {
 // INPUT OPEN MODAL FORM - VIEW INVOICE INFO
 function viewDetailInvoicec(idInvoice) {
   var idInvoice = idInvoice;
-  var server = window.location.hostname;
-  var urlAjax =
-    "https://" + server + "/control/accounting/invoice-customer/info";
+  let urlAjax = devDirectory + "/accounting/invoice-customer/info";
   $.ajax({
     url: urlAjax, //the page containing php script
     type: "post", //request type,
@@ -277,11 +263,10 @@ function viewDetailInvoicec(idInvoice) {
 
 function btnCreatePDFInvoice(id) {
   // Send an AJAX request to the server-side script with the invoice ID
-  var server = window.location.hostname;
   var xhr = new XMLHttpRequest();
   xhr.open(
     "GET",
-    "https://" + server + "/control/accounting/invoice/pdf/" + id,
+    "http://127.0.0.1" + devDirectory + "/accounting/invoice/pdf/" + id,
     true
   );
   xhr.responseType = "blob";
