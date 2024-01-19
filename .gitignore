@@ -13,8 +13,4 @@ Thumbs.db
 
 # Ignorar archivos de configuración local (ejemplo para PHP)
 .env
-composer.json
-composer.lock
 elliotfern.code-workspace
-package-lock.json
-package.json
