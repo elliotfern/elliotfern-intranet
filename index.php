@@ -126,7 +126,7 @@ $route = new Route();
 
 $url_root = $_SERVER['DOCUMENT_ROOT'];
 $url_server = $_SERVER['HTTP_HOST'];
-$dev = "/elliotfern";
+$dev = "";
 
 define("APP_SERVER", $url_server); 
 define("APP_ROOT", $url_root);
@@ -185,6 +185,10 @@ if (empty($_SESSION['user']) || !session_id()) {
 
         $route->add("/accounting/invoice/pdf/{id}", "php-forms/accounting/generate_pdf.php");
 
+        // pagines sense header
+        $route->add("/accounting/invoice-customer/new","php-forms/accounting/invoice-customer-add.php");
+
+
         // Header (solo para las paginas)
         require_once(APP_ROOT . APP_DEV . '/public/php/header.php');
     
@@ -198,7 +202,7 @@ if (empty($_SESSION['user']) || !session_id()) {
         $route->add("/control/accounting/process/customer/new","php-process/accounting/customer-insert.php");
 
         /// add customer invoice
-        $route->add("/accounting/invoice-customer/new","php-forms/accounting/invoice-customer-add.php");
+        
         $route->add("/accounting/process/invoice-customer/new","php-process/accounting/customer-invoice-insert.php");
 
         /// add company supply
@@ -246,9 +250,9 @@ if (empty($_SESSION['user']) || !session_id()) {
         $route->add("/links/update/{id}","php-forms/links/links-update-link.php");
 
         //vault
-        $route->add("/vault","public/control/vault/index.php");
-        $route->add("/vault/customer/{id}","public/control/vault/customer.php");
-        $route->add("/vault/elliot/{id}","public/control/vault/vault-elliot.php");
+        $route->add("/vault","public/pages/vault/index.php");
+        $route->add("/vault/customer/{id}","public/pages/vault/customer.php");
+        $route->add("/vault/elliot/{id}","public/pages/vault/vault-elliot.php");
 
 
         //programming

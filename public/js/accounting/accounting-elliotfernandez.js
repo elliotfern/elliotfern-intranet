@@ -266,7 +266,7 @@ function btnCreatePDFInvoice(id) {
   var xhr = new XMLHttpRequest();
   xhr.open(
     "GET",
-    "http://127.0.0.1" + devDirectory + "/accounting/invoice/pdf/" + id,
+    `https://gestio.elliotfern.com/accounting/invoice/pdf/${id}`,
     true
   );
   xhr.responseType = "blob";

@@ -1,10 +1,13 @@
 <?php
+$url_server = $_SERVER['HTTP_HOST'];
+$url_root = $_SERVER['DOCUMENT_ROOT'];
 
-require_once(APP_ROOT . APP_DEV . '/vendor/tcpdf/tcpdf.php');
-
+require_once($url_root  . '/vendor/tcpdf/tcpdf.php');
 
 if(isset($params['id'])){
     $id = $params['id'];
+} else {
+  $id = 1;
 }
 
 // Retrieve the invoice ID from the query parameters
@@ -12,7 +15,7 @@ $idInvoice = $id;
 
 //call api
 // http://127.0.0.1/elliotfern/api/accounting/
-$url = "http://localhost/" . APP_DEV . "/api/accounting/?type=customers-invoices&id=" .$idInvoice;
+$url = "https://" . $url_server . "/api/accounting/?type=customers-invoices&id=" .$idInvoice;
 $input = file_get_contents($url);
 $arr = json_decode($input, true);
 $obj = $arr[0];
@@ -40,7 +43,7 @@ $subTotal = $obj['facSubtotal'];
 $facVAT = $obj['facVAT'];
 $malt = $obj['facFees'];
 
-$url2 = "http://localhost/" . APP_DEV . "/api/accounting/?type=invoice-products&id=" . $idInvoice;
+$url2 = "https://" . $url_server . "/api/accounting/?type=invoice-products&id=" . $idInvoice;
 //call api
 $input2 = file_get_contents($url2);
 $arr2 = json_decode($input2, true);
@@ -76,7 +79,7 @@ $pdf->SetTitle('Invoice PDF');
 $pdf->AddPage();
 
 // Add the image to the PDF
-$imagePath = "http://localhost/" . APP_DEV . '/public/img/hispantic_logo.jpg';
+$imagePath = "https://" . $url_server . '/public/img/hispantic_logo.jpg';
 $pdf->Image($imagePath, $x = 10, $y = 10, $w = 100, $h = 0, $type = '', $link = '', $align = '', $resize = false, $dpi = 300, $palign = '', $ismask = false, $imgmask = false, $border = 0, $fitbox = false, $hidden = false, $fitonpage = false, $alt = '');
 
 // set header and footer fonts

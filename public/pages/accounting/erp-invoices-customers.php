@@ -34,7 +34,7 @@ echo "<hr>";
             $(document).ready(function(){
                 function fetch_data(){
                     var urlRoot = $("#url").val();
-                    var urlAjax = "/elliotfern/api/accounting/?type=accounting-elliotfernandez-customers-invoices";
+                    var urlAjax = "/api/accounting/?type=accounting-elliotfernandez-customers-invoices";
                     $.ajax({
                         url:urlAjax,
                         method:"POST",

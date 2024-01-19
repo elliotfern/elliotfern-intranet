@@ -3,7 +3,7 @@
   "description": "My package composer",
   "type": "project",
   "require": {
-    "php": "^8.1",
+    "php": "^8.2",
     "vlucas/phpdotenv": "^5.5",
     "firebase/php-jwt": "6.8.1"
   },
