@@ -1,10 +1,5 @@
 <?php
 
-# conectare la base de datos
-$activePage = "cinema";
-include_once('../inc/header.php');
-
-
 echo '<div class="container">';
 echo '<h1>Cinema & TV shows Database</h1>';
 echo '<h2>Movies</h2>';
@@ -40,5 +35,6 @@ echo "<hr>";
 
 //include_once('modals-library.php');
 
+
 # footer
-include_once('../inc/footer.php');
+require_once(APP_ROOT . APP_DEV . '/public/php/footer.php');

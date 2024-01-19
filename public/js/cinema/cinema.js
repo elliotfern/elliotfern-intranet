@@ -1,126 +1,81 @@
-$(document).ready(function () {
-  loadTableTVShows();
-  loadTableMovies();
-  loadTableActors();
-});
-
 function loadTableTVShows() {
-  $("#tvshowTable").DataTable({
-    destroy: true,
-    autoWidth: false,
-    ajax: {
-      url: "../inc/route.php?type=tvshows",
-      dataSrc: "data",
+  let urlAjax = devDirectory + "/api/cinema/get/?type=tvshows";
+  $.ajax({
+    url: urlAjax,
+    method: "GET",
+    dataType: "json",
+    beforeSend: function (xhr) {
+      // Obtener el token del localStorage
+      let token = localStorage.getItem("token");
+
+      // Incluir el token en el encabezado de autorización
+      xhr.setRequestHeader("Authorization", "Bearer " + token);
     },
-    columns: [
-      { data: "name" },
-      { data: "startYear" },
-      { data: "tvProducer" },
-      { data: "countryName" },
-      { data: "id" },
-      { data: "id" },
-    ],
-    columnDefs: [
-      {
-        // # hide the first column
-        // https://datatables.net/examples/advanced_init/column_render.html
-        targets: [0],
-        visible: true,
-        render: function (data, type, row, meta) {
-          let str = escape(row.name);
-          return (
-            '<a id="' +
-            row.id +
-            '" title="View tv show details" data-bs-toggle="modal" data-bs-target="#modalViewTVShow" href="#" onclick="viewDetailTVshow(' +
-            row.id +
-            ",'" +
-            str +
-            "');return false;\">" +
-            row.name +
-            "</a>"
-          );
-        },
-      },
-      {
-        // # hide the first column
-        // https://datatables.net/examples/advanced_init/column_render.html
-        targets: [1],
-        visible: true,
-        render: function (data, type, row, meta) {
-          return row.startYear + " - " + row.endYear;
-        },
-      },
 
-      {
-        // # hide the first column
-        // https://datatables.net/examples/advanced_init/column_render.html
-        targets: [2],
-        visible: true,
-        render: function (data, type, row, meta) {
-          return row.tvProducer;
-        },
-      },
+    success: function (data) {
+      try {
+        let html = "";
+        for (let i = 0; i < data.length; i++) {
+          html += "<tr>";
+          html +=
+            '<td class="text-center"><a id="' +
+            data[i].id +
+            '" title="Author page" href="./' +
+            data[i].slug +
+            '"><img src="../../public/img/library-author/' +
+            data[i].img +
+            '.jpg" style="height:70px"></a></td>';
 
-      {
-        // # disable search for column number 2
-        // https://datatables.net/reference/option/columns.searchable
-        targets: [3],
-        searchable: true,
-        // # disable orderable column
-        // https://datatables.net/reference/option/columns.orderable
-        orderable: true,
-        render: function (data, type, row, meta) {
-          return row.countryName;
-        },
-      },
+            html +=
+            '<td><a id="' +
+            data[i].id +
+            '" title="Author page" href="./' +
+            data[i].id +
+            '">' +
+            data[i].name +
+            "</a></td>";
 
-      {
-        // # action controller (edit,delete)
-        targets: [4],
-        orderable: false,
-        // # column rendering
-        // https://datatables.net/reference/option/columns.render
-        render: function (data, type, row, meta) {
-          return (
-            '<button type="button" onclick="btnUpdateBook(' +
-            row.id +
-            ')" id="btnUpdateBook" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalUpdateBook" data-id="' +
-            row.id +
-            '" value="' +
-            row.id +
-            '" data-title="' +
-            row.id +
-            '" data-slug="' +
-            row.id +
-            '" data-text="' +
-            row.id +
-            '">Update</button>'
-          );
-        },
-      },
-      {
-        // # action controller (delete)
-        targets: [5],
-        orderable: false,
-        // # column rendering
-        // https://datatables.net/reference/option/columns.render
-        render: function (data, type, row, meta) {
-          return (
-            '<button type="button" onclick="btnDeleteBook(this)" id="btnDeleteBook" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteBook" data-id="' +
-            row.id +
-            '" value="' +
-            row.id +
-            '" data-title="' +
-            row.id +
-            '" data-slug="' +
-            row.id +
-            '" data-text="' +
-            row.id +
-            '">Delete</button>'
-          );
-        },
-      },
-    ],
+          html +=
+            '<td><a id="' +
+            data[i].id +
+            '" title="Author page" href="./' +
+            data[i].slug +
+            '">' +
+            data[i].startYear + "-" + data[i].endYear
+            "</a></td>";
+
+          html +=
+            '<td><a id="' +
+            data[i].idCountry +
+            '" title="Authors by country" href="./by-country/' +
+            data[i].idCountry +
+            '">' +
+            data[i].nomDirector + " " + data[i].lastName + 
+            "</a></td>";
+
+            html +=
+            '<td><a id="' +
+            data[i].idCountry +
+            '" title="Authors by country" href="./by-country/' +
+            data[i].idCountry +
+            '">' +
+            data[i].country + 
+            "</a></td>";
+
+          html +=
+            '<td><a href="./update/' +
+            data[i].slug +
+            '"><button type="button" class="btn btn-sm btn-warning">Update</button></a></td>';
+
+          html +=
+            '<td><button type="button" class="btn btn-sm btn-danger">Delete</button></td>';
+          html += "</tr>";
+        }
+        $("#tvshowTable tbody").html(html);
+      } catch (error) {
+        console.error("Error al parsear JSON:", error); // Muestra el error de parsing
+      }
+    },
   });
 }
 

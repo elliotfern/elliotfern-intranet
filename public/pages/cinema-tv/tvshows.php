@@ -1,10 +1,5 @@
 <?php
 
-# conectare la base de datos
-$activePage = "cinema";
-include_once('../inc/header.php');
-
-
 echo '<div class="container">';
 echo '<h1>Cinema & TV shows Database</h1>';
 echo '<h2>TV shows</h2>';
@@ -13,25 +8,36 @@ echo "<p><button type='button' class='btn btn-dark btn-sm' id='btnAddtvshow' onc
 
 echo "<hr>";
 
-    echo '<div class="'.TABLE_DIV_CLASS.'">';
-    echo '<table class="table table-striped datatable" id="tvshowTable">
-        <thead class="'.TABLE_THREAD.'">
-        <tr>
-            <th>Name</th>
-            <th>Years</th>
-            <th>Producer</th>
-            <th>Country</th>
-            <th></th>
-            <th></th>
-    </tr>
-    </thead>
-    </table>
-    </div>
+?>
+<div class="table-responsive">
+            <table class="table table-striped" id="tvshowTable">
+                <thead class="table-primary">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Years</th>
+                    <th>Producer</th>
+                    <th>Country</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+</div>
+</div>
+<?php
 
-    </div>
-</div>';
+?>
+<script>
+$(document).ready(function(){
+    loadTableTVShows();
+});
+</script>
 
+<?php
 include_once('modals-cinema.php');
 
+
 # footer
-include_once('../inc/footer.php');
+require_once(APP_ROOT . APP_DEV . '/public/php/footer.php');

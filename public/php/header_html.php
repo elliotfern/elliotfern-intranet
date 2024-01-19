@@ -30,12 +30,12 @@ $favicon = APP_DEV . "/public/img/icon.png";
 <script src="<?php echo APP_DEV;?>/public/js/links/links-functions.js"></script>
 <script src="<?php echo APP_DEV ;?>/public/js/library/library.js"></script>
 <script src="<?php echo APP_DEV;?>/public/js/accounting/accounting-elliotfernandez.js"></script>
+<script src="<?php echo APP_DEV;?>/public/js/cinema/cinema.js"></script>
+<script src="<?php echo APP_DEV;?>/public/js/vault/vault.js"></script>
 
   <!-- Write your comments here 
+  
     
-    
-    <script src="<?php echo APP_DEV;?>/public/js/vault/vault.js"></script>
-    <script src="<?php echo APP_DEV;?>/public/js/cinema/cinema.js"></script>
     <script src="<?php echo APP_DEV;?>/public/js/history-web/history.js"></script>
     <script src="<?php echo APP_DEV;?>/public/js/elliotfern-web/elliotfern.js"></script>
     <script src="<?php echo APP_DEV;?>/public/js/users/users.js"></script>

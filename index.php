@@ -149,6 +149,8 @@ $route->add("/api/auth/login","php-process/auth/login-process.php");
  $route->add("/api/links/put","api/link/put-link.php");
  $route->add("/api/links/post","api/link/post-link.php");
 
+ $route->add("/api/cinema/get","api/cinema/get-cinema.php");
+
  // links
  $route->add("/api/library/new/{author}","api/library/post-library.php");
  $route->add("/api/library/update/{author}","api/library/put-library.php");
@@ -262,8 +264,8 @@ if (empty($_SESSION['user']) || !session_id()) {
         $route->add("/programming/daw","public/control/programming/daw.php");
 
         //contacts
-        $route->add("/contacts","public/control/contacts/index.php");
-        $route->add("/contacts/personal","public/control/contacts/personal-contacts.php");
+        $route->add("/contacts","public/pages/contacts/index.php");
+        $route->add("/contacts/personal","public/pages/contacts/personal-contacts.php");
 
         //jobs
         $route->add("/jobs","public/control/jobs/index.php");
@@ -285,6 +287,13 @@ if (empty($_SESSION['user']) || !session_id()) {
 
         // projects
         $route->add("/projects","public/control/projects/index.php");
+
+        // cinema
+        $route->add("/cinema","public/pages/cinema-tv/index.php");
+        $route->add("/cinema/tvshows","public/pages/cinema-tv/tvshows.php");
+        $route->add("/cinema/movies","public/pages/cinema-tv/movies.php");
+        $route->add("/cinema/actors","public/pages/cinema-tv/actors.php");
+        $route->add("/cinema/directors","public/pages/cinema-tv/directors.php");
 
 }
 

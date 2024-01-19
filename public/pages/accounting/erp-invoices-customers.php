@@ -16,17 +16,17 @@ echo "<hr>";
             <table class="table table-striped" id="customersInvoices">
                 <thead class="table-primary">
                 <tr>
-                <th>Num.</th>
-                <th>Company</th>
-                <th>Invoice date</th>
-                <th>Concept</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Payment</th>
-                <th>PDF</th>
-                <th></th>
-                <th></th>
-    
+                    <th>Num.</th>
+                    <th>Company</th>
+                    <th>Invoice date</th>
+                    <th>Concept</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Payment</th>
+                    <th>PDF</th>
+                    <th></th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody></tbody>
         </table>

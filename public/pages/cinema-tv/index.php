@@ -1,20 +1,16 @@
 <?php
 
-# conectare la base de datos
-$activePage = "cinema";
-include_once('../inc/header.php');
-
 
 echo '<div class="container">';
 echo '<h1>Cinema & television Database</h1>';
 
-echo '<a href="tvshows.php">TV Shows</a>';
-echo '<br><a href="movies.php">Movies</a>';
-echo '<br><a href="actors.php">Actors</a>';
-echo '<br><a href="directors.php">Directors</a>';
+echo '<a href="'.APP_DEV.'/cinema/tvshows">TV Shows</a>';
+echo '<br><a href="'.APP_DEV.'/cinema/movies">Movies</a>';
+echo '<br><a href="'.APP_DEV.'/cinema/actors">Actors</a>';
+echo '<br><a href="'.APP_DEV.'/cinema/directors">Directors</a>';
 
 echo '</div>
 </div>';
 
 # footer
-include_once('../inc/footer.php');
+require_once(APP_ROOT . APP_DEV . '/public/php/footer.php');
