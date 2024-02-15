@@ -84,3 +84,8 @@ td {
   border-color: #f5853c;
   border-style: solid;
 }
+
+.quadre-cercador {
+  max-width: 500px!important;
+  text-align: left;
+}

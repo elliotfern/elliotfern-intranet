@@ -68,6 +68,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
           } else {
               $web = data_input($_POST['web']);
           }
+
+          if (empty($_POST["email"])) {;
+            $email = NULL;
+          } else {
+              $email = data_input($_POST['email']);
+          }
           
           if (empty($_POST["tipus"])) {;
             $hasError=true;

@@ -29,6 +29,24 @@ if (isset($headers['Authorization'])) {
                     $data[] = $users;
                 }
             echo json_encode($data);
+
+        // 2) Llistat contactes (tots : tipus 0)
+        // ruta GET => "/api/contactes/get/?type=contactes"
+        } elseif (isset($_GET['type']) && $_GET['type'] == 'contactes') {
+            global $conn;
+            $data = array();
+            $stmt = $conn->prepare(
+            "SELECT c.id, c.nom, c.cognoms, c.email, c.tel_1, c.tel_2, c.tel_3, c.data_naixement, c.web, t.tipus, p.pais_cat AS country, c.adreca
+            FROM db_contactes AS c
+            LEFT JOIN aux_contactes_tipus AS t ON c.tipus = t.id
+            LEFT JOIN db_countries AS p ON c.pais = p.id
+            ORDER BY c.cognoms ASC");
+            $stmt->execute();
+            if($stmt->rowCount() === 0) echo ('No rows');
+                while($users = $stmt->fetch(PDO::FETCH_ASSOC) ){
+                    $data[] = $users;
+                }
+            echo json_encode($data);
         
         // 3) Contacte ID
         // ruta GET => "/api/contactes/get/?type=contacte&id=1"

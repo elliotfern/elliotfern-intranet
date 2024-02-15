@@ -5,14 +5,21 @@
 
   <hr>
 
+  <!-- Campo de búsqueda -->
+    <div class="input-group mb-3 quadre-cercador">
+      <input type="text" class="form-control" placeholder="Cercar contacte" id="searchInput">
+      <button class="btn btn-outline-secondary" type="button" onclick="buscarContactos()">Cercar</button>
+    </div>
+
   <!-- Botones para seleccionar el tipo de contacto -->
   <div class="btn-group" role="group" aria-label="Tipus de contacte" style="margin-bottom:25px">
-  <button type="button" class="btn btn-outline-primary active" data-tipus="1">Familia</button>
-  <button type="button" class="btn btn-outline-primary" data-tipus="2">Amics</button>
-  <button type="button" class="btn btn-outline-primary" data-tipus="3">Feina (HispanTIC)</button>
-</div>
+  <button type="button" class="btn btn-outline-primary active" data-tipus="0">Tots els contactes</button>
+    <button type="button" class="btn btn-outline-primary" data-tipus="1">Familia</button>
+    <button type="button" class="btn btn-outline-primary" data-tipus="2">Amics</button>
+    <button type="button" class="btn btn-outline-primary" data-tipus="3">Feina (HispanTIC)</button>
+  </div>
 
-  <div class="container d-flex">
+  <div class="container">
     <div class="row gap-3 justify-content-center" id="contactsContainer">
       <!-- Aquí se muestran los contactos -->
     </div>
@@ -30,6 +37,11 @@
     obtenirContactes(tipoActivo);
   };
 
+  // Escuchar el evento de entrada en el campo de búsqueda
+$('#searchInput').on('input', function() {
+  buscarContactos();
+});
+
    $(document).ready(function() {
     // Manejar clic en los botones de tipo de contacto
     $('button[data-tipus]').click(function() {
@@ -44,7 +56,13 @@
   });
 
   function obtenirContactes(tipus) {
-    let urlAjax = devDirectory + "/api/contactes/get/?type=contactes&tipus=" + tipus;
+
+    // Si se selecciona "Tots", no pasamos ningún tipo de contacto como parámetro
+    let urlAjax = devDirectory + "/api/contactes/get/?type=contactes";
+    if (tipus !== 0) {
+      urlAjax += "&tipus=" + tipus;
+    }
+
     $.ajax({
       url: urlAjax,
       method: "GET",
@@ -63,7 +81,7 @@
           let contactsHTML = '';
           data.forEach(contact => {
             contactsHTML += `
-              <div class="col-sm-3 quadre">
+              <div class="col-sm-3 col-md-3 quadre">
                 <h6 style="background-color:black;color:white;padding:5px;display:inline;">${contact.tipus}</h6>
                 <h3 style="margin-top: 15px;">${contact.nom} ${contact.cognoms}</h3>`;
             if (contact.email !== null) {
@@ -130,6 +148,28 @@ function modificaContacte(id) {
   
   // Redirigir a la URL especificada
   window.location.href = url;
+}
+
+
+// Función para buscar contactos
+function buscarContactos() {
+  var textoBusqueda = normalizeText($('#searchInput').val());
+
+  // Filtrar contactos según el texto de búsqueda normalizado
+  $('#contactsContainer .quadre').each(function() {
+    var nombre = normalizeText($(this).find('h3').text());
+    var apellidos = normalizeText($(this).find('p:nth-of-type(2)').text());
+    if (nombre.includes(textoBusqueda) || apellidos.includes(textoBusqueda)) {
+      $(this).show();
+    } else {
+      $(this).hide();
+    }
+  });
+}
+
+
+function normalizeText(text) {
+  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
 // Cargar contactos al inicio
