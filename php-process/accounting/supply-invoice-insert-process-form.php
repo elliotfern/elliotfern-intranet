@@ -16,9 +16,8 @@
     if (empty($_POST["empresaNom"])) {
       $hasError = true;
     } else {
-      $facConcepte = $_POST['facConcepte']
+      $facConcepte = $_POST['facConcepte'];
     }
-    ;
     
     if (empty($_POST["facData"])) {
       $hasError = true;

@@ -151,6 +151,11 @@ $route->add("/api/auth/login","php-process/auth/login-process.php");
 
  $route->add("/api/cinema/get","api/cinema/get-cinema.php");
 
+ //contactes
+ $route->add("/api/contactes/get/","api/contactes/get-contactes.php");
+ $route->add("/api/contactes/put/{contacte}","api/contactes/put-contactes.php");
+ $route->add("/api/contactes/post","api/contactes/post-contactes.php");
+
  // links
  $route->add("/api/library/new/{author}","api/library/post-library.php");
  $route->add("/api/library/update/{author}","api/library/put-library.php");
@@ -190,6 +195,8 @@ if (empty($_SESSION['user']) || !session_id()) {
         // pagines sense header
         $route->add("/accounting/invoice-customer/new","php-forms/accounting/invoice-customer-add.php");
 
+        /// add customer invoice
+        $route->add("/accounting/process/invoice-customer/new","php-process/accounting/customer-invoice-insert.php");
 
         // Header (solo para las paginas)
         require_once(APP_ROOT . APP_DEV . '/public/php/header.php');
@@ -203,10 +210,7 @@ if (empty($_SESSION['user']) || !session_id()) {
         $route->add("/accounting/customer/new","php-forms/accounting/customer-add.php");
         $route->add("/control/accounting/process/customer/new","php-process/accounting/customer-insert.php");
 
-        /// add customer invoice
         
-        $route->add("/accounting/process/invoice-customer/new","php-process/accounting/customer-invoice-insert.php");
-
         /// add company supply
         $route->add("/accounting/supply/new","php-forms/accounting/company-supply-add.php");
         $route->add("/accounting/process/supply/new","php-process/accounting/supply-company-insert.php");
@@ -264,8 +268,9 @@ if (empty($_SESSION['user']) || !session_id()) {
         $route->add("/programming/daw","public/control/programming/daw.php");
 
         //contacts
-        $route->add("/contacts","public/pages/contacts/index.php");
-        $route->add("/contacts/personal","public/pages/contacts/personal-contacts.php");
+        $route->add("/contactes","public/pages/contacts/index.php");
+        $route->add("/contactes/modifica/{id}","php-forms/contactes/contactes-modifica-id.php");
+        $route->add("/contactes/nou","php-forms/contactes/contactes-inserir-nou.php");
 
         //jobs
         $route->add("/jobs","public/control/jobs/index.php");
@@ -291,6 +296,7 @@ if (empty($_SESSION['user']) || !session_id()) {
         // cinema
         $route->add("/cinema","public/pages/cinema-tv/index.php");
         $route->add("/cinema/tvshows","public/pages/cinema-tv/tvshows.php");
+        $route->add("/cinema/tvshows/{id}","public/pages/cinema-tv/tvshow-page-info.php");
         $route->add("/cinema/movies","public/pages/cinema-tv/movies.php");
         $route->add("/cinema/actors","public/pages/cinema-tv/actors.php");
         $route->add("/cinema/directors","public/pages/cinema-tv/directors.php");

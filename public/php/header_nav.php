@@ -18,11 +18,7 @@ $loggedInUser = ($_SESSION['user']['id']);
 	</div>
 
 	<div class="container-fluid text-center" style="padding-top:20px;padding-bottom:25px">
-		<a href="'.APP_DEV .'/admin"><img src="'. APP_DEV . '/public/img/logo.png" alt="HispanTIC" width="300" height="64"></a>
-	</div>
-
-	<div class="container-fluid text-center" style="padding-top:20px;padding-bottom:25px">
-		<h1 class="text-center"><a href="'. APP_DEV .'/admin">Intranet</a></h1>
+		<h1 class="text-center"><a href="'. APP_DEV .'/admin">Intranet - Elliot Fernandez</a></h1>
 	</div>
 	
 	<div class="container-fluid text-center">
@@ -53,7 +49,7 @@ $loggedInUser = ($_SESSION['user']['id']);
 					<a href="'.APP_DEV.'/history">History</a>
 				</li>
 				<li class="nav-item nav-link">
-					<a href="'.APP_DEV.'/contacts">Contacts</a>
+					<a href="'.APP_DEV.'/contactes">Contactes</a>
 				</li>
 				<li class="nav-item nav-link">
 					<a href="'.APP_DEV.'/library">Library</a>

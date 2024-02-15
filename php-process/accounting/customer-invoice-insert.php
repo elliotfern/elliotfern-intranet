@@ -5,13 +5,6 @@
  * @update_book_ajax
  */
 
-function data_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
-
     // insert data to db
     if (empty($_POST["idUser"])) {
       $hasError = true;
@@ -97,16 +90,17 @@ function data_input($data) {
       $stmt->bindParam(":facPaymentType", $facPaymentType, PDO::PARAM_INT);
       $stmt->execute();
 
-      // response output
+      // response output      
       $response = array(
         'status' => 'success', 
       );
-
       header( "Content-Type: application/json" );
       echo json_encode($response);
+
     } else {
       // response output - data error
-      $response['status'] = 'error';
-      header( "Content-Type: application/json" );
+      $response = array(
+        'status' => 'error', 
+      );
       echo json_encode($response);
     }

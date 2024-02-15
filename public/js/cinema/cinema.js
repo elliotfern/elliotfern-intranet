@@ -29,7 +29,7 @@ function loadTableTVShows() {
             html +=
             '<td><a id="' +
             data[i].id +
-            '" title="Author page" href="./' +
+            '" title="TV serie page" href="./tvshows/' +
             data[i].id +
             '">' +
             data[i].name +
@@ -539,3 +539,52 @@ $(function () {
     });
   });
 });
+
+
+// PAGE TV SHOW INFO
+// https://gestio.elliotfern.com/api/cinema/get/?type=tvshow&id=35
+function tvshowPageInfo(slug) {
+  let urlAjax = devDirectory + "/api/cinema/get/?type=tvshow&id=" + slug;
+  $.ajax({
+    url: urlAjax,
+    method: "GET",
+    dataType: "json",
+    beforeSend: function (xhr) {
+      // Obtener el token del localStorage
+      let token = localStorage.getItem('token');
+
+      // Incluir el token en el encabezado de autorización
+      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+    },
+
+    success: function (data) {
+      try {
+        const idAuthor = data.id;
+        authorBookListLibrary(idAuthor)
+
+        // DOM modifications
+        document.getElementById('authorName').innerHTML = "Author: " + data.AutNom + " " + data.AutCognom1;
+        document.getElementById("authorPhoto").src = `../../public/img/library-author/${data.nameImg}.jpg`;
+        document.getElementById('authorCountry').innerHTML = data.country;
+
+        if (data.yearDie === null || data.yearDie === "NULL" || data.yearDie === 0) {
+          document.getElementById('authorYearBirth').innerHTML = data.yearBorn;
+        } else {
+          document.getElementById('authorYearBirth').innerHTML = data.yearBorn + " - " + data.yearDie;
+        }
+
+        document.getElementById('linkAuthor').href = `../country/${data.idPais}`;
+        document.getElementById('authorprofession').innerHTML = data.name;
+        document.getElementById('authorMovement').innerHTML = data.movement;
+        document.getElementById('linkMovement').href = `../movement/${data.idMovement}`;
+        document.getElementById('authorWeb').href = `${data.AutWikipedia}`;
+        document.getElementById('authorCreated').innerHTML = data.dateCreated;
+        document.getElementById('authorUpdated').innerHTML = data.dateModified;
+        document.getElementById('authorDescrip').innerHTML = data.AutDescrip;
+
+      } catch (error) {
+        console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
+      }
+    }
+  })
+}
