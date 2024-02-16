@@ -168,6 +168,7 @@ $route->add("/api/auth/login","php-process/auth/login-process.php");
 
  $route->add("/api/library/{topics}","api/library/get-library.php");
  $route->add("/api/library/books/{allBooks}","api/library/get-library.php");
+ $route->add("/api/library/books/allBooks/generes/{generes}","api/library/get-library.php");
  $route->add("/api/library/book/{slugBook}","api/library/get-library.php");
 
  $route->add("/api/places/{country}","api/library/get-library.php");
@@ -276,15 +277,15 @@ if (empty($_SESSION['user']) || !session_id()) {
         $route->add("/jobs","public/control/jobs/index.php");
 
         // 5) library
-        $route->add("/library","public/pages/library/index.php");
-        $route->add("/library/book/all","public/pages/library/books.php");
-        $route->add("/library/book/{slug}","public/pages/library/book-page.php");
+        $route->add("/biblioteca","public/pages/library/index.php");
+        $route->add("/biblioteca/book/all","public/pages/library/books.php");
+        $route->add("/biblioteca/book/{slug}","public/pages/library/book-page.php");
 
-        $route->add("/library/author/all","public/pages/library/authors.php");
-        $route->add("/library/author/new","public/pages/library/form-author-new.php");
-        $route->add("/library/author/update/{slug}","public/pages/library/form-author-update.php");
-        $route->add("/library/author/{slug}","public/pages/library/author-page.php");
-        $route->add("/library/author/by-country/{country}","public/pages/library/author-page.php");
+        $route->add("/biblioteca/author/all","public/pages/library/authors.php");
+        $route->add("/biblioteca/author/new","public/pages/library/form-author-new.php");
+        $route->add("/biblioteca/author/update/{slug}","public/pages/library/form-author-update.php");
+        $route->add("/biblioteca/author/{slug}","public/pages/library/author-page.php");
+        $route->add("/biblioteca/author/by-country/{country}","public/pages/library/author-page.php");
         
         //users
         $route->add("/users","public/control/users/index.php");
