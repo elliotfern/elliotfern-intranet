@@ -34,12 +34,12 @@ $stmt->execute();
       echo "<tr>";
             echo "<td>";
             if ($row['client'] == 31) { 
-              echo "<a href='".APP_SERVER."/vault/elliot/31'>Elliot</a>";
+              echo "<a href='/vault/elliot/31'>Elliot</a>";
             } else {
               if (empty($row['clientEmpresa'])) { 
-              echo "<a href='".APP_SERVER."/vault/customer/".$row['idClient']."'>".$row['clientNom']." ".$row['clientCognoms']."</a>";
+              echo "<a href='/vault/customer/".$row['idClient']."'>".$row['clientNom']." ".$row['clientCognoms']."</a>";
               } else {
-                echo "<a href='".APP_SERVER."/vault/customer/".$row['idClient']."'>".$row['clientEmpresa']."</a>";
+                echo "<a href='/vault/customer/".$row['idClient']."'>".$row['clientEmpresa']."</a>";
               }
             }
             echo "</td>";
@@ -55,7 +55,5 @@ echo "</div>";
 echo '</div>
 </div>';
 
-include_once('modals-vault.php');
-
 # footer
-include_once(APP_ROOT.'/inc/footer.php');
+require_once(APP_ROOT . '/public/php/footer.php');

@@ -1,4 +1,3 @@
-<div class="container">
 <h2>La meva biblioteca</h2>
 
 <p><button type='button' class='btn btn-outline-secondary' id='btnCreateLink' onclick='btnCrearLlibre()'>Afegir nou llibre &rarr;</button></p>
@@ -21,7 +20,7 @@
   <button type="button" class="btn btn-outline-primary" data-tipus="9">9. Història.Geografia</button>
 </div>
 
-<div class="container">
+<div class="container-fluid">
   <div class="row gap-3 justify-content-center" id="llibresContainer">
     <!-- Aquí se muestran los contactos -->
   </div>
@@ -127,10 +126,8 @@ function normalizeText(text) {
   return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
-        </script>
-    </div>
+</script>
 
-</div>
 
 <?php
 

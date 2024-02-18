@@ -173,6 +173,10 @@ $route->add("/api/auth/login","php-process/auth/login-process.php");
 
  $route->add("/api/places/{country}","api/library/get-library.php");
 
+ // API PUBLICA
+ $route->add("/api/public/biblioteca/{allBooks}","api/library/public/get-library.php");
+ $route->add("/api/public/biblioteca/allBooks/{generes}","api/library/public/get-library.php");
+
 // aqui comença la lògica del sistema
 
 session_set_cookie_params([
@@ -201,9 +205,9 @@ if (empty($_SESSION['user']) || !session_id()) {
 
         // Header (solo para las paginas)
         require_once(APP_ROOT . APP_DEV . '/public/php/header.php');
-    
-        // homepage
-        $route->add("/","public/pages/homepage/admin.php");
+
+        $route->add("/inici","public/pages/homepage/admin.php");
+
         $route->add("/admin","public/pages/homepage/admin.php");
 
         // 1) accounting-elliot
@@ -241,20 +245,21 @@ if (empty($_SESSION['user']) || !session_id()) {
         $route->add("/logout","public/auth/logout.php");
         
         // accounting
-        $route->add("/accounting","public/pages/accounting/index.php");
-        $route->add("/accounting/customers","public/pages/accounting/costumers.php");
-        $route->add("/accounting/customers/invoices","public/pages/accounting/erp-invoices-customers.php");
+        $route->add("/erp","public/pages/accounting/index.php");
+        $route->add("/erp/facturacio-clients","public/pages/accounting/erp-invoices-customers.php");
+        $route->add("/erp/facturacio-proveedors","public/pages/accounting/erp-invoices-supplies.php");
 
-        $route->add("/accounting/supplies/","public/pages/accounting/supplies.php");
-        $route->add("/accounting/supplies/invoices","public/pages/accounting/erp-invoices-supplies.php");
+        $route->add("/crm/clients/","public/pages/accounting/costumers.php");
+        $route->add("/crm/proveedors","public/pages/accounting/supplies.php");
+        
 
         // 4) links
-        $route->add("/links","public/pages/links/index.php");
-        $route->add("/links/categories","public/pages/links/page-all-categories.php");
-        $route->add("/links/category/{id}","public/pages/links/page-category-id.php");
-        $route->add("/links/topics","public/pages/links/page-all-topics.php");
-        $route->add("/links/topic/{id}","public/pages/links/page-topic-all-links.php");
-        $route->add("/links/update/{id}","php-forms/links/links-update-link.php");
+        $route->add("/adreces","public/pages/links/index.php");
+        $route->add("/adreces/categories","public/pages/links/page-all-categories.php");
+        $route->add("/adreces/category/{id}","public/pages/links/page-category-id.php");
+        $route->add("/adreces/topics","public/pages/links/page-all-topics.php");
+        $route->add("/adreces/topic/{id}","public/pages/links/page-topic-all-links.php");
+        $route->add("/adreces/update/{id}","php-forms/links/links-update-link.php");
 
         //vault
         $route->add("/vault","public/pages/vault/index.php");

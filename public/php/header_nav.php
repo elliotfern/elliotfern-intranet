@@ -1,7 +1,6 @@
 <?php
 
-echo '
-	<div class="text-end">';
+echo '<div class="text-end">';
 
 // Genera o obtén tu clave secreta
 $loggedInUser = ($_SESSION['user']['id']);
@@ -12,8 +11,7 @@ $loggedInUser = ($_SESSION['user']['id']);
 </script>
 
 <?php
-
-	echo '<div id="userDiv"> </div>';
+echo '<div id="userDiv"> </div>';
 	echo ' | <a href="'.APP_DEV.'/logout">(Logout)</a>
 	</div>
 
@@ -28,44 +26,23 @@ $loggedInUser = ($_SESSION['user']['id']);
 			</button>
 		<div class="collapse navbar-collapse justify-content-center menuHeader" id="navbarTogglerDemo01">
 		<ul class="navbar-nav text-center">
-				<li class="nav-item nav-link">
-					<a id="accounting" href="'.APP_DEV.'/accounting-hispantic">HispanTIC ERP & CRM</a>
-				</li>
-
-				<li class="nav-item nav-link">
-					<a id="accounting" href="'.APP_DEV.'/accounting">SoleTrade ERP & CRM</a>
-				</li>
-
-				<li class="nav-item nav-link">
-					<a href="'.APP_DEV.'/projects">Projects</a>
-				</li>
+			
 				<li class="nav-item nav-link">
 					<a href="'.APP_DEV.'/history-web">OpenHistory web</a>
 				</li>
-				<li class="nav-item nav-link">
-					<a href="'.APP_DEV.'/elliotfern-web">Elliotfern.com</a>
-				</li>		
+				
 				<li class="nav-item nav-link">
 					<a href="'.APP_DEV.'/history">History</a>
 				</li>
-				<li class="nav-item nav-link">
-					<a href="'.APP_DEV.'/contactes">Contactes</a>
-				</li>
-				<li class="nav-item nav-link">
-					<a href="'.APP_DEV.'/library">Library</a>
-				</li>
+
+			
 				<li class="nav-item nav-link">
 					<a href="'.APP_DEV.'/images">Images</a>
 				</li>
 				<li class="nav-item nav-link">
 					<a href="'.APP_DEV.'/travels">Travels</a>
 				</li>
-				<li class="nav-item nav-link">
-					<a href="'.APP_DEV.'/links/">Links</a>
-				</li>
-				<li class="nav-item nav-link">
-					<a href="'.APP_DEV.'/cinema">Cinema</a>
-				</li>
+
 				<li class="nav-item nav-link">
 					<a href="'.APP_DEV.'/music">Music</a>
 				</li>
@@ -75,9 +52,7 @@ $loggedInUser = ($_SESSION['user']['id']);
 				<li class="nav-item nav-link">
 					<a href="'.APP_DEV.'/programming/">Programming</a>
 				</li>
-				<li class="nav-item nav-link">
-					<a href="'.APP_DEV.'/contact-form">Contact form</a>
-				</li>
+
 			</ul>
 		</nav>
 	</div>';

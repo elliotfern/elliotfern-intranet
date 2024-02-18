@@ -1,7 +1,7 @@
 <?php
 
 
-echo '<div class="container">';
+echo '<div class="container p-3">';
 echo '<h1>Cinema & television Database</h1>';
 
 echo '<a href="'.APP_DEV.'/cinema/tvshows">TV Shows</a>';

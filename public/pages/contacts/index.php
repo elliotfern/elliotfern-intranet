@@ -1,4 +1,3 @@
-<div class="container">
   <h2>Agenda de contactes</h2>
 
   <p><button type='button' class='btn btn-outline-secondary' id='btnCreateLink' onclick='btnCrearContacte()'>Afegir nou contacte &rarr;</button></p>
@@ -24,7 +23,7 @@
       <!-- Aquí se muestran los contactos -->
     </div>
   </div>
-</div>
+  </div>
 
 <script>
 
@@ -179,5 +178,4 @@ obtenirContactes(1); // Mostrar contactos de tipo 1 por defecto
 <?php
 # footer
 require_once(APP_ROOT . APP_DEV . '/public/php/footer.php');
-
 ?>

@@ -22,7 +22,7 @@
 
 </div>
 <?php
-include_once('modals-links.php');
+//include_once('modals-links.php');
 
 # footer
 require_once(APP_ROOT . APP_DEV . '/public/php/footer.php');

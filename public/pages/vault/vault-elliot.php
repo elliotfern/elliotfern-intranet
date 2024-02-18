@@ -81,8 +81,5 @@ function showPass(id) {
 </script>
 
 <?php
-include_once('modals-vault.php');
-
 # footer
-include_once(APP_ROOT.'/inc/footer.php');
-
+require_once(APP_ROOT . '/public/php/footer.php');

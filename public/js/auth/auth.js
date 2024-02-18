@@ -14,7 +14,7 @@ export function nameUser(idUser) {
         success: function (data) {
             // Modifica el contenido de un div con el resultado de la API
             let responseData = JSON.parse(data);  // Parsea la respuesta JSON
-            let welcomeMessage = `Welcome: ${responseData.firstName} ${responseData.lastName}`;
+            let welcomeMessage = `${responseData.firstName} ${responseData.lastName}`;
             $('#userDiv').html(welcomeMessage);  // Muestra el mensaje en tu página
         },
         error: function (error) {

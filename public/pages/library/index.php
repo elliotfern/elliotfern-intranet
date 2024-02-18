@@ -1,11 +1,8 @@
-<div class="container">
-<h1>Library Database</h1>
+<h2>La meva biblioteca</h2>
 
-<a href="<?php echo APP_DEV .'/library/book/all';?>">Books</a>
-<br><a href="<?php echo APP_DEV .'/library/author/all';?>">Authors</a>
+<a href="<?php echo APP_DEV .'/biblioteca/book/all';?>">Books</a>
+<br><a href="<?php echo APP_DEV .'/biblioteca/author/all';?>">Authors</a>
 
-</div>
-</div>
 
 <?php
 # footer

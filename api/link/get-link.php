@@ -11,17 +11,17 @@ if (isset($headers['Authorization'])) {
         // Token válido, puedes continuar con el código para obtener los datos del usuario
 
         // 1) Llistat categories enllaços
-        // ruta GET => "https://control.elliotfern/api/links/?type=categories"
+        // ruta GET => "/api/links/?type=categories"
         if (isset($_GET['type']) && $_GET['type'] == 'categories' ) {
             global $conn;
             $data = array();
             $stmt = $conn->prepare(
-            "SELECT g.id, g.genre
-            FROM db_library_genres AS g
-            INNER JOIN db_topics AS t ON g.id = t.idGenere
+            "SELECT g.id, g.categoria_ca AS genre
+            FROM aux_categories AS g
+            INNER JOIN aux_temes AS t ON g.id = t.idGenere
             INNER JOIN db_links AS l ON l.cat = t.id
             GROUP BY g.id
-            ORDER BY g.genre ASC");
+            ORDER BY g.categoria_ca ASC");
             $stmt->execute();
             if($stmt->rowCount() === 0) echo ('No rows');
                 while($users = $stmt->fetch(PDO::FETCH_ASSOC) ){
@@ -30,19 +30,19 @@ if (isset($headers['Authorization'])) {
             echo json_encode($data);
         
         // 2) Llistat enllaços segons una categoria en concret
-        // ruta GET => "https://control.elliotfern/api/links/?type=categoria$id=11"
+        // ruta GET => "/api/links/?type=categoria$id=11"
         } elseif ( (isset($_GET['type']) && $_GET['type'] == 'categoria') && (isset($_GET['id']) ) ) {
             $id = $_GET['id'];
             global $conn;
             $data = array();
             $stmt = $conn->prepare(
-            "SELECT t.id AS idTema, t.topic AS tema, g.genre
-            FROM db_topics AS t
-            INNER JOIN db_library_genres AS g ON t.idGenere = g.id
+            "SELECT t.id AS idTema, t.tema_ca AS tema, g.categoria_ca AS genre
+            FROM aux_temes AS t
+            INNER JOIN aux_categories AS g ON t.idGenere = g.id
             INNER JOIN db_links AS l ON l.cat = t.id
             WHERE t.idGenere=?
             GROUP BY t.id
-            ORDER BY t.topic ASC");
+            ORDER BY t.tema_ca ASC");
             $stmt->execute([$id]);
             if ($stmt->rowCount() === 0) echo ('No rows');
                 while($users = $stmt->fetch(PDO::FETCH_ASSOC) ){
@@ -51,7 +51,7 @@ if (isset($headers['Authorization'])) {
             echo json_encode($data);
 
         // 3) Llistat enllaços segons un topic concret
-        // ruta GET => "https://control.elliotfern/api/links/?type=topic$id=11"
+        // ruta GET => "/api/links/?type=topic$id=11"
     } elseif ( (isset($_GET['type']) && $_GET['type'] == 'topic') && (isset($_GET['id']) ) ) {
 
         $id = $_GET['id'];
@@ -63,9 +63,9 @@ if (isset($headers['Authorization'])) {
 
         global $conn;
         $data = array();
-        $stmt = $conn->prepare("SELECT l.web AS url, l.nom, t.id AS idTema, t.topic AS tema, l.id AS linkId, l.lang, ty.id AS idType, ty.type, g.genre, g.id AS idCategoria, total_enlaces.total_count
-        FROM db_topics AS t
-        INNER JOIN db_library_genres AS g ON t.idGenere = g.id
+        $stmt = $conn->prepare("SELECT l.web AS url, l.nom, t.id AS idTema, t.tema_ca AS tema, l.id AS linkId, l.lang, ty.id AS idType, ty.type, g.categoria_ca AS genre, g.id AS idCategoria, total_enlaces.total_count
+        FROM aux_temes AS t
+        INNER JOIN aux_categories AS g ON t.idGenere = g.id
         INNER JOIN db_links AS l ON l.cat = t.id
         LEFT JOIN db_links_type AS ty ON ty.id = l.tipus
         CROSS JOIN (
@@ -91,17 +91,17 @@ if (isset($headers['Authorization'])) {
         }
         
         // 4) Llistat de topics
-        // ruta GET => "https://control.elliotfern/api/links/?type=all-topics"
+        // ruta GET => "/api/links/?type=all-topics"
         } elseif ( (isset($_GET['type']) && $_GET['type'] == 'all-topics') ) {
             global $conn;
             $data = array();
             $stmt = $conn->prepare(
-            "SELECT t.id AS idTema, t.topic AS tema, g.genre, g.id AS idGenre
-            FROM db_topics AS t
-            INNER JOIN db_library_genres AS g ON t.idGenere = g.id
+            "SELECT t.id AS idTema, t.tema_ca AS tema, g.categoria_ca AS genre, g.id AS idGenre
+            FROM aux_temes AS t
+            INNER JOIN aux_categories AS g ON t.idGenere = g.id
             INNER JOIN db_links AS l ON l.cat = t.id
             GROUP BY t.id
-            ORDER BY t.topic ASC");
+            ORDER BY t.tema_ca ASC");
             $stmt->execute();
             if ($stmt->rowCount() === 0) echo ('No rows');
                 while($users = $stmt->fetch(PDO::FETCH_ASSOC) ){
@@ -110,7 +110,7 @@ if (isset($headers['Authorization'])) {
             echo json_encode($data);
 
          // 5) Ruta para sacar 1 enlace y actualizarlo 
-        // ruta GET => "https://control.elliotfern/api/links/?type=link$id=11"
+        // ruta GET => "/api/links/?type=link$id=11"
         } elseif ( (isset($_GET['type']) && $_GET['type'] == 'link') && (isset($_GET['id']) ) ) {
             $id = $_GET['id'];
             global $conn;
