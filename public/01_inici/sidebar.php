@@ -66,9 +66,9 @@
             )
         ),
 
-        "/projectes" => array(
-            "label" => "Projectes (to-do list)",
-            "url" => "/projectes",
+        "/gestor-projectes" => array(
+            "label" => "Gestor de projectes",
+            "url" => "/gestor-projectes",
             "icon" => "bi-list-task",
             "paths" => array(
                "M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5zM3 3H2v1h1z",
@@ -87,7 +87,7 @@
         ),
 
         "/biblioteca" => array(
-            "label" => "Biblioteca",
+            "label" => "Biblioteca de llibres",
             "url" => "/biblioteca",
             "icon" => "bi-book",
             "paths" => array(
@@ -163,37 +163,3 @@
     <a href="#" class="links-sidebar link-sortir ">Sortir</a>
       
   </div>
-
-  
-  <style>
-.bi {
-  vertical-align: -.125em;
-  fill: currentColor;
-}
-
-.me-2 {
-  margin-right: .5rem !important;
-}
-
-.links-sidebar {
-    color: white!important;/* color del texto */;
-}
-
-.links-sidebar:link {
-    color: white!important; /* color de los enlaces */;
-   
-}
-
-.links-sidebar:hover,
-.active {
-    color: white!important; /* color de los enlaces */;
-    text-decoration:underline!important; /* decoración del texto */;
-    font-weight: bold;
-   
-}
-
-.link-sortir {
-    margin-left: 35px;
-    margin-top: 20px;
-}
-</style>

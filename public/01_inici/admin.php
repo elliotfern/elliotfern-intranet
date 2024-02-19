@@ -83,4 +83,4 @@
 
 <?php
 # footer
-require_once(APP_ROOT . APP_DEV . '/public/php/footer.php');
+require_once(APP_ROOT . APP_DEV . '/public/01_inici/footer.php');

@@ -202,11 +202,11 @@ if (empty($_SESSION['user']) || !session_id()) {
         // CARREGAR HEADER
         require_once(APP_ROOT . '/public/01_inici/header_html.php');
 
-        // 1. Inici
+        // 01. Inici
         $route->add("/inici","public/01_inici/admin.php");
         $route->add("/admin","public/01_inici/admin.php");
 
-        // 2. ERP - Comptabilitat
+        // 02. ERP - Comptabilitat
         $route->add("/erp","public/02_erp_comptabilitat/index.php");
         $route->add("/erp/facturacio-clients","public/02_erp_comptabilitat/erp-invoices-customers.php");
         $route->add("/erp/facturacio-proveedors","public/02_erp_comptabilitat/erp-invoices-supplies.php");
@@ -218,7 +218,7 @@ if (empty($_SESSION['user']) || !session_id()) {
             /// info customer invoice
             $route->add("/accounting/invoice-customer/info/","php-forms/accounting/invoice-customer-info.php");
         
-        // 3. CRM - Gestio clients
+        // 03. CRM - Gestio clients
         $route->add("/crm","public/03_crm_clients/index.php");
         $route->add("/crm/clients/","public/03_crm_clients/costumers.php");
         
@@ -226,40 +226,64 @@ if (empty($_SESSION['user']) || !session_id()) {
             $route->add("/accounting/customer/new","php-forms/accounting/customer-add.php");
             $route->add("/control/accounting/process/customer/new","php-process/accounting/customer-insert.php");
 
-        // 4. CRM - Proveidors
+        // 04. CRM - Proveidors
         $route->add("/crm/proveedors","public/04_crm_proveidors/supplies.php");
         
             // a) Afegir proveidor
             $route->add("/accounting/supply/new","php-forms/accounting/company-supply-add.php");
             $route->add("/accounting/process/supply/new","php-process/accounting/supply-company-insert.php");
 
-        // 5. CRM - Pressupostos
+        // 05. CRM - Pressupostos
         $route->add("/crm/pressupostos","public/05_crm_pressupostos/index.php");
 
-        // 2) users
-        $route->add("/users/update","php-forms/users/users-update.php");
-        $route->add("/users/process/update","php-process/users/users-update-process-form.php");
+        // 06. Gestor projectes
+        $route->add("/gestor-projectes","public/06_gestor_projectes/index.php");
 
-        // 3) vault
-        $route->add("/vault/new","php-forms/vault/vault-add.php");
-        $route->add("/vault/process/new","php-process/vault/vault-insert-process-form.php");
+        // 07. Agenda contactes
+        $route->add("/contactes","public/07_agenda_contactes/index.php");
+        $route->add("/contactes/modifica/{id}","public/07_agenda_contactes/contactes-modifica-id.php");
+        $route->add("/contactes/nou","public/07_agenda_contactes/contactes-inserir-nou.php");
 
-        $route->add("/vault/update","php-forms/vault/vault-update.php");
-        $route->add("/vault/process/update","php-process/vault/vault-update-process-form.php");
+        // 08. Biblioteca llibres i autors
+        $route->add("/biblioteca","public/08_biblioteca_llibres/index.php");
+        
+            // a) Llibres:
+            $route->add("/biblioteca/llibres","public/08_biblioteca_llibres/books.php");
+            $route->add("/biblioteca/llibres/{slug}","public/08_biblioteca_llibres/book-page.php");
+            $route->add("/biblioteca/nou/llibre","public/08_biblioteca_llibres/biblioteca-llibre-inserir.php");
 
-        // 4) links
-        $route->add("/adreces","public/pages/links/index.php");
-        $route->add("/adreces/categories","public/pages/links/page-all-categories.php");
-        $route->add("/adreces/category/{id}","public/pages/links/page-category-id.php");
-        $route->add("/adreces/topics","public/pages/links/page-all-topics.php");
-        $route->add("/adreces/topic/{id}","public/pages/links/page-topic-all-links.php");
+            // b) autors
+            $route->add("/biblioteca/autors","public/08_biblioteca_llibres/authors.php");
+            $route->add("/biblioteca/nou/autor","public/08_biblioteca_llibres/biblioteca-autor-inserir.php");
+            $route->add("/biblioteca/autors/update/{slug}","public/08_biblioteca_llibres/form-author-update.php");
+            $route->add("/biblioteca/autors/{slug}","public/08_biblioteca_llibres/author-page.php");
+            $route->add("/biblioteca/autors/by-country/{country}","public/08_biblioteca_llibres/author-page.php");
+
+        // 09. Adreces interes
+        $route->add("/adreces","public/09_adreces_interes/index.php");
+        $route->add("/adreces/categories","public/09_adreces_interes/page-all-categories.php");
+        $route->add("/adreces/category/{id}","public/09_adreces_interes/page-category-id.php");
+        $route->add("/adreces/topics","public/09_adreces_interes/page-all-topics.php");
+        $route->add("/adreces/topic/{id}","public/09_adreces_interes/page-topic-all-links.php");
         $route->add("/adreces/update/{id}","php-forms/links/links-update-link.php");
 
-        //vault
-        $route->add("/vault","public/pages/vault/index.php");
-        $route->add("/vault/customer/{id}","public/pages/vault/customer.php");
-        $route->add("/vault/elliot/{id}","public/pages/vault/vault-elliot.php");
+        // 10 - Claus access
+        $route->add("/vault","public/10_claus_acces/index.php");
 
+        $route->add("/vault/new","php-forms/vault/vault-add.php");
+        $route->add("/vault/process/new","php-process/vault/vault-insert-process-form.php");
+        $route->add("/vault/update","php-forms/vault/vault-update.php");
+        $route->add("/vault/process/update","php-process/vault/vault-update-process-form.php");
+        $route->add("/vault/customer/{id}","public/10_claus_acces/customer.php");
+        $route->add("/vault/elliot/{id}","public/10_claus_acces/vault-elliot.php");
+
+        // 11 - Cinema i series
+        $route->add("/cinema","public/11_cinema_series/index.php");
+        $route->add("/cinema/tvshows","public/11_cinema_series/tvshows.php");
+        $route->add("/cinema/tvshows/{id}","public/11_cinema_series/tvshow-page-info.php");
+        $route->add("/cinema/movies","public/11_cinema_series/movies.php");
+        $route->add("/cinema/actors","public/11_cinema_series/actors.php");
+        $route->add("/cinema/directors","public/11_cinema_series/directors.php");     
 
         //programming
         $route->add("/programming","public/control/programming/index.php");
@@ -267,40 +291,6 @@ if (empty($_SESSION['user']) || !session_id()) {
         $route->add("/programming/links/{id}","public/control/programming/links-detail.php");
         $route->add("/programming/daw","public/control/programming/daw.php");
 
-        //contacts
-        $route->add("/contactes","public/pages/contacts/index.php");
-        $route->add("/contactes/modifica/{id}","php-forms/contactes/contactes-modifica-id.php");
-        $route->add("/contactes/nou","php-forms/contactes/contactes-inserir-nou.php");
-
-        //jobs
-        $route->add("/jobs","public/control/jobs/index.php");
-
-        // 5) library
-        $route->add("/biblioteca","public/pages/library/index.php");
-        $route->add("/biblioteca/book/all","public/pages/library/books.php");
-        $route->add("/biblioteca/book/{slug}","public/pages/library/book-page.php");
-
-        $route->add("/biblioteca/author/all","public/pages/library/authors.php");
-        $route->add("/biblioteca/author/new","public/pages/library/form-author-new.php");
-        $route->add("/biblioteca/author/update/{slug}","public/pages/library/form-author-update.php");
-        $route->add("/biblioteca/author/{slug}","public/pages/library/author-page.php");
-        $route->add("/biblioteca/author/by-country/{country}","public/pages/library/author-page.php");
-        
-        //users
-        $route->add("/users","public/control/users/index.php");
-        $route->add("/users/list","public/control/users/users-list.php");
-
-        // projects
-        $route->add("/projects","public/control/projects/index.php");
-
-        // cinema
-        $route->add("/cinema","public/pages/cinema-tv/index.php");
-        $route->add("/cinema/tvshows","public/pages/cinema-tv/tvshows.php");
-        $route->add("/cinema/tvshows/{id}","public/pages/cinema-tv/tvshow-page-info.php");
-        $route->add("/cinema/movies","public/pages/cinema-tv/movies.php");
-        $route->add("/cinema/actors","public/pages/cinema-tv/actors.php");
-        $route->add("/cinema/directors","public/pages/cinema-tv/directors.php");
-        
         // user info
         $route->add("/user/{id}","public/pages/user.php");
         $route->add("/logout","public/auth/logout.php");     

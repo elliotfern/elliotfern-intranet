@@ -119,3 +119,35 @@ td {
   color: white;
   border-color: #007bff;
 }
+
+/* SIDEBAR */
+.bi {
+  vertical-align: -.125em;
+  fill: currentColor;
+}
+
+.me-2 {
+  margin-right: .5rem !important;
+}
+
+.links-sidebar {
+    color: white!important;/* color del texto */;
+  }
+
+  .links-sidebar:link {
+      color: white!important; /* color de los enlaces */;
+     
+  }
+  
+  .links-sidebar:hover,
+  .active {
+      color: white!important; /* color de los enlaces */;
+      text-decoration:underline!important; /* decoración del texto */;
+      font-weight: bold;
+     
+  }
+  
+  .link-sortir {
+      margin-left: 35px;
+      margin-top: 20px;
+  }
