@@ -1,9 +1,6 @@
 <?php
-# conectar la base de datos
-$activePage = "accounting";
 global $conn;
 
-echo '<div class="container">';
 echo '<h1>HispanTIC - Elliot Fernandez (2022 - )</h1>';
 echo '<h2>ERP & CRM: central system information</h2>';
 
@@ -533,9 +530,6 @@ echo "</div>";
 
 
 echo '</div>';
-echo '</div>';
-
-include_once('modals-accounting.php');
 
 # footer
-require_once(APP_ROOT . APP_DEV . '/public/php/footer.php');
+require_once(APP_ROOT . '/public/01_inici/footer.php');

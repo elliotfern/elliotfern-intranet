@@ -133,11 +133,11 @@ define("APP_ROOT", $url_root);
 define("APP_DEV",$dev);
 
 // Route for paths containing '/control/'
-require_once(APP_ROOT . APP_DEV . '/connection.php');
-require_once(APP_ROOT . APP_DEV . '/public/php/variables.php'); 
-require_once(APP_ROOT . APP_DEV . '/public/php/functions.php');
+require_once(APP_ROOT . '/connection.php');
+require_once(APP_ROOT . '/public/01_inici/variables.php'); 
+require_once(APP_ROOT . '/public/01_inici/functions.php');
 
-$route->add("/login","public/pages/auth/login.php");
+$route->add("/login","public/auth/login.php");
 $route->add("/api/auth/login","php-process/auth/login-process.php");
 
  // API SERVER 
@@ -194,38 +194,47 @@ if (empty($_SESSION['user']) || !session_id()) {
     exit(); 
 
 } else {
-
+        // Pàgines que no han de tenir header
         $route->add("/accounting/invoice/pdf/{id}", "php-forms/accounting/generate_pdf.php");
-
-        // pagines sense header
         $route->add("/accounting/invoice-customer/new","php-forms/accounting/invoice-customer-add.php");
-
-        /// add customer invoice
         $route->add("/accounting/process/invoice-customer/new","php-process/accounting/customer-invoice-insert.php");
 
-        // Header (solo para las paginas)
-        require_once(APP_ROOT . APP_DEV . '/public/php/header.php');
+        // CARREGAR HEADER
+        require_once(APP_ROOT . '/public/01_inici/header_html.php');
 
-        $route->add("/inici","public/pages/homepage/admin.php");
+        // 1. Inici
+        $route->add("/inici","public/01_inici/admin.php");
+        $route->add("/admin","public/01_inici/admin.php");
 
-        $route->add("/admin","public/pages/homepage/admin.php");
+        // 2. ERP - Comptabilitat
+        $route->add("/erp","public/02_erp_comptabilitat/index.php");
+        $route->add("/erp/facturacio-clients","public/02_erp_comptabilitat/erp-invoices-customers.php");
+        $route->add("/erp/facturacio-proveedors","public/02_erp_comptabilitat/erp-invoices-supplies.php");
 
-        // 1) accounting-elliot
-        /// add customer
-        $route->add("/accounting/customer/new","php-forms/accounting/customer-add.php");
-        $route->add("/control/accounting/process/customer/new","php-process/accounting/customer-insert.php");
-
+            /// add company supply invoice
+            $route->add("/accounting/supply/invoice/new","php-forms/accounting/invoice-supply-add.php");
+            $route->add("/accounting/process/supply/invoice/new","php-process/accounting/supply-invoice-insert-process-form.php");
+            
+            /// info customer invoice
+            $route->add("/accounting/invoice-customer/info/","php-forms/accounting/invoice-customer-info.php");
         
-        /// add company supply
-        $route->add("/accounting/supply/new","php-forms/accounting/company-supply-add.php");
-        $route->add("/accounting/process/supply/new","php-process/accounting/supply-company-insert.php");
-
-        /// add company supply invoice
-        $route->add("/accounting/supply/invoice/new","php-forms/accounting/invoice-supply-add.php");
-        $route->add("/accounting/process/supply/invoice/new","php-process/accounting/supply-invoice-insert-process-form.php");
+        // 3. CRM - Gestio clients
+        $route->add("/crm","public/03_crm_clients/index.php");
+        $route->add("/crm/clients/","public/03_crm_clients/costumers.php");
         
-        /// info customer invoice
-        $route->add("/accounting/invoice-customer/info/","php-forms/accounting/invoice-customer-info.php");
+            // a) Afegir client
+            $route->add("/accounting/customer/new","php-forms/accounting/customer-add.php");
+            $route->add("/control/accounting/process/customer/new","php-process/accounting/customer-insert.php");
+
+        // 4. CRM - Proveidors
+        $route->add("/crm/proveedors","public/04_crm_proveidors/supplies.php");
+        
+            // a) Afegir proveidor
+            $route->add("/accounting/supply/new","php-forms/accounting/company-supply-add.php");
+            $route->add("/accounting/process/supply/new","php-process/accounting/supply-company-insert.php");
+
+        // 5. CRM - Pressupostos
+        $route->add("/crm/pressupostos","public/05_crm_pressupostos/index.php");
 
         // 2) users
         $route->add("/users/update","php-forms/users/users-update.php");
@@ -237,21 +246,6 @@ if (empty($_SESSION['user']) || !session_id()) {
 
         $route->add("/vault/update","php-forms/vault/vault-update.php");
         $route->add("/vault/process/update","php-process/vault/vault-update-process-form.php");
-
-
-        // PAGES
-        // user info
-        $route->add("/user/{id}","public/pages/user.php");
-        $route->add("/logout","public/auth/logout.php");
-        
-        // accounting
-        $route->add("/erp","public/pages/accounting/index.php");
-        $route->add("/erp/facturacio-clients","public/pages/accounting/erp-invoices-customers.php");
-        $route->add("/erp/facturacio-proveedors","public/pages/accounting/erp-invoices-supplies.php");
-
-        $route->add("/crm/clients/","public/pages/accounting/costumers.php");
-        $route->add("/crm/proveedors","public/pages/accounting/supplies.php");
-        
 
         // 4) links
         $route->add("/adreces","public/pages/links/index.php");
@@ -306,6 +300,10 @@ if (empty($_SESSION['user']) || !session_id()) {
         $route->add("/cinema/movies","public/pages/cinema-tv/movies.php");
         $route->add("/cinema/actors","public/pages/cinema-tv/actors.php");
         $route->add("/cinema/directors","public/pages/cinema-tv/directors.php");
+        
+        // user info
+        $route->add("/user/{id}","public/pages/user.php");
+        $route->add("/logout","public/auth/logout.php");     
 
 }
 

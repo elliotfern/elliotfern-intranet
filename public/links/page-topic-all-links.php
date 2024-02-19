@@ -16,7 +16,6 @@ $id = $params['id'];
 
 </script>
 
-<div class="container">
 <h6><a href="<?php echo APP_DEV;?>/links">Links</a> > <a href="<?php echo APP_DEV;?>/links/topics">Topics </a></h6>
 <h2 id="titolTopic"></h2>
 <h4 id="titolTopicCategoria"></h4>

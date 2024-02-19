@@ -60,6 +60,12 @@ body {
   text-decoration: none !important;
 }
 
+@media (min-width: 500px) {
+  .fixe {
+    height: 100vh;
+  }
+}
+
 /* TAULES */
 th,
 td {
@@ -88,4 +94,28 @@ td {
 .quadre-cercador {
   max-width: 500px!important;
   text-align: left;
+}
+
+/* PAGINACIO */
+#pagination {
+  margin-top: 20px;
+}
+
+#pagination a {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  color: #333;
+}
+
+#pagination a:hover {
+  background-color: #f0f0f0;
+}
+
+#pagination a.current-page {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
 }

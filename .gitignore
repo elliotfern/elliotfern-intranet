@@ -1,6 +1,7 @@
 # Ignorar archivos y directorios generados por el sistema operativo
 .DS_Store
 Thumbs.db
+/.vscode/
 
 # Ignorar logs y archivos temporales
 /logs/

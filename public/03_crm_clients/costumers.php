@@ -1,9 +1,4 @@
 <?php
-# conectare la base de datos
-$activePage = "accounting";
-
-echo '<div class="container">';
-echo '<h1>Database</h1>';
 echo '<h2>Hispano Atlantic Consulting Ltd - Accounting & CRM</h2>';
 echo '<h3>CRM Customers</h3>';
 
@@ -31,11 +26,9 @@ echo "<p></p>";
  </tbody>
     </table>
     </div>
+';
 
-    </div>
-</div>';
 
-include_once('modals-accounting.php');
 
 # footer
-require_once(APP_ROOT . APP_DEV . '/public/php/footer.php');
+require_once(APP_ROOT . '/public/1_inici/footer.php');
