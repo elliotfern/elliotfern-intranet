@@ -157,25 +157,28 @@ $route->add("/api/auth/login","php-process/auth/login-process.php");
  $route->add("/api/contactes/post","api/contactes/post-contactes.php");
 
  // links
- $route->add("/api/library/new/{author}","api/library/post-library.php");
- $route->add("/api/library/update/{author}","api/library/put-library.php");
- $route->add("/api/library/authors/{allAuthors}","api/library/get-library.php");
- $route->add("/api/library/author/{slugAuthors}","api/library/get-library.php");
- $route->add("/api/library/author/books/{authorId}","api/library/get-library.php");
- $route->add("/api/library/profession/{profession}","api/library/get-library.php");
- $route->add("/api/library/movement/{movement}","api/library/get-library.php");
- $route->add("/api/library/image/author/{imageAuthor}","api/library/get-library.php");
+ $route->add("/api/library/update/{author}","api/08_biblioteca_llibres/put-library.php");
+ $route->add("/api/library/authors/{allAuthors}","api/08_biblioteca_llibres/get-library.php");
+ $route->add("/api/library/author/{slugAuthors}","api/08_biblioteca_llibres/get-library.php");
+ $route->add("/api/library/author/books/{authorId}","api/08_biblioteca_llibres/get-library.php");
+ $route->add("/api/library/profession/{profession}","api/08_biblioteca_llibres/get-library.php");
+ $route->add("/api/library/movement/{movement}","api/08_biblioteca_llibres/get-library.php");
+ $route->add("/api/library/image/author/{imageAuthor}","api/08_biblioteca_llibres/get-library.php");
 
- $route->add("/api/library/{topics}","api/library/get-library.php");
- $route->add("/api/library/books/{allBooks}","api/library/get-library.php");
- $route->add("/api/library/books/allBooks/generes/{generes}","api/library/get-library.php");
- $route->add("/api/library/book/{slugBook}","api/library/get-library.php");
+ $route->add("/api/library/{topics}","api/08_biblioteca_llibres/get-library.php");
+ $route->add("/api/library/books/{allBooks}","api/08_biblioteca_llibres/get-library.php");
+ $route->add("/api/library/books/allBooks/generes/{generes}","api/08_biblioteca_llibres/get-library.php");
+ $route->add("/api/library/book/{slugBook}","api/08_biblioteca_llibres/get-library.php");
 
- $route->add("/api/places/{country}","api/library/get-library.php");
+ $route->add("/api/places/{country}","api/08_biblioteca_llibres/get-library.php");
 
- // API PUBLICA
- $route->add("/api/public/biblioteca/{allBooks}","api/library/public/get-library.php");
- $route->add("/api/public/biblioteca/allBooks/{generes}","api/library/public/get-library.php");
+    // a) inserir dades biblioteca
+    $route->add("/api/biblioteca/post/","api/08_biblioteca_llibres/post-biblioteca.php");
+    $route->add("/api/biblioteca/auxiliars/","api/08_biblioteca_llibres/get-library.php");
+    
+    // API PUBLICA
+    $route->add("/api/public/biblioteca/{allBooks}","api/library/public/get-library.php");
+    $route->add("/api/public/biblioteca/allBooks/{generes}","api/library/public/get-library.php");
 
 // aqui comença la lògica del sistema
 

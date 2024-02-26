@@ -12,8 +12,11 @@ if (isset($params['allAuthors'])) {
     $booksAuthorPoint = $params['authorId'];
 } elseif (isset($params['slugAuthors'])) {
     $AuthorPoint = $params['slugAuthors'];
+} elseif (isset($params['autors'])) {
+    $autorsPoint = $params['autors'];
+} elseif (isset($params['imatgesLlibres'])) {
+    $imatgesLlibresPoint = $params['imatgesLlibres'];
 }
-
 
 // Check if the request method is GET
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
@@ -230,16 +233,16 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 }
                 echo json_encode($data);
 
-            // 10) image author
-            // ruta GET => "https://control.elliotfern/api/image/author/imageAuthor"
-        } elseif (isset($params['imageAuthor'])) {
+         // 10) image author
+        // ruta GET => "/api/biblioteca/auxiliars/?type=imatgeAutor"
+        } elseif (isset($_GET['type']) && $_GET['type'] == 'imageAuthor' ) {
             global $conn;
             $data = array();
             $stmt = $conn->prepare(
-            "SELECT i.id, i.nameImg
+            "SELECT i.id, i.alt
             FROM db_img AS i
             WHERE i.typeImg = 1
-            ORDER BY i.nameImg");
+            ORDER BY i.alt");
             $stmt->execute();
             
             if($stmt->rowCount() === 0) echo ('No rows');
@@ -247,6 +250,120 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 $data[] = $users;
             }
             echo json_encode($data);
+        
+        // 10) Llistat autors
+        // ruta GET => "/api/biblioteca/auxiliars/?type=autors"
+        } elseif (isset($_GET['type']) && $_GET['type'] == 'autors' ) {
+            global $conn;
+            $data = array();
+            $stmt = $conn->prepare(
+                "SELECT a.id, CONCAT(a.cognoms, ', ', a.nom) AS nomComplet
+                FROM db_biblioteca_autors AS a
+                ORDER BY a.cognoms");
+                $stmt->execute();
+                if($stmt->rowCount() === 0) echo ('No rows');
+                while($users = $stmt->fetch(PDO::FETCH_ASSOC) ){
+                    $data[] = $users;
+                }
+                echo json_encode($data);       
+        
+        // 11) Llibre imatge
+        // ruta GET => "/api/biblioteca/auxiliars/?type=oficis"
+        } elseif (isset($_GET['type']) && $_GET['type'] == 'imatgesLlibres' ) {
+            global $conn;
+            $data = array();
+            $stmt = $conn->prepare(
+                "SELECT i.id, i.alt
+                FROM db_img AS i
+                WHERE i.typeImg = 2
+                ORDER BY i.alt ASC");
+                $stmt->execute();
+                if($stmt->rowCount() === 0) echo ('No rows');
+                while($users = $stmt->fetch(PDO::FETCH_ASSOC) ){
+                    $data[] = $users;
+                }
+                echo json_encode($data);
+        
+         // 11) Editorials
+        // ruta GET => "/api/biblioteca/auxiliars/?type=editorials"
+        } elseif (isset($_GET['type']) && $_GET['type'] == 'editorials' ) {
+            global $conn;
+            $data = array();
+            $stmt = $conn->prepare(
+                "SELECT e.id, e.editorial
+                FROM aux_biblioteca_editorials AS e
+                ORDER BY e.editorial ASC");
+                $stmt->execute();
+                if($stmt->rowCount() === 0) echo ('No rows');
+                while($users = $stmt->fetch(PDO::FETCH_ASSOC) ){
+                    $data[] = $users;
+                }
+                echo json_encode($data);
+            
+            // 11) Gèneres
+            // ruta GET => "/api/biblioteca/auxiliars/?type=generes"
+            } elseif (isset($_GET['type']) && $_GET['type'] == 'generes' ) {
+                global $conn;
+                $data = array();
+                $stmt = $conn->prepare(
+                    "SELECT g.id, g.genere_cat
+                    FROM aux_biblioteca_generes_literaris AS g
+                    ORDER BY g.genere_cat ASC");
+                    $stmt->execute();
+                    if($stmt->rowCount() === 0) echo ('No rows');
+                    while($users = $stmt->fetch(PDO::FETCH_ASSOC) ){
+                        $data[] = $users;
+                    }
+                    echo json_encode($data);
+            
+                    // 11) Gèneres
+            // ruta GET => "/api/biblioteca/auxiliars/?type=subgeneres"
+            } elseif (isset($_GET['type']) && $_GET['type'] == 'subgeneres' ) {
+                global $conn;
+                $data = array();
+                $stmt = $conn->prepare(
+                    "SELECT g.id, g.sub_genere_cat
+                    FROM aux_biblioteca_sub_generes_literaris AS g
+                    ORDER BY g.sub_genere_cat ASC");
+                    $stmt->execute();
+                    if($stmt->rowCount() === 0) echo ('No rows');
+                    while($users = $stmt->fetch(PDO::FETCH_ASSOC) ){
+                        $data[] = $users;
+                    }
+                    echo json_encode($data);
+
+            // 11) Gèneres
+            // ruta GET => "/api/biblioteca/auxiliars/?type=llengues"
+            } elseif (isset($_GET['type']) && $_GET['type'] == 'llengues' ) {
+                global $conn;
+                $data = array();
+                $stmt = $conn->prepare(
+                    "SELECT l.id, l.idioma_ca 
+                    FROM aux_idiomes AS l
+                    ORDER BY l.idioma_ca ASC");
+                    $stmt->execute();
+                    if($stmt->rowCount() === 0) echo ('No rows');
+                    while($users = $stmt->fetch(PDO::FETCH_ASSOC) ){
+                        $data[] = $users;
+                    }
+                    echo json_encode($data);
+                  
+            // 11) Gèneres
+            // ruta GET => "/api/biblioteca/auxiliars/?type=tipus"
+            } elseif (isset($_GET['type']) && $_GET['type'] == 'tipus' ) {
+                global $conn;
+                $data = array();
+                $stmt = $conn->prepare(
+                    "SELECT t.nomTipus, t.id
+                    FROM db_library_booktype AS t
+                    ORDER BY t.nomTipus ASC");
+                    $stmt->execute();
+                    if($stmt->rowCount() === 0) echo ('No rows');
+                    while($users = $stmt->fetch(PDO::FETCH_ASSOC) ){
+                        $data[] = $users;
+                    }
+                    echo json_encode($data); 
+                    
             } else {
                 // Si 'type', 'id' o 'token' están ausentes o 'type' no es 'user' en la URL
                 header('HTTP/1.1 403 Forbidden');

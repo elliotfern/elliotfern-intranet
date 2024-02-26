@@ -160,48 +160,6 @@ function bookInfoLibrary(slug) {
   })
 }
 
-// AJAX PROCESS > PHP - MODAL FORM - CREATE BOOK
-$(function () {
-  $("#btnCreateBook").click(function () {
-    // check values
-    $("#createBookMessageErr").hide();
-    $("#btnCreateBook").show();
-
-    // Stop form from submitting normally
-    event.preventDefault();
-
-    $.ajax({
-      type: "POST",
-      url: "./php-process/book-insert-process-form.php",
-      data: {
-        nomAutor: $("#nomAutor").val(),
-        titol: $("#titol").val(),
-        titolEng: $("#titolEng").val(),
-        any: $("#any").val(),
-        idEd: $("#idEd").val(),
-        idGen: $("#idGen").val(),
-        lang: $("#lang").val(),
-        img: $("#img").val(),
-        tipus: $("#tipus").val(),
-        idBook: $("#idBook").val(),
-        dateCreated: $("#dateCreated").val(),
-      },
-      success: function (response) {
-        if (response.status == "success") {
-          // Add response in Modal body
-          $("#createBookMessageOk").show();
-          $("#createBookMessageErr").hide();
-          $("#booksTable").DataTable().ajax.reload();
-          $("#modalFormBook").hide();
-          $("#btnCreateBook").hide();
-        } else {
-          $("#createBookMessageErr").show();
-          $("#createBookMessageOk").hide();
-        }
-      },
-    });
-  });
-});
 
 // INPUT OPEN MODAL FORM - UPDATE BOOK
 function btnUpdateBook(idBook) {
@@ -311,51 +269,6 @@ $(function () {
     });
   });
 });
-
-
-// AJAX PROCESS > PHP - MODAL FORM - INSERT AUTHOR
-function createNewAuthor(event) {
-  event.preventDefault();
-  let urlAjax = devDirectory + "/api/library/new/author";
-
-  $.ajax({
-    type: "POST",
-    url: urlAjax,
-    dataType: "json",
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
-
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
-    data: {
-      AutNom: $("#AutNom").val(),
-      AutCognom1: $("#AutCognom1").val(),
-      slug: $("#slug").val(),
-      yearBorn: $("#yearBorn").val(),
-      yearDie: $("#yearDie").val(),
-      paisAutor: $("#paisAutor").val(),
-      img: $("#img").val(),
-      AutWikipedia: $("#AutWikipedia").val(),
-      AutDescrip: $("#AutDescrip").val(),
-      AutMoviment: $("#AutMoviment").val(),
-      dateCreated: $("#dateCreated").val(),
-      AutOcupacio: $("#AutOcupacio").val(),
-    },
-    success: function (response) {
-      if (response.status == "success") {
-        // Add response in Modal body
-        $("#createAuthorMessageOk").show();
-        $("#createAuthorMessageErr").hide();
-      } else {
-        $("#createAuthorMessageErr").show();
-        $("#createAuthorMessageOk").hide();
-      }
-    },
-  });
-}
-
 
 // AJAX PROCESS > PHP - MODAL FORM - UPDATE AUTHOR
 function updateAuthor(event) {
