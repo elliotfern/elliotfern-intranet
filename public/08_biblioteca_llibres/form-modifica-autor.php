@@ -100,7 +100,7 @@ $id = $params['id'];
 
 <script>
  function formUpdateAuthor(id) {
-  let urlAjax = devDirectory + "/api/biblioteca/get/autor/?autor-id=" + id;
+  let urlAjax = devDirectory + "/api/biblioteca/get/?autor-id=" + id;
   $.ajax({
     url: urlAjax,
     method: "GET",
@@ -157,8 +157,7 @@ let formData = {
         id: $("#id").val(),
         slug: $("#slug").val()
     };
-
-
+    
 let urlAjax = "/api/biblioteca/put/?autor";
 $.ajax({
   contentType: "application/json", // Establecer el tipo de contenido como JSON

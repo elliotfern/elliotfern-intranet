@@ -57,14 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 $data = array();
                 $stmt = $conn->prepare(
                     "SELECT b.titol, b.titolEng, b.any, b.lang, b.id, a.id AS idAutor, a.cognoms AS AutCognom1, a.nom AS AutNom, g.genere_en AS nomGenEng, g.genere_cat AS nomGenCat, g.id AS idGenere, bc.nomCollection, b.slug, a.slug AS slugAuthor, g.codi_cdu AS codiGenere, sg.sub_genere_cat, sg.codi_cdu AS codiSubGenere, idi.idioma_ca, be.editorial
-                    FROM db_biblioteca_llibres AS b
-                    INNER JOIN db_biblioteca_autors AS a ON b.autor = a.id
-                    LEFT JOIN aux_biblioteca_generes_literaris AS g ON b.idGen = g.id
-                    LEFT JOIN aux_biblioteca_sub_generes_literaris AS sg ON b.subGen = sg.id
-                    LEFT JOIN aux_biblioteca_editorials AS be ON b.idEd = be.id
+                    FROM 08_db_biblioteca_llibres AS b
+                    INNER JOIN 08_db_biblioteca_autors AS a ON b.autor = a.id
+                    LEFT JOIN 08_aux_biblioteca_generes_literaris AS g ON b.idGen = g.id
+                    LEFT JOIN 08_aux_biblioteca_sub_generes_literaris AS sg ON b.subGen = sg.id
+                    LEFT JOIN 08_aux_biblioteca_editorials AS be ON b.idEd = be.id
                     LEFT JOIN aux_idiomes AS idi ON b.lang = idi.id
-                    LEFT JOIN db_library_books_collection AS bookc ON b.id = bookc.idBook
-                    LEFT JOIN db_library_collection AS bc ON bookc.idCollection = bc.id
+                    LEFT JOIN 08_aux_biblioteca_colleccions_llibres AS bookc ON b.id = bookc.idBook
+                    LEFT JOIN 08_aux_biblioteca_colleccions AS bc ON bookc.idCollection = bc.id
                     WHERE b.tipus = 1
                     ORDER BY b.titol ASC");
                     $stmt->execute();
@@ -82,14 +82,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 $data = array();
                 $stmt = $conn->prepare(
                 "SELECT b.titol, b.titolEng, b.any, b.lang, b.id, a.id AS idAutor, a.cognoms AS AutCognom1, a.nom AS AutNom, g.genere_en AS nomGenEng, g.genere_cat AS nomGenCat, g.id AS idGenere, bc.nomCollection, b.slug, a.slug AS slugAuthor, g.codi_cdu AS codiGenere, sg.sub_genere_cat, sg.codi_cdu AS codiSubGenere, idi.idioma_ca, be.editorial
-                FROM db_biblioteca_llibres AS b
-                INNER JOIN db_biblioteca_autors AS a ON b.autor = a.id
-                LEFT JOIN aux_biblioteca_generes_literaris AS g ON b.idGen = g.id
-                LEFT JOIN aux_biblioteca_sub_generes_literaris AS sg ON b.subGen = sg.id
-                LEFT JOIN aux_biblioteca_editorials AS be ON b.idEd = be.id
-                LEFT JOIN aux_idiomes AS idi ON b.lang = idi.id
-                LEFT JOIN db_library_books_collection AS bookc ON b.id = bookc.idBook
-                LEFT JOIN db_library_collection AS bc ON bookc.idCollection = bc.id
+                FROM 08_db_biblioteca_llibres AS b
+                INNER JOIN 08_db_biblioteca_autors AS a ON b.autor = a.id
+                LEFT JOIN 08_aux_biblioteca_generes_literaris AS g ON b.idGen = g.id
+                LEFT JOIN 08_aux_biblioteca_sub_generes_literaris AS sg ON b.subGen = sg.id
+                LEFT JOIN 08_aux_biblioteca_editorials AS be ON b.idEd = be.id
+                LEFT JOIN 08_aux_idiomes AS idi ON b.lang = idi.id
+                LEFT JOIN 08_aux_biblioteca_colleccions_llibres AS bookc ON b.id = bookc.idBook
+                LEFT JOIN 08_aux_biblioteca_colleccions AS bc ON bookc.idCollection = bc.id
                 WHERE g.codi_cdu = $idGen AND b.tipus = 1
                 ORDER BY b.titol ASC");
                 $stmt->execute();
@@ -105,10 +105,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                         global $conn;
                         $data = array();
                         $stmt = $conn->prepare(
-                            "SELECT a.id, a.nom AS AutNom, a.cognoms AS AutCognom1, a.slug, a.yearBorn, a.yearDie, a.AutWikipedia, c.country, c.id AS idCountry, p.name AS profession, p.id AS idProfession,  i.nameImg
-                            FROM db_biblioteca_autors AS a
+                            "SELECT a.id, a.nom AS AutNom, a.cognoms AS AutCognom1, a.slug, a.yearBorn, a.yearDie, a.AutWikipedia, c.pais_cat AS country, c.id AS idCountry, p.professio_ca AS profession, p.id AS idProfession,  i.nameImg
+                            FROM 08_db_biblioteca_autors AS a
                             INNER JOIN db_countries AS c ON a.paisAutor = c.id
-                            INNER JOIN db_persons_role AS p ON a.ocupacio = p.id
+                            INNER JOIN aux_professions AS p ON a.ocupacio = p.id
                             INNER JOIN db_img AS i ON a.img = i.id
                             ORDER BY a.cognoms");
                             $stmt->execute();
@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 $data = array();
                 $stmt = $conn->prepare(
                 "SELECT b.id, b.any, b.titol, b.slug
-                FROM db_biblioteca_llibres AS b
+                FROM 08_db_biblioteca_llibres AS b
                 WHERE b.autor = :id
                 ORDER BY b.any ASC");
                 $stmt->execute(['id' => $id]);
@@ -144,12 +144,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 global $conn;
                 $data = array();
                 $stmt = $conn->prepare(
-                "SELECT a.id, a.cognoms AS AutCognom1, a.nom AS AutNom, p.country, a.yearBorn, a.yearDie, p.id AS idPais, o.name, i.nameImg, m.movement, m.id AS idMovement, a.AutWikipedia, a.dateCreated, a.dateModified, a.AutDescrip, a.slug, a.img AS idImg, a.ocupacio AS AutOcupacio
-                FROM db_biblioteca_autors AS a
+                "SELECT a.id, a.cognoms AS AutCognom1, a.nom AS AutNom, p.pais_cat AS country, a.yearBorn, a.yearDie, p.id AS idPais, o.professio_ca AS name, i.nameImg, m.moviment_ca AS movement, m.id AS idMovement, a.AutWikipedia, a.dateCreated, a.dateModified, a.AutDescrip, a.slug, a.img AS idImg, a.ocupacio AS AutOcupacio
+                FROM 08_db_biblioteca_autors AS a
                 INNER JOIN db_countries AS p ON a.paisAutor = p.id
-                INNER JOIN db_persons_role AS o ON a.ocupacio = o.id
+                INNER JOIN aux_professions AS o ON a.ocupacio = o.id
                 INNER JOIN db_img AS i ON a.img = i.id
-                INNER JOIN db_library_movements AS m ON a.moviment = m.id
+                INNER JOIN 08_aux_biblioteca_moviments  AS m ON a.moviment = m.id
                 WHERE a.slug = :slug");
                 $stmt->execute(['slug' => $slug]);
                 
@@ -162,17 +162,17 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 }
             
             // 5) Authors page
-            // ruta GET => "/api/biblioteca/get/autor/?autor-id=VALOR_DEL_ID"
+            // ruta GET => "/api/biblioteca/get/?autor-id=VALOR_DEL_ID"
             } elseif (isset($_GET['autor-id'])) {
                 $id = $_GET['autor-id'];
                 global $conn;
                 $data = array();
-                $stmt = $conn->prepare("SELECT a.id, a.cognoms AS AutCognom1, a.nom AS AutNom, p.country, a.yearBorn, a.yearDie, p.id AS idPais, o.name, i.nameImg, m.movement, m.id AS idMovement, a.AutWikipedia, a.dateCreated, a.dateModified, a.AutDescrip, a.slug, a.img AS idImg, a.ocupacio AS AutOcupacio
-                FROM db_biblioteca_autors AS a
+                $stmt = $conn->prepare("SELECT a.id, a.cognoms AS AutCognom1, a.nom AS AutNom, p.pais_cat AS country, a.yearBorn, a.yearDie, p.id AS idPais, o.professio_ca AS name, i.nameImg, m.moviment_ca AS movement, m.id AS idMovement, a.AutWikipedia, a.dateCreated, a.dateModified, a.AutDescrip, a.slug, a.img AS idImg, a.ocupacio AS AutOcupacio
+                FROM 08_db_biblioteca_autors AS a
                 INNER JOIN db_countries AS p ON a.paisAutor = p.id
-                INNER JOIN db_persons_role AS o ON a.ocupacio = o.id
+                INNER JOIN aux_professions AS o ON a.ocupacio = o.id
                 INNER JOIN db_img AS i ON a.img = i.id
-                INNER JOIN db_library_movements AS m ON a.moviment = m.id
+                INNER JOIN 08_aux_biblioteca_moviments  AS m ON a.moviment = m.id
                 WHERE a.id = :id");
                 $stmt->execute(['id' => $id]);
                 
@@ -185,18 +185,44 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 }
 
             // 6) Book page
-            // ruta GET => "https://control.elliotfern/api/library/get/?type=book-page-info&slug=el-por-bien-del-imperio"
-            } elseif (isset($params['slugBook'])) {
-                $slug = $params['slugBook'];
+            // ruta GET => "/api/biblioteca/get/?llibre-id=ID"
+                } elseif (isset($_GET['llibre-id'])) {
+                    $id = $_GET['llibre-id'];
+                    global $conn;
+                    $data = array();
+                    $stmt = $conn->prepare(
+                    "SELECT b.id, b.autor,b.titol, b.titolEng, b.slug, b.any, b.tipus, b.idEd, b.idGen, b.lang,b.img, b.dateCreated, b.dateModified, b.subGen
+                    FROM 08_db_biblioteca_llibres AS b
+                    WHERE b.id = :id");
+                    $stmt->execute(['id' => $id]);
+                    
+                    if ($stmt->rowCount() === 0) {
+                        echo json_encode(null);  // Devuelve un objeto JSON nulo si no hay resultados
+                    } else {
+                        // Solo obtenemos la primera fila ya que parece ser una búsqueda por ID
+                        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                        echo json_encode($row);  // Codifica la fila como un objeto JSON
+                    }
+
+            // 6) Book page
+            // ruta GET => "/api/biblioteca/get/?llibre-slug=el-por-bien-del-imperio"
+            } elseif (isset($_GET['llibre-slug'])) {
+                $slug = $_GET['llibre-slug'];
                 global $conn;
                 $data = array();
                 $stmt = $conn->prepare(
-                "SELECT 
-                b.id, b.autor,b.titol, b.titolEng, b.slug, b.any, b.tipus, b.idEd, b.idGen, b.lang,b.img, b.dateCreated, b.dateModified
-                FROM db_biblioteca_llibres AS b
+                "SELECT b.id, a.nom, a.cognoms, b.titol, b.titolEng, b.slug, b.any, b.dateCreated, b.dateModified, i.nameImg as img, t.nomTipus, e.editorial, g.genere_cat, id.idioma_ca, a.slug AS slugAutor, sg.sub_genere_cat
+                FROM 08_db_biblioteca_llibres AS b
+                INNER JOIN db_img AS i ON b.img = i.id
+                INNER JOIN 08_db_biblioteca_autors AS a ON b.autor = a.id
+                INNER JOIN 08_aux_biblioteca_tipus as t on b.tipus = t.id
+                INNER JOIN 08_aux_biblioteca_editorials AS e ON b.idEd = e.id
+                INNER JOIN 08_aux_biblioteca_generes_literaris AS g ON b.idGen = g.id
+                LEFT JOIN 08_aux_biblioteca_sub_generes_literaris AS sg ON b.subGen = sg.id
+                INNER JOIN aux_idiomes AS id ON b.lang = id.id
                 WHERE b.slug = :slug");
-                $stmt->execute(['slug' => $slug]);
-                
+                $stmt->execute(['slug' => $slug]);                
+
                 if ($stmt->rowCount() === 0) {
                     echo json_encode(null);  // Devuelve un objeto JSON nulo si no hay resultados
                 } else {
@@ -211,9 +237,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 global $conn;
                 $data = array();
                 $stmt = $conn->prepare(
-                "SELECT r.id, r.name
-                FROM db_persons_role AS r
-                ORDER BY r.name");
+                "SELECT r.id, r.professio_ca AS name
+                FROM aux_professions AS r
+                ORDER BY r.professio_ca");
                 $stmt->execute();
                 
                 if($stmt->rowCount() === 0) echo ('No rows');
@@ -228,9 +254,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 global $conn;
                 $data = array();
                 $stmt = $conn->prepare(
-                "SELECT m.id, m.movement
-                FROM db_library_movements AS m
-                ORDER BY m.movement");
+                "SELECT m.id, m.moviment_ca AS movement
+                FROM 08_aux_biblioteca_moviments AS m
+                ORDER BY m.moviment_ca");
                 $stmt->execute();
                 
                 if($stmt->rowCount() === 0) echo ('No rows');
@@ -245,9 +271,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 global $conn;
                 $data = array();
                 $stmt = $conn->prepare(
-                "SELECT c.id, c.country
+                "SELECT c.id, c.pais_cat AS country
                 FROM db_countries AS c
-                ORDER BY c.country");
+                ORDER BY c.pais_cat");
                 $stmt->execute();
                 
                 if($stmt->rowCount() === 0) echo ('No rows');
@@ -281,7 +307,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             $data = array();
             $stmt = $conn->prepare(
                 "SELECT a.id, CONCAT(a.cognoms, ', ', a.nom) AS nomComplet
-                FROM db_biblioteca_autors AS a
+                FROM 08_db_biblioteca_autors AS a
                 ORDER BY a.cognoms");
                 $stmt->execute();
                 if($stmt->rowCount() === 0) echo ('No rows');
@@ -314,7 +340,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             $data = array();
             $stmt = $conn->prepare(
                 "SELECT e.id, e.editorial
-                FROM aux_biblioteca_editorials AS e
+                FROM 08_aux_biblioteca_editorials AS e
                 ORDER BY e.editorial ASC");
                 $stmt->execute();
                 if($stmt->rowCount() === 0) echo ('No rows');
@@ -330,7 +356,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 $data = array();
                 $stmt = $conn->prepare(
                     "SELECT g.id, g.genere_cat
-                    FROM aux_biblioteca_generes_literaris AS g
+                    FROM 08_aux_biblioteca_generes_literaris AS g
                     ORDER BY g.genere_cat ASC");
                     $stmt->execute();
                     if($stmt->rowCount() === 0) echo ('No rows');
@@ -346,7 +372,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 $data = array();
                 $stmt = $conn->prepare(
                     "SELECT g.id, g.sub_genere_cat
-                    FROM aux_biblioteca_sub_generes_literaris AS g
+                    FROM 08_aux_biblioteca_sub_generes_literaris AS g
                     ORDER BY g.sub_genere_cat ASC");
                     $stmt->execute();
                     if($stmt->rowCount() === 0) echo ('No rows');
@@ -378,7 +404,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 $data = array();
                 $stmt = $conn->prepare(
                     "SELECT t.nomTipus, t.id
-                    FROM db_library_booktype AS t
+                    FROM 08_aux_biblioteca_tipus AS t
                     ORDER BY t.nomTipus ASC");
                     $stmt->execute();
                     if($stmt->rowCount() === 0) echo ('No rows');

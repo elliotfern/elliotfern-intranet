@@ -1,253 +1,250 @@
 <?php
-# conectare la base de datos
-include_once('../../inc/connection.php');
+$id = $params['id'];
+?>
 
-if (isset($_POST['idBook'])) {
-    $id = $_POST['idBook'];
-} else {
-    $id = $_POST['idBook'];
-}
+<h6><a href="<?php echo APP_DEV;?>/biblioteca">Biblioteca</a> > <a href="<?php echo APP_DEV;?>/biblioteca/llibres">Llibres </a></h6>
+</div>
 
-$stmt = $conn->prepare("SELECT book.titol, book.titolEng, book.any, book.img, book.idEd, book.idGen, book.lang, book.nomAutor, book.tipus, book.id
-FROM db_library_books AS book
-WHERE book.id = :id");
-$stmt->execute(['id' => $id]); 
-$data = $stmt->fetchAll();
-// and somewhere later:
-foreach ($data as $row) {
-    $titolPost = $row['titol']; 
-    $titolEngPost = $row['titolEng'];
-    $anyPost = $row['any'];
-    $imgPost = $row['img'];
-    $idEdPost = $row['idEd'];
-    $idGenPost = $row['idGen'];
-    $idIdiomaPost = $row['lang'];
-    $nomAutorPost = $row['nomAutor'];
-    $tipusPost = $row['tipus'];
-}
-    // some action goes here under php
-    echo '<div class="container-fluid">';
+<div class="container-fluid form">
+    <h2>Modificar les dades del llibre</h2>
+    <h4 id="bookUpdateTitle"></h4>
           
-              echo '<div class="alert alert-success show_conversation" style="display:none; role="alert">
-              <h4 class="alert-heading"><strong>'.ADD_OK_MESSAGE_SHORT.'</h4></strong>
-              <h6>'.ADD_OK_MESSAGE.'</h6>
-              </div>';
+<div class="alert alert-success" id="updateBookMessageOk" style="display:none" role="alert">
+<h4 class="alert-heading"><strong><?php echo ADD_OK_MESSAGE_SHORT;?></h4></strong>
+<h6><?php echo ADD_OK_MESSAGE;?></h6>
+</div>
+      
+<div class="alert alert-danger" id="updateBookMessageErr" style="display:none;" role="alert">
+<h4 class="alert-heading"><strong><?php echo ERROR_TYPE_MESSAGE_SHORT?></h4></strong>
+<h6><?php echo ERROR_TYPE_MESSAGE?></h6>
+</div>
 
-              echo '<div class="alert alert-danger show_conversation2" style="display:none; role="alert">
-              <h4 class="alert-heading"><strong>'.ERROR_TYPE_MESSAGE_SHORT.'</h4></strong>
-              <h6>'.ERROR_TYPE_MESSAGE.'</h6>
-              </div>';
+<form method="POST" action="" id="modalFormBook" class="row g-3">
+<?php $timestamp = date('Y-m-d');?>
+<input type="hidden" id="id" name="id" value="<?php echo $id;?>">
+
+            <div class="col-md-4">
+              <label>Títol original:</label>
+              <input class="form-control" type="text" name="titol" id="titol" value="">
+            </div>
+          
+          <div class="col-md-4">
+            <label>Títol en anglés:</label>
+            <input class="form-control" type="text" name="titolEng" id="titolEng" value="">
+          </div>
+
+          <div class="col-md-4">
+            <label>Slug:</label>
+            <input class="form-control" type="text" name="slug" id="slug" value="">
+          </div>
+
+            <div class="col-md-4">
+              <label>Autor:</label>
+              <select class="form-select" name="autor" id="autor" value="">
+              </select>
+            </div>
+
+          <div class="col-md-4">
+            <label>Imatge coberta:</label>
+            <select class="form-select" name="img" id="img" value="">
+            </select>
+          </div>
+
+            <div class="col-md-4">
+              <label>Any de publicació:</label>
+              <input class="form-control" type="text" name="any" id="any" value="">
+            </div>
+      
+          <div class="col-md-4">
+            <label> Editorial:</label>
+            <select class="form-select" name="idEd" id="idEd" value="">
+            </select>
+          </div>
+      
+          <div class="col-md-4">
+          <label>Gènere:</label>
+          <select class="form-select" name="idGen" id="idGen" value="">
+          </select>
+         </div>
+
+         <div class="col-md-4">
+          <label>Sub-gènere:</label>
+          <select class="form-select" name="subGen" id="subGen" value="">
+          </select>
+         </div>
+      
+          <div class="col-md-4">
+          <label>Idioma:</label>
+          <select class="form-select" name="lang" id="lang" value="">
+          </select>
+          </div>
+      
+          <div class="col-md-4">
+          <label>Tipus:</label>
+          <select class="form-select" name="tipus" id="tipus" value="">
+          </select>
+          </div>
               
-              echo '<form method="POST" action="" id="modalFormBook" class="row g-3" style="'.FORM_BACKGROUND_COLOR.'">';
+          <div class="container" style="margin-top:25px">
+            <div class="row">
+              <div class="col-6 text-left">
+              <a href="#" onclick="window.history.back()" class="btn btn-secondary">Tornar enrere</a>
+              </div>
+              <div class="col-6 text-right derecha">
+              <button type="submit" onclick="updateLlibre(event)" class="btn btn-primary">Modifica llibre</button>
+              </div>
+            </div>
+          </div>
+    </form>
 
-              echo '<input type="hidden" id="idBook" name="idBook" value="'.$id.'">';
+</div>
 
-        echo '<h4>Book title</h4>';
-          echo ' <div class="row">
-            <div class="col-md-6">';
-              echo '<label>Book (Original title): </label>';
-              echo '<input class="form-control" type="text" name="titol" id="titol" value="'.$titolPost.'">';
-              echo '<label style="color:#dc3545;display:none" id="titolErr">* Invalid data</label>';
-              echo '</div>';
+ <script>
+function bookInfoLibrary(id) {
+  let urlAjax = "/api/biblioteca/get/?llibre-id=" + id;
+  $.ajax({
+    url: urlAjax,
+    method: "GET",
+    dataType: "json",
+    beforeSend: function (xhr) {
+      // Obtener el token del localStorage
+      let token = localStorage.getItem('token');
 
-              echo '<div class="col-md-6 separador">';
-              echo '<label>Book (English title): </label>';
-              echo '<input class="form-control" type="text" name="titolEng" id="titolEng" value="'.$titolEngPost.'">';
-              echo '<label style="color:#dc3545;display:none" id="titolEngErr">* Invalid data</label>';
-              echo "</div>";
-        echo "</div>";
+      // Incluir el token en el encabezado de autorización
+      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+    },
 
-        echo '<hr>';
-        echo "<h4>Author</h4>";
-        echo ' <div class="row">';
-        echo '<div class="col-md-12">';
-              echo '<select name="nomAutor" id="nomAutor">';
-              echo '<option disabled>Select an option:</option>';
-              $stmt = $conn->prepare("SELECT id, AutNom, AutCognom1 
-                FROM db_library_authors
-                ORDER BY AutCognom1 ASC;");
-                $stmt->execute(); 
-                $data = $stmt->fetchAll();
-                foreach($data as $row){
-                  $idAutor = $row['id'];
-                  $AutNom = $row['AutNom']; 
-                  $AutCognom1 = $row['AutCognom1'];
-                  if ($nomAutorPost == $idAutor) {
-                    echo "<option value=".$nomAutorPost." selected>".$AutCognom1.", ".$AutNom."</option>"; 
-                  } else {
-                    echo "<option value=".$idAutor.">".$AutCognom1.", ".$AutNom."</option>"; 
-                  }
-                }
-              echo '</select>';
-              echo '<label style="color:#dc3545;display:none" id="nomAutorErr">* Author name is missing</label>';
-              echo "</div>";
-              echo "<span style='margin-top:15px'> <a href='#' title='Add another author' onclick='divAnotherAuthor(".$id.");return false;'>Need to add another author to this book?</a></span>";
-              echo '<div id="addAnotherAuthor"></div>';
-              echo "</div>";
+    success: function (data) {
+      try {
+        const newContent = "Llibre: " + data.titol;
+        const h2Element = document.getElementById('bookUpdateTitle');
+        h2Element.innerHTML = newContent;
 
+        document.getElementById('titol').value = data.titol;
+        document.getElementById('titolEng').value = data.titolEng;
+        document.getElementById('slug').value = data.slug;
+        document.getElementById('any').value = data.any;
 
-              echo '<hr>';
-              echo '<h4>Image cover</h4>';
-              echo ' <div class="row">';
-              echo '<div class="col-md-12">';
-              echo '<select name="img" id="img">';
-              echo '<option value="">Select an option:</option>';
-              $stmt = $conn->prepare("SELECT i.id, i.alt
-              FROM db_img AS i
-              WHERE i.typeImg = 2
-              ORDER BY i.alt");
-              $stmt->execute(); 
-              $data = $stmt->fetchAll();
-                foreach ($data as $row) {
-                  $idImg = $row['id'];
-                  $name = $row['alt'];
-                  if ($imgPost == $idImg) {
-                    echo "<option value=".$imgPost." selected>".$name."</option>"; 
-                  } else {
-                    echo "<option value=".$idImg.">".$name."</option>"; 
-                  }
-                }    
-              echo '</select>';
-              echo "</div>";
-              echo "<span style='margin-top:15px'> <a href='#' title='upload image' onclick='divUploadImg(2);return false;'>Need to upload a new image?</a></span>";
-              echo '<div id="uploadImg"></div>';
+        // (idAux, api, elementId, valorText) {
+        auxiliarSelect(data.autor, "autors", "autor", "nomComplet");
+        auxiliarSelect(data.img, "imatgesLlibres", "img", "alt");
+        auxiliarSelect(data.idEd, "editorials", "idEd", "editorial");
+        auxiliarSelect(data.idGen, "generes", "idGen", "genere_cat");
+        auxiliarSelect(data.subGen, "subgeneres", "subGen", "sub_genere_cat");
+        auxiliarSelect(data.lang, "llengues", "lang", "idioma_ca");
+        auxiliarSelect(data.tipus, "tipus", "tipus", "nomTipus");
 
-              echo "</div>";
+      } catch (error) {
+        console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
+      }
+    }
+  })
+}
 
-              echo '<hr>';
-              echo '<h4>Other information</h4>';
+bookInfoLibrary('<?php echo $id; ?>')
 
-              echo ' <div class="row">';
-                echo '<div class="col-md-6 separador">';
-              echo '<label>Year:</label>';
-              echo '<input class="form-control" type="text" name="any" id="any" value="'.$anyPost.'">';
-              echo '<label style="color:#dc3545;display:none" id="anyErr">* Year is missing</label>';
-              echo "</div>";
+// Carregar el select
+function auxiliarSelect(idAux, api, elementId, valorText) {
+  let urlAjax = devDirectory + "/api/biblioteca/auxiliars/?type=" + api;
+  $.ajax({
+    url: urlAjax,
+    method: "GET",
+    dataType: "json",
+    beforeSend: function (xhr) {
+      // Obtener el token del localStorage
+      let token = localStorage.getItem('token');
 
-              echo '<div class="col-md-6 separador">';
-              echo '<label>Publisher:</label>';
-              echo '<select name="idEd" id="idEd">';
-              echo '<option selected disabled>Select an option</option>';
-              $stmt = $conn->prepare("SELECT nomEditorial, idEditorial 
-              FROM db_library_publishers
-              ORDER BY nomEditorial ASC;");
-              $stmt->execute(); 
-              $data = $stmt->fetchAll();
-                foreach ($data as $row) {
-                  $nomEditorial = $row['nomEditorial'];
-                  $idEditorial = $row['idEditorial'];
-                  if ($idEdPost == $idEditorial) {
-                    echo "<option value=".$idEdPost." selected>".$nomEditorial."</option>"; 
-                  } else {
-                    echo "<option value=".$idEditorial.">".$nomEditorial."</option>"; 
-                  }
-                }
-              echo '</select>';
-              echo '<label style="color:#dc3545;display:none" id="idEdErr">* Publisher is missing</label>';
-              echo "<span style='margin-top:25px'> <a href='#' title='create new publisher' onclick='divCreatePublisher();return false;'>Need to create new Publisher?</a></span>";
-          
-              echo "</div>";
-              echo '<div id="createPublisher"></div>';
-              echo "</div>";
+      // Incluir el token en el encabezado de autorización
+      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+    },
 
-              echo '<div class="row">';
-              echo '<div class="col-md-6 separador">';
-              echo '<label>Genre:</label>';
-              echo '<select class="form-select" name="idGen" id="idGen">';
-              echo '<option selected disabled>Select an option:</option>';
-              $stmt = $conn->prepare("SELECT id, genre
-              FROM db_library_genres
-              ORDER BY genre ASC;");
-              $stmt->execute(); 
-              $data = $stmt->fetchAll();
-                foreach($data as $row){
-                  $nomGen = $row['genre'];
-                  $idGenere = $row['id'];
-                  if ($idGenPost == $idGenere){
-                    echo "<option value=".$idGenPost." selected>".$nomGen."</option>"; 
-                  } else {
-                    echo "<option value=".$idGenere.">".$nomGen."</option>"; 
-                  }
-                }
-              echo '</select>';
-              echo '<label style="color:#dc3545;display:none" id="idGenErr">* Genre is missing</label>';;
-              echo "</div>";
+    success: function (data) {
+       try {
+        // Obtener la referencia al elemento select
+        var selectElement = document.getElementById(elementId);
 
-              echo '<div class="col-md-6 separador">';
-              echo '<label>Language:</label>';
-              echo '<select class="form-select" name="lang" id="lang">';
-              echo '<option selected disabled>Select an option:</option>';
-              $stmt = $conn->prepare("SELECT l.idIdioma, l.nomIdiomaEng 
-              FROM db_library_languages AS l
-              ORDER BY l.nomIdiomaEng ASC;");
-              $stmt->execute(); 
-              $data = $stmt->fetchAll();
-                foreach($data as $row){
-                  $nomIdioma = $row['nomIdiomaEng'];
-                  $idIdioma = $row['idIdioma'];
-                  if ($idIdiomaPost == $idIdioma){
-                    echo "<option value=".$idIdiomaPost." selected>".$nomIdioma."</option>"; 
-                  } else {
-                    echo "<option value=".$idIdioma.">".$nomIdioma."</option>"; 
-                  }
-                }   
-              echo '</select>';
-              echo '<label style="color:#dc3545;display:none" id="IdIdiomaErr">* Language is missing</label>';
-              echo "</div>";
-              echo "</div>";
+        // Limpiar el select por si ya tenía opciones anteriores
+        selectElement.innerHTML = "";
 
-              echo ' <div class="row">';
-              echo '<div class="col-md-6 separador">';
-              echo '<label>Type:</label>';
-              echo '<select class="form-select" name="tipus" id="tipus">';
-              echo '<option selected disabled>Select an option:</option>';
-              $stmt = $conn->prepare("SELECT t.nomTipusEng, t.id
-              FROM 	db_library_booktype AS t
-              ORDER BY t.nomTipusEng ASC;");
-              $stmt->execute(); 
-              $data = $stmt->fetchAll();
-                foreach($data as $row){
-                  $id_antic = $row['id'];
-                  $tipusNom = $row['nomTipusEng'];
-                  if ($tipusPost == $id_antic) {
-                    echo "<option value=".$tipusPost." selected>".$tipusNom."</option>"; 
-                  } else {
-                    echo "<option value=".$id_antic.">".$tipusNom."</option>"; 
-                  }
-                }
-              echo '</select>';
-              echo '<label style="color:#dc3545;display:none" id="tipusErr">* Type of book is missing</label>';
-              echo '</div></div>
-                </form>
-              </div>';
-?>
-              <script>
-                $(function() {
-                    $('#nomAutor').selectize({
-                      create: true,
-                      preload: true,
-                      valueField: 'id',
-                      labelField: 'text',
-                      searchField: 'text',                  
-                    });
+        // Agregar una opción predeterminada "Selecciona una opción"
+        var defaultOption = document.createElement("option");
+        defaultOption.text = "Selecciona una opció:";
+        defaultOption.value = ""; // Valor vacío
+        selectElement.appendChild(defaultOption);
 
-                    $('#img').selectize({
-                      create: true,
-                      preload: true,
-                      valueField: 'id',
-                      labelField: 'text',
-                      searchField: 'text',                  
-                    });
+        // Iterar sobre los datos obtenidos de la API
+        data.forEach(function (item) {
+          // Crear una opción y agregarla al select
+         // console.log(item.ciutat)
+          var option = document.createElement("option");
+          option.value = item.id; // Establecer el valor de la opción
+          option.text = item[valorText]; // Establecer el texto visible de la opción
+          selectElement.appendChild(option);
+        });
 
-                    $('#idEd').selectize({
-                      create: true,
-                      preload: true,
-                      valueField: 'id',
-                      labelField: 'text',
-                      searchField: 'text',                  
-                    });
-                });
-              </script>
-          <?php
+        // Seleccionar automáticamente el valor
+        if (idAux) {
+          selectElement.value = idAux;
+        }
 
-?>
+      } catch (error) {
+        console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
+      }
+    }
+  })
+}
+
+// AJAX PROCESS > PHP - MODAL FORM - UPDATE AUTHOR
+function updateLlibre(event) {
+
+// Stop form from submitting normally
+event.preventDefault();
+// Obtener los datos del formulario
+let formData = {
+    titol: $("#titol").val(),
+    titolEng: $("#titolEng").val(),
+    slug: $("#slug").val(),
+    autor: $("#autor").val(),
+    img: $("#img").val(),
+    any: $("#any").val(),
+    idEd: $("#idEd").val(),
+    idGen: $("#idGen").val(),
+    subGen: $("#subGen").val(),
+    lang: $("#lang").val(),
+    tipus: $("#tipus").val(),
+    id: $("#id").val()
+    };
+    
+let urlAjax = "/api/biblioteca/put/?llibre";
+$.ajax({
+  contentType: "application/json", // Establecer el tipo de contenido como JSON
+  type: "PUT",
+  url: urlAjax,
+  dataType: "JSON",
+  beforeSend: function (xhr) {
+    // Obtener el token del localStorage
+    let token = localStorage.getItem('token');
+
+    // Incluir el token en el encabezado de autorización
+    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+  },
+  data: JSON.stringify(formData),
+  success: function (response) {
+    console.log('Response received:', response);
+    if (response.status == "success") {
+      // Add response in Modal body
+      $("#updateBookMessageOk").show();
+      $("#updateBookMessageErr").hide();
+    } else {
+      $("#updateBookMessageErr").show();
+      $("#updateBookMessageOk").hide();
+    }
+  },
+});
+}
+
+ </script>
+
+<?php
+# footer
+require_once(APP_ROOT . '/public/01_inici/footer.php');

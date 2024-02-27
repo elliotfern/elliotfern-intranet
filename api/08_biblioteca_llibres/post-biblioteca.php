@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
             if (!isset($hasError)) {
               global $conn;
-              $sql = "INSERT INTO db_biblioteca_autors SET nom=:nom, cognoms=:cognoms, yearBorn=:yearBorn, yearDie=:yearDie, paisAutor=:paisAutor, img=:img, AutWikipedia=:AutWikipedia, AutDescrip=:AutDescrip, moviment=:moviment, ocupacio=:ocupacio, dateModified=:dateModified, dateCreated=:dateCreated, slug=:slug";
+              $sql = "INSERT INTO 08_db_biblioteca_autors SET nom=:nom, cognoms=:cognoms, yearBorn=:yearBorn, yearDie=:yearDie, paisAutor=:paisAutor, img=:img, AutWikipedia=:AutWikipedia, AutDescrip=:AutDescrip, moviment=:moviment, ocupacio=:ocupacio, dateModified=:dateModified, dateCreated=:dateCreated, slug=:slug";
               $stmt= $conn->prepare($sql);
               $stmt->bindParam(":nom", $nom, PDO::PARAM_STR);
               $stmt->bindParam(":cognoms", $cognoms, PDO::PARAM_STR);
@@ -204,7 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             
               if (!isset($hasError)) {
                 global $conn;
-                $sql = "INSERT INTO db_biblioteca_llibres SET autor=:autor, titol=:titol, titolEng=:titolEng, any=:any, idEd=:idEd, lang=:lang, img=:img, tipus=:tipus, idGen=:idGen, subGen=:subGen, dateCreated=:dateCreated, slug=:slug, dateModified=:dateModified";
+                $sql = "INSERT INTO 08_db_biblioteca_llibres SET autor=:autor, titol=:titol, titolEng=:titolEng, any=:any, idEd=:idEd, lang=:lang, img=:img, tipus=:tipus, idGen=:idGen, subGen=:subGen, dateCreated=:dateCreated, slug=:slug, dateModified=:dateModified";
                 $stmt= $conn->prepare($sql);
                 $stmt->bindParam(":autor", $autor, PDO::PARAM_INT);
                 $stmt->bindParam(":titol", $titol, PDO::PARAM_STR);

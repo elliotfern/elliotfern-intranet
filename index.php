@@ -158,7 +158,7 @@ $route->add("/api/auth/login","php-process/auth/login-process.php");
 
  // 08. Bilioteca llibres
     // a) Rutes Get
-    $route->add("/api/biblioteca/get/autor/","api/08_biblioteca_llibres/get-library.php");
+    $route->add("/api/biblioteca/get/","api/08_biblioteca_llibres/get-library.php");
     $route->add("/api/biblioteca/auxiliars/","api/08_biblioteca_llibres/get-library.php");
 
     // b) Rutes Put

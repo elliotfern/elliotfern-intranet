@@ -41,14 +41,14 @@ $slug = $params['slug'];
 
     <hr>
 
-    <h4>Author works</h4>
+    <h4>Treballs publicats:</h4>
 
 <div class="table-responsive">
             <table class="table table-striped" id="booksAuthor">
                 <thead class="table-primary">
                 <tr>
-                    <th>Work</th>
-                    <th>Publication year <?php echo TABLE_COLUMN_ROW;?></th>
+                    <th>Obra:</th>
+                    <th>Any <?php echo TABLE_COLUMN_ROW;?></th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -84,7 +84,7 @@ function authorPageInfoLibrary(slug) {
 
         // DOM modifications
         document.getElementById('authorName').innerHTML = "Autor: " + data.AutNom + " " + data.AutCognom1;
-        document.getElementById("authorPhoto").src = `../../public/00_inc/img/08_biblioteca_llibres/autors/${data.nameImg}.jpg`;
+        document.getElementById("authorPhoto").src = `${window.location.origin}/public/00_inc/img/08_biblioteca_llibres/autors/${data.nameImg}.jpg`;
         document.getElementById('authorCountry').innerHTML = data.country;
 
         if (data.yearDie === null || data.yearDie === "NULL" || data.yearDie === 0) {
@@ -93,10 +93,10 @@ function authorPageInfoLibrary(slug) {
           document.getElementById('authorYearBirth').innerHTML = data.yearBorn + " - " + data.yearDie;
         }
 
-        document.getElementById('linkAuthor').href = `../country/${data.idPais}`;
+        document.getElementById('linkAuthor').href = `${window.location.origin}/biblioteca/country/${data.idPais}`;
         document.getElementById('authorprofession').innerHTML = data.name;
         document.getElementById('authorMovement').innerHTML = data.movement;
-        document.getElementById('linkMovement').href = `../movement/${data.idMovement}`;
+        document.getElementById('linkMovement').href = `${window.location.origin}/biblioteca/movement/${data.idMovement}`;
         document.getElementById('authorWeb').href = `${data.AutWikipedia}`;
         document.getElementById('authorCreated').innerHTML = dateCreated2;
         document.getElementById('authorUpdated').innerHTML = dateModified2;
@@ -135,12 +135,12 @@ function authorBookListLibrary(idAuthor) {
         let html = '';
         for (let i = 0; i < data.length; i++) {
           html += '<tr>';
-          html += '<td><a id="' + data[i].id + '" title="Book page" href="../llibre/' + data[i].slug + '">' + data[i].titol + '</a></td>';
+          html += '<td><a id="' + data[i].id + '" title="Book page" href="'+window.location.origin+'/biblioteca/llibre/' + data[i].slug + '">' + data[i].titol + '</a></td>';
 
           html += '<td>' + data[i].any + '</td>';
 
-          html += '<td><button type="button" onclick="btnUpdateBook(' + data[i].id + ')" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalUpdateBook" data-id="' + data[i].id + '">Actualitza</button></td>';
-
+          html += '<td><a href="'+window.location.origin+'/biblioteca/modifica/llibre/' + data[i].id + '" class="btn btn-secondary btn-sm modificar-link">Modificar</a></td>';
+          
           html += '<td><button type="button" onclick="btnDeleteBook(' + data[i].id + ')" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteBook" data-id="' + data[i].id + '">Elimina</button></td>';
           html += '</tr>';
         }
