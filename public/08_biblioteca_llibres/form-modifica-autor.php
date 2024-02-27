@@ -121,7 +121,7 @@ $id = $params['id'];
       document.getElementById('AutWikipedia').value = data.AutWikipedia;
       document.getElementById('yearBorn').value = data.yearBorn;
       document.getElementById('yearDie').value = data.yearDie;
-      document.getElementById('AutDescrip').value = data.AutDescrip;
+      document.getElementById('AutDescrip').innerHTML = decodeURIComponent(data.AutDescrip);
       document.getElementById('id').value = data.id;
 
       const newContent = "Autor: " + data.AutNom + " " + data.AutCognom1;

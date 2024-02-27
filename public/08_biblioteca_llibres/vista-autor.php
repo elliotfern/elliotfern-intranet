@@ -76,9 +76,11 @@ function authorPageInfoLibrary(slug) {
 
     success: function (data) {
       try {
-        console.log(data)
         const idAuthor = data.id;
         authorBookListLibrary(idAuthor)
+
+        let dateCreated2 = formatoFecha(data.dateCreated);
+        let dateModified2 = formatoFecha(data.dateModified);
 
         // DOM modifications
         document.getElementById('authorName').innerHTML = "Autor: " + data.AutNom + " " + data.AutCognom1;
@@ -96,8 +98,8 @@ function authorPageInfoLibrary(slug) {
         document.getElementById('authorMovement').innerHTML = data.movement;
         document.getElementById('linkMovement').href = `../movement/${data.idMovement}`;
         document.getElementById('authorWeb').href = `${data.AutWikipedia}`;
-        document.getElementById('authorCreated').innerHTML = data.dateCreated;
-        document.getElementById('authorUpdated').innerHTML = data.dateModified;
+        document.getElementById('authorCreated').innerHTML = dateCreated2;
+        document.getElementById('authorUpdated').innerHTML = dateModified2;
         document.getElementById('authorDescrip').innerHTML = data.AutDescrip;
 
         // Obtener el botón por su ID
@@ -137,9 +139,9 @@ function authorBookListLibrary(idAuthor) {
 
           html += '<td>' + data[i].any + '</td>';
 
-          html += '<td><button type="button" onclick="btnUpdateBook(' + data[i].id + ')" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalUpdateBook" data-id="' + data[i].id + '">Update</button></td>';
+          html += '<td><button type="button" onclick="btnUpdateBook(' + data[i].id + ')" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalUpdateBook" data-id="' + data[i].id + '">Actualitza</button></td>';
 
-          html += '<td><button type="button" onclick="btnDeleteBook(' + data[i].id + ')" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteBook" data-id="' + data[i].id + '">Delete</button></td>';
+          html += '<td><button type="button" onclick="btnDeleteBook(' + data[i].id + ')" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteBook" data-id="' + data[i].id + '">Elimina</button></td>';
           html += '</tr>';
         }
         $('#booksAuthor tbody').html(html);

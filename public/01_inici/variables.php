@@ -98,16 +98,16 @@ define('LIBRARY_BOOKS_WITHOUT_TOPIC', 'Books without topic &rarr;');
 define('LIBRARY_LINK_TOPIC_BOOK', 'Add book to topic &rarr;');
 
 // texts
-define('LIBRARY_YEAR_BIRTH', 'Year of Birth');
-define('LIBRARY_YEAR_DEAD', 'Year of Dead');
-define('LIBRARY_YEAR_YEARS', 'Years');
-define('LIBRARY_PROFESSION', 'Profession');
-define('LIBRARY_MOVEMENT', 'Movement');
+define('LIBRARY_YEAR_BIRTH', 'Any de naixement');
+define('LIBRARY_YEAR_DEAD', 'Any de defunció');
+define('LIBRARY_YEAR_YEARS', 'Anys');
+define('LIBRARY_PROFESSION', 'Professió');
+define('LIBRARY_MOVEMENT', 'Moviment');
 define('LIBRARY_WIKIPEDIA', 'Wikipedia');
-define('LIBRARY_PUBLICATION_YEAR', 'Publication year');
-define('LIBRARY_BOOK_TITLE', 'Book title');
-define('LIBRARY_BOOK_AUTHOR', 'Author');
+define('LIBRARY_PUBLICATION_YEAR', 'Any de publicació');
+define('LIBRARY_BOOK_TITLE', 'Títol del llibre');
+define('LIBRARY_BOOK_AUTHOR', 'Autor');
 
-define('COUNTRY', 'Country');
-define('CREATED_DATE', 'Created on');
-define('UPDATED_DATE', 'Updated on');
+define('COUNTRY', 'País');
+define('CREATED_DATE', 'Creació de la fitxa');
+define('UPDATED_DATE', 'Actualització de la fitxa');
