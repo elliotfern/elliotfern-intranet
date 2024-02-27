@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         // Token válido, puedes continuar con el código para obtener los datos del usuario
 
           // a) Inserir autor
-        if (isset($_GET['type']) && $_GET['type'] == 'autor' ) {
+        if (isset($_GET['autor']) ) {
             if (empty($_POST["nom"])) {;
               $hasError=true;
             } else {

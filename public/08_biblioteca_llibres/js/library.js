@@ -298,7 +298,7 @@ function formCountry(idPais) {
 }
 
 function formImageAuthor(idImg) {
-  let urlAjax = devDirectory + "/api/biblioteca/get/autor/?imageAuthor";
+  let urlAjax = devDirectory + "/api/biblioteca/get/?imageAuthor";
   $.ajax({
     url: urlAjax,
     method: "GET",

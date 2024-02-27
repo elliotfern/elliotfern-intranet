@@ -165,7 +165,7 @@ $route->add("/api/auth/login","php-process/auth/login-process.php");
     $route->add("/api/biblioteca/put/","api/08_biblioteca_llibres/put-biblioteca.php");
 
     // a) Rutes Post
-    $route->add("/api/biblioteca/post/autor/","api/08_biblioteca_llibres/post-biblioteca.php");
+    $route->add("/api/biblioteca/post/","api/08_biblioteca_llibres/post-biblioteca.php");
     
  $route->add("/api/library/authors/{allAuthors}","api/08_biblioteca_llibres/get-library.php");
  $route->add("/api/library/author/{slugAuthors}","api/08_biblioteca_llibres/get-library.php");
@@ -187,6 +187,9 @@ $route->add("/api/auth/login","php-process/auth/login-process.php");
     // API PUBLICA
     $route->add("/api/public/biblioteca/{allBooks}","api/library/public/get-library.php");
     $route->add("/api/public/biblioteca/allBooks/{generes}","api/library/public/get-library.php");
+
+    // API Imatges
+    $route->add("/api/auxiliars/post/imatges","api/100_auxiliars/image-upload-process-form.php");
 
 // aqui comença la lògica del sistema
 
@@ -305,8 +308,12 @@ if (empty($_SESSION['user']) || !session_id()) {
 
         // user info
         $route->add("/user/{id}","public/pages/user.php");
-        $route->add("/logout","public/auth/logout.php");     
+        $route->add("/logout","public/auth/logout.php");
 
+        // AUXILIARS
+        $route->add("/auxiliars","public/100_auxiliars/index.php");
+        $route->add("/auxiliars/imatges","public/100_auxiliars/imatges/index.php");
+        $route->add("/auxiliars/imatges/inserir","public/100_auxiliars/imatges/form-inserir-imatge.php");
 }
 
 ?>

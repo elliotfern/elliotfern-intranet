@@ -172,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 INNER JOIN db_countries AS p ON a.paisAutor = p.id
                 INNER JOIN aux_professions AS o ON a.ocupacio = o.id
                 INNER JOIN db_img AS i ON a.img = i.id
-                INNER JOIN 08_aux_biblioteca_moviments  AS m ON a.moviment = m.id
+                INNER JOIN 08_aux_biblioteca_moviments AS m ON a.moviment = m.id
                 WHERE a.id = :id");
                 $stmt->execute(['id' => $id]);
                 
@@ -232,12 +232,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 }
 
             // 7) Profession author
-            // ruta GET => "https://control.elliotfern/api/library/profession"
-            } elseif (isset($params['profession'])) {
+            // ruta GET => "/api/library/professio"
+        } elseif (isset($_GET['professio']) ) {
                 global $conn;
                 $data = array();
                 $stmt = $conn->prepare(
-                "SELECT r.id, r.professio_ca AS name
+                "SELECT r.id, r.professio_ca AS professio_ca
                 FROM aux_professions AS r
                 ORDER BY r.professio_ca");
                 $stmt->execute();
@@ -249,12 +249,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 echo json_encode($data);
 
             // 8) Movement author
-            // ruta GET => "https://control.elliotfern/api/library/movement"
-            } elseif (isset($params['movement'])) {
+            // ruta GET => "/api/library/moviment"
+           } elseif (isset($_GET['moviment']) ) {
                 global $conn;
                 $data = array();
                 $stmt = $conn->prepare(
-                "SELECT m.id, m.moviment_ca AS movement
+                "SELECT m.id, m.moviment_ca AS movement_ca
                 FROM 08_aux_biblioteca_moviments AS m
                 ORDER BY m.moviment_ca");
                 $stmt->execute();
@@ -266,12 +266,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 echo json_encode($data);
 
             // 9) country
-            // ruta GET => "https://control.elliotfern/api/places/country"
-            } elseif (isset($params['country'])) {
+            // ruta GET => "/api/places/pais"
+        } elseif (isset($_GET['pais']) ) {
                 global $conn;
                 $data = array();
                 $stmt = $conn->prepare(
-                "SELECT c.id, c.pais_cat AS country
+                "SELECT c.id, c.pais_cat AS pais_ca
                 FROM db_countries AS c
                 ORDER BY c.pais_cat");
                 $stmt->execute();

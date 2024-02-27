@@ -94,14 +94,11 @@
 </div>
 
 <script>
-    formProfessionAuthor();
-    formMovimentAuthor();
-    formCountry();
 
 // AJAX PROCESS > PHP - MODAL FORM - INSERT AUTHOR
 function createNewAuthor(event) {
   event.preventDefault();
-  let urlAjax = devDirectory + "/api/biblioteca/post/?type=autor";
+  let urlAjax = devDirectory + "/api/biblioteca/post/?autor";
 
   $.ajax({
     type: "POST",
@@ -143,7 +140,7 @@ function createNewAuthor(event) {
 
 // Carregar el select
 function auxiliarSelect(api, elementId, valorText) {
-  let urlAjax = devDirectory + "/api/biblioteca/auxiliars/?type=" + api;
+  let urlAjax = devDirectory + "/api/biblioteca/auxiliars/?" + api;
   $.ajax({
     url: urlAjax,
     method: "GET",
@@ -189,7 +186,9 @@ function auxiliarSelect(api, elementId, valorText) {
 
 // (api, elementId, valorText) {
 auxiliarSelect("imageAuthor", "img", "alt");
-
+auxiliarSelect("professio", "AutOcupacio", "professio_ca");
+auxiliarSelect("moviment", "AutMoviment", "movement_ca");
+auxiliarSelect("pais", "paisAutor", "pais_ca");
 </script>
 
 <?php

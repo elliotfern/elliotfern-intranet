@@ -130,6 +130,5 @@ function normalizeText(text) {
 
 
 <?php
-
 # footer
 require_once(APP_ROOT . '/public/01_inici/footer.php');
