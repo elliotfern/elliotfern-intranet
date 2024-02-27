@@ -1,12 +1,5 @@
 <?php
-
-// HISPANTIC URL
-// WP-CONTENT
-define('IMG_URL', APP_SERVER . '/img/');
-define('IMG_DEFAULT', APP_SERVER . 'img/default-image.jpg');
-
 // Variables generals
-
 // Missatges error
 define('MANAGE_OPTIONS_ERROR', 'You do not have enough permissions to view this page.');
 define('ERROR', 'The result can\'t be displayed.');
@@ -15,17 +8,17 @@ define('ERROR', 'The result can\'t be displayed.');
 define('FORM_FIELD_REQUIRED', 'Required field');
 define('FORM_INVALID_TYPE', 'Invalid characters');
 
-define('UPDATE_OK_MESSAGE', 'The entry has been successfully updated in the database.');
-define('UPDATE_OK_MESSAGE_SHORT', 'Correct update!');
+define('UPDATE_OK_MESSAGE', 'Les dades s\'han actualitzat correctament a la base de dades.');
+define('UPDATE_OK_MESSAGE_SHORT', 'Actualització correcte!');
 
-define('ADD_OK_MESSAGE', 'The entry has been successfully add in the database.');
-define('ADD_OK_MESSAGE_SHORT', 'Data successfully submitted!');
+define('ADD_OK_MESSAGE', 'Les dades s\'han afegit correctament a la base de dades.');
+define('ADD_OK_MESSAGE_SHORT', 'Dades afegidades correctament!');
 
-define('DELETE_OK_MESSAGE', 'The entry has been successfully delete in the database.');
-define('DELETE_OK_MESSAGE_SHORT', 'Data successfully delete!');
+define('DELETE_OK_MESSAGE', 'Les dades s\'han eliminat correctament de la base de dades.');
+define('DELETE_OK_MESSAGE_SHORT', 'Dades eliminades correctament!');
 
-define('ERROR_MESSAGE', 'The data have not been transmitted correctly to the database.');
-define('ERROR_MESSAGE_SHORT', 'Data transmission error!');
+define('ERROR_MESSAGE', 'Les dades no s\'han transmès correctament a la base de dades.');
+define('ERROR_MESSAGE_SHORT', 'Error en la transmissió de dades');
 
 define('ERROR_TYPE_MESSAGE', 'Verify that all data are correct.');
 define('ERROR_TYPE_MESSAGE_SHORT', 'Error!');

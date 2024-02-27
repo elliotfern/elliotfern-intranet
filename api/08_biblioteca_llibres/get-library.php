@@ -160,6 +160,29 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                     $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     echo json_encode($row);  // Codifica la fila como un objeto JSON
                 }
+            
+            // 5) Authors page
+            // ruta GET => "/api/biblioteca/get/autor/?autor-id=VALOR_DEL_ID"
+            } elseif (isset($_GET['autor-id'])) {
+                $id = $_GET['autor-id'];
+                global $conn;
+                $data = array();
+                $stmt = $conn->prepare("SELECT a.id, a.cognoms AS AutCognom1, a.nom AS AutNom, p.country, a.yearBorn, a.yearDie, p.id AS idPais, o.name, i.nameImg, m.movement, m.id AS idMovement, a.AutWikipedia, a.dateCreated, a.dateModified, a.AutDescrip, a.slug, a.img AS idImg, a.ocupacio AS AutOcupacio
+                FROM db_biblioteca_autors AS a
+                INNER JOIN db_countries AS p ON a.paisAutor = p.id
+                INNER JOIN db_persons_role AS o ON a.ocupacio = o.id
+                INNER JOIN db_img AS i ON a.img = i.id
+                INNER JOIN db_library_movements AS m ON a.moviment = m.id
+                WHERE a.id = :id");
+                $stmt->execute(['id' => $id]);
+                
+                if ($stmt->rowCount() === 0) {
+                    echo json_encode(null);  // Devuelve un objeto JSON nulo si no hay resultados
+                } else {
+                    // Solo obtenemos la primera fila ya que parece ser una búsqueda por ID
+                    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                    echo json_encode($row);  // Codifica la fila como un objeto JSON
+                }
 
             // 6) Book page
             // ruta GET => "https://control.elliotfern/api/library/get/?type=book-page-info&slug=el-por-bien-del-imperio"
@@ -234,8 +257,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 echo json_encode($data);
 
          // 10) image author
-        // ruta GET => "/api/biblioteca/auxiliars/?type=imatgeAutor"
-        } elseif (isset($_GET['type']) && $_GET['type'] == 'imageAuthor' ) {
+        // ruta GET => "/api/biblioteca/auxiliars/?imatgeAutor"
+        } elseif (isset($_GET['imageAuthor']) ) {
             global $conn;
             $data = array();
             $stmt = $conn->prepare(

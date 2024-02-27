@@ -78,9 +78,9 @@ $.ajax({
 
             <p><h6><span style="background-color:black;color:white;padding:5px;margin-top:5px">${llibre.codiSubGenere}.${llibre.sub_genere_cat}</span></h6></p>
         
-            <h3 class="links-contactes" style="margin-top: 15px;"> <a href="../book/${llibre.slug}" title="Fitxa del llibre" >${llibre.titol}</a></h3>`;
+            <h3 class="links-contactes" style="margin-top: 15px;"> <a href="./llibre/${llibre.slug}" title="Fitxa del llibre" >${llibre.titol}</a></h3>`;
        
-            llibres += `<p class="links-contactes autor"><strong>Autor/a:</strong> <a href="../author/${llibre.slugAuthor}">${llibre.AutNom} ${llibre.AutCognom1}</a></p>`;
+            llibres += `<p class="links-contactes autor"><strong>Autor/a:</strong> <a href="./autor/${llibre.slugAuthor}">${llibre.AutNom} ${llibre.AutCognom1}</a></p>`;
             llibres += `<p><strong>Any: </strong> ${llibre.any}</p>`;
             llibres += `<p><strong>Editorial: </strong> ${llibre.editorial}</p>`;
             llibres += `<p><strong>Idioma original: </strong> ${llibre.idioma_ca}</p>`;            

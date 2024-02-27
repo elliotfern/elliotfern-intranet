@@ -156,14 +156,24 @@ $route->add("/api/auth/login","php-process/auth/login-process.php");
  $route->add("/api/contactes/put/{contacte}","api/contactes/put-contactes.php");
  $route->add("/api/contactes/post","api/contactes/post-contactes.php");
 
- // links
- $route->add("/api/library/update/{author}","api/08_biblioteca_llibres/put-library.php");
+ // 08. Bilioteca llibres
+    // a) Rutes Get
+    $route->add("/api/biblioteca/get/autor/","api/08_biblioteca_llibres/get-library.php");
+    $route->add("/api/biblioteca/auxiliars/","api/08_biblioteca_llibres/get-library.php");
+
+    // b) Rutes Put
+    $route->add("/api/biblioteca/put/","api/08_biblioteca_llibres/put-biblioteca.php");
+
+    // a) Rutes Post
+    $route->add("/api/biblioteca/post/autor/","api/08_biblioteca_llibres/post-biblioteca.php");
+    
  $route->add("/api/library/authors/{allAuthors}","api/08_biblioteca_llibres/get-library.php");
  $route->add("/api/library/author/{slugAuthors}","api/08_biblioteca_llibres/get-library.php");
+ $route->add("/api/biblioteca/autor/","api/08_biblioteca_llibres/get-library.php");
  $route->add("/api/library/author/books/{authorId}","api/08_biblioteca_llibres/get-library.php");
  $route->add("/api/library/profession/{profession}","api/08_biblioteca_llibres/get-library.php");
  $route->add("/api/library/movement/{movement}","api/08_biblioteca_llibres/get-library.php");
- $route->add("/api/library/image/author/{imageAuthor}","api/08_biblioteca_llibres/get-library.php");
+
 
  $route->add("/api/library/{topics}","api/08_biblioteca_llibres/get-library.php");
  $route->add("/api/library/books/{allBooks}","api/08_biblioteca_llibres/get-library.php");
@@ -172,9 +182,7 @@ $route->add("/api/auth/login","php-process/auth/login-process.php");
 
  $route->add("/api/places/{country}","api/08_biblioteca_llibres/get-library.php");
 
-    // a) inserir dades biblioteca
-    $route->add("/api/biblioteca/post/","api/08_biblioteca_llibres/post-biblioteca.php");
-    $route->add("/api/biblioteca/auxiliars/","api/08_biblioteca_llibres/get-library.php");
+   
     
     // API PUBLICA
     $route->add("/api/public/biblioteca/{allBooks}","api/library/public/get-library.php");
@@ -252,14 +260,15 @@ if (empty($_SESSION['user']) || !session_id()) {
         
             // a) Llibres:
             $route->add("/biblioteca/llibres","public/08_biblioteca_llibres/books.php");
-            $route->add("/biblioteca/llibres/{slug}","public/08_biblioteca_llibres/book-page.php");
+            $route->add("/biblioteca/llibre/{slug}","public/08_biblioteca_llibres/vista-llibre.php");
             $route->add("/biblioteca/nou/llibre","public/08_biblioteca_llibres/biblioteca-llibre-inserir.php");
+            $route->add("/biblioteca/modifica/llibre/{id}","public/08_biblioteca_llibres/form-modifica-llibre.php");
 
             // b) autors
             $route->add("/biblioteca/autors","public/08_biblioteca_llibres/authors.php");
             $route->add("/biblioteca/nou/autor","public/08_biblioteca_llibres/biblioteca-autor-inserir.php");
-            $route->add("/biblioteca/autors/update/{slug}","public/08_biblioteca_llibres/form-author-update.php");
-            $route->add("/biblioteca/autors/{slug}","public/08_biblioteca_llibres/author-page.php");
+            $route->add("/biblioteca/modifica/autor/{id}","public/08_biblioteca_llibres/form-modifica-autor.php");
+            $route->add("/biblioteca/autor/{slug}","public/08_biblioteca_llibres/vista-autor.php");
             $route->add("/biblioteca/autors/by-country/{country}","public/08_biblioteca_llibres/author-page.php");
 
         // 09. Adreces interes

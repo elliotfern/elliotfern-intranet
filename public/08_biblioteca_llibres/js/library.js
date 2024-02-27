@@ -1,185 +1,3 @@
-// AUTHOR object
-// authors table
-function authorsTableLibrary() {
-  let urlAjax = devDirectory + "/api/library/authors/allAuthors";
-  $.ajax({
-    url: urlAjax,
-    method: "GET",
-    dataType: "json",
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
-
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
-
-    success: function (data) {
-      try {
-        let html = '';
-        for (let i = 0; i < data.length; i++) {
-          html += '<tr>';
-          html += '<td class="text-center"><a id="' + data[i].id + '" title="Author page" href="./' + data[i].slug + '"><img src="../../public/00_inc/img/library-author/' + data[i].nameImg + '.jpg" style="height:70px"></a></td>';
-
-          html += '<td><a id="' + data[i].id + '" title="Author page" href="./autors/' + data[i].slug + '">' + data[i].AutNom + " " + data[i].AutCognom1 + '</a></td>';
-
-          html += '<td><a id="' + data[i].idCountry + '" title="Authors by country" href="./by-country/' + data[i].idCountry + '">' + data[i].country + '</a></td>';
-
-          html += '<td><a id="' + data[i].idProfession + '" title="Authors by profession" href="./by-profession/' + data[i].idProfession + '">' + data[i].profession + '</a></td>';
-
-          if (data[i].yearDie === 0) {
-            html += '<td>' + data[i].yearBorn + '</td>';
-          } else {
-            html += '<td>' + data[i].yearBorn + " - " + data[i].yearDie + '</td>';
-          }
-
-          html += '<td><a href="./update/' + data[i].slug + '"><button type="button" class="btn btn-sm btn-warning">Update</button></a></td>';
-
-          html += '<td><button type="button" class="btn btn-sm btn-danger">Delete</button></td>';
-          html += '</tr>';
-        }
-        $('#authorsTable tbody').html(html);
-      } catch (error) {
-        console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
-      }
-    }
-  })
-}
-
-// author page info
-function authorPageInfoLibrary(slug) {
-  let urlAjax = devDirectory + "/api/library/author/" + slug;
-  $.ajax({
-    url: urlAjax,
-    method: "GET",
-    dataType: "json",
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
-
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
-
-    success: function (data) {
-      try {
-        console.log(data)
-        const idAuthor = data.id;
-        authorBookListLibrary(idAuthor)
-
-        // DOM modifications
-        document.getElementById('authorName').innerHTML = "Author: " + data.AutNom + " " + data.AutCognom1;
-        document.getElementById("authorPhoto").src = `../../public/img/library-author/${data.nameImg}.jpg`;
-        document.getElementById('authorCountry').innerHTML = data.country;
-
-        if (data.yearDie === null || data.yearDie === "NULL" || data.yearDie === 0) {
-          document.getElementById('authorYearBirth').innerHTML = data.yearBorn;
-        } else {
-          document.getElementById('authorYearBirth').innerHTML = data.yearBorn + " - " + data.yearDie;
-        }
-
-        document.getElementById('linkAuthor').href = `../country/${data.idPais}`;
-        document.getElementById('authorprofession').innerHTML = data.name;
-        document.getElementById('authorMovement').innerHTML = data.movement;
-        document.getElementById('linkMovement').href = `../movement/${data.idMovement}`;
-        document.getElementById('authorWeb').href = `${data.AutWikipedia}`;
-        document.getElementById('authorCreated').innerHTML = data.dateCreated;
-        document.getElementById('authorUpdated').innerHTML = data.dateModified;
-        document.getElementById('authorDescrip').innerHTML = data.AutDescrip;
-
-      } catch (error) {
-        console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
-      }
-    }
-  })
-}
-
-// author book
-function authorBookListLibrary(idAuthor) {
-  let urlAjax = devDirectory + "/api/library/author/books/" + idAuthor;
-  $.ajax({
-    url: urlAjax,
-    method: "GET",
-    dataType: "json",
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
-
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
-
-    success: function (data) {
-      try {
-        let html = '';
-        for (let i = 0; i < data.length; i++) {
-          html += '<tr>';
-          html += '<td><a id="' + data[i].id + '" title="Book page" href="../book/' + data[i].slug + '">' + data[i].titol + '</a></td>';
-
-          html += '<td>' + data[i].any + '</td>';
-
-          html += '<td><button type="button" onclick="btnUpdateBook(' + data[i].id + ')" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalUpdateBook" data-id="' + data[i].id + '">Update</button></td>';
-
-          html += '<td><button type="button" onclick="btnDeleteBook(' + data[i].id + ')" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteBook" data-id="' + data[i].id + '">Delete</button></td>';
-          html += '</tr>';
-        }
-        $('#booksAuthor tbody').html(html);
-      } catch (error) {
-        console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
-      }
-    }
-  })
-}
-
-
-// info book
-function bookInfoLibrary(slug) {
-  let urlAjax = devDirectory + "/api/library/book/" + slug;
-  $.ajax({
-    url: urlAjax,
-    method: "GET",
-    dataType: "json",
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
-
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
-
-    success: function (data) {
-      try {
-
-        const newContent = "Book: " + data.titol;
-        const h2Element = document.getElementById('titolBook');
-        h2Element.innerHTML = newContent;
-      } catch (error) {
-        console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
-      }
-    }
-  })
-}
-
-
-// INPUT OPEN MODAL FORM - UPDATE BOOK
-function btnUpdateBook(idBook) {
-  idBook = idBook;
-  $.ajax({
-    url: "./forms/book-update.php", //the page containing php script
-    type: "post", //request type,
-    data: {
-      idBook: idBook,
-      registration: "success",
-    },
-    success: function (response) {
-      // Add response in Modal body
-      $("#bodyModalUpdateBook").html(response);
-      $("bodyModalUpdateBook").show();
-      $("#botoSave").show();
-    },
-  });
-}
-
 // AJAX PROCESS > PHP - MODAL FORM - UPDATE FORM
 $(function () {
   $("#botoSave").click(function () {
@@ -221,100 +39,7 @@ $(function () {
   });
 });
 
-// INPUT OPEN MODAL FORM - DELETE BOOK
-function btnDeleteBook(element) {
-  id = element.value;
-  $("#btnDelete").show();
-  $.ajax({
-    url: "./forms/book-delete.php", //the page containing php script
-    type: "post", //request type,
-    data: {
-      idBook: id,
-      registration: "success",
-    },
-    success: function (response) {
-      // Add response in Modal body
-      $("#bodyModalDeleteBook").html(response);
-    },
-  });
-}
 
-// AJAX PROCESS > PHP - MODAL FORM - DELETE FORM
-$(function () {
-  $("#btnDelete").click(function () {
-    // check values
-    $(".show_conversation2").hide();
-
-    // Stop form from submitting normally
-    event.preventDefault();
-
-    $.ajax({
-      type: "POST",
-      url: "./php-process/book-delete-process-form.php",
-      data: {
-        idBook: $("#idBook").val(),
-      },
-      success: function (response) {
-        if (response.status == "success") {
-          // Add response in Modal body
-          $(".show_conversation").show();
-          $("#modalFormDelete").hide();
-          $("#btnDelete").hide();
-          $("#booksTable").DataTable().ajax.reload();
-        } else {
-          $(".show_conversation2").show();
-          $(".show_conversation").hide();
-        }
-      },
-    });
-  });
-});
-
-// AJAX PROCESS > PHP - MODAL FORM - UPDATE AUTHOR
-function updateAuthor(event) {
-
-  // Stop form from submitting normally
-  event.preventDefault();
-  let urlAjax = devDirectory + "/api/library/update/author";
-  $.ajax({
-    type: "POST",
-    url: urlAjax,
-    dataType: "JSON",
-    headers: { 'X-HTTP-Method-Override': 'PUT' },
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
-
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
-    data: {
-      AutNom: $("#AutNom").val(),
-      AutCognom1: $("#AutCognom1").val(),
-      yearBorn: $("#yearBorn").val(),
-      yearDie: $("#yearDie").val(),
-      paisAutor: $("#paisAutor").val(),
-      img: $("#img").val(),
-      AutWikipedia: $("#AutWikipedia").val(),
-      AutDescrip: $("#AutDescrip").val(),
-      AutMoviment: $("#AutMoviment").val(),
-      dateModified: $("#dateModified").val(),
-      AutOcupacio: $("#AutOcupacio").val(),
-      id: $("#id").val(),
-    },
-    success: function (response) {
-      console.log('Response received:', response);
-      if (response.status == "success") {
-        // Add response in Modal body
-        $("#updateAuthorMessageOk").show();
-        $("#updateAuthorMessageErr").hide();
-      } else {
-        $("#updateAuthorMessageErr").show();
-        $("#updateAuthorMessageOk").hide();
-      }
-    },
-  });
-}
 
 // UPLOAD IMAGE FORM
 function divUploadImg(idType) {
@@ -451,7 +176,7 @@ function formProfessionAuthor(AutOcupacio) {
     },
     success: function (data) {
       try {
-        const select = document.getElementById('AutOcupacio');
+        const select = document.getElementById('ocupacio');
         select.innerHTML = '';  // Limpiar el contenido previo
 
         // Agregar el primer option como marcador de posición
@@ -496,7 +221,7 @@ function formMovimentAuthor(idMovement) {
     },
     success: function (data) {
       try {
-        const select = document.getElementById('AutMoviment');
+        const select = document.getElementById('moviment');
         select.innerHTML = '';  // Limpiar el contenido previo
 
         // Agregar el primer option como marcador de posición
@@ -573,7 +298,7 @@ function formCountry(idPais) {
 }
 
 function formImageAuthor(idImg) {
-  let urlAjax = devDirectory + "/api/library/image/author/imageAuthor";
+  let urlAjax = devDirectory + "/api/biblioteca/get/autor/?imageAuthor";
   $.ajax({
     url: urlAjax,
     method: "GET",
@@ -597,7 +322,7 @@ function formImageAuthor(idImg) {
           data.forEach(item => {
             const option = document.createElement('option');
             option.value = item.id;
-            option.textContent = item.nameImg;
+            option.textContent = item.alt;
             select.appendChild(option);
           });
 
@@ -616,46 +341,6 @@ function formImageAuthor(idImg) {
   });
 }
 
-// Pagina Update Author
-function formUpdateAuthor(slug) {
-  let urlAjax = devDirectory + "/api/library/author/" + slug;
-  console.log(slug)
-  $.ajax({
-    url: urlAjax,
-    method: "GET",
-    dataType: "json",
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
-
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
-
-    success: function (data) {
-      console.log(data)
-      // Establecer valores en los campos del formulario
-      document.getElementById('AutNom').value = data.AutNom;
-      document.getElementById("AutCognom1").value = data.AutCognom1;
-      document.getElementById('slug').value = data.slug;
-      document.getElementById('AutWikipedia').value = data.AutWikipedia;
-      document.getElementById('yearBorn').value = data.yearBorn;
-      document.getElementById('yearDie').value = data.yearDie;
-      document.getElementById('AutDescrip').value = data.AutDescrip;
-      document.getElementById('id').value = data.id;
-
-      const newContent = "Author: " + data.AutNom + " " + data.AutCognom1;
-      const h2Element = document.getElementById('authorUpdateTitle');
-      h2Element.innerHTML = newContent;
-
-      // Ahora llenar el select con las opciones y seleccionar la opción adecuada
-      formProfessionAuthor(data.AutOcupacio, true);
-      formMovimentAuthor(data.idMovement, true);
-      formCountry(data.idPais, true);
-      formImageAuthor(data.idImg, true);
-    }
-  })
-}
 
 function inserirLlibre() {
   window.location.href = '/biblioteca/nou/llibre';
