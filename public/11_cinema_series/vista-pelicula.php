@@ -33,11 +33,12 @@ $id = $params['id'];
                 </div>
         </div>
 
-        <div class="container" style="width:60%;margin-top:25px;margin-bottom:25px">
+    </div>
+    <hr>
+    <div class="container" style="width:60%;margin-top:25px;margin-bottom:25px">
         <h4>Crítica de la pel·lícula</h4>
         <p id="descripcio"></p>
         </div>
-    </div>
 
     <hr>
 
