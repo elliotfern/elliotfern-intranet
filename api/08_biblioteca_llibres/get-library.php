@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 global $conn;
                 $data = array();
                 $stmt = $conn->prepare(
-                    "SELECT b.titol, b.titolEng, b.any, b.lang, b.id, a.id AS idAutor, a.cognoms AS AutCognom1, a.nom AS AutNom, g.genere_en AS nomGenEng, g.genere_cat AS nomGenCat, g.id AS idGenere, bc.nomCollection, b.slug, a.slug AS slugAuthor, g.codi_cdu AS codiGenere, sg.sub_genere_cat, sg.codi_cdu AS codiSubGenere, idi.idioma_ca, be.editorial
+                    "SELECT b.titol, b.titolEng, b.any, b.lang, b.id, a.id AS idAutor, a.cognoms AS AutCognom1, a.nom AS AutNom, g.genere_en AS nomGenEng, g.genere_cat AS nomGenCat, g.id AS idGenere, bc.nomCollection, b.slug, a.slug AS slugAuthor, g.codi_cdu AS codiGenere, sg.sub_genere_cat, sg.codi_cdu AS codiSubGenere, idi.idioma_ca, be.editorial, e.estat
                     FROM 08_db_biblioteca_llibres AS b
                     INNER JOIN 08_db_biblioteca_autors AS a ON b.autor = a.id
                     LEFT JOIN 08_aux_biblioteca_generes_literaris AS g ON b.idGen = g.id
@@ -65,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                     LEFT JOIN aux_idiomes AS idi ON b.lang = idi.id
                     LEFT JOIN 08_aux_biblioteca_colleccions_llibres AS bookc ON b.id = bookc.idBook
                     LEFT JOIN 08_aux_biblioteca_colleccions AS bc ON bookc.idCollection = bc.id
+                    LEFT JOIN 08_aux_biblioteca_estat_llibre AS e ON b.estat = e.id
                     WHERE b.tipus = 1
                     ORDER BY b.titol ASC");
                     $stmt->execute();
@@ -87,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 LEFT JOIN 08_aux_biblioteca_generes_literaris AS g ON b.idGen = g.id
                 LEFT JOIN 08_aux_biblioteca_sub_generes_literaris AS sg ON b.subGen = sg.id
                 LEFT JOIN 08_aux_biblioteca_editorials AS be ON b.idEd = be.id
-                LEFT JOIN 08_aux_idiomes AS idi ON b.lang = idi.id
+                LEFT JOIN aux_idiomes AS idi ON b.lang = idi.id
                 LEFT JOIN 08_aux_biblioteca_colleccions_llibres AS bookc ON b.id = bookc.idBook
                 LEFT JOIN 08_aux_biblioteca_colleccions AS bc ON bookc.idCollection = bc.id
                 WHERE g.codi_cdu = $idGen AND b.tipus = 1
@@ -191,7 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                     global $conn;
                     $data = array();
                     $stmt = $conn->prepare(
-                    "SELECT b.id, b.autor,b.titol, b.titolEng, b.slug, b.any, b.tipus, b.idEd, b.idGen, b.lang,b.img, b.dateCreated, b.dateModified, b.subGen
+                    "SELECT b.id, b.autor,b.titol, b.titolEng, b.slug, b.any, b.tipus, b.idEd, b.idGen, b.lang,b.img, b.dateCreated, b.dateModified, b.subGen, b.estat
                     FROM 08_db_biblioteca_llibres AS b
                     WHERE b.id = :id");
                     $stmt->execute(['id' => $id]);
@@ -300,6 +301,23 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             }
             echo json_encode($data);
         
+        // 10) ruta estat del llibre
+        // ruta GET => "/api/biblioteca/auxiliars/?estatLlibre"
+        } elseif (isset($_GET['type']) && $_GET['type'] == 'estatLlibre' ) {
+            global $conn;
+            $data = array();
+            $stmt = $conn->prepare(
+            "SELECT e.id, e.estat
+            FROM 08_aux_biblioteca_estat_llibre AS e
+            ORDER BY e.estat");
+            $stmt->execute();
+            
+            if($stmt->rowCount() === 0) echo ('No rows');
+            while($users = $stmt->fetch(PDO::FETCH_ASSOC) ){
+                $data[] = $users;
+            }
+            echo json_encode($data);
+
         // 10) Llistat autors
         // ruta GET => "/api/biblioteca/auxiliars/?type=autors"
         } elseif (isset($_GET['type']) && $_GET['type'] == 'autors' ) {

@@ -127,10 +127,12 @@ $route = new Route();
 $url_root = $_SERVER['DOCUMENT_ROOT'];
 $url_server = $_SERVER['HTTP_HOST'];
 $dev = "";
+$base_url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
 
 define("APP_SERVER", $url_server); 
 define("APP_ROOT", $url_root);
 define("APP_DEV",$dev);
+define("APP_WEB",$base_url);
 
 // Route for paths containing '/control/'
 require_once(APP_ROOT . '/connection.php');
@@ -149,7 +151,16 @@ $route->add("/api/auth/login","php-process/auth/login-process.php");
  $route->add("/api/links/put","api/link/put-link.php");
  $route->add("/api/links/post","api/link/post-link.php");
 
- $route->add("/api/cinema/get","api/cinema/get-cinema.php");
+ // 11. Cinema i serie
+    // a) Rutes Get:
+    $route->add("/api/cinema/get","api/11_cinema/get-cinema.php");
+    $route->add("/api/cinema/get/auxiliars/","api/11_cinema/get-cinema.php");
+
+    // b) Rutes Post:
+    $route->add("/api/cinema/post/","api/11_cinema/post-cinema.php");
+
+    // c) Rutes Put:
+    $route->add("/api/cinema/put/","api/11_cinema/put-cinema.php");
 
  //contactes
  $route->add("/api/contactes/get/","api/contactes/get-contactes.php");
@@ -294,12 +305,17 @@ if (empty($_SESSION['user']) || !session_id()) {
 
         // 11 - Cinema i series
         $route->add("/cinema","public/11_cinema_series/index.php");
+        $route->add("/cinema/pelicules","public/11_cinema_series/movies.php");
+        $route->add("/cinema/pelicula/{id}","public/11_cinema_series/vista-pelicula.php");
+
         $route->add("/cinema/tvshows","public/11_cinema_series/tvshows.php");
         $route->add("/cinema/tvshows/{id}","public/11_cinema_series/tvshow-page-info.php");
-        $route->add("/cinema/movies","public/11_cinema_series/movies.php");
         $route->add("/cinema/actors","public/11_cinema_series/actors.php");
-        $route->add("/cinema/directors","public/11_cinema_series/directors.php");     
-
+        $route->add("/cinema/directors","public/11_cinema_series/directors.php");
+        
+        $route->add("/cinema/afegir/pelicula/","public/11_cinema_series/form-inserir-pelicula.php");
+        $route->add("/cinema/modifica/pelicula/{id}","public/11_cinema_series/form-modificar-pelicula.php");
+        
         //programming
         $route->add("/programming","public/control/programming/index.php");
         $route->add("/programming/links","public/control/programming/links.php");

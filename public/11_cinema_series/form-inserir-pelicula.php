@@ -1,123 +1,131 @@
-<?php
-if (isset($_POST['idAuthor'])) {
-  $idAuthor_old = $_POST['idAuthor'];
-} else {
-  $idAuthor_old = NULL;
-}
- 
-?>
-<h6><a href="<?php echo APP_DEV;?>/biblioteca/">Biblioteca</a> > <a href="<?php echo APP_DEV;?>/biblioteca/llibres">Llibres </a></h6>
+<h6><a href="<?php echo APP_WEB;?>/cinema/">Cinema i sèries TV</a> > <a href="<?php echo APP_WEB;?>/cinema/pelicules">Pel·lícules </a></h6>
 </div>
 
 <div class="container-fluid form">
-<h2>Afegir nou llibre</h2>
+<h2>Afegir nova pel·lícula</h2>
 
-<div class="alert alert-success" id="createBookMessageOk" style="display:none" role="alert">
+<div class="alert alert-success" id="createPeliMessageOk" style="display:none" role="alert">
 <h4 class="alert-heading"><strong><?php echo ADD_OK_MESSAGE_SHORT;?></h4></strong>
 <h6><?php echo ADD_OK_MESSAGE;?></h6>
 </div>
-      
-<div class="alert alert-danger" id="createBookMessageErr" style="display:none;" role="alert">
+
+<div class="alert alert-danger" id="createPeliMessageErr" style="display:none;" role="alert">
 <h4 class="alert-heading"><strong><?php echo ERROR_TYPE_MESSAGE_SHORT?></h4></strong>
 <h6><?php echo ERROR_TYPE_MESSAGE?></h6>
 </div>
 
-<form method="POST" action="" id="modalFormBook" class="row g-3">
+<form method="POST" action="" id="inserirPeli" class="row g-3">
 <?php $timestamp = date('Y-m-d');?>
 <input type="hidden" id="dateCreated" name="dateCreated" value="<?php echo $timestamp;?>">
 
             <div class="col-md-4">
               <label>Títol original:</label>
-              <input class="form-control" type="text" name="titol" id="titol">
+              <input class="form-control" type="text" name="pelicula" id="pelicula">
             </div>
           
           <div class="col-md-4">
-            <label>Títol en anglés:</label>
-            <input class="form-control" type="text" name="titolEng" id="titolEng">
+            <label>Títol en espanyol:</label>
+            <input class="form-control" type="text" name="pelicula_es" id="pelicula_es">
           </div>
 
           <div class="col-md-4">
-            <label>Slug:</label>
-            <input class="form-control" type="text" name="slug" id="slug">
+            <label>Any d'estrena:</label>
+            <input class="form-control" type="text" name="any" id="any">
           </div>
 
             <div class="col-md-4">
-              <label>Autor:</label>
-              <select class="form-select" name="autor" id="autor">
-              </select>
+              <label>Data de visió:</label>
+              <input class="form-control" type="date" name="dataVista" id="dataVista">
             </div>
 
+            <div class="col-md-4">
+            <label>Director:</label>
+            <select class="form-select" name="director" id="director">
+            </select>
+          </div>
+
           <div class="col-md-4">
-            <label>Imatge coberta:</label>
+            <label>Imatge:</label>
             <select class="form-select" name="img" id="img">
             </select>
           </div>
 
-            <div class="col-md-4">
-              <label>Any de publicació:</label>
-              <input class="form-control" type="text" name="any" id="any">
-            </div>
-      
           <div class="col-md-4">
-            <label> Editorial:</label>
-            <select class="form-select" name="idEd" id="idEd">
+            <label>Gènere:</label>
+            <select class="form-select" name="genere" id="genere">
             </select>
           </div>
       
           <div class="col-md-4">
-          <label>Gènere:</label>
-          <select class="form-select" name="idGen" id="idGen">
-          </select>
-         </div>
-
-         <div class="col-md-4">
-          <label>Sub-gènere:</label>
-          <select class="form-select" name="subGen" id="subGen">
-          </select>
-         </div>
+            <label> País:</label>
+            <select class="form-select" name="pais" id="pais">
+            </select>
+          </div>
       
           <div class="col-md-4">
-          <label>Idioma:</label>
+          <label>Idioma original:</label>
           <select class="form-select" name="lang" id="lang">
           </select>
-          </div>
-      
-          <div class="col-md-4">
-          <label>Tipus:</label>
-          <select class="form-select" name="tipus" id="tipus">
-          </select>
-          </div>
+         </div>
 
-          <div class="col-md-4">
-          <label>Estat del llibre:</label>
-          <select class="form-select" name="estat" id="estat">
-          </select>
-          </div>
-              
+         <div class="col-md-12">
+         <label><strong>Crítica de la pel·lícula:</strong></label>
+            <!-- Crea un área de texto para Trix -->
+            <input type="hidden" id="descripcio" name="descripcio">
+            <trix-editor input="descripcio"></trix-editor>
+         </div>
+
           <div class="container" style="margin-top:25px">
             <div class="row">
               <div class="col-6 text-left">
               <a href="#" onclick="window.history.back()" class="btn btn-secondary">Tornar enrere</a>
               </div>
               <div class="col-6 text-right derecha">
-              <button type="submit" onclick="createNewBook(event)" class="btn btn-primary">Nou llibre</button>
+              <button type="submit" onclick="createNewFilm(event)" class="btn btn-primary">Inserir</button>
               </div>
             </div>
           </div>
     </form>
 
 </div>
+<style>
+  trix-editor {
+  background-color: white; /* Cambiar el color de fondo a blanco */
+  height: 500px; /* Altura del editor Trix, ajustable según tus preferencias */
+}
+</style>
 
 <script>
-  // AJAX PROCESS > PHP - MODAL FORM - CREATE BOOK
-  function createNewBook(event) {
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtener el editor Trix
+    var editor = document.querySelector('#descripcio');
+
+    // Verificar si el editor Trix se encontró correctamente
+    if (editor) {
+      // Escuchar el evento 'trix-change' para detectar cambios en el editor Trix
+      editor.addEventListener('trix-change', function(event) {
+        // Obtener el contenido actual del editor Trix
+        var descripcio = editor.value;
+        
+        // Actualizar el valor del campo oculto con el contenido del editor Trix
+        document.getElementById('descripcio').value = descripcio;
+      });
+    } else {
+      console.error('No se encontró el editor Trix en el documento.');
+    }
+  });
+
+  // AJAX PROCESS > PHP - MODAL FORM - CREATE FILM
+  function createNewFilm(event) {
     // check values
     $("#createBookMessageErr").hide();
     $("#btnCreateBook").show();
 
     // Stop form from submitting normally
     event.preventDefault();
-    let urlAjax = devDirectory + "/api/biblioteca/post/?type=llibre";
+    let urlAjax = "/api/cinema/post/?pelicula";
+    let formData = $('#inserirPeli').serialize();
 
     $.ajax({
       type: "POST",
@@ -130,29 +138,15 @@ if (isset($_POST['idAuthor'])) {
         // Incluir el token en el encabezado de autorización
         xhr.setRequestHeader('Authorization', 'Bearer ' + token);
       },
-      data: {
-        autor: $("#autor").val(),
-        titol: $("#titol").val(),
-        titolEng: $("#titolEng").val(),
-        slug: $("#slug").val(),
-        any: $("#any").val(),
-        idEd: $("#idEd").val(),
-        idGen: $("#idGen").val(),
-        subGen: $("#subGen").val(),
-        lang: $("#lang").val(),
-        img: $("#img").val(),
-        tipus: $("#tipus").val(),
-        dateCreated: $("#dateCreated").val(),
-        estat: $("#estat").val(),
-      },
+      data: formData,
       success: function (response) {
         if (response.status == "success") {
           // Add response in Modal body
-          $("#createBookMessageOk").show();
-          $("#createBookMessageErr").hide();
+          $("#createPeliMessageOk").show();
+          $("#createPeliMessageErr").hide();
         } else {
-          $("#createBookMessageErr").show();
-          $("#createBookMessageOk").hide();
+          $("#createPeliMessageErr").show();
+          $("#createPeliMessageOk").hide();
         }
       },
     });
@@ -160,7 +154,7 @@ if (isset($_POST['idAuthor'])) {
 
 // Carregar el select
 function auxiliarSelect(api, elementId, valorText) {
-  let urlAjax = devDirectory + "/api/biblioteca/auxiliars/?type=" + api;
+  let urlAjax = devDirectory + "/api/cinema/get/auxiliars/?type=" + api;
   $.ajax({
     url: urlAjax,
     method: "GET",
@@ -205,14 +199,11 @@ function auxiliarSelect(api, elementId, valorText) {
 }
 
 // (api, elementId, valorText) {
-auxiliarSelect("autors", "autor", "nomComplet");
-auxiliarSelect("imatgesLlibres", "img", "alt");
-auxiliarSelect("editorials", "idEd", "editorial");
-auxiliarSelect("generes", "idGen", "genere_cat");
-auxiliarSelect("subgeneres", "subGen", "sub_genere_cat");
+auxiliarSelect("directors", "director", "nomComplet");
+auxiliarSelect("imgPelis", "img", "alt");
+auxiliarSelect("generesPelis", "genere", "genere_ca");
 auxiliarSelect("llengues", "lang", "idioma_ca");
-auxiliarSelect("tipus", "tipus", "nomTipus");
-auxiliarSelect("estatLlibre", "estat", "estat");
+auxiliarSelect("paisos", "pais", "pais_cat");
 </script>
 
 

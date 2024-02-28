@@ -19,6 +19,7 @@
   <option selected>Selecciona el tipus d'imatge</option>
   <option value="1">Biblioteca llibres: autors</option>
   <option value="2">Biblioteca llibres: llibres</option>
+  <option value="8">Cinema: pel·lícules</option>
 </select>
 
 <?php $timestamp = date('Y-m-d');?>

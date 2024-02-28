@@ -84,6 +84,12 @@ $id = $params['id'];
           <select class="form-select" name="tipus" id="tipus" value="">
           </select>
           </div>
+
+          <div class="col-md-4">
+          <label>Estat del llibre:</label>
+          <select class="form-select" name="estat" id="estat">
+          </select>
+          </div>
               
           <div class="container" style="margin-top:25px">
             <div class="row">
@@ -133,6 +139,7 @@ function bookInfoLibrary(id) {
         auxiliarSelect(data.subGen, "subgeneres", "subGen", "sub_genere_cat");
         auxiliarSelect(data.lang, "llengues", "lang", "idioma_ca");
         auxiliarSelect(data.tipus, "tipus", "tipus", "nomTipus");
+        auxiliarSelect(data.estat, "estatLlibre", "estat", "estat");
 
       } catch (error) {
         console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
@@ -212,7 +219,8 @@ let formData = {
     subGen: $("#subGen").val(),
     lang: $("#lang").val(),
     tipus: $("#tipus").val(),
-    id: $("#id").val()
+    id: $("#id").val(),
+    estat: $("#estat").val(),
     };
     
 let urlAjax = "/api/biblioteca/put/?llibre";

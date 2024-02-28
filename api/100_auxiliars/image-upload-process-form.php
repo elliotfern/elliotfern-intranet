@@ -15,6 +15,8 @@
     $typeName = "08_biblioteca_llibres/autors"; 
   } elseif ($type == 2) {
     $typeName = "08_biblioteca_llibres/llibres";
+  } elseif ($type == 8) {
+    $typeName = "11_cinema_series/pelicules";
   } else {
     $typeName = "elliotfern";
   }

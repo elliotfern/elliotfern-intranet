@@ -1,8 +1,8 @@
 <?php
 /*
- * BACKEND LIBRARY
- * FUNCIONS INSERT BOOK
- * @update_book_ajax
+ * BACKEND CINEMA
+ * FUNCIONS INSERT
+ * 
  */
 
 // Check if the request method is POST
@@ -21,72 +21,67 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
       if (verificarToken($token)) {
         // Token válido, puedes continuar con el código para obtener los datos del usuario
 
-          // a) Inserir autor
-        if (isset($_GET['autor']) ) {
-            if (empty($_POST["nom"])) {;
+          // a) Inserir pelicula
+        if (isset($_GET['pelicula']) ) {
+            
+            if (empty($_POST["pelicula"])) {;
               $hasError=true;
             } else {
-              $nom = data_input($_POST['nom']);
+              $pelicula = data_input($_POST['pelicula']);
             }
           
-            if (empty($_POST["cognoms"])) {;
+            if (empty($_POST["pelicula_es"])) {;
               $hasError=true;
             } else {
-              $cognoms = data_input($_POST['cognoms']);
+              $pelicula_es = data_input($_POST['pelicula_es']);
             }
 
-            if (empty($_POST["yearBorn"])) {;
+            if (empty($_POST["director"])) {;
               $hasError=true;
             } else {
-              $yearBorn = filter_input(INPUT_POST, 'yearBorn', FILTER_SANITIZE_NUMBER_INT);
+              $director = filter_input(INPUT_POST, 'director', FILTER_SANITIZE_NUMBER_INT);
             }
 
-            if (empty($_POST["yearDie"])) {;
-              $yearDie = NULL;
+            if (empty($_POST["any"])) {;
+                $hasError=true;
+              } else {
+                $any = data_input($_POST['any']);
+              }
+
+            if (empty($_POST["genere"])) {;
+                $hasError=true;
             } else {
-              $yearDie = filter_input(INPUT_POST, 'yearDie', FILTER_SANITIZE_NUMBER_INT);
+              $genere = filter_input(INPUT_POST, 'genere', FILTER_SANITIZE_NUMBER_INT);
             }
 
-            if (empty($_POST["paisAutor"])) {;
+            if (empty($_POST["pais"])) {;
               $hasError=true;
             } else {
-              $paisAutor = filter_input(INPUT_POST, 'paisAutor', FILTER_SANITIZE_NUMBER_INT);
+              $pais = filter_input(INPUT_POST, 'pais', FILTER_SANITIZE_NUMBER_INT);
             }
 
-            if (empty($_POST["AutWikipedia"])) {;
-              $hasError=true;
-            } else {
-              $AutWikipedia = data_input($_POST['AutWikipedia']);
+            if (empty($_POST["lang"])) {;
+                $hasError=true;
+              } else {
+                $lang = filter_input(INPUT_POST, 'lang', FILTER_SANITIZE_NUMBER_INT);
             }
 
-            if (empty($_POST["AutDescrip"])) {;
-              $hasError=true;
-            } else {
-              $AutDescrip = data_input($_POST['AutDescrip']);
-            }
-
-            if (empty($_POST["ocupacio"])) {;
-              $hasError=true;
-            } else {
-              $ocupacio = filter_input(INPUT_POST, 'ocupacio', FILTER_SANITIZE_NUMBER_INT);
-            }
-
-            if (empty($_POST["moviment"])) {;
-              $hasError=true;
-            } else {
-              $moviment = filter_input(INPUT_POST, 'moviment', FILTER_SANITIZE_NUMBER_INT);
-            }
- 
             if (empty($_POST["img"])) {;
-              $hasError=true;
-            } else {
-              $img = filter_input(INPUT_POST, 'img', FILTER_SANITIZE_NUMBER_INT);
+                $hasError=true;
+              } else {
+                $img = filter_input(INPUT_POST, 'img', FILTER_SANITIZE_NUMBER_INT);
             }
 
-            if (empty($_POST["slug"])) {;
+            if (empty($_POST["dataVista"])) {;
               $hasError=true;
             } else {
-              $slug = data_input($_POST['slug']);
+              $dataVista = data_input($_POST['dataVista']);
+            }
+            
+            if (empty($_POST["descripcio"])) {;
+              $hasError=true;
+            } else {
+              $descripcio = html_entity_decode($_POST['descripcio']);
             }
 
             $timestamp = date('Y-m-d');
@@ -95,21 +90,20 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
             if (!isset($hasError)) {
               global $conn;
-              $sql = "INSERT INTO 08_db_biblioteca_autors SET nom=:nom, cognoms=:cognoms, yearBorn=:yearBorn, yearDie=:yearDie, paisAutor=:paisAutor, img=:img, AutWikipedia=:AutWikipedia, AutDescrip=:AutDescrip, moviment=:moviment, ocupacio=:ocupacio, dateModified=:dateModified, dateCreated=:dateCreated, slug=:slug";
+              $sql = "INSERT INTO 11_db_pelicules SET pelicula=:pelicula, pelicula_es=:pelicula_es, director=:director, any=:any, genere=:genere, img=:img, pais=:pais, lang=:lang, dataVista=:dataVista, dateModified=:dateModified, dateCreated=:dateCreated, descripcio=:descripcio";
               $stmt= $conn->prepare($sql);
-              $stmt->bindParam(":nom", $nom, PDO::PARAM_STR);
-              $stmt->bindParam(":cognoms", $cognoms, PDO::PARAM_STR);
-              $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
-              $stmt->bindParam(":yearBorn", $yearBorn, PDO::PARAM_INT);
-              $stmt->bindParam(":yearDie", $yearDie, PDO::PARAM_INT);
-              $stmt->bindParam(":paisAutor", $paisAutor, PDO::PARAM_INT);
+              $stmt->bindParam(":pelicula", $pelicula, PDO::PARAM_STR);
+              $stmt->bindParam(":pelicula_es", $pelicula_es, PDO::PARAM_STR);
+              $stmt->bindParam(":director", $director, PDO::PARAM_STR);
+              $stmt->bindParam(":any", $any, PDO::PARAM_INT);
+              $stmt->bindParam(":genere", $genere, PDO::PARAM_INT);
+              $stmt->bindParam(":pais", $pais, PDO::PARAM_INT);
               $stmt->bindParam(":img", $img, PDO::PARAM_INT);
-              $stmt->bindParam(":AutWikipedia", $AutWikipedia, PDO::PARAM_STR);
-              $stmt->bindParam(":AutDescrip", $AutDescrip, PDO::PARAM_STR);
-              $stmt->bindParam(":moviment", $moviment, PDO::PARAM_INT);
-              $stmt->bindParam(":ocupacio", $ocupacio, PDO::PARAM_INT);
+              $stmt->bindParam(":lang", $lang, PDO::PARAM_STR);
+              $stmt->bindParam(":dataVista", $dataVista, PDO::PARAM_STR);
               $stmt->bindParam(":dateCreated", $dateCreated, PDO::PARAM_STR);
               $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
+              $stmt->bindParam(":descripcio", $descripcio, PDO::PARAM_STR);
               
               if ($stmt->execute()) {
                 // response output

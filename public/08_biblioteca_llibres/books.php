@@ -27,7 +27,6 @@
 </div>
 </div>
 
-    
 <script>
   // Escuchar el evento de entrada en el campo de búsqueda
   $('#searchInput').on('input', function() {
@@ -92,6 +91,9 @@ $.ajax({
             */
 
             llibres += `
+            <p><button type='button' class='btn btn-light btn-sm'>${llibre.estat}</button></p>`;
+
+            llibres += `
             <a href="./modifica/llibre/${llibre.id}" class="btn btn-secondary btn-sm modificar-link">Modificar</a>
             <button type='button' class='btn btn-dark btn-sm' onclick='eliminaContacte(${llibre.id})'>Eliminar</button>
             </div>`;
@@ -127,7 +129,6 @@ function normalizeText(text) {
 }
 
 </script>
-
 
 <?php
 # footer

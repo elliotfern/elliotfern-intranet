@@ -1,7 +1,7 @@
 <?php
 /*
- * BACKEND LIBRARY
- * FUNCIONS UPDATE AUTHOR
+ * BACKEND CINEMA
+ * FUNCIONS UPDATE
  * @update_book_ajax
  */
 
@@ -22,8 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
         // Token válido, puedes continuar con el código para obtener los datos del usuario
 
         // RUTA PARA ACTUALIZAR AUTOR
-        // ruta PUT => "/api/biblioteca/put?autor"
-        if (isset($_GET['autor'])) {
+        // ruta PUT => "/api/cinema/put?pelicula"
+        if (isset($_GET['pelicula'])) {
 
           // Obtener el cuerpo de la solicitud PUT
           $input_data = file_get_contents("php://input");
@@ -42,38 +42,36 @@ if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
           // Ahora puedes acceder a los datos como un array asociativo
           $hasError = false; // Inicializamos la variable $hasError como false
           
-          $nom = isset($data['nom']) ? data_input($data['nom']) : NULL;
-          $cognoms = isset($data['cognoms']) ? data_input($data['cognoms']) : ($hasError = true);
-          $yearBorn = isset($data['yearBorn']) ? data_input($data['yearBorn']) : ($hasError = true);
-          $yearDie = isset($data['yearDie']) ? data_input($data['yearDie']) : NULL;
-          $paisAutor = isset($data['paisAutor']) ? data_input($data['paisAutor']) : ($hasError = true);
-          $img = isset($data['img']) ? data_input($data['img']) : ($hasError = true);
-          $AutWikipedia = isset($data['AutWikipedia']) ? data_input($data['AutWikipedia']) : ($hasError = true);
-          $AutDescrip = isset($data['AutDescrip']) ? data_input($data['AutDescrip']) : ($hasError = true);
-          $moviment = isset($data['moviment']) ? data_input($data['moviment']) : ($hasError = true);
-          $ocupacio = isset($data['ocupacio']) ? data_input($data['ocupacio']) : ($hasError = true);
-          $id = isset($data['id']) ? data_input($data['id']) : ($hasError = true);
-          $slug = isset($data['slug']) ? data_input($data['slug']) : ($hasError = true);
+            $pelicula = isset($data['pelicula']) ? data_input($data['pelicula']) : ($hasError = true);
+            $pelicula_es = isset($data['pelicula_es']) ? data_input($data['pelicula_es']) : ($hasError = true);
+            $any = isset($data['any']) ? data_input($data['any']) : ($hasError = true);
+            $director = isset($data['director']) ? $data['director'] : null;
+            $genere = isset($data['genere']) ? $data['genere'] : null;
+            $pais = isset($data['pais']) ? $data['pais'] : null;
+            $lang = isset($data['lang']) ? $data['lang'] : null;
+            $img = isset($data['img']) ? $data['img'] : null;
+            $dataVista = isset($data['dataVista']) ? data_input($data['dataVista']) : ($hasError = true);
+            $descripcio = isset($data['descripcio']) ? html_entity_decode($data['descripcio']) : ($hasError = true);        
+            $id = isset($data['id']) ? data_input($data['id']) : ($hasError = true);
 
           $timestamp = date('Y-m-d');
           $dateModified = $timestamp;
           
-          if ($hasError == false) {
+          if (!$hasError) {
                 global $conn;
-                $sql = "UPDATE 08_db_biblioteca_autors SET nom=:nom, cognoms=:cognoms, yearBorn=:yearBorn, yearDie=:yearDie, paisAutor=:paisAutor, img=:img, AutWikipedia=:AutWikipedia, AutDescrip=:AutDescrip, moviment=:moviment, ocupacio=:ocupacio, dateModified=:dateModified, slug=:slug WHERE id=:id";
+                $sql = "UPDATE 11_db_pelicules SET pelicula=:pelicula, pelicula_es=:pelicula_es, director=:director, any=:any, genere=:genere, img=:img, pais=:pais, lang=:lang, dataVista=:dataVista, dateModified=:dateModified, descripcio=:descripcio WHERE id=:id";
                 $stmt = $conn->prepare($sql);
-                $stmt->bindParam(":nom", $nom, PDO::PARAM_STR);
-                $stmt->bindParam(":cognoms", $cognoms, PDO::PARAM_STR);
-                $stmt->bindParam(":yearBorn", $yearBorn, PDO::PARAM_INT);
-                $stmt->bindParam(":yearDie", $yearDie, PDO::PARAM_INT);
-                $stmt->bindParam(":paisAutor", $paisAutor, PDO::PARAM_INT);
+                $stmt->bindParam(":pelicula", $pelicula, PDO::PARAM_STR);
+                $stmt->bindParam(":pelicula_es", $pelicula_es, PDO::PARAM_STR);
+                $stmt->bindParam(":director", $director, PDO::PARAM_INT);
+                $stmt->bindParam(":any", $any, PDO::PARAM_STR);
+                $stmt->bindParam(":genere", $genere, PDO::PARAM_INT);
+                $stmt->bindParam(":pais", $pais, PDO::PARAM_INT);
                 $stmt->bindParam(":img", $img, PDO::PARAM_INT);
-                $stmt->bindParam(":AutWikipedia", $AutWikipedia, PDO::PARAM_STR);
-                $stmt->bindParam(":AutDescrip", $AutDescrip, PDO::PARAM_STR);
-                $stmt->bindParam(":moviment", $moviment, PDO::PARAM_INT);
-                $stmt->bindParam(":ocupacio", $ocupacio, PDO::PARAM_INT);
+                $stmt->bindParam(":lang", $lang, PDO::PARAM_STR);
+                $stmt->bindParam(":dataVista", $dataVista, PDO::PARAM_STR);
                 $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
-                $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
+                $stmt->bindParam(":descripcio", $descripcio, PDO::PARAM_STR);
                 $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
                 if ($stmt->execute()) {
@@ -155,6 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
                   $stmt->bindParam(":estat", $estat, PDO::PARAM_INT);
                   $stmt->bindParam(":id", $id, PDO::PARAM_INT);
                   $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
+                  $stmt->execute();
 
                   if ($stmt->execute()) {
                             // response output
