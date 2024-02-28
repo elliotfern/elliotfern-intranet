@@ -193,8 +193,6 @@ $route->add("/api/auth/login","php-process/auth/login-process.php");
 
  $route->add("/api/places/{country}","api/08_biblioteca_llibres/get-library.php");
 
-   
-    
     // API PUBLICA
     $route->add("/api/public/biblioteca/{allBooks}","api/library/public/get-library.php");
     $route->add("/api/public/biblioteca/allBooks/{generes}","api/library/public/get-library.php");
@@ -308,8 +306,9 @@ if (empty($_SESSION['user']) || !session_id()) {
         $route->add("/cinema/pelicules","public/11_cinema_series/movies.php");
         $route->add("/cinema/pelicula/{id}","public/11_cinema_series/vista-pelicula.php");
 
-        $route->add("/cinema/tvshows","public/11_cinema_series/tvshows.php");
-        $route->add("/cinema/tvshows/{id}","public/11_cinema_series/tvshow-page-info.php");
+        $route->add("/cinema/series","public/11_cinema_series/tvshows.php");
+        $route->add("/cinema/serie/{id}","public/11_cinema_series/tvshow-page-info.php");
+        
         $route->add("/cinema/actors","public/11_cinema_series/actors.php");
         $route->add("/cinema/directors","public/11_cinema_series/directors.php");
         

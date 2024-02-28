@@ -72,15 +72,17 @@ if (isset($headers['Authorization'])) {
             echo json_encode($data);
 
         // 1) Llistat tv shows
-        // ruta GET => "https://control.elliotfern.com/api/cinema/get/?type=tvshows"
-        } elseif (isset($_GET['type']) && $_GET['type'] == 'tvshows' ) {
+        // ruta GET => "/api/cinema/get/?series"
+        } elseif (isset($_GET['series'])) {
             global $conn;
             $data = array();
             $stmt = $conn->prepare(
-            "SELECT tv.id, tv.name, tv.startYear, tv.endYear,tv.season, tv.chapter, d.nomDirector, d.lastName, tv.lang,tv.genre, tv.producer, c.country, tv.img
-            FROM db_tvmovies_tvshows AS tv
-            INNER JOIN db_tvmovies_directors AS d ON tv.director = d.id
+            "SELECT tv.id, tv.name, tv.startYear, tv.endYear,tv.season, tv.chapter, d.nom, d.cognoms, id.idioma_ca AS lang, g.genere_ca AS genre, tv.producer, c.pais_cat AS country, tv.img
+            FROM 11_cinema_series_tv AS tv
+            INNER JOIN 11_aux_cinema_directors AS d ON tv.director = d.id
             INNER JOIN db_countries AS c ON tv.country = c.id
+            INNER JOIN aux_idiomes AS id ON tv.lang = id.id
+            LEFT JOIN 11_aux_cinema_generes AS g ON tv.genre = g.id
             ORDER BY tv.startYear ASC");
             $stmt->execute();
             if($stmt->rowCount() === 0) echo ('No rows');
@@ -90,16 +92,19 @@ if (isset($headers['Authorization'])) {
             echo json_encode($data);
         
         // 2) Pagina informacio tv show
-        // ruta GET => "https://gestio.elliotfern.com/api/cinema/get/?type=tvshow&id=35"
-        } elseif (isset($_GET['type']) && $_GET['type'] == 'tvshow' && isset($_GET['id'])) {
-            $id = $_GET['id'];
+        // ruta GET => "/api/cinema/get/?serie=35"
+        } elseif (isset($_GET['serie']) && is_numeric($_GET['serie'])) {
+            $id = $_GET['serie'];
             global $conn;
             $data = array();
             $stmt = $conn->prepare(
-            "SELECT tv.id, tv.name, tv.startYear, tv.endYear,tv.season, tv.chapter, d.nomDirector, d.lastName, tv.lang,tv.genre, tv.producer, c.country, tv.img
-            FROM db_tvmovies_tvshows AS tv
-            INNER JOIN db_tvmovies_directors AS d ON tv.director = d.id
+            "SELECT tv.id, tv.name, tv.startYear, tv.endYear, tv.season, tv.chapter, d.nom, d.cognoms, id.idioma_ca, tv.genre, tv.producer, c.pais_cat, img.nameImg, g.genere_ca
+            FROM 11_cinema_series_tv AS tv
+            INNER JOIN 11_aux_cinema_directors AS d ON tv.director = d.id
             INNER JOIN db_countries AS c ON tv.country = c.id
+            LEFT JOIN db_img AS img ON tv.img = img.id
+            INNER JOIN aux_idiomes AS id ON tv.lang = id.id
+            LEFT JOIN 11_aux_cinema_generes AS g ON tv.genre = g.id
             WHERE tv.id = $id
             ORDER BY tv.startYear ASC");
             $stmt->execute();
