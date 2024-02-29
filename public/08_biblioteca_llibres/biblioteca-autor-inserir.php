@@ -5,17 +5,17 @@
   <div class="container-fluid form">
     <h2>Afegir nou autor</h2>
 
-  <div class="alert alert-success" id="createAuthorMessageOk" style="display:none" role="alert">
-  <h4 class="alert-heading"><strong><?php echo ADD_OK_MESSAGE_SHORT; ?></h4></strong>
+  <div class="alert alert-success" id="creaOk" style="display:none" role="alert">
+  <h4 class="alert-heading"><strong><?php echo ADD_OK_MESSAGE_SHORT; ?></strong></h4>
   <h6><?php echo ADD_OK_MESSAGE;?></h6>
   </div>
       
-  <div class="alert alert-danger" id="createAuthorMessageErr" style="display:none" role="alert">
-  <h4 class="alert-heading"><strong><?php echo ERROR_TYPE_MESSAGE_SHORT; ?></h4></strong>
+  <div class="alert alert-danger" id="creaErr" style="display:none" role="alert">
+  <h4 class="alert-heading"><strong><?php echo ERROR_TYPE_MESSAGE_SHORT; ?></strong></h4>
   <h6><?php echo ERROR_TYPE_MESSAGE; ?></h6>
   </div>
 
-    <form method="POST" action="" class="row g-3">
+    <form method="POST" action="" class="row g-3" id="inserirAutor">
 
     <div class="col-md-4">
     <label>Nom</label>
@@ -84,7 +84,7 @@
       <a href="#" onclick="window.history.back()" class="btn btn-secondary">Tornar enrere</a>
       </div>
       <div class="col-6 text-right derecha">
-      <button type="submit" onclick="createNewAuthor(event)" class="btn btn-primary">Crear autor</button>
+      <button type="submit" class="btn btn-primary">Crear autor</button>
       </div>
     </div>
   </div>
@@ -94,101 +94,18 @@
 </div>
 
 <script>
+evitarTancarFinestra();
 
-// AJAX PROCESS > PHP - MODAL FORM - INSERT AUTHOR
-function createNewAuthor(event) {
-  event.preventDefault();
-  let urlAjax = devDirectory + "/api/biblioteca/post/?autor";
-
-  $.ajax({
-    type: "POST",
-    url: urlAjax,
-    dataType: "json",
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
-
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
-    data: {
-      nom: $("#AutNom").val(),
-      cognoms: $("#AutCognom1").val(),
-      slug: $("#slug").val(),
-      yearBorn: $("#yearBorn").val(),
-      yearDie: $("#yearDie").val(),
-      paisAutor: $("#paisAutor").val(),
-      img: $("#img").val(),
-      AutWikipedia: $("#AutWikipedia").val(),
-      AutDescrip: $("#AutDescrip").val(),
-      moviment: $("#AutMoviment").val(),
-      dateCreated: $("#dateCreated").val(),
-      ocupacio: $("#AutOcupacio").val(),
-    },
-    success: function (response) {
-      if (response.status == "success") {
-        // Add response in Modal body
-        $("#createAuthorMessageOk").show();
-        $("#createAuthorMessageErr").hide();
-      } else {
-        $("#createAuthorMessageErr").show();
-        $("#createAuthorMessageOk").hide();
-      }
-    },
-  });
-}
-
-// Carregar el select
-function auxiliarSelect(api, elementId, valorText) {
-  let urlAjax = devDirectory + "/api/biblioteca/auxiliars/?" + api;
-  $.ajax({
-    url: urlAjax,
-    method: "GET",
-    dataType: "json",
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
-
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
-
-    success: function (data) {
-       try {
-        // Obtener la referencia al elemento select
-        var selectElement = document.getElementById(elementId);
-
-        // Limpiar el select por si ya tenía opciones anteriores
-        selectElement.innerHTML = "";
-
-        // Agregar una opción predeterminada "Selecciona una opción"
-        var defaultOption = document.createElement("option");
-        defaultOption.text = "Selecciona una opció:";
-        defaultOption.value = ""; // Valor vacío
-        selectElement.appendChild(defaultOption);
-
-        // Iterar sobre los datos obtenidos de la API
-        data.forEach(function (item) {
-          // Crear una opción y agregarla al select
-         // console.log(item.ciutat)
-          var option = document.createElement("option");
-          option.value = item.id; // Establecer el valor de la opción
-          option.text = item[valorText]; // Establecer el texto visible de la opción
-          selectElement.appendChild(option);
-        });
-
-      } catch (error) {
-        console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
-      }
-    }
-  })
-}
+// llançar ajax per guardar dades
+document.getElementById("inserirAutor").addEventListener("submit", function(event) {
+  formulariInserir(event, "inserirAutor", "/api/biblioteca/post/?autor");
+});
 
 // (api, elementId, valorText) {
-auxiliarSelect("imageAuthor", "img", "alt");
-auxiliarSelect("professio", "AutOcupacio", "professio_ca");
-auxiliarSelect("moviment", "AutMoviment", "movement_ca");
-auxiliarSelect("pais", "paisAutor", "pais_ca");
+auxiliarSelect("/api/biblioteca/auxiliars/?", "", "imageAuthor", "img", "alt");
+auxiliarSelect("/api/biblioteca/auxiliars/?", "","professio", "AutOcupacio", "professio_ca");
+auxiliarSelect("/api/biblioteca/auxiliars/?", "","moviment", "AutMoviment", "movement_ca");
+auxiliarSelect("/api/biblioteca/auxiliars/?", "","pais", "paisAutor", "pais_ca");
 </script>
 
 <?php

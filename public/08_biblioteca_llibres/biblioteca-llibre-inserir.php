@@ -12,17 +12,17 @@ if (isset($_POST['idAuthor'])) {
 <div class="container-fluid form">
 <h2>Afegir nou llibre</h2>
 
-<div class="alert alert-success" id="createBookMessageOk" style="display:none" role="alert">
-<h4 class="alert-heading"><strong><?php echo ADD_OK_MESSAGE_SHORT;?></h4></strong>
+<div class="alert alert-success" id="creaOk" style="display:none" role="alert">
+<h4 class="alert-heading"><strong><?php echo ADD_OK_MESSAGE_SHORT;?></strong></h4>
 <h6><?php echo ADD_OK_MESSAGE;?></h6>
 </div>
       
-<div class="alert alert-danger" id="createBookMessageErr" style="display:none;" role="alert">
-<h4 class="alert-heading"><strong><?php echo ERROR_TYPE_MESSAGE_SHORT?></h4></strong>
+<div class="alert alert-danger" id="creaErr" style="display:none;" role="alert">
+<h4 class="alert-heading"><strong><?php echo ERROR_TYPE_MESSAGE_SHORT?></strong></h4>
 <h6><?php echo ERROR_TYPE_MESSAGE?></h6>
 </div>
 
-<form method="POST" action="" id="modalFormBook" class="row g-3">
+<form method="POST" action="" id="inserirLlibre" class="row g-3">
 <?php $timestamp = date('Y-m-d');?>
 <input type="hidden" id="dateCreated" name="dateCreated" value="<?php echo $timestamp;?>">
 
@@ -55,7 +55,7 @@ if (isset($_POST['idAuthor'])) {
 
             <div class="col-md-4">
               <label>Any de publicació:</label>
-              <input class="form-control" type="text" name="any" id="any">
+              <input class="form-control soloNumeros" type="text" name="any" id="any">
             </div>
       
           <div class="col-md-4">
@@ -100,7 +100,7 @@ if (isset($_POST['idAuthor'])) {
               <a href="#" onclick="window.history.back()" class="btn btn-secondary">Tornar enrere</a>
               </div>
               <div class="col-6 text-right derecha">
-              <button type="submit" onclick="createNewBook(event)" class="btn btn-primary">Nou llibre</button>
+              <button type="submit" class="btn btn-primary">Nou llibre</button>
               </div>
             </div>
           </div>
@@ -109,112 +109,23 @@ if (isset($_POST['idAuthor'])) {
 </div>
 
 <script>
-  // AJAX PROCESS > PHP - MODAL FORM - CREATE BOOK
-  function createNewBook(event) {
-    // check values
-    $("#createBookMessageErr").hide();
-    $("#btnCreateBook").show();
+evitarTancarFinestra();
 
-    // Stop form from submitting normally
-    event.preventDefault();
-    let urlAjax = devDirectory + "/api/biblioteca/post/?type=llibre";
-
-    $.ajax({
-      type: "POST",
-      url: urlAjax,
-      dataType: "json",
-      beforeSend: function (xhr) {
-        // Obtener el token del localStorage
-        let token = localStorage.getItem('token');
-
-        // Incluir el token en el encabezado de autorización
-        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-      },
-      data: {
-        autor: $("#autor").val(),
-        titol: $("#titol").val(),
-        titolEng: $("#titolEng").val(),
-        slug: $("#slug").val(),
-        any: $("#any").val(),
-        idEd: $("#idEd").val(),
-        idGen: $("#idGen").val(),
-        subGen: $("#subGen").val(),
-        lang: $("#lang").val(),
-        img: $("#img").val(),
-        tipus: $("#tipus").val(),
-        dateCreated: $("#dateCreated").val(),
-        estat: $("#estat").val(),
-      },
-      success: function (response) {
-        if (response.status == "success") {
-          // Add response in Modal body
-          $("#createBookMessageOk").show();
-          $("#createBookMessageErr").hide();
-        } else {
-          $("#createBookMessageErr").show();
-          $("#createBookMessageOk").hide();
-        }
-      },
-    });
-  }
-
-// Carregar el select
-function auxiliarSelect(api, elementId, valorText) {
-  let urlAjax = devDirectory + "/api/biblioteca/auxiliars/?type=" + api;
-  $.ajax({
-    url: urlAjax,
-    method: "GET",
-    dataType: "json",
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
-
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
-
-    success: function (data) {
-       try {
-        // Obtener la referencia al elemento select
-        var selectElement = document.getElementById(elementId);
-
-        // Limpiar el select por si ya tenía opciones anteriores
-        selectElement.innerHTML = "";
-
-        // Agregar una opción predeterminada "Selecciona una opción"
-        var defaultOption = document.createElement("option");
-        defaultOption.text = "Selecciona una opció:";
-        defaultOption.value = ""; // Valor vacío
-        selectElement.appendChild(defaultOption);
-
-        // Iterar sobre los datos obtenidos de la API
-        data.forEach(function (item) {
-          // Crear una opción y agregarla al select
-         // console.log(item.ciutat)
-          var option = document.createElement("option");
-          option.value = item.id; // Establecer el valor de la opción
-          option.text = item[valorText]; // Establecer el texto visible de la opción
-          selectElement.appendChild(option);
-        });
-
-      } catch (error) {
-        console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
-      }
-    }
-  })
-}
+// llançar ajax per guardar dades
+document.getElementById("inserirLlibre").addEventListener("submit", function(event) {
+  formulariInserir(event, "inserirLlibre", "/api/biblioteca/post/?type=llibre");
+});
 
 // (api, elementId, valorText) {
-auxiliarSelect("autors", "autor", "nomComplet");
-auxiliarSelect("imatgesLlibres", "img", "alt");
-auxiliarSelect("editorials", "idEd", "editorial");
-auxiliarSelect("generes", "idGen", "genere_cat");
-auxiliarSelect("subgeneres", "subGen", "sub_genere_cat");
-auxiliarSelect("llengues", "lang", "idioma_ca");
-auxiliarSelect("tipus", "tipus", "nomTipus");
-auxiliarSelect("estatLlibre", "estat", "estat");
+auxiliarSelect("/api/biblioteca/auxiliars/?type=", "", "autors", "autor", "nomComplet");
+auxiliarSelect("/api/biblioteca/auxiliars/?type=", "", "imatgesLlibres", "img", "alt");
+auxiliarSelect("/api/biblioteca/auxiliars/?type=", "", "editorials", "idEd", "editorial");
+auxiliarSelect("/api/biblioteca/auxiliars/?type=", "", "generes", "idGen", "genere_cat");
+auxiliarSelect("/api/biblioteca/auxiliars/?type=", "", "subgeneres", "subGen", "sub_genere_cat");
+auxiliarSelect("/api/biblioteca/auxiliars/?type=", "", "llengues", "lang", "idioma_ca");
+auxiliarSelect("/api/biblioteca/auxiliars/?type=", "", "tipus", "tipus", "nomTipus");
+auxiliarSelect("/api/biblioteca/auxiliars/?type=", "", "estatLlibre", "estat", "estat");
 </script>
-
 
 <?php
 # footer

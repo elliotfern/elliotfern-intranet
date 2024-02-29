@@ -20,7 +20,7 @@ define('DELETE_OK_MESSAGE_SHORT', 'Dades eliminades correctament!');
 define('ERROR_MESSAGE', 'Les dades no s\'han transmès correctament a la base de dades.');
 define('ERROR_MESSAGE_SHORT', 'Error en la transmissió de dades');
 
-define('ERROR_TYPE_MESSAGE', 'Verify that all data are correct.');
+define('ERROR_TYPE_MESSAGE', 'Verifica que les dades siguin correctes.');
 define('ERROR_TYPE_MESSAGE_SHORT', 'Error!');
 
 // Taules

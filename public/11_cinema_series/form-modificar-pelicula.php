@@ -98,51 +98,16 @@ $id = $params['id'];
 initializeTrixEditor("descripcio");
 evitarTancarFinestra();
 
-peliculaInfo('<?php echo $id; ?>')
+formulariOmplirDades("/api/cinema/get/?pelicula=", <?php echo $id;?>, "modificarPeli", function(data) {
+    // Aquí puedes realizar la lógica con los datos que necesites
 
-function peliculaInfo(id) {
-  let urlAjax = "/api/cinema/get/?pelicula=" + id;
-  $.ajax({
-    url: urlAjax,
-    method: "GET",
-    dataType: "json",
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
-
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
-
-    success: function (data) {
-      try {
-        const newContent = "Pel·lícula: " + data[0].pelicula;
-        const h2Element = document.getElementById('titolPeli');
-        h2Element.innerHTML = newContent;
-
-        document.getElementById('pelicula').value = data[0].pelicula;
-        document.getElementById('pelicula_es').value = data[0].pelicula_es;
-        document.getElementById('any').value = data[0].any;
-        document.getElementById('dataVista').value = data[0].dataVista;
-
-        var texto_desde_bd = data[0].descripcio;
-        var editor = document.querySelector("trix-editor");
-        editor.editor.loadHTML(texto_desde_bd);
+    auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].director, "directors", "director", "nomComplet");
+    auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].img, "imgPelis", "img", "alt");
+    auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].genere, "generesPelis", "genere", "genere_ca");
+    auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].lang, "llengues", "lang", "idioma_ca");
+    auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].pais, "paisos", "pais", "pais_cat");
+});
       
-        // (api, elementId, valorText) {
-        auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].director, "directors", "director", "nomComplet");
-        auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].img, "imgPelis", "img", "alt");
-        auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].genere, "generesPelis", "genere", "genere_ca");
-        auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].lang, "llengues", "lang", "idioma_ca");
-        auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].pais, "paisos", "pais", "pais_cat");
-
-      } catch (error) {
-        console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
-      }
-    }
-  })
-}
-
 // llançar actualizador dades
 document.getElementById("modificarPeli").addEventListener("submit", function(event) {
     formulariActualizar(event, "modificarPeli", "/api/cinema/put/?peli");

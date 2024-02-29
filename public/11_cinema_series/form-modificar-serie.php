@@ -108,50 +108,17 @@ $idSerie = $params['id'];
 // cridem funcions externes:
 formNomesNumeros();
 initializeTrixEditor("descripcio");
-serieInfo('<?php echo $idSerie; ?>')
 evitarTancarFinestra();
 
-function serieInfo(id) {
-  let urlAjax = "/api/cinema/get/?serie=" + id;
-  $.ajax({
-    url: urlAjax,
-    method: "GET",
-    dataType: "json",
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
-
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
-    success: function (data) {
-      try {
-        document.getElementById('titolSerie').innerHTML = "Sèrie tv: " + data[0].name;
-
-        document.getElementById('name').value = data[0].name;
-        document.getElementById('startYear').value = data[0].startYear;
-        document.getElementById('endYear').value = data[0].endYear;
-        document.getElementById('season').value = data[0].season;
-        document.getElementById('chapter').value = data[0].chapter;
-
-        var texto_desde_bd = data[0].descripcio;
-        var editor = document.querySelector("trix-editor");
-        editor.editor.loadHTML(texto_desde_bd);
-      
-        // (api, elementId, valorText) {
-        auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].idDirector, "directors", "director", "nomComplet");
-        auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].idImg, "imgSeries", "img", "alt");
-        auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].idGen, "generesPelis", "genre", "genere_ca");
-        auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].idLang, "llengues", "lang", "idioma_ca");
-        auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].idPais, "paisos", "country", "pais_cat");
-        auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].idProductora, "productores", "producer", "productora");
-
-      } catch (error) {
-        console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
-      }
-    }
-  })
-}
+formulariOmplirDades("/api/cinema/get/?serie=", <?php echo $idSerie;?>, "modificarSerie", function(data) {
+    // Aquí puedes realizar la lógica con los datos que necesites
+    auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].idDirector, "directors", "director", "nomComplet");
+    auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].idImg, "imgSeries", "img", "alt");
+    auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].idGen, "generesPelis", "genre", "genere_ca");
+    auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].idLang, "llengues", "lang", "idioma_ca");
+    auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].idPais, "paisos", "country", "pais_cat");
+    auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].idProductora, "productores", "producer", "productora");
+});
 
 // llançar actualizador dades
 document.getElementById("modificarSerie").addEventListener("submit", function(event) {

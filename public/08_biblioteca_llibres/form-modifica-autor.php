@@ -9,19 +9,18 @@ $id = $params['id'];
     <h2>Modificar les dades de l'autor</h2>
     <h4 id="authorUpdateTitle"></h4>
 
-  <div class="alert alert-success" id="updateAuthorMessageOk" style="display:none" role="alert">
-  <h4 class="alert-heading"><strong><?php echo UPDATE_OK_MESSAGE_SHORT; ?></h4></strong>
+  <div class="alert alert-success" id="updateOk" style="display:none" role="alert">
+  <h4 class="alert-heading"><strong><?php echo UPDATE_OK_MESSAGE_SHORT; ?></strong></h4>
   <h6><?php echo UPDATE_OK_MESSAGE;?></h6>
   </div>
       
-  <div class="alert alert-danger" id="updateAuthorMessageErr" style="display:none" role="alert">
-  <h4 class="alert-heading"><strong><?php echo ERROR_TYPE_MESSAGE_SHORT; ?></h4></strong>
+  <div class="alert alert-danger" id="updateErr" style="display:none" role="alert">
+  <h4 class="alert-heading"><strong><?php echo ERROR_TYPE_MESSAGE_SHORT; ?></strong></h4>
   <h6><?php echo ERROR_TYPE_MESSAGE; ?></h6>
   </div>
 
-    <form method="POST" action="" class="row g-3">
-
-    <input type="hidden" name="id" id="id" value="">
+    <form method="POST" action="" class="row g-3" id="modificaAutor">
+    <input type="hidden" name="id" id="id" value="<?php echo $id;?>">
 
     <div class="col-md-4">
     <label>Nom:</label>
@@ -45,12 +44,12 @@ $id = $params['id'];
 
     <div class="col-md-4">
     <label>Any de naixement:</label>
-    <input class="form-control" type="url" name="yearBorn" id="yearBorn" value="">
+    <input class="form-control" type="text" name="yearBorn" id="yearBorn" value="">
     </div>
 
     <div class="col-md-4">
     <label>Any de defunció:</label>
-    <input class="form-control" type="url" name="yearDie" id="yearDie" value="">
+    <input class="form-control" type="text" name="yearDie" id="yearDie" value="">
     </div>
 
     <div class="col-mb-3">
@@ -90,7 +89,7 @@ $id = $params['id'];
       <a href="#" onclick="window.history.back()" class="btn btn-secondary">Tornar enrere</a>
       </div>
       <div class="col-6 text-right derecha">
-      <button type="submit" onclick="updateAuthor(event)" class="btn btn-primary">Actualitza autor</button>
+      <button type="submit" class="btn btn-primary">Actualitza autor</button>
       </div>
     </div>
   </div>
@@ -99,6 +98,9 @@ $id = $params['id'];
 </form>
 
 <script>
+formUpdateAuthor(<?php echo $id;?>)
+evitarTancarFinestra();
+
  function formUpdateAuthor(id) {
   let urlAjax = devDirectory + "/api/biblioteca/get/?autor-id=" + id;
   $.ajax({
@@ -130,117 +132,21 @@ $id = $params['id'];
 
       // Ahora llenar el select con las opciones y seleccionar la opción adecuada
       //function auxiliarSelect(idAux, api, elementId, valorText) {
-        auxiliarSelect(data.idImg, "imageAuthor", "img", "alt");
-        auxiliarSelect(data.AutOcupacio, "professio", "ocupacio", "professio_ca");
-        auxiliarSelect(data.idMovement, "moviment", "moviment", "movement_ca");
-        auxiliarSelect(data.idPais, "pais", "paisAutor", "pais_ca");
+        auxiliarSelect("/api/biblioteca/auxiliars/?", data.idImg, "imageAuthor", "img", "alt");
+        auxiliarSelect("/api/biblioteca/auxiliars/?", data.AutOcupacio, "professio", "ocupacio", "professio_ca");
+        auxiliarSelect("/api/biblioteca/auxiliars/?", data.idMovement, "moviment", "moviment", "movement_ca");
+        auxiliarSelect("/api/biblioteca/auxiliars/?", data.idPais, "pais", "paisAutor", "pais_ca");
     }
   })
 }
 
-// Carregar el select
-function auxiliarSelect(idAux, api, elementId, valorText) {
-  let urlAjax = devDirectory + "/api/biblioteca/auxiliars/?" + api;
-  $.ajax({
-    url: urlAjax,
-    method: "GET",
-    dataType: "json",
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
-
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
-
-    success: function (data) {
-       try {
-        // Obtener la referencia al elemento select
-        var selectElement = document.getElementById(elementId);
-
-        // Limpiar el select por si ya tenía opciones anteriores
-        selectElement.innerHTML = "";
-
-        // Agregar una opción predeterminada "Selecciona una opción"
-        var defaultOption = document.createElement("option");
-        defaultOption.text = "Selecciona una opció:";
-        defaultOption.value = ""; // Valor vacío
-        selectElement.appendChild(defaultOption);
-
-        // Iterar sobre los datos obtenidos de la API
-        data.forEach(function (item) {
-          // Crear una opción y agregarla al select
-         // console.log(item.ciutat)
-          var option = document.createElement("option");
-          option.value = item.id; // Establecer el valor de la opción
-          option.text = item[valorText]; // Establecer el texto visible de la opción
-          selectElement.appendChild(option);
-        });
-
-        // Seleccionar automáticamente el valor
-        if (idAux) {
-          selectElement.value = idAux;
-        }
-
-      } catch (error) {
-        console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
-      }
-    }
-  })
-}
-
-// AJAX PROCESS > PHP - MODAL FORM - UPDATE AUTHOR
-function updateAuthor(event) {
-
-// Stop form from submitting normally
-event.preventDefault();
-// Obtener los datos del formulario
-let formData = {
-        nom: $("#nom").val(),
-        cognoms: $("#cognoms").val(),
-        yearBorn: $("#yearBorn").val(),
-        yearDie: $("#yearDie").val(),
-        paisAutor: $("#paisAutor").val(),
-        img: $("#img").val(),
-        AutWikipedia: $("#AutWikipedia").val(),
-        AutDescrip: $("#AutDescrip").val(),
-        moviment: $("#moviment").val(),
-        ocupacio: $("#ocupacio").val(),
-        id: $("#id").val(),
-        slug: $("#slug").val()
-    };
-    
-let urlAjax = "/api/biblioteca/put/?autor";
-$.ajax({
-  contentType: "application/json", // Establecer el tipo de contenido como JSON
-  type: "PUT",
-  url: urlAjax,
-  dataType: "JSON",
-  beforeSend: function (xhr) {
-    // Obtener el token del localStorage
-    let token = localStorage.getItem('token');
-
-    // Incluir el token en el encabezado de autorización
-    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-  },
-  data: JSON.stringify(formData),
-  success: function (response) {
-    console.log('Response received:', response);
-    if (response.status == "success") {
-      // Add response in Modal body
-      $("#updateAuthorMessageOk").show();
-      $("#updateAuthorMessageErr").hide();
-    } else {
-      $("#updateAuthorMessageErr").show();
-      $("#updateAuthorMessageOk").hide();
-    }
-  },
+// llançar actualizador dades
+document.getElementById("modificaAutor").addEventListener("submit", function(event) {
+    formulariActualizar(event, "modificaAutor", "/api/biblioteca/put/?autor");
 });
-}
-
+ 
 </script>
 
-<script> formUpdateAuthor(<?php echo $id;?>)</script>
 
 <?php
 # footer

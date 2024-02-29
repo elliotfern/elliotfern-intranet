@@ -87,6 +87,7 @@ function auxiliarSelect(urlApi, idAux, api, elementId, valorText) {
     })
   }
 
+
   // FUNCIÓ PER INICIALITZAR L'EDITOR DE PHP ENRIQUIT TRIX
   function initializeTrixEditor(querySelector) {
     document.addEventListener('DOMContentLoaded', function() {
@@ -202,3 +203,44 @@ function formNomesNumeros(){
     });
     });
 }
+
+  // FUNCIÓ PER OMPLIR ELS INPUTS TEXT I SELECT DE LES PAGINES DE FORMULARIS MODIFICACIO
+  function formulariOmplirDades(url, id, formId, callback) {
+    let urlAjax = url + id;
+    $.ajax({
+      url: urlAjax,
+      method: "GET",
+      dataType: "json",
+      beforeSend: function (xhr) {
+        // Obtener el token del localStorage
+        let token = localStorage.getItem('token');
+        // Incluir el token en el encabezado de autorización
+        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+      },
+      success: function (data) {
+        try {
+          // Llenar el formulario con los datos obtenidos
+          $('#' + formId).find('input, textarea').each(function() {
+            let campo = $(this).attr('name');
+            $(this).val(data[0][campo]);
+          });
+  
+          // Cargar contenido en el editor Trix si está presente
+          if (document.querySelector("trix-editor")) {
+            var texto_desde_bd = data[0].descripcio;
+            var editor = document.querySelector("trix-editor");
+            editor.editor.loadHTML(texto_desde_bd);
+          }
+         
+          // Ejecutar la función de devolución de llamada si se proporciona
+          if (typeof callback === 'function') {
+            callback(data);
+          }
+  
+        } catch (error) {
+          console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
+        }
+      }
+    });
+  }
+  

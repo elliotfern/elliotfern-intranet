@@ -9,17 +9,17 @@ $id = $params['id'];
     <h2>Modificar les dades del llibre</h2>
     <h4 id="bookUpdateTitle"></h4>
           
-<div class="alert alert-success" id="updateBookMessageOk" style="display:none" role="alert">
-<h4 class="alert-heading"><strong><?php echo ADD_OK_MESSAGE_SHORT;?></h4></strong>
+<div class="alert alert-success" id="updateOk" style="display:none" role="alert">
+<h4 class="alert-heading"><strong><?php echo ADD_OK_MESSAGE_SHORT;?></strong></h4>
 <h6><?php echo ADD_OK_MESSAGE;?></h6>
 </div>
       
-<div class="alert alert-danger" id="updateBookMessageErr" style="display:none;" role="alert">
-<h4 class="alert-heading"><strong><?php echo ERROR_TYPE_MESSAGE_SHORT?></h4></strong>
+<div class="alert alert-danger" id="updateErr" style="display:none;" role="alert">
+<h4 class="alert-heading"><strong><?php echo ERROR_TYPE_MESSAGE_SHORT?></strong></h4>
 <h6><?php echo ERROR_TYPE_MESSAGE?></h6>
 </div>
 
-<form method="POST" action="" id="modalFormBook" class="row g-3">
+<form method="POST" action="" id="modificaLlibre" class="row g-3">
 <?php $timestamp = date('Y-m-d');?>
 <input type="hidden" id="id" name="id" value="<?php echo $id;?>">
 
@@ -97,7 +97,7 @@ $id = $params['id'];
               <a href="#" onclick="window.history.back()" class="btn btn-secondary">Tornar enrere</a>
               </div>
               <div class="col-6 text-right derecha">
-              <button type="submit" onclick="updateLlibre(event)" class="btn btn-primary">Modifica llibre</button>
+              <button type="submit" class="btn btn-primary">Modifica llibre</button>
               </div>
             </div>
           </div>
@@ -106,6 +106,9 @@ $id = $params['id'];
 </div>
 
  <script>
+evitarTancarFinestra();
+bookInfoLibrary('<?php echo $id; ?>')
+
 function bookInfoLibrary(id) {
   let urlAjax = "/api/biblioteca/get/?llibre-id=" + id;
   $.ajax({
@@ -132,14 +135,14 @@ function bookInfoLibrary(id) {
         document.getElementById('any').value = data.any;
 
         // (idAux, api, elementId, valorText) {
-        auxiliarSelect(data.autor, "autors", "autor", "nomComplet");
-        auxiliarSelect(data.img, "imatgesLlibres", "img", "alt");
-        auxiliarSelect(data.idEd, "editorials", "idEd", "editorial");
-        auxiliarSelect(data.idGen, "generes", "idGen", "genere_cat");
-        auxiliarSelect(data.subGen, "subgeneres", "subGen", "sub_genere_cat");
-        auxiliarSelect(data.lang, "llengues", "lang", "idioma_ca");
-        auxiliarSelect(data.tipus, "tipus", "tipus", "nomTipus");
-        auxiliarSelect(data.estat, "estatLlibre", "estat", "estat");
+        auxiliarSelect("/api/biblioteca/auxiliars/?type=", data.autor, "autors", "autor", "nomComplet");
+        auxiliarSelect("/api/biblioteca/auxiliars/?type=", data.img, "imatgesLlibres", "img", "alt");
+        auxiliarSelect("/api/biblioteca/auxiliars/?type=", data.idEd, "editorials", "idEd", "editorial");
+        auxiliarSelect("/api/biblioteca/auxiliars/?type=", data.idGen, "generes", "idGen", "genere_cat");
+        auxiliarSelect("/api/biblioteca/auxiliars/?type=", data.subGen, "subgeneres", "subGen", "sub_genere_cat");
+        auxiliarSelect("/api/biblioteca/auxiliars/?type=", data.lang, "llengues", "lang", "idioma_ca");
+        auxiliarSelect("/api/biblioteca/auxiliars/?type=", data.tipus, "tipus", "tipus", "nomTipus");
+        auxiliarSelect("/api/biblioteca/auxiliars/?type=", data.estat, "estatLlibre", "estat", "estat");
 
       } catch (error) {
         console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
@@ -148,110 +151,12 @@ function bookInfoLibrary(id) {
   })
 }
 
-bookInfoLibrary('<?php echo $id; ?>')
-
-// Carregar el select
-function auxiliarSelect(idAux, api, elementId, valorText) {
-  let urlAjax = devDirectory + "/api/biblioteca/auxiliars/?type=" + api;
-  $.ajax({
-    url: urlAjax,
-    method: "GET",
-    dataType: "json",
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
-
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
-
-    success: function (data) {
-       try {
-        // Obtener la referencia al elemento select
-        var selectElement = document.getElementById(elementId);
-
-        // Limpiar el select por si ya tenía opciones anteriores
-        selectElement.innerHTML = "";
-
-        // Agregar una opción predeterminada "Selecciona una opción"
-        var defaultOption = document.createElement("option");
-        defaultOption.text = "Selecciona una opció:";
-        defaultOption.value = ""; // Valor vacío
-        selectElement.appendChild(defaultOption);
-
-        // Iterar sobre los datos obtenidos de la API
-        data.forEach(function (item) {
-          // Crear una opción y agregarla al select
-         // console.log(item.ciutat)
-          var option = document.createElement("option");
-          option.value = item.id; // Establecer el valor de la opción
-          option.text = item[valorText]; // Establecer el texto visible de la opción
-          selectElement.appendChild(option);
-        });
-
-        // Seleccionar automáticamente el valor
-        if (idAux) {
-          selectElement.value = idAux;
-        }
-
-      } catch (error) {
-        console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
-      }
-    }
-  })
-}
-
-// AJAX PROCESS > PHP - MODAL FORM - UPDATE AUTHOR
-function updateLlibre(event) {
-
-// Stop form from submitting normally
-event.preventDefault();
-// Obtener los datos del formulario
-let formData = {
-    titol: $("#titol").val(),
-    titolEng: $("#titolEng").val(),
-    slug: $("#slug").val(),
-    autor: $("#autor").val(),
-    img: $("#img").val(),
-    any: $("#any").val(),
-    idEd: $("#idEd").val(),
-    idGen: $("#idGen").val(),
-    subGen: $("#subGen").val(),
-    lang: $("#lang").val(),
-    tipus: $("#tipus").val(),
-    id: $("#id").val(),
-    estat: $("#estat").val(),
-    };
-    
-let urlAjax = "/api/biblioteca/put/?llibre";
-$.ajax({
-  contentType: "application/json", // Establecer el tipo de contenido como JSON
-  type: "PUT",
-  url: urlAjax,
-  dataType: "JSON",
-  beforeSend: function (xhr) {
-    // Obtener el token del localStorage
-    let token = localStorage.getItem('token');
-
-    // Incluir el token en el encabezado de autorización
-    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-  },
-  data: JSON.stringify(formData),
-  success: function (response) {
-    console.log('Response received:', response);
-    if (response.status == "success") {
-      // Add response in Modal body
-      $("#updateBookMessageOk").show();
-      $("#updateBookMessageErr").hide();
-    } else {
-      $("#updateBookMessageErr").show();
-      $("#updateBookMessageOk").hide();
-    }
-  },
+// llançar actualizador dades
+document.getElementById("modificaLlibre").addEventListener("submit", function(event) {
+    formulariActualizar(event, "modificaLlibre", "/api/biblioteca/put/?llibre");
 });
-}
 
- </script>
+</script>
 
 <?php
 # footer
