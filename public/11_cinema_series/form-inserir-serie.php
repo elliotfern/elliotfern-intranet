@@ -1,50 +1,55 @@
-<?php
-$id = $params['id'];
-?>
-
-<h6><a href="<?php echo APP_WEB;?>/cinema/">Cinema i sèries TV</a> > <a href="<?php echo APP_WEB;?>/cinema/pelicules">Pel·lícules </a></h6>
+<h6><a href="<?php echo APP_WEB;?>/cinema/">Cinema i sèries TV</a> > <a href="<?php echo APP_WEB;?>/cinema/series">Sèries tv </a></h6>
 </div>
 
 <div class="container-fluid form">
-<h2>Modificar pel·lícula</h2>
-<h4 id="titolPeli"></h4>
+<h2>Afegir nova sèrie tv</h2>
 
-<div class="alert alert-success" id="updateSerieMessageOk" style="display:none" role="alert">
+<div class="alert alert-success" id="createSerieMessageOk" style="display:none" role="alert">
 <h4 class="alert-heading"><strong><?php echo ADD_OK_MESSAGE_SHORT;?></h4></strong>
 <h6><?php echo ADD_OK_MESSAGE;?></h6>
 </div>
 
-<div class="alert alert-danger" id="updateSerieMessageErr" style="display:none;" role="alert">
+<div class="alert alert-danger" id="createSerieMessageErr" style="display:none;" role="alert">
 <h4 class="alert-heading"><strong><?php echo ERROR_TYPE_MESSAGE_SHORT?></h4></strong>
 <h6><?php echo ERROR_TYPE_MESSAGE?></h6>
 </div>
 
-<form method="POST" action="" id="modificarPeli" class="row g-3">
-<input type="hidden" id="id" name="id" value="<?php echo $id;?>">
+<form method="POST" action="" id="inserirSerie" class="row g-3">
 
             <div class="col-md-4">
-              <label>Títol original:</label>
-              <input class="form-control" type="text" name="pelicula" id="pelicula" value="">
+              <label>Nom de la sèrie:</label>
+              <input class="form-control" type="text" name="name" id="name">
             </div>
           
           <div class="col-md-4">
-            <label>Títol en espanyol:</label>
-            <input class="form-control" type="text" name="pelicula_es" id="pelicula_es" value="">
+            <label>Any d'inici:</label>
+            <input class="form-control soloNumeros" type="text" name="startYear" id="startYear">
           </div>
 
           <div class="col-md-4">
-            <label>Any d'estrena:</label>
-            <input class="form-control" type="text" name="any" id="any" value="">
+            <label>Any final:</label>
+            <input class="form-control soloNumeros" type="text" name="endYear" id="endYear">
           </div>
 
             <div class="col-md-4">
-              <label>Data de visió:</label>
-              <input class="form-control" type="date" name="dataVista" id="dataVista" value="">
+              <label>Número de temporades:</label>
+              <input class="form-control soloNumeros" type="text" name="season" id="season">
+            </div>
+
+            <div class="col-md-4">
+              <label>Número de capítols:</label>
+              <input class="form-control soloNumeros" type="text" name="chapter" id="chapter">
             </div>
 
             <div class="col-md-4">
             <label>Director:</label>
             <select class="form-select" name="director" id="director">
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label>Productor:</label>
+            <select class="form-select" name="producer" id="producer">
             </select>
           </div>
 
@@ -56,13 +61,13 @@ $id = $params['id'];
 
           <div class="col-md-4">
             <label>Gènere:</label>
-            <select class="form-select" name="genere" id="genere">
+            <select class="form-select" name="genre" id="genre">
             </select>
           </div>
       
           <div class="col-md-4">
             <label> País:</label>
-            <select class="form-select" name="pais" id="pais">
+            <select class="form-select" name="country" id="country">
             </select>
           </div>
       
@@ -75,7 +80,7 @@ $id = $params['id'];
          <div class="col-md-12">
          <label><strong>Crítica de la pel·lícula:</strong></label>
             <!-- Crea un área de texto para Trix -->
-            <input type="hidden" id="descripcio" name="descripcio" value="">
+            <input type="hidden" id="descripcio" name="descripcio">
             <trix-editor input="descripcio"></trix-editor>
          </div>
 
@@ -85,7 +90,7 @@ $id = $params['id'];
               <a href="#" onclick="window.history.back()" class="btn btn-secondary">Tornar enrere</a>
               </div>
               <div class="col-6 text-right derecha">
-              <button type="submit" onclick="updatePelicula(event)" class="btn btn-primary">Actualizar dades</button>
+              <button type="submit" onclick="createNewFilm(event)" class="btn btn-primary">Inserir</button>
               </div>
             </div>
           </div>
@@ -100,6 +105,15 @@ $id = $params['id'];
 </style>
 
 <script>
+  const inputs = document.querySelectorAll('.soloNumeros');
+
+inputs.forEach(input => {
+  input.addEventListener('input', function() {
+    if (isNaN(this.value)) {
+      this.value = ''; // Limpiar el valor si no es un número
+    }
+  });
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     // Obtener el editor Trix
@@ -120,53 +134,43 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  function peliculaInfo(id) {
-  let urlAjax = "/api/cinema/get/?pelicula=" + id;
-  $.ajax({
-    url: urlAjax,
-    method: "GET",
-    dataType: "json",
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
+  // AJAX PROCESS > PHP - MODAL FORM - CREATE FILM
+  function createNewFilm(event) {
+    // check values
+    $("#createSerieMessageErr").hide();
 
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
+    // Stop form from submitting normally
+    event.preventDefault();
+    let urlAjax = "/api/cinema/post/?serie";
+    let formData = $('#inserirSerie').serialize();
 
-    success: function (data) {
-      try {
-        const newContent = "Pel·lícula: " + data[0].pelicula;
-        const h2Element = document.getElementById('titolPeli');
-        h2Element.innerHTML = newContent;
+    $.ajax({
+      type: "POST",
+      url: urlAjax,
+      dataType: "json",
+      beforeSend: function (xhr) {
+        // Obtener el token del localStorage
+        let token = localStorage.getItem('token');
 
-        document.getElementById('pelicula').value = data[0].pelicula;
-        document.getElementById('pelicula_es').value = data[0].pelicula_es;
-        document.getElementById('any').value = data[0].any;
-        document.getElementById('dataVista').value = data[0].dataVista;
-
-        var texto_desde_bd = data[0].descripcio;
-        var editor = document.querySelector("trix-editor");
-        editor.editor.loadHTML(texto_desde_bd);
-      
-        // (api, elementId, valorText) {
-        auxiliarSelect(data[0].director, "directors", "director", "nomComplet");
-        auxiliarSelect(data[0].img, "imgPelis", "img", "alt");
-        auxiliarSelect(data[0].genere, "generesPelis", "genere", "genere_ca");
-        auxiliarSelect(data[0].lang, "llengues", "lang", "idioma_ca");
-        auxiliarSelect(data[0].pais, "paisos", "pais", "pais_cat");
-
-      } catch (error) {
-        console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
-      }
-    }
-  })
-}
-
-peliculaInfo('<?php echo $id; ?>')
+        // Incluir el token en el encabezado de autorización
+        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+      },
+      data: formData,
+      success: function (response) {
+        if (response.status == "success") {
+          // Add response in Modal body
+          $("#createSerieMessageOk").show();
+          $("#createSerieMessageErr").hide();
+        } else {
+          $("#createSerieMessageErr").show();
+          $("#createSerieMessageOk").hide();
+        }
+      },
+    });
+  }
 
 // Carregar el select
-function auxiliarSelect(idAux, api, elementId, valorText) {
+function auxiliarSelect(api, elementId, valorText) {
   let urlAjax = devDirectory + "/api/cinema/get/auxiliars/?type=" + api;
   $.ajax({
     url: urlAjax,
@@ -204,11 +208,6 @@ function auxiliarSelect(idAux, api, elementId, valorText) {
           selectElement.appendChild(option);
         });
 
-        // Seleccionar automáticamente el valor
-        if (idAux) {
-          selectElement.value = idAux;
-        }
-
       } catch (error) {
         console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
       }
@@ -216,46 +215,22 @@ function auxiliarSelect(idAux, api, elementId, valorText) {
   })
 }
 
+// (api, elementId, valorText) {
+auxiliarSelect("directors", "director", "nomComplet");
+auxiliarSelect("imgSeries", "img", "alt");
+auxiliarSelect("generesPelis", "genre", "genere_ca");
+auxiliarSelect("llengues", "lang", "idioma_ca");
+auxiliarSelect("paisos", "country", "pais_cat");
+auxiliarSelect("productores", "producer", "productora");
 
-// AJAX PROCESS > PHP - MODAL FORM - UPDATE PELICULA
-function updatePelicula(event) {
-
-// Stop form from submitting normally
-event.preventDefault();
-
-// Obtener los datos del formulario como un objeto JSON
-var formData = Object.fromEntries(new FormData(document.getElementById('modificarPeli')));
-
-// Convertir el objeto en una cadena JSON
-var jsonData = JSON.stringify(formData);
-    
-let urlAjax = "/api/cinema/put/?pelicula";
-$.ajax({
-  contentType: "application/json", // Establecer el tipo de contenido como JSON
-  type: "PUT",
-  url: urlAjax,
-  dataType: "JSON",
-  beforeSend: function (xhr) {
-    // Obtener el token del localStorage
-    let token = localStorage.getItem('token');
-
-    // Incluir el token en el encabezado de autorización
-    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-  },
-  data: jsonData,
-  success: function (response) {
-    if (response.status == "success") {
-      // Add response in Modal body
-      $("#updateSerieMessageOk").show();
-      $("#updateSerieMessageErr").hide();
-    } else {
-      $("#updateSerieMessageErr").show();
-      $("#updateSerieMessageOk").hide();
-    }
-  },
+window.addEventListener('beforeunload', function(event) {
+    // Cancela el evento de cierre predeterminado
+    event.preventDefault();
+    // Mensaje de advertencia
+    event.returnValue = '';
+    // Muestra el mensaje de advertencia
+    alert('¿Estás seguro que quieres cerrar la ventana?');
 });
-}
-
 </script>
 
 

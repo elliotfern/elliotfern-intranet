@@ -193,6 +193,10 @@ $route->add("/api/auth/login","php-process/auth/login-process.php");
 
  $route->add("/api/places/{country}","api/08_biblioteca_llibres/get-library.php");
 
+    //13. Blog
+    $route->add("/api/blog/get/","api/13_blog/get-blog.php");
+    $route->add("/api/blog/get/{slugArticles}","api/13_blog/get-blog.php");
+
     // API PUBLICA
     $route->add("/api/public/biblioteca/{allBooks}","api/library/public/get-library.php");
     $route->add("/api/public/biblioteca/allBooks/{generes}","api/library/public/get-library.php");
@@ -303,18 +307,27 @@ if (empty($_SESSION['user']) || !session_id()) {
 
         // 11 - Cinema i series
         $route->add("/cinema","public/11_cinema_series/index.php");
-        $route->add("/cinema/pelicules","public/11_cinema_series/movies.php");
-        $route->add("/cinema/pelicula/{id}","public/11_cinema_series/vista-pelicula.php");
 
-        $route->add("/cinema/series","public/11_cinema_series/tvshows.php");
-        $route->add("/cinema/serie/{id}","public/11_cinema_series/tvshow-page-info.php");
+            // a) series tv
+            $route->add("/cinema/series","public/11_cinema_series/vista-llistat-series.php");
+            $route->add("/cinema/serie/{id}","public/11_cinema_series/vista-serie.php");
+            $route->add("/cinema/afegir/actor/serie/{id}","public/11_cinema_series/form-inserir-actor-serie.php");
+            $route->add("/cinema/afegir/serie/","public/11_cinema_series/form-inserir-serie.php");
+            $route->add("/cinema/modifica/serie/{id}","public/11_cinema_series/form-modificar-serie.php");
+            
+            // b) pelicules
+            $route->add("/cinema/pelicules","public/11_cinema_series/vista-llistat-pelicules.php");
+            $route->add("/cinema/pelicula/{id}","public/11_cinema_series/vista-pelicula.php");
+            $route->add("/cinema/afegir/pelicula/","public/11_cinema_series/form-inserir-pelicula.php");
+            $route->add("/cinema/modifica/pelicula/{id}","public/11_cinema_series/form-modificar-pelicula.php");
         
         $route->add("/cinema/actors","public/11_cinema_series/actors.php");
         $route->add("/cinema/directors","public/11_cinema_series/directors.php");
         
-        $route->add("/cinema/afegir/pelicula/","public/11_cinema_series/form-inserir-pelicula.php");
-        $route->add("/cinema/modifica/pelicula/{id}","public/11_cinema_series/form-modificar-pelicula.php");
-        
+        // 13. Blog
+        $route->add("/blog","public/13_blog/index.php");
+        $route->add("/blog/{slug}","public/13_blog/vista-article.php");
+
         //programming
         $route->add("/programming","public/control/programming/index.php");
         $route->add("/programming/links","public/control/programming/links.php");

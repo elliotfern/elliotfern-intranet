@@ -35,7 +35,7 @@ $id = $params['id'];
 
     </div>
     <hr>
-    <div class="container" style="width:60%;margin-top:25px;margin-bottom:25px">
+    <div class="container" style="padding:20px;background-color:#ececec;margin-top:25px;margin-bottom:25px">
         <h4>Crítica de la pel·lícula</h4>
         <p id="descripcio"></p>
         </div>
@@ -43,6 +43,8 @@ $id = $params['id'];
     <hr>
 
     <h4>Actors:</h4>
+
+    <button type="button" id="afegirActor" onClick="afegirActor(<?php echo $id; ?>)" class="btn btn-sm btn-warning">Afegir actor a la pel·lícula</button>
 
 <div class="table-responsive">
             <table class="table table-striped" id="booksAuthor">

@@ -86,12 +86,10 @@ $.ajax({
             pelicules += `<p class="links-contactes autor"><strong>Director/a:</strong> <a href="${window.location.origin}/cinema/director/${pelicula.id}">${pelicula.nom} ${pelicula.cognoms}</a></p>`;
             pelicules += `<p><strong>Any: </strong> ${pelicula.startYear}</p>`;
             pelicules += `<p><strong>País: </strong> ${pelicula.country}</p>`;
-            pelicules += `<p><strong>Idioma original: </strong> ${pelicula.lang}</p>`;            
-            pelicules += `
-            <p><button type='button' class='btn btn-light btn-sm'>${pelicula.genere_ca}</button></p>`;
+            pelicules += `<p><strong>Idioma original: </strong> ${pelicula.lang}</p>`;
 
             pelicules += `
-            <a href="${window.location.origin}/cinema/modifica/pelicula/${pelicula.id}" class="btn btn-secondary btn-sm modificar-link">Modificar</a>
+            <a href="${window.location.origin}/cinema/modifica/serie/${pelicula.id}" class="btn btn-secondary btn-sm modificar-link">Modificar</a>
             <button type='button' class='btn btn-dark btn-sm' onclick='eliminaContacte(${pelicula.id})'>Eliminar</button>
             </div>`;
       });

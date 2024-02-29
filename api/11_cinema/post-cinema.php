@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
               echo json_encode($response);
             }
             
-          // INSERIR NOU LLIBRE
+          // INSERIR NOU autor
           // autor	titol	titolEng	slug	any	tipus	idEd	idGen	subGen	lang	img	dateCreated
           } elseif (isset($_GET['type']) && $_GET['type'] == 'llibre' ) {
               if (empty($_POST["autor"])) {
@@ -243,6 +243,181 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
               echo json_encode($response);
             }
         
+        // a) Inserir Actor en pelicula
+        } elseif (isset($_GET['actorSerie']) ) {
+
+              $hasError = false;
+
+              if (empty($_POST["idActor"])) {
+                $hasError = true;
+              } else {
+                  $idActor = filter_input(INPUT_POST, 'idActor', FILTER_SANITIZE_NUMBER_INT);
+              }
+
+              if (empty($_POST["idSerie"])) {
+                $hasError = true;
+              } else {
+                  $idSerie = filter_input(INPUT_POST, 'idSerie', FILTER_SANITIZE_NUMBER_INT);
+              }
+
+              if (empty($_POST["role"])) {
+                $hasError = true;
+              } else {
+                $role = data_input($_POST["role"], ENT_NOQUOTES);
+              }
+            
+              if (!isset($hasError)) {
+                global $conn;
+                $sql = "INSERT INTO 11_aux_cinema_actors_seriestv SET idActor=:idActor, idSerie=:idSerie, role=:role";
+                $stmt= $conn->prepare($sql);
+                $stmt->bindParam(":idActor", $idActor, PDO::PARAM_INT);
+                $stmt->bindParam(":idSerie", $idSerie, PDO::PARAM_INT);
+                $stmt->bindParam(":role", $role, PDO::PARAM_STR);
+
+                if ($stmt->execute()) {
+                // response output
+                $response['status'] = 'success';
+
+                header( "Content-Type: application/json" );
+                echo json_encode($response);
+
+                } else {
+                  // response output - data error
+                  $response['status'] = 'error';
+
+                  header( "Content-Type: application/json" );
+                  echo json_encode($response);
+                }
+            } else {
+              // response output - data error
+              $response['status'] = 'error';
+
+              header( "Content-Type: application/json" );
+              echo json_encode($response);
+            }
+        
+             // c) Crear nova serie
+            } elseif (isset($_GET['serie']) ) {
+
+              $hasError = false;
+
+              if (empty($_POST["name"])) {
+                $hasError = true;
+              } else {
+                $name = data_input($_POST["name"], ENT_NOQUOTES);
+              }
+
+              if (empty($_POST["startYear"])) {
+                $hasError = true;
+              } else {
+                  $startYear = filter_input(INPUT_POST, 'startYear', FILTER_SANITIZE_NUMBER_INT);
+              }
+
+              if (empty($_POST["endYear"])) {
+                $endYear = NULL;
+              } else {
+                  $endYear = filter_input(INPUT_POST, 'endYear', FILTER_SANITIZE_NUMBER_INT);
+              }
+
+              if (empty($_POST["season"])) {
+                $hasError = true;
+              } else {
+                  $season = filter_input(INPUT_POST, 'season', FILTER_SANITIZE_NUMBER_INT);
+              }
+
+              if (empty($_POST["chapter"])) {
+                $hasError = true;
+              } else {
+                  $chapter = filter_input(INPUT_POST, 'chapter', FILTER_SANITIZE_NUMBER_INT);
+              }
+
+              if (empty($_POST["director"])) {
+                $hasError = true;
+              } else {
+                  $director = filter_input(INPUT_POST, 'director', FILTER_SANITIZE_NUMBER_INT);
+              }
+
+              if (empty($_POST["lang"])) {
+                $hasError = true;
+              } else {
+                  $lang = filter_input(INPUT_POST, 'lang', FILTER_SANITIZE_NUMBER_INT);
+              }
+
+              if (empty($_POST["genre"])) {
+                $hasError = true;
+              } else {
+                  $genre = filter_input(INPUT_POST, 'genre', FILTER_SANITIZE_NUMBER_INT);
+              }
+              
+              if (empty($_POST["producer"])) {
+                $hasError = true;
+              } else {
+                  $producer = filter_input(INPUT_POST, 'producer', FILTER_SANITIZE_NUMBER_INT);
+              }
+
+              if (empty($_POST["country"])) {
+                $hasError = true;
+              } else {
+                  $country = filter_input(INPUT_POST, 'country', FILTER_SANITIZE_NUMBER_INT);
+              }
+
+              if (empty($_POST["img"])) {
+                $hasError = true;
+              } else {
+                  $img = filter_input(INPUT_POST, 'img', FILTER_SANITIZE_NUMBER_INT);
+              }
+
+              if (empty($_POST["descripcio"])) {
+                $hasError = true;
+              } else {
+                $descripcio = html_entity_decode($_POST['descripcio']);
+              }
+              
+              $dateCreated = date('Y-m-d');
+              $dateModified = date('Y-m-d');
+
+              if (!$hasError) {
+                global $conn;
+                $sql = "INSERT INTO 11_db_cinema_series_tv SET name=:name, startYear=:startYear, endYear=:endYear, season=:season, chapter=:chapter, director=:director, lang=:lang, genre=:genre, producer=:producer, country=:country, img=:img, descripcio=:descripcio, dateCreated=:dateCreated, dateModified=:dateModified";
+                $stmt= $conn->prepare($sql);
+                $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+                $stmt->bindParam(":startYear", $startYear, PDO::PARAM_INT);
+                $stmt->bindParam(":endYear", $endYear, PDO::PARAM_INT);
+                $stmt->bindParam(":season", $season, PDO::PARAM_INT);
+                $stmt->bindParam(":chapter", $chapter, PDO::PARAM_INT);
+                $stmt->bindParam(":director", $director, PDO::PARAM_INT);
+                $stmt->bindParam(":lang", $lang, PDO::PARAM_INT);
+                $stmt->bindParam(":genre", $genre, PDO::PARAM_INT);
+                $stmt->bindParam(":producer", $producer, PDO::PARAM_INT);
+                $stmt->bindParam(":country", $country, PDO::PARAM_INT);
+                $stmt->bindParam(":img", $img, PDO::PARAM_INT);
+                $stmt->bindParam(":descripcio", $descripcio, PDO::PARAM_STR);
+                $stmt->bindParam(":dateCreated", $dateCreated, PDO::PARAM_STR);
+                $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
+
+                if ($stmt->execute()) {
+                // response output
+                $response['status'] = 'success';
+
+                header( "Content-Type: application/json" );
+                echo json_encode($response);
+
+                } else {
+                  // response output - data error
+                  $response['status'] = 'error';
+
+                  header( "Content-Type: application/json" );
+                  echo json_encode($response);
+                }
+            } else {
+              // response output - data error
+              $response['status'] = 'error';
+
+              header( "Content-Type: application/json" );
+              echo json_encode($response);
+            }
+        
+        // si no hi ha cap endpoint valid, mostrar error:
         } else {
           // response output - data error
           $response['status'] = 'error';

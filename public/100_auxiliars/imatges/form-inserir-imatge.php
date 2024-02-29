@@ -13,13 +13,15 @@
               <h6>'.ERROR_TYPE_MESSAGE.'</h6>
               </div>
 
- <form method="POST" action="" id="uploadImgForm" class="row g-3" style="'.FORM_BACKGROUND_COLOR.'">
+ <form method="POST" action="" id="uploadImgForm" class="row g-3">
  
  <select class="form-select" id="typeImg" name="typeImg">
   <option selected>Selecciona el tipus d'imatge</option>
   <option value="1">Biblioteca llibres: autors</option>
   <option value="2">Biblioteca llibres: llibres</option>
-  <option value="8">Cinema: pel·lícules</option>
+  <option value="7">Cinema: Sèries tv</option>
+  <option value="8">Cinema: Pel·lícules</option>
+  <option value="9">Cinema: Actors</option>
 </select>
 
 <?php $timestamp = date('Y-m-d');?>

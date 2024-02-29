@@ -1,50 +1,60 @@
 <?php
-$id = $params['id'];
+$idSerie = $params['id'];
 ?>
 
-<h6><a href="<?php echo APP_WEB;?>/cinema/">Cinema i sèries TV</a> > <a href="<?php echo APP_WEB;?>/cinema/pelicules">Pel·lícules </a></h6>
+<h6><a href="<?php echo APP_WEB;?>/cinema/">Cinema i sèries TV</a> > <a href="<?php echo APP_WEB;?>/cinema/series">Sèries tv </a></h6>
 </div>
 
 <div class="container-fluid form">
-<h2>Modificar pel·lícula</h2>
-<h4 id="titolPeli"></h4>
+<h2 id="titolSerie"></h2>
 
-<div class="alert alert-success" id="updateSerieMessageOk" style="display:none" role="alert">
+<div class="alert alert-success" id="createSerieMessageOk" style="display:none" role="alert">
 <h4 class="alert-heading"><strong><?php echo ADD_OK_MESSAGE_SHORT;?></h4></strong>
 <h6><?php echo ADD_OK_MESSAGE;?></h6>
 </div>
 
-<div class="alert alert-danger" id="updateSerieMessageErr" style="display:none;" role="alert">
+<div class="alert alert-danger" id="createSerieMessageErr" style="display:none;" role="alert">
 <h4 class="alert-heading"><strong><?php echo ERROR_TYPE_MESSAGE_SHORT?></h4></strong>
 <h6><?php echo ERROR_TYPE_MESSAGE?></h6>
 </div>
 
-<form method="POST" action="" id="modificarPeli" class="row g-3">
-<input type="hidden" id="id" name="id" value="<?php echo $id;?>">
+<form method="POST" action="" id="modificarSerie" class="row g-3">
+    <input type="hidden" name="id" id="id" value="<?php echo $idSerie;?>">
 
             <div class="col-md-4">
-              <label>Títol original:</label>
-              <input class="form-control" type="text" name="pelicula" id="pelicula" value="">
+              <label>Nom de la sèrie:</label>
+              <input class="form-control" type="text" name="name" id="name" value="">
             </div>
           
           <div class="col-md-4">
-            <label>Títol en espanyol:</label>
-            <input class="form-control" type="text" name="pelicula_es" id="pelicula_es" value="">
+            <label>Any d'inici:</label>
+            <input class="form-control soloNumeros" type="text" name="startYear" id="startYear" value="">
           </div>
 
           <div class="col-md-4">
-            <label>Any d'estrena:</label>
-            <input class="form-control" type="text" name="any" id="any" value="">
+            <label>Any final:</label>
+            <input class="form-control soloNumeros" type="text" name="endYear" id="endYear" value="">
           </div>
 
             <div class="col-md-4">
-              <label>Data de visió:</label>
-              <input class="form-control" type="date" name="dataVista" id="dataVista" value="">
+              <label>Número de temporades:</label>
+              <input class="form-control soloNumeros" type="text" name="season" id="season" value="">
+            </div>
+
+            <div class="col-md-4">
+              <label>Número de capítols:</label>
+              <input class="form-control soloNumeros" type="text" name="chapter" id="chapter" value="">
             </div>
 
             <div class="col-md-4">
             <label>Director:</label>
             <select class="form-select" name="director" id="director">
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label>Productor:</label>
+            <select class="form-select" name="producer" id="producer">
             </select>
           </div>
 
@@ -56,13 +66,13 @@ $id = $params['id'];
 
           <div class="col-md-4">
             <label>Gènere:</label>
-            <select class="form-select" name="genere" id="genere">
+            <select class="form-select" name="genre" id="genre">
             </select>
           </div>
       
           <div class="col-md-4">
             <label> País:</label>
-            <select class="form-select" name="pais" id="pais">
+            <select class="form-select" name="country" id="country">
             </select>
           </div>
       
@@ -75,7 +85,7 @@ $id = $params['id'];
          <div class="col-md-12">
          <label><strong>Crítica de la pel·lícula:</strong></label>
             <!-- Crea un área de texto para Trix -->
-            <input type="hidden" id="descripcio" name="descripcio" value="">
+            <input type="hidden" id="descripcio" name="descripcio">
             <trix-editor input="descripcio"></trix-editor>
          </div>
 
@@ -85,7 +95,7 @@ $id = $params['id'];
               <a href="#" onclick="window.history.back()" class="btn btn-secondary">Tornar enrere</a>
               </div>
               <div class="col-6 text-right derecha">
-              <button type="submit" onclick="updatePelicula(event)" class="btn btn-primary">Actualizar dades</button>
+              <button type="submit" onclick="modificarSerie(event)" class="btn btn-primary">Modificar dades</button>
               </div>
             </div>
           </div>
@@ -100,6 +110,15 @@ $id = $params['id'];
 </style>
 
 <script>
+  const inputs = document.querySelectorAll('.soloNumeros');
+
+inputs.forEach(input => {
+  input.addEventListener('input', function() {
+    if (isNaN(this.value)) {
+      this.value = ''; // Limpiar el valor si no es un número
+    }
+  });
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     // Obtener el editor Trix
@@ -120,8 +139,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  function peliculaInfo(id) {
-  let urlAjax = "/api/cinema/get/?pelicula=" + id;
+  function serieInfo(id) {
+  let urlAjax = "/api/cinema/get/?serie=" + id;
   $.ajax({
     url: urlAjax,
     method: "GET",
@@ -133,28 +152,27 @@ document.addEventListener('DOMContentLoaded', function() {
       // Incluir el token en el encabezado de autorización
       xhr.setRequestHeader('Authorization', 'Bearer ' + token);
     },
-
     success: function (data) {
       try {
-        const newContent = "Pel·lícula: " + data[0].pelicula;
-        const h2Element = document.getElementById('titolPeli');
-        h2Element.innerHTML = newContent;
+        document.getElementById('titolSerie').innerHTML = "Sèrie tv: " + data[0].name;
 
-        document.getElementById('pelicula').value = data[0].pelicula;
-        document.getElementById('pelicula_es').value = data[0].pelicula_es;
-        document.getElementById('any').value = data[0].any;
-        document.getElementById('dataVista').value = data[0].dataVista;
+        document.getElementById('name').value = data[0].name;
+        document.getElementById('startYear').value = data[0].startYear;
+        document.getElementById('endYear').value = data[0].endYear;
+        document.getElementById('season').value = data[0].season;
+        document.getElementById('chapter').value = data[0].chapter;
 
         var texto_desde_bd = data[0].descripcio;
         var editor = document.querySelector("trix-editor");
         editor.editor.loadHTML(texto_desde_bd);
       
         // (api, elementId, valorText) {
-        auxiliarSelect(data[0].director, "directors", "director", "nomComplet");
-        auxiliarSelect(data[0].img, "imgPelis", "img", "alt");
-        auxiliarSelect(data[0].genere, "generesPelis", "genere", "genere_ca");
-        auxiliarSelect(data[0].lang, "llengues", "lang", "idioma_ca");
-        auxiliarSelect(data[0].pais, "paisos", "pais", "pais_cat");
+        auxiliarSelect(data[0].idDirector, "directors", "director", "nomComplet");
+        auxiliarSelect(data[0].idImg, "imgSeries", "img", "alt");
+        auxiliarSelect(data[0].idGen, "generesPelis", "genre", "genere_ca");
+        auxiliarSelect(data[0].idLang, "llengues", "lang", "idioma_ca");
+        auxiliarSelect(data[0].idPais, "paisos", "country", "pais_cat");
+        auxiliarSelect(data[0].idProductora, "productores", "producer", "productora");
 
       } catch (error) {
         console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
@@ -163,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
   })
 }
 
-peliculaInfo('<?php echo $id; ?>')
+serieInfo('<?php echo $idSerie; ?>')
 
 // Carregar el select
 function auxiliarSelect(idAux, api, elementId, valorText) {
@@ -216,46 +234,55 @@ function auxiliarSelect(idAux, api, elementId, valorText) {
   })
 }
 
+  // AJAX PROCESS > PHP - MODAL FORM - CREATE FILM
+  function modificarSerie(event) {
+    // check values
+    $("#createSerieMessageErr").hide();
 
-// AJAX PROCESS > PHP - MODAL FORM - UPDATE PELICULA
-function updatePelicula(event) {
+    // Stop form from submitting normally
+    event.preventDefault();
+    let urlAjax = "/api/cinema/put/?serie";
 
-// Stop form from submitting normally
-event.preventDefault();
+    // Obtener los datos del formulario como un objeto JSON
+    var formData = Object.fromEntries(new FormData(document.getElementById('modificarSerie')));
 
-// Obtener los datos del formulario como un objeto JSON
-var formData = Object.fromEntries(new FormData(document.getElementById('modificarPeli')));
+    // Convertir el objeto en una cadena JSON
+    var jsonData = JSON.stringify(formData);
 
-// Convertir el objeto en una cadena JSON
-var jsonData = JSON.stringify(formData);
-    
-let urlAjax = "/api/cinema/put/?pelicula";
-$.ajax({
-  contentType: "application/json", // Establecer el tipo de contenido como JSON
-  type: "PUT",
-  url: urlAjax,
-  dataType: "JSON",
-  beforeSend: function (xhr) {
-    // Obtener el token del localStorage
-    let token = localStorage.getItem('token');
+    $.ajax({
+      type: "PUT",
+      url: urlAjax,
+      dataType: "json",
+      beforeSend: function (xhr) {
+        // Obtener el token del localStorage
+        let token = localStorage.getItem('token');
 
-    // Incluir el token en el encabezado de autorización
-    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-  },
-  data: jsonData,
-  success: function (response) {
-    if (response.status == "success") {
-      // Add response in Modal body
-      $("#updateSerieMessageOk").show();
-      $("#updateSerieMessageErr").hide();
-    } else {
-      $("#updateSerieMessageErr").show();
-      $("#updateSerieMessageOk").hide();
-    }
-  },
+        // Incluir el token en el encabezado de autorización
+        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+      },
+      data: jsonData,
+      success: function (response) {
+        if (response.status == "success") {
+          // Add response in Modal body
+          $("#createSerieMessageOk").show();
+          $("#createSerieMessageErr").hide();
+        } else {
+          $("#createSerieMessageErr").show();
+          $("#createSerieMessageOk").hide();
+        }
+      },
+    });
+  }
+
+
+window.addEventListener('beforeunload', function(event) {
+    // Cancela el evento de cierre predeterminado
+    event.preventDefault();
+    // Mensaje de advertencia
+    event.returnValue = '';
+    // Muestra el mensaje de advertencia
+    alert('¿Estás seguro que quieres cerrar la ventana?');
 });
-}
-
 </script>
 
 
