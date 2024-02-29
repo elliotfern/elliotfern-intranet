@@ -22,7 +22,7 @@
 
 </div>
 <script>
-            $(document).ready(function(){
+$(document).ready(function(){
                 function fetch_data(){
 
                     var urlAjax = "api/blog/get/?llistat-articles";
@@ -44,7 +44,7 @@
                                 html += '<td>'+data[i].id+'</td>';
                                 html += '<td>'+data[i].post_type+'</td>';
                                 html += '<td><a href="https://'+server+"/blog/"+data[i].slug+'">'+data[i].post_title+'</a></td>';
-                                html += '<td>'+formatDate(data[i].post_date)+'</td>';
+                                html += '<td>'+formatData(data[i].post_date)+'</td>';
                                 html += '<td>'+data[i].idioma_ca+'</td>';
                                 html += '<td><button type="button" onclick="btnUpdateBook('+data[i].id+')" id="btnUpdateBook" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalUpdateBook" data-id="'+data[i].id+ '" value="'+data[i].id+ '" data-title="'+data[i].id+ '" data-slug="'+data[i].id+ '" data-text="'+data[i].id+ '">Update</button>';
                                 html += '</td>';
@@ -60,21 +60,6 @@
                     fetch_data();
                 
             });
-
-function formatDate(inputDate) {
-    // Analizar la fecha en formato 'YYYY-MM-DD HH:mm:ss'
-    const date = new Date(inputDate);
-
-    // Extraer los componentes de la fecha
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-
-    // Formatear la fecha en formato 'DD-MM-YYYY'
-    const formattedDate = `${day}-${month}-${year}`;
-
-    return formattedDate;
-}
 
 </script>
 

@@ -8,13 +8,13 @@ $idSerie = $params['id'];
 <div class="container-fluid form">
 <h2>Afegir actor a sèrie tv</h2>
 
-<div class="alert alert-success" id="createPeliMessageOk" style="display:none" role="alert">
-<h4 class="alert-heading"><strong><?php echo ADD_OK_MESSAGE_SHORT;?></h4></strong>
+<div class="alert alert-success" id="creaOk" style="display:none" role="alert">
+<h4 class="alert-heading"><strong><?php echo ADD_OK_MESSAGE_SHORT;?></strong></h4>
 <h6><?php echo ADD_OK_MESSAGE;?></h6>
 </div>
 
-<div class="alert alert-danger" id="createPeliMessageErr" style="display:none;" role="alert">
-<h4 class="alert-heading"><strong><?php echo ERROR_TYPE_MESSAGE_SHORT?></h4></strong>
+<div class="alert alert-danger" id="creaErr" style="display:none;" role="alert">
+<h4 class="alert-heading"><strong><?php echo ERROR_TYPE_MESSAGE_SHORT?></strong></h4>
 <h6><?php echo ERROR_TYPE_MESSAGE?></h6>
 </div>
 
@@ -44,7 +44,7 @@ $idSerie = $params['id'];
               <a href="#" onclick="window.history.back()" class="btn btn-secondary">Tornar enrere</a>
               </div>
               <div class="col-6 text-right derecha">
-              <button type="submit" onclick="actorSerie(event)" class="btn btn-primary">Inserir</button>
+              <button type="submit" class="btn btn-primary">Inserir</button>
               </div>
             </div>
           </div>
@@ -53,99 +53,17 @@ $idSerie = $params['id'];
 </div>
 
 <script>
+evitarTancarFinestra();
 
-  // AJAX PROCESS > PHP - MODAL FORM - CREATE FILM
-  function actorSerie(event) {
-    // check values
-    $("#createBookMessageErr").hide();
-    $("#btnCreateBook").show();
-
-    // Stop form from submitting normally
-    event.preventDefault();
-    let urlAjax = "/api/cinema/post/?actorSerie";
-    let formData = $('#inserirActorSerie').serialize();
-
-    $.ajax({
-      type: "POST",
-      url: urlAjax,
-      dataType: "json",
-      beforeSend: function (xhr) {
-        // Obtener el token del localStorage
-        let token = localStorage.getItem('token');
-
-        // Incluir el token en el encabezado de autorización
-        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-      },
-      data: formData,
-      success: function (response) {
-        if (response.status == "success") {
-          // Add response in Modal body
-          $("#createPeliMessageOk").show();
-          $("#createPeliMessageErr").hide();
-        } else {
-          $("#createPeliMessageErr").show();
-          $("#createPeliMessageOk").hide();
-        }
-      },
-    });
-  }
-
-// Carregar el select
-function auxiliarSelect(idAux, api, elementId, valorText) {
-  let urlAjax = devDirectory + "/api/cinema/get/?" + api;
-  $.ajax({
-    url: urlAjax,
-    method: "GET",
-    dataType: "json",
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
-
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
-
-    success: function (data) {
-       try {
-        // Obtener la referencia al elemento select
-        var selectElement = document.getElementById(elementId);
-
-        // Limpiar el select por si ya tenía opciones anteriores
-        selectElement.innerHTML = "";
-
-        // Agregar una opción predeterminada "Selecciona una opción"
-        var defaultOption = document.createElement("option");
-        defaultOption.text = "Selecciona una opció:";
-        defaultOption.value = ""; // Valor vacío
-        selectElement.appendChild(defaultOption);
-
-        // Iterar sobre los datos obtenidos de la API
-        data.forEach(function (item) {
-          // Crear una opción y agregarla al select
-         // console.log(item.ciutat)
-          var option = document.createElement("option");
-          option.value = item.id; // Establecer el valor de la opción
-          option.text = item[valorText]; // Establecer el texto visible de la opción
-          selectElement.appendChild(option);
-        });
-
-        // Seleccionar automáticamente el valor
-        if (idAux) {
-          selectElement.value = idAux;
-        }
-
-      } catch (error) {
-        console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
-      }
-    }
-  })
-}
+// llançar ajax per guardar dades
+document.getElementById("inserirActorSerie").addEventListener("submit", function(event) {
+  formulariInserir(event, "inserirActorSerie", "/api/cinema/post/?actorSerie");
+});
 
 // (api, elementId, valorText) {
-auxiliarSelect(<?php echo $idSerie;?>, "series", "idSerie", "name");
-auxiliarSelect("", "actors", "idActor", "nomComplet");
+auxiliarSelect("/api/cinema/get/?", <?php echo $idSerie;?>, "series", "idSerie", "name");
+auxiliarSelect("/api/cinema/get/?", "", "actors", "idActor", "nomComplet");
 </script>
-
 
 <?php
 # footer

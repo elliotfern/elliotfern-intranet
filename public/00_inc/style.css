@@ -73,6 +73,11 @@ td {
 }
 
 /* ESTILS CSS PROPIS */
+trix-editor {
+  background-color: white; /* Cambiar el color de fondo a blanco */
+  height: 500px; /* Altura del editor Trix, ajustable según tus preferencias */
+}
+
 .links-contactes a {
   color: rgb(0, 0, 0); /* Color del texto de los enlaces */
   text-decoration: underline; /* Subrayado para los enlaces */
