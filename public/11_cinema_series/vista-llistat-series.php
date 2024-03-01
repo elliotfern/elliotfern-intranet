@@ -117,11 +117,9 @@ function cercarLlibres() {
   });
 }
 
-function normalizeText(text) {
-  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-}
-
+normalizeText(text);
 </script>
+
 <?php
 # footer
 require_once(APP_ROOT . '/public/01_inici/footer.php');

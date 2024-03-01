@@ -2,52 +2,43 @@
 $id = $params['id'];
 ?>
 
-<script type="module">
-    peliculaPage('<?php echo $id; ?>')
-</script>
-
 <h1>Cinema i sèries TV</h1>
 <h6><a href="<?php echo APP_WEB;?>/cinema/">Cinema i sèries TV</a> > <a href="<?php echo APP_WEB;?>/cinema/series">Sèries </a></h6>
 
-<h2 id="peliculaTitol"></h2>
-
 <div class='row'>
       <div class='col-sm-8'>
-         <img id="peliPhoto" src='' class='img-thumbnail img-fluid rounded mx-auto d-block' style='height:auto;width:auto;max-width:auto' alt='Cartell' title='Cartell'>
-        </div>
+         <img id="nameImg" src='' class='img-thumbnail img-fluid rounded mx-auto d-block' style='height:auto;width:auto;max-width:auto' alt='Cartell' title='Cartell'>
+      </div>
         
         <div class="col-sm-4">
         <p><a href="<?php echo APP_WEB;?>/cinema/modifica/serie/<?php echo $id; ?>" class="btn btn-sm btn-warning">Modificar les dades</a></p>
-        
-                <div class="alert alert-primary" role="alert" style="margin-top:10px">
-                <h4 class="alert-heading" id="authorName"></h4>
-                    <p id="director"></p>
-                    <p id="productor"></p>
-                    <p id="lang"></p>
-                    <p id="genere"></p>
-                    <p id="anys"></p>
-                    <p id="numTemporades"></p>
-                    <p id="numEpisodis"></p>
-                    <p id="pais"></p>
-                    <p id="anyInici"></p>
-                    <p id="anyFinal"></p>
-                    <p id="dateCreated"></p>
-                    <p id="dateModified"></p>
-                </div>
+          <div class="alert alert-primary" role="alert" style="margin-top:10px">
+            <h4 class="alert-heading"></h4>
+            <p><strong>Nom original de la sèrie: </strong><span id="name"></span></p>
+            <p><strong>Director: </strong><a id="directorUrl" href=""><span id="nom"></span> <span id="cognoms"></span></a></p>
+            <p><strong>Idioma original: </strong><span id="idioma_ca"></span></p>
+            <p><strong>Gènere: </strong><span id="genere_ca"></span></p>
+            <p><strong>País: </strong><a id="paisUrl" href=""><span id="pais_cat"></span></a></p>
+            <p><strong>Productora tv/plataforma: </strong><a id="plataformaUrl" href=""><span id="productora"></span></a></p>
+            <p><strong>Número de temporades: </strong><span id="season"></span></p>
+            <p><strong>Número d'episodis: </strong><span id="chapter"></span></p>
+            <p><strong>Anys d'emissió: </strong><span id="startYear"></span> / <span id="endYear"></span></p>
+            <p><strong>Fitxa creada: </strong><span id="dateCreated"></span></p>
+            <p><strong>Fitxa actualizada: </strong><span id="dateModified"></span></p>
+          </div>
         </div>
 
-    </div>
-    <hr>
-    <div class="container" style="padding:20px;background-color:#ececec;margin-top:25px;margin-bottom:25px">
+</div>
+
+<hr>
+<div class="container" style="padding:20px;background-color:#ececec;margin-top:25px;margin-bottom:25px">
         <h4>Crítica de la sèrie</h4>
         <p id="descripcio"></p>
-        </div>
+</div>
 
-    <hr>
-
-    <h4>Actors:</h4>
-
-    <p><a href="<?php echo APP_WEB;?>/cinema/afegir/actor/serie/<?php echo $id; ?>" class="btn btn-sm btn-warning">Afegir actor a la pel·lícula</a></p>
+<hr>
+<h4>Actors:</h4>
+<p><a href="<?php echo APP_WEB;?>/cinema/afegir/actor/serie/<?php echo $id; ?>" class="btn btn-sm btn-warning">Afegir actor a la pel·lícula</a></p>
 
 <div class="table-responsive">
             <table class="table table-striped" id="actors">
@@ -62,61 +53,20 @@ $id = $params['id'];
             </thead>
             <tbody></tbody>
         </table>
-    </div>
+ </div>
 
 <script>
-
-// author page info
-function peliculaPage(id) {
-  let urlAjax = "/api/cinema/get/?serie=" + id;
-  $.ajax({
-    url: urlAjax,
-    method: "GET",
-    dataType: "json",
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
-
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
-
-    success: function (data) {
-      try {
-        const idPeli = data[0].id;
-        
-        let dateCreated2 = formatoFecha(data[0].dateCreated);
-        let dateModified2 = formatoFecha(data[0].dateModified);
-
-        // DOM modifications
-        document.getElementById('peliculaTitol').innerHTML = "Sèrie tv: " + data[0].name;
-        document.getElementById("peliPhoto").src = `${window.location.origin}/public/00_inc/img/11_cinema_series/series/${data[0].nameImg}.jpg`;
-        document.getElementById('authorName').innerHTML = "<strong>Títol original:</strong> " + data[0].name;
-        document.getElementById('pais').innerHTML = `<strong>País:</strong> <a href="${window.location.origin}/cinema/country/">${data[0].pais_cat}</a>`;
-        document.getElementById('anys').innerHTML = "<strong>Anys en antena (temporades):</strong> " + data[0].season;
-        document.getElementById('productor').innerHTML = "<strong>Productor/a:</strong> " + data[0].nom + " " + data[0].cognoms;
-        document.getElementById('numEpisodis').innerHTML = "<strong>Número d'episodis: </strong> " + data[0].chapter;
-        document.getElementById('genere').innerHTML = "<strong>Gènere: </strong> " + data[0].genere_ca;
-       document.getElementById('dateCreated').innerHTML = "<strong>Fitxa creada: </strong> " + dateCreated2;
-        document.getElementById('dateModified').innerHTML = "<strong>Fitxa actualizada: </strong> " + dateModified2;
-        document.getElementById('descripcio').innerHTML = data[0].descripcio;
-        document.getElementById('lang').innerHTML = "<strong>Idioma original: </strong> " + data[0].idioma_ca;
-        document.getElementById('anyInici').innerHTML = "<strong>Any d'inici: </strong> " + data[0].startYear;
-        document.getElementById('anyFinal').innerHTML = "<strong>Any final: </strong> " + data[0].endYear;
-
-        actorsDeLaSerie(data[0].id);
-        
-
-      } catch (error) {
-        console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
-      }
-    }
-  })
-}
+connexioApiGetDades("/api/cinema/get/?serie=", <?php echo $id;?>, "11_cinema_series", "series", function(data) {
+  
+    // Actualiza el atributo href del enlace con el idDirector
+    document.getElementById('directorUrl').href = `${window.location.origin}/cinema/director/${data[0].idDirector}`;
+    document.getElementById('paisUrl').href = `${window.location.origin}/cinema/series/pais/${data[0].idPais}`;
+    document.getElementById('plataformaUrl').href = `${window.location.origin}/series/productora/${data[0].idProductora}`;
+});
 
 // author book
 function actorsDeLaSerie(id) {
-  let urlAjax = devDirectory + "/api/cinema/get/?actors-serie=" + id;
+  let urlAjax = "/api/cinema/get/?actors-serie=" + id;
   $.ajax({
     url: urlAjax,
     method: "GET",
@@ -153,13 +103,7 @@ function actorsDeLaSerie(id) {
     }
   })
 }
-
-// INPUT OPEN MODAL FORM - UPDATE AUTOR
-function updateFilm(id) {
- // Cambia la URL a la que quieres redireccionar aquí
- window.location.href = "/cinema/modifica/pelicula/" + id;
-}
-
+actorsDeLaSerie(<?php echo $id;?>);
 </script>
 
 <?php

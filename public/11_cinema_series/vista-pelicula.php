@@ -2,34 +2,28 @@
 $id = $params['id'];
 ?>
 
-<script type="module">
-    peliculaPage('<?php echo $id; ?>')
-</script>
-
 <h1>Cinema i sèries TV</h1>
 <h6><a href="<?php echo APP_WEB;?>/cinema/">Cinema i sèries TV</a> > <a href="<?php echo APP_WEB;?>/cinema/pelicules">Pel·lícules </a></h6>
 
-<h2 id="peliculaTitol"></h2>
-
 <div class='row'>
       <div class='col-sm-8'>
-         <img id="peliPhoto" src='' class='img-thumbnail img-fluid rounded mx-auto d-block' style='height:auto;width:auto;max-width:auto' alt='Cartell' title='Cartell'>
+         <img id="nameImg" src='' class='img-thumbnail img-fluid rounded mx-auto d-block' style='height:auto;width:auto;max-width:auto' alt='Cartell' title='Cartell'>
         </div>
         
         <div class="col-sm-4">
-           <button type="button" id="updateFilm" onClick="updateFilm(<?php echo $id; ?>)" class="btn btn-sm btn-warning">Modifica les dades</button>
-        
+        <p><a href="<?php echo APP_WEB;?>/cinema/modifica/pelicula/<?php echo $id;?>" class="btn btn-warning btn-sm modificar-link">Modifica les dades</a><p>
+    
                 <div class="alert alert-primary" role="alert" style="margin-top:10px">
-                    <p id="titol"></p>
-                    <p id="titolEsp"></p>
-                    <p id="director"></p>
-                    <p id="pais"></p>
-                    <p id="any"></p>
-                    <p id="genere"></p>
-                    <p id="dataVista"></p>
-                    <p id="authorUpdated"></p>
-                    <p id="dateCreated"></p>
-                    <p id="dateModified"></p>
+                    <p><strong>Títol original: </strong><span id="pelicula"></span></p>
+                    <p><strong>Títol a Espanya:</strong> <span id="pelicula_es"></span></p>
+                    <p><strong>Director/a: </strong><a id="directorUrl" href=""><span id="nom"></span> <span id="cognoms"></span></a></p>
+                    <p><strong>País:</strong> <a id="paisUrl" href=""><span id="pais_cat"></span></a></p>
+                    <p><strong>Idioma original: </strong><span id="idioma_cat"></span></p>
+                    <p><strong>Any d'estrena: </strong><span id="any"></span></p>
+                    <p><strong>Gènere: </strong><span id="genere_ca"></span></p>
+                    <p><strong>Pel·lícula vista el: </strong><span id="dataVista"></span></p>
+                    <p><strong>Fitxa creada: </strong><span id="dateCreated"></span></p>
+                    <p><strong>Fitxa actualizada: </strong> <span id="dateModified"></span></p>
                 </div>
         </div>
 
@@ -43,8 +37,7 @@ $id = $params['id'];
     <hr>
 
     <h4>Actors:</h4>
-
-    <button type="button" id="afegirActor" onClick="afegirActor(<?php echo $id; ?>)" class="btn btn-sm btn-warning">Afegir actor a la pel·lícula</button>
+    <p><a href="<?php echo APP_WEB;?>/biblioteca/afegir/actor/pelicula/<?php echo $id;?>" class="btn btn-warning btn-sm modificar-link">Afegir actor a la pel·lícula</a><p>
 
 <div class="table-responsive">
             <table class="table table-striped" id="booksAuthor">
@@ -61,50 +54,12 @@ $id = $params['id'];
     </div>
 
 <script>
-
-// author page info
-function peliculaPage(id) {
-  let urlAjax = "/api/cinema/get/?pelicula=" + id;
-  $.ajax({
-    url: urlAjax,
-    method: "GET",
-    dataType: "json",
-    beforeSend: function (xhr) {
-      // Obtener el token del localStorage
-      let token = localStorage.getItem('token');
-
-      // Incluir el token en el encabezado de autorización
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-    },
-
-    success: function (data) {
-      try {
-        const idPeli = data[0].id;
-        
-        let dateCreated2 = formatoFecha(data[0].dateCreated);
-        let dateModified2 = formatoFecha(data[0].dateModified);
-        let dataVista2 = formatoFecha(data[0].dataVista);
-
-        // DOM modifications
-        document.getElementById('peliculaTitol').innerHTML = "Pel·lícula: " + data[0].pelicula;
-        document.getElementById("peliPhoto").src = `${window.location.origin}/public/00_inc/img/11_cinema_series/pelicules/${data[0].nameImg}.jpg`;
-        document.getElementById('titol').innerHTML = "<strong>Títol original:</strong> " + data[0].pelicula;
-        document.getElementById('titolEsp').innerHTML = "<strong>Títol a Espanya:</strong> " + data[0].pelicula_es;
-        document.getElementById('pais').innerHTML = `<strong>País:</strong> <a href="${window.location.origin}/cinema/country/">${data[0].pais_cat}</a>`;
-        document.getElementById('any').innerHTML = "<strong>Any d'estrena:</strong> " + data[0].any;
-        document.getElementById('director').innerHTML = "<strong>Director/a:</strong> " + data[0].nom + " " + data[0].cognoms;
-        document.getElementById('dataVista').innerHTML = "<strong>Pel·lícula vista el: </strong> " + dataVista2;
-        document.getElementById('genere').innerHTML = "<strong>Gènere: </strong> " + data[0].genere_ca;
-        document.getElementById('dateCreated').innerHTML = "<strong>Fitxa creada: </strong> " + dateCreated2;
-        document.getElementById('dateModified').innerHTML = "<strong>Fitxa actualizada: </strong> " + dateModified2;
-        document.getElementById('descripcio').innerHTML = data[0].descripcio;
-
-      } catch (error) {
-        console.error('Error al parsear JSON:', error);  // Muestra el error de parsing
-      }
-    }
-  })
-}
+connexioApiGetDades("/api/cinema/get/?pelicula=", <?php echo $id;?>, "11_cinema_series", "pelicules", function(data) {
+  
+  // Actualiza el atributo href del enlace con el idDirector
+  document.getElementById('directorUrl').href = `${window.location.origin}/cinema/director/${data[0].director}`;
+  document.getElementById('paisUrl').href = `${window.location.origin}/cinema/pelicules/pais/${data[0].pais}`;
+});
 
 // author book
 function authorBookListLibrary(id) {
@@ -141,12 +96,6 @@ function authorBookListLibrary(id) {
       }
     }
   })
-}
-
-// INPUT OPEN MODAL FORM - UPDATE AUTOR
-function updateFilm(id) {
- // Cambia la URL a la que quieres redireccionar aquí
- window.location.href = "/cinema/modifica/pelicula/" + id;
 }
 
 </script>

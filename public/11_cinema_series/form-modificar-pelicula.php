@@ -107,7 +107,7 @@ formulariOmplirDades("/api/cinema/get/?pelicula=", <?php echo $id;?>, "modificar
     auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].lang, "llengues", "lang", "idioma_ca");
     auxiliarSelect("/api/cinema/get/auxiliars/?type=", data[0].pais, "paisos", "pais", "pais_cat");
 });
-      
+
 // llançar actualizador dades
 document.getElementById("modificarPeli").addEventListener("submit", function(event) {
     formulariActualizar(event, "modificarPeli", "/api/cinema/put/?peli");

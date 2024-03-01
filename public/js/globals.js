@@ -2,23 +2,9 @@
 const server = window.location.hostname;
 const devDirectory = "";
 
-function formatoFecha(fecha) {
-    // Convierte la fecha al objeto Date
-    var date = new Date(fecha);
-    
-    // Obtiene los componentes de la fecha
-    var dia = date.getDate();
-    var mes = date.getMonth() + 1; // Los meses comienzan desde 0
-    var anio = date.getFullYear();
-    
-    // Agrega un cero inicial si el día o el mes son menores que 10
-    dia = dia < 10 ? '0' + dia : dia;
-    mes = mes < 10 ? '0' + mes : mes;
-    
-    // Formatea la fecha al formato DD-MM-YYYY
-    var fecha_formateada = dia + '-' + mes + '-' + anio;
-    
-    return fecha_formateada;
+// FUNCIONS PER MODIFICAR CADENES DE TEXT I DATES
+function normalizeText(text) {
+  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
 function formatData(inputDate) {
@@ -36,6 +22,32 @@ function formatData(inputDate) {
     return formattedDate;
 }
 
+// UTILITATS
+function evitarTancarFinestra() {
+  window.addEventListener('beforeunload', function(event) {
+    // Cancela el evento de cierre predeterminado
+    event.preventDefault();
+    // Mensaje de advertencia
+    event.returnValue = '';
+    // Muestra el mensaje de advertencia
+    alert('¿Estás seguro que quieres cerrar la ventana?');
+});  
+}
+
+
+function formNomesNumeros(){
+    const inputs = document.querySelectorAll('.soloNumeros');
+
+    inputs.forEach(input => {
+    input.addEventListener('input', function() {
+        if (isNaN(this.value)) {
+        this.value = ''; // Limpiar el valor si no es un número
+        }
+    });
+    });
+}
+
+// FUNCIONS PER CONNECTAR AMB L'API I MOSTRAR DADES
 // FUNCIO PER MOSTRAR ELS INPUTS DE TIPUS SELECT
 function auxiliarSelect(urlApi, idAux, api, elementId, valorText) {
     let urlAjax = "https://" + server + urlApi + api;
@@ -180,30 +192,6 @@ function formulariActualizar(event, formId, urlAjax) {
     });
 }
 
-function evitarTancarFinestra() {
-  window.addEventListener('beforeunload', function(event) {
-    // Cancela el evento de cierre predeterminado
-    event.preventDefault();
-    // Mensaje de advertencia
-    event.returnValue = '';
-    // Muestra el mensaje de advertencia
-    alert('¿Estás seguro que quieres cerrar la ventana?');
-});  
-}
-
-
-function formNomesNumeros(){
-    const inputs = document.querySelectorAll('.soloNumeros');
-
-    inputs.forEach(input => {
-    input.addEventListener('input', function() {
-        if (isNaN(this.value)) {
-        this.value = ''; // Limpiar el valor si no es un número
-        }
-    });
-    });
-}
-
   // FUNCIÓ PER OMPLIR ELS INPUTS TEXT I SELECT DE LES PAGINES DE FORMULARIS MODIFICACIO
   function formulariOmplirDades(url, id, formId, callback) {
     let urlAjax = url + id;
@@ -243,4 +231,50 @@ function formNomesNumeros(){
       }
     });
   }
-  
+
+  // FUNCIÓ PER DEMANAR PER GET INFORMACIO A LA BD I MOSTRAR-LA EN PANTALLA
+  function connexioApiGetDades(url, id, urlImg1, urlImg2, callback) {
+    let urlAjax = url + id;
+    $.ajax({
+      url: urlAjax,
+      method: "GET",
+      dataType: "json",
+      beforeSend: function(xhr) {
+        // Obtener el token del localStorage
+        let token = localStorage.getItem('token');
+        // Incluir el token en el encabezado de autorización
+        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+      },
+      success: function(data) {
+        try {
+           /// Iterar sobre todas las propiedades del objeto data
+        for (let key in data[0]) {
+            if (data[0].hasOwnProperty(key)) {
+              let value = data[0][key];
+              // Si la propiedad es una fecha, formatearla utilizando la función formatData
+              if (key === "dateCreated" || key === "dateModified" || key === "dataVista") {
+                value = formatData(value);
+              }
+              // Verificar si existe un elemento con el ID correspondiente en el DOM
+              let element = document.getElementById(key);
+              if (element) {
+                // Actualizar el DOM con la información recibida
+                if (key === "nameImg") {
+                  element.src = `${window.location.origin}/public/00_inc/img/${urlImg1}/${urlImg2}/${value}.jpg`;
+                } else {
+                  element.innerHTML = value;
+                }
+              }
+            }
+          }
+          
+          // Ejecutar la función de devolución de llamada si se proporciona
+          if (typeof callback === 'function') {
+            callback(data);
+          }
+        } catch (error) {
+          console.error('Error al parsear JSON:', error); // Muestra el error de parsing
+        }
+      }
+    });
+  }

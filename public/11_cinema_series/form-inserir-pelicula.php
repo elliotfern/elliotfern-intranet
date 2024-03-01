@@ -5,12 +5,12 @@
 <h2>Afegir nova pel·lícula</h2>
 
 <div class="alert alert-success" id="creaOk" style="display:none" role="alert">
-<h4 class="alert-heading"><strong><?php echo ADD_OK_MESSAGE_SHORT;?></h4></strong>
+<h4 class="alert-heading"><strong><?php echo ADD_OK_MESSAGE_SHORT;?></strong></h4>
 <h6><?php echo ADD_OK_MESSAGE;?></h6>
 </div>
 
 <div class="alert alert-danger" id="creaErr" style="display:none;" role="alert">
-<h4 class="alert-heading"><strong><?php echo ERROR_TYPE_MESSAGE_SHORT?></h4></strong>
+<h4 class="alert-heading"><strong><?php echo ERROR_TYPE_MESSAGE_SHORT?></strong></h4>
 <h6><?php echo ERROR_TYPE_MESSAGE?></h6>
 </div>
 
@@ -99,7 +99,7 @@ document.getElementById("inserirPeli").addEventListener("submit", function(event
   formulariInserir(event, "inserirPeli", "/api/cinema/post/?pelicula");
 });
 
-// (api, elementId, valorText) {
+// api, elementId, valorText
 auxiliarSelect("/api/cinema/get/auxiliars/?type=", "","directors", "director", "nomComplet");
 auxiliarSelect("/api/cinema/get/auxiliars/?type=", "","imgPelis", "img", "alt");
 auxiliarSelect("/api/cinema/get/auxiliars/?type=", "","generesPelis", "genere", "genere_ca");
