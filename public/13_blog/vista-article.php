@@ -33,7 +33,7 @@ function articleBlog(slug) {
         // DOM modifications
         document.getElementById('titol').innerHTML = data.post_title;
         document.getElementById('content').innerHTML = data.post_content;
-        document.getElementById('date').innerHTML = formatDate(data.post_date);
+        document.getElementById('date').innerHTML =  formatData(data.post_date);
 
       } catch (error) {
         console.error('Error al parsear JSON:', error);  // Muestra el error de parsing

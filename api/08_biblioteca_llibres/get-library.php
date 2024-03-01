@@ -212,7 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 global $conn;
                 $data = array();
                 $stmt = $conn->prepare(
-                "SELECT b.id, a.nom, a.cognoms, b.titol, b.titolEng, b.slug, b.any, b.dateCreated, b.dateModified, i.nameImg as img, t.nomTipus, e.editorial, g.genere_cat, id.idioma_ca, a.slug AS slugAutor, sg.sub_genere_cat
+                "SELECT b.id, a.nom, a.cognoms, a.id AS idAutor, a.slug AS slugAutor, b.titol, b.titolEng, b.slug, b.any, b.dateCreated, b.dateModified, i.nameImg, t.nomTipus, e.editorial, g.genere_cat, id.idioma_ca, a.slug AS slugAutor, sg.sub_genere_cat
                 FROM 08_db_biblioteca_llibres AS b
                 INNER JOIN db_img AS i ON b.img = i.id
                 INNER JOIN 08_db_biblioteca_autors AS a ON b.autor = a.id

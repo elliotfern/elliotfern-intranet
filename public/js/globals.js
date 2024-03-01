@@ -246,11 +246,17 @@ function formulariActualizar(event, formId, urlAjax) {
         xhr.setRequestHeader('Authorization', 'Bearer ' + token);
       },
       success: function(data) {
+         // Si la data es un array y tiene al menos un elemento
+         if (Array.isArray(data) && data.length > 0) {
+          // Utiliza el primer elemento del array
+          data = data[0];
+        }
+        
         try {
            /// Iterar sobre todas las propiedades del objeto data
-        for (let key in data[0]) {
-            if (data[0].hasOwnProperty(key)) {
-              let value = data[0][key];
+        for (let key in data) {
+            if (data.hasOwnProperty(key)) {
+              let value = data[key];
               // Si la propiedad es una fecha, formatearla utilizando la función formatData
               if (key === "dateCreated" || key === "dateModified" || key === "dataVista") {
                 value = formatData(value);
@@ -275,6 +281,60 @@ function formulariActualizar(event, formId, urlAjax) {
         } catch (error) {
           console.error('Error al parsear JSON:', error); // Muestra el error de parsing
         }
+      }
+    });
+  }
+
+  // FUNCIO PER CONSTRUIR TAULES QUE DEPENEN D'UNA ALTRA API
+  function construirTablaFromAPI(url, id, columnas, callback) {
+    let urlAjax = url + id;
+    $.ajax({
+      url: urlAjax,
+      method: "GET",
+      dataType: "json",
+      beforeSend: function(xhr) {
+        // Obtener el token del localStorage si es necesario
+        let token = localStorage.getItem('token');
+        if (token) {
+          // Incluir el token en el encabezado de autorización si está presente
+          xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        }
+      },
+      success: function(data) {
+        try {
+          let html = '<table class="table table-striped" id="booksAuthor">';
+          html += '<thead class="table-primary"><tr>';
+          
+          // Agregar las cabeceras de las columnas
+          columnas.forEach(columna => {
+            html += '<th>' + columna + '</th>';
+          });
+          
+          html += '</tr></thead><tbody>';
+          
+          // Agregar los datos a la tabla
+          data.forEach(fila => {
+            html += '<tr>';
+            columnas.forEach(columna => {
+              if (callback && typeof callback === 'function') {
+                html += '<td>' + callback(fila, columna) + '</td>';
+              } else {
+                html += '<td>' + fila[columna.toLowerCase()] + '</td>';
+              }
+            });
+            html += '</tr>';
+          });
+          
+          html += '</tbody></table>';
+          
+          // Insertar la tabla en el elemento con el ID 'tabla'
+          document.getElementById('tabla').innerHTML = html;
+        } catch (error) {
+          console.error('Error al parsear JSON:', error); // Mostrar el error de parsing
+        }
+      },
+      error: function(xhr, textStatus, errorThrown) {
+        console.error('Error al obtener datos de la API:', textStatus, errorThrown);
       }
     });
   }
