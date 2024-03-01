@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
           $nom = isset($data['nom']) ? data_input($data['nom']) : NULL;
           $cognoms = isset($data['cognoms']) ? data_input($data['cognoms']) : ($hasError = true);
           $yearBorn = isset($data['yearBorn']) ? data_input($data['yearBorn']) : ($hasError = true);
-          $yearDie = isset($data['yearDie']) ? data_input($data['yearDie']) : NULL;
+          $yearDie = isset($data['yearDie']) && $data['yearDie'] !== '' ? data_input($data['yearDie']) : NULL;
           $paisAutor = isset($data['paisAutor']) ? data_input($data['paisAutor']) : ($hasError = true);
           $img = isset($data['img']) ? data_input($data['img']) : ($hasError = true);
           $AutWikipedia = isset($data['AutWikipedia']) ? data_input($data['AutWikipedia']) : ($hasError = true);

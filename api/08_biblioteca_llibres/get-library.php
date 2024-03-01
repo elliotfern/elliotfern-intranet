@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                             FROM 08_db_biblioteca_autors AS a
                             INNER JOIN db_countries AS c ON a.paisAutor = c.id
                             INNER JOIN aux_professions AS p ON a.ocupacio = p.id
-                            INNER JOIN db_img AS i ON a.img = i.id
+                            LEFT JOIN db_img AS i ON a.img = i.id
                             ORDER BY a.cognoms");
                             $stmt->execute();
                             if($stmt->rowCount() === 0) echo ('No rows');
@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 FROM 08_db_biblioteca_autors AS a
                 INNER JOIN db_countries AS p ON a.paisAutor = p.id
                 INNER JOIN aux_professions AS o ON a.ocupacio = o.id
-                INNER JOIN db_img AS i ON a.img = i.id
+                LEFT JOIN db_img AS i ON a.img = i.id
                 INNER JOIN 08_aux_biblioteca_moviments  AS m ON a.moviment = m.id
                 WHERE a.slug = :slug");
                 $stmt->execute(['slug' => $slug]);
@@ -172,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 FROM 08_db_biblioteca_autors AS a
                 INNER JOIN db_countries AS p ON a.paisAutor = p.id
                 INNER JOIN aux_professions AS o ON a.ocupacio = o.id
-                INNER JOIN db_img AS i ON a.img = i.id
+                LEFT JOIN db_img AS i ON a.img = i.id
                 INNER JOIN 08_aux_biblioteca_moviments AS m ON a.moviment = m.id
                 WHERE a.id = :id");
                 $stmt->execute(['id' => $id]);
