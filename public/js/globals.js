@@ -22,6 +22,12 @@ function formatData(inputDate) {
     return formattedDate;
 }
 
+function decodificarEntidadesHTML(texto) {
+    var temp = document.createElement("div");
+    temp.innerHTML = texto;
+    return temp.textContent || temp.innerText || "";
+}
+
 // UTILITATS
 function evitarTancarFinestra() {
   window.addEventListener('beforeunload', function(event) {
@@ -264,11 +270,13 @@ function formulariActualizar(event, formId, urlAjax) {
               // Verificar si existe un elemento con el ID correspondiente en el DOM
               let element = document.getElementById(key);
               if (element) {
+                // Decodificar entidades HTML
+                value = decodificarEntidadesHTML(value);
                 // Actualizar el DOM con la información recibida
                 if (key === "nameImg") {
-                  element.src = `${window.location.origin}/public/00_inc/img/${urlImg1}/${urlImg2}/${value}.jpg`;
+                    element.src = `${window.location.origin}/public/00_inc/img/${urlImg1}/${urlImg2}/${value}.jpg`;
                 } else {
-                  element.innerHTML = value;
+                    element.innerHTML = value;
                 }
               }
             }
@@ -285,33 +293,35 @@ function formulariActualizar(event, formId, urlAjax) {
     });
   }
 
-  // FUNCIO PER CONSTRUIR TAULES QUE DEPENEN D'UNA ALTRA API
-  function construirTablaFromAPI(url, id, columnas, callback) {
-    let urlAjax = url + id;
-    $.ajax({
-      url: urlAjax,
-      method: "GET",
-      dataType: "json",
-      beforeSend: function(xhr) {
-        // Obtener el token del localStorage si es necesario
-        let token = localStorage.getItem('token');
-        if (token) {
-          // Incluir el token en el encabezado de autorización si está presente
-          xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-        }
-      },
-      success: function(data) {
-        try {
+// FUNCIO PER CONSTRUIR TAULES QUE DEPENEN D'UNA ALTRA API
+function construirTablaFromAPI(url, id, columnas, callback) {
+  let urlAjax = url + id;
+  $.ajax({
+    url: urlAjax,
+    method: "GET",
+    dataType: "json",
+    beforeSend: function(xhr) {
+      // Obtener el token del localStorage si es necesario
+      let token = localStorage.getItem('token');
+      if (token) {
+        // Incluir el token en el encabezado de autorización si está presente
+        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+      }
+    },
+    success: function(data) {
+      try {
+        // Verificar si hay datos recibidos desde la API
+        if (data && data.length > 0) {
           let html = '<table class="table table-striped" id="booksAuthor">';
           html += '<thead class="table-primary"><tr>';
-          
+
           // Agregar las cabeceras de las columnas
           columnas.forEach(columna => {
             html += '<th>' + columna + '</th>';
           });
-          
+
           html += '</tr></thead><tbody>';
-          
+
           // Agregar los datos a la tabla
           data.forEach(fila => {
             html += '<tr>';
@@ -324,17 +334,18 @@ function formulariActualizar(event, formId, urlAjax) {
             });
             html += '</tr>';
           });
-          
+
           html += '</tbody></table>';
-          
+
           // Insertar la tabla en el elemento con el ID 'tabla'
           document.getElementById('tabla').innerHTML = html;
-        } catch (error) {
-          console.error('Error al parsear JSON:', error); // Mostrar el error de parsing
+        } else {
+          // No se hace nada si no hay datos recibidos desde la API
+          console.log('No se han recibido datos desde la API.');
         }
-      },
-      error: function(xhr, textStatus, errorThrown) {
-        console.error('Error al obtener datos de la API:', textStatus, errorThrown);
+      } catch (error) {
+        console.error('Error al parsear JSON:', error); // Mostrar el error de parsing
       }
-    });
-  }
+    }
+  });
+}

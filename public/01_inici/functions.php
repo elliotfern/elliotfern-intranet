@@ -30,7 +30,6 @@ function wc_price( $price ) {
 function data_input($data) {
     $data = trim($data);
     $data = stripslashes($data);
-    $data = htmlspecialchars($data);
     return $data;
   }
 

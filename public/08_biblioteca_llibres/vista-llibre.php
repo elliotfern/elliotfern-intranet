@@ -32,49 +32,14 @@ $slug = $params['slug'];
       </div>
 <hr>
 
-     <h3>Book collection</h3>
-     <p><button type='button' class='btn btn-dark btn-sm' id='btnAddCollection' onclick='addCollectionBook(".$id.")' data-bs-toggle='modal' data-bs-target='#modalCreateBookCollection'>Add new collection</button></p>";
-<?php
+     <h3>Col·lecció</h3>
+     <p><button type='button' class='btn btn-dark btn-sm' id='btnAddCollection' onclick='addCollectionBook(".$id.")' data-bs-toggle='modal' data-bs-target='#modalCreateBookCollection'>Add new collection</button></p>
+     
+    <div class="table-responsive">
+      <table id="tabla" class="table table-striped"></table>
+      </table>
+    </div>
 
-/*
-      $stmt = $conn->prepare("SELECT bc.nomCollection, bookc.ordre
-      FROM db_library_books AS book
-      INNER JOIN db_library_books_collection AS bookc ON book.id = bookc.idBook
-      INNER JOIN db_library_collection AS bc ON bookc.idCollection = bc.id
-      WHERE book.id = :id");
-      $stmt->execute(['id' => $id]); 
-      $data = $stmt->fetchAll();
-      if (!empty($data)) {
-        // and somewhere later:
-        echo '<div class="'.TABLE_DIV_CLASS.'">
-        <table class="'.TABLE_CLASS.'" id="booksAuthor">
-        <thead class="'.TABLE_THREAD.'">';     
-        echo "<tr>";
-        echo "<th>Collection &darr;</th>";
-        echo "<th>Book order</th>";
-        echo "<th>Actions</th>";
-        echo "</tr>";
-        echo "</thead>";
-        echo "<tbody>";
-        foreach ($data as $row) {
-          $nomCollection = $row['nomCollection'];
-          $ordre = $row['ordre'];
-          echo "<tr>";
-          echo "<td>".$row['nomCollection']."</td>";
-          echo "<td>".$row['ordre']."</td>";
-          echo '<td>
-          <button type="button" onclick="btnUpdateBook('.$id.')" id="btnUpdateBook" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalUpdateBook" data-id="'.$id.'">Update</button>
-          <button type="button" onclick="btnUpdateBook('.$id.')" id="btnUpdateBook" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalUpdateBook" data-id="'.$id.'">Delete</button>
-          </td>';
-          echo "</tr>";
-        }
-      echo "</tbody>";                            
-      echo "</table>";
-      echo "</div>";
-    } else {
-
-    } */
-?>
 </div>
 
 <script>
@@ -87,6 +52,19 @@ connexioApiGetDades("/api/biblioteca/get/?llibre-slug=", "<?php echo $slug;?>", 
  document.getElementById('linkAutor').href = `${window.location.origin}/biblioteca/autor/${data.slugAutor}`;
  //authorBookListLibrary(data.id)
  document.getElementById('modificaLlibreUrl').href = `${window.location.origin}/biblioteca/modifica/llibre/${data.id}`;
+
+ construirTablaFromAPI("/api/biblioteca/get/?colleccio=", data.id, ['Nom', 'Ordre', 'Accions'], function(fila, columna) {
+      if (columna === 'Nom') {
+        // Manejar el caso del título
+        return '<a href="' + window.location.origin + '/biblioteca/llibre/' + fila['slug'] + '">' + fila['Nom'] + '</a>';
+      } else if (columna === 'Accions') {
+        return '<a href="'+window.location.origin+'/biblioteca/modifica/llibre/' + fila['Ordre'] + '" class="btn btn-secondary btn-sm modificar-link">Modificar</a>';
+      } else {
+        // Manejar otros casos
+        return fila[columna];
+      }
+  });
+
 });
 
 </script>

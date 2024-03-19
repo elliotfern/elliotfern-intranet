@@ -142,19 +142,19 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
               if (empty($_POST["titol"])) {
                 $hasError = true;
               } else {
-                $titol = data_input($_POST["titol"], ENT_NOQUOTES);
+                $titol = data_input($_POST["titol"]);
               }
 
               if (empty($_POST["titolEng"])) {
                 $titolEng = NULL;
               } else {
-                $titolEng = data_input($_POST["titolEng"], ENT_NOQUOTES);
+                $titolEng = data_input($_POST["titolEng"]);
               }
 
               if (empty($_POST["slug"])) {
                 $hasError = true;
               } else {
-                $slug = data_input($_POST["slug"], ENT_NOQUOTES);
+                $slug = data_input($_POST["slug"]);
               }
 
               if (empty($_POST["any"])) {

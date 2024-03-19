@@ -211,8 +211,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 $slug = $_GET['llibre-slug'];
                 global $conn;
                 $data = array();
-                $stmt = $conn->prepare(
-                "SELECT b.id, a.nom, a.cognoms, a.id AS idAutor, a.slug AS slugAutor, b.titol, b.titolEng, b.slug, b.any, b.dateCreated, b.dateModified, i.nameImg, t.nomTipus, e.editorial, g.genere_cat, id.idioma_ca, a.slug AS slugAutor, sg.sub_genere_cat
+                $stmt = $conn->prepare("SELECT b.id, a.nom, a.cognoms, a.id AS idAutor, a.slug AS slugAutor, b.titol, b.titolEng, b.slug, b.any, b.dateCreated, b.dateModified, i.nameImg, t.nomTipus, e.editorial, g.genere_cat, id.idioma_ca, a.slug AS slugAutor, sg.sub_genere_cat
                 FROM 08_db_biblioteca_llibres AS b
                 INNER JOIN db_img AS i ON b.img = i.id
                 INNER JOIN 08_db_biblioteca_autors AS a ON b.autor = a.id
@@ -222,7 +221,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 LEFT JOIN 08_aux_biblioteca_sub_generes_literaris AS sg ON b.subGen = sg.id
                 INNER JOIN aux_idiomes AS id ON b.lang = id.id
                 WHERE b.slug = :slug");
-                $stmt->execute(['slug' => $slug]);                
+                $stmt->execute(['slug' => $slug]);
 
                 if ($stmt->rowCount() === 0) {
                     echo json_encode(null);  // Devuelve un objeto JSON nulo si no hay resultados
@@ -231,6 +230,24 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                     $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     echo json_encode($row);  // Codifica la fila como un objeto JSON
                 }
+
+        // ruta GET => "/api/biblioteca/get/?colleccio=123"
+        } elseif (isset($_GET['colleccio']) && is_numeric($_GET['colleccio'])) {
+            $id= $_GET['colleccio'];
+            global $conn;
+                $data = array();
+                $stmt = $conn->prepare("SELECT bc.nomCollection AS Nom, bookc.ordre AS Ordre
+                FROM 08_db_biblioteca_llibres AS book
+                INNER JOIN 08_aux_biblioteca_colleccions_llibres AS bookc ON book.id = bookc.idBook
+                INNER JOIN 08_aux_biblioteca_colleccions AS bc ON bookc.idCollection = bc.id
+                WHERE book.id = :id");
+                $stmt->execute(['id' => $id]);
+
+                if($stmt->rowCount() === 0) echo ('No rows');
+                while($users = $stmt->fetch(PDO::FETCH_ASSOC) ){
+                    $data[] = $users;
+                }
+                echo json_encode($data);
 
             // 7) Profession author
             // ruta GET => "/api/library/professio"

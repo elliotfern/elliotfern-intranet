@@ -77,7 +77,7 @@ $.ajax({
 
             <p><h6><span style="background-color:black;color:white;padding:5px;margin-top:5px">${llibre.codiSubGenere}.${llibre.sub_genere_cat}</span></h6></p>
         
-            <h3 class="links-contactes" style="margin-top: 15px;"> <a href="${window.location.origin}/biblioteca/llibre/${llibre.slug}" title="Fitxa del llibre" >${llibre.titol}</a></h3>`;
+            <h3 class="links-contactes" style="margin-top: 15px;"> <a href="${window.location.origin}/biblioteca/llibre/${llibre.slug}" title="Fitxa del llibre" >${decodificarEntidadesHTML(llibre.titol)}</a></h3>`;
        
             llibres += `<p class="links-contactes autor"><strong>Autor/a:</strong> <a href="${window.location.origin}/biblioteca/autor/${llibre.slugAuthor}">${llibre.AutNom} ${llibre.AutCognom1}</a></p>`;
             llibres += `<p><strong>Any: </strong> ${llibre.any}</p>`;
@@ -94,7 +94,7 @@ $.ajax({
             <p><button type='button' class='btn btn-light btn-sm'>${llibre.estat}</button></p>`;
 
             llibres += `
-            <a href="./modifica/llibre/${llibre.id}" class="btn btn-secondary btn-sm modificar-link">Modificar</a>
+            <a href="${window.location.origin + "/biblioteca/modifica/llibre/" + llibre.id}" class="btn btn-secondary btn-sm modificar-link">Modificar</a>
             <button type='button' class='btn btn-dark btn-sm' onclick='eliminaContacte(${llibre.id})'>Eliminar</button>
             </div>`;
       });
@@ -122,10 +122,6 @@ function cercarLlibres() {
       $(this).hide();
     }
   });
-}
-
-function normalizeText(text) {
-  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
 </script>
