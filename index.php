@@ -219,7 +219,7 @@ if (empty($_SESSION['user']) || !session_id()) {
 
     header('Location: ' .$dev . '/login');
     exit(); 
-
+ 
 } else {
         // Pàgines que no han de tenir header
         $route->add("/accounting/invoice/pdf/{id}", "php-forms/accounting/generate_pdf.php");

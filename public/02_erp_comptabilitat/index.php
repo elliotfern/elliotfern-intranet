@@ -267,7 +267,7 @@ $stmt->execute();
             echo "</table>";
             echo "</div>";
   }
-echo "<p class='text-right'><a href='".APP_DEV."/accounting/customers/invoices' class='btn btn-info btn-sm' role='button' aria-pressed='true'>Customers invoices &rarr;</a>
+echo "<p class='text-right'><a href='".APP_DEV."/erp/facturacio-clients' class='btn btn-info btn-sm' role='button' aria-pressed='true'>Customers invoices &rarr;</a>
     <a href='' class='btn btn-dark btn-sm' role='button' aria-pressed='true'>Create invoice &rarr;</a></p>";
 echo "</div>";
 echo "</div>";

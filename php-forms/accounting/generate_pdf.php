@@ -2,7 +2,7 @@
 $url_server = $_SERVER['HTTP_HOST'];
 $url_root = $_SERVER['DOCUMENT_ROOT'];
 
-require_once($url_root  . '/vendor/tcpdf/tcpdf.php');
+require_once($url_root . '/vendor/tcpdf/tcpdf.php');
 
 if(isset($params['id'])){
     $id = $params['id'];
@@ -14,7 +14,7 @@ if(isset($params['id'])){
 $idInvoice = $id;
 
 //call api
-// http://127.0.0.1/elliotfern/api/accounting/
+// http://127.0.0.1/elliotfern/api/accounting/ 
 $url = "https://" . $url_server . "/api/accounting/?type=customers-invoices&id=" .$idInvoice;
 $input = file_get_contents($url);
 $arr = json_decode($input, true);
@@ -79,7 +79,7 @@ $pdf->SetTitle('Invoice PDF');
 $pdf->AddPage();
 
 // Add the image to the PDF
-$imagePath = "https://" . $url_server . '/public/img/hispantic_logo.jpg';
+$imagePath = "https://" . $url_server . '/public/00_inc/img/hispantic_logo.jpg';
 $pdf->Image($imagePath, $x = 10, $y = 10, $w = 100, $h = 0, $type = '', $link = '', $align = '', $resize = false, $dpi = 300, $palign = '', $ismask = false, $imgmask = false, $border = 0, $fitbox = false, $hidden = false, $fitonpage = false, $alt = '');
 
 // set header and footer fonts

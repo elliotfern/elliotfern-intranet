@@ -106,4 +106,4 @@ echo "<hr>";
 include_once('modals-accounting.php');
 
 # footer
-require_once(APP_ROOT . APP_DEV . '/public/php/footer.php');
+require_once(APP_ROOT . '/public/php/footer.php');
