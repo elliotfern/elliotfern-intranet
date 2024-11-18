@@ -50,26 +50,30 @@
 
 function obtenirLlibres(tipus) {
 // Si se selecciona "Tots", no pasamos ningún tipo de contacto como parámetro
-let urlAjax = devDirectory + "/api/library/books/allBooks";
+let urlAjax = devDirectory + "/api/biblioteca/get/?type=totsLlibres";
 if (tipus !== 10) {
-  urlAjax += "/generes/" + tipus;
+  urlAjax = devDirectory + "/api/biblioteca/get/?type=generes&genere=" + tipus;
 }
 
-$.ajax({
-  url: urlAjax,
-  method: "GET",
-  dataType: "JSON",
-  beforeSend: function(xhr) {
-    // Obtener el token del localStorage
-    let token = localStorage.getItem('token');
-
-    // Incluir el token en el encabezado de autorización
-    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-  },
-  success: function(data) {
+axios.get(urlAjax, {
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.status !== 200) {
+      throw new Error('Network response was not ok');
+    }
+    return response.data;
+  })
+  .then(data => {
+    // Procesar la respuesta JSON
+    if (Array.isArray(data) && data.length > 0) {
+      data = data[0];
+    }
     try {
-      // Modificaciones del DOM
-      let llibres = '';
+
       data.forEach(llibre => {
         llibres += `
           <div class="col-sm-3 col-md-3 quadre">
@@ -97,16 +101,20 @@ $.ajax({
             <a href="${window.location.origin + "/biblioteca/modifica/llibre/" + llibre.id}" class="btn btn-secondary btn-sm modificar-link">Modificar</a>
             <button type='button' class='btn btn-dark btn-sm' onclick='eliminaContacte(${llibre.id})'>Eliminar</button>
             </div>`;
-      });
-      document.getElementById('llibresContainer').innerHTML = llibres;
+          });
+          document.getElementById('llibresContainer').innerHTML = llibres;
+
     } catch (error) {
-      console.error('Error al parsear JSON:', error); // Muestra el error de parsing
+      console.error('Error al parsear JSON:', error);
     }
-  }
-});
+  })
+  .catch(error => {
+    console.error('Error en la solicitud Axios:', error);
+  });
 }
 
-obtenirLlibres()
+
+
 
 // Función para buscar libros
 function cercarLlibres() {

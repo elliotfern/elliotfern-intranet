@@ -39,12 +39,12 @@
 
     <div class="col-md-4">
     <label>Any de naixement</label>
-    <input class="form-control" type="url" name="yearBorn" id="yearBorn" value="">
+    <input class="form-control" type="text" name="yearBorn" id="yearBorn" value="">
     </div>
 
     <div class="col-md-4">
     <label>Any de defunció</label>
-    <input class="form-control" type="url" name="yearDie" id="yearDie" value="">
+    <input class="form-control" type="text" name="yearDie" id="yearDie" value="">
     </div>
 
     <div class="col-mb-3">

@@ -1,12 +1,13 @@
 <script>
     allTopicsList();
-    btnCreateLink();
-</script>
+    </script>
 
 <h2>Enllaços > Tots els temes</h2>
 <h6><a href="/adreces">Links</a> > <a href="/adreces/topics">Topics</a></h6>
 
-<p><button type="button" class="btn btn-warning btn-sm" id="btnCreateLink" data-bs-toggle="modal" data-bs-target="#modalCreateLink">Add link &rarr;</button>
+
+<a href="<?php APP_WEB;?>/adreces/new" class="btn btn-warning btn-sm">Add link &rarr;</a>
+
 
         <div class="table-responsive">
             <table class="table table-striped" id="allTopicsList">

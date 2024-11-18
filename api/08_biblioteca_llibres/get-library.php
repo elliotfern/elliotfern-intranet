@@ -1,23 +1,5 @@
 <?php
 
-if (isset($params['allAuthors'])) {
-    $authorsPoint = $params['allAuthors'];
-} elseif (isset($params['topics'])) {
-   $topicsPoint = $params['topics']; 
-} elseif (isset($params['allBooks'])) {
-    $booksPoint = $params['allBooks'];
-} elseif (isset($params['generes'])) {
-    $generesPoint = $params['generes'];
-} elseif (isset($params['authorId'])) {
-    $booksAuthorPoint = $params['authorId'];
-} elseif (isset($params['slugAuthors'])) {
-    $AuthorPoint = $params['slugAuthors'];
-} elseif (isset($params['autors'])) {
-    $autorsPoint = $params['autors'];
-} elseif (isset($params['imatgesLlibres'])) {
-    $imatgesLlibresPoint = $params['imatgesLlibres'];
-}
-
 // Check if the request method is GET
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     header('HTTP/1.1 405 Method Not Allowed');
@@ -52,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             
             // 2) Llistat llibres
             // ruta GET => "/api/library/books/all"
-            } elseif (isset($booksPoint )) {
+        } elseif ( (isset($_GET['type']) && $_GET['type'] == 'totsLlibres') ) {
                 global $conn;
                 $data = array();
                 $stmt = $conn->prepare(
@@ -77,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         
             // 1) Llistat contactes 
             // ruta GET => "/api/library/book/generes"
-            } elseif (isset($generesPoint)) {
+        } elseif ( (isset($_GET['type']) && $_GET['type'] == 'generes') && (isset($_GET['generes']) ) ) {
                 $idGen = $params['generes'];
                 global $conn;
                 $data = array();
@@ -206,9 +188,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                     }
 
             // 6) Book page
-            // ruta GET => "/api/biblioteca/get/?llibre-slug=el-por-bien-del-imperio"
-            } elseif (isset($_GET['llibre-slug'])) {
-                $slug = $_GET['llibre-slug'];
+            // ruta GET => "/api/biblioteca/get/?type=llibreSlug=el-por-bien-del-imperio"
+        } elseif ( (isset($_GET['type']) && $_GET['type'] == 'llibreSlug') && (isset($_GET['slug']) ) ) {
+                $slug = $_GET['slug'];
                 global $conn;
                 $data = array();
                 $stmt = $conn->prepare("SELECT b.id, a.nom, a.cognoms, a.id AS idAutor, a.slug AS slugAutor, b.titol, b.titolEng, b.slug, b.any, b.dateCreated, b.dateModified, i.nameImg, t.nomTipus, e.editorial, g.genere_cat, id.idioma_ca, a.slug AS slugAutor, sg.sub_genere_cat

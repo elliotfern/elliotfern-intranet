@@ -239,60 +239,74 @@ function formulariActualizar(event, formId, urlAjax) {
   }
 
   // FUNCIÓ PER DEMANAR PER GET INFORMACIO A LA BD I MOSTRAR-LA EN PANTALLA
-  function connexioApiGetDades(url, id, urlImg1, urlImg2, callback) {
-    let urlAjax = url + id;
-    $.ajax({
-      url: urlAjax,
-      method: "GET",
-      dataType: "json",
-      beforeSend: function(xhr) {
-        // Obtener el token del localStorage
-        let token = localStorage.getItem('token');
-        // Incluir el token en el encabezado de autorización
-        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-      },
-      success: function(data) {
-         // Si la data es un array y tiene al menos un elemento
-         if (Array.isArray(data) && data.length > 0) {
-          // Utiliza el primer elemento del array
-          data = data[0];
-        }
-        
-        try {
-           /// Iterar sobre todas las propiedades del objeto data
+  // Importar Axios en tu archivo JS si aún no está importado
+// Ejemplo: import axios from 'axios'; (en entornos con módulos)
+// o incluir Axios directamente desde CDN
+
+// Función para realizar la solicitud Axios a la API
+function connexioApiGetDades(url, id, urlImg1, urlImg2, callback) {
+  let urlAjax = url + id;
+
+  // Obtener el token del localStorage
+  let token = localStorage.getItem('token');
+
+  // Configurar los headers con el token de autorización
+  const config = {
+    headers: {
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json'
+    }
+  };
+
+  // Realizar la solicitud GET con Axios
+  axios.get(urlAjax, config)
+    .then(response => {
+      // Manejar la respuesta exitosa
+      let data = response.data;
+
+      // Si la data es un array y tiene al menos un elemento, utilizar el primer elemento del array
+      if (Array.isArray(data) && data.length > 0) {
+        data = data[0];
+      }
+
+      try {
+        // Iterar sobre todas las propiedades del objeto data
         for (let key in data) {
-            if (data.hasOwnProperty(key)) {
-              let value = data[key];
-              // Si la propiedad es una fecha, formatearla utilizando la función formatData
-              if (key === "dateCreated" || key === "dateModified" || key === "dataVista") {
-                value = formatData(value);
-              }
-              // Verificar si existe un elemento con el ID correspondiente en el DOM
-              let element = document.getElementById(key);
-              if (element) {
-                // Decodificar entidades HTML
-                value = decodificarEntidadesHTML(value);
-                // Actualizar el DOM con la información recibida
-                if (key === "nameImg") {
-                    element.src = `${window.location.origin}/public/00_inc/img/${urlImg1}/${urlImg2}/${value}.jpg`;
-                } else {
-                    element.innerHTML = value;
-                }
+          if (data.hasOwnProperty(key)) {
+            let value = data[key];
+            // Si la propiedad es una fecha, formatearla utilizando la función formatData (debes definirla)
+            if (key === "dateCreated" || key === "dateModified" || key === "dataVista") {
+              value = formatData(value); // Asegúrate de tener esta función definida para formatear la fecha
+            }
+
+            // Verificar si existe un elemento con el ID correspondiente en el DOM
+            let element = document.getElementById(key);
+            if (element) {
+              // Decodificar entidades HTML
+              value = decodificarEntidadesHTML(value);
+
+              // Actualizar el DOM con la información recibida
+              if (key === "nameImg") {
+                element.src = `${window.location.origin}/public/00_inc/img/${urlImg1}/${urlImg2}/${value}.jpg`;
+              } else {
+                element.innerHTML = value;
               }
             }
           }
-          
-          // Ejecutar la función de devolución de llamada si se proporciona
-          if (typeof callback === 'function') {
-            callback(data);
-          }
-        } catch (error) {
-          console.error('Error al parsear JSON:', error); // Muestra el error de parsing
         }
-      }
-    });
-  }
 
+        // Ejecutar la función de devolución de llamada si se proporciona
+        if (typeof callback === 'function') {
+          callback(data);
+        }
+      } catch (error) {
+        console.error('Error al parsear JSON:', error); // Muestra el error de parsing
+      }
+    })
+    .catch(error => {
+      console.error('Error en la solicitud Axios:', error); // Manejar el error de la solicitud
+    });
+}
 // FUNCIO PER CONSTRUIR TAULES QUE DEPENEN D'UNA ALTRA API
 function construirTablaFromAPI(url, id, columnas, callback) {
   let urlAjax = url + id;

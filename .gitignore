@@ -17,3 +17,4 @@ error_log
 # Ignorar archivos de configuración local (ejemplo para PHP)
 .env
 elliotfern.code-workspace
+contra.php

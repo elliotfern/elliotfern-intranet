@@ -1,5 +1,19 @@
 <?php
 
+// Permitir solicitudes desde cualquier origen
+header("Access-Control-Allow-Origin: *");
+// Permitir métodos GET, POST, PUT, DELETE y OPTIONS
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+// Permitir encabezados Authorization y Content-Type
+header("Access-Control-Allow-Headers: Authorization, Content-Type");
+
+// Si la solicitud es OPTIONS, terminar la ejecución con un código de respuesta 200
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -10,7 +24,9 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 $token = $_ENV['TOKEN'];
+$encryptoken = $_ENV['ENCRYPTATION_TOKEN'];
 define("APP_TOKEN",$token );
+define("APP_ENCRYPTOKEN",$encryptoken );
 
 class Route {
     private function simpleRoute($file, $route){
@@ -294,11 +310,12 @@ if (empty($_SESSION['user']) || !session_id()) {
         $route->add("/adreces/topics","public/09_adreces_interes/page-all-topics.php");
         $route->add("/adreces/topic/{id}","public/09_adreces_interes/page-topic-all-links.php");
         $route->add("/adreces/update/{id}","php-forms/links/links-update-link.php");
+        $route->add("/adreces/new","php-forms/links/links-add-new.php");
 
         // 10 - Claus access
         $route->add("/vault","public/10_claus_acces/index.php");
 
-        $route->add("/vault/new","php-forms/vault/vault-add.php");
+        $route->add("/vault/new","public/10_claus_acces/nova-contrasenya.php");
         $route->add("/vault/process/new","php-process/vault/vault-insert-process-form.php");
         $route->add("/vault/update","php-forms/vault/vault-update.php");
         $route->add("/vault/process/update","php-process/vault/vault-update-process-form.php");

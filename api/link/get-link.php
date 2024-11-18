@@ -53,6 +53,7 @@ if (isset($headers['Authorization'])) {
         // 3) Llistat enllaços segons un topic concret
         // ruta GET => "/api/links/?type=topic$id=11"
     } elseif ( (isset($_GET['type']) && $_GET['type'] == 'topic') && (isset($_GET['id']) ) ) {
+        
 
         $id = $_GET['id'];
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;  // Número de página, predeterminado: 1

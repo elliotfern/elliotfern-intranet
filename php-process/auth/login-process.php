@@ -1,5 +1,4 @@
 <?php
-
 require_once(APP_ROOT . APP_DEV . '/vendor/autoload.php');
 use Dotenv\Dotenv;
 use Firebase\JWT\JWT;
@@ -8,76 +7,68 @@ use Firebase\JWT\JWT;
 $dotenv = Dotenv::createImmutable(APP_ROOT . APP_DEV . '/');
 $dotenv->load();
 
-$jwtSecret = $_ENV['TOKEN'];
+$jwtSecret = $_ENV['TOKEN']; // Obtener el secreto JWT desde variables de entorno
 
-if (isset($_POST['userName'])) {
+// Verificar si se han enviado las credenciales de usuario
+if (isset($_POST['userName']) && isset($_POST['password'])) {
     $username = $_POST['userName'];
     $password = $_POST['password'];
-    $hasError = 1;
-} else {
-    $response['status'] = 'error';
 
-    header( "Content-Type: application/json" );
-    echo json_encode($response);
-}
-
-
-global $conn;
-$data = array();
-$stmt = $conn->prepare(
-    "SELECT u.id, u.username, u.password
-    FROM db_users AS u
-    WHERE u.username = :username");
-    $stmt->execute(
-      ['username' => $username]
+    global $conn;
+    $stmt = $conn->prepare(
+        "SELECT u.id, u.username, u.password
+        FROM db_users AS u
+        WHERE u.username = :username"
     );
+    $stmt->execute(['username' => $username]);
+
     if ($stmt->rowCount() === 0) {
-      $_SESSION['message'] = array('type'=>'danger', 'msg'=>'Your account has not ben enabled.');
+        // Usuario no encontrado
+        $response = array('status' => 'error', 'message' => 'User not found');
+        http_response_code(404); // Código de respuesta 404: No encontrado
+        echo json_encode($response);
+        exit;
     } else {
-      while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $hash = $row['password'];
-        $id = $row['id'];
-        if(password_verify($password, $hash) AND ($id == 1) ) {
-          session_start();
-          $_SESSION['user']['id'] = $row['id'];
-          $_SESSION['user']['username'] = $row['username'];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $hash = $row['password'];
+            $id = $row['id'];
 
-          $key = $jwtSecret;
-          $algorithm = "HS256";  // Elige el algoritmo adecuado para tu aplicación
-          $payload = array(
-              "user_id" =>  $row['id'],
-              "username" => $row['username'],
-              "kid" => "key_api" 
-          );
+            if (password_verify($password, $hash) && $id == 1) {
+                // Generar token JWT
+                $payload = array(
+                    "user_id" => $row['id'],
+                    "username" => $row['username'],
+                    "kid" => "key_api"
+                );
 
-          $headers = [
-            'x-forwarded-for' => 'localhost'
-          ];
-        
-          // Encode headers in the JWT string
-          $jwt = JWT::encode($payload, $key, $algorithm);
+                $jwt = JWT::encode($payload, $jwtSecret, "HS256");
 
-          // Almacenar en localStorage
-          // Devolver el token al cliente (puedes enviarlo en una respuesta JSON)
+                // Almacenar en localStorage del cliente
+                // Devolver el token al cliente en la respuesta JSON
+                $response = array(
+                    "token" => $jwt,
+                    "status" => "success"
+                );
 
-          // Preparar la respuesta
-          $response = array(
-            "token" => $jwt,
-            "status" => "success"
-          );
-
-          // Establecer el encabezado como JSON
-          header('Content-Type: application/json');
-
-          // Devolver la respuesta JSON
-          echo json_encode($response);
-        } else {
-          // response output
-          $response['status'] = 'error';
-
-          header( "Content-Type: application/json" );
-          echo json_encode($response);
+                // Establecer el encabezado como JSON
+                header('Content-Type: application/json');
+                // Devolver la respuesta JSON con el token
+                echo json_encode($response);
+                exit;
+            } else {
+                // Contraseña incorrecta u otro error
+                $response = array('status' => 'error', 'message' => 'Invalid credentials');
+                http_response_code(401); // Código de respuesta 401: No autorizado
+                echo json_encode($response);
+                exit;
+            }
         }
-        
-      }
     }
+} else {
+    // Datos de usuario no proporcionados en la solicitud
+    $response = array('status' => 'error', 'message' => 'Username and password required');
+    http_response_code(400); // Código de respuesta 400: Solicitud incorrecta
+    echo json_encode($response);
+    exit;
+}
+?>

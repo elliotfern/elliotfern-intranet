@@ -3,6 +3,10 @@
 
 <hr>
 
+<?php // Nombre del host
+echo "Ruta completa del archivo actual: " . __FILE__;
+?>
+
 <div class="alert alert-success" id="createImgMessageOk" style="display:none;margin-top:20px" role="alert">
               <h4 class="alert-heading"><strong>'.ADD_OK_MESSAGE_SHORT.'</h4></strong>
               <h6>'.ADD_OK_MESSAGE.'</h6>

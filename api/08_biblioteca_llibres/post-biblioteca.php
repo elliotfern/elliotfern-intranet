@@ -22,113 +22,81 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         // Token válido, puedes continuar con el código para obtener los datos del usuario
 
           // a) Inserir autor
-        if (isset($_GET['autor']) ) {
-            if (empty($_POST["nom"])) {;
-              $hasError=true;
+          if (isset($_GET['autor'])) {
+            $hasError = false;
+            $response = [];
+        
+            // Validaciones
+            if (empty($_POST["AutNom"])) {
+                $hasError = true;
+                $response['errors'][] = 'El campo "nom" es obligatorio.';
             } else {
-              $nom = data_input($_POST['nom']);
+                $nom = data_input($_POST['AutNom']);
             }
-          
-            if (empty($_POST["cognoms"])) {;
-              $hasError=true;
+        
+            if (empty($_POST["AutCognom1"])) {
+                $hasError = true;
+                $response['errors'][] = 'El campo "cognoms" es obligatorio.';
             } else {
-              $cognoms = data_input($_POST['cognoms']);
+                $cognoms = data_input($_POST['AutCognom1']);
             }
-
-            if (empty($_POST["yearBorn"])) {;
-              $hasError=true;
-            } else {
-              $yearBorn = filter_input(INPUT_POST, 'yearBorn', FILTER_SANITIZE_NUMBER_INT);
-            }
-
-            if (empty($_POST["yearDie"])) {;
-              $yearDie = NULL;
-            } else {
-              $yearDie = filter_input(INPUT_POST, 'yearDie', FILTER_SANITIZE_NUMBER_INT);
-            }
-
-            if (empty($_POST["paisAutor"])) {;
-              $hasError=true;
-            } else {
-              $paisAutor = filter_input(INPUT_POST, 'paisAutor', FILTER_SANITIZE_NUMBER_INT);
-            }
-
-            if (empty($_POST["AutWikipedia"])) {;
-              $hasError=true;
-            } else {
-              $AutWikipedia = data_input($_POST['AutWikipedia']);
-            }
-
-            if (empty($_POST["AutDescrip"])) {;
-              $hasError=true;
-            } else {
-              $AutDescrip = data_input($_POST['AutDescrip']);
-            }
-
-            if (empty($_POST["ocupacio"])) {;
-              $hasError=true;
-            } else {
-              $ocupacio = filter_input(INPUT_POST, 'ocupacio', FILTER_SANITIZE_NUMBER_INT);
-            }
-
-            if (empty($_POST["moviment"])) {;
-              $hasError=true;
-            } else {
-              $moviment = filter_input(INPUT_POST, 'moviment', FILTER_SANITIZE_NUMBER_INT);
-            }
- 
-            if (empty($_POST["img"])) {;
-              $hasError=true;
-            } else {
-              $img = filter_input(INPUT_POST, 'img', FILTER_SANITIZE_NUMBER_INT);
-            }
-
-            if (empty($_POST["slug"])) {;
-              $hasError=true;
-            } else {
-              $slug = data_input($_POST['slug']);
-            }
-
+        
+            $yearBorn = filter_input(INPUT_POST, 'yearBorn', FILTER_SANITIZE_NUMBER_INT) ?: null;
+            $yearDie = filter_input(INPUT_POST, 'yearDie', FILTER_SANITIZE_NUMBER_INT) ?: null;
+            $paisAutor = filter_input(INPUT_POST, 'paisAutor', FILTER_SANITIZE_NUMBER_INT) ?: null;
+            $img = filter_input(INPUT_POST, 'img', FILTER_SANITIZE_NUMBER_INT) ?: null;
+            $ocupacio = filter_input(INPUT_POST, 'AutOcupacio', FILTER_SANITIZE_NUMBER_INT) ?: null;
+            $moviment = filter_input(INPUT_POST, 'AutMoviment', FILTER_SANITIZE_NUMBER_INT) ?: null;
+        
+            $AutWikipedia = !empty($_POST["AutWikipedia"]) ? data_input($_POST['AutWikipedia']) : null;
+            $AutDescrip = !empty($_POST["AutDescrip"]) ? data_input($_POST['AutDescrip']) : null;
+            $slug = !empty($_POST["slug"]) ? data_input($_POST['slug']) : null;
+        
             $timestamp = date('Y-m-d');
             $dateCreated = $timestamp;
             $dateModified = $timestamp;
-
-            if (!isset($hasError)) {
-              global $conn;
-              $sql = "INSERT INTO 08_db_biblioteca_autors SET nom=:nom, cognoms=:cognoms, yearBorn=:yearBorn, yearDie=:yearDie, paisAutor=:paisAutor, img=:img, AutWikipedia=:AutWikipedia, AutDescrip=:AutDescrip, moviment=:moviment, ocupacio=:ocupacio, dateModified=:dateModified, dateCreated=:dateCreated, slug=:slug";
-              $stmt= $conn->prepare($sql);
-              $stmt->bindParam(":nom", $nom, PDO::PARAM_STR);
-              $stmt->bindParam(":cognoms", $cognoms, PDO::PARAM_STR);
-              $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
-              $stmt->bindParam(":yearBorn", $yearBorn, PDO::PARAM_INT);
-              $stmt->bindParam(":yearDie", $yearDie, PDO::PARAM_INT);
-              $stmt->bindParam(":paisAutor", $paisAutor, PDO::PARAM_INT);
-              $stmt->bindParam(":img", $img, PDO::PARAM_INT);
-              $stmt->bindParam(":AutWikipedia", $AutWikipedia, PDO::PARAM_STR);
-              $stmt->bindParam(":AutDescrip", $AutDescrip, PDO::PARAM_STR);
-              $stmt->bindParam(":moviment", $moviment, PDO::PARAM_INT);
-              $stmt->bindParam(":ocupacio", $ocupacio, PDO::PARAM_INT);
-              $stmt->bindParam(":dateCreated", $dateCreated, PDO::PARAM_STR);
-              $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
-              
-              if ($stmt->execute()) {
-                // response output
-                $response['status'] = 'success';
-                header( "Content-Type: application/json" );
-                echo json_encode($response);
-              } else {
-                // response output - data error
-                $response['status'] = 'error';
-                header( "Content-Type: application/json" );
-                echo json_encode($response);
-              }
+        
+            if (!$hasError) {
+                try {
+                    global $conn;
+                    $sql = "INSERT INTO 08_db_biblioteca_autors 
+                            (nom, cognoms, yearBorn, yearDie, paisAutor, img, AutWikipedia, AutDescrip, moviment, ocupacio, dateModified, dateCreated, slug) 
+                            VALUES 
+                            (:nom, :cognoms, :yearBorn, :yearDie, :paisAutor, :img, :AutWikipedia, :AutDescrip, :moviment, :ocupacio, :dateModified, :dateCreated, :slug)";
+                    $stmt = $conn->prepare($sql);
+        
+                    $stmt->bindParam(":nom", $nom, PDO::PARAM_STR);
+                    $stmt->bindParam(":cognoms", $cognoms, PDO::PARAM_STR);
+                    $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
+                    $stmt->bindParam(":yearBorn", $yearBorn, PDO::PARAM_INT);
+                    $stmt->bindParam(":yearDie", $yearDie, PDO::PARAM_INT);
+                    $stmt->bindParam(":paisAutor", $paisAutor, PDO::PARAM_INT);
+                    $stmt->bindParam(":img", $img, PDO::PARAM_INT);
+                    $stmt->bindParam(":AutWikipedia", $AutWikipedia, PDO::PARAM_STR);
+                    $stmt->bindParam(":AutDescrip", $AutDescrip, PDO::PARAM_STR);
+                    $stmt->bindParam(":moviment", $moviment, PDO::PARAM_INT);
+                    $stmt->bindParam(":ocupacio", $ocupacio, PDO::PARAM_INT);
+                    $stmt->bindParam(":dateCreated", $dateCreated, PDO::PARAM_STR);
+                    $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
+        
+                    if ($stmt->execute()) {
+                        $response['status'] = 'success';
+                    } else {
+                        $response['status'] = 'error';
+                        $response['message'] = 'Hubo un problema con la base de datos.';
+                    }
+                } catch (PDOException $e) {
+                    $response['status'] = 'error';
+                    $response['message'] = $e->getMessage();
+                }
             } else {
-              // response output - data error
-              $response['status'] = 'error';
-
-              header( "Content-Type: application/json" );
-              echo json_encode($response);
+                $response['status'] = 'error';
+                $response['message'] = 'Errores de validación.';
             }
+        
+            header("Content-Type: application/json");
+            echo json_encode($response);
+    
             
           // INSERIR NOU LLIBRE
           // autor	titol	titolEng	slug	any	tipus	idEd	idGen	subGen	lang	img	dateCreated

@@ -59,9 +59,9 @@ $id = $params['id'];
 connexioApiGetDades("/api/cinema/get/?serie=", <?php echo $id;?>, "11_cinema_series", "series", function(data) {
   
     // Actualiza el atributo href del enlace con el idDirector
-    document.getElementById('directorUrl').href = `${window.location.origin}/cinema/director/${data[0].idDirector}`;
-    document.getElementById('paisUrl').href = `${window.location.origin}/cinema/series/pais/${data[0].idPais}`;
-    document.getElementById('plataformaUrl').href = `${window.location.origin}/series/productora/${data[0].idProductora}`;
+    document.getElementById('directorUrl').href = `${window.location.origin}/cinema/director/${data.idDirector}`;
+    document.getElementById('paisUrl').href = `${window.location.origin}/cinema/series/pais/${data.idPais}`;
+    document.getElementById('plataformaUrl').href = `${window.location.origin}/series/productora/${data.idProductora}`;
 });
 
 // author book

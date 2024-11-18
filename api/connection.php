@@ -1,23 +1,15 @@
 <?php
-
-require 'vendor/autoload.php';
-
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
-$dbHost = $_ENV['DB_HOST'];
-$dbUser = $_ENV['DB_USER'];
-$dbPass = $_ENV['DB_PASS'];
-$dbname = $_ENV['DB_DBNAME'];
-//$dbname2 = $_ENV['DB_DBNAME2'];
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 $conn = "";
-  
+
 try {
-    $servername = $dbHost;
-    $dbname = $dbname;
-    $username = $dbUser;
-    $password = $dbPass;
+    $servername = "localhost:3306";
+    $dbname = "epgylzqu_elliotfern_intranet";
+    $username = "epgylzqu_user";
+    $password = "vf5BW6oX-UT.x^1ZF%";
    
     $conn = new PDO(
         "mysql:host=$servername; dbname=$dbname;charset=utf8",
@@ -32,12 +24,11 @@ try {
         . $e->getMessage();
 }
 
-/*
 try {
-    $servername = $dbHost;
-    $dbname = $dbname2;
-    $username = $dbUser;
-    $password = $dbPass;
+    $servername = "localhost:3306";
+    $dbname = "epgylzqu_historia_web";
+    $username = "epgylzqu_user";
+    $password = "vf5BW6oX-UT.x^1ZF%";
    
     $conn2 = new PDO(
         "mysql:host=$servername; dbname=$dbname;charset=utf8",
@@ -51,5 +42,5 @@ try {
     echo "Connection failed: " 
         . $e->getMessage();
 }
-*/
+
 ?>

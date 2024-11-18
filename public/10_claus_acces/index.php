@@ -7,7 +7,7 @@ global $conn;
 
 echo '<h2>Vault Database</h2>';
 
-echo "<p><button type='button' class='btn btn-light btn-sm' id='btnAddVault' onclick='btnCreateVault()' data-bs-toggle='modal' data-bs-target='#modalCreateVault'>Insert new vault</button></p>";
+echo "<p><a href='/vault/new'><button type='button' class='btn btn-light btn-sm' id='btnAddVault'>Insert new vault</button></a></p>";
 
 $data = array();
 $stmt = $conn->prepare("SELECT v.id, v.client, c.clientEmpresa, c.clientNom, c.clientCognoms, c.id AS idClient

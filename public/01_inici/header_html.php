@@ -21,16 +21,12 @@ $favicon = APP_DEV . "/public/img/icon.png";
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
 <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <link href="/public/00_inc/style.css" rel="stylesheet">
 
 <script src="/public/js/globals.js"></script>
-<script src="/public/js/links/links.js"></script>
-<script src="/public/js/links/links-functions.js"></script>
-<script src="/public/08_biblioteca_llibres/js/library.js"></script>
-<script src="/public/js/accounting/accounting-elliotfernandez.js"></script>
-<script src="/public/js/cinema/cinema.js"></script>
-<script src="/public/js/vault/vault.js"></script>
+<script src="/public/js/main.js"></script>
 
 </head>
 <body>

@@ -19,7 +19,7 @@ function btnCreateLink() {
             $("#btnAddLink").show();
         },
     });
-}
+} 
 
 // AJAX PROCESS > PHP - MODAL FORM - CREATE NEW LINK
 $(function () {
