@@ -1,11 +1,21 @@
 {
-  "name": "myvendor/elliot",
+  "name": "elliot/fernandez",
   "description": "My package composer",
   "type": "project",
   "require": {
     "php": "^8.2",
     "vlucas/phpdotenv": "^5.5",
     "firebase/php-jwt": "6.8.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Controllers\\": "src/Controllers/",
+      "Models\\": "src/Models/",
+      "Config\\": "src/Config/",
+      "Helpers\\": "src/Helpers/",
+      "Middleware\\": "src/Middleware/",
+      "Services\\": "src/Services/"
+    }
   },
   "license": "Apache-2.0",
   "authors": [

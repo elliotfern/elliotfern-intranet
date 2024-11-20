@@ -1,22 +1,50 @@
 <?php
 
-require_once(APP_ROOT . APP_DEV . '/vendor/autoload.php');
 use Dotenv\Dotenv;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 // Cargar variables de entorno desde .env
-$dotenv = Dotenv::createImmutable(APP_ROOT . APP_DEV . '/');
-$dotenv->load();
-
 $jwtSecret = $_ENV['TOKEN'];
 
-/**
- * Formats a price with the given currency symbol, decimal separator, and thousands separator.
- *
- * @param float $price The price to format.
- * @return string The formatted price with currency symbol.
- */
+// Función que verifica si el usuario tiene un token válido
+function verificarSesion() {
+    // Inicia la sesión si no está ya iniciada
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // Verifica si la cookie del token existe y es válida
+    if (!isset($_COOKIE['token']) || !validarToken($_COOKIE['token']) || !isset($_COOKIE['user_type']) || $_COOKIE['user_type'] != 1) {
+        header('Location: /entrada'); // Redirige a login si no hay token válido
+        exit();
+    }
+}
+
+function validarToken($jwt) {
+   
+    $jwtSecret = $_ENV['TOKEN'];  // Tu clave secreta
+    $decoded = null;
+
+    try {
+
+        $decoded = JWT::decode($jwt, new key ($jwtSecret, 'HS256'));
+
+       // Verifica si el token ha expirado
+        if (isset($decoded->exp) && $decoded->exp < time()) {
+            return false;  // Token expirado
+        }
+
+    } catch (Exception $e) {
+        // Manejo del error
+        error_log('Error al validar el token: ' . $e->getMessage());  // Log del error para depuración
+        return false;
+    }
+
+    // Si la decodificación es exitosa y el token es válido, se devuelve el payload
+    return $decoded;
+}
+
 function wc_price( $price ) {
     $currency_symbol = '€'; // replace with your currency symbol
     $decimal_separator = ','; // replace with your decimal separator

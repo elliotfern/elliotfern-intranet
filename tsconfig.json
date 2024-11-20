@@ -6,17 +6,17 @@
     "strict": true,
     "allowJs": true,
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "src_old",
     "esModuleInterop": true,
     "lib": ["es2017", "dom"],
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["./node_modules/@types", "./src/types/"]
+    "typeRoots": ["./node_modules/@types", "src_old/types"]
       },
 
  "include": [
-    "src",
-    "src/types/global.d.ts",
-    "src/types/",
+    "src_old",
+    "src_old/types/global.d.ts",
+    "src_old/types",
   ], 
   "exclude": ["node_modules"]
 }

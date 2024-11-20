@@ -1,49 +1,54 @@
 <?php
-
-// Configuración
-$encryption_key = APP_ENCRYPTOKEN;
-$encryption_method = "AES-256-CBC";
-
-// Función para encriptar
-function encryptData($data, $key, $method) {
-    $iv_length = openssl_cipher_iv_length($method);
-    $iv = openssl_random_pseudo_bytes($iv_length); // Generar IV
-    $encrypted_data = openssl_encrypt($data, $method, $key, 0, $iv);
-    return base64_encode($encrypted_data . "::" . $iv);
-}
-
-// Inicializar variables
-$encrypted = null;
+$hashedPassword = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtener la contraseña desde el formulario
     $password = $_POST['password'] ?? '';
 
     if (!empty($password)) {
-        // Encriptar la contraseña
-        $encrypted = encryptData($password, $encryption_key, $encryption_method);
+        // Generar un hash seguro con password_hash
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        echo $hashedPassword; // Enviar el hash como respuesta
     } else {
-        $encrypted = "Por favor, introduce una contraseña válida.";
+        echo "Por favor, introduce una contraseña válida.";
     }
+
+    exit; // Detener la ejecución para devolver solo el resultado
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encriptar Contraseña en PHP</title>
-</head>
-<body>
-    <h1>Encriptar Contraseña</h1>
-    <form method="POST">
+
+    <h1>Hashear Contraseña</h1>
+    <form id="passwordForm">
         <label for="password">Introduce una contraseña:</label><br>
         <input type="text" id="password" name="password" placeholder="Contraseña"><br><br>
-        <button type="submit">Encriptar</button>
+        <button type="button" id="generateHash">Generar Hash</button>
     </form>
 
-    <?php if ($encrypted): ?>
-        <h2>Contraseña Encriptada:</h2>
-        <p><?php echo htmlspecialchars($encrypted); ?></p>
-    <?php endif; ?>
+    <div id="hashResult"></div>
+
+    <script>
+        $(document).ready(function () {
+            $('#generateHash').click(function () {
+                const password = $('#password').val();
+
+                if (!password) {
+                    $('#hashResult').html('<p>Por favor, introduce una contraseña válida.</p>');
+                    return;
+                }
+
+                // Enviar la contraseña al servidor mediante AJAX
+                $.ajax({
+                    url: '', // La misma página procesa la solicitud
+                    type: 'POST',
+                    data: { password: password },
+                    success: function (response) {
+                        $('#hashResult').html('<h2>Hash de la Contraseña:</h2><p>' + response + '</p>');
+                    },
+                    error: function () {
+                        $('#hashResult').html('<p>Hubo un error al generar el hash.</p>');
+                    }
+                });
+            });
+        });
+    </script>

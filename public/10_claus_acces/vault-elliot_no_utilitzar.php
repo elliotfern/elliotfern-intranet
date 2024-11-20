@@ -1,12 +1,9 @@
 <?php
 
 global $conn;
-$id = $params['id'];
 
-if ($id !== "31") {
-    echo 'ID no válido';
-} else {
-    if (isset($params['id']) && $params['id'] == $id) {
+$encryption_key = APP_ENCRYPTOKEN;
+
 
         echo '<h2><a href="' . APP_SERVER . '/vault">Vault database</a> > <a href="' . APP_SERVER . '/vault/elliot/31">Elliot</a></h2>';
         echo "<p><a href='/vault/new'><button type='button' class='btn btn-light btn-sm' id='btnAddVault'>Insert new vault</button></a></p>";
@@ -38,14 +35,30 @@ if ($id !== "31") {
             $dateMo = $row['dateModified'];
             $dateModified = date("d/m/Y", strtotime($dateMo));
 
-            // La contraseña no se descifra; solo se verifica cuando sea necesario.
-            $password_placeholder = '**********'; // Mostrar algo genérico en lugar de la contraseña
+            // Recuperar datos cifrados (por ejemplo, desde la base de datos)
+            $encrypted_data_with_iv = $row['serveiPas'];
+
+            // Verificar si el texto cifrado tiene el formato correcto
+            if (strpos(base64_decode($encrypted_data_with_iv), "::") !== false) {
+                list($encrypted_data, $iv) = explode("::", base64_decode($encrypted_data_with_iv));
+
+                $encryption_method = "AES-256-CBC"; // Método de cifrado
+
+                // Desencriptar los datos
+                $decrypted_data = openssl_decrypt($encrypted_data, $encryption_method, $encryption_key, 0, $iv);
+
+                if ($decrypted_data === false) {
+                    $decrypted_data = "Error al desencriptar";
+                }
+            } else {
+                $decrypted_data = "Error: Datos no válidos";
+            }
 
             echo "<tr>";
             echo "<td><a href='" . $row['serveiWeb'] . "' target='_blank'>" . $row['serveiNom'] . "</a></td>";
             echo "<td>" . $row['serveiUsuari'] . "</td>";
             echo '<td>
-            <input type="password" id="passw-' . $row['id'] . '" value="' . htmlspecialchars($password_placeholder) . '" readonly style="border: none; background: none;">
+            <input type="password" id="passw-' . $row['id'] . '" value="' . htmlspecialchars($decrypted_data) . '" readonly style="border: none; background: none;">
             <button type="button" class="btn btn-sm btn-secondary" onclick="showPass(' . $row['id'] . ')">Show</button>
           </td>';
             echo "<td>" . $row['typeName'] . "</td>";
@@ -59,55 +72,22 @@ if ($id !== "31") {
         echo "</table>";
         echo "</div>";
         echo "</div>";
-    }
-}
 
 ?>
 <script>
 function showPass(id) {
-    // Obtener contraseña del servidor vía AJAX y compararla
-    let inputField = document.getElementById('passw-' + id);
-    let urlAjax = `/api/vault/get/?type=password&id=${id}`;
-
-    if (inputField.type === "password") {
-
-        $.ajax({
-            url: urlAjax,
-            method: "GET",
-            dataType: "JSON",
-            beforeSend: function(xhr) {
-                // Obtener el token del localStorage
-                let token = localStorage.getItem('token');
-
-                // Incluir el token en el encabezado de autorización
-                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-            },
-            success: function(data) {
-                // Verifica si la respuesta es correcta
-                if (data.success && data.serveiPass) {
-                    inputField.value = data.serveiPass; // Mostrar la contraseña
-                    inputField.type = "text";
-
-                    // Ocultar la contraseña después de 5 segundos
-                    setTimeout(() => {
-                        inputField.value = '**********'; // Volver al placeholder después de 5 segundos
-                        inputField.type = "password";
-                    }, 5000);
-                } else {
-                    alert('No se pudo obtener la contraseña');
-                }
-            },
-            error: function(xhr, status, error) {
-                // Manejo de errores en la solicitud
-                console.error('Error en la solicitud AJAX:', error);
-                alert('Hubo un problema al intentar obtener la contraseña.');
-            }
-        });
+    var x = document.getElementById('passw-' + id + '');
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
     }
+    setTimeout(() => {
+        x.type = "password";
+    }, 5000);
 }
 </script>
 
 <?php
 # Footer
 require_once(APP_ROOT . '/public/01_inici/footer.php');
-?>

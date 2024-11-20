@@ -3,7 +3,7 @@
     RewriteBase /
 
     # Redireccionar "/" a "/inici"
-    # RewriteRule ^$ /inici [L,R=301]
+    RewriteRule ^$ / [L,R=301]
 
     # Redireccionar "/admin" a "/inici"
     # RewriteRule ^admin$ /inici [L,R=301]

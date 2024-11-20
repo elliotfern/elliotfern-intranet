@@ -1,7 +1,7 @@
 <?php
 # conectare la base de datos
 $activePage = "";
-require_once(APP_ROOT . '/inc/header.php');
+
 
 echo '<div class="container">';
 ?>
@@ -13,4 +13,3 @@ echo '<div class="container">';
 </div>
 <?php
 # footer
-require_once(APP_ROOT . '/inc/footer.php');
