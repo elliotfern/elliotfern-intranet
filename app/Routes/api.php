@@ -20,4 +20,11 @@ return [
         'needs_session' => true,
         'no_header_footer' => true, // No incluir header/footer
     ],
+
+    // API COMPTABILITAT ERP
+    '/api/accounting/get/' => [
+        'view' => 'api/accounting.php',
+        'needs_session' => true,
+        'no_header_footer' => true, // No incluir header/footer
+    ],
 ];
