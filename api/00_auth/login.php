@@ -1,7 +1,7 @@
 <?php
 // api/login.php
 
-use Controllers\AuthController;
+use App\Controllers\AuthController;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
