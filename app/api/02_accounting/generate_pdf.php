@@ -1,24 +1,39 @@
 <?php
-$url_server = $_SERVER['HTTP_HOST'];
-$url_root = $_SERVER['DOCUMENT_ROOT'];
+require 'vendor/autoload.php';
+require 'vendor/tecnickcom/tcpdf/tcpdf.php';
 
-require_once($url_root . '/vendor/tcpdf/tcpdf.php');
+// Datos de entrada
+$idInvoice = $routeParams['id'];
 
-if(isset($params['id'])){
-    $id = $params['id'];
-} else {
-  $id = 1;
+header('Content-Type: application/pdf');
+header('Content-Disposition: inline; filename="invoice_' . $idInvoice . '.pdf"');
+header('Content-Transfer-Encoding: binary');
+header('Accept-Ranges: bytes');
+
+
+// Llamada a las APIs
+// URL de la API con el parámetro id
+$url = "https://gestio.elliotfern.com/api/accounting/get/?type=customers-invoices&id={$idInvoice}";
+
+// Obtener los datos de la API
+$response = file_get_contents($url);
+
+// Comprobar si la respuesta es válida
+if ($response === false) {
+  // Manejar el error si la API no responde
+  die("Error al obtener los datos de la API.");
 }
 
-// Retrieve the invoice ID from the query parameters
-$idInvoice = $id;
+// Decodificar el JSON
+$invoiceData = json_decode($response, true);
 
-//call api
-// http://127.0.0.1/elliotfern/api/accounting/ 
-$url = "https://" . $url_server . "/api/accounting/?type=customers-invoices&id=" .$idInvoice;
-$input = file_get_contents($url);
-$arr = json_decode($input, true);
-$obj = $arr[0];
+// Verificar si la decodificación fue exitosa y si hay datos
+if ($invoiceData === null || empty($invoiceData)) {
+  die("Error al decodificar los datos de la API o no se encontraron resultados.");
+}
+
+// Acceder al primer elemento si existe
+$obj = $invoiceData ?? null; // El operador null coalescing asegura que no falle si no existe el índice
 
 $id_factura = $obj['id'];
 $empresa = $obj['clientEmpresa'];
@@ -33,6 +48,8 @@ $clientEmail = $obj['clientEmail'];
 $clientWeb = $obj['clientWeb'];
 $clientCP = $obj['clientCP'];
 $any = $obj['yearInvoice'];
+$facDate2 = $obj['facData'];
+$facDate_net = date('d/m/Y', strtotime($facDate2));
 $facDueDate2 = $obj['facDueDate'];
 $facDueDate_net = date('d/m/Y', strtotime($facDueDate2));
 $pagament = $obj['tipusNom'];
@@ -43,27 +60,46 @@ $subTotal = $obj['facSubtotal'];
 $facVAT = $obj['facVAT'];
 $malt = $obj['facFees'];
 
-$url2 = "https://" . $url_server . "/api/accounting/?type=invoice-products&id=" . $idInvoice;
-//call api
-$input2 = file_get_contents($url2);
-$arr2 = json_decode($input2, true);
+// segunda llamada a API
+$url2 = "https://gestio.elliotfern.com/api/accounting/get/?type=invoice-products&id={$idInvoice}";
 
-// Use the $idInvoice to fetch the necessary data for the PDF generation
-// ... (code to fetch invoice data)
+// Obtener los datos de la API
+$response2 = file_get_contents($url2);
+
+// Comprobar si la respuesta es válida
+if ($response2 === false) {
+  // Manejar el error si la API no responde
+  die("Error al obtener los datos de la API.");
+}
+
+// Decodificar el JSON
+$productData = json_decode($response2, true);
+
+// Verificar si la decodificación fue exitosa y si hay datos
+if ($productData === null || empty($productData)) {
+  die("Error al decodificar los datos de la API o no se encontraron resultados.");
+}
+
+// Acceder al primer elemento si existe
+$arr2 = $productData ?? null; // El operador null coalescing asegura que no falle si no existe el índice
+
+// comença la generacio del PDF
 
 // Extend the TCPDF class to create custom Header and Footer
-class MYPDF extends TCPDF {
+class MYPDF extends TCPDF
+{
 
   // Page footer
-  public function Footer() {
-      // Position at 15 mm from bottom
-      $this->SetY(-15);
-      // Set font
-      $this->SetFont('helvetica', 'I', 8);
-      // Page number
-      $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
-      // Custom footer text
-      $this->Cell(0, 10, '<strong>Elliot Fernandez<br>Tax Reference Number: 9323971DA</strong>', 0, false, 'C', 0, '', 0, false, 'T', 'M');
+  public function Footer()
+  {
+    // Position at 15 mm from bottom
+    $this->SetY(-15);
+    // Set font
+    $this->SetFont('helvetica', 'I', 8);
+    // Page number
+    $this->Cell(0, 10, 'Page ' . $this->getAliasNumPage() . '/' . $this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+    // Custom footer text
+    $this->Cell(0, 10, '<strong>Elliot Fernandez<br>Tax Reference Number: 9323971DA</strong>', 0, false, 'C', 0, '', 0, false, 'T', 'M');
   }
 }
 
@@ -76,15 +112,17 @@ $pdf->SetAuthor('Elliot Fernandez');
 $pdf->SetTitle('Invoice PDF');
 
 // Add a page
-$pdf->AddPage();
+$pdf->AddPage('P', 'A4');
 
 // Add the image to the PDF
-$imagePath = "https://" . $url_server . '/public/00_inc/img/hispantic_logo.jpg';
-$pdf->Image($imagePath, $x = 10, $y = 10, $w = 100, $h = 0, $type = '', $link = '', $align = '', $resize = false, $dpi = 300, $palign = '', $ismask = false, $imgmask = false, $border = 0, $fitbox = false, $hidden = false, $fitonpage = false, $alt = '');
+// Add the image to the PDF
+$imagePath = "https://gestio.elliotfern.com/public/img/hispantic_logo.jpg";
+// Especifica los valores sin unidades, por ejemplo, en milímetros (mm).
+$pdf->Image($imagePath, $x = 10, $y = 10, $w = 70, $h = 0, $type = '', $link = '', $align = '', $resize = false, $dpi = 150, $palign = '', $ismask = false, $imgmask = false, $border = 0, $fitbox = false, $hidden = false, $fitonpage = false, $alt = '');
 
 // set header and footer fonts
-$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 
 // set margins
 $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
@@ -110,14 +148,15 @@ $styles = '<style>
                 border: 1px solid black;
             }
           </style>';
-          
-$html = '
-<br><br><br><br><br><br><br>
+
+$html = '<br><br><br><br><br><br><br>
 <div class="container">
-<strong>Invoice Number: '.$id_factura.'/'.$any.'</strong><br>
-Invoice Date: '.$facDueDate_net.'<br>
-Pay by: '.$pagament.'
+    <strong>Invoice Number: ' . $id_factura . '/' . $any . '</strong><br>
+    Invoice Date: ' . $facDate_net . '<br>
+    Invoice Due Date: ' . $facDueDate_net . '<br>
+    Pay by: ' . $pagament . '
 </div>';
+
 
 $html .= '<div class="container">
   <table class="table">
@@ -125,21 +164,21 @@ $html .= '<div class="container">
           <tr>
             <th>
                 <strong>Invoiced To:</strong><br>
-                '.$empresa.'<br>
-                ATTN: '.$nomClient.' '.$cognomsClient.'<br>
-                Tax ID: '.$nif.'<br>
-                '.$clientAdreca.'<br>
-                '.$ciutat.', ('.$provincia.'), '.$clientCP.'<br>
-                '.$pais.'
+                ' . $empresa . '<br>
+                ATTN: ' . $nomClient . ' ' . $cognomsClient . '<br>
+                Tax ID: ' . $nif . '<br>
+                ' . $clientAdreca . '<br>
+                ' . $ciutat . ', (' . $provincia . '), ' . $clientCP . '<br>
+                ' . $pais . '
             </th>
             <th>
             <strong>HISPANTIC®</strong><br>
             Elliot Fernandez<br>
             Tax ID: 9323971DA<br>
         
-            Apartment 5, The Court, <br>
-            The Paddocks Road<br>
-            Lucan, co. Dublin<br>
+            4 Meehan Court <br>
+            Portlaoise, co. Laois<br>
+            R32 F6YC<br>
             Ireland
             </th>
           </tr>
@@ -162,13 +201,13 @@ $html .= '
             <tbody>';
 
 foreach ($arr2 as $obj2) {
-    $html .= '<tr>
+  $html .= '<tr>
                     <td style="padding: 5px; border: 1px solid black;">' . $obj2['product'] . ' ';
-                    if (!empty($obj2['notes'])) {
-                      $html .= '(' . $obj2['notes'] . ')';
-                  }
-                  $html .= '</td>
-                    <td style="padding: 5px; border: 1px solid black;">€' . $obj2['price'] . '</td>
+  if (!empty($obj2['notes'])) {
+    $html .= '(' . $obj2['notes'] . ')';
+  }
+  $html .= '</td>
+                    <td style="padding: 5px; border: 1px solid black;">€' . number_format($obj2['price'], 2, '.', ',') . '</td>
                </tr>';
 }
 
@@ -182,7 +221,7 @@ $html .= '<div class="container">
           <thead>
           <tr>
             <th scope="col">Sub Total</th>
-            <th scope="col">€'.$subTotal.'</th>
+            <th scope="col">€' . number_format($subTotal, 2, '.', ',') . '</th>
           </tr>
           </thead>
           <tbody>
@@ -190,22 +229,22 @@ $html .= '<div class="container">
             <th scope="row">VAT</th>
             <td>';
 if ($facVAT == 0) {
-    $html .= '€0.00';
+  $html .= '€0.00';
 } else {
-    $html .= $facVAT;
+  $html .= number_format($facVAT, 2, '.', ',');
 }
 $html .= '</td>
           </tr>
 
           <tr>
             <th scope="row">Total</th>
-            <td><strong>€'.$total.'</strong></td>
+            <td><strong>€' . number_format($total, 2, '.', ',') . '</strong></td>
           </tr>
   </table>
 </div>';
 
 if ($idPayment == 6) {
-    $html .= '
+  $html .= '
   <div class="container">
   <h2 style="text-align: center;">PAID BY BANK TRANSFER</h2>
   <span style="text-align: center;"><strong>BANK: AIB Bank (Ireland)</strong><br>
@@ -234,6 +273,4 @@ $pdf->SetHtmlVSpace(array(0, 0, 0, 0));
 $pdf->writeHTML($html, true, false, true, false, '');
 
 // Output the PDF as a downloadable file
-$pdf->Output('invoice_'.$idInvoice.'.pdf', 'D');
-
-?>
+$pdf->Output('invoice_' . $idInvoice . '.pdf', 'D');

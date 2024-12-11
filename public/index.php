@@ -24,12 +24,28 @@ if ($requestUri === '') {
 
 // Buscar la ruta en el arreglo
 $routeFound = false;
+$routeParams = []; // Aquí almacenaremos los parámetros de la ruta
+
 foreach ($routes as $route => $routeInfo) {
+    // Extraer los nombres de los parámetros de la ruta
+    preg_match_all('/\{([a-zA-Z0-9_]+)\}/', $route, $paramNames);
+
+    // Convertir la ruta a un patrón de expresión regular
     $pattern = preg_replace('/\{[a-zA-Z0-9_]+\}/', '([a-zA-Z0-9_-]+)', $route);
 
     // Permitir coincidencia con o sin barra final
     if (preg_match('#^' . $pattern . '/?$#', $requestUri, $matches)) {
         $routeFound = true;
+
+        // Eliminar el primer elemento de $matches (la coincidencia completa)
+        array_shift($matches);
+
+        // Asociar los nombres de los parámetros con sus valores
+        if (!empty($paramNames[1])) {
+            $routeParams = array_combine($paramNames[1], $matches);
+        }
+
+        // Configuración de la vista
         $view = $routeInfo['view'];
         $needsSession = $routeInfo['needs_session'] ?? false;
         $noHeaderFooter = $routeInfo['no_header_footer'] ?? false;

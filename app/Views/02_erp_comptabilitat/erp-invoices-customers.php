@@ -1,12 +1,11 @@
 <?php
-# conectare la base de datos
-$activePage = "accounting";
+
 
 echo '<div class="container">';
 echo '<h2>Elliot Fernandez - Accounting & CRM</h2>';
 echo '<h3>ERP - Customers invoices</h3>';
 
-echo "<p><button type='button' class='btn btn-light btn-sm' id='btnAddCustomerInvoice' onclick='btnCreateCustomInvoice()' data-bs-toggle='modal' data-bs-target='#modalCreateCustomerInvoice'>Create customer invoice</button></p>";
+echo "<p><a href='./facturacio-clients/nova-factura'><button type='button' class='btn btn-light btn-sm' id='btnAddCustomerInvoice'>Create customer invoice</button></a></p>";
 
 echo "<hr>";
 ?>
@@ -89,11 +88,11 @@ echo "<hr>";
                             }
                             html += '</td>';
                             html += '<td>' + data[i].tipusNom + '</td>';
-                            html += '<td><button type="button" class="btn btn-sm btn-warning" onclick="btnCreatePDFInvoice(' + data[i].id + ')" id="pdfButton' + data[i].id + '">PDF</button>';
+                            html += '<td><button type="button" class="btn btn-sm btn-warning" onclick="generatePDF(' + data[i].id + ')" id="pdfButton' + data[i].id + '">PDF</button>';
                             html += '</td>';
-                            html += '<td><button type="button" onclick="btnUpdateBook(' + data[i].id + ')" id="btnUpdateBook" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalUpdateBook" data-id="' + data[i].id + '" value="' + data[i].id + '" data-title="' + data[i].id + '" data-slug="' + data[i].id + '" data-text="' + data[i].id + '">Update</button>';
+                            html += '<td><button type="button">Update</button>';
                             html += '</td>';
-                            html += '<td><button type="button" onclick="btnUpdateBook(' + data[i].id + ')" id="btnUpdateBook" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalUpdateBook" data-id="' + data[i].id + '" value="' + data[i].id + '" data-title="' + data[i].id + '" data-slug="' + data[i].id + '" data-text="' + data[i].id + '">Delete</button>';
+                            html += '<td><button type="button"  id="btnUpdateBook" class="btn btn-sm btn-danger">Delete</button>';
                             html += '</td>';
                             html += '</tr>';
                         }
@@ -106,3 +105,34 @@ echo "<hr>";
     </script>
 </div>
 </div>
+
+<script>
+    const generatePDF = async (invoiceId) => {
+        try {
+            const response = await fetch(`https://gestio.elliotfern.com/api/accounting/get/invoice-pdf/${invoiceId}`);
+
+            if (response.ok) {
+                const blob = await response.blob();
+
+                if (blob.type === 'application/pdf') {
+                    const link = document.createElement('a');
+                    const url = URL.createObjectURL(blob);
+                    link.href = url;
+                    link.download = `invoice_${invoiceId}.pdf`;
+                    document.body.appendChild(link); // Necesario para que el enlace funcione
+                    link.click();
+
+                    // Limpiar
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                } else {
+                    console.error('El archivo descargado no es un PDF', blob.type);
+                }
+            } else {
+                console.error('Error al generar el PDF:', response.status, response.statusText);
+            }
+        } catch (error) {
+            console.error('Hubo un error al hacer la solicitud:', error);
+        }
+    };
+</script>

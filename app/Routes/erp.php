@@ -12,4 +12,10 @@ return [
         'needs_session' => true,
         'no_header_footer' => false, // No incluir header/footer
     ],
+
+    '/erp/facturacio-clients/nova-factura' => [
+        'view' => 'app/Views/02_erp_comptabilitat/erp-invoices-customers-new.php',
+        'needs_session' => true,
+        'no_header_footer' => false, // No incluir header/footer
+    ],
 ];

@@ -16,14 +16,26 @@ return [
 
     // API: Vault
     '/api/vault/get' => [
-        'view' => 'api/10_vault/get-vault.php',
+        'view' => 'app/api/10_vault/get-vault.php',
         'needs_session' => true,
         'no_header_footer' => true, // No incluir header/footer
     ],
 
     // API COMPTABILITAT ERP
-    '/api/accounting/get/' => [
-        'view' => 'api/accounting.php',
+    '/api/accounting/get' => [
+        'view' => 'app/api/02_accounting/accounting.php',
+        'needs_session' => false,
+        'no_header_footer' => true, // No incluir header/footer
+    ],
+
+    '/api/accounting/post/invoice' => [
+        'view' => 'app/api/02_accounting/customer-invoice-insert.php',
+        'needs_session' => true,
+        'no_header_footer' => true, // No incluir header/footer
+    ],
+
+    '/api/accounting/get/invoice-pdf/{id}' => [
+        'view' => 'app/api/02_accounting/generate_pdf.php',
         'needs_session' => true,
         'no_header_footer' => true, // No incluir header/footer
     ],
