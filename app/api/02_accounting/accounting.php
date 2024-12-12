@@ -5,61 +5,81 @@
 
 if (isset($_GET['type']) && $_GET['type'] == 'accounting-customers') {
     global $conn;
-    $data = array();
-    $stmt = $conn->prepare(
-        "SELECT c.id, c.clientNom, c.clientCognoms, c.clientEmail, c.clientWeb, c.clientNIF, c.clientEmpresa, c.clientAdreca, c.clientCiutat, c.clientCP, c.clientProvincia, c.clientPais, c.clientTelefon, c.clientRegistre, ci.city, co.country, cou.county, c.clientStatus, s.estatNom
+    $query = "SELECT c.id, c.clientNom, c.clientCognoms, c.clientEmail, c.clientWeb, c.clientNIF, c.clientEmpresa, c.clientAdreca, c.clientCiutat, c.clientCP, c.clientProvincia, c.clientPais, c.clientTelefon, c.clientRegistre, ci.city, co.country, cou.county, c.clientStatus, s.estatNom
         FROM db_accounting_hispantic_costumers AS c
         INNER JOIN db_cities AS ci ON c.clientCiutat = ci.id
         INNER JOIN db_countries AS co ON c.clientPais = co.id
         INNER JOIN db_countries_counties AS cou ON c.clientProvincia = cou.id
         INNER JOIN  db_accounting_hispantic_costumers_status AS s ON c.clientStatus = s.id
-        ORDER BY c.clientRegistre DESC"
-    );
+        ORDER BY c.clientRegistre DESC";
+
+    $stmt = $conn->prepare($query);
+
+    // Ejecutar la consulta
     $stmt->execute();
-    if ($stmt->rowCount() === 0) echo ('No rows');
-    while ($users = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $data[] = $users;
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit();
     }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     header('Content-Type: application/json');
     echo json_encode($data);
 } elseif (isset($_GET['type']) && $_GET['type'] == 'accounting-customers-invoices') {
     global $conn;
-    $data = array();
-    $stmt = $conn->prepare(
-        "SELECT ic.id, ic.idUser, ic.facConcepte, ic.facData, YEAR(ic.facData) AS yearInvoice,  ic.facDueDate, ic.facSubtotal, ic.facFees, ic.facTotal, ic.facVAT, ic.facIva, ic.facEstat, ic.facPaymentType, vt.ivaPercen, ist.estat, pt.tipusNom, c.clientNom, c.clientCognoms, c.clientEmpresa
+
+    $query = "SELECT ic.id, ic.idUser, ic.facConcepte, ic.facData, YEAR(ic.facData) AS yearInvoice,  ic.facDueDate, ic.facSubtotal, ic.facFees, ic.facTotal, ic.facVAT, ic.facIva, ic.facEstat, ic.facPaymentType, vt.ivaPercen, ist.estat, pt.tipusNom, c.clientNom, c.clientCognoms, c.clientEmpresa
             FROM db_accounting_hispantic_invoices_customers  AS ic
             INNER JOIN db_accounting_hispantic_vat_type AS vt ON ic.facIva = vt.id
             INNER JOIN  db_accounting_hispantic_invoices_status AS ist ON ist.id = ic.facEstat
             INNER JOIN db_accounting_hispantic_payment_type AS pt ON ic.facPaymentType = pt.id
             INNER JOIN db_accounting_hispantic_costumers AS c ON ic.idUser = c.id
-            ORDER BY ic.id ASC"
-    );
+            ORDER BY ic.id DESC";
+
+    $stmt = $conn->prepare($query);
+
+    // Ejecutar la consulta
     $stmt->execute();
 
-    if ($stmt->rowCount() === 0) echo ('No rows');
-    while ($users = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $data[] = $users;
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit();
     }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     header('Content-Type: application/json');
     echo json_encode($data);
 } elseif (isset($_GET['type']) && $_GET['type'] == 'accounting-elliotfernandez-customers-invoices') {
     global $conn;
-    $data = array();
-    $stmt = $conn->prepare(
-        "SELECT ic.id, ic.idUser, ic.facConcepte, ic.facData, YEAR(ic.facData) AS yearInvoice,  ic.facDueDate, ic.facSubtotal, ic.facFees, ic.facTotal, ic.facVAT, ic.facIva, ic.facEstat, ic.facPaymentType, vt.ivaPercen, ist.estat, pt.tipusNom, c.clientNom, c.clientCognoms, c.clientEmpresa
+    $query = "SELECT ic.id, ic.idUser, ic.facConcepte, ic.facData, YEAR(ic.facData) AS yearInvoice,  ic.facDueDate, ic.facSubtotal, ic.facFees, ic.facTotal, ic.facVAT, ic.facIva, ic.facEstat, ic.facPaymentType, vt.ivaPercen, ist.estat, pt.tipusNom, c.clientNom, c.clientCognoms, c.clientEmpresa
                 FROM db_accounting_soletrade_invoices_customers  AS ic
                 LEFT JOIN db_accounting_hispantic_vat_type AS vt ON ic.facIva = vt.id
                 LEFT JOIN db_accounting_hispantic_invoices_status AS ist ON ist.id = ic.facEstat
                 LEFT JOIN db_accounting_hispantic_payment_type AS pt ON ic.facPaymentType = pt.id
                 LEFT JOIN db_accounting_hispantic_costumers AS c ON ic.idUser = c.id
-                ORDER BY ic.id DESC"
-    );
+                ORDER BY ic.id DESC";
+
+    $stmt = $conn->prepare($query);
+
+    // Ejecutar la consulta
     $stmt->execute();
-    if ($stmt->rowCount() === 0) echo ('No rows');
-    while ($users = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $data[] = $users;
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit();
     }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     header('Content-Type: application/json');
     echo json_encode($data);
 } elseif (isset($_GET['type']) && $_GET['type'] == 'accounting-elliotfernandez-supplies-invoices') {
@@ -118,20 +138,29 @@ if (isset($_GET['type']) && $_GET['type'] == 'accounting-customers') {
 } elseif ((isset($_GET['type']) && $_GET['type'] == 'invoice-products') && (isset($_GET['id']))) {
     $id = $_GET['id'];
     global $conn;
-    $data = array();
-    $stmt = $conn->prepare(
-        "SELECT p.id, p.invoice, pd.product, p.notes, p.price
+
+    $query = "SELECT p.id, p.invoice, pd.product, p.notes, p.price
                         FROM db_accounting_soletrade_invoices_customers_products AS p
                         LEFT JOIN db_accounting_soletrade_products AS pd ON pd.id = p.product
                         WHERE p.invoice = $id
                         GROUP BY p.id
-                        ORDER BY p.price desc"
-    );
+                        ORDER BY p.price desc";
+
+    $stmt = $conn->prepare($query);
     $stmt->execute();
-    if ($stmt->rowCount() === 0) echo ('No rows');
-    while ($users = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $data[] = $users;
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit();
     }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     header('Content-Type: application/json');
     echo json_encode($data);
 } elseif (isset($_GET['type']) && $_GET['type'] == 'accounting-supplies-invoices') {

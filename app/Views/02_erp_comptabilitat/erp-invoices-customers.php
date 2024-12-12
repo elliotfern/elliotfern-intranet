@@ -33,7 +33,7 @@ echo "<hr>";
         $(document).ready(function() {
             function fetch_data() {
                 var urlRoot = $("#url").val();
-                var urlAjax = "/api/accounting/get/?type=accounting-elliotfernandez-customers-invoices";
+                var urlAjax = "/api/accounting/proxy/?type=factures-clients";
                 $.ajax({
                     url: urlAjax,
                     method: "POST",

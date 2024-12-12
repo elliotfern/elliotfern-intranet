@@ -2,35 +2,24 @@
 require 'vendor/autoload.php';
 require 'vendor/tecnickcom/tcpdf/tcpdf.php';
 
-// Datos de entrada
-$idInvoice = $routeParams['id'];
-
 header('Content-Type: application/pdf');
 header('Content-Disposition: inline; filename="invoice_' . $idInvoice . '.pdf"');
 header('Content-Transfer-Encoding: binary');
 header('Accept-Ranges: bytes');
 
+// Datos de entrada
+$idInvoice = $routeParams['id'];
 
-// Llamada a las APIs
-// URL de la API con el parámetro id
 $url = "https://gestio.elliotfern.com/api/accounting/get/?type=customers-invoices&id={$idInvoice}";
 
-// Obtener los datos de la API
-$response = file_get_contents($url);
+// segunda llamada a API
+$url2 = "https://gestio.elliotfern.com/api/accounting/get/?type=invoice-products&id={$idInvoice}";
 
-// Comprobar si la respuesta es válida
-if ($response === false) {
-  // Manejar el error si la API no responde
-  die("Error al obtener los datos de la API.");
-}
+// Llamada a la API pasando el token y el ID de la factura
+$invoiceData = hacerLlamadaAPI($url);
 
-// Decodificar el JSON
-$invoiceData = json_decode($response, true);
-
-// Verificar si la decodificación fue exitosa y si hay datos
-if ($invoiceData === null || empty($invoiceData)) {
-  die("Error al decodificar los datos de la API o no se encontraron resultados.");
-}
+// Llamada a la API pasando el token y el ID de la factura
+$productData = hacerLlamadaAPI($url2);
 
 // Acceder al primer elemento si existe
 $obj = $invoiceData ?? null; // El operador null coalescing asegura que no falle si no existe el índice
@@ -60,25 +49,7 @@ $subTotal = $obj['facSubtotal'];
 $facVAT = $obj['facVAT'];
 $malt = $obj['facFees'];
 
-// segunda llamada a API
-$url2 = "https://gestio.elliotfern.com/api/accounting/get/?type=invoice-products&id={$idInvoice}";
 
-// Obtener los datos de la API
-$response2 = file_get_contents($url2);
-
-// Comprobar si la respuesta es válida
-if ($response2 === false) {
-  // Manejar el error si la API no responde
-  die("Error al obtener los datos de la API.");
-}
-
-// Decodificar el JSON
-$productData = json_decode($response2, true);
-
-// Verificar si la decodificación fue exitosa y si hay datos
-if ($productData === null || empty($productData)) {
-  die("Error al decodificar los datos de la API o no se encontraron resultados.");
-}
 
 // Acceder al primer elemento si existe
 $arr2 = $productData ?? null; // El operador null coalescing asegura que no falle si no existe el índice
@@ -115,10 +86,9 @@ $pdf->SetTitle('Invoice PDF');
 $pdf->AddPage('P', 'A4');
 
 // Add the image to the PDF
-// Add the image to the PDF
 $imagePath = "https://gestio.elliotfern.com/public/img/hispantic_logo.jpg";
 // Especifica los valores sin unidades, por ejemplo, en milímetros (mm).
-$pdf->Image($imagePath, $x = 10, $y = 10, $w = 70, $h = 0, $type = '', $link = '', $align = '', $resize = false, $dpi = 150, $palign = '', $ismask = false, $imgmask = false, $border = 0, $fitbox = false, $hidden = false, $fitonpage = false, $alt = '');
+$pdf->Image($imagePath, $x = 17, $y = 10, $w = 70, $h = 0, $type = '', $link = '', $align = '', $resize = false, $dpi = 150, $palign = '', $ismask = false, $imgmask = false, $border = 0, $fitbox = false, $hidden = false, $fitonpage = false, $alt = '');
 
 // set header and footer fonts
 $pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -149,14 +119,13 @@ $styles = '<style>
             }
           </style>';
 
-$html = '<br><br><br><br><br><br><br>
+$html = '<br><br><br><br><br>
 <div class="container">
     <strong>Invoice Number: ' . $id_factura . '/' . $any . '</strong><br>
     Invoice Date: ' . $facDate_net . '<br>
     Invoice Due Date: ' . $facDueDate_net . '<br>
     Pay by: ' . $pagament . '
 </div>';
-
 
 $html .= '<div class="container">
   <table class="table">
@@ -189,7 +158,7 @@ $html .= '<div class="container">
 $html = $styles . $html;
 $html .= '
 <div class="container">
-<h2 style="text-align: center;"><strong>INVOICE DETAILS</strong></h2>
+<h4 style="text-align: center;"><strong>INVOICE DETAILS</strong></h4>
     <div class="table-responsive">
         <table class="table">
             <thead>
@@ -199,6 +168,9 @@ $html .= '
                 </tr>
             </thead>
             <tbody>';
+
+// Verificar si $arr2 es un array, si no lo es, lo convertimos en un array.
+$arr2 = is_array($arr2) ? $arr2 : [$arr2]; // Si no es un array, lo convertimos en un array con un solo producto
 
 foreach ($arr2 as $obj2) {
   $html .= '<tr>
@@ -246,7 +218,7 @@ $html .= '</td>
 if ($idPayment == 6) {
   $html .= '
   <div class="container">
-  <h2 style="text-align: center;">PAID BY BANK TRANSFER</h2>
+  <h5 style="text-align: center;">PAID BY BANK TRANSFER</h5>
   <span style="text-align: center;"><strong>BANK: AIB Bank (Ireland)</strong><br>
   IBAN: IE80AIBK93356246103042<br>
   BIC-SWIFT: AIBKIE2D</span>
@@ -254,12 +226,12 @@ if ($idPayment == 6) {
 } elseif ($idPayment == 5) {
   $html .= '
   <div class="container">
-  <h2 style="text-align: center;">PAID BY STRIPE (Credit/Debit Card)</h2>
+  <h4 style="text-align: center;">PAID BY STRIPE (Credit/Debit Card)</h4>
   </div>';
 } elseif ($idPayment == 2) {
   $html .= '
   <div class="container">
-  <h2 style="text-align: center;">PAID BY BANK TRANSFER</h2>
+  <h4 style="text-align: center;">PAID BY BANK TRANSFER</h4>
   <span style="text-align: center;"><strong>BANK: N26 (Germany)</strong><br>
   IBAN: DE56100110012620403754<br>
   BIC-SWIFT: NTSBDEB1XXX</span>
@@ -271,6 +243,10 @@ $pdf->SetHtmlVSpace(array(0, 0, 0, 0));
 
 // Agregar el contenido HTML a través de la función writeHTML()
 $pdf->writeHTML($html, true, false, true, false, '');
+
+// Limpiar el buffer de salida
+ob_clean();
+flush();
 
 // Output the PDF as a downloadable file
 $pdf->Output('invoice_' . $idInvoice . '.pdf', 'D');

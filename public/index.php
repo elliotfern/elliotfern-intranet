@@ -11,6 +11,7 @@ require __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../app/Config/constants.php';
 require_once __DIR__ . '/../app/Config/config.php';
 require_once __DIR__ . '/../app/Config/funcions.php';
+require_once __DIR__ . '/../app/Config/proxy.php';
 require_once __DIR__ . '/../app/Routes/routes.php';
 
 // Normalizar la ruta solicitada
@@ -62,6 +63,12 @@ if (!$routeFound) {
     $needsSession = $routeInfo['needs_session'] ?? false;
     if ($needsSession) {
         verificarSesion(); // Llamada a la función de verificación de sesión
+    }
+
+    // API: verificacio autenticacio
+    $needsAutentication = $routeInfo['needs_autentication'] ?? false;
+    if ($needsAutentication) {
+        verificarTokenAPI(); // Llamada a la función de verificación de sesión
     }
 
     // Determinar si la vista necesita encabezado y pie de página

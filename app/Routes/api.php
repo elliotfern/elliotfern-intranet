@@ -3,13 +3,13 @@
 return [
     // API: Registre usuari / Login
     '/api/auth/login' => [
-        'view' => 'api/00_auth/login.php',
+        'view' => 'app/api/00_auth/login.php',
         'needs_session' => false,
         'no_header_footer' => true,
     ],
 
     '/api/auth/registre' => [
-        'view' => 'api/00_auth/registre.php',
+        'view' => 'app/api/00_auth/registre.php',
         'needs_session' => false,
         'no_header_footer' => true, // No incluir header/footer
     ],
@@ -22,15 +22,24 @@ return [
     ],
 
     // API COMPTABILITAT ERP
+    '/api/accounting/proxy' => [
+        'view' => 'app/api/02_accounting/proxy.php',
+        'needs_session' => false,
+        'needs_autentication' => false,
+        'no_header_footer' => true, // No incluir header/footer
+    ],
+
     '/api/accounting/get' => [
         'view' => 'app/api/02_accounting/accounting.php',
         'needs_session' => false,
+        'needs_autentication' => true,
         'no_header_footer' => true, // No incluir header/footer
     ],
 
     '/api/accounting/post/invoice' => [
         'view' => 'app/api/02_accounting/customer-invoice-insert.php',
-        'needs_session' => true,
+        'needs_session' => false,
+        'needs_autentication' => true,
         'no_header_footer' => true, // No incluir header/footer
     ],
 
