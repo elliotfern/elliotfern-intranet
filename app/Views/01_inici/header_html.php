@@ -1,5 +1,5 @@
 <?php
-$favicon = APP_DEV . "/public/img/icon.png";
+$favicon = "/public/img/icon.png";
 ?>
 
 <!DOCTYPE html>

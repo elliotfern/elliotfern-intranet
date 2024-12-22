@@ -8,4 +8,5 @@ $dotenv->load();
 
 // En el controlador o en un archivo de configuración
 use App\Config\Database;
+
 $conn = Database::getConnection();
