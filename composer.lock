@@ -447,7 +447,6 @@
         },
         {
             "name": "tecnickcom/tcpdf",
-<<<<<<< HEAD
             "version": "6.8.0",
             "source": {
                 "type": "git",
@@ -458,18 +457,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/14ffa0e308f5634aa2489568b4b90b24073b6731",
                 "reference": "14ffa0e308f5634aa2489568b4b90b24073b6731",
-=======
-            "version": "6.7.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "7956f5e37863c6a569d5ccfae826f353a12a2493"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/7956f5e37863c6a569d5ccfae826f353a12a2493",
-                "reference": "7956f5e37863c6a569d5ccfae826f353a12a2493",
->>>>>>> 9a73a7e249f477a8924ef753dfb8d632661ce007
                 "shasum": ""
             },
             "require": {
@@ -521,11 +508,7 @@
             ],
             "support": {
                 "issues": "https://github.com/tecnickcom/TCPDF/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/tecnickcom/TCPDF/tree/6.8.0"
-=======
-                "source": "https://github.com/tecnickcom/TCPDF/tree/6.7.8"
->>>>>>> 9a73a7e249f477a8924ef753dfb8d632661ce007
             },
             "funding": [
                 {
@@ -533,11 +516,7 @@
                     "type": "custom"
                 }
             ],
-<<<<<<< HEAD
             "time": "2024-12-23T13:34:57+00:00"
-=======
-            "time": "2024-12-13T19:31:40+00:00"
->>>>>>> 9a73a7e249f477a8924ef753dfb8d632661ce007
         },
         {
             "name": "vlucas/phpdotenv",
@@ -1186,7 +1165,6 @@
         },
         {
             "name": "phpunit/phpunit",
-<<<<<<< HEAD
             "version": "11.5.3",
             "source": {
                 "type": "git",
@@ -1197,18 +1175,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/30e319e578a7b5da3543073e30002bf82042f701",
                 "reference": "30e319e578a7b5da3543073e30002bf82042f701",
-=======
-            "version": "11.5.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "153d0531b9f7e883c5053160cad6dd5ac28140b3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/153d0531b9f7e883c5053160cad6dd5ac28140b3",
-                "reference": "153d0531b9f7e883c5053160cad6dd5ac28140b3",
->>>>>>> 9a73a7e249f477a8924ef753dfb8d632661ce007
                 "shasum": ""
             },
             "require": {
@@ -1229,11 +1195,7 @@
                 "phpunit/php-timer": "^7.0.1",
                 "sebastian/cli-parser": "^3.0.2",
                 "sebastian/code-unit": "^3.0.2",
-<<<<<<< HEAD
                 "sebastian/comparator": "^6.3.0",
-=======
-                "sebastian/comparator": "^6.2.1",
->>>>>>> 9a73a7e249f477a8924ef753dfb8d632661ce007
                 "sebastian/diff": "^6.0.2",
                 "sebastian/environment": "^7.2.0",
                 "sebastian/exporter": "^6.3.0",
@@ -1284,11 +1246,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.3"
-=======
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.2"
->>>>>>> 9a73a7e249f477a8924ef753dfb8d632661ce007
             },
             "funding": [
                 {
@@ -1304,11 +1262,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
             "time": "2025-01-13T09:36:00+00:00"
-=======
-            "time": "2024-12-21T05:51:08+00:00"
->>>>>>> 9a73a7e249f477a8924ef753dfb8d632661ce007
         },
         {
             "name": "sebastian/cli-parser",
