@@ -86,7 +86,11 @@
             <p><strong>Editorial: </strong> ${llibre.editorial}</p>
             <p><strong>Idioma original: </strong> ${llibre.idioma_ca}</p>
             <p><button type='button' class='btn btn-light btn-sm'>${llibre.estat}</button></p>
+<<<<<<< HEAD
             <a href="${window.location.origin}/biblioteca/llibre/modifica/${llibre.id}" class="btn btn-secondary btn-sm modificar-link">Modificar</a>
+=======
+            <a href="${window.location.origin}/biblioteca/modifica/llibre/${llibre.id}" class="btn btn-secondary btn-sm modificar-link">Modificar</a>
+>>>>>>> 9a73a7e249f477a8924ef753dfb8d632661ce007
             <button type='button' class='btn btn-dark btn-sm' onclick='eliminaContacte(${llibre.id})'>Eliminar</button>
           </div>`;
         });

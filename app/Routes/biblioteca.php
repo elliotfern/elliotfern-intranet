@@ -20,12 +20,15 @@ return [
         'no_header_footer' => false, // No incluir header/footer
     ],
 
+<<<<<<< HEAD
     '/biblioteca/llibre/modifica/{llibreId}' => [
         'view' => 'app/Views/08_biblioteca_llibres/form-modifica-llibre.php',
         'needs_session' => true,
         'no_header_footer' => false, // No incluir header/footer
     ],
 
+=======
+>>>>>>> 9a73a7e249f477a8924ef753dfb8d632661ce007
     '/biblioteca/llibre/nou' => [
         'view' => 'app/Views/08_biblioteca_llibres/biblioteca-llibre-inserir.php',
         'needs_session' => true,

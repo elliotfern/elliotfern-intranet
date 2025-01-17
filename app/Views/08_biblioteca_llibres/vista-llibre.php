@@ -61,7 +61,11 @@ $slug = $routeParams['llibreSlug'];
           // Actualizar el DOM con los datos recibidos
           document.getElementById('titolBook').textContent = data.titol;
           document.getElementById('nameImg').src = `https://media.elliotfern.com/img/library-book/${data.nameImg}.jpg`;
+<<<<<<< HEAD
           document.getElementById('modificaLlibreUrl').href = `${window.location.origin}/biblioteca/llibre/modifica/${data.id}`;
+=======
+          document.getElementById('modificaLlibreUrl').href = `${window.location.origin}/biblioteca/modifica/llibre/${data.id}`;
+>>>>>>> 9a73a7e249f477a8924ef753dfb8d632661ce007
           document.getElementById('linkAutor').href = `${window.location.origin}/biblioteca/autor/fitxa/${data.slugAutor}`;
           document.getElementById('titol').textContent = data.titol;
           document.getElementById('titolEng').textContent = data.titolEng;
