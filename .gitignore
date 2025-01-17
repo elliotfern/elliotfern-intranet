@@ -4,6 +4,7 @@ Thumbs.db
 /.vscode/
 .gitignore
 error_log
+/public/00_inc/img/
 
 # Ignorar logs y archivos temporales
 /logs/

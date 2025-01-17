@@ -5,89 +5,120 @@
  * @update_book_ajax
  */
 
+// Check if the request method is POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('HTTP/1.1 405 Method Not Allowed');
+    echo json_encode(['error' => 'Method not allowed']);
+    exit();
+}
+
+// Verificar origen permitido
+$allowed_origins = ['https://gestio.elliotfern.com'];
+if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowed_origins)) {
+    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+} else {
+    http_response_code(403);
+    echo json_encode(['error' => 'Acceso no permitido']);
+    exit();
+}
+
+// Verificar si se recibió un archivo
+if (empty($_FILES['fileToUpload']) || $_FILES['fileToUpload']['error'] !== UPLOAD_ERR_OK) {
+    http_response_code(400);
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'No se subió ningún archivo o hubo un error en la carga.',
+        'error_code' => $_FILES['fileToUpload']['error'] ?? 'Sin información'
+    ]);
+    exit();
+}
+
+// Configuración de rutas
 $servidorMedia = '/home/epgylzqu/media.elliotfern.com/img/';
 
-$tmpfilesize = isset($_FILES["fileToUpload"]["size"]) ? $_FILES["fileToUpload"]["size"] : 0;
-$tmpfilename = isset($_FILES["fileToUpload"]["tmp_name"]) ? $_FILES["fileToUpload"]["tmp_name"] : 0;
-$tmpfiletype = isset($_FILES["fileToUpload"]["type"]) ? $_FILES["fileToUpload"]["type"] : 0;
+// Verificar y sanitizar el tipo de imagen
+$type = isset($_POST['typeImg']) ? (int)$_POST['typeImg'] : 0;
+$allowed_types = [
+    1 => 'library-author',
+    2 => 'library-book',
+    7 => 'cinema-television',
+    8 => 'cinema-movie',
+    9 => 'cinema-actor',
+];
+$typeName = $allowed_types[$type] ?? 'elliotfern';
 
-$type = $_POST['typeImg'];
-
-if ($type == 1) {
-    $typeName = "library-author"; 
-} elseif ($type == 2) {
-    $typeName = "library-book";
-} elseif ($type == 7) {
-    $typeName = "cinema-television";
-} elseif ($type == 8) {
-    $typeName = "cinema-movie";
-} elseif ($type == 9) {
-    $typeName = "cinema-actor";
-} else {
-    $typeName = "elliotfern";
-}
-
-// Ruta donde se guardarán las imágenes en el servidor
-$target_dir =  $servidorMedia . '/' . $typeName . '/';
-
-// Verificar si el directorio existe, si no, crearlo
+// Crear el directorio de destino si no existe
+$target_dir = rtrim($servidorMedia, '/') . '/' . $typeName . '/';
 if (!file_exists($target_dir)) {
-    mkdir($target_dir, 0777, true); // Crear el directorio con permisos de escritura
-}
-
-// Verificar el tipo y tamaño del archivo antes de moverlo
-if ( ($_FILES["fileToUpload"]["size"] < 2097152) && 
-    (in_array($_FILES["fileToUpload"]["type"], ["image/jpeg", "image/jpg", "image/png", "image/gif"])) ) {
-
-    // Generar un nombre único para evitar sobrescribir archivos
-    $uniqueName = basename($_FILES['fileToUpload']['name']);
-    $targetFile = $target_dir . $uniqueName;
-
-    // Mover el archivo al servidor
-    if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $targetFile)) {
-
-        // Insertar los datos en la base de datos
-        $nameImg = pathinfo($uniqueName, PATHINFO_FILENAME);  // Obtener solo el nombre sin la extensión
-        $alt = data_input($_POST['alt']);
-        $dateCreated = date('Y-m-d');
-
-        // Realizar la inserción en la base de datos
-        global $conn;
-        $sql = "INSERT INTO db_img SET nameImg=:nameImg, typeImg=:typeImg, alt=:alt, dateCreated=:dateCreated";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(":nameImg", $nameImg, PDO::PARAM_STR);
-        $stmt->bindParam(":typeImg", $type, PDO::PARAM_INT);
-        $stmt->bindParam(":alt", $alt, PDO::PARAM_STR);
-        $stmt->bindParam(":dateCreated", $dateCreated, PDO::PARAM_STR);
-
-        if ($stmt->execute()) {
-            // Respuesta en caso de éxito
-            $response = array(
-                'status' => 'success',
-                'message' => 'El archivo se ha subido y registrado correctamente.'
-            );
-        } else {
-            // Respuesta en caso de error al insertar en la base de datos
-            $response = array(
-                'status' => 'error',
-                'message' => 'Hubo un problema al insertar en la base de datos.'
-            );
-        }
-    } else {
-        // Respuesta en caso de error al mover el archivo
-        $response = array(
-            'status' => 'error',
-            'message' => 'Hubo un problema al mover el archivo al servidor.'
-        );
+    if (!mkdir($target_dir, 0777, true)) {
+        echo json_encode(['error' => "No se pudo crear el directorio $target_dir."]);
+        exit();
     }
-} else {
-    // Respuesta si el archivo no cumple con los requisitos
-    $response = array(
-        'status' => 'error',
-        'message' => 'El archivo es demasiado grande o no es un tipo de imagen permitido.'
-    );
 }
 
-header("Content-Type: application/json");
-echo json_encode($response);
-?>
+// Verificar permisos de escritura
+if (!is_writable($target_dir)) {
+    echo json_encode(['error' => "El directorio $target_dir no tiene permisos de escritura."]);
+    exit();
+}
+
+// Validar el archivo
+$file = $_FILES['fileToUpload'];
+$allowed_mime_types = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+$max_file_size = 2 * 1024 * 1024; // 2 MB
+
+if ($file['size'] > $max_file_size || !in_array($file['type'], $allowed_mime_types)) {
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'El archivo es demasiado grande o no es un tipo de imagen permitido.',
+    ]);
+    exit();
+}
+
+// Generar un nombre único para el archivo
+$uniqueName = basename($file['name']);
+$targetFile = $target_dir . $uniqueName;
+
+// Mover el archivo al servidor
+if (!move_uploaded_file($file['tmp_name'], $targetFile)) {
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Hubo un problema al mover el archivo al servidor.',
+    ]);
+    exit();
+}
+
+// Insertar datos en la base de datos
+try {
+    $nameImg = pathinfo($uniqueName, PATHINFO_FILENAME);
+    $alt = htmlspecialchars($_POST['alt'] ?? '', ENT_QUOTES, 'UTF-8');
+    $dateCreated = date('Y-m-d');
+
+    // Usar una conexión global para PDO
+    global $conn;
+    $sql = "INSERT INTO db_img (nameImg, typeImg, alt, dateCreated) 
+            VALUES (:nameImg, :typeImg, :alt, :dateCreated)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(":nameImg", $nameImg, PDO::PARAM_STR);
+    $stmt->bindParam(":typeImg", $type, PDO::PARAM_INT);
+    $stmt->bindParam(":alt", $alt, PDO::PARAM_STR);
+    $stmt->bindParam(":dateCreated", $dateCreated, PDO::PARAM_STR);
+
+    if ($stmt->execute()) {
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'El archivo se ha subido y registrado correctamente.',
+        ]);
+    } else {
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Hubo un problema al insertar en la base de datos.',
+        ]);
+    }
+} catch (Exception $e) {
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Error al interactuar con la base de datos.',
+        'error' => $e->getMessage(),
+    ]);
+}

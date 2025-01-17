@@ -39,7 +39,7 @@ return [
     '/api/accounting/post/invoice' => [
         'view' => 'app/api/02_accounting/customer-invoice-insert.php',
         'needs_session' => false,
-        'needs_autentication' => true,
+        'needs_autentication' => false,
         'no_header_footer' => true, // No incluir header/footer
     ],
 
@@ -48,4 +48,33 @@ return [
         'needs_session' => true,
         'no_header_footer' => true, // No incluir header/footer
     ],
+
+    // 08. BIBLIOTECA
+    '/api/biblioteca/get/autors' => [
+        'view' => 'app/api/08_biblioteca_llibres/get-library.php',
+        'needs_session' => false,
+        'no_header_footer' => true, // No incluir header/footer
+    ],
+
+    '/api/biblioteca/put' => [
+        'view' => 'app/api/08_biblioteca_llibres/put-biblioteca.php',
+        'needs_session' => false,
+        'no_header_footer' => true, // No incluir header/footer
+    ],
+
+    '/api/biblioteca/post' => [
+        'view' => 'app/api/08_biblioteca_llibres/post-biblioteca.php',
+        'needs_session' => false,
+        'no_header_footer' => true, // No incluir header/footer
+    ],
+
+    // BD AUXILIARS
+    '/api/auxiliars/post/imatges' => [
+        'view' => 'app/api/100_auxiliars/image-upload-process-form.php',
+        'needs_session' => false,
+        'no_header_footer' => true, // No incluir header/footer
+    ],
+
+
+
 ];

@@ -1,18 +1,14 @@
 <h2>La meva biblioteca</h2>
 
-<p><button type='button' class='btn btn-outline-secondary' id='btnCreateLink' onclick='inserirLlibre()'>Afegir nou llibre &rarr;</button>
+<p><a href="/biblioteca/llibre/nou"><button type='button' class='btn btn-outline-secondary'>Afegir nou llibre &rarr;</button></a>
 
-<button type='button' class='btn btn-outline-success' id='btnCreateLink' onclick='inserirAutor()'>Afegir nou autor &rarr;</button>
+    <a href="/biblioteca/autor/nou"><button type='button' class='btn btn-outline-success'>Afegir nou autor &rarr;</button></a>
 </p>
 
 <div class="alert alert-success" role="alert">
     <ul>
-        <li> <a href="<?php echo APP_DEV .'/biblioteca/llibres';?>">Col·lecció de llibres</a></li>
-        <li><a href="<?php echo APP_DEV .'/biblioteca/autors';?>">Col·lecció d'autors/es</a></li>
-    
-</ul>
-</div>
+        <li> <a href="/biblioteca/llibres">Col·lecció de llibres</a></li>
+        <li><a href="/biblioteca/autors">Col·lecció d'autors/es</a></li>
 
-<?php
-# footer
-require_once(APP_ROOT . '/public/01_inici/footer.php');
+    </ul>
+</div>

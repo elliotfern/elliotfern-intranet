@@ -5,10 +5,10 @@
 <hr>
 
 <!-- Campo de búsqueda -->
-  <div class="input-group mb-3 quadre-cercador">
-    <input type="text" class="form-control" placeholder="Cercar per llibre o per autor" id="searchInput">
-    <button class="btn btn-outline-secondary" type="button" onclick="cercarLlibres()">Cercar</button>
-  </div>
+<div class="input-group mb-3 quadre-cercador">
+  <input type="text" class="form-control" placeholder="Cercar per llibre o per autor" id="searchInput">
+  <button class="btn btn-outline-secondary" type="button" onclick="cercarLlibres()">Cercar</button>
+</div>
 
 <!-- Botones para seleccionar el tipo de contacto -->
 <div class="btn-group" role="group" aria-label="Tipus de llibre" style="margin-bottom:25px">
@@ -31,9 +31,9 @@
   // Escuchar el evento de entrada en el campo de búsqueda
   $('#searchInput').on('input', function() {
     cercarLlibres();
-});
+  });
 
-    $(document).ready(function() {
+  $(document).ready(function() {
     obtenirLlibres(10); // Pasar 10 como parámetro para mostrar todos los libros al cargar la página
 
     // Manejar clic en los botones de tipo de contacto
@@ -48,92 +48,71 @@
     });
   });
 
-function obtenirLlibres(tipus) {
-// Si se selecciona "Tots", no pasamos ningún tipo de contacto como parámetro
-let urlAjax = devDirectory + "/api/biblioteca/get/?type=totsLlibres";
-if (tipus !== 10) {
-  urlAjax = devDirectory + "/api/biblioteca/get/?type=generes&genere=" + tipus;
-}
+  function obtenirLlibres(tipus) {
+    let urlAjax = devDirectory + "/api/biblioteca/get/autors/?type=totsLlibres";
+    if (tipus !== 10) {
+      urlAjax = devDirectory + "/api/biblioteca/get/autors/?type=generes&genere=" + tipus;
+    }
 
-axios.get(urlAjax, {
-    headers: {
-      'Authorization': 'Bearer ' + localStorage.getItem('token'),
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(response => {
-    if (response.status !== 200) {
-      throw new Error('Network response was not ok');
-    }
-    return response.data;
-  })
-  .then(data => {
-    // Procesar la respuesta JSON
-    if (Array.isArray(data) && data.length > 0) {
-      data = data[0];
-    }
-    try {
+    axios.get(urlAjax, {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json',
+        }
+      })
+      .then(response => {
+        if (response.status !== 200) {
+          throw new Error('Network response was not ok');
+        }
+        return response.data;
+      })
+      .then(data => {
+        if (!Array.isArray(data)) {
+          console.error('Datos inesperados:', data);
+          return;
+        }
 
-      data.forEach(llibre => {
-        llibres += `
+        let llibres = ''; // Inicializar variable
+        data.forEach(llibre => {
+          llibres += `
           <div class="col-sm-3 col-md-3 quadre">
             <h6><span style="background-color:black;color:white;padding:5px;">${llibre.codiGenere}.${llibre.nomGenCat}</span></h6>
-
-            <p><h6><span style="background-color:black;color:white;padding:5px;margin-top:5px">${llibre.codiSubGenere}.${llibre.sub_genere_cat}</span></h6></p>
-        
-            <h3 class="links-contactes" style="margin-top: 15px;"> <a href="${window.location.origin}/biblioteca/llibre/${llibre.slug}" title="Fitxa del llibre" >${decodificarEntidadesHTML(llibre.titol)}</a></h3>`;
-       
-            llibres += `<p class="links-contactes autor"><strong>Autor/a:</strong> <a href="${window.location.origin}/biblioteca/autor/${llibre.slugAuthor}">${llibre.AutNom} ${llibre.AutCognom1}</a></p>`;
-            llibres += `<p><strong>Any: </strong> ${llibre.any}</p>`;
-            llibres += `<p><strong>Editorial: </strong> ${llibre.editorial}</p>`;
-            llibres += `<p><strong>Idioma original: </strong> ${llibre.idioma_ca}</p>`;            
-            
-            /*
-            if (llibre. !== null) {
-              llibres += `<p><strong>Telèfon 2: </strong> ${llibre.}</p>`;
-            }
-            */
-
-            llibres += `
-            <p><button type='button' class='btn btn-light btn-sm'>${llibre.estat}</button></p>`;
-
-            llibres += `
-            <a href="${window.location.origin + "/biblioteca/modifica/llibre/" + llibre.id}" class="btn btn-secondary btn-sm modificar-link">Modificar</a>
+            <h6><span style="background-color:black;color:white;padding:5px;margin-top:5px">${llibre.codiSubGenere}.${llibre.sub_genere_cat}</span></h6>
+            <h3 class="links-contactes" style="margin-top: 15px;">
+              <a href="${window.location.origin}/biblioteca/llibre/fitxa/${llibre.slug}" title="Fitxa del llibre">${llibre.titol}</a>
+            </h3>
+            <p class="links-contactes autor"><strong>Autor/a:</strong> <a href="${window.location.origin}/biblioteca/autor/fitxa/${llibre.slugAuthor}">${llibre.AutNom} ${llibre.AutCognom1}</a></p>
+            <p><strong>Any: </strong> ${llibre.any}</p>
+            <p><strong>Editorial: </strong> ${llibre.editorial}</p>
+            <p><strong>Idioma original: </strong> ${llibre.idioma_ca}</p>
+            <p><button type='button' class='btn btn-light btn-sm'>${llibre.estat}</button></p>
+            <a href="${window.location.origin}/biblioteca/llibre/modifica/${llibre.id}" class="btn btn-secondary btn-sm modificar-link">Modificar</a>
             <button type='button' class='btn btn-dark btn-sm' onclick='eliminaContacte(${llibre.id})'>Eliminar</button>
-            </div>`;
-          });
-          document.getElementById('llibresContainer').innerHTML = llibres;
+          </div>`;
+        });
 
-    } catch (error) {
-      console.error('Error al parsear JSON:', error);
-    }
-  })
-  .catch(error => {
-    console.error('Error en la solicitud Axios:', error);
-  });
-}
+        document.getElementById('llibresContainer').innerHTML = llibres;
+      })
+      .catch(error => {
+        console.error('Error en la solicitud Axios:', error);
+      });
+  }
 
 
 
+  // Función para buscar libros
+  function cercarLlibres() {
+    let textoBusqueda = normalizeText($('#searchInput').val());
 
-// Función para buscar libros
-function cercarLlibres() {
-  let textoBusqueda = normalizeText($('#searchInput').val());
-
-  // Filtrar libros según el texto de búsqueda normalizado
-  $('#llibresContainer .quadre').each(function() {
-    let titol = normalizeText($(this).find('h3').text());
-    let autor = normalizeText($(this).find('.autor').text()); // Obtener el texto del autor/a y apellidos
-    if (titol.includes(textoBusqueda) || autor.includes(textoBusqueda)) {
-      $(this).show();
-    } else {
-      $(this).hide();
-    }
-  });
-}
-
+    // Filtrar libros según el texto de búsqueda normalizado
+    $('#llibresContainer .quadre').each(function() {
+      let titol = normalizeText($(this).find('h3').text());
+      let autor = normalizeText($(this).find('.autor').text()); // Obtener el texto del autor/a y apellidos
+      if (titol.includes(textoBusqueda) || autor.includes(textoBusqueda)) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  }
 </script>
-
-<?php
-# footer
-require_once(APP_ROOT . '/public/01_inici/footer.php');
