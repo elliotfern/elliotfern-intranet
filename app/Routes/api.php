@@ -68,12 +68,40 @@ return [
         'no_header_footer' => true, // No incluir header/footer
     ],
 
+    // BD CINEMA
+    '/api/cinema/get' => [
+        'view' => 'app/api/11_cinema/get-cinema.php',
+        'needs_session' => false,
+        'no_header_footer' => true, // No incluir header/footer
+    ],
+
+    '/api/cinema/post' => [
+        'view' => 'app/api/11_cinema/post-cinema.php',
+        'needs_session' => false,
+        'no_header_footer' => true, // No incluir header/footer
+    ],
+
+    '/api/cinema/put' => [
+        'view' => 'app/api/11_cinema/put-cinema.php',
+        'needs_session' => false,
+        'no_header_footer' => true, // No incluir header/footer
+    ],
+
     // BD AUXILIARS
     '/api/auxiliars/post/imatges' => [
         'view' => 'app/api/100_auxiliars/image-upload-process-form.php',
         'needs_session' => false,
         'no_header_footer' => true, // No incluir header/footer
     ],
+
+    // BD AUXILIARS
+    '/api/auxiliars/get' => [
+        'view' => 'app/api/100_auxiliars/get-auxiliars.php',
+        'needs_session' => false,
+        'no_header_footer' => true, // No incluir header/footer
+    ],
+
+
 
 
 

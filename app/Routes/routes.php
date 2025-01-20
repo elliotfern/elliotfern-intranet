@@ -8,7 +8,8 @@ $routes = array_merge(
     require APP_ROOT . '/Routes/vault.php',
     require APP_ROOT . '/Routes/erp.php',
     require APP_ROOT . '/Routes/biblioteca.php',
-    require APP_ROOT . '/Routes/auxiliars.php'
+    require APP_ROOT . '/Routes/auxiliars.php',
+    require APP_ROOT . '/Routes/cinema.php',
 );
 
 return $routes;
