@@ -1,5 +1,34 @@
 {
+  "name": "elliotfern-intranet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/src/main.ts",
+  "type": "module",
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "@types/jquery": "^3.5.19"
-  }
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-loader": "^8.0.0",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.7.3",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^4.10.0"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://elliotfern: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@github.com/elliotfern/elliotfern-intranet.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/elliotfern/elliotfern-intranet/issues"
+  },
+  "homepage": "https://github.com/elliotfern/elliotfern-intranet#readme"
 }

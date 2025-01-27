@@ -5,10 +5,38 @@
  * @update_book_ajax
  */
 
+use App\Helpers\JwtHelper;
+
+$secretKey = $_ENV['TOKEN'];
+
 // Configuración de cabeceras para aceptar JSON y responder JSON
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: https://gestio.elliotfern.com");
 header("Access-Control-Allow-Methods: PUT");
+
+// Obtener el encabezado Authorization
+$headers = apache_request_headers();
+if (!isset($headers['Authorization'])) {
+  header('HTTP/1.1 401 Unauthorized');
+  echo json_encode(['error' => 'Missing Authorization header']);
+  exit();
+}
+
+$authHeader = $headers['Authorization'];
+list($jwt) = sscanf($authHeader, 'Bearer %s');
+
+if (!$jwt) {
+  header('HTTP/1.1 401 Unauthorized');
+  echo json_encode(['error' => 'Invalid Authorization header']);
+  exit();
+}
+
+$decoded = JwtHelper::verifyJwt($jwt, $secretKey);
+if (!$decoded) {
+  header('HTTP/1.1 401 Unauthorized');
+  echo json_encode(['error' => 'Invalid token']);
+  exit();
+}
 
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {

@@ -51,42 +51,49 @@ if ($conn !== null) {
 </div>
 
 <script>
-function showPass(id) {
-    let inputField = document.getElementById('passw-' + id);
-    let urlAjax = '/api/vault/get/?id=' + id;
+    function showPass(id) {
+        let inputField = document.getElementById('passw-' + id);
+        let urlAjax = '/api/vault/get/?id=' + id;
 
-    if (inputField.type === "password") {
-        $.ajax({
-            url: urlAjax,
-            method: "GET",
-            dataType: "JSON",
-            success: function(data) {
-                if (data.password) {
-                    inputField.value = data.password; // Mostrar la contraseña
-                    inputField.type = "text";
+        if (inputField.type === "password") {
+            fetch(urlAjax, {
+                    method: "GET",
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en la sol·licitud AJAX');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.password) {
+                        inputField.value = data.password; // Mostrar la contraseña
+                        inputField.type = "text";
 
-                    // Copiar la contraseña al portapapeles
-                    navigator.clipboard.writeText(data.password).then(function() {
-                        
-                    }).catch(function(err) {
-                        console.error("Error al copiar al portapapeles: ", err);
-                    });
+                        // Copiar la contraseña al portapapeles
+                        navigator.clipboard.writeText(data.password).then(() => {
+                            console.log("Contraseña copiada al portapapeles");
+                        }).catch(err => {
+                            console.error("Error al copiar al portapapeles: ", err);
+                        });
 
-                    // Ocultar la contraseña después de 5 segundos
-                    setTimeout(() => {
-                        inputField.value = '**********'; // Volver al placeholder después de 5 segundos
-                        inputField.type = "password";
-                    }, 5000);
-                } else {
-                    inputField.value = data.error; // Mostrar la contraseña
-                    inputField.type = "text";
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('Error en la solicitud AJAX:', error);
-                alert('Hubo un problema al intentar obtener la contraseña.');
-            }
-        });
+                        // Ocultar la contraseña después de 5 segundos
+                        setTimeout(() => {
+                            inputField.value = '**********'; // Volver al placeholder después de 5 segundos
+                            inputField.type = "password";
+                        }, 5000);
+                    } else {
+                        inputField.value = data.error; // Mostrar el error
+                        inputField.type = "text";
+                    }
+                })
+                .catch(error => {
+                    console.error('Error en la sol·licitud AJAX:', error);
+                    alert('Hubo un problema al intentar obtener la contraseña.');
+                });
+        }
     }
-}
 </script>

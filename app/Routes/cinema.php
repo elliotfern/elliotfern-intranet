@@ -7,7 +7,7 @@ return [
         'no_header_footer' => false,
     ],
 
-    '/cinema/pelicules' => [
+    '/cinema/pelicules/llistat' => [
         'view' => 'app/Views/11_cinema_series/vista-llistat-pelicules.php',
         'needs_session' => true,
         'no_header_footer' => false, // No incluir header/footer
@@ -19,19 +19,19 @@ return [
         'no_header_footer' => false, // No incluir header/footer
     ],
 
-    '/cinema/pelicules/nova' => [
+    '/cinema/nova-pelicula' => [
         'view' => 'app/Views/11_cinema_series/form-inserir-pelicula.php',
         'needs_session' => true,
         'no_header_footer' => false, // No incluir header/footer
     ],
 
-    '/cinema/pelicules/modifica/{id}' => [
+    '/cinema/modifica-pelicula/{id}' => [
         'view' => 'app/Views/11_cinema_series/form-inserir-pelicula.php',
         'needs_session' => true,
         'no_header_footer' => false, // No incluir header/footer
     ],
 
-    '/cinema/pelicula/{id}' => [
+    '/cinema/fitxa-pelicula/{id}' => [
         'view' => 'app/Views/11_cinema_series/vista-pelicula.php',
         'needs_session' => true,
         'no_header_footer' => false, // No incluir header/footer

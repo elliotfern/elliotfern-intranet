@@ -77,7 +77,7 @@ if (!$routeFound) {
 
 // Incluir encabezado y pie de página si no se especifica que no lo tenga
 if (!$noHeaderFooter) {
-    include 'app/Views/01_inici/header.php';
+    include 'app/Views/01_inici/header.php'; 
 }
 
 // Incluir la vista asociada a la ruta

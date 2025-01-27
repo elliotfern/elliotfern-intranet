@@ -1,0 +1,94 @@
+// FUNCIO PER CONSTRUIR TAULES QUE DEPENEN D'UNA ALTRA API
+function construirTablaFromAPI(url, id, columnas, callback) {
+  let urlAjax = url + id;
+  $.ajax({
+    url: urlAjax,
+    method: 'GET',
+    dataType: 'json',
+    beforeSend: function (xhr) {
+      // Obtener el token del localStorage si es necesario
+      let token = localStorage.getItem('token');
+      if (token) {
+        // Incluir el token en el encabezado de autorización si está presente
+        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+      }
+    },
+    success: function (data) {
+      try {
+        // Verificar si hay datos recibidos desde la API
+        if (data && data.length > 0) {
+          let html = '<table class="table table-striped" id="booksAuthor">';
+          html += '<thead class="table-primary"><tr>';
+
+          // Agregar las cabeceras de las columnas
+          columnas.forEach((columna) => {
+            html += '<th>' + columna + '</th>';
+          });
+
+          html += '</tr></thead><tbody>';
+
+          // Agregar los datos a la tabla
+          data.forEach((fila) => {
+            html += '<tr>';
+            columnas.forEach((columna) => {
+              if (callback && typeof callback === 'function') {
+                html += '<td>' + callback(fila, columna) + '</td>';
+              } else {
+                html += '<td>' + fila[columna.toLowerCase()] + '</td>';
+              }
+            });
+            html += '</tr>';
+          });
+
+          html += '</tbody></table>';
+
+          // Insertar la tabla en el elemento con el ID 'tabla'
+          document.getElementById('tabla').innerHTML = html;
+        } else {
+          // No se hace nada si no hay datos recibidos desde la API
+          console.log('No se han recibido datos desde la API.');
+        }
+      } catch (error) {
+        console.error('Error al parsear JSON:', error); // Mostrar el error de parsing
+      }
+    },
+  });
+}
+
+// FUNCIONS PER MODIFICAR CADENES DE TEXT I DATES
+function normalizeText(text) {
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+}
+
+
+
+
+
+// UTILITATS
+function evitarTancarFinestra() {
+  window.addEventListener('beforeunload', function (event) {
+    // Cancela el evento de cierre predeterminado
+    event.preventDefault();
+    // Mensaje de advertencia
+    event.returnValue = '';
+    // Muestra el mensaje de advertencia
+    alert('¿Estás seguro que quieres cerrar la ventana?');
+  });
+}
+
+function formNomesNumeros() {
+  const inputs = document.querySelectorAll('.soloNumeros');
+
+  inputs.forEach((input) => {
+    input.addEventListener('input', function () {
+      if (isNaN(this.value)) {
+        this.value = ''; // Limpiar el valor si no es un número
+      }
+    });
+  });
+}
+
+// FUNCIÓ PER INICIALITZAR L'EDITOR DE PHP ENRIQUIT TRIX

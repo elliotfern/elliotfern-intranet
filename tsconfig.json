@@ -1,22 +1,27 @@
 {
   "compilerOptions": {
-    "target": "es6", 
-    "module": "es2020", 
+    "target": "es6",
+    "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "allowJs": true,
     "outDir": "./dist",
-    "rootDir": "src_old",
-    "esModuleInterop": true,
+    "rootDir": "./src/",
     "lib": ["es2017", "dom"],
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["./node_modules/@types", "src_old/types"]
+    "typeRoots": ["./node_modules/@types", "src/frontend/types"]
       },
 
  "include": [
-    "src_old",
-    "src_old/types/global.d.ts",
-    "src_old/types",
+    "src",
   ], 
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "scripts": {
+      "build": "webpack --config ./node_modules/ts-node/register ./webpack.config.ts --mode production",
+      "dev": "webpack serve --config webpack.config.ts --mode development",
+      "start": "npm run dev"
+  }
 }
+
