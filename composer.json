@@ -1,11 +1,11 @@
 {
-  "name": "elliot/01_elliotfern-intranet",
+  "name": "elliot/01_elliotfern",
   "description": "Intranet amb Clean architecture",
   "type": "project",
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "App\\": "app/"
+      "App\\": "/src/backend/"
     }
   },
   "authors": [

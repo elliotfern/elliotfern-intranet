@@ -46,14 +46,12 @@
     <h4 class="text-center mt-4">Título Historia Oberta</h4>
     <h5 class="text-center mb-4">Descripción de Historia Oberta</h5>
 
-
-
-
     <style>
-        /* Ejemplo de estilo para la grilla */
+        /* Estilos generales */
         .gridContainer {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
+            /* 3 columnas por fila en pantallas grandes */
             gap: 20px;
             padding: 20px;
         }
@@ -68,6 +66,21 @@
             width: 100%;
             height: auto;
             border-bottom: 1px solid #ccc;
+        }
+
+        /* Estilo para pantallas más pequeñas */
+        @media (max-width: 1024px) {
+            .gridContainer {
+                grid-template-columns: repeat(2, 1fr);
+                /* 2 columnas por fila en pantallas medianas */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .gridContainer {
+                grid-template-columns: 1fr;
+                /* 1 columna por fila en pantallas pequeñas */
+            }
         }
     </style>
 

@@ -1,0 +1,1 @@
+<p><a href="/auxiliars/imatges/inserir">Inserir nova imatge </a></p>
