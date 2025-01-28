@@ -9,6 +9,7 @@ error_log
 # Ignorar logs y archivos temporales
 /logs/
 /temp/
+/_old/
 
 # Ignorar directorio de dependencias (ejemplo para PHP y Composer)
 /vendor/

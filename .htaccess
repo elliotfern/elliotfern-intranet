@@ -2,13 +2,11 @@
     RewriteEngine On
     RewriteBase /
 
-    # Redireccionar "/" a "/inici"
-    RewriteRule ^$ / [L,R=301]
+    # Redireccionar "/" a "/ca/homepage"
+    RewriteRule ^$ ca/homepage [L,R=301]
 
-    # Redireccionar "/admin" a "/inici"
-    # RewriteRule ^admin$ /inici [L,R=301]
-        
+    # Si no es un archivo o directorio, pasar la solicitud a index.php
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.+)$ index.php?uri=$1 [QSA,L]
+    RewriteRule ^(.*)$ index.php?uri=$1 [QSA,L]
 </IfModule>
