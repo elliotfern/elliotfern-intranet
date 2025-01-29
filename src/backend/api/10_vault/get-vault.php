@@ -1,11 +1,9 @@
 <?php
 
 use App\Vault\Adapters\Inbound\VaultController;
-use App\Vault\Core\Services\VaultService;  // <--- Asegúrate de esta línea
+use App\Vault\Core\Services\VaultService;
 use App\Vault\Adapters\Outbound\DatabasePasswordRepository;
 use App\Config\Database;
-
-use App\Controllers\VaultController2;
 
 // Verificar si se ha recibido un parámetro válido
 if (isset($_GET['llistat_serveis'])) {
@@ -38,30 +36,32 @@ if (isset($_GET['llistat_serveis'])) {
         echo json_encode(["error" => "No se encontraron contraseñas"]);
     }
 } elseif (isset($_GET['id']) && is_numeric($_GET['id'])) {
-    $id = (int)$_GET['id'];
+    // Conectar a la base de datos
+    $conn = Database::getConnection();
 
-    if ($conn !== null) {
-        // Instanciar el controlador
-        $passwordController = new VaultController2($conn);
+    // Crear el repositorio
+    $passwordRepository = new DatabasePasswordRepository($conn);
 
-        // Obtener la contraseña desencriptada desde el controlador
-        try {
-            $password = $passwordController->getPassword($id);
+    // Pasar el repositorio a VaultService
+    $vaultService = new VaultService($passwordRepository);
 
-            // Verificar si la respuesta contiene un error
-            if (isset($password['error'])) {
-                // Si contiene un error, se devuelve el mensaje de error
-                //echo json_encode(['error' => $password['error']]);
-            } else {
-                // Si no contiene error, se devuelve la contraseña desencriptada
-                //echo json_encode(['password' => $password]);
-            }
-        } catch (Exception $e) {
-            // En caso de un error en el servidor, se captura la excepción
-            echo json_encode(['error' => 'Server error: ' . $e->getMessage()]);
-        }
+    // Pasar el servicio correctamente a VaultController
+    $passwordController = new VaultController($vaultService);
+
+    // Obtener el user_id
+    $userId = isset($_GET['id']) ? (int)$_GET['id'] : 1;
+
+    // Llamar al método getPasswords con el ID dinámico
+    $passwords = $passwordController->getPasswordDesencrypt($userId);
+
+    // Verificar que hemos obtenido un array de datos
+    header('Content-Type: application/json');
+    if (is_array($passwords)) {
+        // Devolver los datos como un array JSON
+        echo json_encode($passwords, JSON_PRETTY_PRINT);
     } else {
-        echo json_encode(['error' => 'Database connection failed']);
+        // Si no se ha obtenido un array, devolver un error en formato JSON
+        echo json_encode(["error" => "No se encontraron contraseñas"]);
     }
 } else {
     echo json_encode(['error' => 'Invalid ID']);

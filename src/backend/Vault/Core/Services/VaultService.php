@@ -21,6 +21,11 @@ class VaultService implements PasswordServiceInterface
         return $this->passwordRepository->getPasswords($vaultId);
     }
 
+    // Método que obtiene una contraseña y la desencripta
+    public function getPasswordDesencrypt(int $serviceId): array {
+        return $this->passwordRepository->getPasswordDesencrypt($serviceId);
+    }
+
     // Método que guarda una nueva contraseña en el repositorio
     public function savePassword(int $userId, string $serviceName, string $password, string $type, string $url): void
     {
