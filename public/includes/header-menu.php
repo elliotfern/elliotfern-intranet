@@ -1,72 +1,73 @@
-<header class="bg-light py-3 border-bottom">
-    <div class="container d-flex align-items-center justify-content-between">
+<header class="header">
+    <div class="headerContent">
         <!-- Logo -->
-        <h1 class="m-0">
+        <h1 class="logo">
             <a href="/ca/homepage" class="text-decoration-none text-dark">Elliot Fernandez</a>
         </h1>
 
         <!-- Toggle Menu Button -->
-        <button
-            class="btn btn-outline-secondary d-lg-none"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarMenu"
-            aria-expanded="false"
-            aria-controls="navbarMenu">
-            ☰
-        </button>
+        <button class="toggleMenuButton" id="menuToggle">☰</button>
 
         <!-- Navigation Menu -->
-        <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a href="/ca/homepage" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/ca/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/ca/books" class="nav-link">Books</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/ca/history-archives" class="nav-link">History Archives</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/ca/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/ca/links" class="nav-link">Links</a>
-                </li>
+        <nav class="containerMenu menuHidden" id="navbarMenu">
+            <ul>
+                <li><a href="/ca/homepage">Home</a></li>
+                <li><a href="/ca/about">About</a></li>
+                <li><a href="/ca/books">Books</a></li>
+                <li><a href="/ca/history-archives">History Archives</a></li>
+                <li><a href="/ca/blog">Blog</a></li>
+                <li><a href="/ca/links">Links</a></li>
+
                 <!-- Languages Dropdown -->
-                <li class="nav-item dropdown">
-                    <a
-                        href="#"
-                        class="nav-link dropdown-toggle"
-                        id="languagesDropdown"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Languages
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="languagesDropdown">
-                        <li><a href="#" class="dropdown-item">English</a></li>
-                        <li><a href="#" class="dropdown-item">Spanish</a></li>
-                        <li><a href="#" class="dropdown-item">Italian</a></li>
-                        <li><a href="#" class="dropdown-item">French</a></li>
-                        <li><a href="#" class="dropdown-item">Catalan</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" id="languagesDropdown">Languages</a>
+                    <ul class="superMenu1" style="display:none">
+                        <li><a href="#">English</a></li>
+                        <li><a href="#">Spanish</a></li>
+                        <li><a href="#">Italian</a></li>
+                        <li><a href="#">French</a></li>
+                        <li><a href="#">Catalan</a></li>
                     </ul>
                 </li>
             </ul>
+        </nav>
 
-            <!-- Search Form -->
-            <form class="d-flex" role="search">
-                <input
-                    class="form-control me-2"
-                    type="search"
-                    placeholder="Search..."
-                    aria-label="Search" />
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
+        <!-- Search Form -->
+        <form class="searchForm" role="search">
+            <input class="form-control" type="search" placeholder="Search..." aria-label="Search" />
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
     </div>
 </header>
+
+<script>
+    document.getElementById("menuToggle").addEventListener("click", function() {
+        let menu = document.getElementById("navbarMenu");
+        if (menu.classList.contains("menuHidden")) {
+            menu.classList.remove("menuHidden");
+            menu.classList.add("menuVisible");
+        } else {
+            menu.classList.remove("menuVisible");
+            menu.classList.add("menuHidden");
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const languagesDropdown = document.getElementById("languagesDropdown");
+        const languageMenu = document.querySelector(".superMenu1");
+
+        languagesDropdown.addEventListener("click", function(event) {
+            event.preventDefault();
+            languageMenu.style.display = languageMenu.style.display === "flex" ? "none" : "flex";
+        });
+
+        // Cerrar el menú si se hace clic fuera de él
+        document.addEventListener("click", function(event) {
+            if (!languagesDropdown.contains(event.target) && !languageMenu.contains(event.target)) {
+                languageMenu.style.display = "none";
+            }
+        });
+    });
+</script>
+
+<div class="container">

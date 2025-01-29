@@ -6,6 +6,8 @@ $base_routes = [
     '/gestio/entrada' => 'public/intranet/00_homepage/login.php',
     '/gestio' => 'public/intranet/00_homepage/admin.php',
     '/gestio/admin' => 'public/intranet/00_homepage/admin.php',
+
+    // VAULT
     '/gestio/vault' => 'public/intranet/10_claus_acces/index.php',
     '/gestio/vault/elliot' => 'public/intranet/10_claus_acces/vault-elliot.php',
     '/gestio/vault/nova' => 'public/intranet/10_claus_acces/nova-contrasenya.php',
@@ -27,25 +29,41 @@ $routes = [
     '/gestio/entrada' => ['view' => 'public/intranet/00_homepage/login.php', 'needs_session' => false, 'header_footer' => true, 'header_menu_footer' => false, 'apiSenseHTML' => false],
 
     // HOMEPAGE GESTIO
-    '/gestio' => ['view' => 'public/intranet/00_homepage/admin.php', 'needs_session' => true, 'header_footer' => false, 'header_menu_footer' => true, 'apiSenseHTML' => false],
+    '/gestio' => [
+        'view' => 'public/intranet/00_homepage/admin.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
 
-    '/gestio/admin' => ['view' => 'public/intranet/00_homepage/admin.php', 'needs_session' => true, 'header_footer' => false, 'header_menu_footer' => true, 'apiSenseHTML' => false],
+    '/gestio/admin' => [
+        'view' => 'public/intranet/00_homepage/admin.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
 
     // VAULT
     '/gestio/vault' => [
         'view' => 'public/intranet/10_claus_acces/index.php',
         'needs_session' => true,
         'header_footer' => false,
-        'header_menu_footer' => true,
-        'apiSenseHTML' => false
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
     ],
 
     '/gestio/vault/elliot' => [
         'view' => 'public/intranet/10_claus_acces/vault-elliot.php',
         'needs_session' => true,
         'header_footer' => false,
-        'header_menu_footer' => true,
-        'apiSenseHTML' => false
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
     ],
 
 
@@ -53,8 +71,9 @@ $routes = [
         'view' => 'public/intranet/10_claus_acces/nova-contrasenya.php',
         'needs_session' => true,
         'header_footer' => false,
-        'header_menu_footer' => true,
-        'apiSenseHTML' => false
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
     ],
 
     // CINEMA
@@ -62,48 +81,53 @@ $routes = [
         'view' => 'public/intranet/11_cinema_series/index.php',
         'needs_session' => true,
         'header_footer' => false,
-        'header_menu_footer' => true,
-        'apiSenseHTML' => false
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
     ],
 
     '/gestio/cinema/pelicules/llistat' => [
         'view' => 'public/intranet/11_cinema_series/vista-llistat-pelicules.php',
         'needs_session' => true,
         'header_footer' => false,
-        'header_menu_footer' => true,
-        'apiSenseHTML' => false
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
     ],
 
     '/gestio/cinema/series' => [
         'view' => 'public/intranet/11_cinema_series/vista-llistat-series.php',
         'needs_session' => true,
         'header_footer' => false,
-        'header_menu_footer' => true,
-        'apiSenseHTML' => false
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
     ],
 
     '/gestio/cinema/nova-pelicula' => [
         'view' => 'public/intranet/11_cinema_series/form-inserir-pelicula.php',
         'needs_session' => true,
         'header_footer' => false,
-        'header_menu_footer' => true,
-        'apiSenseHTML' => false
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
     ],
 
     '/gestio/cinema/modifica-pelicula/{id}' => [
         'view' => 'public/intranet/11_cinema_series/form-inserir-pelicula.php',
         'needs_session' => true,
         'header_footer' => false,
-        'header_menu_footer' => true,
-        'apiSenseHTML' => false
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
     ],
 
     '/gestio/cinema/fitxa-pelicula/{id}' => [
         'view' => 'public/intranet/11_cinema_series/vista-pelicula.php',
-        'needs_session' => true,
         'header_footer' => false,
-        'header_menu_footer' => true,
-        'apiSenseHTML' => false
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
     ],
 
 ];

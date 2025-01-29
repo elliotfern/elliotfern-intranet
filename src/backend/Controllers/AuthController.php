@@ -5,7 +5,6 @@
 namespace App\Controllers;
 
 use App\Services\AuthService;
-use App\Helpers\JwtHelper;
 use App\Models\UserModel;
 
 class AuthController
@@ -31,8 +30,9 @@ class AuthController
         }
     }
 
-     // Nueva función para el registro
-     public function register() {
+    // Nueva función para el registro
+    public function register()
+    {
         // Recibir los datos JSON
         $data = json_decode(file_get_contents('php://input'), true);
 

@@ -1,16 +1,17 @@
 <?php
 $slug = $routeParams[0];
 ?>
-<div class="container">
-    <h2 class="text-center bold" id="course-title"></h2>
-    <h5 class="text-center italic" id="course-subtitle"></h5>
+<main>
+    <div class="container">
+        <h2 class="text-center bold" id="course-title"></h2>
+        <h5 class="text-center italic" id="course-subtitle"></h5>
 
-    <h1>Articles:</h1>
-    <ul id="courseList"></ul>
+        <h1>Articles:</h1>
+        <ul id="courseList"></ul>
 
-    <hr />
-</div>
-
+        <hr />
+    </div>
+</main>
 <script>
     const nameCourse = "<?php echo $slug; ?>";
     const lang = "ca";

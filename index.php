@@ -6,7 +6,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Incluir configuraciones y rutas
-require_once __DIR__ . '/src/backend/config/config.php';
+require_once __DIR__ . '/src/backend/Config/config.php';
 require_once __DIR__ . '/src/backend/utils/verificacioSessio.php';
 require_once __DIR__ . '/src/backend/routes/routes.php';
 
@@ -95,10 +95,13 @@ if (!$routeFound) {
     // Determinar si la vista necesita encabezado y pie de página
     $noHeaderFooter = $routeInfo['header_footer'] ?? false;
 
-    // Determinar si la vista el menu del header
+    // Determinar si la vista necesita el menu del header
     $headerMenu = $routeInfo['header_menu_footer'] ?? false;
 
     $apiSenseHTML = $routeInfo['apiSenseHTML'] ?? false;
+
+    // Menu per la intranet
+    $headerMenuIntranet = $routeInfo['menu_intranet'] ?? false;
 }
 
 // Incluir encabezado y pie de página si no se especifica que no lo tenga
@@ -121,4 +124,14 @@ if ($noHeaderFooter) {
 } elseif ($apiSenseHTML) {
     // Incluir la vista asociada a la ruta
     include $view;
+} elseif ($headerMenuIntranet) {
+    include 'public/includes/header.php';
+    include 'public/includes/header-menu.php';
+    include 'public/includes/header-menu-intranet.php';
+
+    // Incluir la vista asociada a la ruta
+    include $view;
+
+    include 'public/includes/footer.php';
+    include 'public/includes/footer-end.php';
 }

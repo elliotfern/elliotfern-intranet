@@ -1,8 +1,8 @@
-<div class="container" style="margin-top:50px">
-  <div class="card mx-auto" style="max-width: 400px;">
+<div class="pantallaLogin">
+  <div class="card" style="max-width: 400px;">
     <div class="card-body">
       <div class="container">
-        <h3>Espai Virtual de la Memòria Històrica de Terrassa - EVMHT</h3>
+        <h3>Accès Intranet</h3>
         <?php
         echo '<div class="alert alert-success" id="loginMessageOk" style="display:none" role="alert">
                   <h4 class="alert-heading"><strong>Dades correctes!</strong></h4>
@@ -15,15 +15,15 @@
                   </div>';
         ?>
 
-        <form action="" method="post" class="login">
+        <form action="" method="post" id="loginForm">
           <label for="username">Correu electrònic</label>
-          <input type="text" name="username" id="username" class="form-control">
+          <input type="text" name="username" id="username" class="form-ample-100">
           <br>
 
           <label for="password">Contrasenya</label>
-          <input type="password" name="password" id="password" class="form-control">
+          <input type="password" name="password" id="password" class="form-ample-100">
           <br>
-          <button name="login" id="btnLogin" class="btn btn-primary">Entra</button>
+          <button name="login" id="btnLogin" class="btn-color-negre">Entra</button>
 
         </form>
       </div>

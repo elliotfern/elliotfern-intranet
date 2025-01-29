@@ -1,57 +1,46 @@
 <?php
 
-// Incluir el controlador y la clase de base de datos
-use App\Controllers\VaultController;
-use App\Config\Database;
-
-
-if ($conn !== null) {
-    $passwordController = new VaultController($conn);
-    // Obtener datos
-    $data2 = $passwordController->showPasswords(31);
-} else {
-    echo "No se pudo conectar a la base de datos.";
-}
 
 ?>
 
-<div class="container">
+<main>
+    <div class="container">
+        <h2><a href="/gestio/vault">Vault database</a> > <a href="/vault">Elliot</a></h2>
+        <p><a href='/gestio/vault/nova'><button type='button' class='btn btn-light btn-sm' id='btnAddVault'>Nova contrasenya</button></a></p>
 
-    <h2><a href="/vault">Vault database</a> > <a href="/vault">Elliot</a></h2>
-    <p><a href='/vault/nova'><button type='button' class='btn btn-light btn-sm' id='btnAddVault'>Nova contrasenya</button></a></p>
-
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead class="table-primary">
-                <tr>
-                    <th>Servei</th>
-                    <th>Usuari</th>
-                    <th>Contrasenya</th>
-                    <th>Tipus</th>
-                    <th>Modificada</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($data2 as $row) : ?>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="table-primary">
                     <tr>
-                        <td><a href="<?php echo $row['web']; ?>" target="_blank"><?php echo $row['servei']; ?></a></td>
-                        <td><?php echo $row['usuari']; ?></td>
-                        <td>
-                            <input type="password" id="passw-<?php echo $row['id']; ?>" value="**********" readonly style="border: none; background: none;">
-                            <button type="button" class="btn btn-sm btn-secondary" onclick="showPass(<?php echo $row['id']; ?>)">Show</button>
-                        </td>
-                        <td><?php echo $row['tipus_type']; ?></td>
-                        <td><?php echo $row['date_modified'] == '0000-00-00' ? 'Not modified' : date("d/m/Y", strtotime($row['date_modified'])); ?></td>
-                        <td><button type="button" onclick="updateVault(<?php echo $row['id']; ?>)" class="btn btn-sm btn-warning">Update</button></td>
-                        <td><button type="button" onclick="deleteVault(<?php echo $row['id']; ?>)" class="btn btn-sm btn-danger">Delete</button></td>
+                        <th>Servei</th>
+                        <th>Usuari</th>
+                        <th>Contrasenya</th>
+                        <th>Tipus</th>
+                        <th>Modificada</th>
+                        <th></th>
+                        <th></th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php foreach ($data2 as $row) : ?>
+                        <tr>
+                            <td><a href="<?php echo $row['web']; ?>" target="_blank"><?php echo $row['servei']; ?></a></td>
+                            <td><?php echo $row['usuari']; ?></td>
+                            <td>
+                                <input type="password" id="passw-<?php echo $row['id']; ?>" value="**********" readonly style="border: none; background: none;">
+                                <button type="button" class="btn btn-sm btn-secondary" onclick="showPass(<?php echo $row['id']; ?>)">Show</button>
+                            </td>
+                            <td><?php echo $row['tipus_type']; ?></td>
+                            <td><?php echo $row['date_modified'] == '0000-00-00' ? 'Not modified' : date("d/m/Y", strtotime($row['date_modified'])); ?></td>
+                            <td><button type="button" onclick="updateVault(<?php echo $row['id']; ?>)" class="btn btn-sm btn-warning">Update</button></td>
+                            <td><button type="button" onclick="deleteVault(<?php echo $row['id']; ?>)" class="btn btn-sm btn-danger">Delete</button></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+</main>
 <script>
     function showPass(id) {
         let inputField = document.getElementById('passw-' + id);

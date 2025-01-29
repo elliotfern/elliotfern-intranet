@@ -32,7 +32,7 @@ class AuthService
             $arr_cookie_options = array (
                     'expires' => $expiration, 
                     'path' => '/', 
-                    'domain' => '.elliotfern.com',
+                    'domain' => 'elliotfern.com',
                     'secure' => true,     // or false
                     'httponly' => true,    // or false
                     'samesite' => 'Strict' // None || Lax  || Strict

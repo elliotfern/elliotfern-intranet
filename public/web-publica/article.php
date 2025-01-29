@@ -2,56 +2,57 @@
 $slug = $routeParams[0];
 
 ?>
-<div class="container">
-    <h2 class="text-center bold"></h2>
-    <h5 class="text-center italic"></h5>
+<main>
+    <div class="container">
+        <h2 class="text-center bold"></h2>
+        <h5 class="text-center italic"></h5>
 
-    <!-- Información del autor -->
-    <div class="author-box">
-        <!-- Contenido del AuthorBox -->
+        <!-- Información del autor -->
+        <div class="author-box">
+            <!-- Contenido del AuthorBox -->
+        </div>
+
+        <p>
+
+        </p>
+
+        <!-- Banderas de idiomas -->
+        <div class="translate-articles">
+
+        </div>
+
+        <!-- Índice de contenidos -->
+        <div class="index-continguts">
+        </div>
+
+        <!-- Contenido del artículo -->
+        <div id="text-article">
+
+        </div>
+
+        <div id="text-article-error">
+
+        </div>
+
+        <hr />
+
+        <!-- Artículos relacionados -->
+        <div>
+            <h3>
+                Curso relacionado:
+                <a href="/es/course/curso-titulo">Título del curso</a>
+            </h3>
+            <ul>
+                <li>
+                    <a href="/es/article/related-article-1">Artículo relacionado 1</a>
+                </li>
+                <li>
+                    <a href="/es/article/related-article-2">Artículo relacionado 2</a>
+                </li>
+            </ul>
+        </div>
     </div>
-
-    <p>
-
-    </p>
-
-    <!-- Banderas de idiomas -->
-    <div class="translate-articles">
-
-    </div>
-
-    <!-- Índice de contenidos -->
-    <div class="index-continguts">
-    </div>
-
-    <!-- Contenido del artículo -->
-    <div id="text-article">
-
-    </div>
-
-    <div id="text-article-error">
-
-    </div>
-
-    <hr />
-
-    <!-- Artículos relacionados -->
-    <div>
-        <h3>
-            Curso relacionado:
-            <a href="/es/course/curso-titulo">Título del curso</a>
-        </h3>
-        <ul>
-            <li>
-                <a href="/es/article/related-article-1">Artículo relacionado 1</a>
-            </li>
-            <li>
-                <a href="/es/article/related-article-2">Artículo relacionado 2</a>
-            </li>
-        </ul>
-    </div>
-</div>
-
+</main>
 <script>
     // Función para obtener el artículo
     const articleContainer = document.getElementById('text-article'); // Un div con id="article-container" en el HTML donde se imprimirá el artículo

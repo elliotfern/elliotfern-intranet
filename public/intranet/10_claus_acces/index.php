@@ -1,54 +1,73 @@
-<?php
+<main>
+  <div class="container">
+    <h2><a href="/gestio/vault">Vault database</a> > <a href="/vault">Elliot</a></h2>
+    <p><a href='/gestio/vault/nova'><button type='button' class='btn btn-light btn-sm' id='btnAddVault'>Nova contrasenya</button></a></p>
 
-# conectare la base de datos
-$activePage = "vault";
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead class="table-primary">
+          <tr>
+            <th>Servei</th>
+            <th>Usuari</th>
+            <th>Contrasenya</th>
+            <th>Tipus</th>
+            <th>Modificada</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody> <!-- Aquí se agregarán las filas dinámicamente -->
+        </tbody>
+      </table>
+    </div>
 
-global $conn;
 
-echo '<h2>Vault Database</h2>';
+  </div>
+</main>
+<script>
+  function showPass(id) {
+    let inputField = document.getElementById('passw-' + id);
+    let urlAjax = '/api/vault/get/?id=' + id;
 
-echo "<p><a href='/vault/new'><button type='button' class='btn btn-light btn-sm' id='btnAddVault'>Insert new vault</button></a></p>";
+    if (inputField.type === "password") {
+      fetch(urlAjax, {
+          method: "GET",
+          headers: {
+            'Accept': 'application/json'
+          }
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Error en la sol·licitud AJAX');
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data.password) {
+            inputField.value = data.password; // Mostrar la contraseña
+            inputField.type = "text";
 
-$data = array();
-$stmt = $conn->prepare("SELECT v.id, v.client, c.clientEmpresa, c.clientNom, c.clientCognoms, c.id AS idClient
-FROM db_vault AS v
-LEFT JOIN db_accounting_hispantic_costumers AS c ON v.client = c.id
-GROUP BY v.client ASC
-ORDER BY c.clientEmpresa");
-$stmt->execute();
-if ($stmt->rowCount() === 0) {
-  echo 'No rows';
-} else {
-  echo "<div class='table-responsive'>";
-  echo "<table class=''>";
-  echo "<thead class='table-primary'>";
-  echo "<tr>";
-  echo "<th>Client</th>";
-  echo "</tr>";
-  echo "</thead>";
-  echo "<tbody>";
-  $data = $stmt->fetchAll();
-  foreach ($data as $row) {
-    $idCostumer = $row['id'];
-    echo "<tr>";
-    echo "<td>";
-    if ($row['client'] == 31) {
-      echo "<a href='/vault/elliot/31'>Elliot</a>";
-    } else {
-      if (empty($row['clientEmpresa'])) {
-        echo "<a href='/vault/customer/" . $row['idClient'] . "'>" . $row['clientNom'] . " " . $row['clientCognoms'] . "</a>";
-      } else {
-        echo "<a href='/vault/customer/" . $row['idClient'] . "'>" . $row['clientEmpresa'] . "</a>";
-      }
+            // Copiar la contraseña al portapapeles
+            navigator.clipboard.writeText(data.password).then(() => {
+              console.log("Contraseña copiada al portapapeles");
+            }).catch(err => {
+              console.error("Error al copiar al portapapeles: ", err);
+            });
+
+            // Ocultar la contraseña después de 5 segundos
+            setTimeout(() => {
+              inputField.value = '**********'; // Volver al placeholder después de 5 segundos
+              inputField.type = "password";
+            }, 5000);
+          } else {
+            inputField.value = data.error; // Mostrar el error
+            inputField.type = "text";
+          }
+        })
+        .catch(error => {
+          console.error('Error en la sol·licitud AJAX:', error);
+          alert('Hubo un problema al intentar obtener la contraseña.');
+        });
     }
-    echo "</td>";
-    echo "</tr>";
   }
-  echo "</tbody>";
-  echo "</table>";
-  echo "</div>";
-  echo "</div>";
-}
-
-
-echo '</div>';
+</script>

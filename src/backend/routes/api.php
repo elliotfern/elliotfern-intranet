@@ -4,7 +4,6 @@ $base_routes = [
     '/api/auth/login' => 'src/backend/api/00_auth/login.php',
     '/api/auth/registre' => 'src/backend/api/00_auth/registre.php',
     '/api/vault/get' => 'src/backend/api/10_vault/get-vault.php',
-    '/api/accounting/proxy' => 'src/backend/api/02_accounting/proxy.php',
     '/api/accounting/get' => 'src/backend/api/02_accounting/accounting.php',
     '/api/accounting/post/invoice' => 'src/backend/api/02_accounting/customer-invoice-insert.php',
     '/api/accounting/get/invoice-pdf/{id}' => 'src/backend/api/02_accounting/generate_pdf.php',

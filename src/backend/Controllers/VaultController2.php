@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\VaultModel;
 
-class VaultController
+class VaultController2
 {
     private $passwordModel;
     private $conn;
@@ -23,15 +23,15 @@ class VaultController
             echo json_encode(['error' => 'Database connection failed']);
             return;
         }
-        
+
         if (!is_numeric($vaultId)) {
             echo json_encode(['error' => 'Invalid ID']);
             return;
         }
-        
+
         // Delegar la operación al Modelo para obtener las contraseñas
         $passwords = $this->passwordModel->getPasswords($vaultId);
-        
+
         if ($passwords) {
             // Si hay contraseñas, devolverlas en formato JSON
             return $passwords;
@@ -68,5 +68,3 @@ class VaultController
         }
     }
 }
-
-?>

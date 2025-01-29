@@ -1,3 +1,4 @@
+</div>
 <div class="container-fluid footer py-4" style="background-color: black;color:white">
     <!-- Menú del pie de página -->
     <div class="footer-elliotfern d-flex justify-content-center flex-wrap">
