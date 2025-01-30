@@ -16,6 +16,8 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 @import './menuIntranet.css';
 @import './taules.css';
 @import './formulari.css';
+@import './botons.css';
+@import './footer.css';
 
 body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;

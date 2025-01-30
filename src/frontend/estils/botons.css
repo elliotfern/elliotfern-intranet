@@ -1,0 +1,93 @@
+/* Ajustes para el botón */
+button {
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-gran {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: none;
+}
+
+.btn-petit {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.7rem;
+  border: none;
+}
+
+.btn-primari {
+  background-color: #081b2e;
+  color: white;
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */
+}
+
+.btn-primari:hover {
+  background-color: #0056b3;
+  transform: scale(1.1);
+}
+
+.btn-secondari {
+  background-color: #b93a08;
+  color: white;
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */
+}
+
+.btn-secondari:hover {
+  background-color: #d60a03;
+  transform: scale(1.1);
+}
+
+/* Botón de envío */
+.btn-color-negre {
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+  font-size: 16px;
+  background-color: rgb(43, 42, 42);
+  color: white;
+  cursor: pointer;
+}
+
+/* Botón Atrás (izquierda) */
+.btn-enrere {
+  background-color: #aaaaaa; /* Gris */
+  color: rgb(0, 0, 0);
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */
+}
+
+.btn-enrere:hover {
+  background-color: #000000; /* Gris más oscuro */
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Botón Crear factura (derecha) */
+.btn-primary {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  background-color: #007bff; /* Azul */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.dreta {
+  text-align: right;
+  margin-left: auto;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Azul más oscuro */
+}
+
+/* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */
+@media (max-width: 768px) {
+  .btn-back,
+  .btn-primary {
+    width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */
+  }
+}

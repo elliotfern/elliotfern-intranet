@@ -1,10 +1,12 @@
 // Definir la interfaz del tipo de dato que esperamos de la API
 interface PasswordRecord {
-  service_name: string;
-  user_name: string;
+  servei: string;
+  usuari: string;
   password: string;
-  type: string;
-  modified_at: string;
+  tipus: string;
+  dateModified: string;
+  web: string;
+  id: number;
 }
 
 // Función para obtener los datos de la API
@@ -39,7 +41,7 @@ export async function serveisVaultApi() {
 }
 // Función para renderizar los datos en la tabla
 // Función para renderizar los datos en la tabla
-function renderTable(data: any[]) {
+function renderTable(data: PasswordRecord[]) {
   const tbody = document.querySelector('tbody') as HTMLElement; // Seleccionamos el tbody de la tabla
   tbody.innerHTML = ''; // Limpiamos el contenido actual de la tabla
 
@@ -68,10 +70,13 @@ function renderTable(data: any[]) {
     passwordInput.value = '**********'; // Mostrar asteriscos
     passwordInput.readOnly = true; // Deshabilitar edición
 
+    // Añadir la clase "input-petit"
+    passwordInput.classList.add('input-petit');
+
     // Crear el botón "Show" para mostrar/ocultar la contraseña
     const showButton = document.createElement('button');
     showButton.type = 'button';
-    showButton.classList.add('btn', 'btn-sm', 'btn-secondary');
+    showButton.classList.add('btn-petit', 'btn-primari');
     showButton.textContent = 'Show';
     showButton.onclick = function () {
       showPass(record.id);
@@ -92,11 +97,11 @@ function renderTable(data: any[]) {
 
     // Crear columnas vacías para los botones de acción
     const editCell = document.createElement('td');
-    editCell.innerHTML = `<button class="btn btn-primary">Editar</button>`;
+    editCell.innerHTML = `<button class="btn-petit btn-primari">Editar</button>`;
     row.appendChild(editCell);
 
     const deleteCell = document.createElement('td');
-    deleteCell.innerHTML = `<button class="btn btn-danger">Eliminar</button>`;
+    deleteCell.innerHTML = `<button class="btn-petit btn-secondari">Eliminar</button>`;
     row.appendChild(deleteCell);
 
     // Añadir la fila completa al tbody

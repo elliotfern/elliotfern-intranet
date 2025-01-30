@@ -46,17 +46,6 @@ label {
   box-sizing: border-box; /* Incluye el padding dentro del ancho */
 }
 
-/* Botón de envío */
-.btn-color-negre {
-  width: 100%;
-  padding: 10px;
-  border-radius: 3px;
-  font-size: 16px;
-  background-color: rgb(43, 42, 42);
-  color: white;
-  cursor: pointer;
-}
-
 /* Mensajes de alerta */
 .alert {
   text-align: center;

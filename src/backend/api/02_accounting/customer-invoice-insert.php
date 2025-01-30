@@ -1,75 +1,101 @@
 <?php
-/*
- * BACKEND LIBRARY
- * FUNCIONS INSERT BOOK
- * @update_book_ajax
- */
+// Configuración de cabeceras para aceptar JSON y responder JSON
+header("Content-Type: application/json");
+header("Access-Control-Allow-Origin: https://elliotfern.com");
+header("Access-Control-Allow-Methods: POST");
 
 // insert data to db
-if (empty($_POST["idUser"])) {
-  $hasError = true;
-} else {
-  $idUser = data_input($_POST['idUser']);
+
+// Dominio permitido (modifica con tu dominio)
+$allowed_origin = "https://elliotfern.com";
+
+// Verificar el encabezado 'Origin'
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+  if ($_SERVER['HTTP_ORIGIN'] !== $allowed_origin) {
+    http_response_code(403); // Respuesta 403 Forbidden
+    echo json_encode(["error" => "Acceso denegado. Origen no permitido."]);
+    exit;
+  }
 }
 
-if (empty($_POST["facConcepte"])) {
-  $hasError = true;
-} else {
-  $facConcepte = data_input($_POST['facConcepte']);
+// Verificar que el método HTTP sea PUT
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+  http_response_code(405); // Método no permitido
+  echo json_encode(["error" => "Método no permitido. Se requiere POST."]);
+  exit;
 }
 
-if (empty($_POST["facData"])) {
+$inputData = file_get_contents('php://input');
+$data = json_decode($inputData, true);
+
+// Inicializar un array para los errores
+$errors = [];
+
+
+if (empty($data["idUser"])) {
   $hasError = true;
 } else {
-  $facData = data_input($_POST['facData']);
+  $idUser = data_input($data['idUser']);
 }
 
-if (empty($_POST["facDueDate"])) {
+if (empty($data["facConcepte"])) {
   $hasError = true;
 } else {
-  $facDueDate = data_input($_POST['facDueDate']);
+  $facConcepte = data_input($data['facConcepte']);
 }
 
-if (empty($_POST["facSubtotal"])) {
+if (empty($data["facData"])) {
   $hasError = true;
 } else {
-  $facSubtotal = data_input($_POST['facSubtotal']);
+  $facData = data_input($data['facData']);
 }
 
-if (empty($_POST["facFees"])) {
+if (empty($data["facDueDate"])) {
   $hasError = true;
 } else {
-  $facFees = data_input($_POST['facFees']);
+  $facDueDate = data_input($data['facDueDate']);
 }
 
-if (empty($_POST["facTotal"])) {
+if (empty($data["facSubtotal"])) {
   $hasError = true;
 } else {
-  $facTotal = data_input($_POST['facTotal']);
+  $facSubtotal = data_input($data['facSubtotal']);
 }
 
-if (empty($_POST["facVAT"])) {
+if (empty($data["facFees"])) {
   $hasError = true;
 } else {
-  $facVAT = data_input($_POST['facVAT']);
+  $facFees = data_input($data['facFees']);
 }
 
-if (empty($_POST["facIva"])) {
+if (empty($data["facTotal"])) {
   $hasError = true;
 } else {
-  $facIva = data_input($_POST['facIva']);
+  $facTotal = data_input($data['facTotal']);
 }
 
-if (empty($_POST["facEstat"])) {
+if (empty($data["facVAT"])) {
   $hasError = true;
 } else {
-  $facEstat = data_input($_POST['facEstat']);
+  $facVAT = data_input($data['facVAT']);
 }
 
-if (empty($_POST["facPaymentType"])) {
+if (empty($data["facIva"])) {
   $hasError = true;
 } else {
-  $facPaymentType = data_input($_POST['facPaymentType']);
+  $facIva = data_input($data['facIva']);
+}
+
+if (empty($data["facEstat"])) {
+  $hasError = true;
+} else {
+  $facEstat = data_input($data['facEstat']);
+}
+
+if (empty($data["facPaymentType"])) {
+  $hasError = true;
+} else {
+  $facPaymentType = data_input($data['facPaymentType']);
 }
 
 if (!isset($hasError)) {

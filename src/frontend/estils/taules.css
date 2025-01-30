@@ -61,16 +61,3 @@
 .table td:last-child {
   text-align: center; /* Centra los botones o enlaces en la última columna */
 }
-
-.table td:last-child button {
-  background-color: transparent; /* Fondo transparente para los botones */
-  border: none; /* Elimina el borde del botón */
-  cursor: pointer; /* Cambia el cursor al pasar sobre los botones */
-  font-size: 16px; /* Tamaño de la fuente en los botones */
-  color: #007bff; /* Color del texto (en este caso, azul) */
-  transition: color 0.3s ease; /* Transición suave al cambiar de color */
-}
-
-.table td:last-child button:hover {
-  color: #0056b3; /* Cambio de color al pasar el ratón por encima del botón */
-}

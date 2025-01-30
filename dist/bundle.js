@@ -2,19 +2,138 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/contenidor.css":
-/*!***************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/contenidor.css ***!
-  \***************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/botons.css":
+/*!******************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/botons.css ***!
+  \******************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, `/* Ajustes para el botón */
+button {
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-gran {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: none;
+}
+
+.btn-petit {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.7rem;
+  border: none;
+}
+
+.btn-primari {
+  background-color: #081b2e;
+  color: white;
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */
+}
+
+.btn-primari:hover {
+  background-color: #0056b3;
+  transform: scale(1.1);
+}
+
+.btn-secondari {
+  background-color: #b93a08;
+  color: white;
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */
+}
+
+.btn-secondari:hover {
+  background-color: #d60a03;
+  transform: scale(1.1);
+}
+
+/* Botón de envío */
+.btn-color-negre {
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+  font-size: 16px;
+  background-color: rgb(43, 42, 42);
+  color: white;
+  cursor: pointer;
+}
+
+/* Botón Atrás (izquierda) */
+.btn-enrere {
+  background-color: #aaaaaa; /* Gris */
+  color: rgb(0, 0, 0);
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */
+}
+
+.btn-enrere:hover {
+  background-color: #000000; /* Gris más oscuro */
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Botón Crear factura (derecha) */
+.btn-primary {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  background-color: #007bff; /* Azul */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.dreta {
+  text-align: right;
+  margin-left: auto;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Azul más oscuro */
+}
+
+/* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */
+@media (max-width: 768px) {
+  .btn-back,
+  .btn-primary {
+    width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */
+  }
+}
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/botons.css"],"names":[],"mappings":"AAAA,0BAA0B;AAC1B;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,oBAAoB;EACpB,eAAe;EACf,YAAY;AACd;;AAEA;EACE,sBAAsB;EACtB,iBAAiB;EACjB,YAAY;AACd;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA,mBAAmB;AACnB;EACE,WAAW;EACX,aAAa;EACb,kBAAkB;EAClB,eAAe;EACf,iCAAiC;EACjC,YAAY;EACZ,eAAe;AACjB;;AAEA,4BAA4B;AAC5B;EACE,yBAAyB,EAAE,SAAS;EACpC,mBAAmB;EACnB,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;EAC/C,YAAY;EACZ,qBAAqB;AACvB;;AAEA,kCAAkC;AAClC;EACE,sBAAsB;EACtB,eAAe;EACf,yBAAyB,EAAE,SAAS;EACpC,YAAY;EACZ,YAAY;EACZ,kBAAkB;EAClB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,iBAAiB;EACjB,iBAAiB;AACnB;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;AACjD;;AAEA,wFAAwF;AACxF;EACE;;IAEE,WAAW,EAAE,6DAA6D;EAC5E;AACF","sourcesContent":["/* Ajustes para el botón */\nbutton {\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n}\n\n.btn-gran {\n  padding: 0.6rem 1rem;\n  font-size: 1rem;\n  border: none;\n}\n\n.btn-petit {\n  padding: 0.4rem 0.6rem;\n  font-size: 0.7rem;\n  border: none;\n}\n\n.btn-primari {\n  background-color: #081b2e;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-primari:hover {\n  background-color: #0056b3;\n  transform: scale(1.1);\n}\n\n.btn-secondari {\n  background-color: #b93a08;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-secondari:hover {\n  background-color: #d60a03;\n  transform: scale(1.1);\n}\n\n/* Botón de envío */\n.btn-color-negre {\n  width: 100%;\n  padding: 10px;\n  border-radius: 3px;\n  font-size: 16px;\n  background-color: rgb(43, 42, 42);\n  color: white;\n  cursor: pointer;\n}\n\n/* Botón Atrás (izquierda) */\n.btn-enrere {\n  background-color: #aaaaaa; /* Gris */\n  color: rgb(0, 0, 0);\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-enrere:hover {\n  background-color: #000000; /* Gris más oscuro */\n  color: white;\n  transform: scale(1.1);\n}\n\n/* Botón Crear factura (derecha) */\n.btn-primary {\n  padding: 0.8rem 1.5rem;\n  font-size: 1rem;\n  background-color: #007bff; /* Azul */\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n}\n\n.dreta {\n  text-align: right;\n  margin-left: auto;\n}\n\n.btn-primary:hover {\n  background-color: #0056b3; /* Azul más oscuro */\n}\n\n/* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */\n@media (max-width: 768px) {\n  .btn-back,\n  .btn-primary {\n    width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */\n  }\n}\n"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/contenidor.css":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/contenidor.css ***!
+  \**********************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
 // Imports
 
@@ -79,26 +198,135 @@ footer {
     margin-bottom: 20px;
   }
 }
-`, "",{"version":3,"sources":["webpack://./src/frontend/contenidor.css"],"names":[],"mappings":"AAAA,6BAA6B;;AAE7B,yBAAyB;AACzB;EACE,UAAU;EACV,iBAAiB;EACjB,cAAc;EACd,iBAAiB;EACjB,qBAAqB;AACvB;;AAEA,qBAAqB;AACrB;EACE,aAAa;EACb,eAAe;EACf,8BAA8B;EAC9B,cAAc;EACd,OAAO;EACP,iBAAiB;AACnB;;AAEA;EACE,aAAa;EACb,aAAa;EACb,kBAAkB;EAClB,uCAAuC;AACzC;;AAEA,YAAY;AACZ;EACE,aAAa;EACb,iBAAiB;EACjB,aAAa;EACb,kBAAkB;EAClB,uCAAuC;AACzC;;AAEA,WAAW;AACX;EACE,gBAAgB;EAChB,YAAY;EACZ,kBAAkB;EAClB,aAAa;EACb,gBAAgB;AAClB;;AAEA,eAAe;AACf;EACE;IACE,sBAAsB;EACxB;;EAEA;;IAEE,WAAW;IACX,mBAAmB;EACrB;AACF","sourcesContent":["/* ESTRUCTURA PRINCIPAL WEB */\n\n/* Contenedor principal */\n.container {\n  width: 90%;\n  max-width: 1200px;\n  margin: 0 auto;\n  padding-top: 50px;\n  padding-bottom: 100px;\n}\n\n/* Layout principal */\nmain {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  margin: 20px 0;\n  flex: 1;\n  background: white;\n}\n\narticle {\n  flex: 1 1 60%;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n}\n\n/* Sidebar */\naside {\n  flex: 1 1 35%;\n  background: white;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n}\n\n/* Footer */\nfooter {\n  background: #333;\n  color: white;\n  text-align: center;\n  padding: 10px;\n  margin-top: auto;\n}\n\n/* Responsive */\n@media (max-width: 768px) {\n  main {\n    flex-direction: column;\n  }\n\n  article,\n  aside {\n    width: 100%;\n    margin-bottom: 20px;\n  }\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/contenidor.css"],"names":[],"mappings":"AAAA,6BAA6B;;AAE7B,yBAAyB;AACzB;EACE,UAAU;EACV,iBAAiB;EACjB,cAAc;EACd,iBAAiB;EACjB,qBAAqB;AACvB;;AAEA,qBAAqB;AACrB;EACE,aAAa;EACb,eAAe;EACf,8BAA8B;EAC9B,cAAc;EACd,OAAO;EACP,iBAAiB;AACnB;;AAEA;EACE,aAAa;EACb,aAAa;EACb,kBAAkB;EAClB,uCAAuC;AACzC;;AAEA,YAAY;AACZ;EACE,aAAa;EACb,iBAAiB;EACjB,aAAa;EACb,kBAAkB;EAClB,uCAAuC;AACzC;;AAEA,WAAW;AACX;EACE,gBAAgB;EAChB,YAAY;EACZ,kBAAkB;EAClB,aAAa;EACb,gBAAgB;AAClB;;AAEA,eAAe;AACf;EACE;IACE,sBAAsB;EACxB;;EAEA;;IAEE,WAAW;IACX,mBAAmB;EACrB;AACF","sourcesContent":["/* ESTRUCTURA PRINCIPAL WEB */\n\n/* Contenedor principal */\n.container {\n  width: 90%;\n  max-width: 1200px;\n  margin: 0 auto;\n  padding-top: 50px;\n  padding-bottom: 100px;\n}\n\n/* Layout principal */\nmain {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  margin: 20px 0;\n  flex: 1;\n  background: white;\n}\n\narticle {\n  flex: 1 1 60%;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n}\n\n/* Sidebar */\naside {\n  flex: 1 1 35%;\n  background: white;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n}\n\n/* Footer */\nfooter {\n  background: #333;\n  color: white;\n  text-align: center;\n  padding: 10px;\n  margin-top: auto;\n}\n\n/* Responsive */\n@media (max-width: 768px) {\n  main {\n    flex-direction: column;\n  }\n\n  article,\n  aside {\n    width: 100%;\n    margin-bottom: 20px;\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/formulari.css":
-/*!**************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/formulari.css ***!
-  \**************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/footer.css":
+/*!******************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/footer.css ***!
+  \******************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, `/* Estilos del pie de página */
+.footer {
+  background-color: black;
+  color: white;
+  padding: 40px 20px;
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #007bff; /* Cambia el color de los enlaces al pasar el cursor */
+}
+
+/* Contenedor principal de los enlaces en el pie de página */
+.footer-elliotfern {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px; /* Espaciado entre los elementos */
+}
+
+/* Separación entre los enlaces */
+.menu-separacio {
+  margin-bottom: 10px;
+}
+
+/* Estilos para los enlaces en el pie de página */
+.footer-elliotfern a {
+  font-size: 1rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.footer-elliotfern a:hover {
+  color: #007bff; /* Color al pasar el cursor */
+}
+
+/* Línea horizontal entre las secciones */
+hr.my-4 {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 30px 0;
+}
+
+/* Estilo para el pie de página pequeño */
+#footer-elliotfern-petit {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Imagen del icono de Creative Commons */
+#footer-elliotfern-petit img {
+  width: 88px;
+  height: 31px;
+  margin-bottom: 10px;
+}
+
+/* Estilo del texto del pie de página pequeño */
+.text-footer {
+  font-size: 0.9rem;
+  color: white;
+  margin-top: 10px;
+}
+
+.text-footer a {
+  color: #007bff;
+  font-weight: 600;
+}
+
+/* Estilos responsivos: cuando la pantalla es pequeña, los enlaces deben alinearse verticalmente */
+@media (max-width: 768px) {
+  .footer-elliotfern {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-elliotfern .menu-separacio {
+    margin-bottom: 15px; /* Espaciado entre los elementos cuando están en columna */
+  }
+}
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/footer.css"],"names":[],"mappings":"AAAA,8BAA8B;AAC9B;EACE,uBAAuB;EACvB,YAAY;EACZ,kBAAkB;AACpB;;AAEA;EACE,YAAY;EACZ,qBAAqB;AACvB;;AAEA;EACE,cAAc,EAAE,sDAAsD;AACxE;;AAEA,4DAA4D;AAC5D;EACE,aAAa;EACb,uBAAuB;EACvB,eAAe;EACf,SAAS,EAAE,kCAAkC;AAC/C;;AAEA,iCAAiC;AACjC;EACE,mBAAmB;AACrB;;AAEA,iDAAiD;AACjD;EACE,eAAe;EACf,gBAAgB;EAChB,2BAA2B;AAC7B;;AAEA;EACE,cAAc,EAAE,6BAA6B;AAC/C;;AAEA,yCAAyC;AACzC;EACE,SAAS;EACT,0BAA0B;EAC1B,cAAc;AAChB;;AAEA,yCAAyC;AACzC;EACE,kBAAkB;EAClB,gBAAgB;AAClB;;AAEA,yCAAyC;AACzC;EACE,WAAW;EACX,YAAY;EACZ,mBAAmB;AACrB;;AAEA,+CAA+C;AAC/C;EACE,iBAAiB;EACjB,YAAY;EACZ,gBAAgB;AAClB;;AAEA;EACE,cAAc;EACd,gBAAgB;AAClB;;AAEA,kGAAkG;AAClG;EACE;IACE,sBAAsB;IACtB,mBAAmB;EACrB;;EAEA;IACE,mBAAmB,EAAE,0DAA0D;EACjF;AACF","sourcesContent":["/* Estilos del pie de página */\n.footer {\n  background-color: black;\n  color: white;\n  padding: 40px 20px;\n}\n\n.footer a {\n  color: white;\n  text-decoration: none;\n}\n\n.footer a:hover {\n  color: #007bff; /* Cambia el color de los enlaces al pasar el cursor */\n}\n\n/* Contenedor principal de los enlaces en el pie de página */\n.footer-elliotfern {\n  display: flex;\n  justify-content: center;\n  flex-wrap: wrap;\n  gap: 30px; /* Espaciado entre los elementos */\n}\n\n/* Separación entre los enlaces */\n.menu-separacio {\n  margin-bottom: 10px;\n}\n\n/* Estilos para los enlaces en el pie de página */\n.footer-elliotfern a {\n  font-size: 1rem;\n  font-weight: 600;\n  transition: color 0.3s ease;\n}\n\n.footer-elliotfern a:hover {\n  color: #007bff; /* Color al pasar el cursor */\n}\n\n/* Línea horizontal entre las secciones */\nhr.my-4 {\n  border: 0;\n  border-top: 1px solid #ddd;\n  margin: 30px 0;\n}\n\n/* Estilo para el pie de página pequeño */\n#footer-elliotfern-petit {\n  text-align: center;\n  margin-top: 30px;\n}\n\n/* Imagen del icono de Creative Commons */\n#footer-elliotfern-petit img {\n  width: 88px;\n  height: 31px;\n  margin-bottom: 10px;\n}\n\n/* Estilo del texto del pie de página pequeño */\n.text-footer {\n  font-size: 0.9rem;\n  color: white;\n  margin-top: 10px;\n}\n\n.text-footer a {\n  color: #007bff;\n  font-weight: 600;\n}\n\n/* Estilos responsivos: cuando la pantalla es pequeña, los enlaces deben alinearse verticalmente */\n@media (max-width: 768px) {\n  .footer-elliotfern {\n    flex-direction: column;\n    align-items: center;\n  }\n\n  .footer-elliotfern .menu-separacio {\n    margin-bottom: 15px; /* Espaciado entre los elementos cuando están en columna */\n  }\n}\n"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/formulari.css":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/formulari.css ***!
+  \*********************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
 // Imports
 
@@ -150,6 +378,11 @@ form label {
   flex: 1 1 100%; /* 1 input que ocupa toda la fila */
 }
 
+.separador {
+  margin-top: 35px;
+  margin-bottom: 20px;
+}
+
 /* Estilos para los inputs */
 input,
 textarea {
@@ -174,6 +407,17 @@ select {
   color: #333;
 }
 
+.input-petit {
+  width: 90%;
+  padding: 0.4rem;
+  margin-top: 0.2rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 0.7rem;
+  color: #333;
+}
+
 /* Bordes más suaves cuando se está enfocando en el campo */
 input:focus,
 select:focus,
@@ -188,21 +432,6 @@ textarea:focus {
 .col-md-6 input,
 .col-md-12 input {
   margin-bottom: 1rem; /* Espacio debajo de cada input */
-}
-
-/* Ajustes para el botón */
-button {
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
 }
 
 /* Estilo para los mensajes de error y éxito */
@@ -232,74 +461,32 @@ button:hover {
   }
 }
 
-/* Botón Atrás (izquierda) */
-.btn-back {
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  background-color: #6c757d; /* Gris */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.btn-back:hover {
-  background-color: #5a6268; /* Gris más oscuro */
-}
-
-/* Botón Crear factura (derecha) */
-.btn-primary {
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  background-color: #007bff; /* Azul */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.dreta {
-  text-align: right;
-  margin-left: auto;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3; /* Azul más oscuro */
-}
-
 /* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */
 @media (max-width: 768px) {
   .form-espai {
     flex-direction: column; /* Los botones se apilarán verticalmente */
   }
-
-  .btn-back,
-  .btn-primary {
-    width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */
-  }
 }
-`, "",{"version":3,"sources":["webpack://./src/frontend/formulari.css"],"names":[],"mappings":"AAAA,yCAAyC;AACzC;EACE,iBAAiB;EACjB,WAAW;EACX,cAAc,EAAE,0BAA0B;EAC1C,aAAa;EACb,yBAAyB,EAAE,2BAA2B;EACtD,kBAAkB;EAClB,yCAAyC,EAAE,iBAAiB;EAC5D,yBAAyB,EAAE,qCAAqC;AAClE;;AAEA;EACE,eAAe;EACf,gBAAgB;EAChB,WAAW;EACX,qBAAqB;AACvB;;AAEA,+CAA+C;AAC/C;EACE,aAAa;EACb,eAAe;EACf,WAAW;AACb;;AAEA;;;EAGE,sBAAsB;AACxB;;AAEA,qCAAqC;AACrC;EACE,aAAa,EAAE,qBAAqB;AACtC;;AAEA;EACE,aAAa,EAAE,qBAAqB;AACtC;;AAEA;EACE,cAAc,EAAE,mCAAmC;AACrD;;AAEA,4BAA4B;AAC5B;;EAEE,UAAU;EACV,eAAe;EACf,kBAAkB;EAClB,sBAAsB;EACtB,kBAAkB;EAClB,sBAAsB;EACtB,eAAe;EACf,WAAW;AACb;;AAEA;EACE,UAAU;EACV,eAAe;EACf,kBAAkB;EAClB,sBAAsB;EACtB,kBAAkB;EAClB,sBAAsB;EACtB,eAAe;EACf,WAAW;AACb;;AAEA,2DAA2D;AAC3D;;;EAGE,qBAAqB;EACrB,aAAa;EACb,0CAA0C;AAC5C;;AAEA,+BAA+B;AAC/B;;;EAGE,mBAAmB,EAAE,iCAAiC;AACxD;;AAEA,0BAA0B;AAC1B;EACE,sBAAsB;EACtB,eAAe;EACf,yBAAyB;EACzB,YAAY;EACZ,YAAY;EACZ,kBAAkB;EAClB,eAAe;AACjB;;AAEA;EACE,yBAAyB;AAC3B;;AAEA,8CAA8C;AAC9C;EACE,aAAa;EACb,gBAAgB;EAChB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd;;AAEA,6DAA6D;AAC7D;EACE;;;IAGE,cAAc,EAAE,mCAAmC;EACrD;AACF;;AAEA,4BAA4B;AAC5B;EACE,sBAAsB;EACtB,eAAe;EACf,yBAAyB,EAAE,SAAS;EACpC,YAAY;EACZ,YAAY;EACZ,kBAAkB;EAClB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;AACjD;;AAEA,kCAAkC;AAClC;EACE,sBAAsB;EACtB,eAAe;EACf,yBAAyB,EAAE,SAAS;EACpC,YAAY;EACZ,YAAY;EACZ,kBAAkB;EAClB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,iBAAiB;EACjB,iBAAiB;AACnB;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;AACjD;;AAEA,wFAAwF;AACxF;EACE;IACE,sBAAsB,EAAE,0CAA0C;EACpE;;EAEA;;IAEE,WAAW,EAAE,6DAA6D;EAC5E;AACF","sourcesContent":["/* Estilos básicos para los formularios */\n.form {\n  max-width: 1200px;\n  width: 100%;\n  margin: 0 auto; /* Centrar el formulario */\n  padding: 20px;\n  background-color: #ffdaa2; /* Fondo ligeramente gris */\n  border-radius: 5px;\n  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */\n  border: 2px solid #000000; /* Borde de 2px de color gris claro */\n}\n\nform label {\n  font-size: 1rem;\n  font-weight: 600;\n  color: #333;\n  margin-bottom: 0.5rem;\n}\n\n/* Ajustes para las columnas en el formulario */\n.form-espai {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\n.col-md-4,\n.col-md-6,\n.col-md-12 {\n  box-sizing: border-box;\n}\n\n/* Para 3 inputs en fila (col-md-4) */\n.col-md-4 {\n  flex: 1 1 30%; /* 3 inputs en fila */\n}\n\n.col-md-6 {\n  flex: 1 1 45%; /* 2 inputs en fila */\n}\n\n.col-md-12 {\n  flex: 1 1 100%; /* 1 input que ocupa toda la fila */\n}\n\n/* Estilos para los inputs */\ninput,\ntextarea {\n  width: 90%;\n  padding: 0.8rem;\n  margin-top: 0.2rem;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  background-color: #fff;\n  font-size: 1rem;\n  color: #333;\n}\n\nselect {\n  width: 97%;\n  padding: 0.8rem;\n  margin-top: 0.2rem;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  background-color: #fff;\n  font-size: 1rem;\n  color: #333;\n}\n\n/* Bordes más suaves cuando se está enfocando en el campo */\ninput:focus,\nselect:focus,\ntextarea:focus {\n  border-color: #007bff;\n  outline: none;\n  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);\n}\n\n/* Espaciado entre los inputs */\n.col-md-4 input,\n.col-md-6 input,\n.col-md-12 input {\n  margin-bottom: 1rem; /* Espacio debajo de cada input */\n}\n\n/* Ajustes para el botón */\nbutton {\n  padding: 0.8rem 1.5rem;\n  font-size: 1rem;\n  background-color: #007bff;\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n}\n\nbutton:hover {\n  background-color: #0056b3;\n}\n\n/* Estilo para los mensajes de error y éxito */\n.message {\n  display: none;\n  margin-top: 1rem;\n  padding: 0.8rem;\n  border-radius: 4px;\n}\n\n.message.success {\n  background-color: #28a745;\n  color: white;\n}\n\n.message.error {\n  background-color: #dc3545;\n  color: white;\n}\n\n/* Ajustes en móviles (cuando la pantalla es menor a 768px) */\n@media (max-width: 768px) {\n  .col-md-4,\n  .col-md-6,\n  .col-md-12 {\n    flex: 1 1 100%; /* Los campos ocupan toda la fila */\n  }\n}\n\n/* Botón Atrás (izquierda) */\n.btn-back {\n  padding: 0.8rem 1.5rem;\n  font-size: 1rem;\n  background-color: #6c757d; /* Gris */\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n}\n\n.btn-back:hover {\n  background-color: #5a6268; /* Gris más oscuro */\n}\n\n/* Botón Crear factura (derecha) */\n.btn-primary {\n  padding: 0.8rem 1.5rem;\n  font-size: 1rem;\n  background-color: #007bff; /* Azul */\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n}\n\n.dreta {\n  text-align: right;\n  margin-left: auto;\n}\n\n.btn-primary:hover {\n  background-color: #0056b3; /* Azul más oscuro */\n}\n\n/* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */\n@media (max-width: 768px) {\n  .form-espai {\n    flex-direction: column; /* Los botones se apilarán verticalmente */\n  }\n\n  .btn-back,\n  .btn-primary {\n    width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */\n  }\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/formulari.css"],"names":[],"mappings":"AAAA,yCAAyC;AACzC;EACE,iBAAiB;EACjB,WAAW;EACX,cAAc,EAAE,0BAA0B;EAC1C,aAAa;EACb,yBAAyB,EAAE,2BAA2B;EACtD,kBAAkB;EAClB,yCAAyC,EAAE,iBAAiB;EAC5D,yBAAyB,EAAE,qCAAqC;AAClE;;AAEA;EACE,eAAe;EACf,gBAAgB;EAChB,WAAW;EACX,qBAAqB;AACvB;;AAEA,+CAA+C;AAC/C;EACE,aAAa;EACb,eAAe;EACf,WAAW;AACb;;AAEA;;;EAGE,sBAAsB;AACxB;;AAEA,qCAAqC;AACrC;EACE,aAAa,EAAE,qBAAqB;AACtC;;AAEA;EACE,aAAa,EAAE,qBAAqB;AACtC;;AAEA;EACE,cAAc,EAAE,mCAAmC;AACrD;;AAEA;EACE,gBAAgB;EAChB,mBAAmB;AACrB;;AAEA,4BAA4B;AAC5B;;EAEE,UAAU;EACV,eAAe;EACf,kBAAkB;EAClB,sBAAsB;EACtB,kBAAkB;EAClB,sBAAsB;EACtB,eAAe;EACf,WAAW;AACb;;AAEA;EACE,UAAU;EACV,eAAe;EACf,kBAAkB;EAClB,sBAAsB;EACtB,kBAAkB;EAClB,sBAAsB;EACtB,eAAe;EACf,WAAW;AACb;;AAEA;EACE,UAAU;EACV,eAAe;EACf,kBAAkB;EAClB,sBAAsB;EACtB,kBAAkB;EAClB,sBAAsB;EACtB,iBAAiB;EACjB,WAAW;AACb;;AAEA,2DAA2D;AAC3D;;;EAGE,qBAAqB;EACrB,aAAa;EACb,0CAA0C;AAC5C;;AAEA,+BAA+B;AAC/B;;;EAGE,mBAAmB,EAAE,iCAAiC;AACxD;;AAEA,8CAA8C;AAC9C;EACE,aAAa;EACb,gBAAgB;EAChB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd;;AAEA,6DAA6D;AAC7D;EACE;;;IAGE,cAAc,EAAE,mCAAmC;EACrD;AACF;;AAEA,wFAAwF;AACxF;EACE;IACE,sBAAsB,EAAE,0CAA0C;EACpE;AACF","sourcesContent":["/* Estilos básicos para los formularios */\n.form {\n  max-width: 1200px;\n  width: 100%;\n  margin: 0 auto; /* Centrar el formulario */\n  padding: 20px;\n  background-color: #ffdaa2; /* Fondo ligeramente gris */\n  border-radius: 5px;\n  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */\n  border: 2px solid #000000; /* Borde de 2px de color gris claro */\n}\n\nform label {\n  font-size: 1rem;\n  font-weight: 600;\n  color: #333;\n  margin-bottom: 0.5rem;\n}\n\n/* Ajustes para las columnas en el formulario */\n.form-espai {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\n.col-md-4,\n.col-md-6,\n.col-md-12 {\n  box-sizing: border-box;\n}\n\n/* Para 3 inputs en fila (col-md-4) */\n.col-md-4 {\n  flex: 1 1 30%; /* 3 inputs en fila */\n}\n\n.col-md-6 {\n  flex: 1 1 45%; /* 2 inputs en fila */\n}\n\n.col-md-12 {\n  flex: 1 1 100%; /* 1 input que ocupa toda la fila */\n}\n\n.separador {\n  margin-top: 35px;\n  margin-bottom: 20px;\n}\n\n/* Estilos para los inputs */\ninput,\ntextarea {\n  width: 90%;\n  padding: 0.8rem;\n  margin-top: 0.2rem;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  background-color: #fff;\n  font-size: 1rem;\n  color: #333;\n}\n\nselect {\n  width: 97%;\n  padding: 0.8rem;\n  margin-top: 0.2rem;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  background-color: #fff;\n  font-size: 1rem;\n  color: #333;\n}\n\n.input-petit {\n  width: 90%;\n  padding: 0.4rem;\n  margin-top: 0.2rem;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  background-color: #fff;\n  font-size: 0.7rem;\n  color: #333;\n}\n\n/* Bordes más suaves cuando se está enfocando en el campo */\ninput:focus,\nselect:focus,\ntextarea:focus {\n  border-color: #007bff;\n  outline: none;\n  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);\n}\n\n/* Espaciado entre los inputs */\n.col-md-4 input,\n.col-md-6 input,\n.col-md-12 input {\n  margin-bottom: 1rem; /* Espacio debajo de cada input */\n}\n\n/* Estilo para los mensajes de error y éxito */\n.message {\n  display: none;\n  margin-top: 1rem;\n  padding: 0.8rem;\n  border-radius: 4px;\n}\n\n.message.success {\n  background-color: #28a745;\n  color: white;\n}\n\n.message.error {\n  background-color: #dc3545;\n  color: white;\n}\n\n/* Ajustes en móviles (cuando la pantalla es menor a 768px) */\n@media (max-width: 768px) {\n  .col-md-4,\n  .col-md-6,\n  .col-md-12 {\n    flex: 1 1 100%; /* Los campos ocupan toda la fila */\n  }\n}\n\n/* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */\n@media (max-width: 768px) {\n  .form-espai {\n    flex-direction: column; /* Los botones se apilarán verticalmente */\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/header.css":
-/*!***********************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/header.css ***!
-  \***********************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/header.css":
+/*!******************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/header.css ***!
+  \******************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
 // Imports
 
@@ -630,26 +817,26 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* HEADER */
     margin-bottom: 10px; /* Añadir espacio entre el input y el botón */
   }
 }
-`, "",{"version":3,"sources":["webpack://./src/frontend/header.css"],"names":[],"mappings":"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","sourcesContent":["/* HEADER */\n.header {\n  position: fixed;\n  top: 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: #c4c4c4;\n  width: 100%;\n  height: 70px;\n  z-index: 10;\n}\n\n.headerContent {\n  position: relative;\n  max-width: 1400px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n}\n\n.headerContent > .logo {\n  flex: 0 1 auto;\n}\n\n.logo {\n  display: flex;\n  font-size: 1.4rem;\n  font-weight: bold;\n  color: black;\n  text-decoration: none;\n}\n\n/* Ajuste de espacio para el logo en pantallas grandes */\n@media (min-width: 768px) {\n  .headerContent {\n    gap: 80px;\n    padding-top: 20px;\n    padding-bottom: 20px;\n  }\n\n  .headerContent > .logo {\n    flex: 0 1 200px;\n  }\n\n  .headerContent > .containerMenu {\n    flex: 1;\n    display: flex;\n    justify-content: space-between;\n  }\n\n  .logo {\n    align-items: center;\n    justify-content: center;\n    padding: 10px;\n    padding-bottom: 20px;\n  }\n}\n\n/* En dispositivos móviles, el logo y el menú ocupan su espacio normal */\n@media (max-width: 767px) {\n  .headerContent > .logo {\n    flex: 0 1 auto;\n  }\n\n  .headerContent > .containerMenu {\n    flex: 1;\n    display: flex;\n    justify-content: center; /* Centra el menú en la versión móvil */\n  }\n}\n\n.headerSecond {\n  display: flex;\n  top: 110px;\n  justify-content: space-between;\n  align-items: center;\n  background-color: #c4c4c4;\n  height: 70px;\n  position: absolute;\n  left: 0;\n  width: 100%;\n  padding: 10px;\n  z-index: 20;\n}\n\n.searchForm {\n  margin-left: 20px;\n}\n\n.containerMenu {\n  text-align: center;\n  justify-content: space-between;\n  padding: 10px;\n  display: flex;\n  flex-direction: row;\n  transition: all 0.3s ease-in-out; /* Para la transición suave del menú */\n}\n\n.containerMenu ul {\n  list-style: none;\n  display: flex;\n  margin: 0;\n  padding-top: 5px;\n}\n\n.containerMenu li {\n  margin-right: 10px; /* Espacio entre elementos */\n}\n\n.containerMenu li:last-child {\n  margin-right: 0; /* Elimina el espacio después del último elemento */\n}\n\n.containerMenu a {\n  text-decoration: none;\n  color: #ffffff;\n  padding: 10px;\n  border: 1px solid #ccc;\n  background-color: #091e4b;\n}\n\n.containerMenu a:hover {\n  background-color: #f0f0f0;\n  color: black;\n}\n\n.dropdown {\n  position: relative;\n}\n\n.superMenu1 {\n  display: none; /* Oculto por defecto */\n  position: absolute;\n  top: 120%; /* Aparece justo debajo del menú principal */\n  left: 0;\n  background-color: #c4c4c4;\n  padding: 10px;\n  white-space: nowrap;\n  z-index: 30;\n}\n\n.superMenu1 ul {\n  display: flex; /* Muestra los elementos en línea */\n  flex-direction: row;\n  gap: 10px; /* Espaciado entre elementos */\n}\n\n.superMenu1 a {\n  display: block;\n  padding: 10px;\n  color: rgb(255, 255, 255);\n  background-color: #091e4b;\n  text-decoration: none;\n  border: 1px solid #ccc;\n}\n\n.superMenu1 a:hover {\n  background-color: #f0f0f0;\n}\n\n.superMenu1 li {\n  margin-right: 20px; /* Espacio entre los elementos del menú */\n  display: inline-block; /* Esto puede ser opcional dependiendo de la estructura */\n}\n\n.superMenu1 li:last-child {\n  margin-right: 0; /* El último elemento no tendrá margen derecho */\n}\n\n.toggleMenuButton {\n  display: none; /* Mostrar el botón en pantallas más pequeñas */\n}\n\n.menuVisible {\n  display: block;\n}\n\n.menuHidden {\n  display: none;\n}\n\n.closeButton {\n  background-color: transparent; /* Fondo transparente */\n  border: none; /* Sin bordes */\n  color: #333; /* Color del icono */\n  font-size: 1.5rem; /* Tamaño del icono */\n  cursor: pointer; /* Cambia el cursor al pasar por encima */\n  right: 10px;\n  transition: color 0.3s ease;\n}\n\n/* Estilos para pantallas más pequeñas (ejemplo: móviles) */\n@media (max-width: 767px) {\n  .menuOpen {\n    display: block;\n  }\n\n  .menuClosed {\n    display: none;\n  }\n\n  .headerContent {\n    flex-direction: column; /* Los elementos se alinean verticalmente */\n    align-items: center;\n  }\n\n  .containerMenu {\n    display: none; /* Menú oculto en móviles */\n    flex-direction: column; /* Cambia la dirección a columna en móviles */\n    width: 100%; /* Asegura que el menú ocupe el ancho completo */\n    align-items: start; /* Centra los elementos */\n  }\n\n  .containerMenu ul {\n    align-items: start; /* Centra los elementos */\n  }\n\n  /* El botón toggleMenuButton se muestra solo en pantallas pequeñas */\n  .toggleMenuButton {\n    display: block; /* Mostrar el botón en pantallas más pequeñas */\n    font-size: 24px; /* Tamaño del ícono */\n    padding: 0;\n    border: none;\n    background: none;\n    cursor: pointer;\n  }\n\n  /* Estilo para mostrar el botón cuando el menú está visible */\n  .toggleMenuButton.menuVisible + .containerMenu {\n    display: flex; /* Muestra el menú cuando tiene la clase \"menuVisible\" */\n  }\n\n  /* Estilo para ocultar el menú cuando el botón tiene la clase \"menuHidden\" */\n  .toggleMenuButton.menuHidden + .containerMenu {\n    display: none; /* Oculta el menú cuando tiene la clase \"menuHidden\" */\n  }\n\n  .containerMenu ul {\n    flex-direction: column;\n    align-items: start;\n    padding-left: 6%;\n  }\n\n  .containerMenu li {\n    margin: 15px 0;\n  }\n\n  .containerMenu a {\n    padding: 10px;\n    width: 100%; /* Asegura que los enlaces ocupen el 100% del ancho */\n    text-align: center;\n  }\n\n  .header {\n    height: auto;\n    flex-direction: column;\n    align-items: center;\n  }\n\n  .headerSecond {\n    height: auto;\n    top: 80px;\n  }\n\n  .superMenu1 {\n    width: 100%;\n    flex-direction: column;\n    align-items: start;\n  }\n\n  .superMenu1 ul {\n    flex-direction: column; /* Apilar los elementos del segundo menú */\n    align-items: start; /* Centrar los elementos */\n  }\n\n  .superMenu1 li {\n    margin: 15px 0; /* Espacio entre los elementos en móviles */\n  }\n}\n\n/* SearchForm.module.css */\n.searchForm {\n  max-width: 350px;\n}\n\n.searchInput {\n  font-size: 1rem;\n  outline: none;\n  transition: border-color 0.3s ease;\n  border: 1px solid #ddd;\n  margin-right: 15px;\n  padding: 7px;\n}\n\n.searchInput:focus {\n  border-color: #000000; /* Borde azul al hacer foco */\n}\n\n.searchButton {\n  background-color: #000000;\n  color: white;\n  border: none;\n  padding: 7px;\n  font-size: 1rem;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n}\n\n.searchButton:hover {\n  background-color: #1a3450; /* Fondo azul más oscuro al pasar el ratón */\n}\n\n@media (max-width: 768px) {\n  .searchForm {\n    flex-direction: column; /* Los elementos se apilan en pantallas pequeñas */\n  }\n\n  .searchInput {\n    margin-bottom: 10px; /* Añadir espacio entre el input y el botón */\n  }\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/header.css"],"names":[],"mappings":"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","sourcesContent":["/* HEADER */\n.header {\n  position: fixed;\n  top: 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: #c4c4c4;\n  width: 100%;\n  height: 70px;\n  z-index: 10;\n}\n\n.headerContent {\n  position: relative;\n  max-width: 1400px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n}\n\n.headerContent > .logo {\n  flex: 0 1 auto;\n}\n\n.logo {\n  display: flex;\n  font-size: 1.4rem;\n  font-weight: bold;\n  color: black;\n  text-decoration: none;\n}\n\n/* Ajuste de espacio para el logo en pantallas grandes */\n@media (min-width: 768px) {\n  .headerContent {\n    gap: 80px;\n    padding-top: 20px;\n    padding-bottom: 20px;\n  }\n\n  .headerContent > .logo {\n    flex: 0 1 200px;\n  }\n\n  .headerContent > .containerMenu {\n    flex: 1;\n    display: flex;\n    justify-content: space-between;\n  }\n\n  .logo {\n    align-items: center;\n    justify-content: center;\n    padding: 10px;\n    padding-bottom: 20px;\n  }\n}\n\n/* En dispositivos móviles, el logo y el menú ocupan su espacio normal */\n@media (max-width: 767px) {\n  .headerContent > .logo {\n    flex: 0 1 auto;\n  }\n\n  .headerContent > .containerMenu {\n    flex: 1;\n    display: flex;\n    justify-content: center; /* Centra el menú en la versión móvil */\n  }\n}\n\n.headerSecond {\n  display: flex;\n  top: 110px;\n  justify-content: space-between;\n  align-items: center;\n  background-color: #c4c4c4;\n  height: 70px;\n  position: absolute;\n  left: 0;\n  width: 100%;\n  padding: 10px;\n  z-index: 20;\n}\n\n.searchForm {\n  margin-left: 20px;\n}\n\n.containerMenu {\n  text-align: center;\n  justify-content: space-between;\n  padding: 10px;\n  display: flex;\n  flex-direction: row;\n  transition: all 0.3s ease-in-out; /* Para la transición suave del menú */\n}\n\n.containerMenu ul {\n  list-style: none;\n  display: flex;\n  margin: 0;\n  padding-top: 5px;\n}\n\n.containerMenu li {\n  margin-right: 10px; /* Espacio entre elementos */\n}\n\n.containerMenu li:last-child {\n  margin-right: 0; /* Elimina el espacio después del último elemento */\n}\n\n.containerMenu a {\n  text-decoration: none;\n  color: #ffffff;\n  padding: 10px;\n  border: 1px solid #ccc;\n  background-color: #091e4b;\n}\n\n.containerMenu a:hover {\n  background-color: #f0f0f0;\n  color: black;\n}\n\n.dropdown {\n  position: relative;\n}\n\n.superMenu1 {\n  display: none; /* Oculto por defecto */\n  position: absolute;\n  top: 120%; /* Aparece justo debajo del menú principal */\n  left: 0;\n  background-color: #c4c4c4;\n  padding: 10px;\n  white-space: nowrap;\n  z-index: 30;\n}\n\n.superMenu1 ul {\n  display: flex; /* Muestra los elementos en línea */\n  flex-direction: row;\n  gap: 10px; /* Espaciado entre elementos */\n}\n\n.superMenu1 a {\n  display: block;\n  padding: 10px;\n  color: rgb(255, 255, 255);\n  background-color: #091e4b;\n  text-decoration: none;\n  border: 1px solid #ccc;\n}\n\n.superMenu1 a:hover {\n  background-color: #f0f0f0;\n}\n\n.superMenu1 li {\n  margin-right: 20px; /* Espacio entre los elementos del menú */\n  display: inline-block; /* Esto puede ser opcional dependiendo de la estructura */\n}\n\n.superMenu1 li:last-child {\n  margin-right: 0; /* El último elemento no tendrá margen derecho */\n}\n\n.toggleMenuButton {\n  display: none; /* Mostrar el botón en pantallas más pequeñas */\n}\n\n.menuVisible {\n  display: block;\n}\n\n.menuHidden {\n  display: none;\n}\n\n.closeButton {\n  background-color: transparent; /* Fondo transparente */\n  border: none; /* Sin bordes */\n  color: #333; /* Color del icono */\n  font-size: 1.5rem; /* Tamaño del icono */\n  cursor: pointer; /* Cambia el cursor al pasar por encima */\n  right: 10px;\n  transition: color 0.3s ease;\n}\n\n/* Estilos para pantallas más pequeñas (ejemplo: móviles) */\n@media (max-width: 767px) {\n  .menuOpen {\n    display: block;\n  }\n\n  .menuClosed {\n    display: none;\n  }\n\n  .headerContent {\n    flex-direction: column; /* Los elementos se alinean verticalmente */\n    align-items: center;\n  }\n\n  .containerMenu {\n    display: none; /* Menú oculto en móviles */\n    flex-direction: column; /* Cambia la dirección a columna en móviles */\n    width: 100%; /* Asegura que el menú ocupe el ancho completo */\n    align-items: start; /* Centra los elementos */\n  }\n\n  .containerMenu ul {\n    align-items: start; /* Centra los elementos */\n  }\n\n  /* El botón toggleMenuButton se muestra solo en pantallas pequeñas */\n  .toggleMenuButton {\n    display: block; /* Mostrar el botón en pantallas más pequeñas */\n    font-size: 24px; /* Tamaño del ícono */\n    padding: 0;\n    border: none;\n    background: none;\n    cursor: pointer;\n  }\n\n  /* Estilo para mostrar el botón cuando el menú está visible */\n  .toggleMenuButton.menuVisible + .containerMenu {\n    display: flex; /* Muestra el menú cuando tiene la clase \"menuVisible\" */\n  }\n\n  /* Estilo para ocultar el menú cuando el botón tiene la clase \"menuHidden\" */\n  .toggleMenuButton.menuHidden + .containerMenu {\n    display: none; /* Oculta el menú cuando tiene la clase \"menuHidden\" */\n  }\n\n  .containerMenu ul {\n    flex-direction: column;\n    align-items: start;\n    padding-left: 6%;\n  }\n\n  .containerMenu li {\n    margin: 15px 0;\n  }\n\n  .containerMenu a {\n    padding: 10px;\n    width: 100%; /* Asegura que los enlaces ocupen el 100% del ancho */\n    text-align: center;\n  }\n\n  .header {\n    height: auto;\n    flex-direction: column;\n    align-items: center;\n  }\n\n  .headerSecond {\n    height: auto;\n    top: 80px;\n  }\n\n  .superMenu1 {\n    width: 100%;\n    flex-direction: column;\n    align-items: start;\n  }\n\n  .superMenu1 ul {\n    flex-direction: column; /* Apilar los elementos del segundo menú */\n    align-items: start; /* Centrar los elementos */\n  }\n\n  .superMenu1 li {\n    margin: 15px 0; /* Espacio entre los elementos en móviles */\n  }\n}\n\n/* SearchForm.module.css */\n.searchForm {\n  max-width: 350px;\n}\n\n.searchInput {\n  font-size: 1rem;\n  outline: none;\n  transition: border-color 0.3s ease;\n  border: 1px solid #ddd;\n  margin-right: 15px;\n  padding: 7px;\n}\n\n.searchInput:focus {\n  border-color: #000000; /* Borde azul al hacer foco */\n}\n\n.searchButton {\n  background-color: #000000;\n  color: white;\n  border: none;\n  padding: 7px;\n  font-size: 1rem;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n}\n\n.searchButton:hover {\n  background-color: #1a3450; /* Fondo azul más oscuro al pasar el ratón */\n}\n\n@media (max-width: 768px) {\n  .searchForm {\n    flex-direction: column; /* Los elementos se apilan en pantallas pequeñas */\n  }\n\n  .searchInput {\n    margin-bottom: 10px; /* Añadir espacio entre el input y el botón */\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/loginPage.css":
-/*!**************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/loginPage.css ***!
-  \**************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/loginPage.css":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/loginPage.css ***!
+  \*********************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
 // Imports
 
@@ -704,17 +891,6 @@ label {
   box-sizing: border-box; /* Incluye el padding dentro del ancho */
 }
 
-/* Botón de envío */
-.btn-color-negre {
-  width: 100%;
-  padding: 10px;
-  border-radius: 3px;
-  font-size: 16px;
-  background-color: rgb(43, 42, 42);
-  color: white;
-  cursor: pointer;
-}
-
 /* Mensajes de alerta */
 .alert {
   text-align: center;
@@ -736,26 +912,26 @@ label {
   /* texto negrita  */
   font-weight: bold;
 }
-`, "",{"version":3,"sources":["webpack://./src/frontend/loginPage.css"],"names":[],"mappings":"AAAA,oCAAoC;AACpC;EACE,aAAa,EAAE,wCAAwC;EACvD,aAAa;EACb,uBAAuB,EAAE,2BAA2B;EACpD,mBAAmB,EAAE,yBAAyB;EAC9C,eAAe,EAAE,iDAAiD;EAClE,sBAAsB;AACxB;;AAEA,yCAAyC;AACzC;EACE,WAAW;EACX,gBAAgB,EAAE,+BAA+B;EACjD,wCAAwC;EACxC,kBAAkB;EAClB,uBAAuB;EACvB,YAAY;AACd;;AAEA;EACE,aAAa;AACf;;AAEA;EACE,kBAAkB;EAClB,mBAAmB;EACnB,WAAW;AACb;;AAEA,4CAA4C;AAC5C;EACE,cAAc,EAAE,uDAAuD;EACvE,kBAAkB,EAAE,kDAAkD;EACtE,iBAAiB,EAAE,6CAA6C;EAChE,WAAW,EAAE,4CAA4C;AAC3D;;AAEA,sBAAsB;AACtB;EACE,WAAW,EAAE,2DAA2D;EACxE,kBAAkB;EAClB,sBAAsB;EACtB,aAAa;EACb,mBAAmB,EAAE,wCAAwC;EAC7D,sBAAsB,EAAE,wCAAwC;AAClE;;AAEA,mBAAmB;AACnB;EACE,WAAW;EACX,aAAa;EACb,kBAAkB;EAClB,eAAe;EACf,iCAAiC;EACjC,YAAY;EACZ,eAAe;AACjB;;AAEA,uBAAuB;AACvB;EACE,kBAAkB;EAClB,kBAAkB;EAClB,yBAAyB;EACzB,aAAa;EACb,mBAAmB;AACrB;;AAEA;EACE,yBAAyB;EACzB,cAAc;EACd,iBAAiB;AACnB;;AAEA;EACE,yBAAyB;EACzB,cAAc;EACd,mBAAmB;EACnB,iBAAiB;AACnB","sourcesContent":["/* Centrar el contenedor principal */\n.pantallaLogin {\n  height: 100vh; /* Ocupa toda la altura de la pantalla */\n  display: flex;\n  justify-content: center; /* Centra horizontalmente */\n  align-items: center; /* Centra verticalmente */\n  padding: 0 20px; /* Asegura que el contenido no toque los bordes */\n  box-sizing: border-box;\n}\n\n/* Estilos de la tarjeta del formulario */\n.card {\n  width: 100%;\n  max-width: 400px; /* Ancho máximo de la tarjeta */\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n  border-radius: 8px;\n  background-color: white;\n  color: black;\n}\n\n.card-body {\n  padding: 20px;\n}\n\nh3 {\n  text-align: center;\n  margin-bottom: 20px;\n  color: #333;\n}\n\n/* Estilo para las etiquetas de los campos */\nlabel {\n  display: block; /* Hace que las etiquetas se ubiquen encima del input */\n  margin-bottom: 8px; /* Espacio entre la etiqueta y el campo de texto */\n  font-weight: bold; /* Hace que las etiquetas sean más visibles */\n  color: #555; /* Un color gris oscuro para las etiquetas */\n}\n\n/* Campos de entrada */\n.form-ample-100 {\n  width: 100%; /* Asegura que los campos ocupen todo el ancho disponible */\n  border-radius: 3px;\n  border: 1px solid #ccc;\n  padding: 10px;\n  margin-bottom: 15px; /* Espacio entre los campos de entrada */\n  box-sizing: border-box; /* Incluye el padding dentro del ancho */\n}\n\n/* Botón de envío */\n.btn-color-negre {\n  width: 100%;\n  padding: 10px;\n  border-radius: 3px;\n  font-size: 16px;\n  background-color: rgb(43, 42, 42);\n  color: white;\n  cursor: pointer;\n}\n\n/* Mensajes de alerta */\n.alert {\n  text-align: center;\n  border-radius: 5px;\n  border: 1px solid #000000;\n  padding: 30px;\n  margin-bottom: 25px;\n}\n\n.alert-success {\n  background-color: #d4edda;\n  color: #155724;\n  font-weight: bold;\n}\n\n.alert-danger {\n  background-color: #f8d7da;\n  color: #721c24;\n  /* texto negrita  */\n  font-weight: bold;\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/loginPage.css"],"names":[],"mappings":"AAAA,oCAAoC;AACpC;EACE,aAAa,EAAE,wCAAwC;EACvD,aAAa;EACb,uBAAuB,EAAE,2BAA2B;EACpD,mBAAmB,EAAE,yBAAyB;EAC9C,eAAe,EAAE,iDAAiD;EAClE,sBAAsB;AACxB;;AAEA,yCAAyC;AACzC;EACE,WAAW;EACX,gBAAgB,EAAE,+BAA+B;EACjD,wCAAwC;EACxC,kBAAkB;EAClB,uBAAuB;EACvB,YAAY;AACd;;AAEA;EACE,aAAa;AACf;;AAEA;EACE,kBAAkB;EAClB,mBAAmB;EACnB,WAAW;AACb;;AAEA,4CAA4C;AAC5C;EACE,cAAc,EAAE,uDAAuD;EACvE,kBAAkB,EAAE,kDAAkD;EACtE,iBAAiB,EAAE,6CAA6C;EAChE,WAAW,EAAE,4CAA4C;AAC3D;;AAEA,sBAAsB;AACtB;EACE,WAAW,EAAE,2DAA2D;EACxE,kBAAkB;EAClB,sBAAsB;EACtB,aAAa;EACb,mBAAmB,EAAE,wCAAwC;EAC7D,sBAAsB,EAAE,wCAAwC;AAClE;;AAEA,uBAAuB;AACvB;EACE,kBAAkB;EAClB,kBAAkB;EAClB,yBAAyB;EACzB,aAAa;EACb,mBAAmB;AACrB;;AAEA;EACE,yBAAyB;EACzB,cAAc;EACd,iBAAiB;AACnB;;AAEA;EACE,yBAAyB;EACzB,cAAc;EACd,mBAAmB;EACnB,iBAAiB;AACnB","sourcesContent":["/* Centrar el contenedor principal */\n.pantallaLogin {\n  height: 100vh; /* Ocupa toda la altura de la pantalla */\n  display: flex;\n  justify-content: center; /* Centra horizontalmente */\n  align-items: center; /* Centra verticalmente */\n  padding: 0 20px; /* Asegura que el contenido no toque los bordes */\n  box-sizing: border-box;\n}\n\n/* Estilos de la tarjeta del formulario */\n.card {\n  width: 100%;\n  max-width: 400px; /* Ancho máximo de la tarjeta */\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n  border-radius: 8px;\n  background-color: white;\n  color: black;\n}\n\n.card-body {\n  padding: 20px;\n}\n\nh3 {\n  text-align: center;\n  margin-bottom: 20px;\n  color: #333;\n}\n\n/* Estilo para las etiquetas de los campos */\nlabel {\n  display: block; /* Hace que las etiquetas se ubiquen encima del input */\n  margin-bottom: 8px; /* Espacio entre la etiqueta y el campo de texto */\n  font-weight: bold; /* Hace que las etiquetas sean más visibles */\n  color: #555; /* Un color gris oscuro para las etiquetas */\n}\n\n/* Campos de entrada */\n.form-ample-100 {\n  width: 100%; /* Asegura que los campos ocupen todo el ancho disponible */\n  border-radius: 3px;\n  border: 1px solid #ccc;\n  padding: 10px;\n  margin-bottom: 15px; /* Espacio entre los campos de entrada */\n  box-sizing: border-box; /* Incluye el padding dentro del ancho */\n}\n\n/* Mensajes de alerta */\n.alert {\n  text-align: center;\n  border-radius: 5px;\n  border: 1px solid #000000;\n  padding: 30px;\n  margin-bottom: 25px;\n}\n\n.alert-success {\n  background-color: #d4edda;\n  color: #155724;\n  font-weight: bold;\n}\n\n.alert-danger {\n  background-color: #f8d7da;\n  color: #721c24;\n  /* texto negrita  */\n  font-weight: bold;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/menuIntranet.css":
-/*!*****************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/menuIntranet.css ***!
-  \*****************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/menuIntranet.css":
+/*!************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/menuIntranet.css ***!
+  \************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
 // Imports
 
@@ -833,34 +1009,38 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* Contenedor principal */
     width: auto; /* En pantallas grandes, los botones no ocupan todo el ancho */
   }
 }
-`, "",{"version":3,"sources":["webpack://./src/frontend/menuIntranet.css"],"names":[],"mappings":"AAAA,yBAAyB;AACzB;EACE,eAAe,EAAE,0CAA0C;EAC3D,gBAAgB;AAClB;;AAEA,sCAAsC;AACtC;EACE,eAAe,EAAE,wBAAwB;EACzC,kBAAkB,EAAE,qCAAqC;EACzD,kBAAkB,EAAE,uCAAuC;EAC3D,kBAAkB,EAAE,uBAAuB;EAC3C,yBAAyB;EACzB,YAAY;AACd;;AAEA,qCAAqC;AACrC;EACE,yBAAyB,EAAE,qDAAqD;EAChF,sBAAsB,EAAE,4CAA4C;AACtE;;AAEA,kDAAkD;AAClD;EACE,SAAS,EAAE,iCAAiC;AAC9C;;AAEA,wDAAwD;AACxD;EACE,aAAa;EACb,eAAe,EAAE,4EAA4E;EAC7F,SAAS,EAAE,8BAA8B;AAC3C;;AAEA;EACE,8BAA8B,EAAE,iDAAiD;AACnF;;AAEA;EACE,aAAa,EAAE,4CAA4C;AAC7D;;AAEA;EACE,sBAAsB,EAAE,gEAAgE;AAC1F;;AAEA;EACE,mBAAmB,EAAE,kEAAkE;AACzF;;AAEA;EACE,WAAW,EAAE,sEAAsE;AACrF;;AAEA;EACE,WAAW,EAAE,iEAAiE;AAChF;;AAEA,6EAA6E;AAC7E;EACE;IACE,WAAW,EAAE,2DAA2D;EAC1E;AACF;;AAEA,uCAAuC;AACvC;EACE;IACE,WAAW,EAAE,8DAA8D;EAC7E;AACF","sourcesContent":["/* Contenedor principal */\n.container-menu {\n  padding: 0 15px; /* Agrega un poco de espacio a los lados */\n  margin-top: 50px;\n}\n\n/* Estilos para los botones del menú */\n.menuBtn {\n  font-size: 16px; /* Tamaño de la fuente */\n  padding: 12px 20px; /* Espaciado interno de los botones */\n  text-align: center; /* Asegura que el texto esté centrado */\n  border-radius: 5px; /* Bordes redondeados */\n  background-color: #014b12;\n  color: white;\n}\n\n/* Efecto de hover para los botones */\n.menuBtn:hover {\n  background-color: #831806; /* Cambia el color de fondo cuando se pasa el ratón */\n  transform: scale(1.05); /* Aumenta ligeramente el tamaño del botón */\n}\n\n/* Estilos para la fila que contiene los botones */\n.row {\n  margin: 0; /* Elimina el margen de la fila */\n}\n\n/* Configuración de los botones para pantallas grandes */\n.col-12 {\n  display: flex;\n  flex-wrap: wrap; /* Permite que los botones se ajusten a la siguiente línea si es necesario */\n  gap: 10px; /* Espacio entre los botones */\n}\n\n.col-md-12 {\n  justify-content: space-between; /* Distribuye los botones de forma equidistante */\n}\n\n.d-flex {\n  display: flex; /* Establece el contenedor como un flexbox */\n}\n\n.flex-column {\n  flex-direction: column; /* Los elementos se apilan verticalmente en pantallas pequeñas */\n}\n\n.flex-md-row {\n  flex-direction: row; /* Los elementos se alinean horizontalmente en pantallas grandes */\n}\n\n.w-100 {\n  width: 100%; /* Los botones ocupan todo el ancho disponible en pantallas pequeñas */\n}\n\n.w-md-auto {\n  width: auto; /* En pantallas grandes, los botones tienen un ancho automático */\n}\n\n/* Asegurarse de que los botones sean igual de anchos en pantallas pequeñas */\n@media (max-width: 767px) {\n  .menuBtn {\n    width: 100%; /* Los botones ocupan todo el ancho en pantallas pequeñas */\n  }\n}\n\n/* Estilos para las pantallas grandes */\n@media (min-width: 768px) {\n  .menuBtn {\n    width: auto; /* En pantallas grandes, los botones no ocupan todo el ancho */\n  }\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/menuIntranet.css"],"names":[],"mappings":"AAAA,yBAAyB;AACzB;EACE,eAAe,EAAE,0CAA0C;EAC3D,gBAAgB;AAClB;;AAEA,sCAAsC;AACtC;EACE,eAAe,EAAE,wBAAwB;EACzC,kBAAkB,EAAE,qCAAqC;EACzD,kBAAkB,EAAE,uCAAuC;EAC3D,kBAAkB,EAAE,uBAAuB;EAC3C,yBAAyB;EACzB,YAAY;AACd;;AAEA,qCAAqC;AACrC;EACE,yBAAyB,EAAE,qDAAqD;EAChF,sBAAsB,EAAE,4CAA4C;AACtE;;AAEA,kDAAkD;AAClD;EACE,SAAS,EAAE,iCAAiC;AAC9C;;AAEA,wDAAwD;AACxD;EACE,aAAa;EACb,eAAe,EAAE,4EAA4E;EAC7F,SAAS,EAAE,8BAA8B;AAC3C;;AAEA;EACE,8BAA8B,EAAE,iDAAiD;AACnF;;AAEA;EACE,aAAa,EAAE,4CAA4C;AAC7D;;AAEA;EACE,sBAAsB,EAAE,gEAAgE;AAC1F;;AAEA;EACE,mBAAmB,EAAE,kEAAkE;AACzF;;AAEA;EACE,WAAW,EAAE,sEAAsE;AACrF;;AAEA;EACE,WAAW,EAAE,iEAAiE;AAChF;;AAEA,6EAA6E;AAC7E;EACE;IACE,WAAW,EAAE,2DAA2D;EAC1E;AACF;;AAEA,uCAAuC;AACvC;EACE;IACE,WAAW,EAAE,8DAA8D;EAC7E;AACF","sourcesContent":["/* Contenedor principal */\n.container-menu {\n  padding: 0 15px; /* Agrega un poco de espacio a los lados */\n  margin-top: 50px;\n}\n\n/* Estilos para los botones del menú */\n.menuBtn {\n  font-size: 16px; /* Tamaño de la fuente */\n  padding: 12px 20px; /* Espaciado interno de los botones */\n  text-align: center; /* Asegura que el texto esté centrado */\n  border-radius: 5px; /* Bordes redondeados */\n  background-color: #014b12;\n  color: white;\n}\n\n/* Efecto de hover para los botones */\n.menuBtn:hover {\n  background-color: #831806; /* Cambia el color de fondo cuando se pasa el ratón */\n  transform: scale(1.05); /* Aumenta ligeramente el tamaño del botón */\n}\n\n/* Estilos para la fila que contiene los botones */\n.row {\n  margin: 0; /* Elimina el margen de la fila */\n}\n\n/* Configuración de los botones para pantallas grandes */\n.col-12 {\n  display: flex;\n  flex-wrap: wrap; /* Permite que los botones se ajusten a la siguiente línea si es necesario */\n  gap: 10px; /* Espacio entre los botones */\n}\n\n.col-md-12 {\n  justify-content: space-between; /* Distribuye los botones de forma equidistante */\n}\n\n.d-flex {\n  display: flex; /* Establece el contenedor como un flexbox */\n}\n\n.flex-column {\n  flex-direction: column; /* Los elementos se apilan verticalmente en pantallas pequeñas */\n}\n\n.flex-md-row {\n  flex-direction: row; /* Los elementos se alinean horizontalmente en pantallas grandes */\n}\n\n.w-100 {\n  width: 100%; /* Los botones ocupan todo el ancho disponible en pantallas pequeñas */\n}\n\n.w-md-auto {\n  width: auto; /* En pantallas grandes, los botones tienen un ancho automático */\n}\n\n/* Asegurarse de que los botones sean igual de anchos en pantallas pequeñas */\n@media (max-width: 767px) {\n  .menuBtn {\n    width: 100%; /* Los botones ocupan todo el ancho en pantallas pequeñas */\n  }\n}\n\n/* Estilos para las pantallas grandes */\n@media (min-width: 768px) {\n  .menuBtn {\n    width: auto; /* En pantallas grandes, los botones no ocupan todo el ancho */\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/style.css":
-/*!**********************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/style.css ***!
-  \**********************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/style.css":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/style.css ***!
+  \*****************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_header_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../node_modules/css-loader/dist/cjs.js!./header.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/header.css");
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_contenidor_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! -!../../node_modules/css-loader/dist/cjs.js!./contenidor.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/contenidor.css");
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_loginPage_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! -!../../node_modules/css-loader/dist/cjs.js!./loginPage.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/loginPage.css");
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_menuIntranet_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! -!../../node_modules/css-loader/dist/cjs.js!./menuIntranet.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/menuIntranet.css");
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_taules_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! -!../../node_modules/css-loader/dist/cjs.js!./taules.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/taules.css");
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_formulari_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! -!../../node_modules/css-loader/dist/cjs.js!./formulari.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/formulari.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_header_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js!./header.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/header.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_contenidor_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js!./contenidor.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/contenidor.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_loginPage_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js!./loginPage.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/loginPage.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_menuIntranet_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js!./menuIntranet.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/menuIntranet.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_taules_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js!./taules.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/taules.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_formulari_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js!./formulari.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/formulari.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_botons_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js!./botons.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/botons.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_footer_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js!./footer.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/footer.css");
 // Imports
+
+
 
 
 
@@ -876,6 +1056,8 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_loginPage_css__WE
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_menuIntranet_css__WEBPACK_IMPORTED_MODULE_5__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_taules_css__WEBPACK_IMPORTED_MODULE_6__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_formulari_css__WEBPACK_IMPORTED_MODULE_7__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_botons_css__WEBPACK_IMPORTED_MODULE_8__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_footer_css__WEBPACK_IMPORTED_MODULE_9__["default"]);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `/*
 Theme Name: ElliotFern
@@ -907,26 +1089,26 @@ a:visited,
 a:hover {
   text-decoration: underline;
 }
-`, "",{"version":3,"sources":["webpack://./src/frontend/style.css"],"names":[],"mappings":"AAAA;;;;;;;;;CASC;;AAED,WAAW;;AAQX;EACE,4LAA4L;EAC5L,gBAAgB;EAChB,WAAW;EACX,SAAS;EACT,UAAU;EACV,sBAAsB;EACtB,SAAS;EACT,yBAAyB;EACzB,WAAW;AACb;;AAEA;;;EAGE,0BAA0B;AAC5B","sourcesContent":["/*\nTheme Name: ElliotFern\nTheme URI: https://elliotfern.com\nAuthor: Elliot Fernandez\nAuthor URI: https://elliotfern.com/\nDescription: Plantilla de tema pel web ElliotFern.com\nVersion: 1.1\nLicense: GNU General Public License v3 or later\nLicense URI: http://www.gnu.org/licenses/gpl-3.0.html\n*/\n\n/* HEADER */\n@import './header.css';\n@import './contenidor.css';\n@import './loginPage.css';\n@import './menuIntranet.css';\n@import './taules.css';\n@import './formulari.css';\n\nbody {\n  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  line-height: 1.5;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  border: 0;\n  background-color: #cecece;\n  color: #333;\n}\n\na:link,\na:visited,\na:hover {\n  text-decoration: underline;\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/style.css"],"names":[],"mappings":"AAAA;;;;;;;;;CASC;;AAED,WAAW;;AAUX;EACE,4LAA4L;EAC5L,gBAAgB;EAChB,WAAW;EACX,SAAS;EACT,UAAU;EACV,sBAAsB;EACtB,SAAS;EACT,yBAAyB;EACzB,WAAW;AACb;;AAEA;;;EAGE,0BAA0B;AAC5B","sourcesContent":["/*\nTheme Name: ElliotFern\nTheme URI: https://elliotfern.com\nAuthor: Elliot Fernandez\nAuthor URI: https://elliotfern.com/\nDescription: Plantilla de tema pel web ElliotFern.com\nVersion: 1.1\nLicense: GNU General Public License v3 or later\nLicense URI: http://www.gnu.org/licenses/gpl-3.0.html\n*/\n\n/* HEADER */\n@import './header.css';\n@import './contenidor.css';\n@import './loginPage.css';\n@import './menuIntranet.css';\n@import './taules.css';\n@import './formulari.css';\n@import './botons.css';\n@import './footer.css';\n\nbody {\n  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  line-height: 1.5;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  border: 0;\n  background-color: #cecece;\n  color: #333;\n}\n\na:link,\na:visited,\na:hover {\n  text-decoration: underline;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/taules.css":
-/*!***********************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/taules.css ***!
-  \***********************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/taules.css":
+/*!******************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/taules.css ***!
+  \******************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
 // Imports
 
@@ -996,20 +1178,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* TAULES */
 .table td:last-child {
   text-align: center; /* Centra los botones o enlaces en la última columna */
 }
-
-.table td:last-child button {
-  background-color: transparent; /* Fondo transparente para los botones */
-  border: none; /* Elimina el borde del botón */
-  cursor: pointer; /* Cambia el cursor al pasar sobre los botones */
-  font-size: 16px; /* Tamaño de la fuente en los botones */
-  color: #007bff; /* Color del texto (en este caso, azul) */
-  transition: color 0.3s ease; /* Transición suave al cambiar de color */
-}
-
-.table td:last-child button:hover {
-  color: #0056b3; /* Cambio de color al pasar el ratón por encima del botón */
-}
-`, "",{"version":3,"sources":["webpack://./src/frontend/taules.css"],"names":[],"mappings":"AAAA,WAAW;;AAEX,mDAAmD;AACnD;EACE,cAAc,EAAE,oCAAoC;AACtD;;AAEA,oCAAoC;AACpC;EACE,WAAW,EAAE,gDAAgD;EAC7D,yBAAyB,EAAE,sCAAsC;EACjE,mBAAmB,EAAE,uEAAuE;EAC5F,eAAe,EAAE,gDAAgD;EACjE,kBAAkB;AACpB;;AAEA,uCAAuC;AACvC;EACE,yBAAyB,EAAE,0CAA0C;AACvE;;AAEA;EACE,yBAAyB,EAAE,4DAA4D;AACzF;;AAEA,2CAA2C;AAC3C;EACE,yBAAyB,EAAE,kCAAkC;EAC7D,YAAY,EAAE,kCAAkC;AAClD;;AAEA;EACE,kBAAkB,EAAE,+DAA+D;EACnF,gBAAgB,EAAE,wCAAwC;EAC1D,iBAAiB,EAAE,kCAAkC;EACrD,yBAAyB,EAAE,oCAAoC;AACjE;;AAEA,wCAAwC;AACxC;EACE,kBAAkB,EAAE,mCAAmC;EACvD,gBAAgB,EAAE,wCAAwC;EAC1D,sBAAsB,EAAE,iCAAiC;EACzD,6BAA6B,EAAE,oCAAoC;AACrE;;AAEA,qCAAqC;AACrC;;EAEE,kBAAkB;AACpB;;AAEA,kCAAkC;AAClC;;EAEE,UAAU;EACV,mBAAmB,EAAE,uCAAuC;AAC9D;;AAEA,0EAA0E;AAC1E;EACE,kBAAkB,EAAE,sDAAsD;AAC5E;;AAEA;EACE,6BAA6B,EAAE,wCAAwC;EACvE,YAAY,EAAE,+BAA+B;EAC7C,eAAe,EAAE,gDAAgD;EACjE,eAAe,EAAE,uCAAuC;EACxD,cAAc,EAAE,yCAAyC;EACzD,2BAA2B,EAAE,yCAAyC;AACxE;;AAEA;EACE,cAAc,EAAE,2DAA2D;AAC7E","sourcesContent":["/* TAULES */\n\n/* Contenedor de la tabla para hacerla responsive */\n.table-responsive {\n  margin: 20px 0; /* Espaciado alrededor de la tabla */\n}\n\n/* Estilos generales para la tabla */\n.table {\n  width: 100%; /* La tabla ocupa todo el ancho del contenedor */\n  border-collapse: collapse; /* Elimina los espacios entre celdas */\n  table-layout: fixed; /* Fija el tamaño de las celdas, haciendo que se ajusten al contenido */\n  font-size: 14px; /* Tamaño de fuente para los datos de la tabla */\n  table-layout: auto;\n}\n\n/* Estilos para las filas de la tabla */\n.table-striped tbody tr:nth-child(odd) {\n  background-color: #f9f9f9; /* Color de fondo para las filas impares */\n}\n\n.table tbody tr:hover {\n  background-color: #eaeaea; /* Color de fondo al pasar el ratón por encima de una fila */\n}\n\n/* Estilos para el encabezado de la tabla */\n.table-primary {\n  background-color: #121518; /* Color de fondo del encabezado */\n  color: white; /* Color de texto del encabezado */\n}\n\n.table th {\n  padding: 12px 15px; /* Espaciado alrededor del texto en las celdas del encabezado */\n  text-align: left; /* Alineación del texto a la izquierda */\n  font-weight: bold; /* Hace que el texto sea negrita */\n  text-transform: uppercase; /* Convierte el texto a mayúsculas */\n}\n\n/* Estilos para las celdas de la tabla */\n.table td {\n  padding: 12px 15px; /* Espaciado dentro de las celdas */\n  text-align: left; /* Alineación del texto a la izquierda */\n  vertical-align: middle; /* Alineación vertical centrada */\n  border-bottom: 1px solid #ddd; /* Línea de separación entre filas */\n}\n\n/* Bordes redondeados en las celdas */\n.table th,\n.table td {\n  border-radius: 5px;\n}\n\n/* Estilo para las celdas vacías */\n.table td:last-child,\n.table th:last-child {\n  width: 1px;\n  white-space: nowrap; /* Asegura que no haya salto de línea */\n}\n\n/* Estilos para las acciones (botones, etc.) dentro de las celdas vacías */\n.table td:last-child {\n  text-align: center; /* Centra los botones o enlaces en la última columna */\n}\n\n.table td:last-child button {\n  background-color: transparent; /* Fondo transparente para los botones */\n  border: none; /* Elimina el borde del botón */\n  cursor: pointer; /* Cambia el cursor al pasar sobre los botones */\n  font-size: 16px; /* Tamaño de la fuente en los botones */\n  color: #007bff; /* Color del texto (en este caso, azul) */\n  transition: color 0.3s ease; /* Transición suave al cambiar de color */\n}\n\n.table td:last-child button:hover {\n  color: #0056b3; /* Cambio de color al pasar el ratón por encima del botón */\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/taules.css"],"names":[],"mappings":"AAAA,WAAW;;AAEX,mDAAmD;AACnD;EACE,cAAc,EAAE,oCAAoC;AACtD;;AAEA,oCAAoC;AACpC;EACE,WAAW,EAAE,gDAAgD;EAC7D,yBAAyB,EAAE,sCAAsC;EACjE,mBAAmB,EAAE,uEAAuE;EAC5F,eAAe,EAAE,gDAAgD;EACjE,kBAAkB;AACpB;;AAEA,uCAAuC;AACvC;EACE,yBAAyB,EAAE,0CAA0C;AACvE;;AAEA;EACE,yBAAyB,EAAE,4DAA4D;AACzF;;AAEA,2CAA2C;AAC3C;EACE,yBAAyB,EAAE,kCAAkC;EAC7D,YAAY,EAAE,kCAAkC;AAClD;;AAEA;EACE,kBAAkB,EAAE,+DAA+D;EACnF,gBAAgB,EAAE,wCAAwC;EAC1D,iBAAiB,EAAE,kCAAkC;EACrD,yBAAyB,EAAE,oCAAoC;AACjE;;AAEA,wCAAwC;AACxC;EACE,kBAAkB,EAAE,mCAAmC;EACvD,gBAAgB,EAAE,wCAAwC;EAC1D,sBAAsB,EAAE,iCAAiC;EACzD,6BAA6B,EAAE,oCAAoC;AACrE;;AAEA,qCAAqC;AACrC;;EAEE,kBAAkB;AACpB;;AAEA,kCAAkC;AAClC;;EAEE,UAAU;EACV,mBAAmB,EAAE,uCAAuC;AAC9D;;AAEA,0EAA0E;AAC1E;EACE,kBAAkB,EAAE,sDAAsD;AAC5E","sourcesContent":["/* TAULES */\n\n/* Contenedor de la tabla para hacerla responsive */\n.table-responsive {\n  margin: 20px 0; /* Espaciado alrededor de la tabla */\n}\n\n/* Estilos generales para la tabla */\n.table {\n  width: 100%; /* La tabla ocupa todo el ancho del contenedor */\n  border-collapse: collapse; /* Elimina los espacios entre celdas */\n  table-layout: fixed; /* Fija el tamaño de las celdas, haciendo que se ajusten al contenido */\n  font-size: 14px; /* Tamaño de fuente para los datos de la tabla */\n  table-layout: auto;\n}\n\n/* Estilos para las filas de la tabla */\n.table-striped tbody tr:nth-child(odd) {\n  background-color: #f9f9f9; /* Color de fondo para las filas impares */\n}\n\n.table tbody tr:hover {\n  background-color: #eaeaea; /* Color de fondo al pasar el ratón por encima de una fila */\n}\n\n/* Estilos para el encabezado de la tabla */\n.table-primary {\n  background-color: #121518; /* Color de fondo del encabezado */\n  color: white; /* Color de texto del encabezado */\n}\n\n.table th {\n  padding: 12px 15px; /* Espaciado alrededor del texto en las celdas del encabezado */\n  text-align: left; /* Alineación del texto a la izquierda */\n  font-weight: bold; /* Hace que el texto sea negrita */\n  text-transform: uppercase; /* Convierte el texto a mayúsculas */\n}\n\n/* Estilos para las celdas de la tabla */\n.table td {\n  padding: 12px 15px; /* Espaciado dentro de las celdas */\n  text-align: left; /* Alineación del texto a la izquierda */\n  vertical-align: middle; /* Alineación vertical centrada */\n  border-bottom: 1px solid #ddd; /* Línea de separación entre filas */\n}\n\n/* Bordes redondeados en las celdas */\n.table th,\n.table td {\n  border-radius: 5px;\n}\n\n/* Estilo para las celdas vacías */\n.table td:last-child,\n.table th:last-child {\n  width: 1px;\n  white-space: nowrap; /* Asegura que no haya salto de línea */\n}\n\n/* Estilos para las acciones (botones, etc.) dentro de las celdas vacías */\n.table td:last-child {\n  text-align: center; /* Centra los botones o enlaces en la última columna */\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1135,29 +1304,29 @@ module.exports = function (item) {
 
 /***/ }),
 
-/***/ "./src/frontend/style.css":
-/*!********************************!*\
-  !*** ./src/frontend/style.css ***!
-  \********************************/
+/***/ "./src/frontend/estils/style.css":
+/*!***************************************!*\
+  !*** ./src/frontend/estils/style.css ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./style.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/style.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js!./style.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/style.css");
 
       
       
@@ -1912,10 +2081,12 @@ function renderTable(data) {
         passwordInput.id = `passw-${record.id}`; // ID único para cada contraseña
         passwordInput.value = '**********'; // Mostrar asteriscos
         passwordInput.readOnly = true; // Deshabilitar edición
+        // Añadir la clase "input-petit"
+        passwordInput.classList.add('input-petit');
         // Crear el botón "Show" para mostrar/ocultar la contraseña
         const showButton = document.createElement('button');
         showButton.type = 'button';
-        showButton.classList.add('btn', 'btn-sm', 'btn-secondary');
+        showButton.classList.add('btn-petit', 'btn-primari');
         showButton.textContent = 'Show';
         showButton.onclick = function () {
             showPass(record.id);
@@ -1932,10 +2103,10 @@ function renderTable(data) {
         row.appendChild(modifiedCell);
         // Crear columnas vacías para los botones de acción
         const editCell = document.createElement('td');
-        editCell.innerHTML = `<button class="btn btn-primary">Editar</button>`;
+        editCell.innerHTML = `<button class="btn-petit btn-primari">Editar</button>`;
         row.appendChild(editCell);
         const deleteCell = document.createElement('td');
-        deleteCell.innerHTML = `<button class="btn btn-danger">Eliminar</button>`;
+        deleteCell.innerHTML = `<button class="btn-petit btn-secondari">Eliminar</button>`;
         row.appendChild(deleteCell);
         // Añadir la fila completa al tbody
         tbody.appendChild(row);
@@ -2442,7 +2613,7 @@ var __webpack_exports__ = {};
   !*** ./src/frontend/main.ts ***!
   \******************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./src/frontend/style.css");
+/* harmony import */ var _estils_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./estils/style.css */ "./src/frontend/estils/style.css");
 /* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/urlPath */ "./src/frontend/utils/urlPath.ts");
 /* harmony import */ var _pages_cinema_funcions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/cinema/funcions */ "./src/frontend/pages/cinema/funcions.ts");
 /* harmony import */ var _pages_login_funcions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/login/funcions */ "./src/frontend/pages/login/funcions.ts");

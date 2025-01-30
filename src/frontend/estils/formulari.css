@@ -43,6 +43,11 @@ form label {
   flex: 1 1 100%; /* 1 input que ocupa toda la fila */
 }
 
+.separador {
+  margin-top: 35px;
+  margin-bottom: 20px;
+}
+
 /* Estilos para los inputs */
 input,
 textarea {
@@ -67,6 +72,17 @@ select {
   color: #333;
 }
 
+.input-petit {
+  width: 90%;
+  padding: 0.4rem;
+  margin-top: 0.2rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 0.7rem;
+  color: #333;
+}
+
 /* Bordes más suaves cuando se está enfocando en el campo */
 input:focus,
 select:focus,
@@ -81,21 +97,6 @@ textarea:focus {
 .col-md-6 input,
 .col-md-12 input {
   margin-bottom: 1rem; /* Espacio debajo de cada input */
-}
-
-/* Ajustes para el botón */
-button {
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
 }
 
 /* Estilo para los mensajes de error y éxito */
@@ -125,51 +126,9 @@ button:hover {
   }
 }
 
-/* Botón Atrás (izquierda) */
-.btn-back {
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  background-color: #6c757d; /* Gris */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.btn-back:hover {
-  background-color: #5a6268; /* Gris más oscuro */
-}
-
-/* Botón Crear factura (derecha) */
-.btn-primary {
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  background-color: #007bff; /* Azul */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.dreta {
-  text-align: right;
-  margin-left: auto;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3; /* Azul más oscuro */
-}
-
 /* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */
 @media (max-width: 768px) {
   .form-espai {
     flex-direction: column; /* Los botones se apilarán verticalmente */
-  }
-
-  .btn-back,
-  .btn-primary {
-    width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */
   }
 }

@@ -57,7 +57,7 @@ echo "<hr>";
                             year: 'numeric',
                         });
 
-                        let statusButton = `<button type="button" class="btn btn-primary btn-sm">${invoice.estat}</button>`;
+                        let statusButton = `<button type="button" class="btn-petit btn-primari">${invoice.estat}</button>`;
                         html += `
                     <tr>
                         <td>
@@ -74,7 +74,7 @@ echo "<hr>";
                         <td>${statusButton}</td>
                         <td>${invoice.tipusNom}</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-warning" onclick="generatePDF(${invoice.id})" id="pdfButton${invoice.id}">PDF</button>
+                            <button type="button" class="btn-petit btn-secondari" onclick="generatePDF(${invoice.id})" id="pdfButton${invoice.id}">PDF</button>
                         </td>
                         <td><button type="button">Update</button></td>
                         <td><button type="button" id="btnUpdateBook" class="btn btn-sm btn-danger">Delete</button></td>

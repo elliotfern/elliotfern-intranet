@@ -2,8 +2,9 @@
 # conectare la base de datos
 
 // some action goes here under php
-echo '<main>
-<div class="form">
+echo '<main>';
+
+echo '<div class="form">
 <h2>Creació de factura</h2>';
 
 echo '<div class="alert alert-success" id="createCustomerInvoiceMessageOk" style="display:none;role="alert">
@@ -138,18 +139,22 @@ foreach ($data as $row) {
 }
 echo '</select>';
 echo '</div>';
+
+echo '<div class="col-md-4">';
 echo '</div>';
 
-echo '<hr>';
+echo '</div>';
+
+echo '<hr class="separador">';
 echo '<div class="form-espai">
   <!-- Columna izquierda: Botón Atrás -->
   <div class="col-md-4">
-    <button type="button" id="btnBack" class="btn btn-back">Atrás</button>
+    <button type="button" id="btnBack" class="btn-enrere">Anar enrere</button>
   </div>
 
   <!-- Columna derecha: Botón Crear factura -->
   <div class="col-md-4 dreta">
-    <button type="submit" id="btnAddNewCustomerInvoice" class="btn btn-primary">Crear factura</button>
+    <button type="submit" id="btnAddNewCustomerInvoice" class="btn-primari">Crear factura</button>
   </div>
 </div>';
 
@@ -159,6 +164,10 @@ echo "</form>
 
 ?>
 <script>
+    document.getElementById('btnBack').addEventListener('click', function() {
+        window.history.back(); // Esto te lleva a la página anterior
+    });
+
     // AJAX PROCESS > PHP - MODAL FORM - CREATE NEW INVOICE CUSTOMER - ELLIOT FERNANDEZ SOLE TRADE
     document.addEventListener("DOMContentLoaded", function() {
         const urlAjax = "https://elliotfern.com/api/accounting/post/invoice";
@@ -204,9 +213,6 @@ echo "</form>
                     document.getElementById("createCustomerInvoiceMessageOk").style.display = 'block';
                     document.getElementById("createCustomerInvoiceMessageErr").style.display = 'none';
 
-                    // Cerrar el modal
-                    document.getElementById("modalFormAddCustomerInvoice").style.display = 'none';
-                    document.getElementById("btnAddNewCustomerInvoice").style.display = 'none';
                 } else {
                     // Mostrar mensaje de error
                     document.getElementById("createCustomerInvoiceMessageErr").style.display = 'block';
