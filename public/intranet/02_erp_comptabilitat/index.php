@@ -267,7 +267,7 @@ if ($stmt->rowCount() === 0) {
   echo "</table>";
   echo "</div>";
 }
-echo "<p class='text-right'><a href='/erp/facturacio-clients' class='btn btn-info btn-sm' role='button' aria-pressed='true'>Customers invoices &rarr;</a>
+echo "<p class='text-right'><a href='/gestio/erp/facturacio-clients' class='btn btn-info btn-sm' role='button' aria-pressed='true'>Customers invoices &rarr;</a>
     <a href='' class='btn btn-dark btn-sm' role='button' aria-pressed='true'>Create invoice &rarr;</a></p>";
 echo "</div>";
 echo "</div>";

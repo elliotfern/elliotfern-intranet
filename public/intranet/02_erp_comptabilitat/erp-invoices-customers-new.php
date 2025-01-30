@@ -1,23 +1,25 @@
 <?php
 # conectare la base de datos
-global $conn;
 
 // some action goes here under php
-echo '<div class="container">
+echo '<main>
+<div class="form">
 <h2>Creació de factura</h2>';
 
 echo '<div class="alert alert-success" id="createCustomerInvoiceMessageOk" style="display:none;role="alert">
-              <h4 class="alert-heading"><strong>' . ADD_OK_MESSAGE_SHORT . '</h4></strong>
-              <h6>' . ADD_OK_MESSAGE . '</h6>
+              <h4 class="alert-heading"><strong>correcte!</h4></strong>
+              <h6></h6>
               </div>';
 
 echo '<div class="alert alert-danger" id="createCustomerInvoiceMessageErr" style="display:none;role="alert">
-              <h4 class="alert-heading"><strong>' . ERROR_TYPE_MESSAGE_SHORT . '</h4></strong>
-              <h6>' . ERROR_TYPE_MESSAGE . '</h6>
+              <h4 class="alert-heading"><strong>error</h4></strong>
+              <h6></h6>
               </div>
               ';
 
-echo '<form method="POST" action="" id="modalFormAddCustomerInvoice" class="row g-3">';
+echo '<form method="POST" action="" id="modalFormAddCustomerInvoice">
+
+<div class="form-espai">';
 
 echo '<div class="col-md-4">';
 echo '<label>Company:</label>';
@@ -39,7 +41,7 @@ foreach ($data as $row) {
     } else {
         $nom = $clientNom . $coma . $clientCognoms;
     }
-    echo "<option value=" . $ID_antic . " selected>" . $ID_antic . " - " . $nom . "</option>";
+    echo "<option value=" . $ID_antic . ">" . $ID_antic . " - " . $nom . "</option>";
 }
 echo '</select>';
 echo '</div>';
@@ -136,54 +138,86 @@ foreach ($data as $row) {
 }
 echo '</select>';
 echo '</div>';
+echo '</div>';
 
-echo '<button type="submit" id="btnAddNewCustomerInvoice">Crear factura</button>';
+echo '<hr>';
+echo '<div class="form-espai">
+  <!-- Columna izquierda: Botón Atrás -->
+  <div class="col-md-4">
+    <button type="button" id="btnBack" class="btn btn-back">Atrás</button>
+  </div>
 
-echo "</form>";
+  <!-- Columna derecha: Botón Crear factura -->
+  <div class="col-md-4 dreta">
+    <button type="submit" id="btnAddNewCustomerInvoice" class="btn btn-primary">Crear factura</button>
+  </div>
+</div>';
+
+echo "</form>
+</div>
+</main>";
 
 ?>
 <script>
     // AJAX PROCESS > PHP - MODAL FORM - CREATE NEW INVOICE CUSTOMER - ELLIOT FERNANDEZ SOLE TRADE
-    $(function() {
-        let urlAjax = "https://gestio.elliotfern.com/api/accounting/post/invoice";
-        $("#btnAddNewCustomerInvoice").click(function() {
-            // check values
-            $("#createCustomerInvoiceMessageOk").hide();
-            $("#createCustomerInvoiceMessageErr").hide();
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlAjax = "https://elliotfern.com/api/accounting/post/invoice";
 
-            // Stop form from submitting normally
+        const btnAddNewCustomerInvoice = document.getElementById("btnAddNewCustomerInvoice");
+        btnAddNewCustomerInvoice.addEventListener("click", async function(event) {
+            // Ocultar mensajes de éxito y error
+            document.getElementById("createCustomerInvoiceMessageOk").style.display = 'none';
+            document.getElementById("createCustomerInvoiceMessageErr").style.display = 'none';
+
+            // Detener el comportamiento predeterminado del formulario (evitar la recarga de la página)
             event.preventDefault();
-            $.ajax({
-                type: "POST",
-                url: urlAjax,
-                data: {
-                    idUser: $("#idUser").val(),
-                    num: $("#num").val(),
-                    facConcepte: $("#facConcepte").val(),
-                    facData: $("#facData").val(),
-                    facDueDate: $("#facDueDate").val(),
-                    facSubtotal: $("#facSubtotal").val(),
-                    facFees: $("#facFees").val(),
-                    facTotal: $("#facTotal").val(),
-                    facVAT: $("#facVAT").val(),
-                    facIva: $("#facIva").val(),
-                    facEstat: $("#facEstat").val(),
-                    facPaymentType: $("#facPaymentType").val(),
-                },
-                success: function(response) {
-                    if (response.status == "success") {
-                        // Add response in Modal body
-                        $("#createCustomerInvoiceMessageOk").show();
-                        $("#createCustomerInvoiceMessageErr").hide();
-                        $("#customersInvoicesTable").DataTable().ajax.reload();
-                        $("#modalFormAddCustomerInvoice").hide();
-                        $("#btnAddNewCustomerInvoice").hide();
-                    } else {
-                        $("#createCustomerInvoiceMessageErr").show();
-                        $("#createCustomerInvoiceMessageOk").hide();
-                    }
-                },
-            });
+
+            // Preparar los datos para el POST
+            const formData = {
+                idUser: document.getElementById("idUser").value,
+                facConcepte: document.getElementById("facConcepte").value,
+                facData: document.getElementById("facData").value,
+                facDueDate: document.getElementById("facDueDate").value,
+                facSubtotal: document.getElementById("facSubtotal").value,
+                facFees: document.getElementById("facFees").value,
+                facTotal: document.getElementById("facTotal").value,
+                facVAT: document.getElementById("facVAT").value,
+                facIva: document.getElementById("facIva").value,
+                facEstat: document.getElementById("facEstat").value,
+                facPaymentType: document.getElementById("facPaymentType").value,
+            };
+
+            try {
+                // Hacer el POST usando fetch con async/await
+                const response = await fetch(urlAjax, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                const data = await response.json();
+
+                if (data.status === "success") {
+                    // Mostrar mensaje de éxito y ocultar el de error
+                    document.getElementById("createCustomerInvoiceMessageOk").style.display = 'block';
+                    document.getElementById("createCustomerInvoiceMessageErr").style.display = 'none';
+
+                    // Cerrar el modal
+                    document.getElementById("modalFormAddCustomerInvoice").style.display = 'none';
+                    document.getElementById("btnAddNewCustomerInvoice").style.display = 'none';
+                } else {
+                    // Mostrar mensaje de error
+                    document.getElementById("createCustomerInvoiceMessageErr").style.display = 'block';
+                    document.getElementById("createCustomerInvoiceMessageOk").style.display = 'none';
+                }
+            } catch (error) {
+                // Manejo de errores de la solicitud
+                console.error("Error al enviar los datos:", error);
+                document.getElementById("createCustomerInvoiceMessageErr").style.display = 'block';
+                document.getElementById("createCustomerInvoiceMessageOk").style.display = 'none';
+            }
         });
     });
 </script>

@@ -1,0 +1,36 @@
+/*
+Theme Name: ElliotFern
+Theme URI: https://elliotfern.com
+Author: Elliot Fernandez
+Author URI: https://elliotfern.com/
+Description: Plantilla de tema pel web ElliotFern.com
+Version: 1.1
+License: GNU General Public License v3 or later
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
+*/
+
+/* HEADER */
+@import './header.css';
+@import './contenidor.css';
+@import './loginPage.css';
+@import './menuIntranet.css';
+@import './taules.css';
+@import './formulari.css';
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  line-height: 1.5;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+  background-color: #cecece;
+  color: #333;
+}
+
+a:link,
+a:visited,
+a:hover {
+  text-decoration: underline;
+}

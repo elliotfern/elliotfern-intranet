@@ -102,7 +102,7 @@ function verificarTokenAPI()
     }
 }
 
-
+/*
 // Función que verifica si el usuario tiene un token válido
 function verificarSesion()
 {
@@ -153,13 +153,14 @@ function wc_price($price)
     return $price . $currency_symbol;
 }
 
+
 function data_input($data)
 {
     $data = trim($data);
     $data = stripslashes($data);
     return $data;
 }
-
+*/
 function validateURLExists($url)
 {
     $headers = @get_headers($url);

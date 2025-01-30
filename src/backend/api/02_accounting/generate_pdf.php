@@ -1,19 +1,19 @@
 <?php
 require 'vendor/autoload.php';
-require 'vendor/tecnickcom/tcpdf/tcpdf.php';
 
+/*
 header('Content-Type: application/pdf');
 header('Content-Disposition: inline; filename="invoice_' . $idInvoice . '.pdf"');
 header('Content-Transfer-Encoding: binary');
 header('Accept-Ranges: bytes');
-
+*/
 // Datos de entrada
-$idInvoice = $routeParams['id'];
+$idInvoice = $routeParams[0];
 
-$url = "https://gestio.elliotfern.com/api/accounting/get/?type=customers-invoices&id={$idInvoice}";
+$url = "https://elliotfern.com/api/accounting/get/?type=customers-invoices&id={$idInvoice}";
 
 // segunda llamada a API
-$url2 = "https://gestio.elliotfern.com/api/accounting/get/?type=invoice-products&id={$idInvoice}";
+$url2 = "https://elliotfern.com/api/accounting/get/?type=invoice-products&id={$idInvoice}";
 
 // Llamada a la API pasando el token y el ID de la factura
 $invoiceData = hacerLlamadaAPI($url);
@@ -86,7 +86,7 @@ $pdf->SetTitle('Invoice PDF');
 $pdf->AddPage('P', 'A4');
 
 // Add the image to the PDF
-$imagePath = "https://gestio.elliotfern.com/public/img/hispantic_logo.jpg";
+$imagePath = "https://elliotfern.com/public/img/hispantic_logo.jpg";
 // Especifica los valores sin unidades, por ejemplo, en milímetros (mm).
 $pdf->Image($imagePath, $x = 17, $y = 10, $w = 70, $h = 0, $type = '', $link = '', $align = '', $resize = false, $dpi = 150, $palign = '', $ismask = false, $imgmask = false, $border = 0, $fitbox = false, $hidden = false, $fitonpage = false, $alt = '');
 

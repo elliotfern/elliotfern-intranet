@@ -1,4 +1,4 @@
-import './style.css';
+import './estils/style.css';
 import { getPageType } from './utils/urlPath';
 import { cinema } from './pages/cinema/funcions';
 import { loginPage } from './pages/login/funcions';

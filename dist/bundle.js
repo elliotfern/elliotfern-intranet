@@ -86,6 +86,207 @@ footer {
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/formulari.css":
+/*!**************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/formulari.css ***!
+  \**************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, `/* Estilos básicos para los formularios */
+.form {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto; /* Centrar el formulario */
+  padding: 20px;
+  background-color: #ffdaa2; /* Fondo ligeramente gris */
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  border: 2px solid #000000; /* Borde de 2px de color gris claro */
+}
+
+form label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+/* Ajustes para las columnas en el formulario */
+.form-espai {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.col-md-4,
+.col-md-6,
+.col-md-12 {
+  box-sizing: border-box;
+}
+
+/* Para 3 inputs en fila (col-md-4) */
+.col-md-4 {
+  flex: 1 1 30%; /* 3 inputs en fila */
+}
+
+.col-md-6 {
+  flex: 1 1 45%; /* 2 inputs en fila */
+}
+
+.col-md-12 {
+  flex: 1 1 100%; /* 1 input que ocupa toda la fila */
+}
+
+/* Estilos para los inputs */
+input,
+textarea {
+  width: 90%;
+  padding: 0.8rem;
+  margin-top: 0.2rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 1rem;
+  color: #333;
+}
+
+select {
+  width: 97%;
+  padding: 0.8rem;
+  margin-top: 0.2rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Bordes más suaves cuando se está enfocando en el campo */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Espaciado entre los inputs */
+.col-md-4 input,
+.col-md-6 input,
+.col-md-12 input {
+  margin-bottom: 1rem; /* Espacio debajo de cada input */
+}
+
+/* Ajustes para el botón */
+button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para los mensajes de error y éxito */
+.message {
+  display: none;
+  margin-top: 1rem;
+  padding: 0.8rem;
+  border-radius: 4px;
+}
+
+.message.success {
+  background-color: #28a745;
+  color: white;
+}
+
+.message.error {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Ajustes en móviles (cuando la pantalla es menor a 768px) */
+@media (max-width: 768px) {
+  .col-md-4,
+  .col-md-6,
+  .col-md-12 {
+    flex: 1 1 100%; /* Los campos ocupan toda la fila */
+  }
+}
+
+/* Botón Atrás (izquierda) */
+.btn-back {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  background-color: #6c757d; /* Gris */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-back:hover {
+  background-color: #5a6268; /* Gris más oscuro */
+}
+
+/* Botón Crear factura (derecha) */
+.btn-primary {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  background-color: #007bff; /* Azul */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.dreta {
+  text-align: right;
+  margin-left: auto;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Azul más oscuro */
+}
+
+/* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */
+@media (max-width: 768px) {
+  .form-espai {
+    flex-direction: column; /* Los botones se apilarán verticalmente */
+  }
+
+  .btn-back,
+  .btn-primary {
+    width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */
+  }
+}
+`, "",{"version":3,"sources":["webpack://./src/frontend/formulari.css"],"names":[],"mappings":"AAAA,yCAAyC;AACzC;EACE,iBAAiB;EACjB,WAAW;EACX,cAAc,EAAE,0BAA0B;EAC1C,aAAa;EACb,yBAAyB,EAAE,2BAA2B;EACtD,kBAAkB;EAClB,yCAAyC,EAAE,iBAAiB;EAC5D,yBAAyB,EAAE,qCAAqC;AAClE;;AAEA;EACE,eAAe;EACf,gBAAgB;EAChB,WAAW;EACX,qBAAqB;AACvB;;AAEA,+CAA+C;AAC/C;EACE,aAAa;EACb,eAAe;EACf,WAAW;AACb;;AAEA;;;EAGE,sBAAsB;AACxB;;AAEA,qCAAqC;AACrC;EACE,aAAa,EAAE,qBAAqB;AACtC;;AAEA;EACE,aAAa,EAAE,qBAAqB;AACtC;;AAEA;EACE,cAAc,EAAE,mCAAmC;AACrD;;AAEA,4BAA4B;AAC5B;;EAEE,UAAU;EACV,eAAe;EACf,kBAAkB;EAClB,sBAAsB;EACtB,kBAAkB;EAClB,sBAAsB;EACtB,eAAe;EACf,WAAW;AACb;;AAEA;EACE,UAAU;EACV,eAAe;EACf,kBAAkB;EAClB,sBAAsB;EACtB,kBAAkB;EAClB,sBAAsB;EACtB,eAAe;EACf,WAAW;AACb;;AAEA,2DAA2D;AAC3D;;;EAGE,qBAAqB;EACrB,aAAa;EACb,0CAA0C;AAC5C;;AAEA,+BAA+B;AAC/B;;;EAGE,mBAAmB,EAAE,iCAAiC;AACxD;;AAEA,0BAA0B;AAC1B;EACE,sBAAsB;EACtB,eAAe;EACf,yBAAyB;EACzB,YAAY;EACZ,YAAY;EACZ,kBAAkB;EAClB,eAAe;AACjB;;AAEA;EACE,yBAAyB;AAC3B;;AAEA,8CAA8C;AAC9C;EACE,aAAa;EACb,gBAAgB;EAChB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd;;AAEA,6DAA6D;AAC7D;EACE;;;IAGE,cAAc,EAAE,mCAAmC;EACrD;AACF;;AAEA,4BAA4B;AAC5B;EACE,sBAAsB;EACtB,eAAe;EACf,yBAAyB,EAAE,SAAS;EACpC,YAAY;EACZ,YAAY;EACZ,kBAAkB;EAClB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;AACjD;;AAEA,kCAAkC;AAClC;EACE,sBAAsB;EACtB,eAAe;EACf,yBAAyB,EAAE,SAAS;EACpC,YAAY;EACZ,YAAY;EACZ,kBAAkB;EAClB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,iBAAiB;EACjB,iBAAiB;AACnB;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;AACjD;;AAEA,wFAAwF;AACxF;EACE;IACE,sBAAsB,EAAE,0CAA0C;EACpE;;EAEA;;IAEE,WAAW,EAAE,6DAA6D;EAC5E;AACF","sourcesContent":["/* Estilos básicos para los formularios */\n.form {\n  max-width: 1200px;\n  width: 100%;\n  margin: 0 auto; /* Centrar el formulario */\n  padding: 20px;\n  background-color: #ffdaa2; /* Fondo ligeramente gris */\n  border-radius: 5px;\n  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */\n  border: 2px solid #000000; /* Borde de 2px de color gris claro */\n}\n\nform label {\n  font-size: 1rem;\n  font-weight: 600;\n  color: #333;\n  margin-bottom: 0.5rem;\n}\n\n/* Ajustes para las columnas en el formulario */\n.form-espai {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\n.col-md-4,\n.col-md-6,\n.col-md-12 {\n  box-sizing: border-box;\n}\n\n/* Para 3 inputs en fila (col-md-4) */\n.col-md-4 {\n  flex: 1 1 30%; /* 3 inputs en fila */\n}\n\n.col-md-6 {\n  flex: 1 1 45%; /* 2 inputs en fila */\n}\n\n.col-md-12 {\n  flex: 1 1 100%; /* 1 input que ocupa toda la fila */\n}\n\n/* Estilos para los inputs */\ninput,\ntextarea {\n  width: 90%;\n  padding: 0.8rem;\n  margin-top: 0.2rem;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  background-color: #fff;\n  font-size: 1rem;\n  color: #333;\n}\n\nselect {\n  width: 97%;\n  padding: 0.8rem;\n  margin-top: 0.2rem;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  background-color: #fff;\n  font-size: 1rem;\n  color: #333;\n}\n\n/* Bordes más suaves cuando se está enfocando en el campo */\ninput:focus,\nselect:focus,\ntextarea:focus {\n  border-color: #007bff;\n  outline: none;\n  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);\n}\n\n/* Espaciado entre los inputs */\n.col-md-4 input,\n.col-md-6 input,\n.col-md-12 input {\n  margin-bottom: 1rem; /* Espacio debajo de cada input */\n}\n\n/* Ajustes para el botón */\nbutton {\n  padding: 0.8rem 1.5rem;\n  font-size: 1rem;\n  background-color: #007bff;\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n}\n\nbutton:hover {\n  background-color: #0056b3;\n}\n\n/* Estilo para los mensajes de error y éxito */\n.message {\n  display: none;\n  margin-top: 1rem;\n  padding: 0.8rem;\n  border-radius: 4px;\n}\n\n.message.success {\n  background-color: #28a745;\n  color: white;\n}\n\n.message.error {\n  background-color: #dc3545;\n  color: white;\n}\n\n/* Ajustes en móviles (cuando la pantalla es menor a 768px) */\n@media (max-width: 768px) {\n  .col-md-4,\n  .col-md-6,\n  .col-md-12 {\n    flex: 1 1 100%; /* Los campos ocupan toda la fila */\n  }\n}\n\n/* Botón Atrás (izquierda) */\n.btn-back {\n  padding: 0.8rem 1.5rem;\n  font-size: 1rem;\n  background-color: #6c757d; /* Gris */\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n}\n\n.btn-back:hover {\n  background-color: #5a6268; /* Gris más oscuro */\n}\n\n/* Botón Crear factura (derecha) */\n.btn-primary {\n  padding: 0.8rem 1.5rem;\n  font-size: 1rem;\n  background-color: #007bff; /* Azul */\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n}\n\n.dreta {\n  text-align: right;\n  margin-left: auto;\n}\n\n.btn-primary:hover {\n  background-color: #0056b3; /* Azul más oscuro */\n}\n\n/* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */\n@media (max-width: 768px) {\n  .form-espai {\n    flex-direction: column; /* Los botones se apilarán verticalmente */\n  }\n\n  .btn-back,\n  .btn-primary {\n    width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */\n  }\n}\n"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/header.css":
 /*!***********************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/header.css ***!
@@ -658,7 +859,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_loginPage_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! -!../../node_modules/css-loader/dist/cjs.js!./loginPage.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/loginPage.css");
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_menuIntranet_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! -!../../node_modules/css-loader/dist/cjs.js!./menuIntranet.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/menuIntranet.css");
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_taules_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! -!../../node_modules/css-loader/dist/cjs.js!./taules.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/taules.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_formulari_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! -!../../node_modules/css-loader/dist/cjs.js!./formulari.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/formulari.css");
 // Imports
+
 
 
 
@@ -672,6 +875,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_contenidor_css__W
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_loginPage_css__WEBPACK_IMPORTED_MODULE_4__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_menuIntranet_css__WEBPACK_IMPORTED_MODULE_5__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_taules_css__WEBPACK_IMPORTED_MODULE_6__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_formulari_css__WEBPACK_IMPORTED_MODULE_7__["default"]);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `/*
 Theme Name: ElliotFern
@@ -703,7 +907,7 @@ a:visited,
 a:hover {
   text-decoration: underline;
 }
-`, "",{"version":3,"sources":["webpack://./src/frontend/style.css"],"names":[],"mappings":"AAAA;;;;;;;;;CASC;;AAED,WAAW;;AAOX;EACE,4LAA4L;EAC5L,gBAAgB;EAChB,WAAW;EACX,SAAS;EACT,UAAU;EACV,sBAAsB;EACtB,SAAS;EACT,yBAAyB;EACzB,WAAW;AACb;;AAEA;;;EAGE,0BAA0B;AAC5B","sourcesContent":["/*\nTheme Name: ElliotFern\nTheme URI: https://elliotfern.com\nAuthor: Elliot Fernandez\nAuthor URI: https://elliotfern.com/\nDescription: Plantilla de tema pel web ElliotFern.com\nVersion: 1.1\nLicense: GNU General Public License v3 or later\nLicense URI: http://www.gnu.org/licenses/gpl-3.0.html\n*/\n\n/* HEADER */\n@import './header.css';\n@import './contenidor.css';\n@import './loginPage.css';\n@import './menuIntranet.css';\n@import './taules.css';\n\nbody {\n  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  line-height: 1.5;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  border: 0;\n  background-color: #cecece;\n  color: #333;\n}\n\na:link,\na:visited,\na:hover {\n  text-decoration: underline;\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/frontend/style.css"],"names":[],"mappings":"AAAA;;;;;;;;;CASC;;AAED,WAAW;;AAQX;EACE,4LAA4L;EAC5L,gBAAgB;EAChB,WAAW;EACX,SAAS;EACT,UAAU;EACV,sBAAsB;EACtB,SAAS;EACT,yBAAyB;EACzB,WAAW;AACb;;AAEA;;;EAGE,0BAA0B;AAC5B","sourcesContent":["/*\nTheme Name: ElliotFern\nTheme URI: https://elliotfern.com\nAuthor: Elliot Fernandez\nAuthor URI: https://elliotfern.com/\nDescription: Plantilla de tema pel web ElliotFern.com\nVersion: 1.1\nLicense: GNU General Public License v3 or later\nLicense URI: http://www.gnu.org/licenses/gpl-3.0.html\n*/\n\n/* HEADER */\n@import './header.css';\n@import './contenidor.css';\n@import './loginPage.css';\n@import './menuIntranet.css';\n@import './taules.css';\n@import './formulari.css';\n\nbody {\n  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  line-height: 1.5;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  border: 0;\n  background-color: #cecece;\n  color: #333;\n}\n\na:link,\na:visited,\na:hover {\n  text-decoration: underline;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

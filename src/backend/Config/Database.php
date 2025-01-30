@@ -36,7 +36,6 @@ class Database
                 if (!self::$conn) {
                     throw new Exception("La conexión a la base de datos no se pudo establecer.");
                 }
-
             } catch (Exception $e) {
                 // Si hay un error, registrar el error completo
                 error_log('Error de conexión a la base de datos: ' . $e->getMessage());

@@ -20,7 +20,10 @@ $base_routes = [
     '/gestio/cinema/modifica-pelicula/{id}' => 'public/intranet/11_cinema_series/form-inserir-pelicula.php',
     '/gestio/cinema/fitxa-pelicula/{id}' => 'public/intranet/11_cinema_series/vista-pelicula.php',
 
-
+    // ERP
+    '/gestio/erp' => 'public/intranet/02_erp_comptabilitat/index.php',
+    '/gestio/erp/facturacio-clients' => 'public/intranet/02_erp_comptabilitat/erp-invoices-customers.php',
+    '/gestio/erp/facturacio-clients/nova-factura' => 'public/intranet/02_erp_comptabilitat/erp-invoices-customers-new.php',
 ];
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
@@ -124,6 +127,35 @@ $routes = [
 
     '/gestio/cinema/fitxa-pelicula/{id}' => [
         'view' => 'public/intranet/11_cinema_series/vista-pelicula.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    // ERP
+    '/gestio/erp' => [
+        'view' => 'public/intranet/02_erp_comptabilitat/index.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/erp/facturacio-clients' => [
+        'view' => 'public/intranet/02_erp_comptabilitat/erp-invoices-customers.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/erp/facturacio-clients/nova-factura' => [
+        'view' => 'public/intranet/02_erp_comptabilitat/erp-invoices-customers-new.php',
+        'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
         'apiSenseHTML' => false,
