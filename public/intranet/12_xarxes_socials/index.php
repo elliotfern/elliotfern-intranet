@@ -27,12 +27,12 @@
             <div class="form-espai">
                 <!-- Columna izquierda: Botón Atrás -->
                 <div class="col-md-4">
-                    <button type="button" id="submitBluesky" onclick="publicarEnBluesky()" class=" btn-gran btn-secondari">Publicar a Bluesky</button>
+                    <button type="button" id="" class=" btn-gran btn-enrere">Tornar enrere </button>
                 </div>
 
                 <!-- Columna derecha: Botón Crear factura -->
                 <div class="col-md-4 dreta">
-                    <button type="submit" id="submitMastodon" onclick="publicarEnMastodon()" class="btn-gran btn-primari">Publicar a Mastodon</button>
+                    <button type="submit" id="submitMastodon" onclick="publicar()" class="btn-gran btn-primari">Publicar a xarxes</button>
                 </div>
             </div>
 
@@ -43,7 +43,11 @@
 
 <script>
     // Vincula la acción para Bluesky
-
+    function publicar() {
+        publicarEnBluesky();
+        publicarEnMastodon();
+        publicarEnBlog();
+    }
     // Función para publicar en Bluesky
     function publicarEnBluesky() {
         event.preventDefault(); // Evitar el envío normal del formulario
@@ -115,6 +119,49 @@
         }
 
         fetch("/api/xarxes-socials/post/mastodont/?type=mastodont", {
+                method: "POST",
+                body: formData, // Enviamos los datos del formulario
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Obtener el div donde mostrar el mensaje de éxito
+                const mensajeExitoDiv = document.getElementById('mensajeExito');
+                const mensajeErrDiv = document.getElementById('mensajeErr');
+
+                // Establecer el mensaje de éxito en el div
+                if (data.success) {
+                    mensajeExitoDiv.innerHTML = data.success;
+
+                    // Mostrar el div (si estaba oculto)
+                    mensajeExitoDiv.style.display = 'block';
+
+                    // Opcional: puedes agregar un temporizador para ocultarlo después de unos segundos
+                    setTimeout(() => {
+                        mensajeExitoDiv.style.display = 'none';
+                    }, 5000); // Oculta el mensaje después de 5 segundos
+                } else {
+                    mensajeErrDiv.innerHTML = data.error;
+                    mensajeErrDiv.style.display = 'block';
+                    // Opcional: puedes agregar un temporizador para ocultarlo después de unos segundos
+                    setTimeout(() => {
+                        mensajeErrDiv.style.display = 'none';
+                    }, 5000); // Oculta el mensaje después de 5 segundos
+                }
+            })
+            .catch(error => console.error("Error:", error));
+
+    }
+
+
+    function publicarEnBlog() {
+
+        event.preventDefault(); // Evitar el envío normal del formulario
+
+        const formData = new FormData();
+        formData.append("mensaje", document.getElementById("mensaje").value);
+
+
+        fetch("/api/xarxes-socials/post/blog/?type=blog", {
                 method: "POST",
                 body: formData, // Enviamos los datos del formulario
             })

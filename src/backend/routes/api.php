@@ -18,6 +18,7 @@ $base_routes = [
 
     '/api/xarxes-socials/post/bluesky' => 'src/backend/api/12_xarxes_socials/post-bluesky.php',
     '/api/xarxes-socials/post/mastodont' => 'src/backend/api/12_xarxes_socials/post-mastodont.php',
+    '/api/xarxes-socials/post/blog' => 'src/backend/api/12_xarxes_socials/post-blog.php',
 ];
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
@@ -160,6 +161,14 @@ $routes = [
 
     '/api/xarxes-socials/post/mastodont' => [
         'view' => 'src/backend/api/12_xarxes_socials/post-mastodont.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    '/api/xarxes-socials/post/blog' => [
+        'view' => 'src/backend/api/12_xarxes_socials/post-blog.php',
         'needs_session' => false,
         'header_footer' => false,
         'header_menu_footer' => false,
