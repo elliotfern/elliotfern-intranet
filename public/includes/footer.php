@@ -50,6 +50,7 @@
         </div>
         <div class="text-footer mt-2">
             Elliot Fernandez (2002 - 2025)
+            <a rel="me" href="https://mastodont.cat/@elliot">Mastodon</a>
         </div>
     </div>
 </div>

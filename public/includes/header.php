@@ -12,6 +12,7 @@ $favicon = "/public/img/icon.png";
   <link rel="profile" href="https://gmpg.org/xfn/11">
   <meta name="robots" content="index, follow">
   <meta name="distribution" content="global" />
+  <meta name="fediverse:creator" content="@elliot@mastodont.cat">
 
   <link rel="profile" href="http://gmpg.org/xfn/11">
   <link rel="shortcut icon" href="<?php echo $favicon; ?>">

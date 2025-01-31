@@ -25,6 +25,8 @@
 
       <a href="<?php APP_SERVER; ?>/gestio/auxiliars" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">Aux</a>
 
+      <a href="<?php APP_SERVER; ?>/gestio/xarxes-socials" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">Xarxes</a>
+
     </div>
   </div>
 </div>

@@ -24,6 +24,9 @@ $base_routes = [
     '/gestio/erp' => 'public/intranet/02_erp_comptabilitat/index.php',
     '/gestio/erp/facturacio-clients' => 'public/intranet/02_erp_comptabilitat/erp-invoices-customers.php',
     '/gestio/erp/facturacio-clients/nova-factura' => 'public/intranet/02_erp_comptabilitat/erp-invoices-customers-new.php',
+
+    // XARXES SOCIALS
+    '/gestio/xarxes-socials' => 'public/intranet/12_xarxes_socials/index.php',
 ];
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
@@ -155,6 +158,16 @@ $routes = [
 
     '/gestio/erp/facturacio-clients/nova-factura' => [
         'view' => 'public/intranet/02_erp_comptabilitat/erp-invoices-customers-new.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    // XARXES SOCIALS
+    '/gestio/xarxes-socials' => [
+        'view' => 'public/intranet/12_xarxes_socials/index.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
