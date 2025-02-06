@@ -27,6 +27,11 @@ $base_routes = [
 
     // XARXES SOCIALS
     '/gestio/xarxes-socials' => 'public/intranet/12_xarxes_socials/index.php',
+    '/gestio/xarxes-socials/mastodon' => 'public/intranet/12_xarxes_socials/lector-mastodon.php',
+    '/gestio/xarxes-socials/publica' => 'public/intranet/12_xarxes_socials/nou-post.php',
+
+    // LECTOR RSS
+    '/gestio/lector-rss' => 'public/intranet/14_lector_rss/index.php',
 ];
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
@@ -168,6 +173,34 @@ $routes = [
     // XARXES SOCIALS
     '/gestio/xarxes-socials' => [
         'view' => 'public/intranet/12_xarxes_socials/index.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/xarxes-socials/mastodon' => [
+        'view' => 'public/intranet/12_xarxes_socials/lector-mastodon.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/xarxes-socials/publica' => [
+        'view' => 'public/intranet/12_xarxes_socials/nou-post.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    // LECTOR RSS
+    '/gestio/lector-rss' => [
+        'view' => 'public/intranet/14_lector_rss/index.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,

@@ -44,7 +44,7 @@ class DatabaseAuthRepository implements AuthRepositoryInterface
                 $arr_cookie_options = array(
                     'expires' => $expiration,
                     'path' => '/',
-                    'domain' => 'elliotfern.com',
+                    'domain' => 'elliot.cat',
                     'secure' => true,     // or false
                     'httponly' => true,    // or false
                     'samesite' => 'Strict' // None || Lax  || Strict

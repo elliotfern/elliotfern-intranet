@@ -7,7 +7,7 @@ use App\Config\Database;
 
 // Configuración de cabeceras para aceptar JSON y responder JSON
 header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: https://elliotfern.com");
+header("Access-Control-Allow-Origin: https://elliot.cat");
 header("Access-Control-Allow-Methods: POST");
 
 // Verificar si se ha recibido un parámetro válido

@@ -2,7 +2,7 @@
 
 // Configuración de cabeceras para aceptar JSON y responder JSON
 header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: https://elliotfern.com");
+header("Access-Control-Allow-Origin: https://elliot.cat");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Permitir solo origen autorizado
-$allowed_origins = ['https://elliotfern.com'];
+$allowed_origins = ['https://elliot.cat'];
 if (!isset($_SERVER['HTTP_ORIGIN']) || !in_array($_SERVER['HTTP_ORIGIN'], $allowed_origins)) {
     http_response_code(403);
     echo json_encode(['error' => 'Acceso no permitido']);

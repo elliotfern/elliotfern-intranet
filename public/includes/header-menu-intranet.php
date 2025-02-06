@@ -27,6 +27,8 @@
 
       <a href="<?php APP_SERVER; ?>/gestio/xarxes-socials" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">Xarxes</a>
 
+      <a href="<?php APP_SERVER; ?>/gestio/lector-rss" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">Lector RSS</a>
+
     </div>
   </div>
 </div>

@@ -17,8 +17,18 @@ $base_routes = [
     '/api/auxiliars/get' => 'src/backend/api/100_auxiliars/get-auxiliars.php',
 
     '/api/xarxes-socials/post/bluesky' => 'src/backend/api/12_xarxes_socials/post-bluesky.php',
+
+    '/api/xarxes-socials/get/mastodont' => 'src/backend/api/12_xarxes_socials/get-mastodon.php',
     '/api/xarxes-socials/post/mastodont' => 'src/backend/api/12_xarxes_socials/post-mastodont.php',
+    '/api/xarxes-socials/post/likes-mastodont' => 'src/backend/api/12_xarxes_socials/post-like-mastodont.php',
+
     '/api/xarxes-socials/post/blog' => 'src/backend/api/12_xarxes_socials/post-blog.php',
+    '/api/xarxes-socials/post/linkedin' => 'src/backend/api/12_xarxes_socials/post-linkedin.php',
+
+    '/api/lector-rss/get' => 'src/backend/api/14_lector_rss/get-lector.php',
+
+    '/api/sitemap/get' => 'src/backend/api/15_sitemap/get-sitemap.php',
+
 ];
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
@@ -159,8 +169,24 @@ $routes = [
         'apiSenseHTML' => true
     ],
 
+    '/api/xarxes-socials/get/mastodont' => [
+        'view' => 'src/backend/api/12_xarxes_socials/get-mastodon.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
     '/api/xarxes-socials/post/mastodont' => [
         'view' => 'src/backend/api/12_xarxes_socials/post-mastodont.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    '/api/xarxes-socials/post/likes-mastodont' => [
+        'view' => 'src/backend/api/12_xarxes_socials/post-like-mastodont.php',
         'needs_session' => false,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -175,6 +201,23 @@ $routes = [
         'apiSenseHTML' => true
     ],
 
+    // LECTOR RSS
+    '/api/lector-rss/get' => [
+        'view' => 'src/backend/api/14_lector_rss/get-lector.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    // SITEMAP
+    '/api/sitemap/get' => [
+        'view' => 'src/backend/api/15_sitemap/get-sitemap.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
 
 ];
 

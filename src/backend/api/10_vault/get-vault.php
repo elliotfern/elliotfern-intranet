@@ -5,6 +5,11 @@ use App\Vault\Core\Services\VaultService;
 use App\Vault\Adapters\Outbound\DatabasePasswordRepository;
 use App\Config\Database;
 
+// Configuración de cabeceras para aceptar JSON y responder JSON
+header("Content-Type: application/json");
+header("Access-Control-Allow-Origin: https://elliot.cat");
+header("Access-Control-Allow-Methods: GET");
+
 // Verificar si se ha recibido un parámetro válido
 if (isset($_GET['llistat_serveis'])) {
 

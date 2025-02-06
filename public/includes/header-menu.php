@@ -30,13 +30,13 @@
                     </ul>
                 </li>
             </ul>
-        </nav>
 
-        <!-- Search Form -->
-        <form class="searchForm" role="search">
-            <input class="form-control" type="search" placeholder="Search..." aria-label="Search" />
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+            <!-- Search Form -->
+            <form class="searchForm" role="search">
+                <input class="form-search" type="search" placeholder="Search..." aria-label="Search" />
+                <button class="btn btn-primari" type="submit">Search</button>
+            </form>
+        </nav>
     </div>
 </header>
 

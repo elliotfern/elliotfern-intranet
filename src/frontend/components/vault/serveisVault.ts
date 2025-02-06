@@ -12,7 +12,7 @@ interface PasswordRecord {
 // Función para obtener los datos de la API
 export async function serveisVaultApi() {
   try {
-    const response = await fetch('https://elliotfern.com/api/vault/get/?llistat_serveis');
+    const response = await fetch('https://elliot.cat/api/vault/get/?llistat_serveis');
 
     if (!response.ok) {
       throw new Error('Error al obtener los datos de la API');

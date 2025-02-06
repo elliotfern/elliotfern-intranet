@@ -2,7 +2,7 @@
 
 // Configuración de cabeceras para aceptar JSON y responder JSON
 header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: https://elliotfern.com");
+header("Access-Control-Allow-Origin: https://elliot.cat");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Permitir solo origen autorizado
-$allowed_origins = ['https://elliotfern.com'];
+$allowed_origins = ['https://elliot.cat'];
 if (!isset($_SERVER['HTTP_ORIGIN']) || !in_array($_SERVER['HTTP_ORIGIN'], $allowed_origins)) {
     http_response_code(403);
     echo json_encode(['error' => 'Acceso no permitido']);
@@ -34,6 +34,20 @@ function generarUUID()
     return $uuid;
 }
 
+function generateDate()
+{
+    $date = date("Ymd-His");
+    return $date;
+}
+
+function generateDateEsp()
+{
+    $date = date("d/m/Y");
+    return $date;
+}
+
+// Cambié el formato a día-mes-año
+
 if (empty($_POST['mensaje'])) {
     http_response_code(400);
     echo json_encode(['error' => 'El mensaje no puede estar vacío']);
@@ -42,12 +56,12 @@ if (empty($_POST['mensaje'])) {
 
 // Recoger datos del formulario
 $post_content = isset($_POST['mensaje']) ? trim($_POST['mensaje']) : '';
-$post_title = "Microblogging";
+$post_title = "Microblogging " . generateDateEsp();
 $post_type = "blog";
 $post_excerpt = NULL;
 $lang = 1;
 $post_status = "publish";
-$slug = "microblogging-" . generarUUID();
+$slug = "microblogging-" . generateDate();
 $categoria = 1;
 $post_date = date("Y-m-d H:i:s");
 
@@ -82,7 +96,7 @@ try {
     $stmt->execute();
 
     // Respuesta de éxito
-    echo json_encode(["status" => "✅ Les dades s'han desat correctament a la base de dades."]);
+    echo json_encode(["status" => "success", "message" => "✅ Les dades s'han desat correctament a la base de dades."]);
 } catch (PDOException $e) {
     // En caso de error en la conexión o ejecución de la consulta
     http_response_code(500); // Internal Server Error

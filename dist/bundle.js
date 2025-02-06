@@ -488,12 +488,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_header_pc_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js!./header_pc.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/header_pc.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_header_mobil_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js!./header_mobil.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/header_mobil.css");
 // Imports
 
 
+
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_header_pc_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_header_mobil_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `/* HEADER */
+
 .header {
   position: fixed;
   top: 0;
@@ -502,7 +509,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* HEADER */
   align-items: center;
   background-color: #c4c4c4;
   width: 100%;
-  height: 70px;
   z-index: 10;
 }
 
@@ -526,45 +532,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* HEADER */
   font-weight: bold;
   color: black;
   text-decoration: none;
-}
-
-/* Ajuste de espacio para el logo en pantallas grandes */
-@media (min-width: 768px) {
-  .headerContent {
-    gap: 80px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-
-  .headerContent > .logo {
-    flex: 0 1 200px;
-  }
-
-  .headerContent > .containerMenu {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .logo {
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    padding-bottom: 20px;
-  }
-}
-
-/* En dispositivos móviles, el logo y el menú ocupan su espacio normal */
-@media (max-width: 767px) {
-  .headerContent > .logo {
-    flex: 0 1 auto;
-  }
-
-  .headerContent > .containerMenu {
-    flex: 1;
-    display: flex;
-    justify-content: center; /* Centra el menú en la versión móvil */
-  }
 }
 
 .headerSecond {
@@ -665,18 +632,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* HEADER */
   margin-right: 0; /* El último elemento no tendrá margen derecho */
 }
 
-.toggleMenuButton {
-  display: none; /* Mostrar el botón en pantallas más pequeñas */
-}
-
-.menuVisible {
-  display: block;
-}
-
-.menuHidden {
-  display: none;
-}
-
 .closeButton {
   background-color: transparent; /* Fondo transparente */
   border: none; /* Sin bordes */
@@ -686,36 +641,51 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* HEADER */
   right: 10px;
   transition: color 0.3s ease;
 }
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/header.css"],"names":[],"mappings":"AAAA,WAAW;;AAIX;EACE,eAAe;EACf,MAAM;EACN,aAAa;EACb,uBAAuB;EACvB,mBAAmB;EACnB,yBAAyB;EACzB,WAAW;EACX,WAAW;AACb;;AAEA;EACE,kBAAkB;EAClB,iBAAiB;EACjB,cAAc;EACd,aAAa;EACb,8BAA8B;EAC9B,mBAAmB;EACnB,WAAW;AACb;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE,aAAa;EACb,iBAAiB;EACjB,iBAAiB;EACjB,YAAY;EACZ,qBAAqB;AACvB;;AAEA;EACE,aAAa;EACb,UAAU;EACV,8BAA8B;EAC9B,mBAAmB;EACnB,yBAAyB;EACzB,YAAY;EACZ,kBAAkB;EAClB,OAAO;EACP,WAAW;EACX,aAAa;EACb,WAAW;AACb;;AAEA;EACE,iBAAiB;AACnB;;AAEA;EACE,kBAAkB;EAClB,8BAA8B;EAC9B,aAAa;EACb,aAAa;EACb,mBAAmB;EACnB,gCAAgC,EAAE,sCAAsC;AAC1E;;AAEA;EACE,gBAAgB;EAChB,aAAa;EACb,SAAS;EACT,gBAAgB;AAClB;;AAEA;EACE,kBAAkB,EAAE,4BAA4B;AAClD;;AAEA;EACE,eAAe,EAAE,mDAAmD;AACtE;;AAEA;EACE,qBAAqB;EACrB,cAAc;EACd,aAAa;EACb,sBAAsB;EACtB,yBAAyB;AAC3B;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd;;AAEA;EACE,kBAAkB;AACpB;;AAEA;EACE,aAAa,EAAE,uBAAuB;EACtC,kBAAkB;EAClB,SAAS,EAAE,4CAA4C;EACvD,OAAO;EACP,yBAAyB;EACzB,aAAa;EACb,mBAAmB;EACnB,WAAW;AACb;;AAEA;EACE,aAAa,EAAE,mCAAmC;EAClD,mBAAmB;EACnB,SAAS,EAAE,8BAA8B;AAC3C;;AAEA;EACE,cAAc;EACd,aAAa;EACb,yBAAyB;EACzB,yBAAyB;EACzB,qBAAqB;EACrB,sBAAsB;AACxB;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,kBAAkB,EAAE,yCAAyC;EAC7D,qBAAqB,EAAE,yDAAyD;AAClF;;AAEA;EACE,eAAe,EAAE,gDAAgD;AACnE;;AAEA;EACE,6BAA6B,EAAE,uBAAuB;EACtD,YAAY,EAAE,eAAe;EAC7B,WAAW,EAAE,oBAAoB;EACjC,iBAAiB,EAAE,qBAAqB;EACxC,eAAe,EAAE,yCAAyC;EAC1D,WAAW;EACX,2BAA2B;AAC7B","sourcesContent":["/* HEADER */\n@import './header_pc.css';\n@import './header_mobil.css';\n\n.header {\n  position: fixed;\n  top: 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: #c4c4c4;\n  width: 100%;\n  z-index: 10;\n}\n\n.headerContent {\n  position: relative;\n  max-width: 1400px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n}\n\n.headerContent > .logo {\n  flex: 0 1 auto;\n}\n\n.logo {\n  display: flex;\n  font-size: 1.4rem;\n  font-weight: bold;\n  color: black;\n  text-decoration: none;\n}\n\n.headerSecond {\n  display: flex;\n  top: 110px;\n  justify-content: space-between;\n  align-items: center;\n  background-color: #c4c4c4;\n  height: 70px;\n  position: absolute;\n  left: 0;\n  width: 100%;\n  padding: 10px;\n  z-index: 20;\n}\n\n.searchForm {\n  margin-left: 20px;\n}\n\n.containerMenu {\n  text-align: center;\n  justify-content: space-between;\n  padding: 10px;\n  display: flex;\n  flex-direction: row;\n  transition: all 0.3s ease-in-out; /* Para la transición suave del menú */\n}\n\n.containerMenu ul {\n  list-style: none;\n  display: flex;\n  margin: 0;\n  padding-top: 5px;\n}\n\n.containerMenu li {\n  margin-right: 10px; /* Espacio entre elementos */\n}\n\n.containerMenu li:last-child {\n  margin-right: 0; /* Elimina el espacio después del último elemento */\n}\n\n.containerMenu a {\n  text-decoration: none;\n  color: #ffffff;\n  padding: 10px;\n  border: 1px solid #ccc;\n  background-color: #091e4b;\n}\n\n.containerMenu a:hover {\n  background-color: #f0f0f0;\n  color: black;\n}\n\n.dropdown {\n  position: relative;\n}\n\n.superMenu1 {\n  display: none; /* Oculto por defecto */\n  position: absolute;\n  top: 120%; /* Aparece justo debajo del menú principal */\n  left: 0;\n  background-color: #c4c4c4;\n  padding: 10px;\n  white-space: nowrap;\n  z-index: 30;\n}\n\n.superMenu1 ul {\n  display: flex; /* Muestra los elementos en línea */\n  flex-direction: row;\n  gap: 10px; /* Espaciado entre elementos */\n}\n\n.superMenu1 a {\n  display: block;\n  padding: 10px;\n  color: rgb(255, 255, 255);\n  background-color: #091e4b;\n  text-decoration: none;\n  border: 1px solid #ccc;\n}\n\n.superMenu1 a:hover {\n  background-color: #f0f0f0;\n}\n\n.superMenu1 li {\n  margin-right: 20px; /* Espacio entre los elementos del menú */\n  display: inline-block; /* Esto puede ser opcional dependiendo de la estructura */\n}\n\n.superMenu1 li:last-child {\n  margin-right: 0; /* El último elemento no tendrá margen derecho */\n}\n\n.closeButton {\n  background-color: transparent; /* Fondo transparente */\n  border: none; /* Sin bordes */\n  color: #333; /* Color del icono */\n  font-size: 1.5rem; /* Tamaño del icono */\n  cursor: pointer; /* Cambia el cursor al pasar por encima */\n  right: 10px;\n  transition: color 0.3s ease;\n}\n"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
-/* Estilos para pantallas más pequeñas (ejemplo: móviles) */
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/header_mobil.css":
+/*!************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/header_mobil.css ***!
+  \************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, `/* Para pantallas pequeñas, el menú está oculto y el botón toggle se muestra */
 @media (max-width: 767px) {
-  .menuOpen {
-    display: block;
-  }
-
-  .menuClosed {
-    display: none;
-  }
-
   .headerContent {
-    flex-direction: column; /* Los elementos se alinean verticalmente */
-    align-items: center;
+    flex-direction: column;
   }
 
-  .containerMenu {
-    display: none; /* Menú oculto en móviles */
-    flex-direction: column; /* Cambia la dirección a columna en móviles */
-    width: 100%; /* Asegura que el menú ocupe el ancho completo */
-    align-items: start; /* Centra los elementos */
+  /* Menú oculto por defecto */
+  #navbarMenu.menuHidden {
+    display: none; /* Ocultamos el menú */
   }
 
-  .containerMenu ul {
-    align-items: start; /* Centra los elementos */
+  /* Menú visible cuando se le añade la clase "menuVisible" */
+  #navbarMenu.menuVisible {
+    display: block; /* Mostramos el menú */
   }
 
-  /* El botón toggleMenuButton se muestra solo en pantallas pequeñas */
+  /* Mostrar el botón de toggle solo en móviles */
   .toggleMenuButton {
-    display: block; /* Mostrar el botón en pantallas más pequeñas */
+    display: block;
     font-size: 24px; /* Tamaño del ícono */
     padding: 0;
     border: none;
@@ -723,19 +693,22 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* HEADER */
     cursor: pointer;
   }
 
-  /* Estilo para mostrar el botón cuando el menú está visible */
-  .toggleMenuButton.menuVisible + .containerMenu {
-    display: flex; /* Muestra el menú cuando tiene la clase "menuVisible" */
+  /* Si el menú está visible, el botón toggle se oculta (opcional) */
+  .toggleMenuButton.menuVisible {
+    display: none; /* El botón de toggle se oculta cuando el menú está visible */
   }
 
-  /* Estilo para ocultar el menú cuando el botón tiene la clase "menuHidden" */
-  .toggleMenuButton.menuHidden + .containerMenu {
-    display: none; /* Oculta el menú cuando tiene la clase "menuHidden" */
+  /* Aseguramos que el menú tenga un diseño adecuado */
+  .containerMenu {
+    display: none; /* Ocultamos el menú en móviles */
+    flex-direction: column; /* Hacemos que los elementos del menú se apilen */
+    width: 100%;
+    align-items: flex-start; /* Centra los elementos */
   }
 
+  /* Aseguramos que los enlaces dentro del menú estén correctamente alineados */
   .containerMenu ul {
     flex-direction: column;
-    align-items: start;
     padding-left: 6%;
   }
 
@@ -745,21 +718,11 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* HEADER */
 
   .containerMenu a {
     padding: 10px;
-    width: 100%; /* Asegura que los enlaces ocupen el 100% del ancho */
+    width: 100%; /* Los enlaces ocupan el 100% del ancho */
     text-align: center;
   }
 
-  .header {
-    height: auto;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .headerSecond {
-    height: auto;
-    top: 80px;
-  }
-
+  /* Menú desplegable de idiomas */
   .superMenu1 {
     width: 100%;
     flex-direction: column;
@@ -767,57 +730,126 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* HEADER */
   }
 
   .superMenu1 ul {
-    flex-direction: column; /* Apilar los elementos del segundo menú */
-    align-items: start; /* Centrar los elementos */
+    flex-direction: column; /* Apilar los elementos */
+    align-items: start;
   }
 
   .superMenu1 li {
-    margin: 15px 0; /* Espacio entre los elementos en móviles */
+    margin: 15px 0;
   }
-}
 
-/* SearchForm.module.css */
-.searchForm {
-  max-width: 350px;
-}
-
-.searchInput {
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.3s ease;
-  border: 1px solid #ddd;
-  margin-right: 15px;
-  padding: 7px;
-}
-
-.searchInput:focus {
-  border-color: #000000; /* Borde azul al hacer foco */
-}
-
-.searchButton {
-  background-color: #000000;
-  color: white;
-  border: none;
-  padding: 7px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.searchButton:hover {
-  background-color: #1a3450; /* Fondo azul más oscuro al pasar el ratón */
-}
-
-@media (max-width: 768px) {
+  /* Formulario de búsqueda */
   .searchForm {
-    flex-direction: column; /* Los elementos se apilan en pantallas pequeñas */
+    flex-direction: column;
   }
 
   .searchInput {
-    margin-bottom: 10px; /* Añadir espacio entre el input y el botón */
+    margin-bottom: 10px;
   }
 }
-`, "",{"version":3,"sources":["webpack://./src/frontend/estils/header.css"],"names":[],"mappings":"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","sourcesContent":["/* HEADER */\n.header {\n  position: fixed;\n  top: 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: #c4c4c4;\n  width: 100%;\n  height: 70px;\n  z-index: 10;\n}\n\n.headerContent {\n  position: relative;\n  max-width: 1400px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  width: 100%;\n}\n\n.headerContent > .logo {\n  flex: 0 1 auto;\n}\n\n.logo {\n  display: flex;\n  font-size: 1.4rem;\n  font-weight: bold;\n  color: black;\n  text-decoration: none;\n}\n\n/* Ajuste de espacio para el logo en pantallas grandes */\n@media (min-width: 768px) {\n  .headerContent {\n    gap: 80px;\n    padding-top: 20px;\n    padding-bottom: 20px;\n  }\n\n  .headerContent > .logo {\n    flex: 0 1 200px;\n  }\n\n  .headerContent > .containerMenu {\n    flex: 1;\n    display: flex;\n    justify-content: space-between;\n  }\n\n  .logo {\n    align-items: center;\n    justify-content: center;\n    padding: 10px;\n    padding-bottom: 20px;\n  }\n}\n\n/* En dispositivos móviles, el logo y el menú ocupan su espacio normal */\n@media (max-width: 767px) {\n  .headerContent > .logo {\n    flex: 0 1 auto;\n  }\n\n  .headerContent > .containerMenu {\n    flex: 1;\n    display: flex;\n    justify-content: center; /* Centra el menú en la versión móvil */\n  }\n}\n\n.headerSecond {\n  display: flex;\n  top: 110px;\n  justify-content: space-between;\n  align-items: center;\n  background-color: #c4c4c4;\n  height: 70px;\n  position: absolute;\n  left: 0;\n  width: 100%;\n  padding: 10px;\n  z-index: 20;\n}\n\n.searchForm {\n  margin-left: 20px;\n}\n\n.containerMenu {\n  text-align: center;\n  justify-content: space-between;\n  padding: 10px;\n  display: flex;\n  flex-direction: row;\n  transition: all 0.3s ease-in-out; /* Para la transición suave del menú */\n}\n\n.containerMenu ul {\n  list-style: none;\n  display: flex;\n  margin: 0;\n  padding-top: 5px;\n}\n\n.containerMenu li {\n  margin-right: 10px; /* Espacio entre elementos */\n}\n\n.containerMenu li:last-child {\n  margin-right: 0; /* Elimina el espacio después del último elemento */\n}\n\n.containerMenu a {\n  text-decoration: none;\n  color: #ffffff;\n  padding: 10px;\n  border: 1px solid #ccc;\n  background-color: #091e4b;\n}\n\n.containerMenu a:hover {\n  background-color: #f0f0f0;\n  color: black;\n}\n\n.dropdown {\n  position: relative;\n}\n\n.superMenu1 {\n  display: none; /* Oculto por defecto */\n  position: absolute;\n  top: 120%; /* Aparece justo debajo del menú principal */\n  left: 0;\n  background-color: #c4c4c4;\n  padding: 10px;\n  white-space: nowrap;\n  z-index: 30;\n}\n\n.superMenu1 ul {\n  display: flex; /* Muestra los elementos en línea */\n  flex-direction: row;\n  gap: 10px; /* Espaciado entre elementos */\n}\n\n.superMenu1 a {\n  display: block;\n  padding: 10px;\n  color: rgb(255, 255, 255);\n  background-color: #091e4b;\n  text-decoration: none;\n  border: 1px solid #ccc;\n}\n\n.superMenu1 a:hover {\n  background-color: #f0f0f0;\n}\n\n.superMenu1 li {\n  margin-right: 20px; /* Espacio entre los elementos del menú */\n  display: inline-block; /* Esto puede ser opcional dependiendo de la estructura */\n}\n\n.superMenu1 li:last-child {\n  margin-right: 0; /* El último elemento no tendrá margen derecho */\n}\n\n.toggleMenuButton {\n  display: none; /* Mostrar el botón en pantallas más pequeñas */\n}\n\n.menuVisible {\n  display: block;\n}\n\n.menuHidden {\n  display: none;\n}\n\n.closeButton {\n  background-color: transparent; /* Fondo transparente */\n  border: none; /* Sin bordes */\n  color: #333; /* Color del icono */\n  font-size: 1.5rem; /* Tamaño del icono */\n  cursor: pointer; /* Cambia el cursor al pasar por encima */\n  right: 10px;\n  transition: color 0.3s ease;\n}\n\n/* Estilos para pantallas más pequeñas (ejemplo: móviles) */\n@media (max-width: 767px) {\n  .menuOpen {\n    display: block;\n  }\n\n  .menuClosed {\n    display: none;\n  }\n\n  .headerContent {\n    flex-direction: column; /* Los elementos se alinean verticalmente */\n    align-items: center;\n  }\n\n  .containerMenu {\n    display: none; /* Menú oculto en móviles */\n    flex-direction: column; /* Cambia la dirección a columna en móviles */\n    width: 100%; /* Asegura que el menú ocupe el ancho completo */\n    align-items: start; /* Centra los elementos */\n  }\n\n  .containerMenu ul {\n    align-items: start; /* Centra los elementos */\n  }\n\n  /* El botón toggleMenuButton se muestra solo en pantallas pequeñas */\n  .toggleMenuButton {\n    display: block; /* Mostrar el botón en pantallas más pequeñas */\n    font-size: 24px; /* Tamaño del ícono */\n    padding: 0;\n    border: none;\n    background: none;\n    cursor: pointer;\n  }\n\n  /* Estilo para mostrar el botón cuando el menú está visible */\n  .toggleMenuButton.menuVisible + .containerMenu {\n    display: flex; /* Muestra el menú cuando tiene la clase \"menuVisible\" */\n  }\n\n  /* Estilo para ocultar el menú cuando el botón tiene la clase \"menuHidden\" */\n  .toggleMenuButton.menuHidden + .containerMenu {\n    display: none; /* Oculta el menú cuando tiene la clase \"menuHidden\" */\n  }\n\n  .containerMenu ul {\n    flex-direction: column;\n    align-items: start;\n    padding-left: 6%;\n  }\n\n  .containerMenu li {\n    margin: 15px 0;\n  }\n\n  .containerMenu a {\n    padding: 10px;\n    width: 100%; /* Asegura que los enlaces ocupen el 100% del ancho */\n    text-align: center;\n  }\n\n  .header {\n    height: auto;\n    flex-direction: column;\n    align-items: center;\n  }\n\n  .headerSecond {\n    height: auto;\n    top: 80px;\n  }\n\n  .superMenu1 {\n    width: 100%;\n    flex-direction: column;\n    align-items: start;\n  }\n\n  .superMenu1 ul {\n    flex-direction: column; /* Apilar los elementos del segundo menú */\n    align-items: start; /* Centrar los elementos */\n  }\n\n  .superMenu1 li {\n    margin: 15px 0; /* Espacio entre los elementos en móviles */\n  }\n}\n\n/* SearchForm.module.css */\n.searchForm {\n  max-width: 350px;\n}\n\n.searchInput {\n  font-size: 1rem;\n  outline: none;\n  transition: border-color 0.3s ease;\n  border: 1px solid #ddd;\n  margin-right: 15px;\n  padding: 7px;\n}\n\n.searchInput:focus {\n  border-color: #000000; /* Borde azul al hacer foco */\n}\n\n.searchButton {\n  background-color: #000000;\n  color: white;\n  border: none;\n  padding: 7px;\n  font-size: 1rem;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n}\n\n.searchButton:hover {\n  background-color: #1a3450; /* Fondo azul más oscuro al pasar el ratón */\n}\n\n@media (max-width: 768px) {\n  .searchForm {\n    flex-direction: column; /* Los elementos se apilan en pantallas pequeñas */\n  }\n\n  .searchInput {\n    margin-bottom: 10px; /* Añadir espacio entre el input y el botón */\n  }\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/header_mobil.css"],"names":[],"mappings":"AAAA,8EAA8E;AAC9E;EACE;IACE,sBAAsB;EACxB;;EAEA,4BAA4B;EAC5B;IACE,aAAa,EAAE,sBAAsB;EACvC;;EAEA,2DAA2D;EAC3D;IACE,cAAc,EAAE,sBAAsB;EACxC;;EAEA,+CAA+C;EAC/C;IACE,cAAc;IACd,eAAe,EAAE,qBAAqB;IACtC,UAAU;IACV,YAAY;IACZ,gBAAgB;IAChB,eAAe;EACjB;;EAEA,kEAAkE;EAClE;IACE,aAAa,EAAE,6DAA6D;EAC9E;;EAEA,oDAAoD;EACpD;IACE,aAAa,EAAE,iCAAiC;IAChD,sBAAsB,EAAE,iDAAiD;IACzE,WAAW;IACX,uBAAuB,EAAE,yBAAyB;EACpD;;EAEA,6EAA6E;EAC7E;IACE,sBAAsB;IACtB,gBAAgB;EAClB;;EAEA;IACE,cAAc;EAChB;;EAEA;IACE,aAAa;IACb,WAAW,EAAE,yCAAyC;IACtD,kBAAkB;EACpB;;EAEA,gCAAgC;EAChC;IACE,WAAW;IACX,sBAAsB;IACtB,kBAAkB;EACpB;;EAEA;IACE,sBAAsB,EAAE,yBAAyB;IACjD,kBAAkB;EACpB;;EAEA;IACE,cAAc;EAChB;;EAEA,2BAA2B;EAC3B;IACE,sBAAsB;EACxB;;EAEA;IACE,mBAAmB;EACrB;AACF","sourcesContent":["/* Para pantallas pequeñas, el menú está oculto y el botón toggle se muestra */\n@media (max-width: 767px) {\n  .headerContent {\n    flex-direction: column;\n  }\n\n  /* Menú oculto por defecto */\n  #navbarMenu.menuHidden {\n    display: none; /* Ocultamos el menú */\n  }\n\n  /* Menú visible cuando se le añade la clase \"menuVisible\" */\n  #navbarMenu.menuVisible {\n    display: block; /* Mostramos el menú */\n  }\n\n  /* Mostrar el botón de toggle solo en móviles */\n  .toggleMenuButton {\n    display: block;\n    font-size: 24px; /* Tamaño del ícono */\n    padding: 0;\n    border: none;\n    background: none;\n    cursor: pointer;\n  }\n\n  /* Si el menú está visible, el botón toggle se oculta (opcional) */\n  .toggleMenuButton.menuVisible {\n    display: none; /* El botón de toggle se oculta cuando el menú está visible */\n  }\n\n  /* Aseguramos que el menú tenga un diseño adecuado */\n  .containerMenu {\n    display: none; /* Ocultamos el menú en móviles */\n    flex-direction: column; /* Hacemos que los elementos del menú se apilen */\n    width: 100%;\n    align-items: flex-start; /* Centra los elementos */\n  }\n\n  /* Aseguramos que los enlaces dentro del menú estén correctamente alineados */\n  .containerMenu ul {\n    flex-direction: column;\n    padding-left: 6%;\n  }\n\n  .containerMenu li {\n    margin: 15px 0;\n  }\n\n  .containerMenu a {\n    padding: 10px;\n    width: 100%; /* Los enlaces ocupan el 100% del ancho */\n    text-align: center;\n  }\n\n  /* Menú desplegable de idiomas */\n  .superMenu1 {\n    width: 100%;\n    flex-direction: column;\n    align-items: start;\n  }\n\n  .superMenu1 ul {\n    flex-direction: column; /* Apilar los elementos */\n    align-items: start;\n  }\n\n  .superMenu1 li {\n    margin: 15px 0;\n  }\n\n  /* Formulario de búsqueda */\n  .searchForm {\n    flex-direction: column;\n  }\n\n  .searchInput {\n    margin-bottom: 10px;\n  }\n}\n"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/header_pc.css":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/header_pc.css ***!
+  \*********************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, `/* Para pantallas grandes, el menú se muestra y el botón toggle se oculta */
+@media (min-width: 768px) {
+  .header {
+    height: 70px;
+  }
+
+  .menuVisible {
+    display: block;
+  }
+
+  .menuHidden {
+    display: none;
+  }
+
+  .toggleMenuButton {
+    display: none; /* Mostrar el botón en pantallas más pequeñas */
+  }
+
+  .containerMenu {
+    display: flex; /* El menú se muestra */
+  }
+
+  .containerMenu ul {
+    flex-direction: row; /* Los enlaces se muestran en línea */
+  }
+
+  .headerContent {
+    gap: 80px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .headerContent > .logo {
+    flex: 0 1 200px;
+  }
+
+  .headerContent > .containerMenu {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .logo {
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    padding-bottom: 20px;
+  }
+
+  .searchForm {
+    display: flex; /* Alineamos el input y el botón horizontalmente */
+    justify-content: flex-start; /* Alineamos a la izquierda */
+    gap: 10px; /* Espacio entre el input y el botón */
+    max-width: 400px; /* Limitamos el ancho total del formulario */
+    margin: 0 auto; /* Centra el formulario en la pantalla */
+  }
+
+  .searchForm .form-search {
+    flex: 1; /* Hace que el input ocupe todo el espacio disponible, excepto el botón */
+    max-width: 300px; /* Limita el tamaño máximo del campo de texto */
+    height: 36px; /* Limita la altura del input */
+    line-height: 36px; /* Alinea el texto verticalmente dentro del input */
+    padding: 0 10px; /* Añade espacio interno para que el texto no quede pegado a los bordes */
+    margin-top: 0px;
+  }
+
+  .searchForm .form-control {
+    flex: 1; /* Hace que el input ocupe todo el espacio disponible, excepto el botón */
+    max-width: 300px; /* Limita el tamaño máximo del campo de texto */
+  }
+
+  .searchForm .btn {
+    padding: 8px 10px; /* Tamaño del botón */
+    font-size: 14px; /* Tamaño de la fuente en el botón */
+  }
+}
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/header_pc.css"],"names":[],"mappings":"AAAA,2EAA2E;AAC3E;EACE;IACE,YAAY;EACd;;EAEA;IACE,cAAc;EAChB;;EAEA;IACE,aAAa;EACf;;EAEA;IACE,aAAa,EAAE,+CAA+C;EAChE;;EAEA;IACE,aAAa,EAAE,uBAAuB;EACxC;;EAEA;IACE,mBAAmB,EAAE,qCAAqC;EAC5D;;EAEA;IACE,SAAS;IACT,iBAAiB;IACjB,oBAAoB;EACtB;;EAEA;IACE,eAAe;EACjB;;EAEA;IACE,OAAO;IACP,aAAa;IACb,8BAA8B;EAChC;;EAEA;IACE,mBAAmB;IACnB,uBAAuB;IACvB,aAAa;IACb,oBAAoB;EACtB;;EAEA;IACE,aAAa,EAAE,kDAAkD;IACjE,2BAA2B,EAAE,6BAA6B;IAC1D,SAAS,EAAE,sCAAsC;IACjD,gBAAgB,EAAE,4CAA4C;IAC9D,cAAc,EAAE,wCAAwC;EAC1D;;EAEA;IACE,OAAO,EAAE,yEAAyE;IAClF,gBAAgB,EAAE,+CAA+C;IACjE,YAAY,EAAE,+BAA+B;IAC7C,iBAAiB,EAAE,mDAAmD;IACtE,eAAe,EAAE,yEAAyE;IAC1F,eAAe;EACjB;;EAEA;IACE,OAAO,EAAE,yEAAyE;IAClF,gBAAgB,EAAE,+CAA+C;EACnE;;EAEA;IACE,iBAAiB,EAAE,qBAAqB;IACxC,eAAe,EAAE,oCAAoC;EACvD;AACF","sourcesContent":["/* Para pantallas grandes, el menú se muestra y el botón toggle se oculta */\n@media (min-width: 768px) {\n  .header {\n    height: 70px;\n  }\n\n  .menuVisible {\n    display: block;\n  }\n\n  .menuHidden {\n    display: none;\n  }\n\n  .toggleMenuButton {\n    display: none; /* Mostrar el botón en pantallas más pequeñas */\n  }\n\n  .containerMenu {\n    display: flex; /* El menú se muestra */\n  }\n\n  .containerMenu ul {\n    flex-direction: row; /* Los enlaces se muestran en línea */\n  }\n\n  .headerContent {\n    gap: 80px;\n    padding-top: 20px;\n    padding-bottom: 20px;\n  }\n\n  .headerContent > .logo {\n    flex: 0 1 200px;\n  }\n\n  .headerContent > .containerMenu {\n    flex: 1;\n    display: flex;\n    justify-content: space-between;\n  }\n\n  .logo {\n    align-items: center;\n    justify-content: center;\n    padding: 10px;\n    padding-bottom: 20px;\n  }\n\n  .searchForm {\n    display: flex; /* Alineamos el input y el botón horizontalmente */\n    justify-content: flex-start; /* Alineamos a la izquierda */\n    gap: 10px; /* Espacio entre el input y el botón */\n    max-width: 400px; /* Limitamos el ancho total del formulario */\n    margin: 0 auto; /* Centra el formulario en la pantalla */\n  }\n\n  .searchForm .form-search {\n    flex: 1; /* Hace que el input ocupe todo el espacio disponible, excepto el botón */\n    max-width: 300px; /* Limita el tamaño máximo del campo de texto */\n    height: 36px; /* Limita la altura del input */\n    line-height: 36px; /* Alinea el texto verticalmente dentro del input */\n    padding: 0 10px; /* Añade espacio interno para que el texto no quede pegado a los bordes */\n    margin-top: 0px;\n  }\n\n  .searchForm .form-control {\n    flex: 1; /* Hace que el input ocupe todo el espacio disponible, excepto el botón */\n    max-width: 300px; /* Limita el tamaño máximo del campo de texto */\n  }\n\n  .searchForm .btn {\n    padding: 8px 10px; /* Tamaño del botón */\n    font-size: 14px; /* Tamaño de la fuente en el botón */\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2030,7 +2062,7 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 function serveisVaultApi() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const response = yield fetch('https://elliotfern.com/api/vault/get/?llistat_serveis');
+            const response = yield fetch('https://elliot.cat/api/vault/get/?llistat_serveis');
             if (!response.ok) {
                 throw new Error('Error al obtener los datos de la API');
             }
