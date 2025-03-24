@@ -9,7 +9,7 @@ echo "<p><a href='./facturacio-clients/nova-factura'><button type='button' class
 
 echo "<hr>";
 ?>
-<input type='hidden' id='url' value='https://gestio.elliotfern.com' />
+<input type='hidden' id='url' value='https://elliot.cat' />
 
 <div class="table-responsive">
     <table class="table table-striped" id="customersInvoices">
@@ -98,7 +98,7 @@ echo "<hr>";
 <script>
     const generatePDF = async (invoiceId) => {
         try {
-            const response = await fetch(`https://elliotfern.com/api/accounting/get/invoice-pdf/${invoiceId}`);
+            const response = await fetch(`https://elliot.cat/api/accounting/get/invoice-pdf/${invoiceId}`);
 
             if (response.ok) {
                 const blob = await response.blob();

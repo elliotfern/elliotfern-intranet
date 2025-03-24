@@ -11,9 +11,9 @@
 
       <a href="<?php APP_SERVER; ?>/gestio/tasques" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">Tasques</a>
 
-      <a href="<?php APP_SERVER; ?>/gestio/contactes" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">Contactes</a>
+      <a href="<?php APP_SERVER; ?>/gestio/agenda-contactes" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">Contactes</a>
 
-      <a href="<?php APP_SERVER; ?>/gestio/llibres" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">Llibres</a>
+      <a href="<?php APP_SERVER; ?>/gestio/biblioteca" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">Biblioteca</a>
 
       <a href="<?php APP_SERVER; ?>/gestio/adreces" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">Links</a>
 
@@ -28,6 +28,8 @@
       <a href="<?php APP_SERVER; ?>/gestio/xarxes-socials" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">Xarxes</a>
 
       <a href="<?php APP_SERVER; ?>/gestio/lector-rss" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">Lector RSS</a>
+
+      <a href="<?php APP_SERVER; ?>/gestio/historia-oberta" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">Historia Oberta</a>
 
     </div>
   </div>

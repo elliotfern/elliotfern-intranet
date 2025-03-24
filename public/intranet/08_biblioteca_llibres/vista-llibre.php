@@ -1,10 +1,10 @@
 <?php
-$slug = $routeParams['llibreSlug'];
+$slug = $routeParams[0];
 ?>
 
 <h1>Biblioteca de llibres</h1>
 <h3 id="titolBook"></h3>
-<h6><a href="/biblioteca/">Biblioteca</a> > <a href="/biblioteca/llibres/">Llibres </a></h6>
+<h6><a href="/gestio/biblioteca/">Biblioteca</a> > <a href="/biblioteca/llibres/">Llibres </a></h6>
 
 <div class='row'>
   <div class='col-sm-8'>
@@ -14,7 +14,7 @@ $slug = $routeParams['llibreSlug'];
     <p><a id="modificaLlibreUrl" href="" class="btn btn-warning btn-sm">Modifica les dades</a>
     <p>
 
-    <div class="alert alert-primary" role="alert" style="margin-top:10px">
+    <div class="quadre-detalls">
       <p>
       <h3> <span id="titol"></span></h3>
       </p>
@@ -41,15 +41,19 @@ $slug = $routeParams['llibreSlug'];
 </div>
 
 <script>
-  // Función para realizar la solicitud Axios a la API
+  // Función para realizar la solicitud a la API
   function fetchApiData(url) {
-    axios.get(url)
+    fetch(url, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
       .then(response => {
-        console.log('Respuesta Axios:', response); // Ver la respuesta completa de Axios
-        if (response.status !== 200) {
+        if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        return response.data;
+        return response.json();
       })
       .then(data => {
         console.log('Datos recibidos:', data); // Ver los datos recibidos
@@ -60,13 +64,10 @@ $slug = $routeParams['llibreSlug'];
         try {
           // Actualizar el DOM con los datos recibidos
           document.getElementById('titolBook').textContent = data.titol;
-          document.getElementById('nameImg').src = `https://media.elliotfern.com/img/library-book/${data.nameImg}.jpg`;
-<<<<<<< HEAD
-          document.getElementById('modificaLlibreUrl').href = `${window.location.origin}/biblioteca/llibre/modifica/${data.id}`;
-=======
-          document.getElementById('modificaLlibreUrl').href = `${window.location.origin}/biblioteca/modifica/llibre/${data.id}`;
->>>>>>> 9a73a7e249f477a8924ef753dfb8d632661ce007
-          document.getElementById('linkAutor').href = `${window.location.origin}/biblioteca/autor/fitxa/${data.slugAutor}`;
+          document.getElementById('nameImg').src = `https://media.elliot.cat/img/library-book/${data.nameImg}.jpg`;
+          document.getElementById('modificaLlibreUrl').href = `${window.location.origin}/gestio/biblioteca/llibre/modifica/${data.id}`;
+          document.getElementById('modificaLlibreUrl').href = `${window.location.origin}/gestio/biblioteca/modifica/llibre/${data.id}`;
+          document.getElementById('linkAutor').href = `${window.location.origin}/gestio/biblioteca/autor/fitxa/${data.slugAutor}`;
           document.getElementById('titol').textContent = data.titol;
           document.getElementById('titolEng').textContent = data.titolEng;
           document.getElementById('nom').textContent = data.nom;
@@ -84,7 +85,7 @@ $slug = $routeParams['llibreSlug'];
         }
       })
       .catch(error => {
-        console.error('Error en la solicitud Axios:', error);
+        console.error('Error en la solicitud:', error);
       });
   }
 

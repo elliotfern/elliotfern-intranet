@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 }
 
 // Dominio permitido (modifica con tu dominio)
-$allowed_origin = "https://gestio.elliotfern.com";
+$allowed_origin = "https://elliot.cat";
 
 // Verificar el encabezado 'Origin'
 if (isset($_SERVER['HTTP_ORIGIN'])) {

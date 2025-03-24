@@ -1,9 +1,11 @@
+import Quill from 'quill';
+
 interface TrixEditorElement extends HTMLElement {
-    editor: {
-      loadHTML: (html: string) => void;
-    };
-  }
-  
+  editor: {
+    loadHTML: (html: string) => void;
+  };
+}
+
 /**
  * Funció per omplir els inputs text i select de les pàgines de formularis de modificació.
  * @param url - L'URL de l'API per obtenir les dades.
@@ -37,23 +39,64 @@ export async function omplirDadesForm(url: string, id: number, formId: string, c
       return;
     }
 
-    Object.keys(data[0]).forEach((key) => {
+    Object.keys(data).forEach((key) => {
       const input = form.querySelector(`[name="${key}"]`) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
       if (input) {
-        input.value = data[0][key];
+        input.value = data[key];
       }
     });
 
-    // Carregar contingut en l'editor Trix si està present
-    const trixEditor = document.querySelector('trix-editor') as TrixEditorElement;
-    if (trixEditor) {
-      const trixInput = document.querySelector('input[name="descripcio"]') as HTMLInputElement;
-      if (trixInput) {
-        trixInput.value = data[0]['descripcio'];
-        trixEditor.editor.loadHTML(data[0]['descripcio']);
-      }
+    // Verificar si data.descripcio existe y no está vacío
+    if (data['descripcio']) {
+      initializeQuill('descripcio', data['descripcio']);
     }
   } catch (error) {
     console.error('Error:', error);
   }
+}
+
+function initializeQuill(textareaId: string, content: string | null) {
+  const textarea = document.getElementById(textareaId) as HTMLTextAreaElement;
+
+  if (!textarea) {
+    console.error(`No se encontró el textarea con id ${textareaId}`);
+    return;
+  }
+
+  // Crear el contenedor del editor si no existe
+  let editorContainer = document.getElementById('quill-editor');
+  if (!editorContainer) {
+    editorContainer = document.createElement('div');
+    editorContainer.id = 'quill-editor';
+    textarea.insertAdjacentElement('afterend', editorContainer);
+    textarea.style.display = 'none'; // Ocultar el textarea original
+  }
+
+  // Inicializar Quill en el contenedor
+  const quill = new Quill(editorContainer, {
+    theme: 'snow',
+    modules: {
+      toolbar: [
+        [{ header: [1, 2, 3, false] }], // Encabezados
+        ['bold', 'italic', 'underline', 'strike'], // Negrita, cursiva, etc.
+        [{ list: 'ordered' }, { list: 'bullet' }], // Listas
+        [{ script: 'sub' }, { script: 'super' }], // Subíndice y superíndice
+        [{ indent: '-1' }, { indent: '+1' }], // Sangría
+        [{ color: [] }, { background: [] }], // Colores
+        [{ align: [] }], // Alineación
+        ['link', 'image', 'video'], // Enlaces, imágenes y videos
+        ['clean'], // Eliminar formato
+      ],
+    },
+  });
+
+  // 🔹 Verificar si `content` existe y no está vacío antes de cargarlo
+  if (content && content.trim() !== '') {
+    quill.root.innerHTML = content;
+  }
+
+  // Actualizar el textarea cuando Quill cambie
+  quill.on('text-change', () => {
+    textarea.value = quill.root.innerHTML;
+  });
 }

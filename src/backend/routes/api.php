@@ -29,6 +29,13 @@ $base_routes = [
 
     '/api/sitemap/get' => 'src/backend/api/15_sitemap/get-sitemap.php',
 
+    // HISTORIA OBERTA
+    '/api/historia-oberta/get' => 'src/backend/api/16_historia_oberta/get-historia.php',
+
+    // AGENDA CONTACTES
+    '/api/contactes/get' => 'src/backend/api/contactes/get-contactes.php',
+
+
 ];
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
@@ -213,6 +220,24 @@ $routes = [
     // SITEMAP
     '/api/sitemap/get' => [
         'view' => 'src/backend/api/15_sitemap/get-sitemap.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    // HISTORIA OBERTA
+    '/api/historia-oberta/get' => [
+        'view' => 'src/backend/api/16_historia_oberta/get-historia.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    // AGENDA CONTACTES
+    '/api/contactes/get' => [
+        'view' => 'src/backend/api/contactes/get-contactes.php',
         'needs_session' => false,
         'header_footer' => false,
         'header_menu_footer' => false,

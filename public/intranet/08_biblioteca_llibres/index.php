@@ -7,8 +7,8 @@
 
 <div class="alert alert-success" role="alert">
     <ul>
-        <li> <a href="/biblioteca/llibres">Col·lecció de llibres</a></li>
-        <li><a href="/biblioteca/autors">Col·lecció d'autors/es</a></li>
+        <li> <a href="/gestio/biblioteca/llibres">Col·lecció de llibres</a></li>
+        <li><a href="/gestio/biblioteca/autors">Col·lecció d'autors/es</a></li>
 
     </ul>
 </div>

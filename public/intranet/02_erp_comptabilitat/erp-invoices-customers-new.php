@@ -170,7 +170,7 @@ echo "</form>
 
     // AJAX PROCESS > PHP - MODAL FORM - CREATE NEW INVOICE CUSTOMER - ELLIOT FERNANDEZ SOLE TRADE
     document.addEventListener("DOMContentLoaded", function() {
-        const urlAjax = "https://elliotfern.com/api/accounting/post/invoice";
+        const urlAjax = "https://elliot.cat/api/accounting/post/invoice";
 
         const btnAddNewCustomerInvoice = document.getElementById("btnAddNewCustomerInvoice");
         btnAddNewCustomerInvoice.addEventListener("click", async function(event) {

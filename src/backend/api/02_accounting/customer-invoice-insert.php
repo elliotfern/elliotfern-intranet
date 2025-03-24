@@ -1,13 +1,13 @@
 <?php
 // Configuración de cabeceras para aceptar JSON y responder JSON
 header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: https://elliotfern.com");
+header("Access-Control-Allow-Origin: https://elliot.cat");
 header("Access-Control-Allow-Methods: POST");
 
 // insert data to db
 
 // Dominio permitido (modifica con tu dominio)
-$allowed_origin = "https://elliotfern.com";
+$allowed_origin = "https://elliot.cat";
 
 // Verificar el encabezado 'Origin'
 if (isset($_SERVER['HTTP_ORIGIN'])) {

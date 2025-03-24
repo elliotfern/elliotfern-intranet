@@ -38,6 +38,12 @@ curl_close($ch);
 // Decodificar la respuesta JSON en un array PHP
 $responseData = json_decode($response, true);
 
+if (curl_getinfo($ch, CURLINFO_HTTP_CODE) == 401) {
+    http_response_code(401);
+    echo json_encode(['error' => 'Token de acceso inválido o caducado']);
+    exit();
+}
+
 // Verificar si la respuesta es válida
 if ($responseData === null) {
     http_response_code(500);
