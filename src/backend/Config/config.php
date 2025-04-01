@@ -4,9 +4,8 @@
 define('BASE_URL', $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST']);
 define('APP_ROOT', $_SERVER['DOCUMENT_ROOT']);
 
-$base_url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
-define("APP_WEB", $base_url);
-define("APP_SERVER", $base_url);
+$base_url = BASE_URL . "/gestio";
+define("APP_INTRANET", $base_url);
 
 // Configurar cookies de sesión
 ini_set('session.cookie_lifetime', 60 * 60 * 24 * 30); // 30 días
@@ -20,3 +19,9 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../');
 $dotenv->load();
 require_once __DIR__ . '/../Config/connection.php';
+
+// definicio de url
+$url = [
+    'biblioteca' => '/biblioteca',
+
+];

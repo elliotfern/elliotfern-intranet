@@ -1,5 +1,5 @@
 // AJAX PROCESS > PHP API : PER ACTUALIZAR FORMULARIS A LA BD
-export async function formulariActualitzar(event: Event, formId: string, urlAjax: string): Promise<void> {
+export async function transmissioDadesDB(event: Event, tipus:string, formId: string, urlAjax: string): Promise<void> {
   event.preventDefault();
 
   const form = document.getElementById(formId) as HTMLFormElement;
@@ -16,18 +16,11 @@ export async function formulariActualitzar(event: Event, formId: string, urlAjax
 
   const jsonData = JSON.stringify(formData);
 
-  const token = localStorage.getItem('token');
-  if (!token) {
-    console.error('Token not found in localStorage');
-    return;
-  }
-
   try {
     const response = await fetch(urlAjax, {
-      method: 'PUT',
+      method: tipus,
       headers: {
         Accept: 'application/json',
-        Authorization: `Bearer ${token}`,
       },
       body: jsonData,
     });
@@ -46,11 +39,14 @@ export async function formulariActualitzar(event: Event, formId: string, urlAjax
       if (missatgeOk && missatgeErr) {
         missatgeOk.style.display = 'block';
         missatgeErr.style.display = 'none';
+        // Agregar texto dinámicamente al div de éxito
+        missatgeOk.textContent = "L'operació s'ha realizat correctament a la base de dades.";
       }
     } else {
       if (missatgeOk && missatgeErr) {
         missatgeErr.style.display = 'block';
         missatgeOk.style.display = 'none';
+        missatgeErr.textContent = "L'operació no s'ha pogut realizar correctament a la base de dades.";
       }
     }
   } catch (error) {

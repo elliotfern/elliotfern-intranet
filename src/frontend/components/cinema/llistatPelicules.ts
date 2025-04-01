@@ -18,6 +18,7 @@ interface Pelicula {
   genere: number;
   img: number;
   pais: number;
+  slug: string;
 }
 
 export async function llistatPelicules(tipus: number) {
@@ -54,7 +55,7 @@ export async function llistatPelicules(tipus: number) {
       <div class="col-sm-3 col-md-3 quadre">
         <h6><span style="background-color:black;color:white;padding:5px;">${pelicula.genere_ca}</span></h6>
     
-        <h3 class="links-contactes" style="margin-top: 15px;"> <a href="${window.location.origin}/gestio/cinema/fitxa-pelicula/${pelicula.id}" title="Fitxa de la pel·lícula" >${pelicula.pelicula}</a></h3>`;
+        <h3 class="links-contactes" style="margin-top: 15px;"> <a href="${window.location.origin}/gestio/cinema/fitxa-pelicula/${pelicula.slug}" title="Fitxa de la pel·lícula" >${pelicula.pelicula}</a></h3>`;
 
       pelicules += `<p class="links-contactes autor"><strong>Director/a:</strong> <a href="${window.location.origin}/cinema/director/${pelicula.id}">${pelicula.nom} ${pelicula.cognoms}</a></p>`;
       pelicules += `<p><strong>Any: </strong> ${pelicula.any}</p>`;

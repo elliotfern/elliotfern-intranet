@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
   exit();
 }
 
-$allowed_origins = ['https://gestio.elliotfern.com'];
+$allowed_origins = ['https://elliot.cat'];
 
 if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowed_origins)) {
   header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
@@ -46,13 +46,12 @@ if (isset($_GET['autor'])) {
 
   $nom = isset($data['nom']) ? data_input($data['nom']) : NULL;
   $cognoms = isset($data['cognoms']) ? data_input($data['cognoms']) : ($hasError = true);
-  $yearBorn = isset($data['yearBorn']) ? data_input($data['yearBorn']) : ($hasError = true);
-  $yearDie = isset($data['yearDie']) && $data['yearDie'] !== '' ? data_input($data['yearDie']) : NULL;
+  $anyNaixement = isset($data['anyNaixement']) ? data_input($data['anyNaixement']) : ($hasError = true);
+  $anyDefuncio = isset($data['anyDefuncio']) && $data['anyDefuncio'] !== '' ? data_input($data['anyDefuncio']) : NULL;
   $paisAutor = isset($data['paisAutor']) ? data_input($data['paisAutor']) : ($hasError = true);
   $img = isset($data['img']) ? data_input($data['img']) : ($hasError = true);
-  $AutWikipedia = isset($data['AutWikipedia']) ? data_input($data['AutWikipedia']) : ($hasError = true);
-  $AutDescrip = isset($data['AutDescrip']) ? data_input($data['AutDescrip']) : ($hasError = true);
-  $moviment = isset($data['moviment']) ? data_input($data['moviment']) : ($hasError = true);
+  $web = isset($data['web']) ? data_input($data['web']) : ($hasError = true);
+  $descripcio = isset($data['descripcio']) ? data_input($data['descripcio']) : ($hasError = true);
   $ocupacio = isset($data['ocupacio']) ? data_input($data['ocupacio']) : ($hasError = true);
   $id = isset($data['id']) ? data_input($data['id']) : ($hasError = true);
   $slug = isset($data['slug']) ? data_input($data['slug']) : ($hasError = true);
@@ -62,17 +61,16 @@ if (isset($_GET['autor'])) {
 
   if ($hasError == false) {
     global $conn;
-    $sql = "UPDATE 08_db_biblioteca_autors SET nom=:nom, cognoms=:cognoms, yearBorn=:yearBorn, yearDie=:yearDie, paisAutor=:paisAutor, img=:img, AutWikipedia=:AutWikipedia, AutDescrip=:AutDescrip, moviment=:moviment, ocupacio=:ocupacio, dateModified=:dateModified, slug=:slug WHERE id=:id";
+    $sql = "UPDATE db_persones SET nom=:nom, cognoms=:cognoms, anyNaixement=:anyNaixement, anyDefuncio=:anyDefuncio, paisAutor=:paisAutor, img=:img, web=:web, descripcio=:descripcio, ocupacio=:ocupacio, dateModified=:dateModified, slug=:slug WHERE id=:id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":nom", $nom, PDO::PARAM_STR);
     $stmt->bindParam(":cognoms", $cognoms, PDO::PARAM_STR);
-    $stmt->bindParam(":yearBorn", $yearBorn, PDO::PARAM_INT);
-    $stmt->bindParam(":yearDie", $yearDie, PDO::PARAM_INT);
+    $stmt->bindParam(":anyNaixement", $anyNaixement, PDO::PARAM_INT);
+    $stmt->bindParam(":anyDefuncio", $anyDefuncio, PDO::PARAM_INT);
     $stmt->bindParam(":paisAutor", $paisAutor, PDO::PARAM_INT);
     $stmt->bindParam(":img", $img, PDO::PARAM_INT);
-    $stmt->bindParam(":AutWikipedia", $AutWikipedia, PDO::PARAM_STR);
-    $stmt->bindParam(":AutDescrip", $AutDescrip, PDO::PARAM_STR);
-    $stmt->bindParam(":moviment", $moviment, PDO::PARAM_INT);
+    $stmt->bindParam(":web", $web, PDO::PARAM_STR);
+    $stmt->bindParam(":descripcio", $descripcio, PDO::PARAM_STR);
     $stmt->bindParam(":ocupacio", $ocupacio, PDO::PARAM_INT);
     $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
     $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);

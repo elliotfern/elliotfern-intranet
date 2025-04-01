@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         $stmt = $conn->prepare(
             "SELECT b.titol, b.titolEng, b.any, b.lang, b.id, a.id AS idAutor, a.cognoms AS AutCognom1, a.nom AS AutNom, g.genere_en AS nomGenEng, g.genere_cat AS nomGenCat, g.id AS idGenere, bc.nomCollection, b.slug, a.slug AS slugAuthor, g.codi_cdu AS codiGenere, sg.sub_genere_cat, sg.codi_cdu AS codiSubGenere, idi.idioma_ca, be.editorial, e.estat
                     FROM 08_db_biblioteca_llibres AS b
-                    INNER JOIN 08_db_biblioteca_autors AS a ON b.autor = a.id
+                    INNER JOIN db_persones AS a ON b.autor = a.id
                     LEFT JOIN 08_aux_biblioteca_generes_literaris AS g ON b.idGen = g.id
                     LEFT JOIN 08_aux_biblioteca_sub_generes_literaris AS sg ON b.subGen = sg.id
                     LEFT JOIN 08_aux_biblioteca_editorials AS be ON b.idEd = be.id
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         $stmt = $conn->prepare(
             "SELECT b.titol, b.titolEng, b.any, b.lang, b.id, a.id AS idAutor, a.cognoms AS AutCognom1, a.nom AS AutNom, g.genere_en AS nomGenEng, g.genere_cat AS nomGenCat, g.id AS idGenere, bc.nomCollection, b.slug, a.slug AS slugAuthor, g.codi_cdu AS codiGenere, sg.sub_genere_cat, sg.codi_cdu AS codiSubGenere, idi.idioma_ca, be.editorial
                 FROM 08_db_biblioteca_llibres AS b
-                INNER JOIN 08_db_biblioteca_autors AS a ON b.autor = a.id
+                INNER JOIN db_persones AS a ON b.autor = a.id
                 LEFT JOIN 08_aux_biblioteca_generes_literaris AS g ON b.idGen = g.id
                 LEFT JOIN 08_aux_biblioteca_sub_generes_literaris AS sg ON b.subGen = sg.id
                 LEFT JOIN 08_aux_biblioteca_editorials AS be ON b.idEd = be.id
@@ -77,13 +77,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         echo json_encode($data);
 
         // 3) Llistat autors
-        // ruta GET => "https://control.elliotfern/api/library/get/authors"
+        // ruta GET => "https://elliot.cat/api/biblioteca/get/authors"
     } elseif (isset($_GET['type']) && $_GET['type'] == 'totsAutors') {
         global $conn;
         $data = array();
         $stmt = $conn->prepare(
-            "SELECT a.id, a.nom AS AutNom, a.cognoms AS AutCognom1, a.slug, a.yearBorn, a.yearDie, a.AutWikipedia, c.pais_cat AS country, c.id AS idCountry, p.professio_ca AS profession, p.id AS idProfession,  i.nameImg
-                            FROM 08_db_biblioteca_autors AS a
+            "SELECT a.id, a.nom AS AutNom, a.cognoms AS AutCognom1, a.slug, a.anyNaixement AS yearBorn, a.anyDefuncio AS yearDie, a.web AS AutWikipedia, c.pais_cat AS country, c.id AS idCountry, p.professio_ca AS profession, p.id AS idProfession, i.nameImg
+                            FROM db_persones AS a
                             INNER JOIN db_countries AS c ON a.paisAutor = c.id
                             INNER JOIN aux_professions AS p ON a.ocupacio = p.id
                             LEFT JOIN db_img AS i ON a.img = i.id
@@ -116,45 +116,20 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         }
         echo json_encode($data);
 
-        // 5) Authors page
-        // ruta GET => "api/library/authors/joaquim-albareda"
-    } elseif ((isset($_GET['type']) && $_GET['type'] == 'autor') && (isset($_GET['slugAuthor']))) {
-        $slug = $_GET['slugAuthor'];
-        global $conn;
-        $data = array();
-        $stmt = $conn->prepare(
-            "SELECT a.id, a.cognoms AS AutCognom1, a.nom AS AutNom, p.pais_cat AS country, a.yearBorn, a.yearDie, p.id AS idPais, o.professio_ca AS name, i.nameImg, m.moviment_ca AS movement, m.id AS idMovement, a.AutWikipedia, a.dateCreated, a.dateModified, a.AutDescrip, a.slug, a.img AS idImg, a.ocupacio AS AutOcupacio
-                FROM 08_db_biblioteca_autors AS a
-                INNER JOIN db_countries AS p ON a.paisAutor = p.id
-                INNER JOIN aux_professions AS o ON a.ocupacio = o.id
-                LEFT JOIN db_img AS i ON a.img = i.id
-                INNER JOIN 08_aux_biblioteca_moviments  AS m ON a.moviment = m.id
-                WHERE a.slug = :slug"
-        );
-        $stmt->execute(['slug' => $slug]);
-
-        if ($stmt->rowCount() === 0) {
-            echo json_encode(null);  // Devuelve un objeto JSON nulo si no hay resultados
-        } else {
-            // Solo obtenemos la primera fila ya que parece ser una búsqueda por ID
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            echo json_encode($row);  // Codifica la fila como un objeto JSON
-        }
 
         // 5) Authors page
-        // ruta GET => "/api/biblioteca/get/?autor-id=VALOR_DEL_ID"
-    } elseif ((isset($_GET['type']) && $_GET['type'] == 'autorId') && (isset($_GET['id']))) {
-        $id = $_GET['id'];
+        // ruta GET => "/api/biblioteca/get/?autorSlug=josep-fontana"
+    } elseif (isset($_GET['autorSlug'])) {
+        $autorSlug = $_GET['autorSlug'];
         global $conn;
         $data = array();
-        $stmt = $conn->prepare("SELECT a.id, a.cognoms AS AutCognom1, a.nom AS AutNom, p.pais_cat AS country, a.yearBorn, a.yearDie, p.id AS idPais, o.professio_ca AS name, i.nameImg, m.moviment_ca AS movement, m.id AS idMovement, a.AutWikipedia, a.dateCreated, a.dateModified, a.AutDescrip, a.slug, a.img AS idImg, a.ocupacio AS AutOcupacio
-                FROM 08_db_biblioteca_autors AS a
-                INNER JOIN db_countries AS p ON a.paisAutor = p.id
-                INNER JOIN aux_professions AS o ON a.ocupacio = o.id
+        $stmt = $conn->prepare("SELECT a.id, a.cognoms, a.nom, p.pais_cat, a.anyNaixement, a.anyDefuncio, p.id AS idPais, o.professio_ca, i.nameImg, a.web, a.dateCreated, a.dateModified, a.descripcio, a.slug, a.img AS idImg, a.ocupacio AS idOcupacio
+                FROM db_persones AS a
+                LEFT JOIN db_countries AS p ON a.paisAutor = p.id
+                LEFT JOIN aux_professions AS o ON a.ocupacio = o.id
                 LEFT JOIN db_img AS i ON a.img = i.id
-                INNER JOIN 08_aux_biblioteca_moviments AS m ON a.moviment = m.id
-                WHERE a.id = :id");
-        $stmt->execute(['id' => $id]);
+                WHERE a.slug = :slug");
+        $stmt->execute(['slug' => $autorSlug]);
 
         if ($stmt->rowCount() === 0) {
             echo json_encode(null);  // Devuelve un objeto JSON nulo si no hay resultados
@@ -165,36 +140,16 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         }
 
         // 6) Book page
-        // ruta GET => "/api/biblioteca/get/?llibre-id=ID"
-    } elseif (isset($_GET['llibre-id'])) {
-        $id = $_GET['llibre-id'];
+        // ruta GET => "/api/biblioteca/get/?llibreSlug=el-por-bien-del-imperio"
+    } elseif ((isset($_GET['llibreSlug']))) {
+        $slug = $_GET['llibreSlug'];
         global $conn;
         $data = array();
-        $stmt = $conn->prepare(
-            "SELECT b.id, b.autor,b.titol, b.titolEng, b.slug, b.any, b.tipus, b.idEd, b.idGen, b.lang,b.img, b.dateCreated, b.dateModified, b.subGen, b.estat
-                    FROM 08_db_biblioteca_llibres AS b
-                    WHERE b.id = :id"
-        );
-        $stmt->execute(['id' => $id]);
-
-        if ($stmt->rowCount() === 0) {
-            echo json_encode(null);  // Devuelve un objeto JSON nulo si no hay resultados
-        } else {
-            // Solo obtenemos la primera fila ya que parece ser una búsqueda por ID
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            echo json_encode($row);  // Codifica la fila como un objeto JSON
-        }
-
-        // 6) Book page
-        // ruta GET => "/api/biblioteca/get/?type=llibreSlug=el-por-bien-del-imperio"
-    } elseif ((isset($_GET['type']) && $_GET['type'] == 'llibreSlug') && (isset($_GET['slug']))) {
-        $slug = $_GET['slug'];
-        global $conn;
-        $data = array();
-        $stmt = $conn->prepare("SELECT b.id, a.nom, a.cognoms, a.id AS idAutor, a.slug AS slugAutor, b.titol, b.titolEng, b.slug, b.any, b.dateCreated, b.dateModified, i.nameImg, t.nomTipus, e.editorial, g.genere_cat, id.idioma_ca, a.slug AS slugAutor, sg.sub_genere_cat
+        $stmt = $conn->prepare("SELECT b.id,  b.titol, b.titolEng, b.slug, b.any, b.dateCreated, b.dateModified, b.idGen, b.subGen, b.lang, b.tipus, b.estat, b.idEd, b.img,
+        a.nom, a.cognoms, a.id AS idAutor, a.slug AS slugAutor, i.nameImg, t.nomTipus, e.editorial, g.genere_cat, id.idioma_ca, a.slug AS slugAutor, sg.sub_genere_cat
                 FROM 08_db_biblioteca_llibres AS b
                 INNER JOIN db_img AS i ON b.img = i.id
-                INNER JOIN 08_db_biblioteca_autors AS a ON b.autor = a.id
+                INNER JOIN db_persones AS a ON b.autor = a.id
                 INNER JOIN 08_aux_biblioteca_tipus as t on b.tipus = t.id
                 INNER JOIN 08_aux_biblioteca_editorials AS e ON b.idEd = e.id
                 INNER JOIN 08_aux_biblioteca_generes_literaris AS g ON b.idGen = g.id
@@ -284,7 +239,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         echo json_encode($data);
 
         // 10) image author
-        // ruta GET => "/api/biblioteca/auxiliars/?type=auxiliarImatgesAutor"
+        // ruta GET => "/api/biblioteca/?type=auxiliarImatgesAutor"
     } elseif ((isset($_GET['type']) && $_GET['type'] == 'auxiliarImatgesAutor')) {
         global $conn;
         $data = array();
@@ -327,7 +282,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         $data = array();
         $stmt = $conn->prepare(
             "SELECT a.id, CONCAT(a.cognoms, ', ', a.nom) AS nomComplet
-                FROM 08_db_biblioteca_autors AS a
+                FROM db_persones AS a
+                WHERE a.grup = '[1]'
                 ORDER BY a.cognoms"
         );
         $stmt->execute();

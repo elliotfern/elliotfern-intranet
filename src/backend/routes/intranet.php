@@ -25,10 +25,17 @@ $base_routes = [
 
     // 08 Biblioteca llibres
     '/gestio/biblioteca' => 'public/intranet/08_biblioteca_llibres/index.php',
-    '/gestio/biblioteca/llibres' => 'public/intranet/08_biblioteca_llibres/books.php',
-    '/gestio/biblioteca/autors' => 'public/intranet/08_biblioteca_llibres/authors.php',
+    '/gestio/biblioteca/llistat-llibres' => 'public/intranet/08_biblioteca_llibres/vista-llistat-llibres.php',
+    '/gestio/biblioteca/llistat-autors' => 'public/intranet/08_biblioteca_llibres/vista-llistat-autors.php',
+
     '/gestio/biblioteca/fitxa-llibre/{slug}' => 'public/intranet/08_biblioteca_llibres/vista-llibre.php',
     '/gestio/biblioteca/fitxa-autor/{slug}' => 'public/intranet/08_biblioteca_llibres/vista-autor.php',
+
+    '/gestio/biblioteca/modifica-autor/{slug}' => 'public/intranet/08_biblioteca_llibres/form-modifica-autor.php',
+    '/gestio/biblioteca/modifica-llibre/{slug}' => 'public/intranet/08_biblioteca_llibres/form-modifica-llibre.php',
+
+    '/gestio/biblioteca/nou-autor' => 'public/intranet/08_biblioteca_llibres/form-modifica-autor.php',
+    '/gestio/biblioteca/nou-llibre' => 'public/intranet/08_biblioteca_llibres/form-modifica-llibre.php',
 
     // VAULT
     '/gestio/vault' => 'public/intranet/10_claus_acces/index.php',
@@ -37,12 +44,18 @@ $base_routes = [
 
     // CINEMA
     '/gestio/cinema' => 'public/intranet/11_cinema_series/index.php',
-    '/gestio/cinema/pelicules/llistat' => 'public/intranet/11_cinema_series/vista-llistat-pelicules.php',
+    '/gestio/cinema/pelicules' => 'public/intranet/11_cinema_series/vista-llistat-pelicules.php',
     '/gestio/cinema/series' => 'app/Views/11_cinema_series/vista-llistat-series.php',
+    '/gestio/cinema/directors' => 'public/intranet/11_cinema_series/vista-directors.php',
+    '/gestio/cinema/actors' => 'public/intranet/11_cinema_series/vista-actors.php',
+
+    '/gestio/cinema/fitxa-actor/{slug}' => 'public/intranet/11_cinema_series/vista-actor.php',
+    '/gestio/cinema/fitxa-director{slug}' => 'public/intranet/11_cinema_series/vista-director.php',
+    '/gestio/cinema/fitxa-pelicula/{slug}' => 'public/intranet/11_cinema_series/vista-pelicula.php',
+    '/gestio/cinema/fitxa-serie/{slug}' => 'public/intranet/11_cinema_series/vista-serie.php',
+
     '/gestio/cinema/nova-pelicula' => 'public/intranet/11_cinema_series/form-inserir-pelicula.php',
     '/gestio/cinema/modifica-pelicula/{id}' => 'public/intranet/11_cinema_series/form-inserir-pelicula.php',
-    '/gestio/cinema/fitxa-pelicula/{id}' => 'public/intranet/11_cinema_series/vista-pelicula.php',
-
 
     // XARXES SOCIALS
     '/gestio/xarxes-socials' => 'public/intranet/12_xarxes_socials/index.php',
@@ -120,7 +133,7 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/pelicules/llistat' => [
+    '/gestio/cinema/pelicules' => [
         'view' => 'public/intranet/11_cinema_series/vista-llistat-pelicules.php',
         'needs_session' => true,
         'header_footer' => false,
@@ -156,7 +169,7 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/fitxa-pelicula/{id}' => [
+    '/gestio/cinema/fitxa-pelicula/{slug}' => [
         'view' => 'public/intranet/11_cinema_series/vista-pelicula.php',
         'needs_session' => true,
         'header_footer' => false,
@@ -164,6 +177,52 @@ $routes = [
         'apiSenseHTML' => false,
         'menu_intranet' => true
     ],
+
+    '/gestio/cinema/directors' => [
+        'view' => 'public/intranet/11_cinema_series/vista-directors.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/cinema/actors' => [
+        'view' => 'public/intranet/11_cinema_series/vista-actors.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/cinema/fitxa-actor/{slug}' => [
+        'view' => 'public/intranet/11_cinema_series/vista-actor.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/cinema/fitxa-director/{slug}' => [
+        'view' => 'public/intranet/11_cinema_series/vista-director.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/cinema/fitxa-serie/{slug}' => [
+        'view' => 'public/intranet/11_cinema_series/vista-serie.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
 
     // ERP
     '/gestio/erp' => [
@@ -270,8 +329,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/biblioteca/llibres' => [
-        'view' => 'public/intranet/08_biblioteca_llibres/books.php',
+    '/gestio/biblioteca/llistat-llibres' => [
+        'view' => 'public/intranet/08_biblioteca_llibres/vista-llistat-llibres.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -279,8 +338,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/biblioteca/autors' => [
-        'view' => 'public/intranet/08_biblioteca_llibres/authors.php',
+    '/gestio/biblioteca/llistat-autors' => [
+        'view' => 'public/intranet/08_biblioteca_llibres/vista-llistat-autors.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -299,6 +358,42 @@ $routes = [
 
     '/gestio/biblioteca/fitxa-autor/{slug}' => [
         'view' => 'public/intranet/08_biblioteca_llibres/vista-autor.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/biblioteca/modifica-autor/{slug}' => [
+        'view' => 'public/intranet/08_biblioteca_llibres/form-modifica-autor.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/biblioteca/modifica-llibre/{slug}' => [
+        'view' => 'public/intranet/08_biblioteca_llibres/form-modifica-llibre.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/biblioteca/nou-llibre' => [
+        'view' => 'public/intranet/08_biblioteca_llibres/form-modifica-llibre.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/biblioteca/nou-autor' => [
+        'view' => 'public/intranet/08_biblioteca_llibres/form-modifica-autor.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,

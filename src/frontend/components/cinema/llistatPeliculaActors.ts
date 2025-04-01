@@ -1,5 +1,5 @@
 // author book
-export async function llistatPeliculaActors(id: number) {
+export async function llistatPeliculaActors(id: string) {
   let urlAjax = '/api/cinema/get/?actors-pelicula=' + id;
 
   try {
@@ -25,7 +25,7 @@ export async function llistatPeliculaActors(id: number) {
     for (let i = 0; i < data.length; i++) {
       html += '<tr>';
 
-      html += '<td><img src="https://media.elliotfern.com/img/cinema-actor/' + data[i].nameImg + '.jpg" alt="Descripción de la imagen" width="auto" height="150"></td>';
+      html += '<td><img src="https://media.elliot.cat/img/cinema-actor/' + data[i].nameImg + '.jpg" alt="Descripción de la imagen" width="auto" height="150"></td>';
 
       html += '<td><a id="' + data[i].id + '" title="Book page" href="' + window.location.origin + '/biblioteca/llibre/' + data[i].slug + '">' + data[i].nom + ' ' + data[i].cognoms + '</a></td>';
 

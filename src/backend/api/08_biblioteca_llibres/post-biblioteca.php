@@ -6,14 +6,14 @@
  */
 
 
-// Check if the request method is PUT
+// Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
   header('HTTP/1.1 405 Method Not Allowed');
   echo json_encode(['error' => 'Method not allowed']);
   exit();
 }
 
-$allowed_origins = ['https://gestio.elliotfern.com'];
+$allowed_origins = ['https://elliot.cat'];
 
 if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowed_origins)) {
   header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
@@ -25,34 +25,35 @@ if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowed
 
 // a) Inserir autor
 if (isset($_GET['autor'])) {
+
+  // Obtener el cuerpo de la solicitud PUT
+  $input_data = file_get_contents("php://input");
+
+  // Decodificar los datos JSON
+  $data = json_decode($input_data, true);
+
+  // Verificar si se recibieron datos
+  if ($data === null) {
+    // Error al decodificar JSON
+    header('HTTP/1.1 400 Bad Request');
+    echo json_encode(['error' => 'Error decoding JSON data']);
+    exit();
+  }
+
+  // Ahora puedes acceder a los datos como un array asociativo
   $hasError = false;
-  $response = [];
 
-  // Validaciones
-  if (empty($_POST["AutNom"])) {
-    $hasError = true;
-    $response['errors'][] = 'El campo "nom" es obligatorio.';
-  } else {
-    $nom = data_input($_POST['AutNom']);
-  }
-
-  if (empty($_POST["AutCognom1"])) {
-    $hasError = true;
-    $response['errors'][] = 'El campo "cognoms" es obligatorio.';
-  } else {
-    $cognoms = data_input($_POST['AutCognom1']);
-  }
-
-  $yearBorn = filter_input(INPUT_POST, 'yearBorn', FILTER_SANITIZE_NUMBER_INT) ?: null;
-  $yearDie = filter_input(INPUT_POST, 'yearDie', FILTER_SANITIZE_NUMBER_INT) ?: null;
-  $paisAutor = filter_input(INPUT_POST, 'paisAutor', FILTER_SANITIZE_NUMBER_INT) ?: null;
-  $img = filter_input(INPUT_POST, 'img', FILTER_SANITIZE_NUMBER_INT) ?: null;
-  $ocupacio = filter_input(INPUT_POST, 'AutOcupacio', FILTER_SANITIZE_NUMBER_INT) ?: null;
-  $moviment = filter_input(INPUT_POST, 'AutMoviment', FILTER_SANITIZE_NUMBER_INT) ?: null;
-
-  $AutWikipedia = !empty($_POST["AutWikipedia"]) ? data_input($_POST['AutWikipedia']) : null;
-  $AutDescrip = !empty($_POST["AutDescrip"]) ? data_input($_POST['AutDescrip']) : null;
-  $slug = !empty($_POST["slug"]) ? data_input($_POST['slug']) : null;
+  $grup = "[1]";
+  $nom = !empty($data['nom']) ? data_input($data['nom']) : ($hasError = true);
+  $cognoms = isset($data['cognoms']) ? data_input($data['cognoms']) : ($hasError = false);
+  $slug = !empty($data['slug']) ? data_input($data['slug']) : ($hasError = true);
+  $ocupacio = !empty($data['ocupacio']) ? data_input($data['ocupacio']) : ($hasError = true);
+  $anyNaixement = !empty($data['anyNaixement']) ? data_input($data['anyNaixement']) : ($hasError = true);
+  $anyDefuncio = isset($data['anyDefuncio']) ? data_input($data['anyDefuncio']) : ($hasError = false);
+  $paisAutor = !empty($data['paisAutor']) ? data_input($data['paisAutor']) : ($hasError = true);
+  $img = !empty($data['img']) ? data_input($data['img']) : ($hasError = true);
+  $web = !empty($data['web']) ? data_input($data['web']) : ($hasError = false);
+  $descripcio = !empty($data['descripcio']) ? data_input($data['descripcio']) : ($hasError = true);
 
   $timestamp = date('Y-m-d');
   $dateCreated = $timestamp;
@@ -61,25 +62,25 @@ if (isset($_GET['autor'])) {
   if (!$hasError) {
     try {
       global $conn;
-      $sql = "INSERT INTO 08_db_biblioteca_autors 
-                            (nom, cognoms, yearBorn, yearDie, paisAutor, img, AutWikipedia, AutDescrip, moviment, ocupacio, dateModified, dateCreated, slug) 
+      $sql = "INSERT INTO db_persones 
+                            (nom, cognoms, anyNaixement, anyDefuncio, paisAutor, img, web, descripcio, ocupacio, dateModified, dateCreated, slug, grup) 
                             VALUES 
-                            (:nom, :cognoms, :yearBorn, :yearDie, :paisAutor, :img, :AutWikipedia, :AutDescrip, :moviment, :ocupacio, :dateModified, :dateCreated, :slug)";
+                            (:nom, :cognoms, :anyNaixement, :anyDefuncio, :paisAutor, :img, :web, :descripcio, :ocupacio, :dateModified, :dateCreated, :slug, :grup)";
       $stmt = $conn->prepare($sql);
 
       $stmt->bindParam(":nom", $nom, PDO::PARAM_STR);
       $stmt->bindParam(":cognoms", $cognoms, PDO::PARAM_STR);
       $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
-      $stmt->bindParam(":yearBorn", $yearBorn, PDO::PARAM_INT);
-      $stmt->bindParam(":yearDie", $yearDie, PDO::PARAM_INT);
+      $stmt->bindParam(":anyNaixement", $anyNaixement, PDO::PARAM_INT);
+      $stmt->bindParam(":anyDefuncio", $anyDefuncio, PDO::PARAM_INT);
       $stmt->bindParam(":paisAutor", $paisAutor, PDO::PARAM_INT);
       $stmt->bindParam(":img", $img, PDO::PARAM_INT);
-      $stmt->bindParam(":AutWikipedia", $AutWikipedia, PDO::PARAM_STR);
-      $stmt->bindParam(":AutDescrip", $AutDescrip, PDO::PARAM_STR);
-      $stmt->bindParam(":moviment", $moviment, PDO::PARAM_INT);
+      $stmt->bindParam(":web", $web, PDO::PARAM_STR);
+      $stmt->bindParam(":descripcio", $descripcio, PDO::PARAM_STR);
       $stmt->bindParam(":ocupacio", $ocupacio, PDO::PARAM_INT);
       $stmt->bindParam(":dateCreated", $dateCreated, PDO::PARAM_STR);
       $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
+      $stmt->bindParam(":grup", $grup, PDO::PARAM_STR);
 
       if ($stmt->execute()) {
         $response['status'] = 'success';
@@ -102,89 +103,48 @@ if (isset($_GET['autor'])) {
 
   // INSERIR NOU LLIBRE
   // autor	titol	titolEng	slug	any	tipus	idEd	idGen	subGen	lang	img	dateCreated
-} elseif (isset($_GET['type']) && $_GET['type'] == 'llibre') {
-  if (empty($_POST["autor"])) {
-    $hasError = true;
-  } else {
-    $autor = filter_input(INPUT_POST, 'autor', FILTER_SANITIZE_NUMBER_INT);
+} elseif (isset($_GET['llibre'])) {
+
+  // Obtener el cuerpo de la solicitud PUT
+  $input_data = file_get_contents("php://input");
+
+  // Decodificar los datos JSON
+  $data = json_decode($input_data, true);
+
+  // Verificar si se recibieron datos
+  if ($data === null) {
+    // Error al decodificar JSON
+    header('HTTP/1.1 400 Bad Request');
+    echo json_encode(['error' => 'Error decoding JSON data']);
+    exit();
   }
 
-  if (empty($_POST["titol"])) {
-    $hasError = true;
-  } else {
-    $titol = data_input($_POST["titol"]);
-  }
+  // Ahora puedes acceder a los datos como un array asociativo
+  $hasError = false; // Inicializamos la variable $hasError como fa
 
-  if (empty($_POST["titolEng"])) {
-    $titolEng = NULL;
-  } else {
-    $titolEng = data_input($_POST["titolEng"]);
-  }
+  $autor = !empty($data['autor']) ? data_input($data['autor']) : ($hasError = true);
+  $titol = !empty($data['titol']) ? data_input($data['titol']) : ($hasError = true);
+  $titolEng = isset($data['titolEng']) ? data_input($data['titolEng']) : ($hasError = true);
+  $any = !empty($data['any']) ? data_input($data['any']) : ($hasError = true);
+  $idEd = !empty($data['idEd']) ? data_input($data['idEd']) : ($hasError = true);
+  $lang = !empty($data['lang']) ? data_input($data['lang']) : ($hasError = true);
+  $img = !empty($data['img']) ? data_input($data['img']) : ($hasError = true);
+  $tipus = !empty($data['tipus']) ? data_input($data['tipus']) : ($hasError = true);
+  $idGen = !empty($data['idGen']) ? data_input($data['idGen']) : ($hasError = true);
+  $subGen = !empty($data['subGen']) ? data_input($data['subGen']) : ($hasError = true);
+  $slug = !empty($data['slug']) ? data_input($data['slug']) : ($hasError = true);
+  $estat = !empty($data['estat']) ? data_input($data['estat']) : ($hasError = true);
 
-  if (empty($_POST["slug"])) {
-    $hasError = true;
-  } else {
-    $slug = data_input($_POST["slug"]);
-  }
+  $dateCreated = date('Y-m-d');
 
-  if (empty($_POST["any"])) {
-    $hasError = true;
-  } else {
-    $any = filter_input(INPUT_POST, 'any', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["idEd"])) {
-    $hasError = true;
-  } else {
-    $idEd = filter_input(INPUT_POST, 'idEd', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["idGen"])) {
-    $hasError = true;
-  } else {
-    $idGen = filter_input(INPUT_POST, 'idGen', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["subGen"])) {
-    $hasError = true;
-  } else {
-    $subGen = filter_input(INPUT_POST, 'subGen', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["lang"])) {
-    $hasError = true;
-  } else {
-    $lang = filter_input(INPUT_POST, 'lang', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["img"])) {
-    $hasError = true;
-  } else {
-    $img = filter_input(INPUT_POST, 'img', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["tipus"])) {
-    $hasError = true;
-  } else {
-    $tipus = filter_input(INPUT_POST, 'tipus', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["estat"])) {
-    $hasError = true;
-  } else {
-    $estat = filter_input(INPUT_POST, 'estat', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  $dateCreated = ($_POST['dateCreated']);
-  $dateModified = date('Y-m-d');
-
-  if (!isset($hasError)) {
+  if (!$hasError) {
     global $conn;
-    $sql = "INSERT INTO 08_db_biblioteca_llibres SET autor=:autor, titol=:titol, titolEng=:titolEng, any=:any, idEd=:idEd, lang=:lang, img=:img, tipus=:tipus, idGen=:idGen, subGen=:subGen, dateCreated=:dateCreated, slug=:slug, dateModified=:dateModified, estat=:estat";
+    $sql = "INSERT INTO 08_db_biblioteca_llibres SET autor=:autor, titol=:titol, titolEng=:titolEng, any=:any, idEd=:idEd, lang=:lang, img=:img, tipus=:tipus, idGen=:idGen, subGen=:subGen, dateCreated=:dateCreated, slug=:slug, estat=:estat";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":autor", $autor, PDO::PARAM_INT);
     $stmt->bindParam(":titol", $titol, PDO::PARAM_STR);
     $stmt->bindParam(":titolEng", $titolEng, PDO::PARAM_STR);
+    $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
     $stmt->bindParam(":any", $any, PDO::PARAM_INT);
     $stmt->bindParam(":idEd", $idEd, PDO::PARAM_INT);
     $stmt->bindParam(":lang", $lang, PDO::PARAM_INT);
@@ -194,8 +154,7 @@ if (isset($_GET['autor'])) {
     $stmt->bindParam(":subGen", $subGen, PDO::PARAM_INT);
     $stmt->bindParam(":estat", $estat, PDO::PARAM_INT);
     $stmt->bindParam(":dateCreated", $dateCreated, PDO::PARAM_STR);
-    $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
-    $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
+
 
     if ($stmt->execute()) {
       // response output
@@ -205,21 +164,21 @@ if (isset($_GET['autor'])) {
       echo json_encode($response);
     } else {
       // response output - data error
-      $response['status'] = 'error';
+      $response['status'] = 'error db';
 
       header("Content-Type: application/json");
       echo json_encode($response);
     }
   } else {
     // response output - data error
-    $response['status'] = 'error';
+    $response['status'] = 'error dades';
 
     header("Content-Type: application/json");
     echo json_encode($response);
   }
 } else {
   // response output - data error
-  $response['status'] = 'error';
+  $response['status'] = 'error ruta';
   header("Content-Type: application/json");
   echo json_encode($response);
   exit();

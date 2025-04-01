@@ -11,7 +11,7 @@ import { formataHTML } from '../../../utils/formataHtml';
  * @param callback - La funció de callback que es cridarà amb les dades obtingudes.
  */
 // Función para realizar la solicitud Axios a la API
-export async function connexioApiDades(url: string, id: number, urlImg1: string, urlImg2: string, callback: (data: any) => void) {
+export async function connexioApiDades(url: string, id: string, urlImg1: string, urlImg2: string, callback: (data: any) => void) {
   const urlAjax = `${url}${id}`;
 
   // Obtener el token del localStorage
@@ -53,7 +53,7 @@ export async function connexioApiDades(url: string, id: number, urlImg1: string,
 
         // Actualizar el DOM con la información recibida
         if (key === 'nameImg') {
-          (element as HTMLImageElement).src = `http://media.elliotfern.com/${urlImg1}/${urlImg2}/${value}.jpg`;
+          (element as HTMLImageElement).src = `http://media.elliot.cat/${urlImg1}/${urlImg2}/${value}.jpg`;
         }
 
         // Casos especiales: Director/a

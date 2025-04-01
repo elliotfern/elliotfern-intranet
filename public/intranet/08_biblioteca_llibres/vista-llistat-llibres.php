@@ -1,32 +1,40 @@
-<h2>La meva biblioteca</h2>
+<div class="container">
+  <main>
+    <div class="container">
 
-<p><button type='button' class='btn btn-outline-secondary' id='btnCreateLink' onclick='btnCrearLlibre()'>Afegir nou llibre &rarr;</button></p>
+      <h1>Biblioteca: llistat de llibres</h1>
 
-<hr>
+      <h6><a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>">Biblioteca</a> > <a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>/llistat-llibres">Llibres</a> </h6>
 
-<!-- Campo de búsqueda -->
-<div class="input-group mb-3 quadre-cercador">
-  <input type="text" class="form-control" placeholder="Cercar per llibre o per autor" id="searchInput">
-  <button class="btn btn-outline-secondary" type="button" onclick="cercarLlibres()">Cercar</button>
+      <button onclick="window.location.href='<?php echo APP_INTRANET . $url['biblioteca']; ?>/nou-llibre/'" class="button btn-gran btn-secondari">Afegir llibre</button>
+
+
+      <!-- Campo de búsqueda -->
+      <div class="input-group mb-3 quadre-cercador">
+        <input type="text" class="form-control" placeholder="Cercar per llibre o per autor" id="searchInput">
+        <button class="btn btn-outline-secondary" type="button" onclick="cercarLlibres()">Cercar</button>
+      </div>
+
+      <!-- Botones para seleccionar el tipo de contacto -->
+      <div class="btn-group" role="group" aria-label="Tipus de llibre" style="margin-bottom:25px">
+        <button type="button" class="btn btn-outline-primary active" data-tipus="10">Tots els llibres</button>
+        <button type="button" class="btn btn-outline-primary" data-tipus="0">0. Obres generals</button>
+        <button type="button" class="btn btn-outline-primary" data-tipus="1">1. Filosofia</button>
+        <button type="button" class="btn btn-outline-primary" data-tipus="6">6. Ciències aplicades</button>
+        <button type="button" class="btn btn-outline-primary" data-tipus="8">8. Literatura</button>
+        <button type="button" class="btn btn-outline-primary" data-tipus="9">9. Història.Geografia</button>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row gap-3 justify-content-center llibresContainer" id="llibresContainer">
+          <!-- Aquí se muestran los contactos -->
+        </div>
+      </div>
+
+
+    </div>
+  </main>
 </div>
-
-<!-- Botones para seleccionar el tipo de contacto -->
-<div class="btn-group" role="group" aria-label="Tipus de llibre" style="margin-bottom:25px">
-  <button type="button" class="btn btn-outline-primary active" data-tipus="10">Tots els llibres</button>
-  <button type="button" class="btn btn-outline-primary" data-tipus="0">0. Obres generals</button>
-  <button type="button" class="btn btn-outline-primary" data-tipus="1">1. Filosofia</button>
-  <button type="button" class="btn btn-outline-primary" data-tipus="6">6. Ciències aplicades</button>
-  <button type="button" class="btn btn-outline-primary" data-tipus="8">8. Literatura</button>
-  <button type="button" class="btn btn-outline-primary" data-tipus="9">9. Història.Geografia</button>
-</div>
-
-<div class="container-fluid">
-  <div class="row gap-3 justify-content-center" id="llibresContainer">
-    <!-- Aquí se muestran los contactos -->
-  </div>
-</div>
-</div>
-
 <script>
   // Escuchar el evento de entrada en el campo de búsqueda
   document.getElementById('searchInput').addEventListener('input', cercarLlibres);
@@ -53,9 +61,9 @@
 
   function obtenirLlibres(tipus) {
     let devDirectory = "https://" + window.location.hostname;;
-    let urlAjax = devDirectory + "/api/biblioteca/get/autors/?type=totsLlibres";
+    let urlAjax = devDirectory + "/api/biblioteca/get/?type=totsLlibres";
     if (tipus !== 10) {
-      urlAjax = devDirectory + "/api/biblioteca/get/autors/?type=generes&genere=" + tipus;
+      urlAjax = devDirectory + "/api/biblioteca/get/?type=generes&genere=" + tipus;
     }
 
     fetch(urlAjax, {
@@ -90,9 +98,11 @@
           <p><strong>Any: </strong> ${llibre.any}</p>
           <p><strong>Editorial: </strong> ${llibre.editorial}</p>
           <p><strong>Idioma original: </strong> ${llibre.idioma_ca}</p>
-          <p><button type='button' class='btn btn-light btn-sm'>${llibre.estat}</button></p>
-          <a href="${window.location.origin}/gestio/biblioteca/llibre/modifica/${llibre.id}" class="btn btn-secondary btn-sm modificar-link">Modificar</a>
-          <button type='button' class='btn btn-dark btn-sm' onclick='eliminaContacte(${llibre.id})'>Eliminar</button>
+          <p><button type='button' class='button btn-petit'>${llibre.estat}</button></p>
+          <p>
+          <button onclick="window.location.href='${window.location.origin}/gestio/biblioteca/modifica-llibre/${llibre.slug}'" class="button btn-petit">Modificar</button>
+          </p>
+         
         </div>`;
         });
 
@@ -123,58 +133,3 @@
     return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   }
 </script>
-
-<style>
-  /* Estilos para el contenedor de las fichas de libros */
-  #llibresContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  /* Estilos para cada ficha de libro */
-  .card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-    padding: 30px;
-    background-color: #fff1d0 !important;
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-
-  .card-img-top {
-    height: 200px;
-    object-fit: cover;
-  }
-
-  .card-body {
-    padding: 1rem;
-  }
-
-  .card-title {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .card-text {
-    font-size: 1rem;
-    color: #555;
-  }
-
-  .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-  }
-
-  .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-  }
-</style>

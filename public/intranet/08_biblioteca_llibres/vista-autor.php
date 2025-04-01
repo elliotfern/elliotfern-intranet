@@ -5,17 +5,18 @@ $slug = $routeParams[0];
 <div class="container">
   <main>
     <div class="container">
-      <h1>Biblioteca: <span id="AutNom"></span> <span id="AutCognom1"></span></h1>
-      <h6><a href="/biblioteca/">Biblioteca</a> > <a href="/biblioteca/autors">Autors/es </a></h6>
+      <h1>Biblioteca: <span id="nom"></span> <span id="cognoms"></span></h1>
+      <h6><a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>">Biblioteca</a> > <a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>/llistat-autors">Autors/es </a></h6>
 
-      <a id="modificaAutorUrl" href="" class="btn btn-warning btn-sm">Modifica les dades</a>
-      <div class='row'>
+      <button onclick="window.location.href='<?php echo APP_INTRANET . $url['biblioteca']; ?>/modifica-autor/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Modifica fitxa</button>
 
-        <div class='col imatge'>
+      <div class='fixaDades'>
+
+        <div class='columna imatge'>
           <img id="nameImg" src='' class='img-thumbnail' style='height:auto;width:auto;max-width:auto' alt='Author Photo' title='Author photo'>
         </div>
 
-        <div class="col">
+        <div class="columna">
 
           <div class="quadre-detalls">
             <p>
@@ -23,21 +24,19 @@ $slug = $routeParams[0];
             </p>
             <strong>
               <p>Anys:
-            </strong><span id="yearBorn"> </span> - <span id="yearDie"></span></p>
+            </strong><span id="anyNaixement"></span></p>
 
-            <p id="AutDescrip"> </p>
+            <p><strong>Pais: </strong> <span id="pais_cat"></span></p>
 
-            <p><strong>Pais: </strong> <a id="linkAutor" href='' title='Country'><span id="country"></span></a></p>
+            <p><strong>Professió: </strong><span id="professio_ca"></span></p>
 
-            <p><strong>Professió: </strong><a id="ocupacioLink" href='' title='Movement'><span id="name"></span></a></p>
-
-            <p><strong>Moviment: </strong><a id="movimentLink" href='' title='Movement'><span id="movement"></span></a></p>
-
-            <p><strong>Viquipedia: </strong><a id="wikipediaLink" href='' target='_blank' title='Wikipedia'>Web</a></p>
+            <p><strong>Web: </strong><a id="web" href='' target='_blank' title='web'>Web</a></p>
 
             <p><strong>Data de creació: </strong><span id="dateCreated"></span></p>
 
             <p><strong>Data de modificació: </strong><span id="dateModified"></span></p>
+
+            <p> <span id="descripcio"> </span></p>
           </div>
         </div>
       </div>
@@ -55,23 +54,14 @@ $slug = $routeParams[0];
 </main>
 </div>
 
-
-
 <script>
   // Función para realizar la solicitud Axios a la API
   async function connexioApiDades(url, id, urlImg1, urlImg2, callback) {
     const urlAjax = `${url}${id}`;
 
-    // Obtener el token del localStorage
-    let token = localStorage.getItem('token');
-
     try {
       const response = await fetch(urlAjax, {
         method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
-        },
       });
 
       if (!response.ok) {
@@ -100,7 +90,11 @@ $slug = $routeParams[0];
 
           // Actualizar el DOM con la información recibida
           if (key === 'nameImg') {
-            (element).src = `http://media.elliotfern.com/${urlImg1}/${urlImg2}/${value}.jpg`;
+            document.getElementById('nameImg').src = `https://media.elliot.cat/img/library-author/${data2['nameImg']}.jpg`;
+          }
+
+          if (key === 'descripcio') {
+            document.getElementById('descripcio').innerHTML = `${data2['descripcio']}`;
           }
 
           // Casos especiales: Director/a
@@ -111,21 +105,57 @@ $slug = $routeParams[0];
             }
           }
 
-          // Casos especiales: País
-          if (key === 'pais_cat') {
-            const paisUrl = document.getElementById('paisUrl');
-            if (paisUrl && paisUrl.tagName === 'A') {
-              paisUrl.href = `/paisos/${data2['pais']}`; // Añadir la URL del país
+          if (key === 'web') {
+            document.getElementById('web').href = data2['web'];
+          }
+
+          // Anys naixement i defuncio
+          if (key === 'dateCreated') {
+            const dateElement = document.getElementById('dateCreated');
+            if (dateElement && dateElement.tagName === 'SPAN') {
+              const dateObj = new Date(value);
+              const day = dateObj.getDate();
+              const month = dateObj.getMonth() + 1; // Los meses van de 0 a 11
+              const year = dateObj.getFullYear();
+
+              dateElement.textContent = `${day}-${month}-${year}`;
             }
           }
 
-          // Formatear fechas si es necesario
-          if (key === 'dateCreated' || key === 'dateModified' || key === 'dataVista') {
-            const dateElement = document.getElementById(key);
+          // Anys naixement i defuncio
+          if (key === 'dateModified') {
+            const dateElement = document.getElementById('dateModified');
             if (dateElement && dateElement.tagName === 'SPAN') {
-              dateElement.textContent = value; // Formatear y agregar la fecha
+              const dateObj = new Date(value);
+              const day = dateObj.getDate();
+              const month = dateObj.getMonth() + 1; // Los meses van de 0 a 11
+              const year = dateObj.getFullYear();
+
+              dateElement.textContent = `${day}-${month}-${year}`;
             }
           }
+
+          // Anys naixement i defuncio
+          if (key === 'anyNaixement' || key === 'anyDefuncio') {
+            const dateElement = document.getElementById(key);
+            if (dateElement && dateElement.tagName === 'SPAN') {
+              const anyNaixement = parseInt(data2['anyNaixement'], 10);
+              const anyDefuncio = data2['anyDefuncio'] ? parseInt(data2['anyDefuncio'], 10) : null;
+              const anyActual = new Date().getFullYear();
+
+              let edad;
+
+              if (!anyDefuncio) {
+                edad = anyActual - anyNaixement; // Calcula la edad actual si sigue vivo
+              } else {
+                edad = anyDefuncio - anyNaixement; // Calcula la edad en caso de fallecimiento
+              }
+
+              dateElement.innerHTML = `${anyNaixement} - ${anyDefuncio || ""} (${edad} anys)`;
+            }
+          }
+
+
         }
       }
       // Ejecutar la función de devolución de llamada si se proporciona
@@ -162,6 +192,7 @@ $slug = $routeParams[0];
         table.classList.add('table', 'table-striped');
 
         const thead = document.createElement('thead');
+        thead.classList.add('table-primary');
         const trHead = document.createElement('tr');
         columnas.forEach(columna => {
           const th = document.createElement('th');
@@ -194,22 +225,14 @@ $slug = $routeParams[0];
   }
 
 
-  connexioApiDades("/api/biblioteca/get/autors/?type=autor&slugAuthor=", "<?php echo $slug; ?>", "08_biblioteca_llibres", "autors", function(data) {
+  connexioApiDades("/api/biblioteca/get/?autorSlug=", "<?php echo $slug; ?>", "08_biblioteca_llibres", "autors", function(data) {
 
-    // Actualiza el atributo href del enlace con el idDirector
-    document.getElementById('wikipediaLink').href = `${data.AutWikipedia}`;
-    document.getElementById('movimentLink').href = `${window.location.origin}/biblioteca/autors/moviment/${data.idMovement}`;
-    document.getElementById('ocupacioLink').href = `${window.location.origin}/biblioteca/autors/professio/${data.AutOcupacio}`;
-    document.getElementById('linkAutor').href = `${window.location.origin}/biblioteca/autors/pais/${data.idPais}`;
-    document.getElementById('modificaAutorUrl').href = `${window.location.origin}/biblioteca/autor/modifica/${data.id}`;
-    document.getElementById('nameImg').src = `https://media.elliot.cat/img/library-author/${data.nameImg}.jpg`;
-
-    construirTablaFromAPI("/api/biblioteca/get/autors/?type=autorLlibres&id=", data.id, ['Titol', 'Any', 'Accions'], function(fila, columna) {
+    construirTablaFromAPI("/api/biblioteca/get/?type=autorLlibres&id=", data.id, ['Titol', 'Any', 'Accions'], function(fila, columna) {
       if (columna.toLowerCase() === 'titol') {
         // Manejar el caso del título
         return '<a href="' + window.location.origin + '/gestio/biblioteca/fitxa-llibre/' + fila['slug'] + '">' + fila['titol'] + '</a>';
       } else if (columna.toLowerCase() === 'accions') {
-        return '<a href="' + window.location.origin + '/gestio/biblioteca/modifica/llibre/' + fila['id'] + '" class="btn btn-secondary btn-sm modificar-link">Modificar</a>';
+        return `<button onclick="window.location.href='${window.location.origin}/gestio/biblioteca/modifica-llibre/${fila['slug']}'" class="button btn-petit">Modificar</button>`;
       } else {
         // Manejar otros casos
         return fila[columna.toLowerCase()];
@@ -217,52 +240,3 @@ $slug = $routeParams[0];
     });
   });
 </script>
-
-<style>
-  .row {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-
-  .col {
-    flex: 1;
-    margin: 2px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .imatge {
-    flex: 0 0 300px;
-    /* Limita el ancho de la primera columna a 200px */
-  }
-
-
-  .img-thumbnail {
-    max-width: 100%;
-    height: 350px !important;
-    border-radius: 8px;
-  }
-
-  .quadre-detalls {
-    border: 1px black;
-  }
-
-  /* Media query para pantallas más pequeñas */
-  @media (max-width: 600px) {
-    .container {
-      flex-direction: column;
-      /* Cambia la dirección del flex a columna */
-    }
-
-    .imatge {
-      flex: 1 1 100%;
-      /* La primera columna ocupa el 100% del ancho en dispositivos pequeños */
-    }
-  }
-</style>

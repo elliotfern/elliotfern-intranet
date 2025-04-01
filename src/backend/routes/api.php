@@ -4,15 +4,19 @@ $base_routes = [
     '/api/auth/login' => 'src/backend/api/00_auth/login.php',
     '/api/auth/registre' => 'src/backend/api/00_auth/registre.php',
     '/api/vault/get' => 'src/backend/api/10_vault/get-vault.php',
+
     '/api/accounting/get' => 'src/backend/api/02_accounting/accounting.php',
     '/api/accounting/post/invoice' => 'src/backend/api/02_accounting/customer-invoice-insert.php',
     '/api/accounting/get/invoice-pdf/{id}' => 'src/backend/api/02_accounting/generate_pdf.php',
-    '/api/biblioteca/get/autors' => 'src/backend/api/08_biblioteca_llibres/get-library.php',
+
+    '/api/biblioteca/get' => 'src/backend/api/08_biblioteca_llibres/get-library.php',
     '/api/biblioteca/put' => 'src/backend/api/08_biblioteca_llibres/put-biblioteca.php',
     '/api/biblioteca/post' => 'src/backend/api/08_biblioteca_llibres/post-biblioteca.php',
+
     '/api/cinema/get' => 'src/backend/api/11_cinema/get-cinema.php',
     '/api/cinema/post' => 'src/backend/api/11_cinema/post-cinema.php',
     '/api/cinema/put' => 'src/backend/api/11_cinema/put-cinema.php',
+
     '/api/auxiliars/post/imatges' => 'src/backend/api/100_auxiliars/image-upload-process-form.php',
     '/api/auxiliars/get' => 'src/backend/api/100_auxiliars/get-auxiliars.php',
 
@@ -100,7 +104,7 @@ $routes = [
     ],
 
     // 08. BIBLIOTECA
-    '/api/biblioteca/get/autors' => [
+    '/api/biblioteca/get' => [
         'view' => 'src/backend/api/08_biblioteca_llibres/get-library.php',
         'needs_session' => false,
         'header_footer' => false,
