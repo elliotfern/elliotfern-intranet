@@ -22,15 +22,3 @@
         </div>
     </main>
 </div>
-<style>
-    .llistat {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        text-align: left;
-    }
-
-    .quadre {
-        width: 50%;
-    }
-</style>

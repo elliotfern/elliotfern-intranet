@@ -6,7 +6,6 @@ define('APP_ROOT', $_SERVER['DOCUMENT_ROOT']);
 
 $base_url = BASE_URL . "/gestio";
 define("APP_INTRANET", $base_url);
-
 // Configurar cookies de sesión
 ini_set('session.cookie_lifetime', 60 * 60 * 24 * 30); // 30 días
 ini_set('session.cookie_secure', true); // HTTPS
@@ -23,5 +22,6 @@ require_once __DIR__ . '/../Config/connection.php';
 // definicio de url
 $url = [
     'biblioteca' => '/biblioteca',
+    'adreces' => '/adreces',
 
 ];

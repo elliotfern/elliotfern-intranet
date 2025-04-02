@@ -29,6 +29,13 @@ button {
   padding: 0.6rem 1rem;
 }
 
+.button {
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  padding: 0.6rem 1rem;
+}
+
 .btn-gran {
   font-size: 1rem;
   border: none;
@@ -114,7 +121,7 @@ button {
     width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */
   }
 }
-`, "",{"version":3,"sources":["webpack://./src/frontend/estils/botons.css"],"names":[],"mappings":"AAAA,0BAA0B;AAC1B;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,oBAAoB;AACtB;;AAEA;EACE,eAAe;EACf,YAAY;AACd;;AAEA;EACE,sBAAsB;EACtB,iBAAiB;EACjB,YAAY;AACd;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA,mBAAmB;AACnB;EACE,WAAW;EACX,aAAa;EACb,kBAAkB;EAClB,eAAe;EACf,iCAAiC;EACjC,YAAY;EACZ,eAAe;AACjB;;AAEA,4BAA4B;AAC5B;EACE,yBAAyB,EAAE,SAAS;EACpC,mBAAmB;EACnB,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;EAC/C,YAAY;EACZ,qBAAqB;AACvB;;AAEA,kCAAkC;AAClC;EACE,sBAAsB;EACtB,eAAe;EACf,yBAAyB,EAAE,SAAS;EACpC,YAAY;EACZ,YAAY;EACZ,kBAAkB;EAClB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,iBAAiB;EACjB,iBAAiB;AACnB;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;AACjD;;AAEA,wFAAwF;AACxF;EACE;;IAEE,WAAW,EAAE,6DAA6D;EAC5E;AACF","sourcesContent":["/* Ajustes para el botón */\nbutton {\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n  padding: 0.6rem 1rem;\n}\n\n.btn-gran {\n  font-size: 1rem;\n  border: none;\n}\n\n.btn-petit {\n  padding: 0.4rem 0.6rem;\n  font-size: 0.7rem;\n  border: none;\n}\n\n.btn-primari {\n  background-color: #081b2e;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-primari:hover {\n  background-color: #0056b3;\n  transform: scale(1.1);\n}\n\n.btn-secondari {\n  background-color: #b93a08;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-secondari:hover {\n  background-color: #d60a03;\n  transform: scale(1.1);\n}\n\n/* Botón de envío */\n.btn-color-negre {\n  width: 100%;\n  padding: 10px;\n  border-radius: 3px;\n  font-size: 16px;\n  background-color: rgb(43, 42, 42);\n  color: white;\n  cursor: pointer;\n}\n\n/* Botón Atrás (izquierda) */\n.btn-enrere {\n  background-color: #aaaaaa; /* Gris */\n  color: rgb(0, 0, 0);\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-enrere:hover {\n  background-color: #000000; /* Gris más oscuro */\n  color: white;\n  transform: scale(1.1);\n}\n\n/* Botón Crear factura (derecha) */\n.btn-primary {\n  padding: 0.8rem 1.5rem;\n  font-size: 1rem;\n  background-color: #007bff; /* Azul */\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n}\n\n.dreta {\n  text-align: right;\n  margin-left: auto;\n}\n\n.btn-primary:hover {\n  background-color: #0056b3; /* Azul más oscuro */\n}\n\n/* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */\n@media (max-width: 768px) {\n  .btn-back,\n  .btn-primary {\n    width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */\n  }\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/botons.css"],"names":[],"mappings":"AAAA,0BAA0B;AAC1B;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,oBAAoB;AACtB;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,oBAAoB;AACtB;;AAEA;EACE,eAAe;EACf,YAAY;AACd;;AAEA;EACE,sBAAsB;EACtB,iBAAiB;EACjB,YAAY;AACd;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA,mBAAmB;AACnB;EACE,WAAW;EACX,aAAa;EACb,kBAAkB;EAClB,eAAe;EACf,iCAAiC;EACjC,YAAY;EACZ,eAAe;AACjB;;AAEA,4BAA4B;AAC5B;EACE,yBAAyB,EAAE,SAAS;EACpC,mBAAmB;EACnB,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;EAC/C,YAAY;EACZ,qBAAqB;AACvB;;AAEA,kCAAkC;AAClC;EACE,sBAAsB;EACtB,eAAe;EACf,yBAAyB,EAAE,SAAS;EACpC,YAAY;EACZ,YAAY;EACZ,kBAAkB;EAClB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,iBAAiB;EACjB,iBAAiB;AACnB;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;AACjD;;AAEA,wFAAwF;AACxF;EACE;;IAEE,WAAW,EAAE,6DAA6D;EAC5E;AACF","sourcesContent":["/* Ajustes para el botón */\nbutton {\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n  padding: 0.6rem 1rem;\n}\n\n.button {\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n  padding: 0.6rem 1rem;\n}\n\n.btn-gran {\n  font-size: 1rem;\n  border: none;\n}\n\n.btn-petit {\n  padding: 0.4rem 0.6rem;\n  font-size: 0.7rem;\n  border: none;\n}\n\n.btn-primari {\n  background-color: #081b2e;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-primari:hover {\n  background-color: #0056b3;\n  transform: scale(1.1);\n}\n\n.btn-secondari {\n  background-color: #b93a08;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-secondari:hover {\n  background-color: #d60a03;\n  transform: scale(1.1);\n}\n\n/* Botón de envío */\n.btn-color-negre {\n  width: 100%;\n  padding: 10px;\n  border-radius: 3px;\n  font-size: 16px;\n  background-color: rgb(43, 42, 42);\n  color: white;\n  cursor: pointer;\n}\n\n/* Botón Atrás (izquierda) */\n.btn-enrere {\n  background-color: #aaaaaa; /* Gris */\n  color: rgb(0, 0, 0);\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-enrere:hover {\n  background-color: #000000; /* Gris más oscuro */\n  color: white;\n  transform: scale(1.1);\n}\n\n/* Botón Crear factura (derecha) */\n.btn-primary {\n  padding: 0.8rem 1.5rem;\n  font-size: 1rem;\n  background-color: #007bff; /* Azul */\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n}\n\n.dreta {\n  text-align: right;\n  margin-left: auto;\n}\n\n.btn-primary:hover {\n  background-color: #0056b3; /* Azul más oscuro */\n}\n\n/* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */\n@media (max-width: 768px) {\n  .btn-back,\n  .btn-primary {\n    width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -254,6 +261,18 @@ footer {
   margin-top: auto;
 }
 
+/* Llistats */
+.llistat {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.quadre {
+  width: 50%;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   main {
@@ -266,7 +285,7 @@ footer {
     margin-bottom: 20px;
   }
 }
-`, "",{"version":3,"sources":["webpack://./src/frontend/estils/contenidor.css"],"names":[],"mappings":"AAAA,6BAA6B;;AAE7B,yBAAyB;AACzB;EACE,UAAU;EACV,iBAAiB;EACjB,cAAc;EACd,iBAAiB;EACjB,qBAAqB;AACvB;;AAEA,qBAAqB;AACrB;EACE,aAAa;EACb,eAAe;EACf,8BAA8B;EAC9B,cAAc;EACd,OAAO;EACP,iBAAiB;AACnB;;AAEA;EACE,aAAa;EACb,aAAa;EACb,kBAAkB;EAClB,uCAAuC;AACzC;;AAEA,YAAY;AACZ;EACE,aAAa;EACb,iBAAiB;EACjB,aAAa;EACb,kBAAkB;EAClB,uCAAuC;AACzC;;AAEA,WAAW;AACX;EACE,gBAAgB;EAChB,YAAY;EACZ,kBAAkB;EAClB,aAAa;EACb,gBAAgB;AAClB;;AAEA,eAAe;AACf;EACE;IACE,sBAAsB;EACxB;;EAEA;;IAEE,WAAW;IACX,mBAAmB;EACrB;AACF","sourcesContent":["/* ESTRUCTURA PRINCIPAL WEB */\n\n/* Contenedor principal */\n.container {\n  width: 90%;\n  max-width: 1200px;\n  margin: 0 auto;\n  padding-top: 50px;\n  padding-bottom: 100px;\n}\n\n/* Layout principal */\nmain {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  margin: 20px 0;\n  flex: 1;\n  background: white;\n}\n\narticle {\n  flex: 1 1 60%;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n}\n\n/* Sidebar */\naside {\n  flex: 1 1 35%;\n  background: white;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n}\n\n/* Footer */\nfooter {\n  background: #333;\n  color: white;\n  text-align: center;\n  padding: 10px;\n  margin-top: auto;\n}\n\n/* Responsive */\n@media (max-width: 768px) {\n  main {\n    flex-direction: column;\n  }\n\n  article,\n  aside {\n    width: 100%;\n    margin-bottom: 20px;\n  }\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/contenidor.css"],"names":[],"mappings":"AAAA,6BAA6B;;AAE7B,yBAAyB;AACzB;EACE,UAAU;EACV,iBAAiB;EACjB,cAAc;EACd,iBAAiB;EACjB,qBAAqB;AACvB;;AAEA,qBAAqB;AACrB;EACE,aAAa;EACb,eAAe;EACf,8BAA8B;EAC9B,cAAc;EACd,OAAO;EACP,iBAAiB;AACnB;;AAEA;EACE,aAAa;EACb,aAAa;EACb,kBAAkB;EAClB,uCAAuC;AACzC;;AAEA,YAAY;AACZ;EACE,aAAa;EACb,iBAAiB;EACjB,aAAa;EACb,kBAAkB;EAClB,uCAAuC;AACzC;;AAEA,WAAW;AACX;EACE,gBAAgB;EAChB,YAAY;EACZ,kBAAkB;EAClB,aAAa;EACb,gBAAgB;AAClB;;AAEA,aAAa;AACb;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;;AAEA;EACE,UAAU;AACZ;;AAEA,eAAe;AACf;EACE;IACE,sBAAsB;EACxB;;EAEA;;IAEE,WAAW;IACX,mBAAmB;EACrB;AACF","sourcesContent":["/* ESTRUCTURA PRINCIPAL WEB */\n\n/* Contenedor principal */\n.container {\n  width: 90%;\n  max-width: 1200px;\n  margin: 0 auto;\n  padding-top: 50px;\n  padding-bottom: 100px;\n}\n\n/* Layout principal */\nmain {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  margin: 20px 0;\n  flex: 1;\n  background: white;\n}\n\narticle {\n  flex: 1 1 60%;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n}\n\n/* Sidebar */\naside {\n  flex: 1 1 35%;\n  background: white;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n}\n\n/* Footer */\nfooter {\n  background: #333;\n  color: white;\n  text-align: center;\n  padding: 10px;\n  margin-top: auto;\n}\n\n/* Llistats */\n.llistat {\n  list-style: none;\n  padding: 0;\n  margin: 0;\n  text-align: left;\n}\n\n.quadre {\n  width: 50%;\n}\n\n/* Responsive */\n@media (max-width: 768px) {\n  main {\n    flex-direction: column;\n  }\n\n  article,\n  aside {\n    width: 100%;\n    margin-bottom: 20px;\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2211,6 +2230,46 @@ function showPass(id) {
 
 /***/ }),
 
+/***/ "./src/frontend/pages/adreces/adreces.ts":
+/*!***********************************************!*\
+  !*** ./src/frontend/pages/adreces/adreces.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   adreces: () => (/* binding */ adreces)
+/* harmony export */ });
+/* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
+/* harmony import */ var _utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/actualitzarDades */ "./src/frontend/utils/actualitzarDades.ts");
+
+
+const url = window.location.href;
+const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_0__.getPageType)(url);
+function adreces() {
+    if (pageType[2] === 'modifica-link') {
+        const autor = document.getElementById('modificalink');
+        if (autor) {
+            // Lanzar actualizador de datos
+            autor.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'modificalink', '/api/adreces/put/?link');
+            });
+        }
+    }
+    else if (pageType[2] === 'nou-link') {
+        const llibre = document.getElementById('modificalink');
+        if (llibre) {
+            // Lanzar actualizador de datos
+            llibre.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'modificalink', '/api/adreces/post/?link');
+            });
+        }
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/pages/biblioteca/biblioteca.ts":
 /*!*****************************************************!*\
   !*** ./src/frontend/pages/biblioteca/biblioteca.ts ***!
@@ -2774,6 +2833,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_vault_funcions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/vault/funcions */ "./src/frontend/pages/vault/funcions.ts");
 /* harmony import */ var _pages_historiaOberta_historiaOberta__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/historiaOberta/historiaOberta */ "./src/frontend/pages/historiaOberta/historiaOberta.ts");
 /* harmony import */ var _pages_biblioteca_biblioteca__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/biblioteca/biblioteca */ "./src/frontend/pages/biblioteca/biblioteca.ts");
+/* harmony import */ var _pages_adreces_adreces__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/adreces/adreces */ "./src/frontend/pages/adreces/adreces.ts");
+
 
 
 
@@ -2799,6 +2860,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     else if (pageType[1] === 'biblioteca') {
         (0,_pages_biblioteca_biblioteca__WEBPACK_IMPORTED_MODULE_6__.biblioteca)();
+    }
+    else if (pageType[1] === 'adreces') {
+        (0,_pages_adreces_adreces__WEBPACK_IMPORTED_MODULE_7__.adreces)();
     }
 });
 

@@ -1,3 +1,9 @@
+<IfModule mod_headers.c>
+Header Always Set Access-Control-Allow-Origin "https://elliot.cat"
+Header Always Set Access-Control-Allow-Methods "GET, POST, PUT, OPTIONS"
+Header Always Set Access-Control-Allow-Headers "Authorization, Content-Type"
+</IfModule>
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
     

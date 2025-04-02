@@ -5,6 +5,7 @@ import { loginPage } from './pages/login/funcions';
 import { vault } from './pages/vault/funcions';
 import { historiaOberta } from './pages/historiaOberta/historiaOberta';
 import { biblioteca } from './pages/biblioteca/biblioteca';
+import { adreces } from './pages/adreces/adreces';
 
 const url = window.location.href;
 const pageType = getPageType(url);
@@ -21,5 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     historiaOberta();
   } else if (pageType[1] === 'biblioteca') {
     biblioteca();
+  } else if (pageType[1] === 'adreces') {
+    adreces();
   }
 });

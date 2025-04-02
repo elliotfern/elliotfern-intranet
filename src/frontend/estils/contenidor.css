@@ -44,6 +44,18 @@ footer {
   margin-top: auto;
 }
 
+/* Llistats */
+.llistat {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.quadre {
+  width: 50%;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   main {

@@ -1,38 +1,46 @@
-<h2>Adreces d'interés</h2>
+<div class="container">
+    <main>
+        <div class="container">
+            <h1>Adreces d'interés</h1>
+            <h6><a href="<?php echo APP_INTRANET . $url['adreces']; ?>">Adreces</a> > Inici </h6>
 
-<div class="alert alert-success" role="alert" style="padding:25px;margin-top:25px;margin-bottom:50px;">
+            <p>
+                <button onclick="window.location.href='<?php echo APP_INTRANET . $url['adreces']; ?>/nou-link/'" class="button btn-gran btn-secondari">Afegir enllaç</button>
 
-    <h4>Tipologia d'Enllaços segons:</h4>
-    <ul>
-        <li><a href="/adreces/categories">Les categories</a></li>
-        <li><a href="/adreces/topics">Els temes</a></li>
-    </ul>
+            </p>
 
-    <hr>
+            <div class="alert alert-success quadre">
 
-    <h4>Programació i informàtica:</h4>
-    <ul>
-        <li><a href="/adreces/category/18">Llenguatges de programació</a></li>
-        <li><a href="/adreces/category/3">Altres temes sobre tecnologia</a></li>
-    </ul>
+                <h4>Tots els enllaços segons:</h4>
+                <ul class="llistat">
+                    <li><a href="<?php echo APP_INTRANET . $url['adreces']; ?>/llistat-categories">Llistat de categories</a></li>
+                    <li><a href="<?php echo APP_INTRANET . $url['adreces']; ?>/llistat-temes">Llistat de temes</a></li>
+                </ul>
 
-    <hr>
+                <hr>
 
-    <h4>Mitjans de comunicació:</h4>
-    <ul>
-        <li><a href="/adreces/topic/88">Mitjans d'economia</a></li>
-        <li><a href="/adreces/topic/64">Mitjans progressistes</a></li>
-        <li><a href="/adreces/topic/19">Mitjans de Catalunya</a></li>
-        <li><a href="/adreces/topic/57">Mitjans de tecnologia</a></li>
-        <li><a href="/adreces/topic/9">Ràdios públiques</a></li>
-        <li><a href="/adreces/topic/21">Mitjans d'Espanya</a></li>
-        <li><a href="/adreces/topic/47">Mitjans d'Irlanda</a></li>
-        <li><a href="/adreces/topic/13">Mitjans dels Estats Units</a></li>
-        <li><a href="/adreces/topic/20">Mitjans d'Itàlia</a></li>
-    </ul>
+                <h4>Programació i informàtica:</h4>
+                <ul class="llistat">
+                    <li><a href="<?php echo APP_INTRANET . $url['adreces']; ?>/categoria/18">Llenguatges de programació</a></li>
+                    <li><a href="<?php echo APP_INTRANET . $url['adreces']; ?>/categoria/3">Altres temes sobre tecnologia</a></li>
+                </ul>
 
+                <hr>
+
+                <h4>Mitjans de comunicació:</h4>
+                <ul class="llistat">
+                    <li><a href="<?php echo APP_INTRANET . $url['adreces']; ?>/tema/88">Mitjans d'economia</a></li>
+                    <li><a href="<?php echo APP_INTRANET . $url['adreces']; ?>/tema/64">Mitjans progressistes</a></li>
+                    <li><a href="<?php echo APP_INTRANET . $url['adreces']; ?>/tema/19">Mitjans de Catalunya</a></li>
+                    <li><a href="<?php echo APP_INTRANET . $url['adreces']; ?>/tema/57">Mitjans de tecnologia</a></li>
+                    <li><a href="<?php echo APP_INTRANET . $url['adreces']; ?>/tema/9">Ràdios públiques</a></li>
+                    <li><a href="<?php echo APP_INTRANET . $url['adreces']; ?>/tema/21">Mitjans d'Espanya</a></li>
+                    <li><a href="<?php echo APP_INTRANET . $url['adreces']; ?>/tema/47">Mitjans d'Irlanda</a></li>
+                    <li><a href="<?php echo APP_INTRANET . $url['adreces']; ?>/tema/13">Mitjans dels Estats Units</a></li>
+                    <li><a href="<?php echo APP_INTRANET . $url['adreces']; ?>/tema/20">Mitjans d'Itàlia</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </main>
 </div>
-
-<?php
-# footer
-require_once(APP_ROOT . '/public/01_inici/footer.php');

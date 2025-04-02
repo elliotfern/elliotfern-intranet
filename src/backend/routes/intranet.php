@@ -2,7 +2,7 @@
 
 // Define las rutas base que quieres traducir
 $base_routes = [
-    // 00 Homepage - Entrada Pàgina login i homepage
+    // 01. Homepage - Entrada Pàgina login i homepage
     '/gestio/entrada' => 'public/intranet/00_homepage/login.php',
     '/gestio' => 'public/intranet/00_homepage/admin.php',
     '/gestio/admin' => 'public/intranet/00_homepage/admin.php',
@@ -23,7 +23,7 @@ $base_routes = [
     // 07. Agenda contactes
     '/gestio/agenda-contactes' => 'public/intranet/07_agenda_contactes/index.php',
 
-    // 08 Biblioteca llibres
+    // 08. Biblioteca llibres
     '/gestio/biblioteca' => 'public/intranet/08_biblioteca_llibres/index.php',
     '/gestio/biblioteca/llistat-llibres' => 'public/intranet/08_biblioteca_llibres/vista-llistat-llibres.php',
     '/gestio/biblioteca/llistat-autors' => 'public/intranet/08_biblioteca_llibres/vista-llistat-autors.php',
@@ -36,6 +36,15 @@ $base_routes = [
 
     '/gestio/biblioteca/nou-autor' => 'public/intranet/08_biblioteca_llibres/form-modifica-autor.php',
     '/gestio/biblioteca/nou-llibre' => 'public/intranet/08_biblioteca_llibres/form-modifica-llibre.php',
+
+    // 09. Adreces interes
+    '/gestio/adreces' => 'public/intranet/09_adreces_interes/index.php',
+    '/gestio/adreces/llistat-categories' => 'public/intranet/09_adreces_interes/llistat-categories.php',
+    '/gestio/adreces/llistat-temes' => 'public/intranet/09_adreces_interes/llistat-temes.php',
+    '/gestio/adreces/categoria/{id}' => 'public/intranet/09_adreces_interes/vista-categoria.php',
+    '/gestio/adreces/tema/{id}' => 'public/intranet/09_adreces_interes/vista-tema.php',
+    '/gestio/adreces/nou-link' => 'public/intranet/09_adreces_interes/modifica-link.php',
+    '/gestio/adreces/modifica-link/{id}' => 'public/intranet/09_adreces_interes/modifica-link.php',
 
     // VAULT
     '/gestio/vault' => 'public/intranet/10_claus_acces/index.php',
@@ -400,6 +409,72 @@ $routes = [
         'apiSenseHTML' => false,
         'menu_intranet' => true
     ],
+
+    // 09. Adreces interes
+    '/gestio/adreces' => [
+        'view' => 'public/intranet/09_adreces_interes/index.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+
+    '/gestio/adreces/llistat-categories' => [
+        'view' => 'public/intranet/09_adreces_interes/llistat-categories.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/adreces/llistat-temes' => [
+        'view' => 'public/intranet/09_adreces_interes/llistat-temes.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/adreces/categoria/{id}' => [
+        'view' => 'public/intranet/09_adreces_interes/vista-categoria.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/adreces/tema/{id}' => [
+        'view' => 'public/intranet/09_adreces_interes/vista-tema.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/adreces/nou-link' => [
+        'view' => 'public/intranet/09_adreces_interes/modifica-link.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/adreces/modifica-link/{id}' => [
+        'view' => 'public/intranet/09_adreces_interes/modifica-link.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
 
 ];
 

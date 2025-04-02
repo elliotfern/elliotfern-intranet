@@ -39,6 +39,11 @@ $base_routes = [
     // AGENDA CONTACTES
     '/api/contactes/get' => 'src/backend/api/contactes/get-contactes.php',
 
+    // 09. Adreces interes
+    '/api/adreces/get' => 'src/backend/api/09_adreces/get-link.php',
+    '/api/adreces/post' => 'src/backend/api/09_adreces/post-link.php',
+    '/api/adreces/put' => 'src/backend/api/09_adreces/put-link.php',
+
 
 ];
 
@@ -242,6 +247,31 @@ $routes = [
     // AGENDA CONTACTES
     '/api/contactes/get' => [
         'view' => 'src/backend/api/contactes/get-contactes.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    // 09. Adreces interes
+    '/api/adreces/get' => [
+        'view' => 'src/backend/api/09_adreces/get-link.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    '/api/adreces/post' => [
+        'view' => 'src/backend/api/09_adreces/post-link.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    '/api/adreces/put' => [
+        'view' => 'src/backend/api/09_adreces/put-link.php',
         'needs_session' => false,
         'header_footer' => false,
         'header_menu_footer' => false,
