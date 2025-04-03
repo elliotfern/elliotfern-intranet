@@ -7,7 +7,7 @@ $segments = explode("/", trim($path, "/"));
 
 if ($segments[2] === "modifica-link") {
     $modificaBtn = 1;
-    $slug = $routeParams[0];
+    $id = $routeParams[0];
 } else {
     $modificaBtn = 2;
 }
@@ -15,7 +15,7 @@ if ($segments[2] === "modifica-link") {
 if ($modificaBtn === 1) {
 ?>
     <script type="module">
-        formUpdateLlibre("<?php echo $slug; ?>");
+        formUpdateLlibre("<?php echo $id; ?>");
     </script>
 <?php
 } else {
@@ -57,11 +57,10 @@ if ($modificaBtn === 1) {
     </div>
 
     <form method="POST" action="" id="modificalink" class="row g-3">
-        <?php $timestamp = date('Y-m-d'); ?>
         <?php
         if ($modificaBtn === 1) {
         ?>
-            <input type="hidden" id="id" name="id" value="<?php echo $llibreId; ?>">
+            <input type="hidden" id="id" name="id" value="<?php echo $id; ?>">
         <?php
         }
         ?>
@@ -124,7 +123,7 @@ if ($modificaBtn === 1) {
 
 <script>
     function formUpdateLlibre(id) {
-        let urlAjax = "/api/biblioteca/get/?llibreSlug=" + id;
+        let urlAjax = "/api/adreces/get/?linkId=" + id;
 
         fetch(urlAjax, {
                 method: "GET",
@@ -132,18 +131,16 @@ if ($modificaBtn === 1) {
             .then(response => response.json())
             .then(data => {
                 // Establecer valores en los campos del formulario
-                const newContent = "Llibre: " + data.titol;
+                const newContent = "Enllaç: " + data.nom;
                 const h2Element = document.getElementById('bookUpdateTitle');
                 h2Element.innerHTML = newContent;
 
-                document.getElementById('titol').value = data.titol;
-                document.getElementById('titolEng').value = data.titolEng;
-                document.getElementById('slug').value = data.slug;
-                document.getElementById('any').value = data.any;
+                document.getElementById('nom').value = data.nom;
+                document.getElementById('web').value = data.web;
                 document.getElementById("id").value = data.id;
 
                 // Llenar selects con opciones
-                selectOmplirDades("/api/adreces/get/?type=totsTemes", data.idGen, "cat", "tema_categoria");
+                selectOmplirDades("/api/adreces/get/?type=totsTemes", data.cat, "cat", "tema_categoria");
                 selectOmplirDades("/api/biblioteca/get/?type=llengues", data.lang, "lang", "idioma_ca");
                 selectOmplirDades("/api/adreces/get/?type=all-types", data.tipus, "tipus", "type_ca");
 

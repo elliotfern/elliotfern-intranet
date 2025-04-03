@@ -14,8 +14,6 @@
                         <tr>
                             <th>Tema &darr;</th>
                             <th>Categoria</th>
-                            <th></th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -52,10 +50,6 @@
                 html += '<td><a href="./tema/' + data[i].idTema + '">' + data[i].tema + '</a></td>';
 
                 html += '<td><a href="./categoria/' + data[i].idGenre + '">' + data[i].genre + '</a></td>';
-
-                html += '<td><button type="button" onclick="modalUpdateLink(' + data[i].linkId + ')" id="btnUpdateLink" class="btn btn-sm btn-warning">Modifica</button></td>';
-
-                html += '<td><button type="button" onclick="btnRemoveLink(' + data[i].linkId + ')" id="btnRemoveLink" class="btn btn-sm btn-danger">Elimina</button></td>';
 
                 html += '</tr>';
             }

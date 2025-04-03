@@ -85,11 +85,12 @@ if (isset($_GET['type']) && $_GET['type'] == 'categories') {
 
     global $conn;
     $data = array();
-    $stmt = $conn->prepare("SELECT l.web AS url, l.nom, t.id AS idTema, t.tema_ca AS tema, l.id AS linkId, l.lang, ty.id AS idType, ty.type_ca, g.categoria_ca AS genre, g.id AS idCategoria, total_enlaces.total_count, l.dateCreated
+    $stmt = $conn->prepare("SELECT l.web AS url, l.nom, t.id AS idTema, t.tema_ca AS tema, l.id AS linkId, l.lang, i.idioma_ca, ty.id AS idType, ty.type_ca, g.categoria_ca AS genre, g.id AS idCategoria, total_enlaces.total_count, l.dateCreated
         FROM aux_temes AS t
         INNER JOIN aux_categories AS g ON t.idGenere = g.id
         INNER JOIN db_links AS l ON l.cat = t.id
         LEFT JOIN db_links_type AS ty ON ty.id = l.tipus
+        LEFT JOIN aux_idiomes AS i ON l.lang = i.id
         CROSS JOIN (
             SELECT COUNT(*) AS total_count
             FROM db_links
@@ -155,13 +156,13 @@ if (isset($_GET['type']) && $_GET['type'] == 'categories') {
 
 
     // 5) Ruta para sacar 1 enlace y actualizarlo 
-    // ruta GET => "/api/links/?type=link$id=11"
-} elseif ((isset($_GET['type']) && $_GET['type'] == 'link') && (isset($_GET['id']))) {
-    $id = $_GET['id'];
+    // ruta GET => "/api/adreces/?linkId=11"
+} elseif ((isset($_GET['linkId']))) {
+    $id = $_GET['linkId'];
     global $conn;
     $data = array();
     $stmt = $conn->prepare(
-        "SELECT l.id, l.web, l.nom, l.cat AS idTema, l.tipus, l.lang, l.linkCreated, l.linkUpdated
+        "SELECT l.id, l.web, l.nom, l.cat, l.tipus, l.lang
             FROM db_links AS l
             WHERE l.id=?"
     );

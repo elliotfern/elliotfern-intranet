@@ -96,15 +96,15 @@ if (isset($routeParams[0])) {
             <tr>
                 <td><a href="${link.url}" target="_blank">${link.nom}</a></td>
 
-                <td>${getLanguageName(link.lang)}</td>
+                <td>${link.idioma_ca}</td>
 
                 <td>${link.type_ca}</td>
 
                 <td>${formattedDate}</td>
 
-                <td><a class="button btn-petit" href="../update/${link.linkId}" role="button">Modifica</a></td>
+                <td><a class="button btn-petit" href="https://${window.location.host}/gestio/adreces/modifica-link/${link.linkId}" role="button">Modifica</a></td>
 
-                <td><a class="button btn-petit" href="../update/${link.linkId}" role="button">Elimina</a></td>
+                <td><a class="button btn-petit" href="../modifica-link/${link.linkId}" role="button">Elimina</a></td>
             </tr>
        `;
             }).join('');
@@ -115,22 +115,6 @@ if (isset($routeParams[0])) {
 
         } catch (error) {
             console.error('Error:', error);
-        }
-    }
-
-    // Función auxiliar para obtener el nombre del idioma
-    function getLanguageName(langInt) {
-        switch (langInt) {
-            case 1:
-                return 'Anglès';
-            case 2:
-                return 'Català';
-            case 3:
-                return 'Castellà';
-            case 4:
-                return 'Italià';
-            default:
-                return 'Altres';
         }
     }
 

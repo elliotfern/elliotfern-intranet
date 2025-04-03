@@ -21,7 +21,6 @@ if (isset($routeParams[0])) {
                     <thead class="table-primary">
                         <tr>
                             <th>Tema</th>
-                            <th>Accions</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -62,10 +61,6 @@ if (isset($routeParams[0])) {
                 html += `
                 <tr>
                     <td><a id="${item.id}" title="Show category" href="../tema/${item.idTema}">${item.tema}</a></td>
-                    <td>
-                        <button type="button" onclick="btnUpdateBook(${item.id})" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalUpdateBook" data-id="${item.id}">Update</button>
-                        <button type="button" onclick="btnDeleteBook(${item.id})" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteBook" data-id="${item.id}">Delete</button>
-                    </td>
                 </tr>
             `;
             });

@@ -17,7 +17,6 @@
                     <thead class="table-primary">
                         <tr>
                             <th>Categoria</th>
-                            <th>Accions</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -50,11 +49,7 @@
             data.forEach(item => {
                 html += `
                 <tr>
-                    <td><a id="${item.id}" title="Show category" href="../categoria/${item.id}">${item.genre}</a></td>
-                    <td>
-                        <button type="button" onclick="btnUpdateBook(${item.id})" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalUpdateBook" data-id="${item.id}">Modifica</button>
-                        <button type="button" onclick="btnDeleteBook(${item.id})" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteBook" data-id="${item.id}">Elimina</button>
-                    </td>
+                    <td><a id="${item.id}" title="Show category" href="https://${window.location.host}/gestio/adreces/categoria/${item.id}">${item.genre}</a></td>
                 </tr>`;
             });
 
