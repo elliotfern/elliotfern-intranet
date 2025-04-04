@@ -104,7 +104,7 @@ if (isset($_GET['pelicules'])) {
     $slug = $_GET['pelicula'];
     global $conn;
 
-    $query = "SELECT p.id, p.pelicula, p.slug, p.pelicula_es, p.any, p.descripcio, p.dataVista, p.dateCreated, p.dateModified, d.nom, d.cognoms, id.idioma_ca, c.pais_cat, img.nameImg, g.genere_ca, d.id AS idDirector, c.id AS idPais, img.id AS idImg, id.id As idLang, g.id AS idGen
+    $query = "SELECT p.id, p.pelicula, p.slug, p.pelicula_es, p.any, p.descripcio, p.dataVista, p.dateCreated, p.dateModified, d.nom, d.cognoms, id.idioma_ca, c.pais_cat, img.nameImg, g.genere_ca, d.id AS idDirector, c.id AS idPais, img.id AS idImg, id.id As idLang, g.id AS idGen, d.slug AS slugDirector
             FROM 11_db_pelicules AS p
             LEFT JOIN db_persones AS d ON p.director = d.id
             LEFT JOIN db_countries AS c ON p.pais = c.id
@@ -164,7 +164,7 @@ if (isset($_GET['pelicules'])) {
 
     $query = "SELECT a.nom, a.cognoms, a.id AS idActor, sa.role, img.nameImg, sa.id AS idCast, a.slug
         FROM 11_db_pelicules AS s
-        LEFT JOIN 11_aux_cinema_actors_pelicules AS sa on s.id = sa.idMovie
+        INNER JOIN 11_aux_cinema_actors_pelicules AS sa on s.id = sa.idMovie
         LEFT JOIN db_persones AS a ON a.id = sa.idActor
         LEFT JOIN db_img AS img ON a.img = img.id
         WHERE s.slug = :slug

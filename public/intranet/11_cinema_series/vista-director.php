@@ -33,38 +33,13 @@ $slug = $routeParams[0];
 
             </div>
 
-            <hr>
-            <div class="container" style="padding:20px;background-color:#ececec;margin-top:25px;margin-bottom:25px">
-                <h4>Crítica de la sèrie</h4>
-                <p id="descripcio"></p>
-            </div>
-
-            <hr>
-            <h4>Actors:</h4>
-            <p><a href="/cinema/afegir/actor/serie/>" class="btn btn-sm btn-warning">Afegir actor a la pel·lícula</a></p>
-
-            <div class="table-responsive">
-                <table class="table table-striped" id="actors">
-                    <thead class="table-primary">
-                        <tr>
-                            <th></th>
-                            <th>Actor:</th>
-                            <th>Personatge</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
 
         </div>
     </main>
 </div>
 
 <script>
-    connexioApiGetDades("/api/cinema/get/?serie=", "<?php echo $slug; ?>")
-    actorsDeLaSerie("<?php echo $slug; ?>");
+    connexioApiGetDades("/api/cinema/get/?director=", "<?php echo $slug; ?>")
 
     async function connexioApiGetDades(url, id) {
         const urlAjax = `${url}${id}`;

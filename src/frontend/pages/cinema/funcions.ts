@@ -51,13 +51,8 @@ export function cinema() {
     connexioApiDades('/api/cinema/get/?pelicula=', pageType[3], 'img', 'cinema-movie', function (data) {
       // Actualiza el atributo href del enlace con el idDirector
       const directorUrl = document.getElementById('directorUrl') as HTMLAnchorElement;
-      const paisUrl = document.getElementById('paisUrl') as HTMLAnchorElement;
       if (directorUrl) {
-        directorUrl.href = `${window.location.origin}/cinema/director/${data[0].director}`;
-      }
-
-      if (paisUrl) {
-        paisUrl.href = `${window.location.origin}/cinema/pelicules/pais/${data[0].pais}`;
+        directorUrl.href = `${window.location.origin}/gestio/cinema/fitxa-director/${data[0].slugDirector}`;
       }
     });
 

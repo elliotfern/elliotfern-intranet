@@ -2374,12 +2374,8 @@ function cinema() {
         (0,_components_lecturaDadesForm_mostrarDades_connexioApiDades__WEBPACK_IMPORTED_MODULE_3__.connexioApiDades)('/api/cinema/get/?pelicula=', pageType[3], 'img', 'cinema-movie', function (data) {
             // Actualiza el atributo href del enlace con el idDirector
             const directorUrl = document.getElementById('directorUrl');
-            const paisUrl = document.getElementById('paisUrl');
             if (directorUrl) {
-                directorUrl.href = `${window.location.origin}/cinema/director/${data[0].director}`;
-            }
-            if (paisUrl) {
-                paisUrl.href = `${window.location.origin}/cinema/pelicules/pais/${data[0].pais}`;
+                directorUrl.href = `${window.location.origin}/gestio/cinema/fitxa-director/${data[0].slugDirector}`;
             }
         });
         // author book

@@ -20,11 +20,20 @@
 
         <select class="form-select" id="typeImg" name="typeImg">
           <option selected>Selecciona el tipus d'imatge</option>
-          <option value="1">Biblioteca llibres: autors</option>
-          <option value="2">Biblioteca llibres: llibres</option>
-          <option value="7">Cinema: Sèries tv</option>
-          <option value="8">Cinema: Pel·lícules</option>
-          <option value="9">Cinema: Actors</option>
+          <option value="1">Biblioteca llibres: autor</option>
+          <option value="2">Biblioteca llibres: llibre</option>
+          <option value="3">Història: imatge</option>
+          <option value="4">Història: esdeveniment</option>
+          <option value="5">Història: persona</option>
+          <option value="6">Història: organització</option>
+          <option value="12">Història: mapa</option>
+          <option value="7">Cinema: sèrie tv</option>
+          <option value="8">Cinema: pel·lícula</option>
+          <option value="9">Cinema: actor</option>
+          <option value="14">Cinema: director</option>
+          <option value="10">Història: thumbnail</option>
+          <option value="11">Viatges: viatge</option>
+          <option value="13">Blog</option>
         </select>
 
         <?php $timestamp = date('Y-m-d'); ?>

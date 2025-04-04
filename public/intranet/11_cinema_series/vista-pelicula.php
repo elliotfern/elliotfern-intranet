@@ -31,7 +31,7 @@ $slug = $routeParams[0];
             <p><strong>Títol original: </strong><span id="pelicula"></span></p>
             <p><strong>Títol a Espanya:</strong> <span id="pelicula_es"></span></p>
             <p><strong>Director/a: </strong><a id="directorUrl" href=""><span id="nom"></span> <span id="cognoms"></span></a></p>
-            <p><strong>País:</strong> <a id="paisUrl" href=""><span id="pais_cat"></span></a></p>
+            <p><strong>País:</strong> <span id="pais_cat"></span></p>
             <p><strong>Idioma original: </strong><span id="idioma_ca"></span></p>
             <p><strong>Any d'estrena: </strong><span id="any"></span></p>
             <p><strong>Gènere: </strong><span id="genere_ca"></span></p>

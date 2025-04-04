@@ -248,7 +248,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             "SELECT i.id, CONCAT(i.alt, ' (', t.name, ')') AS alt
             FROM db_img AS i
             LEFT JOIN db_img_type AS t ON i.typeImg = t.id
-            WHERE i.typeImg IN (1, 5, 9)
+            WHERE i.typeImg IN (1, 5, 9, 14)
             ORDER BY i.alt"
         );
         $stmt->execute();
