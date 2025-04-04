@@ -55,13 +55,14 @@ if (isset($_GET['autor'])) {
   $ocupacio = isset($data['ocupacio']) ? data_input($data['ocupacio']) : ($hasError = true);
   $id = isset($data['id']) ? data_input($data['id']) : ($hasError = true);
   $slug = isset($data['slug']) ? data_input($data['slug']) : ($hasError = true);
+  $grup = !empty($data['grup']) ? data_input($data['grup']) : ($hasError = true);
 
   $timestamp = date('Y-m-d');
   $dateModified = $timestamp;
 
   if ($hasError == false) {
     global $conn;
-    $sql = "UPDATE db_persones SET nom=:nom, cognoms=:cognoms, anyNaixement=:anyNaixement, anyDefuncio=:anyDefuncio, paisAutor=:paisAutor, img=:img, web=:web, descripcio=:descripcio, ocupacio=:ocupacio, dateModified=:dateModified, slug=:slug WHERE id=:id";
+    $sql = "UPDATE db_persones SET nom=:nom, cognoms=:cognoms, anyNaixement=:anyNaixement, anyDefuncio=:anyDefuncio, paisAutor=:paisAutor, img=:img, web=:web, descripcio=:descripcio, ocupacio=:ocupacio, dateModified=:dateModified, slug=:slug, grup=:grup WHERE id=:id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":nom", $nom, PDO::PARAM_STR);
     $stmt->bindParam(":cognoms", $cognoms, PDO::PARAM_STR);
@@ -74,6 +75,7 @@ if (isset($_GET['autor'])) {
     $stmt->bindParam(":ocupacio", $ocupacio, PDO::PARAM_INT);
     $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
     $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
+    $stmt->bindParam(":grup", $grup, PDO::PARAM_INT);
     $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
     if ($stmt->execute()) {

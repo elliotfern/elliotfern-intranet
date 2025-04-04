@@ -43,7 +43,7 @@ if (isset($_GET['autor'])) {
   // Ahora puedes acceder a los datos como un array asociativo
   $hasError = false;
 
-  $grup = "[1]";
+  $grup = !empty($data['grup']) ? data_input($data['grup']) : ($hasError = true);
   $nom = !empty($data['nom']) ? data_input($data['nom']) : ($hasError = true);
   $cognoms = isset($data['cognoms']) ? data_input($data['cognoms']) : ($hasError = false);
   $slug = !empty($data['slug']) ? data_input($data['slug']) : ($hasError = true);

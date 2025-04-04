@@ -84,9 +84,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         $stmt = $conn->prepare(
             "SELECT a.id, a.nom AS AutNom, a.cognoms AS AutCognom1, a.slug, a.anyNaixement AS yearBorn, a.anyDefuncio AS yearDie, a.web AS AutWikipedia, c.pais_cat AS country, c.id AS idCountry, p.professio_ca AS profession, p.id AS idProfession, i.nameImg
                             FROM db_persones AS a
-                            INNER JOIN db_countries AS c ON a.paisAutor = c.id
-                            INNER JOIN aux_professions AS p ON a.ocupacio = p.id
+                            LEFT JOIN db_countries AS c ON a.paisAutor = c.id
+                            LEFT JOIN aux_professions AS p ON a.ocupacio = p.id
                             LEFT JOIN db_img AS i ON a.img = i.id
+                            WHERE grup = 1
                             ORDER BY a.cognoms"
         );
         $stmt->execute();
@@ -123,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         $autorSlug = $_GET['autorSlug'];
         global $conn;
         $data = array();
-        $stmt = $conn->prepare("SELECT a.id, a.cognoms, a.nom, p.pais_cat, a.anyNaixement, a.anyDefuncio, p.id AS idPais, o.professio_ca, i.nameImg, a.web, a.dateCreated, a.dateModified, a.descripcio, a.slug, a.img AS idImg, a.ocupacio AS idOcupacio
+        $stmt = $conn->prepare("SELECT a.id, a.cognoms, a.nom, p.pais_cat, a.anyNaixement, a.anyDefuncio, p.id AS idPais, o.professio_ca, i.nameImg, a.web, a.dateCreated, a.dateModified, a.descripcio, a.slug, a.img AS idImg, a.ocupacio AS idOcupacio, a.grup AS idGrup
                 FROM db_persones AS a
                 LEFT JOIN db_countries AS p ON a.paisAutor = p.id
                 LEFT JOIN aux_professions AS o ON a.ocupacio = o.id
@@ -244,9 +245,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         global $conn;
         $data = array();
         $stmt = $conn->prepare(
-            "SELECT i.id, i.alt
+            "SELECT i.id, CONCAT(i.alt, ' (', t.name, ')') AS alt
             FROM db_img AS i
-            WHERE i.typeImg = 1
+            LEFT JOIN db_img_type AS t ON i.typeImg = t.id
+            WHERE i.typeImg IN (1, 5, 9)
             ORDER BY i.alt"
         );
         $stmt->execute();
@@ -470,6 +472,38 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         $query = "SELECT c.id, c.pais_cat
                     FROM  db_countries AS c
                     ORDER BY c.pais_cat ASC";
+
+        // Preparar la consulta
+        $stmt = $conn->prepare($query);
+
+        // Ejecutar la consulta
+        $stmt->execute();
+
+        // Verificar si se encontraron resultados
+        if ($stmt->rowCount() === 0) {
+            echo json_encode(['error' => 'No rows found']);
+            exit();
+        }
+
+        // Recopilar los resultados
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Establecer el encabezado de respuesta a JSON
+        header('Content-Type: application/json');
+
+        // Devolver los datos en formato JSON
+        echo json_encode($data);
+        exit();
+
+        // 12) classificació grup persona
+        // ruta GET => "/api/biblioteca/auxiliars/?type=grup"
+    } elseif ((isset($_GET['type']) && $_GET['type'] == 'grup')) {
+
+        /** @var PDO $conn */
+        global $conn;
+        $query = "SELECT p.id, p.grup_ca
+                    FROM aux_persones_grups AS p
+                    ORDER BY p.grup_ca ASC";
 
         // Preparar la consulta
         $stmt = $conn->prepare($query);

@@ -10,7 +10,7 @@
 
       <h6><a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>">Biblioteca</a> > <a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>/llistat-autors">Autors</a> </h6>
 
-      <button onclick="window.location.href='<?php echo APP_INTRANET . $url['biblioteca']; ?>/nou-autor/'" class="button btn-gran btn-secondari">Afegir autor</button>
+      <button onclick="window.location.href='<?php echo APP_INTRANET . $url['persona']; ?>/nova-persona/'" class="button btn-gran btn-secondari">Afegir autor</button>
 
       <div class="table-responsive">
         <table class="table table-striped" id="authorsTable">
@@ -68,7 +68,7 @@
              ${!author.yearDie ? author.yearBorn : `${author.yearBorn} - ${author.yearDie}`}
             </td>
             <td>
-              <a href="./modifica-autor/${author.slug}">
+              <a href="https://${window.location.host}/gestio/persona/modifica-persona/${author.slug}">
                 <button type="button" class="btn btn-sm btn-warning">Modifica</button>
               </a>
             </td>

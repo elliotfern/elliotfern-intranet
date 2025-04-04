@@ -8,7 +8,7 @@ $slug = $routeParams[0];
       <h1>Biblioteca: <span id="nom"></span> <span id="cognoms"></span></h1>
       <h6><a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>">Biblioteca</a> > <a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>/llistat-autors">Autors/es </a></h6>
 
-      <button onclick="window.location.href='<?php echo APP_INTRANET . $url['biblioteca']; ?>/modifica-autor/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Modifica fitxa</button>
+      <button onclick="window.location.href='<?php echo APP_INTRANET . $url['persona']; ?>/modifica-persona/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Modifica fitxa</button>
 
       <div class='fixaDades'>
 

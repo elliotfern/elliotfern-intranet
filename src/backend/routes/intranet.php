@@ -14,7 +14,9 @@ $base_routes = [
 
     // 03. CRM clients
 
-    // 04. 
+    // 04. DB Persones
+    '/gestio/persona/nova-persona' => 'public/intranet/04_persones/form-operacions-persona.php',
+    '/gestio/persona/modifica-persona/{slug}' => 'public/intranet/04_persones/form-operacions-persona.php',
 
     // 05.
 
@@ -31,10 +33,7 @@ $base_routes = [
     '/gestio/biblioteca/fitxa-llibre/{slug}' => 'public/intranet/08_biblioteca_llibres/vista-llibre.php',
     '/gestio/biblioteca/fitxa-autor/{slug}' => 'public/intranet/08_biblioteca_llibres/vista-autor.php',
 
-    '/gestio/biblioteca/modifica-autor/{slug}' => 'public/intranet/08_biblioteca_llibres/form-modifica-autor.php',
     '/gestio/biblioteca/modifica-llibre/{slug}' => 'public/intranet/08_biblioteca_llibres/form-modifica-llibre.php',
-
-    '/gestio/biblioteca/nou-autor' => 'public/intranet/08_biblioteca_llibres/form-modifica-autor.php',
     '/gestio/biblioteca/nou-llibre' => 'public/intranet/08_biblioteca_llibres/form-modifica-llibre.php',
 
     // 09. Adreces interes
@@ -51,17 +50,20 @@ $base_routes = [
     '/gestio/vault/elliot' => 'public/intranet/10_claus_acces/vault-elliot.php',
     '/gestio/vault/nova' => 'public/intranet/10_claus_acces/nova-contrasenya.php',
 
-    // CINEMA
+    // 11. Arts esceniques, cinema, televisio
     '/gestio/cinema' => 'public/intranet/11_cinema_series/index.php',
-    '/gestio/cinema/pelicules' => 'public/intranet/11_cinema_series/vista-llistat-pelicules.php',
-    '/gestio/cinema/series' => 'app/Views/11_cinema_series/vista-llistat-series.php',
-    '/gestio/cinema/directors' => 'public/intranet/11_cinema_series/vista-directors.php',
-    '/gestio/cinema/actors' => 'public/intranet/11_cinema_series/vista-actors.php',
+
+    '/gestio/cinema/llistat-pelicules' => 'public/intranet/11_cinema_series/vista-llistat-pelicules.php',
+    '/gestio/cinema/llistat-series' => 'app/Views/11_cinema_series/vista-llistat-series.php',
+    '/gestio/cinema/llistat-directors' => 'public/intranet/11_cinema_series/vista-directors.php',
+    '/gestio/cinema/llistat-actors' => 'public/intranet/11_cinema_series/vista-actors.php',
+    '/gestio/cinema/llistat-obres-teatre' => 'public/intranet/11_cinema_series/vista-teatre.php',
 
     '/gestio/cinema/fitxa-actor/{slug}' => 'public/intranet/11_cinema_series/vista-actor.php',
     '/gestio/cinema/fitxa-director{slug}' => 'public/intranet/11_cinema_series/vista-director.php',
     '/gestio/cinema/fitxa-pelicula/{slug}' => 'public/intranet/11_cinema_series/vista-pelicula.php',
     '/gestio/cinema/fitxa-serie/{slug}' => 'public/intranet/11_cinema_series/vista-serie.php',
+    '/gestio/cinema/fitxa-teatre/{slug}' => 'public/intranet/11_cinema_series/vista-teatre.php',
 
     '/gestio/cinema/nova-pelicula' => 'public/intranet/11_cinema_series/form-inserir-pelicula.php',
     '/gestio/cinema/modifica-pelicula/{id}' => 'public/intranet/11_cinema_series/form-inserir-pelicula.php',
@@ -77,6 +79,10 @@ $base_routes = [
     // HISTORIA OBERTA GESTIO
     '/gestio/historia-oberta' => 'public/intranet/15_historia_oberta/index.php',
     '/gestio/historia-oberta/modifica-article/{id}' => 'public/intranet/15_historia_oberta/modifica-article.php',
+
+    // 100. Auxiliars
+    '/gestio/auxiliars' => 'public/intranet/100_auxiliars/index.php',
+    '/gestio/auxiliars/nova-imatge' => 'public/intranet/100_auxiliars/imatges/form-inserir-imatge.php',
 ];
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
@@ -142,7 +148,7 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/pelicules' => [
+    '/gestio/cinema/llistat-pelicules' => [
         'view' => 'public/intranet/11_cinema_series/vista-llistat-pelicules.php',
         'needs_session' => true,
         'header_footer' => false,
@@ -151,7 +157,7 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/series' => [
+    '/gestio/cinema/llistat-series' => [
         'view' => 'public/intranet/11_cinema_series/vista-llistat-series.php',
         'needs_session' => true,
         'header_footer' => false,
@@ -160,8 +166,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/nova-pelicula' => [
-        'view' => 'public/intranet/11_cinema_series/form-inserir-pelicula.php',
+    '/gestio/cinema/llistat-directors' => [
+        'view' => 'public/intranet/11_cinema_series/vista-directors.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -169,8 +175,17 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/modifica-pelicula/{id}' => [
-        'view' => 'public/intranet/11_cinema_series/form-inserir-pelicula.php',
+    '/gestio/cinema/llistat-actors' => [
+        'view' => 'public/intranet/11_cinema_series/vista-actors.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/cinema/llistat-obres-teatre' => [
+        'view' => 'public/intranet/11_cinema_series/vista-teatre.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -180,24 +195,6 @@ $routes = [
 
     '/gestio/cinema/fitxa-pelicula/{slug}' => [
         'view' => 'public/intranet/11_cinema_series/vista-pelicula.php',
-        'needs_session' => true,
-        'header_footer' => false,
-        'header_menu_footer' => false,
-        'apiSenseHTML' => false,
-        'menu_intranet' => true
-    ],
-
-    '/gestio/cinema/directors' => [
-        'view' => 'public/intranet/11_cinema_series/vista-directors.php',
-        'needs_session' => true,
-        'header_footer' => false,
-        'header_menu_footer' => false,
-        'apiSenseHTML' => false,
-        'menu_intranet' => true
-    ],
-
-    '/gestio/cinema/actors' => [
-        'view' => 'public/intranet/11_cinema_series/vista-actors.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -225,6 +222,24 @@ $routes = [
 
     '/gestio/cinema/fitxa-serie/{slug}' => [
         'view' => 'public/intranet/11_cinema_series/vista-serie.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/cinema/nova-pelicula' => [
+        'view' => 'public/intranet/11_cinema_series/form-inserir-pelicula.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/cinema/modifica-pelicula/{id}' => [
+        'view' => 'public/intranet/11_cinema_series/form-inserir-pelicula.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -374,15 +389,6 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/biblioteca/modifica-autor/{slug}' => [
-        'view' => 'public/intranet/08_biblioteca_llibres/form-modifica-autor.php',
-        'needs_session' => true,
-        'header_footer' => false,
-        'header_menu_footer' => false,
-        'apiSenseHTML' => false,
-        'menu_intranet' => true
-    ],
-
     '/gestio/biblioteca/modifica-llibre/{slug}' => [
         'view' => 'public/intranet/08_biblioteca_llibres/form-modifica-llibre.php',
         'needs_session' => true,
@@ -401,14 +407,6 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/biblioteca/nou-autor' => [
-        'view' => 'public/intranet/08_biblioteca_llibres/form-modifica-autor.php',
-        'needs_session' => true,
-        'header_footer' => false,
-        'header_menu_footer' => false,
-        'apiSenseHTML' => false,
-        'menu_intranet' => true
-    ],
 
     // 09. Adreces interes
     '/gestio/adreces' => [
@@ -475,6 +473,43 @@ $routes = [
         'menu_intranet' => true
     ],
 
+    // 04. DB Persones
+    '/gestio/persona/modifica-persona/{slug}' => [
+        'view' => 'public/intranet/04_persones/form-operacions-persona.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/persona/nova-persona' => [
+        'view' => 'public/intranet/04_persones/form-operacions-persona.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    // 100. Auxiliars
+    '/gestio/auxiliars' => [
+        'view' => 'public/intranet/100_auxiliars/index.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/auxiliars/nova-imatge' => [
+        'view' => 'public/intranet/100_auxiliars/imatges/form-inserir-imatge.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
 
 ];
 

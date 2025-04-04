@@ -1862,9 +1862,9 @@ function llistatPeliculaActors(id) {
             for (let i = 0; i < data.length; i++) {
                 html += '<tr>';
                 html += '<td><img src="https://media.elliot.cat/img/cinema-actor/' + data[i].nameImg + '.jpg" alt="Descripción de la imagen" width="auto" height="150"></td>';
-                html += '<td><a id="' + data[i].id + '" title="Book page" href="' + window.location.origin + '/biblioteca/llibre/' + data[i].slug + '">' + data[i].nom + ' ' + data[i].cognoms + '</a></td>';
+                html += '<td><a id="' + data[i].id + '" title="Actor" href="' + window.location.origin + '/gestio/cinema/fitxa-actor/' + data[i].slug + '">' + data[i].nom + ' ' + data[i].cognoms + '</a></td>';
                 html += '<td>' + data[i].role + '</td>';
-                html += '<td><a href="' + window.location.origin + '/biblioteca/modifica/llibre/' + data[i].id + '" class="btn btn-secondary btn-sm modificar-link">Modificar</a></td>';
+                html += '<td><a href="' + window.location.origin + '/gestio/persona/modifica-persona/' + data[i].slug + '" class="btn btn-secondary btn-sm modificar-link">Modificar</a></td>';
                 html += '<td><button type="button" onclick="btnDeleteBook(' + data[i].id + ')" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteBook" data-id="' + data[i].id + '">Elimina</button></td>';
                 html += '</tr>';
             }
@@ -2287,16 +2287,7 @@ __webpack_require__.r(__webpack_exports__);
 const url = window.location.href;
 const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_0__.getPageType)(url);
 function biblioteca() {
-    if (pageType[2] === 'modifica-autor') {
-        const autor = document.getElementById('modificaAutor');
-        if (autor) {
-            // Lanzar actualizador de datos
-            autor.addEventListener('submit', function (event) {
-                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'modificaAutor', '/api/biblioteca/put/?autor');
-            });
-        }
-    }
-    else if (pageType[2] === 'modifica-llibre') {
+    if (pageType[2] === 'modifica-llibre') {
         const llibre = document.getElementById('modificaLlibre');
         if (llibre) {
             // Lanzar actualizador de datos
@@ -2311,15 +2302,6 @@ function biblioteca() {
             // Lanzar actualizador de datos
             llibre.addEventListener('submit', function (event) {
                 (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'modificaLlibre', '/api/biblioteca/post/?llibre');
-            });
-        }
-    }
-    else if (pageType[2] === 'nou-autor') {
-        const autor = document.getElementById('modificaAutor');
-        if (autor) {
-            // Lanzar actualizador de datos
-            autor.addEventListener('submit', function (event) {
-                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'modificaAutor', '/api/biblioteca/post/?autor');
             });
         }
     }
@@ -2486,6 +2468,46 @@ function loginPage() {
             event.preventDefault(); // Prevenir el comportament per defecte del formulari
             (0,_services_login_loginApi__WEBPACK_IMPORTED_MODULE_0__.loginApi)(event);
         });
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/pages/persona/persona.ts":
+/*!***********************************************!*\
+  !*** ./src/frontend/pages/persona/persona.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   persona: () => (/* binding */ persona)
+/* harmony export */ });
+/* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
+/* harmony import */ var _utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/actualitzarDades */ "./src/frontend/utils/actualitzarDades.ts");
+
+
+const url = window.location.href;
+const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_0__.getPageType)(url);
+function persona() {
+    if (pageType[2] === 'modifica-persona') {
+        const autor = document.getElementById('modificaAutor');
+        if (autor) {
+            // Lanzar actualizador de datos
+            autor.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'modificaAutor', '/api/biblioteca/put/?autor');
+            });
+        }
+    }
+    else if (pageType[2] === 'nova-persona') {
+        const autor = document.getElementById('modificaAutor');
+        if (autor) {
+            // Lanzar actualizador de datos
+            autor.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'modificaAutor', '/api/biblioteca/post/?autor');
+            });
+        }
     }
 }
 
@@ -2834,6 +2856,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_historiaOberta_historiaOberta__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/historiaOberta/historiaOberta */ "./src/frontend/pages/historiaOberta/historiaOberta.ts");
 /* harmony import */ var _pages_biblioteca_biblioteca__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/biblioteca/biblioteca */ "./src/frontend/pages/biblioteca/biblioteca.ts");
 /* harmony import */ var _pages_adreces_adreces__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/adreces/adreces */ "./src/frontend/pages/adreces/adreces.ts");
+/* harmony import */ var _pages_persona_persona__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/persona/persona */ "./src/frontend/pages/persona/persona.ts");
+
 
 
 
@@ -2863,6 +2887,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     else if (pageType[1] === 'adreces') {
         (0,_pages_adreces_adreces__WEBPACK_IMPORTED_MODULE_7__.adreces)();
+    }
+    else if (pageType[1] === 'persona') {
+        (0,_pages_persona_persona__WEBPACK_IMPORTED_MODULE_8__.persona)();
     }
 });
 

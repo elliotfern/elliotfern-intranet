@@ -8,7 +8,7 @@
             <p>
                 <button onclick="window.location.href='<?php echo APP_INTRANET . $url['biblioteca']; ?>/nou-llibre/'" class="button btn-gran btn-secondari">Afegir llibre</button>
 
-                <button onclick="window.location.href='<?php echo APP_INTRANET . $url['biblioteca']; ?>/nou-autor/'" class="button btn-gran btn-secondari">Afegir autor/a</button>
+                <button onclick="window.location.href='<?php echo APP_INTRANET . $url['persona']; ?>/nova-persona/'" class="button btn-gran btn-secondari">Afegir autor/a</button>
             </p>
 
             <div class="alert alert-success quadre">

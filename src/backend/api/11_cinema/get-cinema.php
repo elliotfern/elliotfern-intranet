@@ -159,13 +159,13 @@ if (isset($_GET['pelicules'])) {
     // 2) Actors que participen en una pelicula
     // ruta GET => "/api/cinema/get/?actors-pelicula=35"
 } elseif (isset($_GET['actors-pelicula'])) {
-    $id = $_GET['actors-pelicula'];
+    $slug = $_GET['actors-pelicula'];
     global $conn;
 
-    $query = "SELECT a.nom, a.cognoms, a.id AS idActor, sa.role, img.nameImg, sa.id AS idCast
+    $query = "SELECT a.nom, a.cognoms, a.id AS idActor, sa.role, img.nameImg, sa.id AS idCast, a.slug
         FROM 11_db_pelicules AS s
-        INNER JOIN 11_aux_cinema_actors_pelicules AS sa on s.id = sa.idMovie
-        INNER JOIN db_persones AS a ON a.id = sa.idActor
+        LEFT JOIN 11_aux_cinema_actors_pelicules AS sa on s.id = sa.idMovie
+        LEFT JOIN db_persones AS a ON a.id = sa.idActor
         LEFT JOIN db_img AS img ON a.img = img.id
         WHERE s.slug = :slug
         ORDER BY a.cognoms ASC";

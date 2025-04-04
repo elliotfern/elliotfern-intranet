@@ -6,6 +6,7 @@ import { vault } from './pages/vault/funcions';
 import { historiaOberta } from './pages/historiaOberta/historiaOberta';
 import { biblioteca } from './pages/biblioteca/biblioteca';
 import { adreces } from './pages/adreces/adreces';
+import { persona } from './pages/persona/persona';
 
 const url = window.location.href;
 const pageType = getPageType(url);
@@ -24,5 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     biblioteca();
   } else if (pageType[1] === 'adreces') {
     adreces();
+  } else if (pageType[1] === 'persona') {
+    persona();
   }
 });

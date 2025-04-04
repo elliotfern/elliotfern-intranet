@@ -5,7 +5,7 @@ $parsedUrl = parse_url($url2);
 $path = $parsedUrl['path'];
 $segments = explode("/", trim($path, "/"));
 
-if ($segments[2] === "modifica-autor") {
+if ($segments[2] === "modifica-persona") {
   $modificaBtn = 1;
   $autorSlug = $routeParams[0];
 } else {
@@ -25,6 +25,7 @@ if ($modificaBtn === 1) {
     selectOmplirDades("/api/biblioteca/get/?type=auxiliarImatgesAutor", "", "img", "alt");
     selectOmplirDades("/api/biblioteca/get/?type=professio", "", "ocupacio", "professio_ca");
     selectOmplirDades("/api/biblioteca/get/?type=pais", "", "paisAutor", "pais_cat");
+    selectOmplirDades("/api/biblioteca/get/?type=grup", "", "grup", "grup_ca");
   </script>
 <?php
 }
@@ -107,6 +108,18 @@ if ($modificaBtn === 1) {
       </select>
     </div>
 
+    <div class="col-md-4">
+      <label>Classificació grup persona:</label>
+      <select class="form-select" name="grup" id="grup">
+      </select>
+    </div>
+
+    <div class="col-md-4">
+    </div>
+
+    <div class="col-md-4">
+    </div>
+
     <div class="col-complet">
       <label for="AutDescrip" class="form-label">Descripció:</label>
       <textarea class="form-control" id="descripcio" name="descripcio" rows="6"></textarea>
@@ -163,6 +176,7 @@ if ($modificaBtn === 1) {
           selectOmplirDades("/api/biblioteca/get/?type=auxiliarImatgesAutor", data.idImg, "img", "alt");
           selectOmplirDades("/api/biblioteca/get/?type=professio", data.idOcupacio, "ocupacio", "professio_ca");
           selectOmplirDades("/api/biblioteca/get/?type=pais", data.idPais, "paisAutor", "pais_cat");
+          selectOmplirDades("/api/biblioteca/get/?type=grup", data.idGrup, "grup", "grup_ca");
         })
         .catch(error => console.error("Error al obtener los datos:", error));
     }
