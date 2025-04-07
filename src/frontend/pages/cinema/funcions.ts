@@ -74,5 +74,21 @@ export function cinema() {
         transmissioDadesDB(event, 'POST', 'modificarSerie', '/api/cinema/post/?serie');
       });
     }
+  } else if (pageType[2] === 'modifica-pelicula') {
+    const serie = document.getElementById('modificarPeli');
+    if (serie) {
+      // Lanzar actualizador de datos
+      serie.addEventListener('submit', function (event) {
+        transmissioDadesDB(event, 'PUT', 'modificarPeli', '/api/cinema/put/?pelicula');
+      });
+    }
+  } else if (pageType[2] === 'nova-pelicula') {
+    const serie = document.getElementById('modificarPeli');
+    if (serie) {
+      // Lanzar actualizador de datos
+      serie.addEventListener('submit', function (event) {
+        transmissioDadesDB(event, 'POST', 'modificarPeli', '/api/cinema/post/?pelicula');
+      });
+    }
   }
 }

@@ -2399,6 +2399,24 @@ function cinema() {
             });
         }
     }
+    else if (pageType[2] === 'modifica-pelicula') {
+        const serie = document.getElementById('modificarPeli');
+        if (serie) {
+            // Lanzar actualizador de datos
+            serie.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'modificarPeli', '/api/cinema/put/?pelicula');
+            });
+        }
+    }
+    else if (pageType[2] === 'nova-pelicula') {
+        const serie = document.getElementById('modificarPeli');
+        if (serie) {
+            // Lanzar actualizador de datos
+            serie.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'modificarPeli', '/api/cinema/post/?pelicula');
+            });
+        }
+    }
 }
 
 

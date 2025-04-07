@@ -15,73 +15,42 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // a) Inserir pelicula
 if (isset($_GET['pelicula'])) {
 
-  if (empty($_POST["pelicula"])) {;
-    $hasError = true;
-  } else {
-    $pelicula = data_input($_POST['pelicula']);
+  // Obtener el cuerpo de la solicitud PUT
+  $input_data = file_get_contents("php://input");
+
+  // Decodificar los datos JSON
+  $data = json_decode($input_data, true);
+
+  // Verificar si se recibieron datos
+  if ($data === null) {
+    // Error al decodificar JSON
+    header('HTTP/1.1 400 Bad Request');
+    echo json_encode(['error' => 'Error decoding JSON data']);
+    exit();
   }
 
-  if (empty($_POST["pelicula_es"])) {;
-    $hasError = true;
-  } else {
-    $pelicula_es = data_input($_POST['pelicula_es']);
-  }
+  // Ahora puedes acceder a los datos como un array asociativo
+  $hasError = false; // Inicializamos la variable $hasError como false
 
-  if (empty($_POST["director"])) {;
-    $hasError = true;
-  } else {
-    $director = filter_input(INPUT_POST, 'director', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["any"])) {;
-    $hasError = true;
-  } else {
-    $any = data_input($_POST['any']);
-  }
-
-  if (empty($_POST["genere"])) {;
-    $hasError = true;
-  } else {
-    $genere = filter_input(INPUT_POST, 'genere', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["pais"])) {;
-    $hasError = true;
-  } else {
-    $pais = filter_input(INPUT_POST, 'pais', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["lang"])) {;
-    $hasError = true;
-  } else {
-    $lang = filter_input(INPUT_POST, 'lang', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["img"])) {;
-    $hasError = true;
-  } else {
-    $img = filter_input(INPUT_POST, 'img', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["dataVista"])) {;
-    $hasError = true;
-  } else {
-    $dataVista = data_input($_POST['dataVista']);
-  }
-
-  if (empty($_POST["descripcio"])) {;
-    $hasError = true;
-  } else {
-    $descripcio = html_entity_decode($_POST['descripcio']);
-  }
+  $pelicula = !empty($data['pelicula']) ? data_input($data['pelicula']) : ($hasError = true);
+  $slug = !empty($data['slug']) ? data_input($data['slug']) : ($hasError = true);
+  $pelicula_es = !empty($data['pelicula_es']) ? data_input($data['pelicula_es']) : ($hasError = true);
+  $director = !empty($data['director']) ? data_input($data['director']) : ($hasError = true);
+  $any = !empty($data['any']) ? data_input($data['any']) : ($hasError = true);
+  $genere = !empty($data['genere']) ? data_input($data['genere']) : ($hasError = true);
+  $pais = !empty($data['pais']) ? data_input($data['pais']) : ($hasError = true);
+  $lang = !empty($data['lang']) ? data_input($data['lang']) : ($hasError = true);
+  $img = !empty($data['img']) ? data_input($data['img']) : ($hasError = true);
+  $descripcio = !empty($data['descripcio']) ? data_input($data['descripcio']) : ($hasError = true);
+  $dataVista = !empty($data['dataVista']) ? data_input($data['dataVista']) : ($hasError = true);
 
   $timestamp = date('Y-m-d');
   $dateCreated = $timestamp;
   $dateModified = $timestamp;
 
-  if (!isset($hasError)) {
+  if (!$hasError) {
     global $conn;
-    $sql = "INSERT INTO 11_db_pelicules SET pelicula=:pelicula, pelicula_es=:pelicula_es, director=:director, any=:any, genere=:genere, img=:img, pais=:pais, lang=:lang, dataVista=:dataVista, dateModified=:dateModified, dateCreated=:dateCreated, descripcio=:descripcio";
+    $sql = "INSERT INTO 11_db_pelicules SET pelicula=:pelicula, pelicula_es=:pelicula_es, director=:director, any=:any, genere=:genere, img=:img, pais=:pais, lang=:lang, dataVista=:dataVista, dateModified=:dateModified, dateCreated=:dateCreated, descripcio=:descripcio, slug=:slug";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":pelicula", $pelicula, PDO::PARAM_STR);
     $stmt->bindParam(":pelicula_es", $pelicula_es, PDO::PARAM_STR);
@@ -95,6 +64,7 @@ if (isset($_GET['pelicula'])) {
     $stmt->bindParam(":dateCreated", $dateCreated, PDO::PARAM_STR);
     $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
     $stmt->bindParam(":descripcio", $descripcio, PDO::PARAM_STR);
+    $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
 
     if ($stmt->execute()) {
       // response output

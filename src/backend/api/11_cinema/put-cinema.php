@@ -11,7 +11,7 @@ $secretKey = $_ENV['TOKEN'];
 
 // Configuración de cabeceras para aceptar JSON y responder JSON
 header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: https://gestio.elliotfern.com");
+header("Access-Control-Allow-Origin: https://elliot.cat");
 header("Access-Control-Allow-Methods: PUT");
 
 
@@ -23,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
 }
 
 // RUTA PARA ACTUALIZAR PELICULA
-// ruta GET => "/api/cinema/put/?type=pelicula"
-if (isset($_GET['type']) && $_GET['type'] == 'pelicula') {
+// ruta GET => "/api/cinema/put/?pelicula"
+if (isset($_GET['pelicula'])) {
   // Obtener el cuerpo de la solicitud PUT
   $input_data = file_get_contents("php://input");
 
@@ -52,47 +52,56 @@ if (isset($_GET['type']) && $_GET['type'] == 'pelicula') {
     exit;
   }
 
-  $pelicula = isset($data['pelicula']) ? data_input($data['pelicula']) : ($hasError = true);
-  $pelicula_es = isset($data['pelicula_es']) ? data_input($data['pelicula_es']) : ($hasError = true);
-  $any = isset($data['any']) ? data_input($data['any']) : ($hasError = true);
-  $director = isset($data['director']) ? $data['director'] : null;
-  $genere = isset($data['genere']) ? $data['genere'] : null;
-  $pais = isset($data['pais']) ? $data['pais'] : null;
-  $lang = isset($data['lang']) ? $data['lang'] : null;
-  $img = isset($data['img']) ? $data['img'] : null;
-  $dataVista = isset($data['dataVista']) ? data_input($data['dataVista']) : ($hasError = true);
-  $descripcio = isset($data['descripcio']) ? html_entity_decode($data['descripcio']) : ($hasError = true);
-  $id = isset($data['id']) ? data_input($data['id']) : ($hasError = true);
+  $id = !empty($data['id']) ? data_input($data['id']) : ($hasError = true);
+  $pelicula = !empty($data['pelicula']) ? data_input($data['pelicula']) : ($hasError = true);
+  $slug = !empty($data['slug']) ? data_input($data['slug']) : ($hasError = true);
+  $pelicula_es = !empty($data['pelicula_es']) ? data_input($data['pelicula_es']) : ($hasError = true);
+  $director = !empty($data['director']) ? data_input($data['director']) : ($hasError = true);
+  $any = !empty($data['any']) ? data_input($data['any']) : ($hasError = true);
+  $genere = !empty($data['genere']) ? data_input($data['genere']) : ($hasError = true);
+  $pais = !empty($data['pais']) ? data_input($data['pais']) : ($hasError = true);
+  $lang = !empty($data['lang']) ? data_input($data['lang']) : ($hasError = true);
+  $img = !empty($data['img']) ? data_input($data['img']) : ($hasError = true);
+  $descripcio = !empty($data['descripcio']) ? data_input($data['descripcio']) : ($hasError = true);
+  $dataVista = !empty($data['dataVista']) ? data_input($data['dataVista']) : ($hasError = true);
 
   $timestamp = date('Y-m-d');
   $dateModified = $timestamp;
 
+  if (!$hasError) {
+    global $conn;
+    $sql = "UPDATE 11_db_pelicules SET pelicula=:pelicula, pelicula_es=:pelicula_es, director=:director, any=:any, genere=:genere, img=:img, pais=:pais, lang=:lang, dataVista=:dataVista, dateModified=:dateModified, descripcio=:descripcio, slug=:slug WHERE id=:id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(":pelicula", $pelicula, PDO::PARAM_STR);
+    $stmt->bindParam(":pelicula_es", $pelicula_es, PDO::PARAM_STR);
+    $stmt->bindParam(":director", $director, PDO::PARAM_INT);
+    $stmt->bindParam(":any", $any, PDO::PARAM_STR);
+    $stmt->bindParam(":genere", $genere, PDO::PARAM_INT);
+    $stmt->bindParam(":pais", $pais, PDO::PARAM_INT);
+    $stmt->bindParam(":img", $img, PDO::PARAM_INT);
+    $stmt->bindParam(":lang", $lang, PDO::PARAM_STR);
+    $stmt->bindParam(":dataVista", $dataVista, PDO::PARAM_STR);
+    $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
+    $stmt->bindParam(":descripcio", $descripcio, PDO::PARAM_STR);
+    $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
-  global $conn;
-  $sql = "UPDATE 11_db_pelicules SET pelicula=:pelicula, pelicula_es=:pelicula_es, director=:director, any=:any, genere=:genere, img=:img, pais=:pais, lang=:lang, dataVista=:dataVista, dateModified=:dateModified, descripcio=:descripcio WHERE id=:id";
-  $stmt = $conn->prepare($sql);
-  $stmt->bindParam(":pelicula", $pelicula, PDO::PARAM_STR);
-  $stmt->bindParam(":pelicula_es", $pelicula_es, PDO::PARAM_STR);
-  $stmt->bindParam(":director", $director, PDO::PARAM_INT);
-  $stmt->bindParam(":any", $any, PDO::PARAM_STR);
-  $stmt->bindParam(":genere", $genere, PDO::PARAM_INT);
-  $stmt->bindParam(":pais", $pais, PDO::PARAM_INT);
-  $stmt->bindParam(":img", $img, PDO::PARAM_INT);
-  $stmt->bindParam(":lang", $lang, PDO::PARAM_STR);
-  $stmt->bindParam(":dataVista", $dataVista, PDO::PARAM_STR);
-  $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
-  $stmt->bindParam(":descripcio", $descripcio, PDO::PARAM_STR);
-  $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+    if ($stmt->execute()) {
+      // response output
+      $response['status'] = 'success';
 
-  if ($stmt->execute()) {
-    // response output
-    $response['status'] = 'success';
+      header("Content-Type: application/json");
+      echo json_encode($response);
+    } else {
+      // response output - data error
+      $response['status'] = 'error bd';
 
-    header("Content-Type: application/json");
-    echo json_encode($response);
+      header("Content-Type: application/json");
+      echo json_encode($response);
+    }
   } else {
     // response output - data error
-    $response['status'] = 'error bd';
+    $response['status'] = 'error';
 
     header("Content-Type: application/json");
     echo json_encode($response);

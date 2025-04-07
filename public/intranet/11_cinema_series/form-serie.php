@@ -57,7 +57,13 @@ if ($modificaBtn === 1) {
   </div>
 
   <form method="POST" action="" class="row g-3" id="modificarSerie">
-    <input type="hidden" name="id" id="id" value="<?php echo $idSerie; ?>">
+    <?php
+    if ($modificaBtn === 1) {
+    ?>
+      <input type="hidden" name="id" id="id" value="">
+    <?php
+    }
+    ?>
 
     <div class="col-md-4">
       <label>Nom de la sèrie:</label>

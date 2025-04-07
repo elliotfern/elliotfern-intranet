@@ -65,11 +65,11 @@ $base_routes = [
     '/gestio/cinema/fitxa-serie/{slug}' => 'public/intranet/11_cinema_series/vista-serie.php',
     '/gestio/cinema/fitxa-teatre/{slug}' => 'public/intranet/11_cinema_series/vista-teatre.php',
 
-    '/gestio/cinema/nova-pelicula' => 'public/intranet/11_cinema_series/form-inserir-pelicula.php',
-    '/gestio/cinema/modifica-pelicula/{id}' => 'public/intranet/11_cinema_series/form-inserir-pelicula.php',
+    '/gestio/cinema/nova-pelicula' => 'public/intranet/11_cinema_series/form-pelicula.php',
+    '/gestio/cinema/modifica-pelicula/{id}' => 'public/intranet/11_cinema_series/form-pelicula.php',
 
-    '/gestio/cinema/nova-serie' => 'public/intranet/11_cinema_series/form-modificar-serie.php',
-    '/gestio/cinema/modifica-serie/{id}' => 'public/intranet/11_cinema_series/form-modificar-serie.php',
+    '/gestio/cinema/nova-serie' => 'public/intranet/11_cinema_series/form-serie.php',
+    '/gestio/cinema/modifica-serie/{id}' => 'public/intranet/11_cinema_series/form-serie.php',
 
     // XARXES SOCIALS
     '/gestio/xarxes-socials' => 'public/intranet/12_xarxes_socials/index.php',
@@ -233,7 +233,7 @@ $routes = [
     ],
 
     '/gestio/cinema/nova-pelicula' => [
-        'view' => 'public/intranet/11_cinema_series/form-inserir-pelicula.php',
+        'view' => 'public/intranet/11_cinema_series/form-pelicula.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -242,7 +242,7 @@ $routes = [
     ],
 
     '/gestio/cinema/modifica-pelicula/{id}' => [
-        'view' => 'public/intranet/11_cinema_series/form-inserir-pelicula.php',
+        'view' => 'public/intranet/11_cinema_series/form-pelicula.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -251,7 +251,7 @@ $routes = [
     ],
 
     '/gestio/cinema/nova-serie' => [
-        'view' => 'public/intranet/11_cinema_series/form-modificar-serie.php',
+        'view' => 'public/intranet/11_cinema_series/form-serie.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -260,7 +260,7 @@ $routes = [
     ],
 
     '/gestio/cinema/modifica-serie/{id}' => [
-        'view' => 'public/intranet/11_cinema_series/form-modificar-serie.php',
+        'view' => 'public/intranet/11_cinema_series/form-serie.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
