@@ -12,18 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
   exit();
 }
 
-// Dominio permitido (modifica con tu dominio)
-$allowed_origin = "https://gestio.elliotfern.com";
-
-// Verificar el encabezado 'Origin'
-if (isset($_SERVER['HTTP_ORIGIN'])) {
-  if ($_SERVER['HTTP_ORIGIN'] !== $allowed_origin) {
-    http_response_code(403); // Respuesta 403 Forbidden
-    echo json_encode(["error" => "Acceso denegado. Origen no permitido."]);
-    exit;
-  }
-}
-
 // a) Inserir pelicula
 if (isset($_GET['pelicula'])) {
 
@@ -127,124 +115,6 @@ if (isset($_GET['pelicula'])) {
     echo json_encode($response);
   }
 
-  // INSERIR NOU autor
-  // autor	titol	titolEng	slug	any	tipus	idEd	idGen	subGen	lang	img	dateCreated
-} elseif (isset($_GET['type']) && $_GET['type'] == 'llibre') {
-  if (empty($_POST["autor"])) {
-    $hasError = true;
-  } else {
-    $autor = filter_input(INPUT_POST, 'autor', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["titol"])) {
-    $hasError = true;
-  } else {
-    $titol = data_input($_POST["titol"], ENT_NOQUOTES);
-  }
-
-  if (empty($_POST["titolEng"])) {
-    $titolEng = NULL;
-  } else {
-    $titolEng = data_input($_POST["titolEng"], ENT_NOQUOTES);
-  }
-
-  if (empty($_POST["slug"])) {
-    $hasError = true;
-  } else {
-    $slug = data_input($_POST["slug"], ENT_NOQUOTES);
-  }
-
-  if (empty($_POST["any"])) {
-    $hasError = true;
-  } else {
-    $any = filter_input(INPUT_POST, 'any', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["idEd"])) {
-    $hasError = true;
-  } else {
-    $idEd = filter_input(INPUT_POST, 'idEd', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["idGen"])) {
-    $hasError = true;
-  } else {
-    $idGen = filter_input(INPUT_POST, 'idGen', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["subGen"])) {
-    $hasError = true;
-  } else {
-    $subGen = filter_input(INPUT_POST, 'subGen', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["lang"])) {
-    $hasError = true;
-  } else {
-    $lang = filter_input(INPUT_POST, 'lang', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["img"])) {
-    $hasError = true;
-  } else {
-    $img = filter_input(INPUT_POST, 'img', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["tipus"])) {
-    $hasError = true;
-  } else {
-    $tipus = filter_input(INPUT_POST, 'tipus', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["estat"])) {
-    $hasError = true;
-  } else {
-    $estat = filter_input(INPUT_POST, 'estat', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  $dateCreated = ($_POST['dateCreated']);
-  $dateModified = date('Y-m-d');
-
-  if (!isset($hasError)) {
-    global $conn;
-    $sql = "INSERT INTO 08_db_biblioteca_llibres SET autor=:autor, titol=:titol, titolEng=:titolEng, any=:any, idEd=:idEd, lang=:lang, img=:img, tipus=:tipus, idGen=:idGen, subGen=:subGen, dateCreated=:dateCreated, slug=:slug, dateModified=:dateModified, estat=:estat";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(":autor", $autor, PDO::PARAM_INT);
-    $stmt->bindParam(":titol", $titol, PDO::PARAM_STR);
-    $stmt->bindParam(":titolEng", $titolEng, PDO::PARAM_STR);
-    $stmt->bindParam(":any", $any, PDO::PARAM_INT);
-    $stmt->bindParam(":idEd", $idEd, PDO::PARAM_INT);
-    $stmt->bindParam(":lang", $lang, PDO::PARAM_INT);
-    $stmt->bindParam(":img", $img, PDO::PARAM_INT);
-    $stmt->bindParam(":tipus", $tipus, PDO::PARAM_INT);
-    $stmt->bindParam(":idGen", $idGen, PDO::PARAM_INT);
-    $stmt->bindParam(":subGen", $subGen, PDO::PARAM_INT);
-    $stmt->bindParam(":estat", $estat, PDO::PARAM_INT);
-    $stmt->bindParam(":dateCreated", $dateCreated, PDO::PARAM_STR);
-    $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
-    $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
-
-    if ($stmt->execute()) {
-      // response output
-      $response['status'] = 'success';
-
-      header("Content-Type: application/json");
-      echo json_encode($response);
-    } else {
-      // response output - data error
-      $response['status'] = 'error';
-
-      header("Content-Type: application/json");
-      echo json_encode($response);
-    }
-  } else {
-    // response output - data error
-    $response['status'] = 'error';
-
-    header("Content-Type: application/json");
-    echo json_encode($response);
-  }
-
   // a) Inserir Actor en pelicula
 } elseif (isset($_GET['actorSerie'])) {
 
@@ -300,86 +170,44 @@ if (isset($_GET['pelicula'])) {
   // c) Crear nova serie
 } elseif (isset($_GET['serie'])) {
 
-  $hasError = false;
+  // Obtener el cuerpo de la solicitud PUT
+  $input_data = file_get_contents("php://input");
 
-  if (empty($_POST["name"])) {
-    $hasError = true;
-  } else {
-    $name = data_input($_POST["name"], ENT_NOQUOTES);
+  // Decodificar los datos JSON
+  $data = json_decode($input_data, true);
+
+  // Verificar si se recibieron datos
+  if ($data === null) {
+    // Error al decodificar JSON
+    header('HTTP/1.1 400 Bad Request');
+    echo json_encode(['error' => 'Error decoding JSON data']);
+    exit();
   }
 
-  if (empty($_POST["startYear"])) {
-    $hasError = true;
-  } else {
-    $startYear = filter_input(INPUT_POST, 'startYear', FILTER_SANITIZE_NUMBER_INT);
-  }
+  // Ahora puedes acceder a los datos como un array asociativo
+  $hasError = false; // Inicializamos la variable $hasError como false
 
-  if (empty($_POST["endYear"])) {
-    $endYear = NULL;
-  } else {
-    $endYear = filter_input(INPUT_POST, 'endYear', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["season"])) {
-    $hasError = true;
-  } else {
-    $season = filter_input(INPUT_POST, 'season', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["chapter"])) {
-    $hasError = true;
-  } else {
-    $chapter = filter_input(INPUT_POST, 'chapter', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["director"])) {
-    $hasError = true;
-  } else {
-    $director = filter_input(INPUT_POST, 'director', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["lang"])) {
-    $hasError = true;
-  } else {
-    $lang = filter_input(INPUT_POST, 'lang', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["genre"])) {
-    $hasError = true;
-  } else {
-    $genre = filter_input(INPUT_POST, 'genre', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["producer"])) {
-    $hasError = true;
-  } else {
-    $producer = filter_input(INPUT_POST, 'producer', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["country"])) {
-    $hasError = true;
-  } else {
-    $country = filter_input(INPUT_POST, 'country', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["img"])) {
-    $hasError = true;
-  } else {
-    $img = filter_input(INPUT_POST, 'img', FILTER_SANITIZE_NUMBER_INT);
-  }
-
-  if (empty($_POST["descripcio"])) {
-    $hasError = true;
-  } else {
-    $descripcio = html_entity_decode($_POST['descripcio']);
-  }
+  $id = !empty($data['id']) ? data_input($data['id']) : ($hasError = true);
+  $name = !empty($data['name']) ? data_input($data['name']) : ($hasError = true);
+  $slug = !empty($data['slug']) ? data_input($data['slug']) : ($hasError = true);
+  $startYear = !empty($data['startYear']) ? data_input($data['startYear']) : ($hasError = true);
+  $endYear = !empty($data['endYear']) ? data_input($data['endYear']) : ($hasError = false);
+  $season = !empty($data['season']) ? data_input($data['season']) : ($hasError = true);
+  $chapter = !empty($data['chapter']) ? data_input($data['chapter']) : ($hasError = true);
+  $director = !empty($data['director']) ? data_input($data['director']) : ($hasError = true);
+  $lang = !empty($data['lang']) ? data_input($data['lang']) : ($hasError = true);
+  $genre = !empty($data['genre']) ? data_input($data['genre']) : ($hasError = true);
+  $producer = !empty($data['producer']) ? data_input($data['producer']) : ($hasError = true);
+  $country = !empty($data['country']) ? data_input($data['country']) : ($hasError = true);
+  $img = !empty($data['img']) ? data_input($data['img']) : ($hasError = true);
+  $descripcio = !empty($data['descripcio']) ? data_input($data['descripcio']) : ($hasError = true);
 
   $dateCreated = date('Y-m-d');
   $dateModified = date('Y-m-d');
 
   if (!$hasError) {
     global $conn;
-    $sql = "INSERT INTO 11_db_cinema_series_tv SET name=:name, startYear=:startYear, endYear=:endYear, season=:season, chapter=:chapter, director=:director, lang=:lang, genre=:genre, producer=:producer, country=:country, img=:img, descripcio=:descripcio, dateCreated=:dateCreated, dateModified=:dateModified";
+    $sql = "INSERT INTO 11_db_cinema_series_tv SET name=:name, startYear=:startYear, endYear=:endYear, season=:season, chapter=:chapter, director=:director, lang=:lang, genre=:genre, producer=:producer, country=:country, img=:img, descripcio=:descripcio, dateCreated=:dateCreated, dateModified=:dateModified, slug=:slug";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":name", $name, PDO::PARAM_STR);
     $stmt->bindParam(":startYear", $startYear, PDO::PARAM_INT);
@@ -393,6 +221,7 @@ if (isset($_GET['pelicula'])) {
     $stmt->bindParam(":country", $country, PDO::PARAM_INT);
     $stmt->bindParam(":img", $img, PDO::PARAM_INT);
     $stmt->bindParam(":descripcio", $descripcio, PDO::PARAM_STR);
+    $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
     $stmt->bindParam(":dateCreated", $dateCreated, PDO::PARAM_STR);
     $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
 

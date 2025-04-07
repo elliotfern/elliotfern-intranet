@@ -5,24 +5,24 @@ $slug = $routeParams[0];
 <div class="container">
   <main>
     <div class="container">
-      <h1>Cinema i sèries TV</h1>
-      <h6><a href="/cinema/">Cinema i sèries TV</a> > <a href="/cinema/series">Sèries </a></h6>
+      <h1>Sèrie tv: <span id="name"></span></h1>
+      <h6><a href="<?php echo APP_INTRANET . $url['cinema']; ?>">Arts escèniques, cinema i televisió</a> > <a href="<?php echo APP_INTRANET . $url['cinema']; ?>/llistat-series">Llistat sèries</a></h6>
 
-      <div class='row'>
-        <div class='col-sm-8'>
+      <button onclick="window.location.href='<?php echo APP_INTRANET . $url['cinema']; ?>/modifica-serie/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Modifica fitxa</button>
+
+      <div class='fixaDades'>
+
+        <div class='columna imatge'>
           <img id="img" src='' class='img-thumbnail img-fluid rounded mx-auto d-block' style='height:auto;width:auto;max-width:auto' alt='Cartell' title='Cartell'>
         </div>
 
-        <div class="col-sm-4">
-          <p><a href="/cinema/modifica/serie/" class="btn btn-sm btn-warning">Modificar les dades</a></p>
-          <div class="alert alert-primary" role="alert" style="margin-top:10px">
-            <h4 class="alert-heading"></h4>
-            <p><strong>Nom original de la sèrie: </strong><span id="name"></span></p>
+        <div class="col">
+          <div class="quadre-detalls">
             <p><strong>Director: </strong><a id="directorUrl" href=""><span id="nom"></span> <span id="cognoms"></span></a></p>
             <p><strong>Idioma original: </strong><span id="idioma_ca"></span></p>
             <p><strong>Gènere: </strong><span id="genere_ca"></span></p>
-            <p><strong>País: </strong><a id="paisUrl" href=""><span id="pais_cat"></span></a></p>
-            <p><strong>Productora tv/plataforma: </strong><a id="plataformaUrl" href=""><span id="productora"></span></a></p>
+            <p><strong>País: </strong><span id="pais_cat"></span></p>
+            <p><strong>Productora tv/plataforma: </strong><span id="productora"></span></p>
             <p><strong>Número de temporades: </strong><span id="season"></span></p>
             <p><strong>Número d'episodis: </strong><span id="chapter"></span></p>
             <p><strong>Anys d'emissió: </strong><span id="startYear"></span> / <span id="endYear"></span></p>
@@ -36,7 +36,7 @@ $slug = $routeParams[0];
       <hr>
       <div class="container" style="padding:20px;background-color:#ececec;margin-top:25px;margin-bottom:25px">
         <h4>Crítica de la sèrie</h4>
-        <p id="descripcio"></p>
+        <span id="descripcio"></span>
       </div>
 
       <hr>
@@ -99,7 +99,7 @@ $slug = $routeParams[0];
 
           // Actualizar el DOM con la información recibida
           if (key === 'nameImg') {
-            document.getElementById('img').src = `https://media.elliot.cat/img/cinema-television/${data2['nameImg']}.jpg`;
+            document.getElementById('img').src = `https://media.elliot.cat/img/cinema-serie/${data2['nameImg']}.jpg`;
           }
 
           // Casos especiales: Director/a
@@ -107,14 +107,6 @@ $slug = $routeParams[0];
             const directorUrl = document.getElementById('directorUrl');
             if (directorUrl && directorUrl.tagName === 'A') {
               directorUrl.href = `/directors/${data2['director']}`; // Añadir la URL del director
-            }
-          }
-
-          // Casos especiales: País
-          if (key === 'pais_cat') {
-            const paisUrl = document.getElementById('paisUrl');
-            if (paisUrl && paisUrl.tagName === 'A') {
-              paisUrl.href = `/paisos/${data2['pais']}`; // Añadir la URL del país
             }
           }
 
@@ -171,7 +163,6 @@ $slug = $routeParams[0];
               dateElement.textContent = `${day}-${month}-${year}`;
             }
           }
-
 
         }
       }

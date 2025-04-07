@@ -48,7 +48,7 @@ export function cinema() {
       });
     });
   } else if (pageType[2] === 'fitxa-pelicula') {
-    connexioApiDades('/api/cinema/get/?pelicula=', pageType[3], 'img', 'cinema-movie', function (data) {
+    connexioApiDades('/api/cinema/get/?pelicula=', pageType[3], 'img', 'cinema-pelicula', function (data) {
       // Actualiza el atributo href del enlace con el idDirector
       const directorUrl = document.getElementById('directorUrl') as HTMLAnchorElement;
       if (directorUrl) {
@@ -58,5 +58,21 @@ export function cinema() {
 
     // author book
     llistatPeliculaActors(pageType[3]);
+  } else if (pageType[2] === 'modifica-serie') {
+    const serie = document.getElementById('modificarSerie');
+    if (serie) {
+      // Lanzar actualizador de datos
+      serie.addEventListener('submit', function (event) {
+        transmissioDadesDB(event, 'PUT', 'modificarSerie', '/api/cinema/put/?serie');
+      });
+    }
+  } else if (pageType[2] === 'nova-serie') {
+    const serie = document.getElementById('modificarSerie');
+    if (serie) {
+      // Lanzar actualizador de datos
+      serie.addEventListener('submit', function (event) {
+        transmissioDadesDB(event, 'POST', 'modificarSerie', '/api/cinema/post/?serie');
+      });
+    }
   }
 }

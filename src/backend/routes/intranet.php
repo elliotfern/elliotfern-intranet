@@ -55,7 +55,7 @@ $base_routes = [
 
     '/gestio/cinema/llistat-pelicules' => 'public/intranet/11_cinema_series/vista-llistat-pelicules.php',
     '/gestio/cinema/llistat-series' => 'app/Views/11_cinema_series/vista-llistat-series.php',
-    '/gestio/cinema/llistat-directors' => 'public/intranet/11_cinema_series/vista-directors.php',
+    '/gestio/cinema/llistat-directors' => 'public/intranet/11_cinema_series/vista-llistat-directors.php',
     '/gestio/cinema/llistat-actors' => 'public/intranet/11_cinema_series/vista-actors.php',
     '/gestio/cinema/llistat-obres-teatre' => 'public/intranet/11_cinema_series/vista-teatre.php',
 
@@ -67,6 +67,9 @@ $base_routes = [
 
     '/gestio/cinema/nova-pelicula' => 'public/intranet/11_cinema_series/form-inserir-pelicula.php',
     '/gestio/cinema/modifica-pelicula/{id}' => 'public/intranet/11_cinema_series/form-inserir-pelicula.php',
+
+    '/gestio/cinema/nova-serie' => 'public/intranet/11_cinema_series/form-modificar-serie.php',
+    '/gestio/cinema/modifica-serie/{id}' => 'public/intranet/11_cinema_series/form-modificar-serie.php',
 
     // XARXES SOCIALS
     '/gestio/xarxes-socials' => 'public/intranet/12_xarxes_socials/index.php',
@@ -167,7 +170,7 @@ $routes = [
     ],
 
     '/gestio/cinema/llistat-directors' => [
-        'view' => 'public/intranet/11_cinema_series/vista-directors.php',
+        'view' => 'public/intranet/11_cinema_series/vista-llistat-directors.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -247,6 +250,23 @@ $routes = [
         'menu_intranet' => true
     ],
 
+    '/gestio/cinema/nova-serie' => [
+        'view' => 'public/intranet/11_cinema_series/form-modificar-serie.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/cinema/modifica-serie/{id}' => [
+        'view' => 'public/intranet/11_cinema_series/form-modificar-serie.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
 
     // ERP
     '/gestio/erp' => [

@@ -5,12 +5,12 @@ $slug = $routeParams[0];
 <div class="container">
     <main>
         <div class="container">
-            <h1>Cinema: <span id="nom"></span> <span id="cognoms"></span></h1>
-            <h6><a href="/biblioteca/">Cinema</a> > <a href="/cinema/autors">Autors/es </a></h6>
+            <h1>Actor/a: <span id="nom"></span> <span id="cognoms"></span></h1>
+            <h6><a href="<?php echo APP_INTRANET . $url['cinema']; ?>">Arts escèniques, cinema i televisió</a> > <a href="<?php echo APP_INTRANET . $url['cinema']; ?>/llistat-actors">Llistat actors</a></h6>
 
             <button onclick="window.location.href='<?php echo APP_INTRANET . $url['persona']; ?>/modifica-persona/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Modifica fitxa</button>
-            <div class='row'>
 
+            <div class='row'>
                 <div class='col imatge'>
                     <img id="img" src='' class='img-thumbnail' style='height:auto;width:auto;max-width:auto' alt='Author Photo' title='Author photo'>
                 </div>
@@ -18,30 +18,16 @@ $slug = $routeParams[0];
                 <div class="col">
 
                     <div class="quadre-detalls">
-                        <p>
-
-                        </p>
-                        <strong>
-                            <p>Anys:
-                        </strong><span id="anyNaixement"></span></p>
-
+                        <p><strong> Anys: </strong><span id="anyNaixement"></span></p>
                         <p id="AutDescrip"> </p>
-
-                        <p><strong>Pais: </strong> <a id="linkAutor" href='' title='Country'><span id="country"></span></a></p>
-
-                        <p><strong>Professió: </strong><a id="ocupacioLink" href='' title='Movement'><span id="name"></span></a></p>
-
-                        <p><strong>Moviment: </strong><a id="movimentLink" href='' title='Movement'><span id="movement"></span></a></p>
-
-                        <p><strong>Viquipedia: </strong><a id="wikipediaLink" href='' target='_blank' title='Wikipedia'>Web</a></p>
-
+                        <p><strong>Pais: </strong><span id="pais_cat"></span></p>
+                        <p><strong>Professió: </strong><span id="ocupacio"></span></p>
+                        <p><strong>Pàgina web: </strong><a id="web" href='' target='_blank' title='Wikipedia'>Web</a></p>
                         <p><strong>Data de creació: </strong><span id="dateCreated"></span></p>
-
                         <p><strong>Data de modificació: </strong><span id="dateModified"></span></p>
                     </div>
                 </div>
             </div>
-
 
             <hr>
             <h4>Participació a pel·lícules:</h4>
@@ -55,7 +41,7 @@ $slug = $routeParams[0];
             <h4>Participació a sèries de televisió:</h4>
 
             <div class="table-responsive">
-                <table id="containerTaula2" class="table table-striped"></table>
+                <table class="table table-striped" id="containerTaula2">
                 </table>
             </div>
 
@@ -200,7 +186,7 @@ $slug = $routeParams[0];
 
             // Crear la estructura de la tabla
             let tableHTML = `
-            <thead>
+            <thead class="table-primary">
                 <tr>
                     <th>Títol</th>
                     <th>Any</th>

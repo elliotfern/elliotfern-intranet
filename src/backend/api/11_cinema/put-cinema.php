@@ -14,29 +14,6 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: https://gestio.elliotfern.com");
 header("Access-Control-Allow-Methods: PUT");
 
-// Obtener el encabezado Authorization
-$headers = apache_request_headers();
-if (!isset($headers['Authorization'])) {
-  header('HTTP/1.1 401 Unauthorized');
-  echo json_encode(['error' => 'Missing Authorization header']);
-  exit();
-}
-
-$authHeader = $headers['Authorization'];
-list($jwt) = sscanf($authHeader, 'Bearer %s');
-
-if (!$jwt) {
-  header('HTTP/1.1 401 Unauthorized');
-  echo json_encode(['error' => 'Invalid Authorization header']);
-  exit();
-}
-
-$decoded = JwtHelper::verifyJwt($jwt, $secretKey);
-if (!$decoded) {
-  header('HTTP/1.1 401 Unauthorized');
-  echo json_encode(['error' => 'Invalid token']);
-  exit();
-}
 
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
@@ -45,20 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
   exit();
 }
 
-// Dominio permitido (modifica con tu dominio)
-$allowed_origin = "https://gestio.elliotfern.com";
-
-// Verificar el encabezado 'Origin'
-if (isset($_SERVER['HTTP_ORIGIN'])) {
-  if ($_SERVER['HTTP_ORIGIN'] !== $allowed_origin) {
-    http_response_code(403); // Respuesta 403 Forbidden
-    echo json_encode(["error" => "Acceso denegado. Origen no permitido."]);
-    exit;
-  }
-}
-
 // RUTA PARA ACTUALIZAR PELICULA
-
 // ruta GET => "/api/cinema/put/?type=pelicula"
 if (isset($_GET['type']) && $_GET['type'] == 'pelicula') {
   // Obtener el cuerpo de la solicitud PUT
@@ -240,12 +204,13 @@ if (isset($_GET['type']) && $_GET['type'] == 'pelicula') {
     $descripcio = html_entity_decode($data['descripcio']);
   }
 
+  $slug = $data["slug"];
   $id = $data['id'];
   $dateModified = date('Y-m-d');
 
   if ($hasError == false) {
     global $conn;
-    $sql = "UPDATE 11_db_cinema_series_tv SET name=:name, startYear=:startYear, endYear=:endYear, season=:season, chapter=:chapter, director=:director, lang=:lang, img=:img, genre=:genre, producer=:producer, country=:country, dateModified=:dateModified, descripcio=:descripcio WHERE id=:id";
+    $sql = "UPDATE 11_db_cinema_series_tv SET name=:name, startYear=:startYear, endYear=:endYear, season=:season, chapter=:chapter, director=:director, lang=:lang, img=:img, genre=:genre, producer=:producer, country=:country, dateModified=:dateModified, descripcio=:descripcio, slug=:slug WHERE id=:id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":name", $name, PDO::PARAM_STR);
     $stmt->bindParam(":startYear", $startYear, PDO::PARAM_STR);
@@ -260,6 +225,7 @@ if (isset($_GET['type']) && $_GET['type'] == 'pelicula') {
     $stmt->bindParam(":country", $country, PDO::PARAM_INT);
     $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
     $stmt->bindParam(":descripcio", $descripcio, PDO::PARAM_STR);
+    $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
     $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
     if ($stmt->execute()) {

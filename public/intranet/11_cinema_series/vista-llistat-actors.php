@@ -1,5 +1,5 @@
 <script type="module">
-    authorsTableLibrary();
+  authorsTableLibrary();
 </script>
 
 <h1>Cinema & TV shows Database</h1>
@@ -10,38 +10,38 @@
 <hr>
 
 <div class="">
-    <table class="table table-striped datatable" id="actorsTable">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Nom</th>
-                <th>Anys</th>
-                <th>Pais</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody> <!-- Agregado este tbody -->
-        </tbody>
-    </table>
+  <table class="table table-striped datatable" id="actorsTable">
+    <thead class="table-primary">
+      <tr>
+        <th></th>
+        <th>Nom</th>
+        <th>Anys</th>
+        <th>Pais</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody> <!-- Agregado este tbody -->
+    </tbody>
+  </table>
 </div>
 
 <script>
-    function authorsTableLibrary() {
-        const urlAjax = `https://${window.location.host}/api/cinema/get/?actors`;
+  function authorsTableLibrary() {
+    const urlAjax = `https://${window.location.host}/api/cinema/get/?actors`;
 
-        fetch(urlAjax)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                try {
-                    let html = '';
-                    data.forEach(author => {
-                        html += `<tr>
+    fetch(urlAjax)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        try {
+          let html = '';
+          data.forEach(author => {
+            html += `<tr>
             <td class="text-center">
               <a id="${author.id}" title="Author page" href="./fitxa-actor/${author.slug}">
                 <img src="https://media.elliot.cat/img/cinema-actor/${author.img}.jpg" style="height:70px">
@@ -72,18 +72,18 @@
               <button type="button" class="btn btn-sm btn-danger">Elimina</button>
             </td>
           </tr>`;
-                    });
+          });
 
-                    const tableBody = document.querySelector('#actorsTable tbody');
-                    if (tableBody) {
-                        tableBody.innerHTML = html;
-                    } else {
-                        console.error("No se encontró el tbody de la tabla de autores.");
-                    }
-                } catch (error) {
-                    console.error('Error al procesar los datos:', error);
-                }
-            })
-            .catch(error => console.error('Error en la petición:', error));
-    }
+          const tableBody = document.querySelector('#actorsTable tbody');
+          if (tableBody) {
+            tableBody.innerHTML = html;
+          } else {
+            console.error("No se encontró el tbody de la tabla de autores.");
+          }
+        } catch (error) {
+          console.error('Error al procesar los datos:', error);
+        }
+      })
+      .catch(error => console.error('Error en la petición:', error));
+  }
 </script>

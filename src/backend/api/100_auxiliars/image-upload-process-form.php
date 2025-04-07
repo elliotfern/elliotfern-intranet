@@ -44,6 +44,7 @@ $allowed_types = [
     7 => 'cinema-television',
     8 => 'cinema-movie',
     9 => 'cinema-actor',
+    14 => 'cinema-director',
 ];
 $typeName = $allowed_types[$type] ?? 'elliotfern';
 

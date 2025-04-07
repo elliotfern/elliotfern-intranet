@@ -2371,7 +2371,7 @@ function cinema() {
         });
     }
     else if (pageType[2] === 'fitxa-pelicula') {
-        (0,_components_lecturaDadesForm_mostrarDades_connexioApiDades__WEBPACK_IMPORTED_MODULE_3__.connexioApiDades)('/api/cinema/get/?pelicula=', pageType[3], 'img', 'cinema-movie', function (data) {
+        (0,_components_lecturaDadesForm_mostrarDades_connexioApiDades__WEBPACK_IMPORTED_MODULE_3__.connexioApiDades)('/api/cinema/get/?pelicula=', pageType[3], 'img', 'cinema-pelicula', function (data) {
             // Actualiza el atributo href del enlace con el idDirector
             const directorUrl = document.getElementById('directorUrl');
             if (directorUrl) {
@@ -2380,6 +2380,24 @@ function cinema() {
         });
         // author book
         (0,_components_cinema_llistatPeliculaActors__WEBPACK_IMPORTED_MODULE_4__.llistatPeliculaActors)(pageType[3]);
+    }
+    else if (pageType[2] === 'modifica-serie') {
+        const serie = document.getElementById('modificarSerie');
+        if (serie) {
+            // Lanzar actualizador de datos
+            serie.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'modificarSerie', '/api/cinema/put/?serie');
+            });
+        }
+    }
+    else if (pageType[2] === 'nova-serie') {
+        const serie = document.getElementById('modificarSerie');
+        if (serie) {
+            // Lanzar actualizador de datos
+            serie.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'modificarSerie', '/api/cinema/post/?serie');
+            });
+        }
     }
 }
 

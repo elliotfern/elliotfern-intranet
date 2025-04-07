@@ -1,30 +1,40 @@
-<h2>Sèries de televisió</h2>
+<div class="container">
+  <main>
+    <div class="container">
 
-<p><a href="/cinema/afegir/serie/" id="afegirPelicula" class="btn btn-dark btn-sm">Afegir nova sèrie</a></p>
+      <h1>Arts escèniques, cinema i televisió: llistat pel·lícules</h1>
+      <h6><a href="<?php echo APP_INTRANET . $url['cinema']; ?>">Arts escèniques, cinema i televisió</a> > <a href="<?php echo APP_INTRANET . $url['cinema']; ?>/llistat-series">LListat sèries tv</a></h6>
 
-<hr>
+      <p>
+        <button onclick="window.location.href='<?php echo APP_INTRANET . $url['cinema']; ?>/nova-serie/'" class="button btn-gran btn-secondari">Afegir sèrie tv</button>
 
-<!-- Campo de búsqueda -->
-<div class="input-group mb-3 quadre-cercador">
-  <input type="text" class="form-control" placeholder="Cercar per llibre o per autor" id="searchInput">
-  <button class="btn btn-outline-secondary" type="button" onclick="cercarLlibres()">Cercar</button>
-</div>
+        <button onclick="window.location.href='<?php echo APP_INTRANET . $url['persona']; ?>/nova-persona/'" class="button btn-gran btn-secondari">Afegir actor/a</button>
+      </p>
 
-<!-- Botones para seleccionar el tipo de contacto -->
-<div class="btn-group" role="group" aria-label="Tipus de llibre" style="margin-bottom:25px">
-  <button type="button" class="btn btn-outline-primary active" data-tipus="10">Totes les pel·lícules</button>
-  <button type="button" class="btn btn-outline-primary" data-tipus="1">1. Drama</button>
-  <button type="button" class="btn btn-outline-primary" data-tipus="6">6. Ciències aplicades</button>
-  <button type="button" class="btn btn-outline-primary" data-tipus="8">8. Literatura</button>
-  <button type="button" class="btn btn-outline-primary" data-tipus="9">9. Història.Geografia</button>
-</div>
+      <!-- Campo de búsqueda -->
+      <div class="input-group mb-3 quadre-cercador">
+        <input type="text" class="form-control" placeholder="Cercar per llibre o per autor" id="searchInput">
+        <button class="btn btn-outline-secondary" type="button" onclick="cercarLlibres()">Cercar</button>
+      </div>
+
+      <!-- Botones para seleccionar el tipo de contacto -->
+      <div class="btn-group" role="group" aria-label="Tipus de llibre" style="margin-bottom:25px">
+        <button type="button" class="btn btn-outline-primary active" data-tipus="10">Totes les pel·lícules</button>
+        <button type="button" class="btn btn-outline-primary" data-tipus="1">1. Drama</button>
+        <button type="button" class="btn btn-outline-primary" data-tipus="6">6. Ciències aplicades</button>
+        <button type="button" class="btn btn-outline-primary" data-tipus="8">8. Literatura</button>
+        <button type="button" class="btn btn-outline-primary" data-tipus="9">9. Història.Geografia</button>
+      </div>
 
 
-<div class="container-fluid">
-  <div class="row gap-3 justify-content-center llibresContainer" id="seriesContainer">
-    <!-- aqui es mostren les pelicules -->
-  </div>
-</div>
+      <div class="container-fluid">
+        <div class="row gap-3 justify-content-center llibresContainer" id="seriesContainer">
+          <!-- aqui es mostren les pelicules -->
+        </div>
+
+
+      </div>
+  </main>
 </div>
 
 <script>

@@ -57,7 +57,7 @@ if (isset($_GET['pelicules'])) {
             INNER JOIN db_countries AS c ON tv.country = c.id
             INNER JOIN aux_idiomes AS id ON tv.lang = id.id
             LEFT JOIN 11_aux_cinema_generes AS g ON tv.genre = g.id
-            ORDER BY tv.startYear ASC"
+            ORDER BY tv.startYear DESC"
     );
     $stmt->execute();
     if ($stmt->rowCount() === 0) echo ('No rows');
@@ -67,12 +67,12 @@ if (isset($_GET['pelicules'])) {
     echo json_encode($data);
 
     // 2) Pagina informacio tv show
-    // ruta GET => "/api/cinema/get/?serie=35"
+    // ruta GET => "/api/cinema/get/?serie="benvinguts-a-la-familia"
 } elseif (isset($_GET['serie'])) {
     $slug = $_GET['serie'];
     global $conn;
 
-    $query = "SELECT tv.id, tv.name, tv.startYear, tv.endYear, tv.season, tv.chapter, d.nom, d.cognoms, id.idioma_ca, tv.genre, tv.producer, c.pais_cat, img.nameImg, g.genere_ca, tv.descripcio, d.id AS idDirector, c.id AS idPais, img.id AS idImg, id.id As idLang, g.id AS idGen, pr.id AS idProductora, pr.productora, tv.dateCreated, tv.dateModified
+    $query = "SELECT tv.id, tv.name, tv.startYear, tv.endYear, tv.season, tv.chapter, d.nom, d.cognoms, id.idioma_ca, tv.genre, tv.producer, c.pais_cat, img.nameImg, g.genere_ca, tv.descripcio, d.id AS idDirector, c.id AS idPais, img.id AS idImg, id.id As idLang, g.id AS idGen, pr.id AS idProductora, pr.productora, tv.dateCreated, tv.dateModified, tv.slug
             FROM 11_db_cinema_series_tv AS tv
             INNER JOIN db_persones AS d ON tv.director = d.id
             INNER JOIN db_countries AS c ON tv.country = c.id
@@ -208,15 +208,94 @@ if (isset($_GET['pelicules'])) {
 } elseif (isset($_GET['directors'])) {
     global $conn;
     $data = array();
-    $stmt = $conn->prepare("SELECT a.id, a.cognoms, a.nom
+    $stmt = $conn->prepare("SELECT a.id, CONCAT(a.cognoms, ', ', a.nom) AS nomComplet, i.nameImg, c.pais_cat, a.slug, a.anyNaixement, a.anyDefuncio 
             FROM db_persones AS a
-            WHERE grup = '[2]'
+            LEFT JOIN db_img AS i ON a.img = i.id
+            LEFT JOIN db_countries AS c ON a.paisAutor = c.id
+            WHERE grup = '2'
             ORDER BY a.cognoms ASC");
+
     $stmt->execute();
     if ($stmt->rowCount() === 0) echo ('No rows');
     while ($users = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $data[] = $users;
     }
+    echo json_encode($data);
+
+    // 1) Fitxa director
+    // ruta GET => "/api/cinema/get/?director=?arron-sorkin"
+} elseif (isset($_GET['director'])) {
+    $slug = $_GET['director'];
+    global $conn;
+    $data = array();
+    $query = "SELECT a.id, a.cognoms, a.nom, i.nameImg, c.pais_cat, a.slug, a.anyNaixement, a.anyDefuncio, a.dateCreated, a.dateModified, pro.professio_ca, a.web
+            FROM db_persones AS a
+            LEFT JOIN db_img AS i ON a.img = i.id
+            LEFT JOIN db_countries AS c ON a.paisAutor = c.id
+            LEFT JOIN aux_professions AS pro ON a.ocupacio = pro.id
+            WHERE a.slug = :slug";
+
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':slug', $slug, PDO::PARAM_STR);
+    $stmt->execute();
+
+    if ($stmt->rowCount() === 0) echo ('No rows');
+
+    // Recopilar los resultados
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    echo json_encode($data);
+
+    // 1) Fitxa director: pelicules
+    // ruta GET => "/api/cinema/get/?directorPelicules=?arron-sorkin"
+} elseif (isset($_GET['directorPelicules'])) {
+    $id = $_GET['directorPelicules'];
+    global $conn;
+    $data = array();
+    $query = "SELECT p.id, p.pelicula AS name, p.slug, p.any AS anyInici, i.nameImg, c.pais_cat, g.genere_ca
+            FROM 11_db_pelicules AS p
+            LEFT JOIN db_img AS i ON p.img = i.id
+            LEFT JOIN db_countries AS c ON p.pais = c.id
+            LEFT JOIN 11_aux_cinema_generes AS g ON p.genere = g.id
+            WHERE p.director = :id";
+
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+    $stmt->execute();
+
+    if ($stmt->rowCount() === 0) {
+        echo json_encode("No rows");
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($data);
+
+    // 1) Fitxa director: series
+    // ruta GET => "/api/cinema/get/?directorSeries=?arron-sorkin"
+} elseif (isset($_GET['directorSeries'])) {
+    $id = $_GET['directorSeries'];
+    global $conn;
+    $data = array();
+
+    $query = "SELECT s.id, s.name AS name, s.slug, s.startYear AS anyInici, s.endYear, i.nameImg, c.pais_cat, g.genere_ca
+            FROM 11_db_cinema_series_tv AS s
+            LEFT JOIN db_img AS i ON s.img = i.id
+            LEFT JOIN db_countries AS c ON s.country = c.id
+            LEFT JOIN 11_aux_cinema_generes AS g ON s.genre = g.id
+            WHERE s.director = :id";
+
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+    $stmt->execute();
+
+    if ($stmt->rowCount() === 0) {
+        echo json_encode("No rows");
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($data);
 
     // 2) Fitxa autor
@@ -226,9 +305,11 @@ if (isset($_GET['pelicules'])) {
     global $conn;
     // PREPARED STATEMENT para evitar inyección SQL
     $stmt = $conn->prepare("SELECT
-	p.id, p.nom, p.cognoms, p.slug, p.ocupacio, p.anyNaixement, p.anyDefuncio, p.paisAutor, p.img, p.web, p.descripcio, p.dateCreated, p.dateModified, i.nameImg
+	p.id, p.nom, p.cognoms, p.slug, p.ocupacio, p.anyNaixement, p.anyDefuncio, p.paisAutor, p.img, p.web, p.descripcio, p.dateCreated, p.dateModified, i.nameImg, c.pais_cat, professio_ca
     FROM db_persones AS p
     LEFT JOIN db_img AS i ON p.img = i.id
+    LEFT JOIN db_countries AS c ON p.paisAutor = c.id
+    LEFT JOIN aux_professions AS pro ON pro.id = p.ocupacio
     WHERE slug = :actorSlug");
     $stmt->bindParam(':actorSlug', $actorSlug, PDO::PARAM_STR);
     $stmt->execute();

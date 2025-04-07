@@ -16,12 +16,9 @@ $slug = $routeParams[0];
           <img id="nameImg" src='' class='img-thumbnail' style='height:auto;width:auto;max-width:auto' alt='Author Photo' title='Author photo'>
         </div>
 
-        <div class="columna">
+        <div class="col">
 
           <div class="quadre-detalls">
-            <p>
-
-            </p>
             <strong>
               <p>Anys:
             </strong><span id="anyNaixement"></span></p>
