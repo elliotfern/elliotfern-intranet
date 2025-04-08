@@ -2,28 +2,33 @@
   authorsTableLibrary();
 </script>
 
-<h1>Cinema & TV shows Database</h1>
-<h2>Actors</h2>
+<div class="container">
+  <main>
+    <div class="container">
+      <h1>Arts escèniques, cinema i televisió: llistat d'actors/es</h1>
+      <h6><a href="<?php echo APP_INTRANET . $url['cinema']; ?>">Arts escèniques, cinema i televisió</a> > <a href="<?php echo APP_INTRANET . $url['cinema']; ?>/llistat-actors">Llistat actors</a></h6>
 
-<p><button type='button' class='btn btn-dark btn-sm' id='btnAddActor' onclick='btnFAddActor()' data-bs-toggle='modal' data-bs-target='#modalCreateActor'>Create new Actor</button></p>
+      <button onclick="window.location.href='<?php echo APP_INTRANET . $url['persona']; ?>/nova-persona/'" class="button btn-gran btn-secondari">Crea nou actor/a</button>
 
-<hr>
+      <div class="table-responsive">
+        <table class="table table-striped" id="actorsTable">
+          <thead class="table-primary">
+            <tr>
+              <th></th>
+              <th>Nom</th>
+              <th>Anys</th>
+              <th>Pais</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody> <!-- Agregado este tbody -->
+          </tbody>
+        </table>
+      </div>
 
-<div class="">
-  <table class="table table-striped datatable" id="actorsTable">
-    <thead class="table-primary">
-      <tr>
-        <th></th>
-        <th>Nom</th>
-        <th>Anys</th>
-        <th>Pais</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody> <!-- Agregado este tbody -->
-    </tbody>
-  </table>
+    </div>
+  </main>
 </div>
 
 <script>
@@ -43,28 +48,22 @@
           data.forEach(author => {
             html += `<tr>
             <td class="text-center">
-              <a id="${author.id}" title="Author page" href="./fitxa-actor/${author.slug}">
+              <a id="${author.id}" title="Author page" href="https://${window.location.host}/gestio/cinema/fitxa-actor/${author.slug}">
                 <img src="https://media.elliot.cat/img/cinema-actor/${author.img}.jpg" style="height:70px">
               </a>
             </td>
             <td>
-              <a id="${author.id}" title="Author page" href="./fitxa-actor/${author.slug}">
+              <a id="${author.id}" title="Author page" href="https://${window.location.host}/gestio/cinema/fitxa-actor/${author.slug}">
                 ${author.nom} ${author.cognoms}
               </a>
             </td>
             
-            <td>
-             ${!author.anyDefuncio ? author.anyNaixement : `${author.anyNaixement} - ${author.anyDefuncio}`}
-            </td>
+            <td>${!author.anyDefuncio ? author.anyNaixement : `${author.anyNaixement} - ${author.anyDefuncio}`}</td>
 
-            <td>
-              <a id="${author.idCountry}" title="Authors by country" href="./by-country/${author.idCountry}">
-                ${author.country}
-              </a>
-            </td>
+            <td>${author.country}</td>
            
             <td>
-              <a href="./modifica/autor/${author.id}">
+              <a href="https://${window.location.host}/gestio/persona/modifica-persona/${author.slug}">
                 <button type="button" class="btn btn-sm btn-warning">Modifica</button>
               </a>
             </td>

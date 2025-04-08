@@ -56,8 +56,8 @@ $base_routes = [
     '/gestio/cinema/llistat-pelicules' => 'public/intranet/11_cinema_series/vista-llistat-pelicules.php',
     '/gestio/cinema/llistat-series' => 'app/Views/11_cinema_series/vista-llistat-series.php',
     '/gestio/cinema/llistat-directors' => 'public/intranet/11_cinema_series/vista-llistat-directors.php',
-    '/gestio/cinema/llistat-actors' => 'public/intranet/11_cinema_series/vista-actors.php',
-    '/gestio/cinema/llistat-obres-teatre' => 'public/intranet/11_cinema_series/vista-teatre.php',
+    '/gestio/cinema/llistat-actors' => 'public/intranet/11_cinema_series/vista-llistat.actors.php',
+    '/gestio/cinema/llistat-obres-teatre' => 'public/intranet/11_cinema_series/vista-llistat-teatre.php',
 
     '/gestio/cinema/fitxa-actor/{slug}' => 'public/intranet/11_cinema_series/vista-actor.php',
     '/gestio/cinema/fitxa-director{slug}' => 'public/intranet/11_cinema_series/vista-director.php',
@@ -185,7 +185,7 @@ $routes = [
     ],
 
     '/gestio/cinema/llistat-actors' => [
-        'view' => 'public/intranet/11_cinema_series/vista-actors.php',
+        'view' => 'public/intranet/11_cinema_series/vista-llistat-actors.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -194,7 +194,7 @@ $routes = [
     ],
 
     '/gestio/cinema/llistat-obres-teatre' => [
-        'view' => 'public/intranet/11_cinema_series/vista-teatre.php',
+        'view' => 'public/intranet/11_cinema_series/vista-llistat-teatre.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,

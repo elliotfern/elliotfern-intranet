@@ -46,12 +46,8 @@ $slug = $routeParams[0];
             </div>
 
         </div>
-
+    </main>
 </div>
-</main>
-</div>
-
-
 
 <script>
     // Función para realizar la solicitud Axios a la API
