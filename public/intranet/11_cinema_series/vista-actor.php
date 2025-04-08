@@ -191,7 +191,7 @@ $slug = $routeParams[0];
             data.forEach(pelicula => {
                 tableHTML += `
                 <tr>
-                    <td><a href="${window.location.href}/gestio/cinema/fitxa-${categoria}/${pelicula.slug}">${pelicula.titol}</a></td>
+                    <td><a href="https://${window.location.host}/gestio/cinema/fitxa-${categoria}/${pelicula.slug}">${pelicula.titol}</a></td>
                     <td>${pelicula.anyInici}${pelicula.anyFi ? ' - ' + pelicula.anyFi : ''}</td>
                     <td>${pelicula.role}</td>
                 </tr>
