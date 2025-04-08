@@ -158,7 +158,6 @@ if (isset($_GET['pelicula'])) {
   // Ahora puedes acceder a los datos como un array asociativo
   $hasError = false; // Inicializamos la variable $hasError como false
 
-  $id = !empty($data['id']) ? data_input($data['id']) : ($hasError = true);
   $name = !empty($data['name']) ? data_input($data['name']) : ($hasError = true);
   $slug = !empty($data['slug']) ? data_input($data['slug']) : ($hasError = true);
   $startYear = !empty($data['startYear']) ? data_input($data['startYear']) : ($hasError = true);
@@ -177,9 +176,12 @@ if (isset($_GET['pelicula'])) {
   $dateModified = date('Y-m-d');
 
   if (!$hasError) {
+
     global $conn;
     $sql = "INSERT INTO 11_db_cinema_series_tv SET name=:name, startYear=:startYear, endYear=:endYear, season=:season, chapter=:chapter, director=:director, lang=:lang, genre=:genre, producer=:producer, country=:country, img=:img, descripcio=:descripcio, dateCreated=:dateCreated, dateModified=:dateModified, slug=:slug";
+
     $stmt = $conn->prepare($sql);
+
     $stmt->bindParam(":name", $name, PDO::PARAM_STR);
     $stmt->bindParam(":startYear", $startYear, PDO::PARAM_INT);
     $stmt->bindParam(":endYear", $endYear, PDO::PARAM_INT);
