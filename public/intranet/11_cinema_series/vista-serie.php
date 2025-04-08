@@ -16,7 +16,7 @@ $slug = $routeParams[0];
           <img id="img" src='' class='img-thumbnail img-fluid rounded mx-auto d-block' style='height:auto;width:auto;max-width:auto' alt='Cartell' title='Cartell'>
         </div>
 
-        <div class="col">
+        <div class="columna">
           <div class="quadre-detalls">
             <p><strong>Director: </strong><a id="directorUrl" href=""><span id="nom"></span> <span id="cognoms"></span></a></p>
             <p><strong>Idioma original: </strong><span id="idioma_ca"></span></p>
@@ -43,19 +43,8 @@ $slug = $routeParams[0];
       <h4>Actors:</h4>
       <button onclick="window.location.href='<?php echo APP_INTRANET . $url['cinema']; ?>/inserir-actor-serie/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Afegir actor a la sèrie</button>
 
-      <div class="table-responsive">
-        <table class="table table-striped" id="actors">
-          <thead class="table-primary">
-            <tr>
-              <th></th>
-              <th>Actor:</th>
-              <th>Personatge</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+      <div class="table-responsive" id="actors-container">
+
       </div>
 
     </div>
@@ -174,7 +163,7 @@ $slug = $routeParams[0];
 
   async function actorsDeLaSerie(id) {
     const urlAjax = `/api/cinema/get/?llistat-actors-serie=${id}`;
-
+    const container = document.getElementById("actors-container"); // Un contenedor para meter la tabla o el mensaje
 
     try {
       const response = await fetch(urlAjax, {
@@ -186,31 +175,51 @@ $slug = $routeParams[0];
       }
 
       const data = await response.json();
-      let html = data.map(actor => `
+
+      if (data.length > 0) {
+        const tableHTML = `
+        <table class="table table-striped" id="actors">
+          <thead class="table-primary">
             <tr>
+              <th></th>
+              <th>Actor</th>
+              <th>Personatge</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            ${data.map(actor => `
+              <tr>
                 <td>
-                    <a id="actor-${actor.idActor}" title="Actor" href="${window.location.origin}/gestio/cinema/fitxa-actor/${actor.slug}">
-                        <img src="https://media.elliot.cat/img/cinema-actor/${actor.nameImg}.jpg" width="100" height="auto">
-                    </a>
+                  <a id="actor-${actor.idActor}" title="Actor" href="${window.location.origin}/gestio/cinema/fitxa-actor/${actor.slug}">
+                    <img src="https://media.elliot.cat/img/cinema-actor/${actor.nameImg}.jpg" width="100" height="auto">
+                  </a>
                 </td>
                 <td>
-                    <a id="actor-${actor.idActor}" title="Actor" href="${window.location.origin}/gestio/cinema/fitxa-actor/${actor.slug}">
-                        ${actor.nom} ${actor.cognoms}
-                    </a>
+                  <a id="actor-${actor.idActor}" title="Actor" href="${window.location.origin}/gestio/cinema/fitxa-actor/${actor.slug}">
+                    ${actor.nom} ${actor.cognoms}
+                  </a>
                 </td>
                 <td>${actor.role}</td>
                 <td>
-                    <a href="${window.location.origin}/gestio/cinema/modifica-actor-serie/${actor.idCast}" class="btn btn-secondary btn-sm modificar-link">Modificar</a>
+                  <a href="${window.location.origin}/gestio/cinema/modifica-actor-serie/${actor.idCast}" class="btn btn-secondary btn-sm modificar-link">Modificar</a>
                 </td>
                 <td>
-                    <button type="button">
-                        Elimina
-                    </button>
+                  <button type="button">Elimina</button>
                 </td>
-            </tr>
-        `).join("");
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      `;
 
-      document.querySelector("#actors tbody").innerHTML = html;
+        container.innerHTML = tableHTML;
+
+      } else {
+        container.innerHTML = `<p class="text-muted">No hi ha actors assignats a aquesta sèrie.</p>`;
+      }
+
     } catch (error) {
       console.error("Error al obtener los actores:", error);
     }
