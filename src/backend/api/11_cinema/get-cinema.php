@@ -72,7 +72,7 @@ if (isset($_GET['pelicules'])) {
     $slug = $_GET['serie'];
     global $conn;
 
-    $query = "SELECT tv.id, tv.name, tv.startYear, tv.endYear, tv.season, tv.chapter, d.nom, d.cognoms, id.idioma_ca, tv.genre, tv.producer, c.pais_cat, img.nameImg, g.genere_ca, tv.descripcio, d.id AS idDirector, c.id AS idPais, img.id AS idImg, id.id As idLang, g.id AS idGen, pr.id AS idProductora, pr.productora, tv.dateCreated, tv.dateModified, tv.slug
+    $query = "SELECT tv.id, tv.name, tv.startYear, tv.endYear, tv.season, tv.chapter, d.nom, d.cognoms, id.idioma_ca, tv.genre, tv.producer, c.pais_cat, img.nameImg, g.genere_ca, tv.descripcio, d.id AS idDirector, d.slug AS slugDirector, c.id AS idPais, img.id AS idImg, id.id As idLang, g.id AS idGen, pr.id AS idProductora, pr.productora, tv.dateCreated, tv.dateModified, tv.slug
             FROM 11_db_cinema_series_tv AS tv
             INNER JOIN db_persones AS d ON tv.director = d.id
             INNER JOIN db_countries AS c ON tv.country = c.id
@@ -138,7 +138,7 @@ if (isset($_GET['pelicules'])) {
     $query = "SELECT a.nom, a.cognoms, a.id AS idActor, sa.role, img.nameImg, sa.id AS idCast, a.slug
         FROM 11_db_cinema_series_tv AS s
         LEFT JOIN 11_aux_cinema_actors_seriestv AS sa on s.id = sa.idSerie
-        LEFT JOIN db_persones AS a ON a.id = sa.idActor
+        INNER JOIN db_persones AS a ON a.id = sa.idActor
         LEFT JOIN db_img AS img ON a.img = img.id
         WHERE s.slug = :slug";
 
@@ -190,14 +190,14 @@ if (isset($_GET['pelicules'])) {
 } elseif (isset($_GET['actors'])) {
     global $conn;
     $data = array();
-    $stmt = $conn->prepare("SELECT a.id, a.cognoms, a.nom, c.pais_cat AS country, i.nameImg AS img, a.anyNaixement, a.anyDefuncio, a.slug
+    $stmt = $conn->prepare("SELECT a.id, a.cognoms, a.nom, CONCAT(a.cognoms, ', ', a.nom) AS nomComplet, c.pais_cat AS country, i.nameImg AS img, a.anyNaixement, a.anyDefuncio, a.slug
     FROM db_persones AS a
     LEFT JOIN db_countries AS c ON a.paisAutor = c.id
     LEFT JOIN db_img AS i ON a.img = i.id
-    WHERE grup = '[3]'
+    WHERE grup = '3'
     ORDER BY a.cognoms ASC");
     $stmt->execute();
-    if ($stmt->rowCount() === 0) echo ('No rows');
+    if ($stmt->rowCount() === 0) echo json_encode("No rows");
     while ($users = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $data[] = $users;
     }
@@ -382,6 +382,56 @@ if (isset($_GET['pelicules'])) {
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Enviar respuesta en formato JSON
+    echo json_encode($data);
+
+    // 2) Actor-pelicula
+    // ruta GET => "/api/cinema/get/?actorPelicula=35"
+} elseif (isset($_GET['actorPelicula'])) {
+    $id = $_GET['actorPelicula'];
+    global $conn;
+
+    $query = "SELECT cap.idMovie, cap.idActor, cap.role, p.pelicula, cap.id
+        FROM 11_aux_cinema_actors_pelicules AS cap
+        LEFT JOIN 11_db_pelicules AS p ON cap.idMovie = p.id
+        WHERE cap.id = :id";
+
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+    $stmt->execute();
+
+    // Verificar si hay resultados antes de hacer fetch
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(["error" => "No rows found"]);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($data);
+
+    // 2) Actor-serie tv
+    // ruta GET => "/api/cinema/get/?actorSerie=35"
+} elseif (isset($_GET['actorSerie'])) {
+    $id = $_GET['actorSerie'];
+    global $conn;
+
+    $query = "SELECT cas.idSerie, cas.idActor, cas.role, cas.id, s.name
+        FROM 11_aux_cinema_actors_seriestv AS cas
+        LEFT JOIN 11_db_cinema_series_tv AS s ON cas.idSerie = s.id
+        WHERE cas.id = :id";
+
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+    $stmt->execute();
+
+    // Verificar si hay resultados antes de hacer fetch
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(["error" => "No rows found"]);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($data);
 } else {
     // Si 'type', 'id' o 'token' están ausentes o 'type' no es 'user' en la URL

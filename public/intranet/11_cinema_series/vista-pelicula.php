@@ -51,7 +51,7 @@ $slug = $routeParams[0];
       <hr>
 
       <h4>Actors:</h4>
-      <button onclick="window.location.href='<?php echo APP_INTRANET . $url['cinema']; ?>/actor-pelicula/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Afegir actor a la pel·lícula</button>
+      <button onclick="window.location.href='<?php echo APP_INTRANET . $url['cinema']; ?>/inserir-actor-pelicula/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Afegir actor a la pel·lícula</button>
 
       <div class="table-responsive">
         <table class="table table-striped" id="booksAuthor">

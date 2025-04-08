@@ -13,27 +13,19 @@ $slug = $routeParams[0];
       <div class='fixaDades'>
 
         <div class='columna imatge'>
-          <img id="nameImg" src='' class='img-thumbnail' style='height:auto;width:auto;max-width:auto' alt='Author Photo' title='Author photo'>
+          <img id="nameImg" src='' class='img-thumbnail' alt='Author Photo' title='Author photo'>
         </div>
 
-        <div class="col">
+        <div class="columna">
 
           <div class="quadre-detalls">
-            <strong>
-              <p>Anys:
-            </strong><span id="anyNaixement"></span></p>
-
+            <p><strong>Anys:</strong><span id="anyNaixement"></span></p>
             <p><strong>Pais: </strong> <span id="pais_cat"></span></p>
-
             <p><strong>Professió: </strong><span id="professio_ca"></span></p>
-
             <p><strong>Web: </strong><a id="web" href='' target='_blank' title='web'>Web</a></p>
-
             <p><strong>Data de creació: </strong><span id="dateCreated"></span></p>
-
             <p><strong>Data de modificació: </strong><span id="dateModified"></span></p>
-
-            <p> <span id="descripcio"> </span></p>
+            <p><span id="descripcio"></span></p>
           </div>
         </div>
       </div>
@@ -47,8 +39,8 @@ $slug = $routeParams[0];
       </div>
 
     </div>
-</div>
-</main>
+
+  </main>
 </div>
 
 <script>
@@ -87,7 +79,7 @@ $slug = $routeParams[0];
 
           // Actualizar el DOM con la información recibida
           if (key === 'nameImg') {
-            document.getElementById('nameImg').src = `https://media.elliot.cat/img/library-author/${data2['nameImg']}.jpg`;
+            document.getElementById('nameImg').src = `https://media.elliot.cat/img/biblioteca-autor/${data2['nameImg']}.jpg`;
           }
 
           if (key === 'descripcio') {

@@ -88,27 +88,28 @@ if (isset($_GET['pelicula'])) {
   // a) Inserir Actor en pelicula
 } elseif (isset($_GET['actorSerie'])) {
 
-  $hasError = false;
+  // Obtener el cuerpo de la solicitud PUT
+  $input_data = file_get_contents("php://input");
 
-  if (empty($_POST["idActor"])) {
-    $hasError = true;
-  } else {
-    $idActor = filter_input(INPUT_POST, 'idActor', FILTER_SANITIZE_NUMBER_INT);
+  // Decodificar los datos JSON
+  $data = json_decode($input_data, true);
+
+  // Verificar si se recibieron datos
+  if ($data === null) {
+    // Error al decodificar JSON
+    header('HTTP/1.1 400 Bad Request');
+    echo json_encode(['error' => 'Error decoding JSON data']);
+    exit();
   }
 
-  if (empty($_POST["idSerie"])) {
-    $hasError = true;
-  } else {
-    $idSerie = filter_input(INPUT_POST, 'idSerie', FILTER_SANITIZE_NUMBER_INT);
-  }
+  // Ahora puedes acceder a los datos como un array asociativo
+  $hasError = false; // Inicializamos la variable $hasError como false
 
-  if (empty($_POST["role"])) {
-    $hasError = true;
-  } else {
-    $role = data_input($_POST["role"], ENT_NOQUOTES);
-  }
+  $idSerie = !empty($data['idSerie']) ? data_input($data['idSerie']) : ($hasError = true);
+  $idActor = !empty($data['idActor']) ? data_input($data['idActor']) : ($hasError = true);
+  $role = !empty($data['role']) ? data_input($data['role']) : ($hasError = true);
 
-  if (!isset($hasError)) {
+  if (!$hasError) {
     global $conn;
     $sql = "INSERT INTO 11_aux_cinema_actors_seriestv SET idActor=:idActor, idSerie=:idSerie, role=:role";
     $stmt = $conn->prepare($sql);
@@ -216,6 +217,52 @@ if (isset($_GET['pelicula'])) {
     echo json_encode($response);
   }
 
+  // a) Inserir Actor en pelicula
+} elseif (isset($_GET['actorPelicula'])) {
+
+  // Obtener el cuerpo de la solicitud PUT
+  $input_data = file_get_contents("php://input");
+
+  // Decodificar los datos JSON
+  $data = json_decode($input_data, true);
+
+  // Verificar si se recibieron datos
+  if ($data === null) {
+    // Error al decodificar JSON
+    header('HTTP/1.1 400 Bad Request');
+    echo json_encode(['error' => 'Error decoding JSON data']);
+    exit();
+  }
+
+  // Ahora puedes acceder a los datos como un array asociativo
+  $hasError = false; // Inicializamos la variable $hasError como false
+
+  $idMovie = !empty($data['idMovie']) ? data_input($data['idMovie']) : ($hasError = true);
+  $idActor = !empty($data['idActor']) ? data_input($data['idActor']) : ($hasError = true);
+  $role = !empty($data['role']) ? data_input($data['role']) : ($hasError = true);
+
+  if (!$hasError) {
+    global $conn;
+    $sql = "INSERT INTO 11_aux_cinema_actors_pelicules SET idActor=:idActor, idMovie=:idMovie, role=:role";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(":idActor", $idActor, PDO::PARAM_INT);
+    $stmt->bindParam(":idMovie", $idMovie, PDO::PARAM_INT);
+    $stmt->bindParam(":role", $role, PDO::PARAM_STR);
+
+    if ($stmt->execute()) {
+      // response output
+      $response['status'] = 'success';
+
+      header("Content-Type: application/json");
+      echo json_encode($response);
+    } else {
+      // response output - data error
+      $response['status'] = 'error';
+
+      header("Content-Type: application/json");
+      echo json_encode($response);
+    }
+  }
   // si no hi ha cap endpoint valid, mostrar error:
 } else {
   // response output - data error

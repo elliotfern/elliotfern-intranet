@@ -5,9 +5,6 @@
  * @update_book_ajax
  */
 
-use App\Helpers\JwtHelper;
-
-$secretKey = $_ENV['TOKEN'];
 
 // Configuración de cabeceras para aceptar JSON y responder JSON
 header("Content-Type: application/json");
@@ -69,8 +66,10 @@ if (isset($_GET['pelicula'])) {
   $dateModified = $timestamp;
 
   if (!$hasError) {
+
     global $conn;
     $sql = "UPDATE 11_db_pelicules SET pelicula=:pelicula, pelicula_es=:pelicula_es, director=:director, any=:any, genere=:genere, img=:img, pais=:pais, lang=:lang, dataVista=:dataVista, dateModified=:dateModified, descripcio=:descripcio, slug=:slug WHERE id=:id";
+
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":pelicula", $pelicula, PDO::PARAM_STR);
     $stmt->bindParam(":pelicula_es", $pelicula_es, PDO::PARAM_STR);
@@ -129,97 +128,32 @@ if (isset($_GET['pelicula'])) {
   // Ahora puedes acceder a los datos como un array asociativo
   $hasError = false; // Inicializamos la variable $hasError como false
 
-  // Verificación y filtrado para el campo 'name'
-  if (empty($data["name"])) {
-    $hasError = true;
-  } else {
-    $name = data_input($data['name']);
-  }
 
-  // Verificación y filtrado para el campo 'startYear'
-  if (empty($data["startYear"])) {
-    $hasError = true;
-  } else {
-    $startYear = $data['startYear'];
-  }
+  // Ahora puedes acceder a los datos como un array asociativo
+  $hasError = false; // Inicializamos la variable $hasError como false
 
-  // Verificación y filtrado para el campo 'endYear'
-  if (empty($data["endYear"])) {
-    $hasError = true;
-  } else {
-    $endYear = $data['endYear'];
-  }
+  $name          = !empty($data['name'])         ? data_input($data['name'])         : ($hasError = true);
+  $slug          = !empty($data['slug'])         ? data_input($data['slug'])         : ($hasError = true);
+  $startYear     = !empty($data['startYear'])    ? data_input($data['startYear'])    : ($hasError = true);
+  $endYear       = !empty($data['endYear'])      ? data_input($data['endYear'])      : ($hasError = false);
+  $season        = !empty($data['season'])       ? data_input($data['season'])       : ($hasError = true);
+  $chapter       = !empty($data['chapter'])      ? data_input($data['chapter'])      : ($hasError = true);
+  $director      = !empty($data['director'])     ? data_input($data['director'])     : ($hasError = true);
+  $lang          = !empty($data['lang'])         ? data_input($data['lang'])         : ($hasError = true);
+  $genre         = !empty($data['genre'])        ? data_input($data['genre'])        : ($hasError = true);
+  $producer      = !empty($data['producer'])     ? data_input($data['producer'])     : ($hasError = true);
+  $country       = !empty($data['country'])      ? data_input($data['country'])      : ($hasError = true);
+  $img           = !empty($data['img'])          ? data_input($data['img'])          : ($hasError = true);
+  $descripcio    = !empty($data['descripcio'])   ? data_input($data['descripcio'])   : ($hasError = true);
+  $id = !empty($data['id']) ? data_input($data['id']) : ($hasError = true);
 
-  // Verificación y filtrado para el campo 'season'
-  if (empty($data["season"])) {
-    $hasError = true;
-  } else {
-    $season = $data['season'];
-  }
-
-  // Verificación y filtrado para el campo 'chapter'
-  if (empty($data["chapter"])) {
-    $hasError = true;
-  } else {
-    $chapter = $data['chapter'];
-  }
-
-  // Verificación y filtrado para el campo 'director'
-  if (empty($data["director"])) {
-    $hasError = true;
-  } else {
-    $director = $data['director'];
-  }
-
-  // Verificación y filtrado para el campo 'lang'
-  if (empty($data["lang"])) {
-    $hasError = true;
-  } else {
-    $lang = $data['lang'];
-  }
-
-  // Verificación y filtrado para el campo 'img'
-  if (empty($data["img"])) {
-    $hasError = true;
-  } else {
-    $img = $data['img'];
-  }
-
-  // Verificación y filtrado para el campo 'genre'
-  if (empty($data["genre"])) {
-    $hasError = true;
-  } else {
-    $genre = $data['genre'];
-  }
-
-  // Verificación y filtrado para el campo 'producer'
-  if (empty($data["producer"])) {
-    $hasError = true;
-  } else {
-    $producer = $data['producer'];
-  }
-
-  // Verificación y filtrado para el campo 'country'
-  if (empty($data["country"])) {
-    $hasError = true;
-  } else {
-    $country = $data['country'];
-  }
-
-  // Verificación y filtrado para el campo 'descripcio'
-  if (empty($data["descripcio"])) {
-    $hasError = true;
-  } else {
-    $descripcio = html_entity_decode($data['descripcio']);
-  }
-
-  $slug = $data["slug"];
-  $id = $data['id'];
   $dateModified = date('Y-m-d');
 
-  if ($hasError == false) {
+  if (!$hasError) {
+
     global $conn;
     $sql = "UPDATE 11_db_cinema_series_tv SET name=:name, startYear=:startYear, endYear=:endYear, season=:season, chapter=:chapter, director=:director, lang=:lang, img=:img, genre=:genre, producer=:producer, country=:country, dateModified=:dateModified, descripcio=:descripcio, slug=:slug WHERE id=:id";
+
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":name", $name, PDO::PARAM_STR);
     $stmt->bindParam(":startYear", $startYear, PDO::PARAM_STR);
@@ -253,6 +187,114 @@ if (isset($_GET['pelicula'])) {
   } else {
     // response output - data error
     $response['status'] = 'error /hasError/ dades';
+
+    header("Content-Type: application/json");
+    echo json_encode($response);
+  }
+
+  // a) Inserir Actor en pelicula
+} elseif (isset($_GET['actorPelicula'])) {
+
+  // Obtener el cuerpo de la solicitud PUT
+  $input_data = file_get_contents("php://input");
+
+  // Decodificar los datos JSON
+  $data = json_decode($input_data, true);
+
+  // Verificar si se recibieron datos
+  if ($data === null) {
+    // Error al decodificar JSON
+    header('HTTP/1.1 400 Bad Request');
+    echo json_encode(['error' => 'Error decoding JSON data']);
+    exit();
+  }
+
+  // Ahora puedes acceder a los datos como un array asociativo
+  $hasError = false; // Inicializamos la variable $hasError como false
+
+  $idMovie = !empty($data['idMovie']) ? data_input($data['idMovie']) : ($hasError = true);
+  $idActor = !empty($data['idActor']) ? data_input($data['idActor']) : ($hasError = true);
+  $role = !empty($data['role']) ? data_input($data['role']) : ($hasError = true);
+  $id = !empty($data['id']) ? data_input($data['id']) : ($hasError = true);
+
+  if (!$hasError) {
+
+    global $conn;
+
+    $sql = "UPDATE 11_aux_cinema_actors_pelicules SET idActor=:idActor, idMovie=:idMovie, role=:role WHERE id=:id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(":idActor", $idActor, PDO::PARAM_INT);
+    $stmt->bindParam(":idMovie", $idMovie, PDO::PARAM_INT);
+    $stmt->bindParam(":role", $role, PDO::PARAM_STR);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+
+    if ($stmt->execute()) {
+      // response output
+      $response['status'] = 'success';
+
+      header("Content-Type: application/json");
+      echo json_encode($response);
+    } else {
+      // response output - data error
+      $response['status'] = 'error';
+
+      header("Content-Type: application/json");
+      echo json_encode($response);
+    }
+  }
+
+  // a) Inserir Actor en pelicula
+} elseif (isset($_GET['actorSerie'])) {
+
+  // Obtener el cuerpo de la solicitud PUT
+  $input_data = file_get_contents("php://input");
+
+  // Decodificar los datos JSON
+  $data = json_decode($input_data, true);
+
+  // Verificar si se recibieron datos
+  if ($data === null) {
+    // Error al decodificar JSON
+    header('HTTP/1.1 400 Bad Request');
+    echo json_encode(['error' => 'Error decoding JSON data']);
+    exit();
+  }
+
+  // Ahora puedes acceder a los datos como un array asociativo
+  $hasError = false; // Inicializamos la variable $hasError como false
+
+  $idSerie = !empty($data['idSerie']) ? data_input($data['idSerie']) : ($hasError = true);
+  $idActor = !empty($data['idActor']) ? data_input($data['idActor']) : ($hasError = true);
+  $role = !empty($data['role']) ? data_input($data['role']) : ($hasError = true);
+  $id = !empty($data['id']) ? data_input($data['id']) : ($hasError = true);
+
+  if (!$hasError) {
+
+    global $conn;
+    $sql = "UPDATE 11_aux_cinema_actors_seriestv SET idActor=:idActor, idSerie=:idSerie, role=:role WHERE id=:id";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(":idActor", $idActor, PDO::PARAM_INT);
+    $stmt->bindParam(":idSerie", $idSerie, PDO::PARAM_INT);
+    $stmt->bindParam(":role", $role, PDO::PARAM_STR);
+    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+
+    if ($stmt->execute()) {
+      // response output
+      $response['status'] = 'success';
+
+      header("Content-Type: application/json");
+      echo json_encode($response);
+    } else {
+      // response output - data error
+      $response['status'] = 'error';
+
+      header("Content-Type: application/json");
+      echo json_encode($response);
+    }
+  } else {
+    // response output - data error
+    $response['status'] = 'error';
 
     header("Content-Type: application/json");
     echo json_encode($response);

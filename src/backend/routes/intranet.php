@@ -71,6 +71,12 @@ $base_routes = [
     '/gestio/cinema/nova-serie' => 'public/intranet/11_cinema_series/form-serie.php',
     '/gestio/cinema/modifica-serie/{id}' => 'public/intranet/11_cinema_series/form-serie.php',
 
+    '/gestio/cinema/inserir-actor-pelicula/{slug}' => 'public/intranet/11_cinema_series/form-actor-pelicula.php',
+    '/gestio/cinema/modifica-actor-pelicula/{slug}' => 'public/intranet/11_cinema_series/form-actor-pelicula.php',
+
+    '/gestio/cinema/inserir-actor-serie/{slug}' => 'public/intranet/11_cinema_series/form-actor-serie.php',
+    '/gestio/cinema/modifica-actor-serie/{slug}' => 'public/intranet/11_cinema_series/form-actor-serie.php',
+
     // XARXES SOCIALS
     '/gestio/xarxes-socials' => 'public/intranet/12_xarxes_socials/index.php',
     '/gestio/xarxes-socials/mastodon' => 'public/intranet/12_xarxes_socials/lector-mastodon.php',
@@ -261,6 +267,42 @@ $routes = [
 
     '/gestio/cinema/modifica-serie/{id}' => [
         'view' => 'public/intranet/11_cinema_series/form-serie.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/cinema/inserir-actor-pelicula/{slug}' => [
+        'view' => 'public/intranet/11_cinema_series/form-actor-pelicula.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/cinema/modifica-actor-pelicula/{slug}' => [
+        'view' => 'public/intranet/11_cinema_series/form-actor-pelicula.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/cinema/inserir-actor-serie/{slug}' => [
+        'view' => 'public/intranet/11_cinema_series/form-actor-serie.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    '/gestio/cinema/modifica-actor-serie/{slug}' => [
+        'view' => 'public/intranet/11_cinema_series/form-actor-serie.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,

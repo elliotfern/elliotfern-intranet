@@ -90,5 +90,37 @@ export function cinema() {
         transmissioDadesDB(event, 'POST', 'modificarPeli', '/api/cinema/post/?pelicula');
       });
     }
+  } else if (pageType[2] === 'inserir-actor-pelicula') {
+    const serie = document.getElementById('inserirActorPelicula');
+    if (serie) {
+      // Lanzar actualizador de datos
+      serie.addEventListener('submit', function (event) {
+        transmissioDadesDB(event, 'POST', 'inserirActorPelicula', '/api/cinema/post/?actorPelicula');
+      });
+    }
+  } else if (pageType[2] === 'modifica-actor-pelicula') {
+    const serie = document.getElementById('inserirActorPelicula');
+    if (serie) {
+      // Lanzar actualizador de datos
+      serie.addEventListener('submit', function (event) {
+        transmissioDadesDB(event, 'PUT', 'inserirActorPelicula', '/api/cinema/put/?actorPelicula');
+      });
+    }
+  } else if (pageType[2] === 'inserir-actor-serie') {
+    const serie = document.getElementById('inserirActorSerie');
+    if (serie) {
+      // Lanzar actualizador de datos
+      serie.addEventListener('submit', function (event) {
+        transmissioDadesDB(event, 'POST', 'inserirActorSerie', '/api/cinema/post/?actorSerie');
+      });
+    }
+  } else if (pageType[2] === 'modifica-actor-serie') {
+    const serie = document.getElementById('inserirActorSerie');
+    if (serie) {
+      // Lanzar actualizador de datos
+      serie.addEventListener('submit', function (event) {
+        transmissioDadesDB(event, 'PUT', 'inserirActorSerie', '/api/cinema/put/?actorSerie');
+      });
+    }
   }
 }

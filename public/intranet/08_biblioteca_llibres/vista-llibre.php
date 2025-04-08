@@ -13,7 +13,7 @@ $slug = $routeParams[0];
       <div class='fixaDades'>
 
         <div class='columna imatge'>
-          <img id="nameImg" src='' class='img-thumbnail img-fluid rounded mx-auto d-block' style='height:auto;width:auto;max-width:auto' alt='Llibre Photo' title='Llibre photo'>
+          <img id="nameImg" src='' class='img-thumbnail img-fluid rounded mx-auto d-block' alt='Llibre Photo' title='Llibre photo'>
         </div>
 
         <div class="columna">
@@ -71,7 +71,7 @@ $slug = $routeParams[0];
 
           // Actualizar el DOM con los datos recibidos
           document.getElementById('titolBook').textContent = data.titol;
-          document.getElementById('nameImg').src = `https://media.elliot.cat/img/library-book/${data.nameImg}.jpg`;
+          document.getElementById('nameImg').src = `https://media.elliot.cat/img/biblioteca-llibre/${data.nameImg}.jpg`;
           document.getElementById('linkAutor').href = `${window.location.origin}/gestio/biblioteca/fitxa-autor/${data.slugAutor}`;
           document.getElementById('titolEng').textContent = data.titolEng;
           document.getElementById('nom').textContent = data.nom;

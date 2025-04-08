@@ -21,8 +21,8 @@ $slug = $routeParams[0];
                         <p><strong> Anys: </strong><span id="anyNaixement"></span></p>
                         <p id="AutDescrip"> </p>
                         <p><strong>Pais: </strong><span id="pais_cat"></span></p>
-                        <p><strong>Professió: </strong><span id="ocupacio"></span></p>
-                        <p><strong>Pàgina web: </strong><a id="web" href='' target='_blank' title='Wikipedia'>Web</a></p>
+                        <p><strong>Professió: </strong><span id="professio_ca"></span></p>
+                        <p><strong>Pàgina web: </strong><a id="web" href='' target='_blank' title='web'>Web</a></p>
                         <p><strong>Data de creació: </strong><span id="dateCreated"></span></p>
                         <p><strong>Data de modificació: </strong><span id="dateModified"></span></p>
                     </div>
@@ -92,18 +92,10 @@ $slug = $routeParams[0];
                     }
 
                     // Casos especiales: Director/a
-                    if (key === 'nom' || key === 'cognoms') {
-                        const directorUrl = document.getElementById('directorUrl');
+                    if (key === 'web') {
+                        const directorUrl = document.getElementById('web');
                         if (directorUrl && directorUrl.tagName === 'A') {
-                            directorUrl.href = `/directors/${data2['director']}`; // Añadir la URL del director
-                        }
-                    }
-
-                    // Casos especiales: País
-                    if (key === 'pais_cat') {
-                        const paisUrl = document.getElementById('paisUrl');
-                        if (paisUrl && paisUrl.tagName === 'A') {
-                            paisUrl.href = `/paisos/${data2['pais']}`; // Añadir la URL del país
+                            directorUrl.href = `${data2['web']}`; // Añadir la URL del director
                         }
                     }
 
@@ -199,7 +191,7 @@ $slug = $routeParams[0];
             data.forEach(pelicula => {
                 tableHTML += `
                 <tr>
-                    <td><a href="/gestio/cinema/fitxa-${categoria}/${pelicula.slug}">${pelicula.titol}</a></td>
+                    <td><a href="${window.location.href}/gestio/cinema/fitxa-${categoria}/${pelicula.slug}">${pelicula.titol}</a></td>
                     <td>${pelicula.anyInici}${pelicula.anyFi ? ' - ' + pelicula.anyFi : ''}</td>
                     <td>${pelicula.role}</td>
                 </tr>

@@ -41,7 +41,7 @@ $slug = $routeParams[0];
 
       <hr>
       <h4>Actors:</h4>
-      <p><a href="/cinema/afegir/actor/serie/>" class="btn btn-sm btn-warning">Afegir actor a la pel·lícula</a></p>
+      <button onclick="window.location.href='<?php echo APP_INTRANET . $url['cinema']; ?>/inserir-actor-serie/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Afegir actor a la sèrie</button>
 
       <div class="table-responsive">
         <table class="table table-striped" id="actors">
@@ -106,7 +106,7 @@ $slug = $routeParams[0];
           if (key === 'nom' || key === 'cognoms') {
             const directorUrl = document.getElementById('directorUrl');
             if (directorUrl && directorUrl.tagName === 'A') {
-              directorUrl.href = `/directors/${data2['director']}`; // Añadir la URL del director
+              directorUrl.href = `${window.location.origin}/gestio/cinema/fitxa-director/${data2['slugDirector']}`; // Añadir la URL del director
             }
           }
 
@@ -200,10 +200,10 @@ $slug = $routeParams[0];
                 </td>
                 <td>${actor.role}</td>
                 <td>
-                    <a href="${window.location.origin}/biblioteca/modifica/llibre/${actor.id}" class="btn btn-secondary btn-sm modificar-link">Modificar</a>
+                    <a href="${window.location.origin}/gestio/cinema/modifica-actor-serie/${actor.idCast}" class="btn btn-secondary btn-sm modificar-link">Modificar</a>
                 </td>
                 <td>
-                    <button type="button" onclick="btnDeleteBook(${actor.id})" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteBook" data-id="${actor.id}">
+                    <button type="button">
                         Elimina
                     </button>
                 </td>

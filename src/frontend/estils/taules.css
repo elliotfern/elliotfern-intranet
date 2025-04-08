@@ -1,63 +1,73 @@
-/* TAULES */
-
 /* Contenedor de la tabla para hacerla responsive */
 .table-responsive {
-  margin: 20px 0; /* Espaciado alrededor de la tabla */
+  margin: 20px 0;
+  overflow-x: auto; /* Permite scroll horizontal */
+  -webkit-overflow-scrolling: touch; /* Mejora la experiencia en iOS */
 }
 
 /* Estilos generales para la tabla */
 .table {
-  width: 100%; /* La tabla ocupa todo el ancho del contenedor */
-  border-collapse: collapse; /* Elimina los espacios entre celdas */
-  table-layout: fixed; /* Fija el tamaño de las celdas, haciendo que se ajusten al contenido */
-  font-size: 14px; /* Tamaño de fuente para los datos de la tabla */
-  table-layout: auto;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 600px; /* Evita que la tabla se rompa al reducir mucho el ancho */
 }
 
 /* Estilos para las filas de la tabla */
 .table-striped tbody tr:nth-child(odd) {
-  background-color: #f9f9f9; /* Color de fondo para las filas impares */
+  background-color: #f9f9f9;
 }
 
 .table tbody tr:hover {
-  background-color: #eaeaea; /* Color de fondo al pasar el ratón por encima de una fila */
+  background-color: #eaeaea;
 }
 
-/* Estilos para el encabezado de la tabla */
+/* Encabezado */
 .table-primary {
-  background-color: #121518; /* Color de fondo del encabezado */
-  color: white; /* Color de texto del encabezado */
+  background-color: #121518;
+  color: white;
 }
 
 .table th {
-  padding: 12px 15px; /* Espaciado alrededor del texto en las celdas del encabezado */
-  text-align: left; /* Alineación del texto a la izquierda */
-  font-weight: bold; /* Hace que el texto sea negrita */
-  text-transform: uppercase; /* Convierte el texto a mayúsculas */
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-/* Estilos para las celdas de la tabla */
+/* Celdas */
 .table td {
-  padding: 12px 15px; /* Espaciado dentro de las celdas */
-  text-align: left; /* Alineación del texto a la izquierda */
-  vertical-align: middle; /* Alineación vertical centrada */
-  border-bottom: 1px solid #ddd; /* Línea de separación entre filas */
+  padding: 12px 15px;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid #ddd;
 }
 
-/* Bordes redondeados en las celdas */
+/* Bordes redondeados */
 .table th,
 .table td {
   border-radius: 5px;
 }
 
-/* Estilo para las celdas vacías */
+/* Celdas de acciones */
 .table td:last-child,
 .table th:last-child {
   width: 1px;
-  white-space: nowrap; /* Asegura que no haya salto de línea */
+  white-space: nowrap;
 }
 
-/* Estilos para las acciones (botones, etc.) dentro de las celdas vacías */
 .table td:last-child {
-  text-align: left; /* Centra los botones o enlaces en la última columna */
+  text-align: left;
+}
+
+/* Media query para móviles */
+@media (max-width: 768px) {
+  .table-responsive {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+
+  .table {
+    min-width: 100%; /* Sigue permitiendo scroll horizontal */
+  }
 }

@@ -1312,70 +1312,80 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `/* TAULES */
-
-/* Contenedor de la tabla para hacerla responsive */
+___CSS_LOADER_EXPORT___.push([module.id, `/* Contenedor de la tabla para hacerla responsive */
 .table-responsive {
-  margin: 20px 0; /* Espaciado alrededor de la tabla */
+  margin: 20px 0;
+  overflow-x: auto; /* Permite scroll horizontal */
+  -webkit-overflow-scrolling: touch; /* Mejora la experiencia en iOS */
 }
 
 /* Estilos generales para la tabla */
 .table {
-  width: 100%; /* La tabla ocupa todo el ancho del contenedor */
-  border-collapse: collapse; /* Elimina los espacios entre celdas */
-  table-layout: fixed; /* Fija el tamaño de las celdas, haciendo que se ajusten al contenido */
-  font-size: 14px; /* Tamaño de fuente para los datos de la tabla */
-  table-layout: auto;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 600px; /* Evita que la tabla se rompa al reducir mucho el ancho */
 }
 
 /* Estilos para las filas de la tabla */
 .table-striped tbody tr:nth-child(odd) {
-  background-color: #f9f9f9; /* Color de fondo para las filas impares */
+  background-color: #f9f9f9;
 }
 
 .table tbody tr:hover {
-  background-color: #eaeaea; /* Color de fondo al pasar el ratón por encima de una fila */
+  background-color: #eaeaea;
 }
 
-/* Estilos para el encabezado de la tabla */
+/* Encabezado */
 .table-primary {
-  background-color: #121518; /* Color de fondo del encabezado */
-  color: white; /* Color de texto del encabezado */
+  background-color: #121518;
+  color: white;
 }
 
 .table th {
-  padding: 12px 15px; /* Espaciado alrededor del texto en las celdas del encabezado */
-  text-align: left; /* Alineación del texto a la izquierda */
-  font-weight: bold; /* Hace que el texto sea negrita */
-  text-transform: uppercase; /* Convierte el texto a mayúsculas */
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-/* Estilos para las celdas de la tabla */
+/* Celdas */
 .table td {
-  padding: 12px 15px; /* Espaciado dentro de las celdas */
-  text-align: left; /* Alineación del texto a la izquierda */
-  vertical-align: middle; /* Alineación vertical centrada */
-  border-bottom: 1px solid #ddd; /* Línea de separación entre filas */
+  padding: 12px 15px;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid #ddd;
 }
 
-/* Bordes redondeados en las celdas */
+/* Bordes redondeados */
 .table th,
 .table td {
   border-radius: 5px;
 }
 
-/* Estilo para las celdas vacías */
+/* Celdas de acciones */
 .table td:last-child,
 .table th:last-child {
   width: 1px;
-  white-space: nowrap; /* Asegura que no haya salto de línea */
+  white-space: nowrap;
 }
 
-/* Estilos para las acciones (botones, etc.) dentro de las celdas vacías */
 .table td:last-child {
-  text-align: left; /* Centra los botones o enlaces en la última columna */
+  text-align: left;
 }
-`, "",{"version":3,"sources":["webpack://./src/frontend/estils/taules.css"],"names":[],"mappings":"AAAA,WAAW;;AAEX,mDAAmD;AACnD;EACE,cAAc,EAAE,oCAAoC;AACtD;;AAEA,oCAAoC;AACpC;EACE,WAAW,EAAE,gDAAgD;EAC7D,yBAAyB,EAAE,sCAAsC;EACjE,mBAAmB,EAAE,uEAAuE;EAC5F,eAAe,EAAE,gDAAgD;EACjE,kBAAkB;AACpB;;AAEA,uCAAuC;AACvC;EACE,yBAAyB,EAAE,0CAA0C;AACvE;;AAEA;EACE,yBAAyB,EAAE,4DAA4D;AACzF;;AAEA,2CAA2C;AAC3C;EACE,yBAAyB,EAAE,kCAAkC;EAC7D,YAAY,EAAE,kCAAkC;AAClD;;AAEA;EACE,kBAAkB,EAAE,+DAA+D;EACnF,gBAAgB,EAAE,wCAAwC;EAC1D,iBAAiB,EAAE,kCAAkC;EACrD,yBAAyB,EAAE,oCAAoC;AACjE;;AAEA,wCAAwC;AACxC;EACE,kBAAkB,EAAE,mCAAmC;EACvD,gBAAgB,EAAE,wCAAwC;EAC1D,sBAAsB,EAAE,iCAAiC;EACzD,6BAA6B,EAAE,oCAAoC;AACrE;;AAEA,qCAAqC;AACrC;;EAEE,kBAAkB;AACpB;;AAEA,kCAAkC;AAClC;;EAEE,UAAU;EACV,mBAAmB,EAAE,uCAAuC;AAC9D;;AAEA,0EAA0E;AAC1E;EACE,gBAAgB,EAAE,sDAAsD;AAC1E","sourcesContent":["/* TAULES */\n\n/* Contenedor de la tabla para hacerla responsive */\n.table-responsive {\n  margin: 20px 0; /* Espaciado alrededor de la tabla */\n}\n\n/* Estilos generales para la tabla */\n.table {\n  width: 100%; /* La tabla ocupa todo el ancho del contenedor */\n  border-collapse: collapse; /* Elimina los espacios entre celdas */\n  table-layout: fixed; /* Fija el tamaño de las celdas, haciendo que se ajusten al contenido */\n  font-size: 14px; /* Tamaño de fuente para los datos de la tabla */\n  table-layout: auto;\n}\n\n/* Estilos para las filas de la tabla */\n.table-striped tbody tr:nth-child(odd) {\n  background-color: #f9f9f9; /* Color de fondo para las filas impares */\n}\n\n.table tbody tr:hover {\n  background-color: #eaeaea; /* Color de fondo al pasar el ratón por encima de una fila */\n}\n\n/* Estilos para el encabezado de la tabla */\n.table-primary {\n  background-color: #121518; /* Color de fondo del encabezado */\n  color: white; /* Color de texto del encabezado */\n}\n\n.table th {\n  padding: 12px 15px; /* Espaciado alrededor del texto en las celdas del encabezado */\n  text-align: left; /* Alineación del texto a la izquierda */\n  font-weight: bold; /* Hace que el texto sea negrita */\n  text-transform: uppercase; /* Convierte el texto a mayúsculas */\n}\n\n/* Estilos para las celdas de la tabla */\n.table td {\n  padding: 12px 15px; /* Espaciado dentro de las celdas */\n  text-align: left; /* Alineación del texto a la izquierda */\n  vertical-align: middle; /* Alineación vertical centrada */\n  border-bottom: 1px solid #ddd; /* Línea de separación entre filas */\n}\n\n/* Bordes redondeados en las celdas */\n.table th,\n.table td {\n  border-radius: 5px;\n}\n\n/* Estilo para las celdas vacías */\n.table td:last-child,\n.table th:last-child {\n  width: 1px;\n  white-space: nowrap; /* Asegura que no haya salto de línea */\n}\n\n/* Estilos para las acciones (botones, etc.) dentro de las celdas vacías */\n.table td:last-child {\n  text-align: left; /* Centra los botones o enlaces en la última columna */\n}\n"],"sourceRoot":""}]);
+
+/* Media query para móviles */
+@media (max-width: 768px) {
+  .table-responsive {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+
+  .table {
+    min-width: 100%; /* Sigue permitiendo scroll horizontal */
+  }
+}
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/taules.css"],"names":[],"mappings":"AAAA,mDAAmD;AACnD;EACE,cAAc;EACd,gBAAgB,EAAE,8BAA8B;EAChD,iCAAiC,EAAE,iCAAiC;AACtE;;AAEA,oCAAoC;AACpC;EACE,WAAW;EACX,yBAAyB;EACzB,eAAe;EACf,gBAAgB,EAAE,0DAA0D;AAC9E;;AAEA,uCAAuC;AACvC;EACE,yBAAyB;AAC3B;;AAEA;EACE,yBAAyB;AAC3B;;AAEA,eAAe;AACf;EACE,yBAAyB;EACzB,YAAY;AACd;;AAEA;EACE,kBAAkB;EAClB,gBAAgB;EAChB,iBAAiB;EACjB,yBAAyB;AAC3B;;AAEA,WAAW;AACX;EACE,kBAAkB;EAClB,gBAAgB;EAChB,sBAAsB;EACtB,6BAA6B;AAC/B;;AAEA,uBAAuB;AACvB;;EAEE,kBAAkB;AACpB;;AAEA,uBAAuB;AACvB;;EAEE,UAAU;EACV,mBAAmB;AACrB;;AAEA;EACE,gBAAgB;AAClB;;AAEA,6BAA6B;AAC7B;EACE;IACE,sBAAsB;IACtB,kBAAkB;EACpB;;EAEA;IACE,eAAe,EAAE,wCAAwC;EAC3D;AACF","sourcesContent":["/* Contenedor de la tabla para hacerla responsive */\n.table-responsive {\n  margin: 20px 0;\n  overflow-x: auto; /* Permite scroll horizontal */\n  -webkit-overflow-scrolling: touch; /* Mejora la experiencia en iOS */\n}\n\n/* Estilos generales para la tabla */\n.table {\n  width: 100%;\n  border-collapse: collapse;\n  font-size: 14px;\n  min-width: 600px; /* Evita que la tabla se rompa al reducir mucho el ancho */\n}\n\n/* Estilos para las filas de la tabla */\n.table-striped tbody tr:nth-child(odd) {\n  background-color: #f9f9f9;\n}\n\n.table tbody tr:hover {\n  background-color: #eaeaea;\n}\n\n/* Encabezado */\n.table-primary {\n  background-color: #121518;\n  color: white;\n}\n\n.table th {\n  padding: 12px 15px;\n  text-align: left;\n  font-weight: bold;\n  text-transform: uppercase;\n}\n\n/* Celdas */\n.table td {\n  padding: 12px 15px;\n  text-align: left;\n  vertical-align: middle;\n  border-bottom: 1px solid #ddd;\n}\n\n/* Bordes redondeados */\n.table th,\n.table td {\n  border-radius: 5px;\n}\n\n/* Celdas de acciones */\n.table td:last-child,\n.table th:last-child {\n  width: 1px;\n  white-space: nowrap;\n}\n\n.table td:last-child {\n  text-align: left;\n}\n\n/* Media query para móviles */\n@media (max-width: 768px) {\n  .table-responsive {\n    border: 1px solid #ddd;\n    border-radius: 8px;\n  }\n\n  .table {\n    min-width: 100%; /* Sigue permitiendo scroll horizontal */\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1861,11 +1871,11 @@ function llistatPeliculaActors(id) {
             let html = '';
             for (let i = 0; i < data.length; i++) {
                 html += '<tr>';
-                html += '<td><img src="https://media.elliot.cat/img/cinema-actor/' + data[i].nameImg + '.jpg" alt="Descripción de la imagen" width="auto" height="150"></td>';
+                html += '<td><a id="' + data[i].id + '" title="Actor" href="' + window.location.origin + '/gestio/cinema/fitxa-actor/' + data[i].slug + '"><img src="https://media.elliot.cat/img/cinema-actor/' + data[i].nameImg + '.jpg" alt="Imatge" width="auto" height="150"></a></td>';
                 html += '<td><a id="' + data[i].id + '" title="Actor" href="' + window.location.origin + '/gestio/cinema/fitxa-actor/' + data[i].slug + '">' + data[i].nom + ' ' + data[i].cognoms + '</a></td>';
                 html += '<td>' + data[i].role + '</td>';
-                html += '<td><a href="' + window.location.origin + '/gestio/persona/modifica-persona/' + data[i].slug + '" class="btn btn-secondary btn-sm modificar-link">Modificar</a></td>';
-                html += '<td><button type="button" onclick="btnDeleteBook(' + data[i].id + ')" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteBook" data-id="' + data[i].id + '">Elimina</button></td>';
+                html += '<td><a href="' + window.location.origin + '/gestio/cinema/modifica-actor-pelicula/' + data[i].idCast + '" class="btn btn-secondary btn-sm modificar-link">Modificar</a></td>';
+                html += '<td><button type="button" class="btn btn-sm btn-danger">Elimina</button></td>';
                 html += '</tr>';
             }
             // Actualizar el contenido del tbody
@@ -2414,6 +2424,42 @@ function cinema() {
             // Lanzar actualizador de datos
             serie.addEventListener('submit', function (event) {
                 (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'modificarPeli', '/api/cinema/post/?pelicula');
+            });
+        }
+    }
+    else if (pageType[2] === 'inserir-actor-pelicula') {
+        const serie = document.getElementById('inserirActorPelicula');
+        if (serie) {
+            // Lanzar actualizador de datos
+            serie.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'inserirActorPelicula', '/api/cinema/post/?actorPelicula');
+            });
+        }
+    }
+    else if (pageType[2] === 'modifica-actor-pelicula') {
+        const serie = document.getElementById('inserirActorPelicula');
+        if (serie) {
+            // Lanzar actualizador de datos
+            serie.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'inserirActorPelicula', '/api/cinema/put/?actorPelicula');
+            });
+        }
+    }
+    else if (pageType[2] === 'inserir-actor-serie') {
+        const serie = document.getElementById('inserirActorSerie');
+        if (serie) {
+            // Lanzar actualizador de datos
+            serie.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'inserirActorSerie', '/api/cinema/post/?actorSerie');
+            });
+        }
+    }
+    else if (pageType[2] === 'modifica-actor-serie') {
+        const serie = document.getElementById('inserirActorSerie');
+        if (serie) {
+            // Lanzar actualizador de datos
+            serie.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'inserirActorSerie', '/api/cinema/put/?actorSerie');
             });
         }
     }

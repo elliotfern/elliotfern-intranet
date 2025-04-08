@@ -28,6 +28,7 @@
           <tbody></tbody>
         </table>
       </div>
+
     </div>
   </main>
 </div>
@@ -50,7 +51,7 @@
             html += `<tr>
             <td class="text-center">
               <a id="${author.id}" title="Author page" href="./fitxa-autor/${author.slug}">
-                <img src="https://media.elliot.cat/img/library-author/${author.nameImg}.jpg" style="height:70px">
+                <img src="https://media.elliot.cat/img/biblioteca-autor/${author.nameImg}.jpg" style="height:70px">
               </a>
             </td>
             <td>

@@ -39,12 +39,22 @@ $servidorMedia = '/home/epgylzqu/media.elliotfern.com/img/';
 // Verificar y sanitizar el tipo de imagen
 $type = isset($_POST['typeImg']) ? (int)$_POST['typeImg'] : 0;
 $allowed_types = [
-    1 => 'library-author',
-    2 => 'library-book',
-    7 => 'cinema-television',
-    8 => 'cinema-movie',
+    1 => 'biblioteca-autor',
+    2 => 'biblioteca-llibre',
+    3 => 'historia-imatge',
+    4 => 'historia-esdeveniment',
+    5 => 'historia-persona',
+    6 => 'historia-organitzacio',
+    7 => 'cinema-serie',
+    8 => 'cinema-pelicula',
     9 => 'cinema-actor',
+    10 => 'historia-imatge-min',
+    11 => 'viatge',
+    12 => 'historia-mapa',
+    13 => 'blog',
     14 => 'cinema-director',
+    15 => 'historia-infografia',
+    16 => 'historia-cronologia',
 ];
 $typeName = $allowed_types[$type] ?? 'elliotfern';
 

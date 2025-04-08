@@ -25,15 +25,15 @@ export async function llistatPeliculaActors(id: string) {
     for (let i = 0; i < data.length; i++) {
       html += '<tr>';
 
-      html += '<td><img src="https://media.elliot.cat/img/cinema-actor/' + data[i].nameImg + '.jpg" alt="Descripción de la imagen" width="auto" height="150"></td>';
+      html += '<td><a id="' + data[i].id + '" title="Actor" href="' + window.location.origin + '/gestio/cinema/fitxa-actor/' + data[i].slug + '"><img src="https://media.elliot.cat/img/cinema-actor/' + data[i].nameImg + '.jpg" alt="Imatge" width="auto" height="150"></a></td>';
 
       html += '<td><a id="' + data[i].id + '" title="Actor" href="' + window.location.origin + '/gestio/cinema/fitxa-actor/' + data[i].slug + '">' + data[i].nom + ' ' + data[i].cognoms + '</a></td>';
 
       html += '<td>' + data[i].role + '</td>';
 
-      html += '<td><a href="' + window.location.origin + '/gestio/persona/modifica-persona/' + data[i].slug + '" class="btn btn-secondary btn-sm modificar-link">Modificar</a></td>';
+      html += '<td><a href="' + window.location.origin + '/gestio/cinema/modifica-actor-pelicula/' + data[i].idCast + '" class="btn btn-secondary btn-sm modificar-link">Modificar</a></td>';
 
-      html += '<td><button type="button" onclick="btnDeleteBook(' + data[i].id + ')" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDeleteBook" data-id="' + data[i].id + '">Elimina</button></td>';
+      html += '<td><button type="button" class="btn btn-sm btn-danger">Elimina</button></td>';
       html += '</tr>';
     }
 
