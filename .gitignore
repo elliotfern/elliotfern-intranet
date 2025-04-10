@@ -10,6 +10,7 @@ error_log
 /logs/
 /temp/
 /_old/
+/img/
 
 # Ignorar directorio de dependencias (ejemplo para PHP y Composer)
 /vendor/

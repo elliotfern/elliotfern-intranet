@@ -1,5 +1,5 @@
 // AJAX PROCESS > PHP API : PER ACTUALIZAR FORMULARIS A LA BD
-export async function transmissioDadesDB(event: Event, tipus:string, formId: string, urlAjax: string): Promise<void> {
+export async function transmissioDadesDB(event: Event, tipus: string, formId: string, urlAjax: string): Promise<void> {
   event.preventDefault();
 
   const form = document.getElementById(formId) as HTMLFormElement;
@@ -41,6 +41,13 @@ export async function transmissioDadesDB(event: Event, tipus:string, formId: str
         missatgeErr.style.display = 'none';
         // Agregar texto dinámicamente al div de éxito
         missatgeOk.textContent = "L'operació s'ha realizat correctament a la base de dades.";
+
+        limpiarFormulario();
+
+        // Eliminar el mensaje de éxito después de 5 segundos
+        setTimeout(() => {
+          missatgeOk.style.display = 'none';
+        }, 5000);
       }
     } else {
       if (missatgeOk && missatgeErr) {
@@ -58,4 +65,17 @@ export async function transmissioDadesDB(event: Event, tipus:string, formId: str
       missatgeOk.style.display = 'none';
     }
   }
+}
+
+function limpiarFormulario() {
+  const formulario = document.querySelector('form') as HTMLFormElement;
+  const inputs = formulario.querySelectorAll('input, textarea, select');
+  inputs.forEach((input) => {
+    if (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement) {
+      input.value = ''; // Limpiar el valor del campo
+    }
+    if (input instanceof HTMLSelectElement) {
+      input.selectedIndex = 0; // Limpiar el select (poner el primer valor por defecto)
+    }
+  });
 }
