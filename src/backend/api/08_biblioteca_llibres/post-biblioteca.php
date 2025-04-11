@@ -136,10 +136,11 @@ if (isset($_GET['autor'])) {
   $estat = !empty($data['estat']) ? data_input($data['estat']) : ($hasError = true);
 
   $dateCreated = date('Y-m-d');
+  $dateModified = date('Y-m-d');
 
   if (!$hasError) {
     global $conn;
-    $sql = "INSERT INTO 08_db_biblioteca_llibres SET autor=:autor, titol=:titol, titolEng=:titolEng, any=:any, idEd=:idEd, lang=:lang, img=:img, tipus=:tipus, idGen=:idGen, subGen=:subGen, dateCreated=:dateCreated, slug=:slug, estat=:estat";
+    $sql = "INSERT INTO 08_db_biblioteca_llibres SET autor=:autor, titol=:titol, titolEng=:titolEng, any=:any, idEd=:idEd, lang=:lang, img=:img, tipus=:tipus, idGen=:idGen, subGen=:subGen, dateCreated=:dateCreated, slug=:slug, estat=:estat, dateModified=:dateModified";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":autor", $autor, PDO::PARAM_INT);
     $stmt->bindParam(":titol", $titol, PDO::PARAM_STR);
@@ -154,7 +155,7 @@ if (isset($_GET['autor'])) {
     $stmt->bindParam(":subGen", $subGen, PDO::PARAM_INT);
     $stmt->bindParam(":estat", $estat, PDO::PARAM_INT);
     $stmt->bindParam(":dateCreated", $dateCreated, PDO::PARAM_STR);
-
+    $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
 
     if ($stmt->execute()) {
       // response output

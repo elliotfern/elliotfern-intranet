@@ -285,7 +285,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         $stmt = $conn->prepare(
             "SELECT a.id, CONCAT(a.cognoms, ', ', a.nom) AS nomComplet
                 FROM db_persones AS a
-                WHERE a.grup = '[1]'
+                WHERE a.grup = 1
                 ORDER BY a.cognoms"
         );
         $stmt->execute();

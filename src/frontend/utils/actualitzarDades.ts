@@ -42,7 +42,7 @@ export async function transmissioDadesDB(event: Event, tipus: string, formId: st
         // Agregar texto dinámicamente al div de éxito
         missatgeOk.textContent = "L'operació s'ha realizat correctament a la base de dades.";
 
-        limpiarFormulario();
+        limpiarFormulario(formId);
 
         // Eliminar el mensaje de éxito después de 5 segundos
         setTimeout(() => {
@@ -67,8 +67,8 @@ export async function transmissioDadesDB(event: Event, tipus: string, formId: st
   }
 }
 
-function limpiarFormulario() {
-  const formulario = document.querySelector('form') as HTMLFormElement;
+function limpiarFormulario(formId: string) {
+  const formulario = document.getElementById(formId) as HTMLFormElement;
   const inputs = formulario.querySelectorAll('input, textarea, select');
   inputs.forEach((input) => {
     if (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement) {
