@@ -223,7 +223,11 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* ESTRUCTURA PRINCIPAL WEB */
   max-width: 1200px;
   margin: 0 auto;
   padding-top: 50px;
-  padding-bottom: 100px;
+  padding-bottom: 30px;
+}
+
+.contingut {
+padding-top: 15px!important
 }
 
 /* Layout principal */
@@ -285,7 +289,28 @@ footer {
     margin-bottom: 20px;
   }
 }
-`, "",{"version":3,"sources":["webpack://./src/frontend/estils/contenidor.css"],"names":[],"mappings":"AAAA,6BAA6B;;AAE7B,yBAAyB;AACzB;EACE,UAAU;EACV,iBAAiB;EACjB,cAAc;EACd,iBAAiB;EACjB,qBAAqB;AACvB;;AAEA,qBAAqB;AACrB;EACE,aAAa;EACb,eAAe;EACf,8BAA8B;EAC9B,cAAc;EACd,OAAO;EACP,iBAAiB;AACnB;;AAEA;EACE,aAAa;EACb,aAAa;EACb,kBAAkB;EAClB,uCAAuC;AACzC;;AAEA,YAAY;AACZ;EACE,aAAa;EACb,iBAAiB;EACjB,aAAa;EACb,kBAAkB;EAClB,uCAAuC;AACzC;;AAEA,WAAW;AACX;EACE,gBAAgB;EAChB,YAAY;EACZ,kBAAkB;EAClB,aAAa;EACb,gBAAgB;AAClB;;AAEA,aAAa;AACb;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;;AAEA;EACE,UAAU;AACZ;;AAEA,eAAe;AACf;EACE;IACE,sBAAsB;EACxB;;EAEA;;IAEE,WAAW;IACX,mBAAmB;EACrB;AACF","sourcesContent":["/* ESTRUCTURA PRINCIPAL WEB */\n\n/* Contenedor principal */\n.container {\n  width: 90%;\n  max-width: 1200px;\n  margin: 0 auto;\n  padding-top: 50px;\n  padding-bottom: 100px;\n}\n\n/* Layout principal */\nmain {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  margin: 20px 0;\n  flex: 1;\n  background: white;\n}\n\narticle {\n  flex: 1 1 60%;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n}\n\n/* Sidebar */\naside {\n  flex: 1 1 35%;\n  background: white;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n}\n\n/* Footer */\nfooter {\n  background: #333;\n  color: white;\n  text-align: center;\n  padding: 10px;\n  margin-top: auto;\n}\n\n/* Llistats */\n.llistat {\n  list-style: none;\n  padding: 0;\n  margin: 0;\n  text-align: left;\n}\n\n.quadre {\n  width: 50%;\n}\n\n/* Responsive */\n@media (max-width: 768px) {\n  main {\n    flex-direction: column;\n  }\n\n  article,\n  aside {\n    width: 100%;\n    margin-bottom: 20px;\n  }\n}\n"],"sourceRoot":""}]);
+
+/* Barra navegacio */
+.barraNavegacio h6 {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 0;
+}
+
+.barraNavegacio a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 2px 4px;
+  color:rgb(168, 12, 12);
+}
+
+.barraNavegacio a:hover {
+  text-decoration: underline;
+  color:rgb(0, 0, 0);
+}`, "",{"version":3,"sources":["webpack://./src/frontend/estils/contenidor.css"],"names":[],"mappings":"AAAA,6BAA6B;;AAE7B,yBAAyB;AACzB;EACE,UAAU;EACV,iBAAiB;EACjB,cAAc;EACd,iBAAiB;EACjB,oBAAoB;AACtB;;AAEA;AACA;AACA;;AAEA,qBAAqB;AACrB;EACE,aAAa;EACb,eAAe;EACf,8BAA8B;EAC9B,cAAc;EACd,OAAO;EACP,iBAAiB;AACnB;;AAEA;EACE,aAAa;EACb,aAAa;EACb,kBAAkB;EAClB,uCAAuC;AACzC;;AAEA,YAAY;AACZ;EACE,aAAa;EACb,iBAAiB;EACjB,aAAa;EACb,kBAAkB;EAClB,uCAAuC;AACzC;;AAEA,WAAW;AACX;EACE,gBAAgB;EAChB,YAAY;EACZ,kBAAkB;EAClB,aAAa;EACb,gBAAgB;AAClB;;AAEA,aAAa;AACb;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;;AAEA;EACE,UAAU;AACZ;;AAEA,eAAe;AACf;EACE;IACE,sBAAsB;EACxB;;EAEA;;IAEE,WAAW;IACX,mBAAmB;EACrB;AACF;;AAEA,oBAAoB;AACpB;EACE,qBAAqB;EACrB,yBAAyB;EACzB,aAAa;EACb,kBAAkB;EAClB,SAAS;AACX;;AAEA;EACE,WAAW;EACX,qBAAqB;EACrB,gBAAgB;EAChB,gBAAgB;EAChB,sBAAsB;AACxB;;AAEA;EACE,0BAA0B;EAC1B,kBAAkB;AACpB","sourcesContent":["/* ESTRUCTURA PRINCIPAL WEB */\n\n/* Contenedor principal */\n.container {\n  width: 90%;\n  max-width: 1200px;\n  margin: 0 auto;\n  padding-top: 50px;\n  padding-bottom: 30px;\n}\n\n.contingut {\npadding-top: 15px!important\n}\n\n/* Layout principal */\nmain {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  margin: 20px 0;\n  flex: 1;\n  background: white;\n}\n\narticle {\n  flex: 1 1 60%;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n}\n\n/* Sidebar */\naside {\n  flex: 1 1 35%;\n  background: white;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n}\n\n/* Footer */\nfooter {\n  background: #333;\n  color: white;\n  text-align: center;\n  padding: 10px;\n  margin-top: auto;\n}\n\n/* Llistats */\n.llistat {\n  list-style: none;\n  padding: 0;\n  margin: 0;\n  text-align: left;\n}\n\n.quadre {\n  width: 50%;\n}\n\n/* Responsive */\n@media (max-width: 768px) {\n  main {\n    flex-direction: column;\n  }\n\n  article,\n  aside {\n    width: 100%;\n    margin-bottom: 20px;\n  }\n}\n\n/* Barra navegacio */\n.barraNavegacio h6 {\n  display: inline-block;\n  background-color: #f0f0f0;\n  padding: 10px;\n  border-radius: 4px;\n  margin: 0;\n}\n\n.barraNavegacio a {\n  color: #333;\n  text-decoration: none;\n  font-weight: 600;\n  padding: 2px 4px;\n  color:rgb(168, 12, 12);\n}\n\n.barraNavegacio a:hover {\n  text-decoration: underline;\n  color:rgb(0, 0, 0);\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

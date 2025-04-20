@@ -3,12 +3,15 @@
 </script>
 
 <div class="container">
+  
+  <div class="barraNavegacio">
+    <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>">Biblioteca</a> > <a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>/llistat-autors">LListat d'autors/es</a> </h6>
+  </div>
+
   <main>
-    <div class="container">
+    <div class="container contingut">
 
       <h1>Biblioteca: llistat d'autors</h1>
-
-      <h6><a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>">Biblioteca</a> > <a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>/llistat-autors">Autors</a> </h6>
 
       <button onclick="window.location.href='<?php echo APP_INTRANET . $url['persona']; ?>/nova-persona/'" class="button btn-gran btn-secondari">Afegir autor</button>
 

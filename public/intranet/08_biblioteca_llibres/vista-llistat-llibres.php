@@ -1,11 +1,12 @@
 <div class="container">
+<div class="barraNavegacio">
+    <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>">Biblioteca</a> > <a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>/llistat-llibres">LListat de llibres</a> </h6>
+  </div>
+
   <main>
-    <div class="container">
+    <div class="container contingut">
 
       <h1>Biblioteca: llistat de llibres</h1>
-
-      <h6><a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>">Biblioteca</a> > <a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>/llistat-llibres">Llibres</a> </h6>
-
       <button onclick="window.location.href='<?php echo APP_INTRANET . $url['biblioteca']; ?>/nou-llibre/'" class="button btn-gran btn-secondari">Afegir llibre</button>
 
 
