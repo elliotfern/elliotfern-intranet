@@ -35,7 +35,9 @@ if ($modificaBtn === 1) {
 }
 ?>
 
-<h6><a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>">Biblioteca</a> > <a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>/llistat-llibres">Llibres </a></h6>
+<div class="barraNavegacio">
+  <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>">Biblioteca</a> > <a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>/llistat-llibres">Llibres </a></h6>
+</div>
 
 <div class="container-fluid form">
   <?php
@@ -273,7 +275,8 @@ if ($modificaBtn === 1) {
   }
 
   .form {
-    margin-bottom: 100px;
+    margin-bottom: 50px;
+    margin-top: 25px;
   }
 
   .container {

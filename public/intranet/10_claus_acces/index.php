@@ -1,29 +1,38 @@
-<main>
-  <div class="container">
-    <h2><a href="/gestio/vault">Vault database</a> > <a href="/vault">Elliot</a></h2>
-    <p><a href='/gestio/vault/nova'><button type='button' class='btn btn-light btn-sm' id='btnAddVault'>Nova contrasenya</button></a></p>
+<div class="container">
 
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead class="table-primary">
-          <tr>
-            <th>Servei</th>
-            <th>Usuari</th>
-            <th>Contrasenya</th>
-            <th>Tipus</th>
-            <th>Modificada</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody> <!-- Aquí se agregarán las filas dinámicamente -->
-        </tbody>
-      </table>
-    </div>
-
-
+  <div class="barraNavegacio">
+    <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['vault']; ?>">Claus privades</a></h6>
   </div>
-</main>
+
+  <main>
+    <div class="container">
+      <h1>Claus privades</h1>
+      <p>
+        <button onclick="window.location.href='<?php echo APP_INTRANET . $url['vault']; ?>/nova-clau/'" class="button btn-gran btn-secondari">Afegir clau</button>
+      </p>
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead class="table-primary">
+            <tr>
+              <th>Servei</th>
+              <th>Usuari</th>
+              <th>Contrasenya</th>
+              <th>Tipus</th>
+              <th>Modificada</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody> <!-- Aquí se agregarán las filas dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </main>
+</div>
+
 <script>
   function showPass(id) {
     let inputField = document.getElementById('passw-' + id);

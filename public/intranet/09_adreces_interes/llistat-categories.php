@@ -3,10 +3,14 @@
 </script>
 
 <div class="container">
+
+    <div class="barraNavegacio">
+        <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['adreces']; ?>">Adreces d'interès</a> > <a href="<?php echo APP_INTRANET . $url['adreces']; ?>/llistat-categories">Llistat de categories</a></h6>
+    </div>
+
     <main>
         <div class="container">
             <h1>Adreces d'interés: llistat categories</h1>
-            <h6><a href="<?php echo APP_INTRANET . $url['adreces']; ?>">Adreces</a> > Llistat categories </h6>
             <p>
                 <button onclick="window.location.href='<?php echo APP_INTRANET . $url['adreces']; ?>/nou-link/'" class="button btn-gran btn-secondari">Afegir enllaç</button>
 

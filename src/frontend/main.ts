@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cinema();
   } else if (pageType[1] === 'entrada') {
     loginPage();
-  } else if (pageType[1] === 'vault') {
+  } else if (pageType[1] === 'claus-privades') {
     vault();
   } else if (pageType[1] === 'historia-oberta') {
     historiaOberta();

@@ -3,38 +3,38 @@
 // Define las rutas base que quieres traducir
 $base_routes = [
     // 01. Homepage - Entrada Pàgina login i homepage
-    '/gestio/entrada' => 'public/intranet/00_homepage/login.php',
-    '/gestio' => 'public/intranet/00_homepage/admin.php',
-    '/gestio/admin' => 'public/intranet/00_homepage/admin.php',
+    APP_GESTIO . '/entrada' => APP_INTRANET_DIR . APP_HOMEPAGE_DIR . 'login.php',
+    APP_GESTIO . '/' => APP_INTRANET_DIR . APP_HOMEPAGE_DIR . 'admin.php',
+    APP_GESTIO . '/admin' => APP_INTRANET_DIR . APP_HOMEPAGE_DIR . 'admin.php',
 
-    // 02. ERP comptabilitat
-    '/gestio/erp' => 'public/intranet/02_erp_comptabilitat/index.php',
-    '/gestio/erp/facturacio-clients' => 'public/intranet/02_erp_comptabilitat/erp-invoices-customers.php',
-    '/gestio/erp/facturacio-clients/nova-factura' => 'public/intranet/02_erp_comptabilitat/erp-invoices-customers-new.php',
+    // 02. Comptabilitat
+    APP_GESTIO . $url['comptabilitat'] => APP_INTRANET_DIR . APP_COMPTABILITAT_DIR . 'index.php',
+    APP_GESTIO . $url['comptabilitat'] . '/facturacio-clients' => APP_INTRANET_DIR . APP_COMPTABILITAT_DIR . 'erp-invoices-customers.php',
+    APP_GESTIO . $url['comptabilitat'] . '/facturacio-clients/nova-factura' => APP_INTRANET_DIR . APP_COMPTABILITAT_DIR . 'erp-invoices-customers-new.php',
 
-    // 03. CRM clients
+    // 03. Clients
+    APP_GESTIO . $url['clients']  => APP_INTRANET_DIR . APP_CLIENTS_DIR . 'index.php',
 
-    // 04. DB Persones
-    '/gestio/persona/nova-persona' => 'public/intranet/04_persones/form-operacions-persona.php',
-    '/gestio/persona/modifica-persona/{slug}' => 'public/intranet/04_persones/form-operacions-persona.php',
+    // 04. Base dades Persones
+    APP_GESTIO . $url['persones'] . '/nova-persona' => APP_INTRANET_DIR . APP_PERSONES_DIR . 'form-operacions-persona.php',
+    APP_GESTIO . $url['persones'] . '/modifica-persona/{slug}' => APP_INTRANET_DIR . APP_PERSONES_DIR . 'form-operacions-persona.php',
 
     // 05.
 
     // 06. Gestor projectes
+    APP_GESTIO . $url['projectes'] => APP_INTRANET_DIR . APP_PROJECTES_DIR . 'index.php',
 
     // 07. Agenda contactes
-    '/gestio/agenda-contactes' => 'public/intranet/07_agenda_contactes/index.php',
+    APP_GESTIO . $url['contactes'] => APP_INTRANET_DIR . APP_CONTACTES_DIR . 'index.php',
 
     // 08. Biblioteca llibres
-    '/gestio/biblioteca' => 'public/intranet/08_biblioteca_llibres/index.php',
-    '/gestio/biblioteca/llistat-llibres' => 'public/intranet/08_biblioteca_llibres/vista-llistat-llibres.php',
-    '/gestio/biblioteca/llistat-autors' => 'public/intranet/08_biblioteca_llibres/vista-llistat-autors.php',
-
-    '/gestio/biblioteca/fitxa-llibre/{slug}' => 'public/intranet/08_biblioteca_llibres/vista-llibre.php',
-    '/gestio/biblioteca/fitxa-autor/{slug}' => 'public/intranet/08_biblioteca_llibres/vista-autor.php',
-
-    '/gestio/biblioteca/modifica-llibre/{slug}' => 'public/intranet/08_biblioteca_llibres/form-modifica-llibre.php',
-    '/gestio/biblioteca/nou-llibre' => 'public/intranet/08_biblioteca_llibres/form-modifica-llibre.php',
+    APP_GESTIO . $url['biblioteca'] => APP_INTRANET_DIR . APP_BIBLIOTECA_DIR . 'index.php',
+    APP_GESTIO . $url['biblioteca'] . '/llistat-llibres' => APP_INTRANET_DIR . APP_BIBLIOTECA_DIR . 'vista-llistat-llibres.php',
+    APP_GESTIO . $url['biblioteca'] . '/llistat-autors' => APP_INTRANET_DIR . APP_BIBLIOTECA_DIR . 'vista-llistat-autors.php',
+    APP_GESTIO . $url['biblioteca']  . '/fitxa-llibre/{slug}' => APP_INTRANET_DIR . APP_BIBLIOTECA_DIR . 'vista-llibre.php',
+    APP_GESTIO . $url['biblioteca'] . '/fitxa-autor/{slug}' => APP_INTRANET_DIR . APP_BIBLIOTECA_DIR . 'vista-autor.php',
+    APP_GESTIO . $url['biblioteca'] . '/modifica-llibre/{slug}' => APP_INTRANET_DIR . APP_BIBLIOTECA_DIR .  'form-modifica-llibre.php',
+    APP_GESTIO . $url['biblioteca'] . '/nou-llibre' => APP_INTRANET_DIR . APP_BIBLIOTECA_DIR . 'form-modifica-llibre.php',
 
     // 09. Adreces interes
     '/gestio/adreces' => 'public/intranet/09_adreces_interes/index.php',
@@ -97,11 +97,17 @@ $base_routes = [
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
 $routes = [
     // ACCES SECCIO GESTIO
-    '/gestio/entrada' => ['view' => 'public/intranet/00_homepage/login.php', 'needs_session' => false, 'header_footer' => true, 'header_menu_footer' => false, 'apiSenseHTML' => false],
+    APP_GESTIO . '/entrada' => [
+        'view' =>  APP_INTRANET_DIR . APP_HOMEPAGE_DIR . 'login.php',
+        'needs_session' => false,
+        'header_footer' => true,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false
+    ],
 
-    // HOMEPAGE GESTIO
-    '/gestio' => [
-        'view' => 'public/intranet/00_homepage/admin.php',
+    // 00. Homepage
+    APP_GESTIO => [
+        'view' =>  APP_INTRANET_DIR . APP_HOMEPAGE_DIR . 'admin.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -109,8 +115,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/admin' => [
-        'view' => 'public/intranet/00_homepage/admin.php',
+    APP_GESTIO . '/admin' => [
+        'view' =>  APP_INTRANET_DIR . APP_HOMEPAGE_DIR . 'admin.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -118,9 +124,9 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    // VAULT
-    '/gestio/vault' => [
-        'view' => 'public/intranet/10_claus_acces/index.php',
+    // 02. Comptabilitat
+    APP_GESTIO . $url['comptabilitat'] => [
+        'view' => APP_INTRANET_DIR . APP_COMPTABILITAT_DIR . 'index.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -128,8 +134,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/vault/elliot' => [
-        'view' => 'public/intranet/10_claus_acces/vault-elliot.php',
+    APP_GESTIO . $url['comptabilitat'] . '/facturacio-clients' => [
+        'view' => APP_INTRANET_DIR . APP_COMPTABILITAT_DIR . 'erp-invoices-customers.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -137,9 +143,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-
-    '/gestio/vault/nova' => [
-        'view' => 'public/intranet/10_claus_acces/nova-contrasenya.php',
+    APP_GESTIO . $url['comptabilitat'] . '/facturacio-clients/nova-factura' => [
+        'view' => APP_INTRANET_DIR . APP_COMPTABILITAT_DIR . 'erp-invoices-customers-new.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -147,9 +152,9 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    // CINEMA
-    '/gestio/cinema' => [
-        'view' => 'public/intranet/11_cinema_series/index.php',
+    // 03. Clients
+    APP_GESTIO . $url['clients'] => [
+        'view' => APP_INTRANET_DIR . APP_CLIENTS_DIR . 'index.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -157,8 +162,9 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/llistat-pelicules' => [
-        'view' => 'public/intranet/11_cinema_series/vista-llistat-pelicules.php',
+    // 06. Gestor projectes
+    APP_GESTIO . $url['projectes'] => [
+        'view' => APP_INTRANET_DIR . APP_PROJECTES_DIR . 'index.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -166,8 +172,9 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/llistat-series' => [
-        'view' => 'public/intranet/11_cinema_series/vista-llistat-series.php',
+    // 10. Claus acces
+    APP_GESTIO . $url['vault'] => [
+        'view' => APP_INTRANET_DIR . APP_CLAUS_DIR . 'index.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -175,8 +182,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/llistat-directors' => [
-        'view' => 'public/intranet/11_cinema_series/vista-llistat-directors.php',
+    APP_GESTIO . $url['vault'] . '/nova' => [
+        'view' => APP_INTRANET_DIR . APP_CLAUS_DIR . 'nova-contrasenya.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -184,8 +191,9 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/llistat-actors' => [
-        'view' => 'public/intranet/11_cinema_series/vista-llistat-actors.php',
+    // 11. Cinema i televisió
+    APP_GESTIO . $url['cinema'] => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'index.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -193,8 +201,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/llistat-obres-teatre' => [
-        'view' => 'public/intranet/11_cinema_series/vista-llistat-teatre.php',
+    APP_GESTIO . $url['cinema'] . '/llistat-pelicules' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-pelicules.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -202,8 +210,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/fitxa-pelicula/{slug}' => [
-        'view' => 'public/intranet/11_cinema_series/vista-pelicula.php',
+    APP_GESTIO . $url['cinema'] . '/llistat-series' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-series.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -211,8 +219,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/fitxa-actor/{slug}' => [
-        'view' => 'public/intranet/11_cinema_series/vista-actor.php',
+    APP_GESTIO . $url['cinema'] . '/llistat-directors' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-directors.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -220,8 +228,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/fitxa-director/{slug}' => [
-        'view' => 'public/intranet/11_cinema_series/vista-director.php',
+    APP_GESTIO . $url['cinema'] . '/llistat-actors' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-actors.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -229,8 +237,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/fitxa-serie/{slug}' => [
-        'view' => 'public/intranet/11_cinema_series/vista-serie.php',
+    APP_GESTIO . $url['cinema'] . '/llistat-obres-teatre' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-teatre.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -238,8 +246,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/nova-pelicula' => [
-        'view' => 'public/intranet/11_cinema_series/form-pelicula.php',
+    APP_GESTIO . $url['cinema'] . '/fitxa-pelicula/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-pelicula.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -247,8 +255,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/modifica-pelicula/{id}' => [
-        'view' => 'public/intranet/11_cinema_series/form-pelicula.php',
+    APP_GESTIO . $url['cinema'] . '/fitxa-actor/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-actor.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -256,8 +264,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/nova-serie' => [
-        'view' => 'public/intranet/11_cinema_series/form-serie.php',
+    APP_GESTIO . $url['cinema'] . '/fitxa-director/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-director.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -265,8 +273,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/modifica-serie/{id}' => [
-        'view' => 'public/intranet/11_cinema_series/form-serie.php',
+    APP_GESTIO . $url['cinema'] . '/fitxa-serie/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-serie.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -274,8 +282,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/inserir-actor-pelicula/{slug}' => [
-        'view' => 'public/intranet/11_cinema_series/form-actor-pelicula.php',
+    APP_GESTIO . $url['cinema'] . '/nova-pelicula' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'form-pelicula.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -283,8 +291,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/modifica-actor-pelicula/{slug}' => [
-        'view' => 'public/intranet/11_cinema_series/form-actor-pelicula.php',
+    APP_GESTIO . $url['cinema'] . '/modifica-pelicula/{id}' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'form-pelicula.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -292,8 +300,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/inserir-actor-serie/{slug}' => [
-        'view' => 'public/intranet/11_cinema_series/form-actor-serie.php',
+    APP_GESTIO . $url['cinema'] . '/nova-serie' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'form-serie.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -301,8 +309,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/cinema/modifica-actor-serie/{slug}' => [
-        'view' => 'public/intranet/11_cinema_series/form-actor-serie.php',
+    APP_GESTIO . $url['cinema'] .  '/modifica-serie/{id}' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'form-serie.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -310,9 +318,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    // ERP
-    '/gestio/erp' => [
-        'view' => 'public/intranet/02_erp_comptabilitat/index.php',
+    APP_GESTIO . $url['cinema'] . '/inserir-actor-pelicula/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'form-actor-pelicula.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -320,8 +327,8 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/erp/facturacio-clients' => [
-        'view' => 'public/intranet/02_erp_comptabilitat/erp-invoices-customers.php',
+    APP_GESTIO . $url['cinema'] . '/modifica-actor-pelicula/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'form-actor-pelicula.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -329,8 +336,17 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    '/gestio/erp/facturacio-clients/nova-factura' => [
-        'view' => 'public/intranet/02_erp_comptabilitat/erp-invoices-customers-new.php',
+    APP_GESTIO . $url['cinema'] . '/inserir-actor-serie/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'form-actor-serie.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['cinema'] . '/modifica-actor-serie/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'form-actor-serie.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,

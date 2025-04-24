@@ -5,7 +5,7 @@ const url = window.location.href;
 const pageType = getPageType(url);
 
 export function vault() {
-  if (pageType[1] === 'vault') {
+  if (pageType[1] === 'claus-privades') {
     serveisVaultApi();
   }
 }

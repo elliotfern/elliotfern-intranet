@@ -30,7 +30,9 @@ if ($modificaBtn === 1) {
 }
 ?>
 
-<h6><a href="<?php echo APP_INTRANET . $url['adreces']; ?>">Adreces</a></h6>
+<div class="barraNavegacio">
+        <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['adreces']; ?>">Adreces d'interès</a> > <a href="<?php echo APP_INTRANET . $url['adreces']; ?>/nou-link">Inserció enllaç</a></h6>
+    </div>
 
 <div class="container-fluid form">
     <?php

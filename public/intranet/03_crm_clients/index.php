@@ -7,9 +7,9 @@ echo "<p><button type='button' class='btn btn-light btn-sm' id='btnAddNewCostume
 echo "<hr>";
 echo "<p></p>";
 
-    echo '<div class="'.TABLE_DIV_CLASS.'">';
-    echo '<table class="table table-striped">
-        <thead class="'.TABLE_THREAD.'">
+echo '<div class="">';
+echo '<table class="table table-striped">
+        <thead class="">
         <tr>
             <th>Customer</th>
             <th>Company</th>
@@ -27,8 +27,3 @@ echo "<p></p>";
     </table>
     </div>
 ';
-
-
-
-# footer
-require_once(APP_ROOT . '/public/01_inici/footer.php');

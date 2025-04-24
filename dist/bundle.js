@@ -2634,7 +2634,7 @@ __webpack_require__.r(__webpack_exports__);
 const url = window.location.href;
 const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_0__.getPageType)(url);
 function vault() {
-    if (pageType[1] === 'vault') {
+    if (pageType[1] === 'claus-privades') {
         (0,_components_vault_serveisVault__WEBPACK_IMPORTED_MODULE_1__.serveisVaultApi)();
     }
 }
@@ -2996,7 +2996,7 @@ document.addEventListener('DOMContentLoaded', () => {
     else if (pageType[1] === 'entrada') {
         (0,_pages_login_funcions__WEBPACK_IMPORTED_MODULE_3__.loginPage)();
     }
-    else if (pageType[1] === 'vault') {
+    else if (pageType[1] === 'claus-privades') {
         (0,_pages_vault_funcions__WEBPACK_IMPORTED_MODULE_4__.vault)();
     }
     else if (pageType[1] === 'historia-oberta') {
