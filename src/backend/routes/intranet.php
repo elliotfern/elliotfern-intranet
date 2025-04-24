@@ -19,7 +19,7 @@ $base_routes = [
     APP_GESTIO . $url['persones'] . '/nova-persona' => APP_INTRANET_DIR . APP_PERSONES_DIR . 'form-operacions-persona.php',
     APP_GESTIO . $url['persones'] . '/modifica-persona/{slug}' => APP_INTRANET_DIR . APP_PERSONES_DIR . 'form-operacions-persona.php',
 
-    // 05.
+    // 05. Programacio
 
     // 06. Gestor projectes
     APP_GESTIO . $url['projectes'] => APP_INTRANET_DIR . APP_PROJECTES_DIR . 'index.php',
@@ -37,45 +37,44 @@ $base_routes = [
     APP_GESTIO . $url['biblioteca'] . '/nou-llibre' => APP_INTRANET_DIR . APP_BIBLIOTECA_DIR . 'form-modifica-llibre.php',
 
     // 09. Adreces interes
-    '/gestio/adreces' => 'public/intranet/09_adreces_interes/index.php',
-    '/gestio/adreces/llistat-categories' => 'public/intranet/09_adreces_interes/llistat-categories.php',
-    '/gestio/adreces/llistat-temes' => 'public/intranet/09_adreces_interes/llistat-temes.php',
-    '/gestio/adreces/categoria/{id}' => 'public/intranet/09_adreces_interes/vista-categoria.php',
-    '/gestio/adreces/tema/{id}' => 'public/intranet/09_adreces_interes/vista-tema.php',
-    '/gestio/adreces/nou-link' => 'public/intranet/09_adreces_interes/modifica-link.php',
-    '/gestio/adreces/modifica-link/{id}' => 'public/intranet/09_adreces_interes/modifica-link.php',
+    APP_GESTIO . $url['adreces'] => APP_INTRANET_DIR . APP_ADRECES_DIR . 'index.php',
+    APP_GESTIO . $url['adreces'] . '/llistat-categories' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'llistat-categories.php',
+    APP_GESTIO . $url['adreces'] . '/llistat-temes' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'llistat-temes.php',
+    APP_GESTIO . $url['adreces'] . '/categoria/{id}' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'vista-categoria.php',
+    APP_GESTIO . $url['adreces'] . '/tema/{id}' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'vista-tema.php',
+    APP_GESTIO . $url['adreces'] . '/nou-link' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'modifica-link.php',
+    APP_GESTIO . $url['adreces'] . '/modifica-link/{id}' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'modifica-link.php',
 
-    // VAULT
-    '/gestio/vault' => 'public/intranet/10_claus_acces/index.php',
-    '/gestio/vault/elliot' => 'public/intranet/10_claus_acces/vault-elliot.php',
-    '/gestio/vault/nova' => 'public/intranet/10_claus_acces/nova-contrasenya.php',
+    // 10. Claus access
+    APP_GESTIO . $url['vault'] => APP_INTRANET_DIR . APP_CLAUS_DIR . 'index.php',
+    APP_GESTIO . $url['vault'] . '/nova-clau' => APP_INTRANET_DIR . APP_CLAUS_DIR . 'nova-contrasenya.php',
 
     // 11. Arts esceniques, cinema, televisio
-    '/gestio/cinema' => 'public/intranet/11_cinema_series/index.php',
+    APP_GESTIO . $url['cinema'] => 'public/intranet/11_cinema_series/index.php',
 
-    '/gestio/cinema/llistat-pelicules' => 'public/intranet/11_cinema_series/vista-llistat-pelicules.php',
-    '/gestio/cinema/llistat-series' => 'app/Views/11_cinema_series/vista-llistat-series.php',
-    '/gestio/cinema/llistat-directors' => 'public/intranet/11_cinema_series/vista-llistat-directors.php',
-    '/gestio/cinema/llistat-actors' => 'public/intranet/11_cinema_series/vista-llistat.actors.php',
-    '/gestio/cinema/llistat-obres-teatre' => 'public/intranet/11_cinema_series/vista-llistat-teatre.php',
+    APP_GESTIO . $url['cinema'] . '/llistat-pelicules' => 'public/intranet/11_cinema_series/vista-llistat-pelicules.php',
+    APP_GESTIO . $url['cinema'] . '/llistat-series' => 'app/Views/11_cinema_series/vista-llistat-series.php',
+    APP_GESTIO . $url['cinema'] . '/llistat-directors' => 'public/intranet/11_cinema_series/vista-llistat-directors.php',
+    APP_GESTIO . $url['cinema'] . '/llistat-actors' => 'public/intranet/11_cinema_series/vista-llistat.actors.php',
+    APP_GESTIO . $url['cinema'] . '/llistat-obres-teatre' => 'public/intranet/11_cinema_series/vista-llistat-teatre.php',
 
-    '/gestio/cinema/fitxa-actor/{slug}' => 'public/intranet/11_cinema_series/vista-actor.php',
-    '/gestio/cinema/fitxa-director{slug}' => 'public/intranet/11_cinema_series/vista-director.php',
-    '/gestio/cinema/fitxa-pelicula/{slug}' => 'public/intranet/11_cinema_series/vista-pelicula.php',
-    '/gestio/cinema/fitxa-serie/{slug}' => 'public/intranet/11_cinema_series/vista-serie.php',
-    '/gestio/cinema/fitxa-teatre/{slug}' => 'public/intranet/11_cinema_series/vista-teatre.php',
+    APP_GESTIO . $url['cinema'] . '/fitxa-actor/{slug}' => 'public/intranet/11_cinema_series/vista-actor.php',
+    APP_GESTIO . $url['cinema'] . '/fitxa-director{slug}' => 'public/intranet/11_cinema_series/vista-director.php',
+    APP_GESTIO . $url['cinema'] . '/fitxa-pelicula/{slug}' => 'public/intranet/11_cinema_series/vista-pelicula.php',
+    APP_GESTIO . $url['cinema'] . '/fitxa-serie/{slug}' => 'public/intranet/11_cinema_series/vista-serie.php',
+    APP_GESTIO . $url['cinema'] . '/fitxa-teatre/{slug}' => 'public/intranet/11_cinema_series/vista-teatre.php',
 
-    '/gestio/cinema/nova-pelicula' => 'public/intranet/11_cinema_series/form-pelicula.php',
-    '/gestio/cinema/modifica-pelicula/{id}' => 'public/intranet/11_cinema_series/form-pelicula.php',
+    APP_GESTIO . $url['cinema'] . '/nova-pelicula' => 'public/intranet/11_cinema_series/form-pelicula.php',
+    APP_GESTIO . $url['cinema'] . '/modifica-pelicula/{id}' => 'public/intranet/11_cinema_series/form-pelicula.php',
 
-    '/gestio/cinema/nova-serie' => 'public/intranet/11_cinema_series/form-serie.php',
-    '/gestio/cinema/modifica-serie/{id}' => 'public/intranet/11_cinema_series/form-serie.php',
+    APP_GESTIO . $url['cinema'] . '/nova-serie' => 'public/intranet/11_cinema_series/form-serie.php',
+    APP_GESTIO . $url['cinema'] . '/modifica-serie/{id}' => 'public/intranet/11_cinema_series/form-serie.php',
 
-    '/gestio/cinema/inserir-actor-pelicula/{slug}' => 'public/intranet/11_cinema_series/form-actor-pelicula.php',
-    '/gestio/cinema/modifica-actor-pelicula/{slug}' => 'public/intranet/11_cinema_series/form-actor-pelicula.php',
+    APP_GESTIO . $url['cinema'] . '/inserir-actor-pelicula/{slug}' => 'public/intranet/11_cinema_series/form-actor-pelicula.php',
+    APP_GESTIO . $url['cinema'] . '/modifica-actor-pelicula/{slug}' => 'public/intranet/11_cinema_series/form-actor-pelicula.php',
 
-    '/gestio/cinema/inserir-actor-serie/{slug}' => 'public/intranet/11_cinema_series/form-actor-serie.php',
-    '/gestio/cinema/modifica-actor-serie/{slug}' => 'public/intranet/11_cinema_series/form-actor-serie.php',
+    APP_GESTIO . $url['cinema'] . '/inserir-actor-serie/{slug}' => 'public/intranet/11_cinema_series/form-actor-serie.php',
+    APP_GESTIO . $url['cinema'] . '/modifica-actor-serie/{slug}' => 'public/intranet/11_cinema_series/form-actor-serie.php',
 
     // XARXES SOCIALS
     '/gestio/xarxes-socials' => 'public/intranet/12_xarxes_socials/index.php',
@@ -162,9 +161,21 @@ $routes = [
         'menu_intranet' => true
     ],
 
+    // 04. Base de dades persones
+
     // 06. Gestor projectes
     APP_GESTIO . $url['projectes'] => [
         'view' => APP_INTRANET_DIR . APP_PROJECTES_DIR . 'index.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    // 07. Agenda contactes
+    APP_GESTIO . $url['contactes'] => [
+        'view' => APP_INTRANET_DIR . APP_CONTACTES_DIR . 'index.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -354,6 +365,72 @@ $routes = [
         'menu_intranet' => true
     ],
 
+    // 09. Adreces interes
+    APP_GESTIO . $url['adreces'] => [
+        'view' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'index.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['adreces'] . '/llistat-categories' => [
+        'view' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'llistat-categories.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['adreces'] . '/llistat-temes' => [
+        'view' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'llistat-temes.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['adreces'] . '/categoria/{id}' => [
+        'view' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'vista-categoria.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['adreces'] . '/tema/{id}' => [
+        'view' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'vista-tema.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['adreces'] . '/nou-link' => [
+        'view' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'modifica-link.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['adreces'] . '/modifica-link/{id}' => [
+        'view' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'modifica-link.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    // 10. 
+
     // XARXES SOCIALS
     '/gestio/xarxes-socials' => [
         'view' => 'public/intranet/12_xarxes_socials/index.php',
@@ -404,16 +481,6 @@ $routes = [
 
     '/gestio/historia-oberta/modifica-article/{id}' => [
         'view' => 'public/intranet/15_historia_oberta/modifica-article.php',
-        'needs_session' => true,
-        'header_footer' => false,
-        'header_menu_footer' => false,
-        'apiSenseHTML' => false,
-        'menu_intranet' => true
-    ],
-
-    // 07. Agenda contactes
-    '/gestio/agenda-contactes' => [
-        'view' => 'public/intranet/07_agenda_contactes/index.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -478,72 +545,6 @@ $routes = [
 
     '/gestio/biblioteca/nou-llibre' => [
         'view' => 'public/intranet/08_biblioteca_llibres/form-modifica-llibre.php',
-        'needs_session' => true,
-        'header_footer' => false,
-        'header_menu_footer' => false,
-        'apiSenseHTML' => false,
-        'menu_intranet' => true
-    ],
-
-
-    // 09. Adreces interes
-    '/gestio/adreces' => [
-        'view' => 'public/intranet/09_adreces_interes/index.php',
-        'needs_session' => true,
-        'header_footer' => false,
-        'header_menu_footer' => false,
-        'apiSenseHTML' => false,
-        'menu_intranet' => true
-    ],
-
-
-    '/gestio/adreces/llistat-categories' => [
-        'view' => 'public/intranet/09_adreces_interes/llistat-categories.php',
-        'needs_session' => true,
-        'header_footer' => false,
-        'header_menu_footer' => false,
-        'apiSenseHTML' => false,
-        'menu_intranet' => true
-    ],
-
-    '/gestio/adreces/llistat-temes' => [
-        'view' => 'public/intranet/09_adreces_interes/llistat-temes.php',
-        'needs_session' => true,
-        'header_footer' => false,
-        'header_menu_footer' => false,
-        'apiSenseHTML' => false,
-        'menu_intranet' => true
-    ],
-
-    '/gestio/adreces/categoria/{id}' => [
-        'view' => 'public/intranet/09_adreces_interes/vista-categoria.php',
-        'needs_session' => true,
-        'header_footer' => false,
-        'header_menu_footer' => false,
-        'apiSenseHTML' => false,
-        'menu_intranet' => true
-    ],
-
-    '/gestio/adreces/tema/{id}' => [
-        'view' => 'public/intranet/09_adreces_interes/vista-tema.php',
-        'needs_session' => true,
-        'header_footer' => false,
-        'header_menu_footer' => false,
-        'apiSenseHTML' => false,
-        'menu_intranet' => true
-    ],
-
-    '/gestio/adreces/nou-link' => [
-        'view' => 'public/intranet/09_adreces_interes/modifica-link.php',
-        'needs_session' => true,
-        'header_footer' => false,
-        'header_menu_footer' => false,
-        'apiSenseHTML' => false,
-        'menu_intranet' => true
-    ],
-
-    '/gestio/adreces/modifica-link/{id}' => [
-        'view' => 'public/intranet/09_adreces_interes/modifica-link.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
