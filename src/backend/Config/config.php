@@ -14,12 +14,18 @@ define('APP_HOMEPAGE_DIR',  "01_homepage/");
 define('APP_COMPTABILITAT_DIR',  "02_erp_comptabilitat/");
 define('APP_CLIENTS_DIR',  "03_crm_clients/");
 define('APP_PERSONES_DIR', '04_persones/');
+define('APP_PROGRAMACIO_DIR', '05_programacio/');
 define('APP_PROJECTES_DIR', '06_gestor_projectes/');
 define('APP_CONTACTES_DIR', '07_agenda_contactes/');
 define('APP_BIBLIOTECA_DIR', '08_biblioteca_llibres/');
 define('APP_ADRECES_DIR', '09_adreces_interes/');
 define('APP_CLAUS_DIR', '10_claus_acces/');
 define('APP_CINEMA_DIR', '11_cinema_series/');
+define('APP_XARXES_DIR', '12_xarxes_socials/');
+define('APP_BLOG_DIR', '13_blog/');
+define('APP_RSS_DIR', '14_lector_rss/');
+define('APP_HISTORIA_DIR', '15_historia/');
+define('APP_AUXILIARS_DIR', '16_auxiliars/');
 
 // Cargar librerías externas
 require_once __DIR__ . '/../../../vendor/autoload.php';
@@ -34,12 +40,16 @@ $url = [
     'clients' => '/clients',
     'projectes' => '/projectes',
     'biblioteca' => '/biblioteca',
+    'programacio' => '/programacio',
     'adreces' => '/adreces',
     'persona' => '/persona',
     'cinema' => '/cinema',
-    'auxiliars' => '/auxiliars',
     'vault' => '/claus-privades',
     'persones' => '/persona',
     'contactes' => '/agenda-contactes',
-
+    'xarxes' => '/xarxes-socials',
+    'blog' => '/blog',
+    'rss' => '/lector-rss',
+    'historia' => '/historia',
+    'auxiliars' => '/auxiliars',
 ];

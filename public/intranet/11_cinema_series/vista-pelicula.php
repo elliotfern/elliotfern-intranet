@@ -2,14 +2,16 @@
 $slug = $routeParams[0];
 ?>
 
-
 <div class="container">
+
+  <div class="barraNavegacio">
+    <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['cinema']; ?>">Arts escèniques, cinema i televisió</a> > <a href="<?php echo APP_INTRANET . $url['cinema']; ?>/llistat-pelicules">LListat pel·lícules</a></h6>
+  </div>
+
   <main>
-    <div class="container">
+    <div class="container contingut">
 
       <h1>Arts escèniques, cinema i televisió: llistat pel·lícules</h1>
-      <h6><a href="<?php echo APP_INTRANET . $url['cinema']; ?>">Arts escèniques, cinema i televisió</a> > <a href="<?php echo APP_INTRANET . $url['cinema']; ?>/llistat-pelicules">LListat pel·lícules</a></h6>
-
       <p>
         <button onclick="window.location.href='<?php echo APP_INTRANET . $url['cinema']; ?>/nova-pelicula/'" class="button btn-gran btn-secondari">Afegir pel·lícula</button>
 

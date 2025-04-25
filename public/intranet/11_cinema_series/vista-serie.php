@@ -3,11 +3,14 @@ $slug = $routeParams[0];
 ?>
 
 <div class="container">
-  <main>
-    <div class="container">
-      <h1>Sèrie tv: <span id="name"></span></h1>
-      <h6><a href="<?php echo APP_INTRANET . $url['cinema']; ?>">Arts escèniques, cinema i televisió</a> > <a href="<?php echo APP_INTRANET . $url['cinema']; ?>/llistat-series">Llistat sèries</a></h6>
 
+  <div class="barraNavegacio">
+    <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['cinema']; ?>">Arts escèniques, cinema i televisió</a> > <a href="<?php echo APP_INTRANET . $url['cinema']; ?>/llistat-series">Llistat sèries</a></h6>
+  </div>
+
+  <main>
+    <div class="container contingut">
+      <h1>Sèrie tv: <span id="name"></span></h1>
       <button onclick="window.location.href='<?php echo APP_INTRANET . $url['cinema']; ?>/modifica-serie/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Modifica fitxa</button>
 
       <div class='fixaDades'>

@@ -1,69 +1,111 @@
-<h2>Blog</h2>
+<main>
+    <div class="container">
+        <h2><a href="/gestio/blog">Blog</a> > <a href="/vault">Elliot</a></h2>
+        <p><a href='/gestio/vault/nova'><button type='button' class='btn btn-light btn-sm' id='btnAddVault'>Nou article</button></a></p>
 
-<p><button type='button' class='btn btn-outline-secondary' id='btnCreateLink' onclick='btnCrearLlibre()'>Afegir nou llibre &rarr;</button></p>
-
-<hr>
         <div class="table-responsive">
-            <table class="table table-striped" id="blog">
+            <table class="table table-striped">
                 <thead class="table-primary">
-                <tr>
-                <th>ID</th>
-                <th>Tipus</th>
-                <th>Títol</th>
-                <th>Data</th>
-                <th>Idioma</th>
-                <th></th>
-                <th></th>
-    
-            </thead>
-            <tbody></tbody>
-        </table>
-</div>
+                    <tr>
+                        <th>Id</th>
+                        <th>Article</th>
+                        <th>Data publicació</th>
+                        <th>Tipus</th>
+                        <th>idioma</th>
+                        <th>Modifica</th>
+                        <th>Elimina</th>
+                    </tr>
+                </thead>
+                <tbody> <!-- Aquí se agregarán las filas dinámicamente -->
+                </tbody>
+            </table>
+        </div>
 
-</div>
+
+    </div>
+</main>
 <script>
-$(document).ready(function(){
-                function fetch_data(){
+    async function fetchArticles() {
+        const allowedOrigins = ['https://elliot.cat', 'https://historiaoberta.cat'];
+        const currentOrigin = window.location.origin;
 
-                    var urlAjax = "api/blog/get/?llistat-articles";
-                    $.ajax({
-                        url:urlAjax,
-                        method:"GET",
-                        dataType:"json",
-                        beforeSend: function(xhr) {
-                            // Obtener el token del localStorage
-                            let token = localStorage.getItem('token');
+        if (!allowedOrigins.includes(currentOrigin)) {
+            console.error('Acceso no permitido desde este origen');
+            return;
+        }
 
-                            // Incluir el token en el encabezado de autorización
-                            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-                        },
-                        success:function(data){
-                            var html = '';
-                            for (var i=0; i<data.length; i++) {
-                                html += '<tr>';
-                                html += '<td>'+data[i].id+'</td>';
-                                html += '<td>'+data[i].post_type+'</td>';
-                                html += '<td><a href="https://'+server+"/blog/"+data[i].slug+'">'+data[i].post_title+'</a></td>';
-                                html += '<td>'+formatData(data[i].post_date)+'</td>';
-                                html += '<td>'+data[i].idioma_ca+'</td>';
-                                html += '<td><button type="button" onclick="btnUpdateBook('+data[i].id+')" id="btnUpdateBook" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalUpdateBook" data-id="'+data[i].id+ '" value="'+data[i].id+ '" data-title="'+data[i].id+ '" data-slug="'+data[i].id+ '" data-text="'+data[i].id+ '">Update</button>';
-                                html += '</td>';
-                                html += '<td><button type="button" onclick="btnUpdateBook('+data[i].id+')" id="btnUpdateBook" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalUpdateBook" data-id="'+data[i].id+ '" value="'+data[i].id+ '" data-title="'+data[i].id+ '" data-slug="'+data[i].id+ '" data-text="'+data[i].id+ '">Delete</button>';
-                                html += '</td>';
-                                html += '</tr>';
-                            }
-                            $('#blog tbody').html(html);
-                        }
-                    });
-                }
-                
-                    fetch_data();
-                
+        try {
+            const response = await fetch('/api/historia-oberta/get/?type=llistat-articles', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Origin': currentOrigin
+                },
+                credentials: 'include' // Incluir credenciales si es necesario
             });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const articles = await response.json();
+            displayArticles(articles);
+        } catch (error) {
+            console.error('Error fetching articles:', error);
+        }
+    }
 
+    function displayArticles(articles) {
+        const tbody = document.querySelector('.table tbody');
+        tbody.innerHTML = ''; // Limpiar el contenido existente
+
+        articles.forEach(article => {
+            const row = document.createElement('tr');
+
+            const idCell = document.createElement('td');
+            idCell.textContent = article.id;
+            row.appendChild(idCell);
+
+            const titleCell = document.createElement('td');
+            titleCell.textContent = article.post_title;
+            row.appendChild(titleCell);
+
+            const dateCell = document.createElement('td');
+            dateCell.textContent = new Date(article.postData).toLocaleDateString();
+            row.appendChild(dateCell);
+
+            const typeCell = document.createElement('td');
+            typeCell.textContent = article.post_name; // Asumiendo que post_name es el tipo
+            row.appendChild(typeCell);
+
+            const idiomaCell = document.createElement('td');
+            idiomaCell.textContent = article.idioma; // Asumiendo que post_name es el tipo
+            row.appendChild(idiomaCell);
+
+            const modifyCell = document.createElement('td');
+            modifyCell.innerHTML = `<a href="/gestio/blog/modifica-article/${article.ID}"><button type="button" class="btn-primari btn-petit">Modifica</button></a>`;
+            row.appendChild(modifyCell);
+
+            const deleteCell = document.createElement('td');
+            deleteCell.innerHTML = `<button type="button" class="btn-secondari btn-petit " onclick="deleteArticle(${article.ID})">Elimina</button>`;
+            row.appendChild(deleteCell);
+
+            tbody.appendChild(row);
+        });
+    }
+
+    async function deleteArticle(id) {
+        try {
+            const response = await fetch(`URL_DE_TU_API/${id}`, {
+                method: 'DELETE',
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            fetchArticles(); // Refrescar la tabla después de eliminar
+        } catch (error) {
+            console.error('Error deleting article:', error);
+        }
+    }
+
+    // Llamar a la función para cargar los artículos al cargar la página
+    fetchArticles();
 </script>
-
-
-<?php
-# footer
-require_once(APP_ROOT . '/public/01_inici/footer.php');

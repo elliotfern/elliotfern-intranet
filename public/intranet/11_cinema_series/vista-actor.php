@@ -3,10 +3,14 @@ $slug = $routeParams[0];
 ?>
 
 <div class="container">
+
+    <div class="barraNavegacio">
+        <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['cinema']; ?>">Arts escèniques, cinema i televisió</a> > <a href="<?php echo APP_INTRANET . $url['cinema']; ?>/llistat-actors">Llistat actors</a></h6>
+    </div>
+
     <main>
-        <div class="container">
+        <div class="container contingut">
             <h1>Actor/a: <span id="nom"></span> <span id="cognoms"></span></h1>
-            <h6><a href="<?php echo APP_INTRANET . $url['cinema']; ?>">Arts escèniques, cinema i televisió</a> > <a href="<?php echo APP_INTRANET . $url['cinema']; ?>/llistat-actors">Llistat actors</a></h6>
 
             <button onclick="window.location.href='<?php echo APP_INTRANET . $url['persona']; ?>/modifica-persona/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Modifica fitxa</button>
 

@@ -9,7 +9,7 @@
 
       <a href="<?php echo APP_INTRANET . $url['persones']; ?>" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">04. Persones</a>
 
-      <a href="<?php echo APP_INTRANET . $url['persones']; ?>" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">05. Programació</a>
+      <a href="<?php echo APP_INTRANET . $url['programacio']; ?>" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">05. Programació</a>
 
       <a href="<?php echo APP_INTRANET . $url['projectes']; ?>" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">06. Gestor projectes</a>
 
@@ -23,15 +23,15 @@
 
       <a href="<?php echo APP_INTRANET . $url['cinema']; ?>" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">11. Cinema</a>
 
-      <a href="<?php echo APP_INTRANET; ?>/xarxes-socials" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">12. Xarxes socials</a>
+      <a href="<?php echo APP_INTRANET . $url['xarxes']; ?>" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">12. Xarxes socials</a>
 
-      <a href="<?php echo APP_INTRANET; ?>/blog" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">13. Blog</a>
+      <a href="<?php echo APP_INTRANET . $url['blog']; ?>" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">13. Blog</a>
 
-      <a href="<?php echo APP_INTRANET; ?>/lector-rss" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">14. Lector RSS</a>
+      <a href="<?php echo APP_INTRANET . $url['rss']; ?>" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">14. Lector RSS</a>
 
-      <a href="<?php echo APP_INTRANET; ?>/historia-oberta" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">15. Historia Oberta</a>
+      <a href="<?php echo APP_INTRANET . $url['historia']; ?>" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">15. Historia</a>
 
-      <a href="<?php echo APP_INTRANET; ?>/auxiliars" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">Aux</a>
+      <a href="<?php echo APP_INTRANET . $url['auxiliars']; ?>" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">16. Auxiliars</a>
 
     </div>
   </div>
