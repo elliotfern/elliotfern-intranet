@@ -11,8 +11,8 @@ define("APP_INTRANET", $base_url);
 // Variables del directori de fitxers
 define('APP_INTRANET_DIR',  "public/intranet/");
 define('APP_HOMEPAGE_DIR',  "01_homepage/");
-define('APP_COMPTABILITAT_DIR',  "02_erp_comptabilitat/");
-define('APP_CLIENTS_DIR',  "03_crm_clients/");
+define('APP_COMPTABILITAT_DIR',  "02_comptabilitat/");
+define('APP_CLIENTS_DIR',  "03_clients/");
 define('APP_PERSONES_DIR', '04_persones/');
 define('APP_PROGRAMACIO_DIR', '05_programacio/');
 define('APP_PROJECTES_DIR', '06_gestor_projectes/');
@@ -26,6 +26,7 @@ define('APP_BLOG_DIR', '13_blog/');
 define('APP_RSS_DIR', '14_lector_rss/');
 define('APP_HISTORIA_DIR', '15_historia/');
 define('APP_AUXILIARS_DIR', '16_auxiliars/');
+define('APP_VIATGES_DIR', '17_viatges/');
 
 // Cargar librerías externas
 require_once __DIR__ . '/../../../vendor/autoload.php';
@@ -52,4 +53,5 @@ $url = [
     'rss' => '/lector-rss',
     'historia' => '/historia',
     'auxiliars' => '/auxiliars',
+    'viatges' => '/viatges',
 ];

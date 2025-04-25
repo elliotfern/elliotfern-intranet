@@ -101,6 +101,8 @@ $base_routes = [
     APP_GESTIO . $url['auxiliars'] . '/nova-imatge' => APP_INTRANET_DIR . APP_AUXILIARS_DIR . 'imatges/form-inserir-imatge.php',
 
     // 17. Viatges
+    APP_GESTIO . $url['viatges'] => APP_INTRANET_DIR . APP_VIATGES_DIR . 'index.php',
+    APP_GESTIO . $url['viatges'] . '/fitxa-viatge/{slug}' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'fitxa-viatge.php',
 ];
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
@@ -644,6 +646,25 @@ $routes = [
 
     APP_GESTIO . $url['auxiliars'] . '/nova-imatge' => [
         'view' => APP_INTRANET_DIR . APP_AUXILIARS_DIR . 'imatges/form-inserir-imatge.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    // 17. Viatges
+    APP_GESTIO . $url['viatges'] => [
+        'view' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'index.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['viatges'] . '/fitxa-viatge/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'fitxa-viatge.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,

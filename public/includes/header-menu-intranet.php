@@ -33,6 +33,8 @@
 
       <a href="<?php echo APP_INTRANET . $url['auxiliars']; ?>" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">16. Auxiliars</a>
 
+      <a href="<?php echo APP_INTRANET . $url['viatges']; ?>" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">17. Viatges</a>
+
     </div>
   </div>
 </div>
