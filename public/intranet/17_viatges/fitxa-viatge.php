@@ -49,7 +49,7 @@ $slug = $routeParams[0];
                 $dataInici_formateada = date("d/m/Y", strtotime($dataVisita));
 
                 echo "<tr>";
-                echo "<td><a href='/gestio/viatges/fitxa-viatge/'>" . $nom . "</a></td>";
+                echo "<td><a href='/gestio/viatges/fitxa-espai/" . $id . "'>" . $nom . "</a></td>";
                 echo '<td>' . $city . '</td>';
                 echo "<td>" . $dataInici_formateada . " </td>";
                 echo "</tr>";

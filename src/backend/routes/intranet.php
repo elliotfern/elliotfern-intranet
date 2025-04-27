@@ -103,6 +103,8 @@ $base_routes = [
     // 17. Viatges
     APP_GESTIO . $url['viatges'] => APP_INTRANET_DIR . APP_VIATGES_DIR . 'index.php',
     APP_GESTIO . $url['viatges'] . '/fitxa-viatge/{slug}' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'fitxa-viatge.php',
+    APP_GESTIO . $url['viatges'] . '/fitxa-espai/{slug}' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'fitxa-espai.php',
+
 ];
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
@@ -665,6 +667,15 @@ $routes = [
 
     APP_GESTIO . $url['viatges'] . '/fitxa-viatge/{slug}' => [
         'view' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'fitxa-viatge.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['viatges'] . '/fitxa-espai/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'fitxa-espai.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
