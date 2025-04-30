@@ -36,6 +36,13 @@ button {
   padding: 0.6rem 1rem;
 }
 
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+}
+
 .btn-gran {
   font-size: 1rem;
   border: none;
@@ -67,6 +74,13 @@ button {
 .btn-secondari:hover {
   background-color: #d60a03;
   transform: scale(1.1);
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+  color: white;
+  border-radius: 3px;
 }
 
 /* Botón de envío */
@@ -121,7 +135,7 @@ button {
     width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */
   }
 }
-`, "",{"version":3,"sources":["webpack://./src/frontend/estils/botons.css"],"names":[],"mappings":"AAAA,0BAA0B;AAC1B;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,oBAAoB;AACtB;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,oBAAoB;AACtB;;AAEA;EACE,eAAe;EACf,YAAY;AACd;;AAEA;EACE,sBAAsB;EACtB,iBAAiB;EACjB,YAAY;AACd;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA,mBAAmB;AACnB;EACE,WAAW;EACX,aAAa;EACb,kBAAkB;EAClB,eAAe;EACf,iCAAiC;EACjC,YAAY;EACZ,eAAe;AACjB;;AAEA,4BAA4B;AAC5B;EACE,yBAAyB,EAAE,SAAS;EACpC,mBAAmB;EACnB,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;EAC/C,YAAY;EACZ,qBAAqB;AACvB;;AAEA,kCAAkC;AAClC;EACE,sBAAsB;EACtB,eAAe;EACf,yBAAyB,EAAE,SAAS;EACpC,YAAY;EACZ,YAAY;EACZ,kBAAkB;EAClB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,iBAAiB;EACjB,iBAAiB;AACnB;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;AACjD;;AAEA,wFAAwF;AACxF;EACE;;IAEE,WAAW,EAAE,6DAA6D;EAC5E;AACF","sourcesContent":["/* Ajustes para el botón */\nbutton {\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n  padding: 0.6rem 1rem;\n}\n\n.button {\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n  padding: 0.6rem 1rem;\n}\n\n.btn-gran {\n  font-size: 1rem;\n  border: none;\n}\n\n.btn-petit {\n  padding: 0.4rem 0.6rem;\n  font-size: 0.7rem;\n  border: none;\n}\n\n.btn-primari {\n  background-color: #081b2e;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-primari:hover {\n  background-color: #0056b3;\n  transform: scale(1.1);\n}\n\n.btn-secondari {\n  background-color: #b93a08;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-secondari:hover {\n  background-color: #d60a03;\n  transform: scale(1.1);\n}\n\n/* Botón de envío */\n.btn-color-negre {\n  width: 100%;\n  padding: 10px;\n  border-radius: 3px;\n  font-size: 16px;\n  background-color: rgb(43, 42, 42);\n  color: white;\n  cursor: pointer;\n}\n\n/* Botón Atrás (izquierda) */\n.btn-enrere {\n  background-color: #aaaaaa; /* Gris */\n  color: rgb(0, 0, 0);\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-enrere:hover {\n  background-color: #000000; /* Gris más oscuro */\n  color: white;\n  transform: scale(1.1);\n}\n\n/* Botón Crear factura (derecha) */\n.btn-primary {\n  padding: 0.8rem 1.5rem;\n  font-size: 1rem;\n  background-color: #007bff; /* Azul */\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n}\n\n.dreta {\n  text-align: right;\n  margin-left: auto;\n}\n\n.btn-primary:hover {\n  background-color: #0056b3; /* Azul más oscuro */\n}\n\n/* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */\n@media (max-width: 768px) {\n  .btn-back,\n  .btn-primary {\n    width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */\n  }\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/botons.css"],"names":[],"mappings":"AAAA,0BAA0B;AAC1B;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,oBAAoB;AACtB;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,oBAAoB;AACtB;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,eAAe;AACjB;;AAEA;EACE,eAAe;EACf,YAAY;AACd;;AAEA;EACE,sBAAsB;EACtB,iBAAiB;EACjB,YAAY;AACd;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,YAAY;EACZ,kBAAkB;AACpB;;AAEA,mBAAmB;AACnB;EACE,WAAW;EACX,aAAa;EACb,kBAAkB;EAClB,eAAe;EACf,iCAAiC;EACjC,YAAY;EACZ,eAAe;AACjB;;AAEA,4BAA4B;AAC5B;EACE,yBAAyB,EAAE,SAAS;EACpC,mBAAmB;EACnB,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;EAC/C,YAAY;EACZ,qBAAqB;AACvB;;AAEA,kCAAkC;AAClC;EACE,sBAAsB;EACtB,eAAe;EACf,yBAAyB,EAAE,SAAS;EACpC,YAAY;EACZ,YAAY;EACZ,kBAAkB;EAClB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,iBAAiB;EACjB,iBAAiB;AACnB;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;AACjD;;AAEA,wFAAwF;AACxF;EACE;;IAEE,WAAW,EAAE,6DAA6D;EAC5E;AACF","sourcesContent":["/* Ajustes para el botón */\nbutton {\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n  padding: 0.6rem 1rem;\n}\n\n.button {\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n  padding: 0.6rem 1rem;\n}\n\n.btn {\n  padding: 10px 20px;\n  font-size: 16px;\n  text-align: center;\n  cursor: pointer;\n}\n\n.btn-gran {\n  font-size: 1rem;\n  border: none;\n}\n\n.btn-petit {\n  padding: 0.4rem 0.6rem;\n  font-size: 0.7rem;\n  border: none;\n}\n\n.btn-primari {\n  background-color: #081b2e;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-primari:hover {\n  background-color: #0056b3;\n  transform: scale(1.1);\n}\n\n.btn-secondari {\n  background-color: #b93a08;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-secondari:hover {\n  background-color: #d60a03;\n  transform: scale(1.1);\n}\n\n.btn-secondary {\n  background-color: #6c757d;\n  border: none;\n  color: white;\n  border-radius: 3px;\n}\n\n/* Botón de envío */\n.btn-color-negre {\n  width: 100%;\n  padding: 10px;\n  border-radius: 3px;\n  font-size: 16px;\n  background-color: rgb(43, 42, 42);\n  color: white;\n  cursor: pointer;\n}\n\n/* Botón Atrás (izquierda) */\n.btn-enrere {\n  background-color: #aaaaaa; /* Gris */\n  color: rgb(0, 0, 0);\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-enrere:hover {\n  background-color: #000000; /* Gris más oscuro */\n  color: white;\n  transform: scale(1.1);\n}\n\n/* Botón Crear factura (derecha) */\n.btn-primary {\n  padding: 0.8rem 1.5rem;\n  font-size: 1rem;\n  background-color: #007bff; /* Azul */\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n}\n\n.dreta {\n  text-align: right;\n  margin-left: auto;\n}\n\n.btn-primary:hover {\n  background-color: #0056b3; /* Azul más oscuro */\n}\n\n/* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */\n@media (max-width: 768px) {\n  .btn-back,\n  .btn-primary {\n    width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -227,7 +241,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* ESTRUCTURA PRINCIPAL WEB */
 }
 
 .contingut {
-padding-top: 15px!important
+  padding-top: 15px !important;
 }
 
 /* Layout principal */
@@ -304,13 +318,24 @@ footer {
   text-decoration: none;
   font-weight: 600;
   padding: 2px 4px;
-  color:rgb(168, 12, 12);
+  color: rgb(168, 12, 12);
 }
 
 .barraNavegacio a:hover {
   text-decoration: underline;
-  color:rgb(0, 0, 0);
-}`, "",{"version":3,"sources":["webpack://./src/frontend/estils/contenidor.css"],"names":[],"mappings":"AAAA,6BAA6B;;AAE7B,yBAAyB;AACzB;EACE,UAAU;EACV,iBAAiB;EACjB,cAAc;EACd,iBAAiB;EACjB,oBAAoB;AACtB;;AAEA;AACA;AACA;;AAEA,qBAAqB;AACrB;EACE,aAAa;EACb,eAAe;EACf,8BAA8B;EAC9B,cAAc;EACd,OAAO;EACP,iBAAiB;AACnB;;AAEA;EACE,aAAa;EACb,aAAa;EACb,kBAAkB;EAClB,uCAAuC;AACzC;;AAEA,YAAY;AACZ;EACE,aAAa;EACb,iBAAiB;EACjB,aAAa;EACb,kBAAkB;EAClB,uCAAuC;AACzC;;AAEA,WAAW;AACX;EACE,gBAAgB;EAChB,YAAY;EACZ,kBAAkB;EAClB,aAAa;EACb,gBAAgB;AAClB;;AAEA,aAAa;AACb;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;;AAEA;EACE,UAAU;AACZ;;AAEA,eAAe;AACf;EACE;IACE,sBAAsB;EACxB;;EAEA;;IAEE,WAAW;IACX,mBAAmB;EACrB;AACF;;AAEA,oBAAoB;AACpB;EACE,qBAAqB;EACrB,yBAAyB;EACzB,aAAa;EACb,kBAAkB;EAClB,SAAS;AACX;;AAEA;EACE,WAAW;EACX,qBAAqB;EACrB,gBAAgB;EAChB,gBAAgB;EAChB,sBAAsB;AACxB;;AAEA;EACE,0BAA0B;EAC1B,kBAAkB;AACpB","sourcesContent":["/* ESTRUCTURA PRINCIPAL WEB */\n\n/* Contenedor principal */\n.container {\n  width: 90%;\n  max-width: 1200px;\n  margin: 0 auto;\n  padding-top: 50px;\n  padding-bottom: 30px;\n}\n\n.contingut {\npadding-top: 15px!important\n}\n\n/* Layout principal */\nmain {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  margin: 20px 0;\n  flex: 1;\n  background: white;\n}\n\narticle {\n  flex: 1 1 60%;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n}\n\n/* Sidebar */\naside {\n  flex: 1 1 35%;\n  background: white;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n}\n\n/* Footer */\nfooter {\n  background: #333;\n  color: white;\n  text-align: center;\n  padding: 10px;\n  margin-top: auto;\n}\n\n/* Llistats */\n.llistat {\n  list-style: none;\n  padding: 0;\n  margin: 0;\n  text-align: left;\n}\n\n.quadre {\n  width: 50%;\n}\n\n/* Responsive */\n@media (max-width: 768px) {\n  main {\n    flex-direction: column;\n  }\n\n  article,\n  aside {\n    width: 100%;\n    margin-bottom: 20px;\n  }\n}\n\n/* Barra navegacio */\n.barraNavegacio h6 {\n  display: inline-block;\n  background-color: #f0f0f0;\n  padding: 10px;\n  border-radius: 4px;\n  margin: 0;\n}\n\n.barraNavegacio a {\n  color: #333;\n  text-decoration: none;\n  font-weight: 600;\n  padding: 2px 4px;\n  color:rgb(168, 12, 12);\n}\n\n.barraNavegacio a:hover {\n  text-decoration: underline;\n  color:rgb(0, 0, 0);\n}"],"sourceRoot":""}]);
+  color: rgb(0, 0, 0);
+}
+
+/* Dades Fitxa */
+.dadesFitxa {
+  padding: 20px;
+  background-color: #ececec;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+}
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/contenidor.css"],"names":[],"mappings":"AAAA,6BAA6B;;AAE7B,yBAAyB;AACzB;EACE,UAAU;EACV,iBAAiB;EACjB,cAAc;EACd,iBAAiB;EACjB,oBAAoB;AACtB;;AAEA;EACE,4BAA4B;AAC9B;;AAEA,qBAAqB;AACrB;EACE,aAAa;EACb,eAAe;EACf,8BAA8B;EAC9B,cAAc;EACd,OAAO;EACP,iBAAiB;AACnB;;AAEA;EACE,aAAa;EACb,aAAa;EACb,kBAAkB;EAClB,uCAAuC;AACzC;;AAEA,YAAY;AACZ;EACE,aAAa;EACb,iBAAiB;EACjB,aAAa;EACb,kBAAkB;EAClB,uCAAuC;AACzC;;AAEA,WAAW;AACX;EACE,gBAAgB;EAChB,YAAY;EACZ,kBAAkB;EAClB,aAAa;EACb,gBAAgB;AAClB;;AAEA,aAAa;AACb;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;;AAEA;EACE,UAAU;AACZ;;AAEA,eAAe;AACf;EACE;IACE,sBAAsB;EACxB;;EAEA;;IAEE,WAAW;IACX,mBAAmB;EACrB;AACF;;AAEA,oBAAoB;AACpB;EACE,qBAAqB;EACrB,yBAAyB;EACzB,aAAa;EACb,kBAAkB;EAClB,SAAS;AACX;;AAEA;EACE,WAAW;EACX,qBAAqB;EACrB,gBAAgB;EAChB,gBAAgB;EAChB,uBAAuB;AACzB;;AAEA;EACE,0BAA0B;EAC1B,mBAAmB;AACrB;;AAEA,gBAAgB;AAChB;EACE,aAAa;EACb,yBAAyB;EACzB,gBAAgB;EAChB,mBAAmB;EACnB,mBAAmB;EACnB,eAAe;AACjB","sourcesContent":["/* ESTRUCTURA PRINCIPAL WEB */\n\n/* Contenedor principal */\n.container {\n  width: 90%;\n  max-width: 1200px;\n  margin: 0 auto;\n  padding-top: 50px;\n  padding-bottom: 30px;\n}\n\n.contingut {\n  padding-top: 15px !important;\n}\n\n/* Layout principal */\nmain {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  margin: 20px 0;\n  flex: 1;\n  background: white;\n}\n\narticle {\n  flex: 1 1 60%;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n}\n\n/* Sidebar */\naside {\n  flex: 1 1 35%;\n  background: white;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n}\n\n/* Footer */\nfooter {\n  background: #333;\n  color: white;\n  text-align: center;\n  padding: 10px;\n  margin-top: auto;\n}\n\n/* Llistats */\n.llistat {\n  list-style: none;\n  padding: 0;\n  margin: 0;\n  text-align: left;\n}\n\n.quadre {\n  width: 50%;\n}\n\n/* Responsive */\n@media (max-width: 768px) {\n  main {\n    flex-direction: column;\n  }\n\n  article,\n  aside {\n    width: 100%;\n    margin-bottom: 20px;\n  }\n}\n\n/* Barra navegacio */\n.barraNavegacio h6 {\n  display: inline-block;\n  background-color: #f0f0f0;\n  padding: 10px;\n  border-radius: 4px;\n  margin: 0;\n}\n\n.barraNavegacio a {\n  color: #333;\n  text-decoration: none;\n  font-weight: 600;\n  padding: 2px 4px;\n  color: rgb(168, 12, 12);\n}\n\n.barraNavegacio a:hover {\n  text-decoration: underline;\n  color: rgb(0, 0, 0);\n}\n\n/* Dades Fitxa */\n.dadesFitxa {\n  padding: 20px;\n  background-color: #ececec;\n  margin-top: 25px;\n  margin-bottom: 25px;\n  color: rgb(0, 0, 0);\n  font-size: 14px;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -520,7 +545,8 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* Estilos básicos para los formulari
 .form {
   max-width: 1200px;
   width: 100%;
-  margin: 0 auto; /* Centrar el formulario */
+  margin-bottom: 50px;
+  margin-top: 25px;
   padding: 20px;
   background-color: #ffdaa2; /* Fondo ligeramente gris */
   border-radius: 5px;
@@ -650,7 +676,69 @@ textarea:focus {
     flex-direction: column; /* Los botones se apilarán verticalmente */
   }
 }
-`, "",{"version":3,"sources":["webpack://./src/frontend/estils/formulari.css"],"names":[],"mappings":"AAAA,yCAAyC;AACzC;EACE,iBAAiB;EACjB,WAAW;EACX,cAAc,EAAE,0BAA0B;EAC1C,aAAa;EACb,yBAAyB,EAAE,2BAA2B;EACtD,kBAAkB;EAClB,yCAAyC,EAAE,iBAAiB;EAC5D,yBAAyB,EAAE,qCAAqC;AAClE;;AAEA;EACE,eAAe;EACf,gBAAgB;EAChB,WAAW;EACX,qBAAqB;AACvB;;AAEA,+CAA+C;AAC/C;EACE,aAAa;EACb,eAAe;EACf,WAAW;AACb;;AAEA;;;EAGE,sBAAsB;AACxB;;AAEA,qCAAqC;AACrC;EACE,aAAa,EAAE,qBAAqB;AACtC;;AAEA;EACE,aAAa,EAAE,qBAAqB;AACtC;;AAEA;EACE,cAAc,EAAE,mCAAmC;AACrD;;AAEA;EACE,gBAAgB;EAChB,mBAAmB;AACrB;;AAEA,4BAA4B;AAC5B;;EAEE,UAAU;EACV,eAAe;EACf,kBAAkB;EAClB,sBAAsB;EACtB,kBAAkB;EAClB,sBAAsB;EACtB,eAAe;EACf,WAAW;AACb;;AAEA;EACE,UAAU;EACV,eAAe;EACf,kBAAkB;EAClB,sBAAsB;EACtB,kBAAkB;EAClB,sBAAsB;EACtB,eAAe;EACf,WAAW;AACb;;AAEA;EACE,UAAU;EACV,eAAe;EACf,kBAAkB;EAClB,sBAAsB;EACtB,kBAAkB;EAClB,sBAAsB;EACtB,iBAAiB;EACjB,WAAW;AACb;;AAEA,2DAA2D;AAC3D;;;EAGE,qBAAqB;EACrB,aAAa;EACb,0CAA0C;AAC5C;;AAEA,+BAA+B;AAC/B;;;EAGE,mBAAmB,EAAE,iCAAiC;AACxD;;AAEA,8CAA8C;AAC9C;EACE,aAAa;EACb,gBAAgB;EAChB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd;;AAEA,6DAA6D;AAC7D;EACE;;;IAGE,cAAc,EAAE,mCAAmC;EACrD;AACF;;AAEA,wFAAwF;AACxF;EACE;IACE,sBAAsB,EAAE,0CAA0C;EACpE;AACF","sourcesContent":["/* Estilos básicos para los formularios */\n.form {\n  max-width: 1200px;\n  width: 100%;\n  margin: 0 auto; /* Centrar el formulario */\n  padding: 20px;\n  background-color: #ffdaa2; /* Fondo ligeramente gris */\n  border-radius: 5px;\n  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */\n  border: 2px solid #000000; /* Borde de 2px de color gris claro */\n}\n\nform label {\n  font-size: 1rem;\n  font-weight: 600;\n  color: #333;\n  margin-bottom: 0.5rem;\n}\n\n/* Ajustes para las columnas en el formulario */\n.form-espai {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\n.col-md-4,\n.col-md-6,\n.col-md-12 {\n  box-sizing: border-box;\n}\n\n/* Para 3 inputs en fila (col-md-4) */\n.col-md-4 {\n  flex: 1 1 30%; /* 3 inputs en fila */\n}\n\n.col-md-6 {\n  flex: 1 1 45%; /* 2 inputs en fila */\n}\n\n.col-md-12 {\n  flex: 1 1 100%; /* 1 input que ocupa toda la fila */\n}\n\n.separador {\n  margin-top: 35px;\n  margin-bottom: 20px;\n}\n\n/* Estilos para los inputs */\ninput,\ntextarea {\n  width: 90%;\n  padding: 0.8rem;\n  margin-top: 0.2rem;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  background-color: #fff;\n  font-size: 1rem;\n  color: #333;\n}\n\nselect {\n  width: 97%;\n  padding: 0.8rem;\n  margin-top: 0.2rem;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  background-color: #fff;\n  font-size: 1rem;\n  color: #333;\n}\n\n.input-petit {\n  width: 90%;\n  padding: 0.4rem;\n  margin-top: 0.2rem;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  background-color: #fff;\n  font-size: 0.7rem;\n  color: #333;\n}\n\n/* Bordes más suaves cuando se está enfocando en el campo */\ninput:focus,\nselect:focus,\ntextarea:focus {\n  border-color: #007bff;\n  outline: none;\n  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);\n}\n\n/* Espaciado entre los inputs */\n.col-md-4 input,\n.col-md-6 input,\n.col-md-12 input {\n  margin-bottom: 1rem; /* Espacio debajo de cada input */\n}\n\n/* Estilo para los mensajes de error y éxito */\n.message {\n  display: none;\n  margin-top: 1rem;\n  padding: 0.8rem;\n  border-radius: 4px;\n}\n\n.message.success {\n  background-color: #28a745;\n  color: white;\n}\n\n.message.error {\n  background-color: #dc3545;\n  color: white;\n}\n\n/* Ajustes en móviles (cuando la pantalla es menor a 768px) */\n@media (max-width: 768px) {\n  .col-md-4,\n  .col-md-6,\n  .col-md-12 {\n    flex: 1 1 100%; /* Los campos ocupan toda la fila */\n  }\n}\n\n/* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */\n@media (max-width: 768px) {\n  .form-espai {\n    flex-direction: column; /* Los botones se apilarán verticalmente */\n  }\n}\n"],"sourceRoot":""}]);
+
+/* pendents de modificar */
+/* Establecer un contenedor flex para la fila */
+.form .row {
+  display: flex;
+  flex-wrap: wrap;
+  /* Permite que los elementos se muevan a la siguiente fila cuando no haya espacio */
+  gap: 15px;
+  /* Añade un espacio entre las columnas */
+}
+
+/* Hacer que cada columna ocupe el 50% del ancho */
+.form .col-md-4 {
+  flex: 0 0 30%;
+  /* 48% de ancho para que haya espacio entre las columnas */
+  box-sizing: border-box;
+  /* Asegura que el padding no afecte el tamaño total */
+}
+
+.form .col-complet {
+  flex: 0 0 100%;
+  /* 48% de ancho para que haya espacio entre las columnas */
+  box-sizing: border-box;
+  /* Asegura que el padding no afecte el tamaño total */
+}
+
+/* Asegurarse de que las columnas se ajusten bien en pantallas pequeñas */
+@media (max-width: 768px) {
+  .form .col-md-4 {
+    flex: 0 0 100%;
+    /* En pantallas más pequeñas, cada columna ocupa el 100% del ancho */
+  }
+}
+
+/* Asegúrate de que el contenedor tenga un display flex para la fila */
+.container .row {
+  display: flex;
+  justify-content: space-between;
+  /* Distribuye los botones con espacio entre ellos */
+  padding: 10px 0;
+}
+
+.container {
+  padding-bottom: 10px !important;
+}
+
+/* Ajuste para móviles (si lo deseas) */
+@media (max-width: 768px) {
+  .container .row {
+    flex-direction: column;
+    /* Hace que los botones se apilen verticalmente en pantallas pequeñas */
+    align-items: center;
+    /* Centra los botones */
+  }
+
+  .container .row .col-6 {
+    width: 100%;
+    /* Hace que las columnas ocupen el 100% del ancho en pantallas pequeñas */
+    text-align: center;
+    /* Centra el texto en pantallas pequeñas */
+  }
+}
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/formulari.css"],"names":[],"mappings":"AAAA,yCAAyC;AACzC;EACE,iBAAiB;EACjB,WAAW;EACX,mBAAmB;EACnB,gBAAgB;EAChB,aAAa;EACb,yBAAyB,EAAE,2BAA2B;EACtD,kBAAkB;EAClB,yCAAyC,EAAE,iBAAiB;EAC5D,yBAAyB,EAAE,qCAAqC;AAClE;;AAEA;EACE,eAAe;EACf,gBAAgB;EAChB,WAAW;EACX,qBAAqB;AACvB;;AAEA,+CAA+C;AAC/C;EACE,aAAa;EACb,eAAe;EACf,WAAW;AACb;;AAEA;;;EAGE,sBAAsB;AACxB;;AAEA,qCAAqC;AACrC;EACE,aAAa,EAAE,qBAAqB;AACtC;;AAEA;EACE,aAAa,EAAE,qBAAqB;AACtC;;AAEA;EACE,cAAc,EAAE,mCAAmC;AACrD;;AAEA;EACE,gBAAgB;EAChB,mBAAmB;AACrB;;AAEA,4BAA4B;AAC5B;;EAEE,UAAU;EACV,eAAe;EACf,kBAAkB;EAClB,sBAAsB;EACtB,kBAAkB;EAClB,sBAAsB;EACtB,eAAe;EACf,WAAW;AACb;;AAEA;EACE,UAAU;EACV,eAAe;EACf,kBAAkB;EAClB,sBAAsB;EACtB,kBAAkB;EAClB,sBAAsB;EACtB,eAAe;EACf,WAAW;AACb;;AAEA;EACE,UAAU;EACV,eAAe;EACf,kBAAkB;EAClB,sBAAsB;EACtB,kBAAkB;EAClB,sBAAsB;EACtB,iBAAiB;EACjB,WAAW;AACb;;AAEA,2DAA2D;AAC3D;;;EAGE,qBAAqB;EACrB,aAAa;EACb,0CAA0C;AAC5C;;AAEA,+BAA+B;AAC/B;;;EAGE,mBAAmB,EAAE,iCAAiC;AACxD;;AAEA,8CAA8C;AAC9C;EACE,aAAa;EACb,gBAAgB;EAChB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd;;AAEA,6DAA6D;AAC7D;EACE;;;IAGE,cAAc,EAAE,mCAAmC;EACrD;AACF;;AAEA,wFAAwF;AACxF;EACE;IACE,sBAAsB,EAAE,0CAA0C;EACpE;AACF;;AAEA,0BAA0B;AAC1B,+CAA+C;AAC/C;EACE,aAAa;EACb,eAAe;EACf,mFAAmF;EACnF,SAAS;EACT,wCAAwC;AAC1C;;AAEA,kDAAkD;AAClD;EACE,aAAa;EACb,0DAA0D;EAC1D,sBAAsB;EACtB,qDAAqD;AACvD;;AAEA;EACE,cAAc;EACd,0DAA0D;EAC1D,sBAAsB;EACtB,qDAAqD;AACvD;;AAEA,yEAAyE;AACzE;EACE;IACE,cAAc;IACd,oEAAoE;EACtE;AACF;;AAEA,sEAAsE;AACtE;EACE,aAAa;EACb,8BAA8B;EAC9B,mDAAmD;EACnD,eAAe;AACjB;;AAEA;EACE,+BAA+B;AACjC;;AAEA,uCAAuC;AACvC;EACE;IACE,sBAAsB;IACtB,uEAAuE;IACvE,mBAAmB;IACnB,uBAAuB;EACzB;;EAEA;IACE,WAAW;IACX,yEAAyE;IACzE,kBAAkB;IAClB,0CAA0C;EAC5C;AACF","sourcesContent":["/* Estilos básicos para los formularios */\n.form {\n  max-width: 1200px;\n  width: 100%;\n  margin-bottom: 50px;\n  margin-top: 25px;\n  padding: 20px;\n  background-color: #ffdaa2; /* Fondo ligeramente gris */\n  border-radius: 5px;\n  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */\n  border: 2px solid #000000; /* Borde de 2px de color gris claro */\n}\n\nform label {\n  font-size: 1rem;\n  font-weight: 600;\n  color: #333;\n  margin-bottom: 0.5rem;\n}\n\n/* Ajustes para las columnas en el formulario */\n.form-espai {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\n.col-md-4,\n.col-md-6,\n.col-md-12 {\n  box-sizing: border-box;\n}\n\n/* Para 3 inputs en fila (col-md-4) */\n.col-md-4 {\n  flex: 1 1 30%; /* 3 inputs en fila */\n}\n\n.col-md-6 {\n  flex: 1 1 45%; /* 2 inputs en fila */\n}\n\n.col-md-12 {\n  flex: 1 1 100%; /* 1 input que ocupa toda la fila */\n}\n\n.separador {\n  margin-top: 35px;\n  margin-bottom: 20px;\n}\n\n/* Estilos para los inputs */\ninput,\ntextarea {\n  width: 90%;\n  padding: 0.8rem;\n  margin-top: 0.2rem;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  background-color: #fff;\n  font-size: 1rem;\n  color: #333;\n}\n\nselect {\n  width: 97%;\n  padding: 0.8rem;\n  margin-top: 0.2rem;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  background-color: #fff;\n  font-size: 1rem;\n  color: #333;\n}\n\n.input-petit {\n  width: 90%;\n  padding: 0.4rem;\n  margin-top: 0.2rem;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  background-color: #fff;\n  font-size: 0.7rem;\n  color: #333;\n}\n\n/* Bordes más suaves cuando se está enfocando en el campo */\ninput:focus,\nselect:focus,\ntextarea:focus {\n  border-color: #007bff;\n  outline: none;\n  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);\n}\n\n/* Espaciado entre los inputs */\n.col-md-4 input,\n.col-md-6 input,\n.col-md-12 input {\n  margin-bottom: 1rem; /* Espacio debajo de cada input */\n}\n\n/* Estilo para los mensajes de error y éxito */\n.message {\n  display: none;\n  margin-top: 1rem;\n  padding: 0.8rem;\n  border-radius: 4px;\n}\n\n.message.success {\n  background-color: #28a745;\n  color: white;\n}\n\n.message.error {\n  background-color: #dc3545;\n  color: white;\n}\n\n/* Ajustes en móviles (cuando la pantalla es menor a 768px) */\n@media (max-width: 768px) {\n  .col-md-4,\n  .col-md-6,\n  .col-md-12 {\n    flex: 1 1 100%; /* Los campos ocupan toda la fila */\n  }\n}\n\n/* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */\n@media (max-width: 768px) {\n  .form-espai {\n    flex-direction: column; /* Los botones se apilarán verticalmente */\n  }\n}\n\n/* pendents de modificar */\n/* Establecer un contenedor flex para la fila */\n.form .row {\n  display: flex;\n  flex-wrap: wrap;\n  /* Permite que los elementos se muevan a la siguiente fila cuando no haya espacio */\n  gap: 15px;\n  /* Añade un espacio entre las columnas */\n}\n\n/* Hacer que cada columna ocupe el 50% del ancho */\n.form .col-md-4 {\n  flex: 0 0 30%;\n  /* 48% de ancho para que haya espacio entre las columnas */\n  box-sizing: border-box;\n  /* Asegura que el padding no afecte el tamaño total */\n}\n\n.form .col-complet {\n  flex: 0 0 100%;\n  /* 48% de ancho para que haya espacio entre las columnas */\n  box-sizing: border-box;\n  /* Asegura que el padding no afecte el tamaño total */\n}\n\n/* Asegurarse de que las columnas se ajusten bien en pantallas pequeñas */\n@media (max-width: 768px) {\n  .form .col-md-4 {\n    flex: 0 0 100%;\n    /* En pantallas más pequeñas, cada columna ocupa el 100% del ancho */\n  }\n}\n\n/* Asegúrate de que el contenedor tenga un display flex para la fila */\n.container .row {\n  display: flex;\n  justify-content: space-between;\n  /* Distribuye los botones con espacio entre ellos */\n  padding: 10px 0;\n}\n\n.container {\n  padding-bottom: 10px !important;\n}\n\n/* Ajuste para móviles (si lo deseas) */\n@media (max-width: 768px) {\n  .container .row {\n    flex-direction: column;\n    /* Hace que los botones se apilen verticalmente en pantallas pequeñas */\n    align-items: center;\n    /* Centra los botones */\n  }\n\n  .container .row .col-6 {\n    width: 100%;\n    /* Hace que las columnas ocupen el 100% del ancho en pantallas pequeñas */\n    text-align: center;\n    /* Centra el texto en pantallas pequeñas */\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

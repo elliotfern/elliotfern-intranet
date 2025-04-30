@@ -147,7 +147,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         global $conn;
         $data = array();
         $stmt = $conn->prepare("SELECT b.id,  b.titol, b.titolEng, b.slug, b.any, b.dateCreated, b.dateModified, b.idGen, b.subGen, b.lang, b.tipus, b.estat, b.idEd, b.img,
-        a.nom, a.cognoms, a.id AS idAutor, a.slug AS slugAutor, i.nameImg, t.nomTipus, e.editorial, g.genere_cat, id.idioma_ca, a.slug AS slugAutor, sg.sub_genere_cat
+        a.nom, a.cognoms, a.id AS idAutor, a.slug AS slugAutor, i.nameImg, t.nomTipus, e.editorial, g.genere_cat, id.idioma_ca, a.slug AS slugAutor, sg.sub_genere_cat,
+        el.estat
                 FROM 08_db_biblioteca_llibres AS b
                 INNER JOIN db_img AS i ON b.img = i.id
                 INNER JOIN db_persones AS a ON b.autor = a.id
@@ -155,6 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
                 INNER JOIN 08_aux_biblioteca_editorials AS e ON b.idEd = e.id
                 INNER JOIN 08_aux_biblioteca_generes_literaris AS g ON b.idGen = g.id
                 LEFT JOIN 08_aux_biblioteca_sub_generes_literaris AS sg ON b.subGen = sg.id
+                LEFT JOIN 08_aux_biblioteca_estat_llibre AS el ON b.estat = el.id
                 INNER JOIN aux_idiomes AS id ON b.lang = id.id
                 WHERE b.slug = :slug");
         $stmt->execute(['slug' => $slug]);

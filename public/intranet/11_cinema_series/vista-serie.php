@@ -2,7 +2,7 @@
 $slug = $routeParams[0];
 ?>
 
-<div class="container">
+<div class="container contingut">
 
   <div class="barraNavegacio">
     <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['cinema']; ?>">Arts escèniques, cinema i televisió</a> > <a href="<?php echo APP_INTRANET . $url['cinema']; ?>/llistat-series">Llistat sèries</a></h6>
@@ -13,6 +13,10 @@ $slug = $routeParams[0];
       <h1>Sèrie tv: <span id="name"></span></h1>
       <button onclick="window.location.href='<?php echo APP_INTRANET . $url['cinema']; ?>/modifica-serie/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Modifica fitxa</button>
 
+      <div class="dadesFitxa">
+        <strong>Aquesta fitxa ha estat creada el: </strong><span id="dateCreated"></span> <span id="dateModified"></span>
+      </div>
+
       <div class='fixaDades'>
 
         <div class='columna imatge'>
@@ -21,16 +25,14 @@ $slug = $routeParams[0];
 
         <div class="columna">
           <div class="quadre-detalls">
-            <p><strong>Director: </strong><a id="directorUrl" href=""><span id="nom"></span> <span id="cognoms"></span></a></p>
+            <p><strong>Creador: </strong><a id="directorUrl" href=""><span id="nom"></span> <span id="cognoms"></span></a></p>
             <p><strong>Idioma original: </strong><span id="idioma_ca"></span></p>
             <p><strong>Gènere: </strong><span id="genere_ca"></span></p>
             <p><strong>País: </strong><span id="pais_cat"></span></p>
             <p><strong>Productora tv/plataforma: </strong><span id="productora"></span></p>
             <p><strong>Número de temporades: </strong><span id="season"></span></p>
             <p><strong>Número d'episodis: </strong><span id="chapter"></span></p>
-            <p><strong>Anys d'emissió: </strong><span id="startYear"></span> / <span id="endYear"></span></p>
-            <p><strong>Fitxa creada: </strong><span id="dateCreated"></span></p>
-            <p><strong>Fitxa actualizada: </strong><span id="dateModified"></span></p>
+            <p><span id="startYear"></span></p>
           </div>
         </div>
 
@@ -102,14 +104,6 @@ $slug = $routeParams[0];
             }
           }
 
-          // Formatear fechas si es necesario
-          if (key === 'dateCreated' || key === 'dateModified' || key === 'dataVista') {
-            const dateElement = document.getElementById(key);
-            if (dateElement && dateElement.tagName === 'SPAN') {
-              dateElement.textContent = value; // Formatear y agregar la fecha
-            }
-          }
-
           // Anys naixement i defuncio
           if (key === 'anyNaixement' || key === 'anyDefuncio') {
             const dateElement = document.getElementById(key);
@@ -139,23 +133,46 @@ $slug = $routeParams[0];
               const month = dateObj.getMonth() + 1; // Los meses van de 0 a 11
               const year = dateObj.getFullYear();
 
-              dateElement.textContent = `${day}-${month}-${year}`;
+              dateElement.textContent = `${day}/${month}/${year}`;
+            }
+          }
+
+          if (key === 'dateModified') {
+            const dateElement = document.getElementById('dateModified');
+
+            // Verifica si el valor es distinto de '0000-00-00' y si la fecha es válida
+            if (dateElement && dateElement.tagName === 'SPAN') {
+              const dateObj = new Date(value);
+
+              // Verifica si la fecha es válida
+              if (data2['dateModified'] == '0000-00-00') {
+                dateElement.textContent = ''; // No mostrar nada si no es válida
+              } else {
+                const day = dateObj.getDate();
+                const month = dateObj.getMonth() + 1;
+                const year = dateObj.getFullYear();
+
+                dateElement.innerHTML = `| <strong> Darrera modificació: </strong> ${day}/${month}/${year}`;
+
+              }
             }
           }
 
           // Anys naixement i defuncio
-          if (key === 'dateModified') {
-            const dateElement = document.getElementById('dateModified');
-            if (dateElement && dateElement.tagName === 'SPAN') {
-              const dateObj = new Date(value);
-              const day = dateObj.getDate();
-              const month = dateObj.getMonth() + 1; // Los meses van de 0 a 11
-              const year = dateObj.getFullYear();
-
-              dateElement.textContent = `${day}-${month}-${year}`;
+          if (key === 'startYear') {
+            const dateElement = document.getElementById('startYear');
+            if (data2['endYear'] === null || data2['endYear'] === 0) {
+              const startYear = data2['startYear'];
+              dateElement.innerHTML = `<strong>En emissió: </strong>des de l'any ${startYear}`;
+            } else if (data2['startYear'] === data2['endYear']) {
+              const startYear = data2['startYear'];
+              dateElement.innerHTML = `<strong>Any emissió: </strong> ${startYear}`;
+            } else {
+              const endYear = data2['endYear'];
+              const startYear = data2['startYear'];
+              dateElement.innerHTML = `<strong>Anys emissió: </strong>${startYear} / ${endYear}`;
             }
           }
-
         }
       }
 

@@ -13,6 +13,10 @@ $slug = $routeParams[0];
 
       <button onclick="window.location.href='<?php echo APP_INTRANET . $url['biblioteca']; ?>/modifica-llibre/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Modifica fitxa</button>
 
+      <div class="dadesFitxa">
+        <strong>Aquesta fitxa ha estat creada el: </strong><span id="dateCreated"></span> <span id="dateModified"></span>
+      </div>
+
       <div class='fixaDades'>
 
         <div class='columna imatge'>
@@ -30,8 +34,7 @@ $slug = $routeParams[0];
             <p><strong>Sub-gènere: </strong> <span id="sub_genere_cat"></span></p>
             <p><strong>Idioma original: </strong> <span id="idioma_ca"></span></p>
             <p><strong>Tipus d'obra: </strong> <span id="nomTipus"></span></p>
-            <p><strong>Fitxa creada: </strong> <span id="dateCreated"></span></p>
-            <p><strong>Fitxa actualizada: </strong> <span id="dateModified"></span></p>
+            <p><button type='button' class='button btn-petit'><span id="estat"></span></button></p>
           </div>
         </div>
       </div>
@@ -85,8 +88,23 @@ $slug = $routeParams[0];
           document.getElementById('sub_genere_cat').textContent = data.sub_genere_cat;
           document.getElementById('idioma_ca').textContent = data.idioma_ca;
           document.getElementById('nomTipus').textContent = data.nomTipus;
-          document.getElementById('dateCreated').textContent = fechaFormateada_net;
-          document.getElementById('dateModified').textContent = fechaFormateada2_net;
+          document.getElementById('estat').textContent = data.estat;
+
+          const dateElement = document.getElementById('dateCreated');
+          const dateElement2 = document.getElementById('dateModified');
+          dateElement.textContent = `${fechaFormateada_net}`;
+
+          // Verifica si la fecha es válida
+          if (fechaFormateada2_net == '0000-00-00') {
+            dateElement2.textContent = ''; // No mostrar nada si no es válida
+          } else if (fechaFormateada_net == fechaFormateada2_net) {
+            dateElement2.textContent = '';
+          } else {
+            dateElement2.innerHTML = `| <strong> Darrera modificació: </strong> ${fechaFormateada2_net}`;
+
+          }
+
+
         } catch (error) {
           console.error('Error al parsear JSON:', error);
         }

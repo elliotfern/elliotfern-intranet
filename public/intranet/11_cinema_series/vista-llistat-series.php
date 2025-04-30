@@ -93,8 +93,7 @@
               <p><strong>Any: </strong> ${pelicula.startYear}</p>
               <p><strong>País: </strong> ${pelicula.country}</p>
               <p><strong>Idioma original: </strong> ${pelicula.lang}</p>
-              <a href="${window.location.origin}/cinema/modifica/serie/${pelicula.id}" class="btn btn-secondary btn-sm modificar-link">Modificar</a>
-              <button type='button' class='btn btn-dark btn-sm' onclick='eliminaContacte(${pelicula.id})'>Eliminar</button>
+               <button onclick="window.location.href='${window.location.origin}/gestio/cinema/modifica-serie/${pelicula.slug}'" class="button btn-petit">Modificar</button>
             </div>`;
           });
           document.getElementById("seriesContainer").innerHTML = pelicules;

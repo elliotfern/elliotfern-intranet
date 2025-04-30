@@ -14,6 +14,10 @@ $slug = $routeParams[0];
 
             <button onclick="window.location.href='<?php echo APP_INTRANET . $url['persona']; ?>/modifica-persona/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Modifica fitxa</button>
 
+            <div class="dadesFitxa">
+                <strong>Aquesta fitxa ha estat creada el: </strong><span id="dateCreated"></span> <span id="dateModified"></span>
+            </div>
+
             <div class='row'>
                 <div class='col imatge'>
                     <img id="img" src='' class='img-thumbnail' style='height:auto;width:auto;max-width:auto' alt='Author Photo' title='Author photo'>
@@ -26,12 +30,12 @@ $slug = $routeParams[0];
                         <p id="AutDescrip"> </p>
                         <p><strong>Pais: </strong><span id="pais_cat"></span></p>
                         <p><strong>Professió: </strong><span id="professio_ca"></span></p>
-                        <p><strong>Pàgina web: </strong><a id="web" href='' target='_blank' title='web'>Web</a></p>
-                        <p><strong>Data de creació: </strong><span id="dateCreated"></span></p>
-                        <p><strong>Data de modificació: </strong><span id="dateModified"></span></p>
+                        <p><strong>Pàgina Viquipèdia: </strong><a id="web" href='' target='_blank' title='web'>Web</a></p>
+                        <p><span id="descripcio"></span></p>
                     </div>
                 </div>
             </div>
+
 
             <hr>
             <h4>Participació a pel·lícules:</h4>
@@ -99,14 +103,6 @@ $slug = $routeParams[0];
                         }
                     }
 
-                    // Formatear fechas si es necesario
-                    if (key === 'dateCreated' || key === 'dateModified' || key === 'dataVista') {
-                        const dateElement = document.getElementById(key);
-                        if (dateElement && dateElement.tagName === 'SPAN') {
-                            dateElement.textContent = value; // Formatear y agregar la fecha
-                        }
-                    }
-
                     // Anys naixement i defuncio
                     if (key === 'anyNaixement' || key === 'anyDefuncio') {
                         const dateElement = document.getElementById(key);
@@ -136,20 +132,31 @@ $slug = $routeParams[0];
                             const month = dateObj.getMonth() + 1; // Los meses van de 0 a 11
                             const year = dateObj.getFullYear();
 
-                            dateElement.textContent = `${day}-${month}-${year}`;
+                            dateElement.textContent = `${day}/${month}/${year}`;
                         }
                     }
 
-                    // Anys naixement i defuncio
                     if (key === 'dateModified') {
                         const dateElement = document.getElementById('dateModified');
+
+                        // Verifica si el valor es distinto de '0000-00-00' y si la fecha es válida
                         if (dateElement && dateElement.tagName === 'SPAN') {
                             const dateObj = new Date(value);
-                            const day = dateObj.getDate();
-                            const month = dateObj.getMonth() + 1; // Los meses van de 0 a 11
-                            const year = dateObj.getFullYear();
 
-                            dateElement.textContent = `${day}-${month}-${year}`;
+                            // Verifica si la fecha es válida
+                            if (data2['dateModified'] == '0000-00-00') {
+                                dateElement.textContent = '';
+
+                            } else if (data2['dateModified'] == data2['dateCreated']) {
+                                dateElement.textContent = '';
+                            } else {
+                                const day = dateObj.getDate();
+                                const month = dateObj.getMonth() + 1;
+                                const year = dateObj.getFullYear();
+
+                                dateElement.innerHTML = `| <strong> Darrera modificació: </strong> ${day}/${month}/${year}`;
+
+                            }
                         }
                     }
 

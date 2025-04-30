@@ -3,7 +3,7 @@ $slug = $routeParams[0];
 ?>
 
 <div class="container">
-<div class="barraNavegacio">
+  <div class="barraNavegacio">
     <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>">Biblioteca</a> > <a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>/llistat-autors">LListat d'autors/es</a> </h6>
   </div>
 
@@ -12,6 +12,10 @@ $slug = $routeParams[0];
       <h1>Biblioteca: <span id="nom"></span> <span id="cognoms"></span></h1>
 
       <button onclick="window.location.href='<?php echo APP_INTRANET . $url['persona']; ?>/modifica-persona/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Modifica fitxa</button>
+
+      <div class="dadesFitxa">
+        <strong>Aquesta fitxa ha estat creada el: </strong><span id="dateCreated"></span> <span id="dateModified"></span>
+      </div>
 
       <div class='fixaDades'>
 
@@ -26,8 +30,6 @@ $slug = $routeParams[0];
             <p><strong>Pais: </strong> <span id="pais_cat"></span></p>
             <p><strong>Professió: </strong><span id="professio_ca"></span></p>
             <p><strong>Web: </strong><a id="web" href='' target='_blank' title='web'>Web</a></p>
-            <p><strong>Data de creació: </strong><span id="dateCreated"></span></p>
-            <p><strong>Data de modificació: </strong><span id="dateModified"></span></p>
             <p><span id="descripcio"></span></p>
           </div>
         </div>
@@ -102,32 +104,6 @@ $slug = $routeParams[0];
           }
 
           // Anys naixement i defuncio
-          if (key === 'dateCreated') {
-            const dateElement = document.getElementById('dateCreated');
-            if (dateElement && dateElement.tagName === 'SPAN') {
-              const dateObj = new Date(value);
-              const day = dateObj.getDate();
-              const month = dateObj.getMonth() + 1; // Los meses van de 0 a 11
-              const year = dateObj.getFullYear();
-
-              dateElement.textContent = `${day}-${month}-${year}`;
-            }
-          }
-
-          // Anys naixement i defuncio
-          if (key === 'dateModified') {
-            const dateElement = document.getElementById('dateModified');
-            if (dateElement && dateElement.tagName === 'SPAN') {
-              const dateObj = new Date(value);
-              const day = dateObj.getDate();
-              const month = dateObj.getMonth() + 1; // Los meses van de 0 a 11
-              const year = dateObj.getFullYear();
-
-              dateElement.textContent = `${day}-${month}-${year}`;
-            }
-          }
-
-          // Anys naixement i defuncio
           if (key === 'anyNaixement' || key === 'anyDefuncio') {
             const dateElement = document.getElementById(key);
             if (dateElement && dateElement.tagName === 'SPAN') {
@@ -144,6 +120,43 @@ $slug = $routeParams[0];
               }
 
               dateElement.innerHTML = `${anyNaixement} - ${anyDefuncio || ""} (${edad} anys)`;
+            }
+          }
+
+          // Anys naixement i defuncio
+          if (key === 'dateCreated') {
+            const dateElement = document.getElementById('dateCreated');
+            if (dateElement && dateElement.tagName === 'SPAN') {
+              const dateObj = new Date(value);
+              const day = dateObj.getDate();
+              const month = dateObj.getMonth() + 1; // Los meses van de 0 a 11
+              const year = dateObj.getFullYear();
+
+              dateElement.textContent = `${day}/${month}/${year}`;
+            }
+          }
+
+          if (key === 'dateModified') {
+            const dateElement = document.getElementById('dateModified');
+
+            // Verifica si el valor es distinto de '0000-00-00' y si la fecha es válida
+            if (dateElement && dateElement.tagName === 'SPAN') {
+              const dateObj = new Date(value);
+
+              // Verifica si la fecha es válida
+              if (data2['dateModified'] == '0000-00-00') {
+                dateElement.textContent = '';
+
+              } else if (data2['dateModified'] == data2['dateCreated']) {
+                dateElement.textContent = '';
+              } else {
+                const day = dateObj.getDate();
+                const month = dateObj.getMonth() + 1;
+                const year = dateObj.getFullYear();
+
+                dateElement.innerHTML = `| <strong> Darrera modificació: </strong> ${day}/${month}/${year}`;
+
+              }
             }
           }
 

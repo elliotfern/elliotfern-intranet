@@ -228,7 +228,7 @@ if (isset($_GET['pelicules'])) {
     $slug = $_GET['director'];
     global $conn;
     $data = array();
-    $query = "SELECT a.id, a.cognoms, a.nom, i.nameImg, c.pais_cat, a.slug, a.anyNaixement, a.anyDefuncio, a.dateCreated, a.dateModified, pro.professio_ca, a.web
+    $query = "SELECT a.id, a.cognoms, a.nom, i.nameImg, c.pais_cat, a.slug, a.anyNaixement, a.anyDefuncio, a.dateCreated, a.dateModified, pro.professio_ca, a.web, a.descripcio
             FROM db_persones AS a
             LEFT JOIN db_img AS i ON a.img = i.id
             LEFT JOIN db_countries AS c ON a.paisAutor = c.id

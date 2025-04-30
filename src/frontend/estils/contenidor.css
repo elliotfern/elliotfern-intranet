@@ -10,7 +10,7 @@
 }
 
 .contingut {
-padding-top: 15px!important
+  padding-top: 15px !important;
 }
 
 /* Layout principal */
@@ -87,10 +87,20 @@ footer {
   text-decoration: none;
   font-weight: 600;
   padding: 2px 4px;
-  color:rgb(168, 12, 12);
+  color: rgb(168, 12, 12);
 }
 
 .barraNavegacio a:hover {
   text-decoration: underline;
-  color:rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+}
+
+/* Dades Fitxa */
+.dadesFitxa {
+  padding: 20px;
+  background-color: #ececec;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  color: rgb(0, 0, 0);
+  font-size: 14px;
 }
