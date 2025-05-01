@@ -142,36 +142,3 @@ if (isset($routeParams[0])) {
         }
     }
 </script>
-<style>
-    #pagination {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    #pagination a {
-        display: inline-block;
-        padding: 8px 12px;
-        margin: 0 5px;
-        text-decoration: none;
-        color: #007bff;
-        border: 1px solid #007bff;
-        border-radius: 4px;
-        transition: all 0.3s ease;
-    }
-
-    #pagination a:hover {
-        background-color: #007bff;
-        color: white;
-    }
-
-    #pagination a.current-page {
-        background-color: #007bff;
-        color: white;
-        font-weight: bold;
-        border: 1px solid #0056b3;
-    }
-
-    #pagination a:active {
-        transform: scale(0.95);
-    }
-</style>

@@ -57,12 +57,48 @@ if (isset($_GET['autor'])) {
   $slug = isset($data['slug']) ? data_input($data['slug']) : ($hasError = true);
   $grup = !empty($data['grup']) ? data_input($data['grup']) : ($hasError = true);
 
+  $sexe = !empty($data['sexe']) ? data_input($data['sexe']) : ($hasError = true);
+  $mesNaixement = !empty($data['mesNaixement']) ? data_input($data['mesNaixement']) : ($hasError = false);
+  $diaNaixement = !empty($data['diaNaixement']) ? data_input($data['diaNaixement']) : ($hasError = false);
+  $mesDefuncio = !empty($data['mesDefuncio']) ? data_input($data['mesDefuncio']) : ($hasError = false);
+  $diaDefuncio = !empty($data['diaDefuncio']) ? data_input($data['diaDefuncio']) : ($hasError = false);
+  $ciutatNaixement = !empty($data['ciutatNaixement']) ? data_input($data['ciutatNaixement']) : ($hasError = false);
+  $ciutatDefuncio = !empty($data['ciutatDefuncio']) ? data_input($data['ciutatDefuncio']) : ($hasError = false);
+  $descripcioCast = !empty($data['descripcioCast']) ? data_input($data['descripcioCast']) : ($hasError = false);
+  $descripcioEng = !empty($data['descripcioEng']) ? data_input($data['descripcioEng']) : ($hasError = false);
+  $descripcioIt = !empty($data['descripcioIt']) ? data_input($data['descripcioIt']) : ($hasError = false);
+
   $timestamp = date('Y-m-d');
   $dateModified = $timestamp;
 
   if ($hasError == false) {
     global $conn;
-    $sql = "UPDATE db_persones SET nom=:nom, cognoms=:cognoms, anyNaixement=:anyNaixement, anyDefuncio=:anyDefuncio, paisAutor=:paisAutor, img=:img, web=:web, descripcio=:descripcio, ocupacio=:ocupacio, dateModified=:dateModified, slug=:slug, grup=:grup WHERE id=:id";
+
+    $sql = "UPDATE db_persones 
+              SET nom=:nom, 
+                cognoms=:cognoms, 
+                anyNaixement=:anyNaixement, 
+                anyDefuncio=:anyDefuncio, 
+                paisAutor=:paisAutor, 
+                img=:img, 
+                web=:web, 
+                descripcio=:descripcio, 
+                ocupacio=:ocupacio, 
+                dateModified=:dateModified, 
+                slug=:slug, 
+                grup=:grup, 
+                sexe=:sexe, 
+                mesNaixement=:mesNaixement, 
+                diaNaixement=:diaNaixement, 
+                mesDefuncio=:mesDefuncio, 
+                diaDefuncio=:diaDefuncio, 
+                ciutatNaixement=:ciutatNaixement, 
+                ciutatDefuncio=:ciutatDefuncio, 
+                descripcioCast=:descripcioCast, 
+                descripcioEng=:descripcioEng, 
+                descripcioIt=:descripcioIt
+              WHERE id=:id";
+
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":nom", $nom, PDO::PARAM_STR);
     $stmt->bindParam(":cognoms", $cognoms, PDO::PARAM_STR);
@@ -76,6 +112,17 @@ if (isset($_GET['autor'])) {
     $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
     $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
     $stmt->bindParam(":grup", $grup, PDO::PARAM_INT);
+    $stmt->bindParam(":sexe", $sexe, PDO::PARAM_INT);
+    $stmt->bindParam(":mesNaixement", $mesNaixement, PDO::PARAM_INT);
+    $stmt->bindParam(":diaNaixement", $diaNaixement, PDO::PARAM_INT);
+    $stmt->bindParam(":mesDefuncio", $mesDefuncio, PDO::PARAM_INT);
+    $stmt->bindParam(":diaDefuncio", $diaDefuncio, PDO::PARAM_INT);
+    $stmt->bindParam(":ciutatNaixement", $ciutatNaixement, PDO::PARAM_STR);
+    $stmt->bindParam(":ciutatDefuncio", $ciutatDefuncio, PDO::PARAM_STR);
+    $stmt->bindParam(":descripcio", $descripcio, PDO::PARAM_STR);
+    $stmt->bindParam(":descripcioCast", $descripcioCast, PDO::PARAM_STR);
+    $stmt->bindParam(":descripcioEng", $descripcioEng, PDO::PARAM_STR);
+    $stmt->bindParam(":descripcioIt", $descripcioIt, PDO::PARAM_STR);
     $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
     if ($stmt->execute()) {

@@ -44,6 +44,9 @@ $base_routes = [
     '/api/adreces/post' => 'src/backend/api/09_adreces/post-link.php',
     '/api/adreces/put' => 'src/backend/api/09_adreces/put-link.php',
 
+    // 04- Persones
+    '/api/persones/get' => 'src/backend/api/04_persones/get-persones.php',
+
 
 ];
 
@@ -277,6 +280,16 @@ $routes = [
         'header_menu_footer' => false,
         'apiSenseHTML' => true
     ],
+
+    // 04. Persones
+    '/api/persones/get' => [
+        'view' => 'src/backend/api/04_persones/get-persones.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
 
 ];
 

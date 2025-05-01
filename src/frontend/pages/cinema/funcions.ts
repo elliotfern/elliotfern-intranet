@@ -5,22 +5,14 @@ import { transmissioDadesDB } from '../../utils/actualitzarDades';
 import { llistatPelicules } from '../../components/cinema/llistatPelicules';
 import { connexioApiDades } from '../../components/lecturaDadesForm/mostrarDades/connexioApiDades';
 import { llistatPeliculaActors } from '../../components/cinema/llistatPeliculaActors';
+import { fitxaPersona } from '../persona/fitxaPersona';
+import { construirTaula } from '../../services/api/construirTaula';
 
 const url = window.location.href;
 const pageType = getPageType(url);
 
 export function cinema() {
   if (pageType[2] === 'modifica-pelicula') {
-    // Inicialitzar l'editor Trix
-    /*
-    omplirDadesForm('/api/cinema/get/?pelicula=', idElement, 'peli', function (data) {
-      selectOmplirDades('/api/auxiliars/get/?type=directors', data[0].director, 'director', 'nomComplet');
-      selectOmplirDades('/api/auxiliars/get/?type=imgPelis', data[0].img, 'img', 'alt');
-      selectOmplirDades('/api/auxiliars/get/?type=generesPelis', data[0].genere, 'genere', 'genere_ca');
-      selectOmplirDades('/api/auxiliars/get/?type=llengues', data[0].lang, 'lang', 'idioma_ca');
-      selectOmplirDades('/api/auxiliars/get/?type=paisos', data[0].pais, 'pais', 'pais_cat');
-    });
-*/
     const peli = document.getElementById('peli');
     if (peli) {
       peli.addEventListener('submit', function (event) {
@@ -122,5 +114,77 @@ export function cinema() {
         transmissioDadesDB(event, 'PUT', 'inserirActorSerie', '/api/cinema/put/?actorSerie');
       });
     }
+  } else if (pageType[2] === 'fitxa-actor') {
+    fitxaPersona('/api/persones/get/?persona=', pageType[3], 'cinema-actor', function (data) {
+      construirTaula('taula1', '/api/cinema/get/?actor-pelicules=', data.slug, ['Titol', 'Any', 'Rol'], function (fila, columna) {
+        if (columna.toLowerCase() === 'titol') {
+          // Manejar el caso del título
+          return `<a href="https://${window.location.host}/gestio/cinema/fitxa-pelicula/${fila['slug']}">${fila['titol']}</a>`;
+        } else if (columna.toLowerCase() === 'any') {
+          return `${fila['anyInici']}${fila['anyFi'] ? ' - ' + fila['anyFi'] : ''}`;
+        } else if (columna.toLowerCase() === 'rol') {
+          // Manejar otros casos
+          return `${fila['role']}`;
+        } else {
+          // Manejar otros casos
+          return fila[columna.toLowerCase()];
+        }
+      });
+      construirTaula('taula2', '/api/cinema/get/?actor-series=', data.slug, ['Titol', 'Any', 'Rol'], function (fila, columna) {
+        if (columna.toLowerCase() === 'titol') {
+          // Manejar el caso del título
+          return `<a href="https://${window.location.host}/gestio/cinema/fitxa-serie/${fila['slug']}">${fila['titol']}</a>`;
+        } else if (columna.toLowerCase() === 'any') {
+          return `${fila['anyInici']}${fila['anyFi'] ? ' - ' + fila['anyFi'] : ''}`;
+        } else if (columna.toLowerCase() === 'rol') {
+          // Manejar otros casos
+          return `${fila['role']}`;
+        } else {
+          // Manejar otros casos
+          return fila[columna.toLowerCase()];
+        }
+      });
+    });
+  } else if (pageType[2] === 'fitxa-director') {
+    fitxaPersona('/api/persones/get/?persona=', pageType[3], 'cinema-director', function (data) {
+      construirTaula('taula1', '/api/cinema/get/?directorPelicules=', data.id, ['', 'Titol', 'Any', 'Gènere'], function (fila, columna) {
+        if (columna.toLowerCase() === '') {
+          // Manejar el caso del título
+          return `<a id="pelicula-${fila['id']}" title="pelicula" href="${window.location.origin}/gestio/cinema/fitxa-pelicula/${fila['slug']}">
+                        <img src="https://media.elliot.cat/img/cinema-pelicula/${fila['nameImg']}.jpg" width="100" height="auto">
+                    </a>`;
+        } else if (columna.toLowerCase() === 'titol') {
+          // Manejar el caso del título
+          return `<a href="https://${window.location.host}/gestio/cinema/fitxa-pelicula/${fila['slug']}">${fila['name']}</a>`;
+        } else if (columna.toLowerCase() === 'any') {
+          return `${fila['anyInici']}${fila['anyFi'] ? ' - ' + fila['anyFi'] : ''}`;
+        } else if (columna.toLowerCase() === 'gènere') {
+          // Manejar otros casos
+          return `${fila['genere_ca']}`;
+        } else {
+          // Manejar otros casos
+          return fila[columna.toLowerCase()];
+        }
+      });
+      construirTaula('taula2', '/api/cinema/get/?directorSeries=', data.id, ['', 'Titol', 'Any', 'Gènere'], function (fila, columna) {
+        if (columna.toLowerCase() === '') {
+          // Manejar el caso del título
+          return `<a id="serie-${fila['id']}" title="serie" href="${window.location.origin}/gestio/cinema/fitxa-serie/${fila['slug']}">
+                        <img src="https://media.elliot.cat/img/cinema-serie/${fila['nameImg']}.jpg" width="100" height="auto">
+                    </a>`;
+        } else if (columna.toLowerCase() === 'titol') {
+          // Manejar el caso del título
+          return `<a href="https://${window.location.host}/gestio/cinema/fitxa-serie/${fila['slug']}">${fila['name']}</a>`;
+        } else if (columna.toLowerCase() === 'any') {
+          return `${fila['anyInici']}${fila['anyFi'] ? ' - ' + fila['anyFi'] : ''}`;
+        } else if (columna.toLowerCase() === 'gènere') {
+          // Manejar otros casos
+          return `${fila['genere_ca']}`;
+        } else {
+          // Manejar otros casos
+          return fila[columna.toLowerCase()];
+        }
+      });
+    });
   }
 }

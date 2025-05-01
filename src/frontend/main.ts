@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     biblioteca();
   } else if (pageType[1] === 'adreces') {
     adreces();
-  } else if (pageType[1] === 'persona') {
+  } else if (pageType[1] === 'base-dades-persones') {
     persona();
   }
 });

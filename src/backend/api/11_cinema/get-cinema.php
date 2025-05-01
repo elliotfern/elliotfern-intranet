@@ -239,7 +239,7 @@ if (isset($_GET['pelicules'])) {
     $stmt->bindParam(':slug', $slug, PDO::PARAM_STR);
     $stmt->execute();
 
-    if ($stmt->rowCount() === 0) echo ('No rows');
+    if ($stmt->rowCount() === 0) echo json_encode(["error" => "No rows found"]);
 
     // Recopilar los resultados
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -263,7 +263,7 @@ if (isset($_GET['pelicules'])) {
     $stmt->execute();
 
     if ($stmt->rowCount() === 0) {
-        echo json_encode("No rows");
+        echo json_encode(["error" => "No rows found"]);
         exit;
     }
 
@@ -290,7 +290,7 @@ if (isset($_GET['pelicules'])) {
     $stmt->execute();
 
     if ($stmt->rowCount() === 0) {
-        echo json_encode("No rows");
+        echo json_encode(["error" => "No rows found"]);
         exit;
     }
 

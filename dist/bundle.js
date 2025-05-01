@@ -1319,6 +1319,66 @@ ___CSS_LOADER_EXPORT___.push([module.id, `/* Contenedor principal */
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/paginacio.css":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/paginacio.css ***!
+  \*********************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, `#pagination {
+  text-align: center;
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap; /* Permite que los botones se distribuyan en varias filas si es necesario */
+  gap: 10px; /* Espacio entre los botones en cada fila */
+}
+
+#pagination a {
+  display: inline-block;
+  padding: 8px 12px;
+  margin: 0 5px;
+  text-decoration: none;
+  color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+#pagination a:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+#pagination a.current-page {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border: 1px solid #0056b3;
+}
+
+#pagination a:active {
+  transform: scale(0.95);
+}
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/paginacio.css"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,gBAAgB;EAChB,aAAa;EACb,eAAe,EAAE,2EAA2E;EAC5F,SAAS,EAAE,2CAA2C;AACxD;;AAEA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,aAAa;EACb,qBAAqB;EACrB,cAAc;EACd,yBAAyB;EACzB,kBAAkB;EAClB,yBAAyB;AAC3B;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,iBAAiB;EACjB,yBAAyB;AAC3B;;AAEA;EACE,sBAAsB;AACxB","sourcesContent":["#pagination {\n  text-align: center;\n  margin-top: 20px;\n  display: flex;\n  flex-wrap: wrap; /* Permite que los botones se distribuyan en varias filas si es necesario */\n  gap: 10px; /* Espacio entre los botones en cada fila */\n}\n\n#pagination a {\n  display: inline-block;\n  padding: 8px 12px;\n  margin: 0 5px;\n  text-decoration: none;\n  color: #007bff;\n  border: 1px solid #007bff;\n  border-radius: 4px;\n  transition: all 0.3s ease;\n}\n\n#pagination a:hover {\n  background-color: #007bff;\n  color: white;\n}\n\n#pagination a.current-page {\n  background-color: #007bff;\n  color: white;\n  font-weight: bold;\n  border: 1px solid #0056b3;\n}\n\n#pagination a:active {\n  transform: scale(0.95);\n}\n"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/style.css":
 /*!*****************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/style.css ***!
@@ -1343,7 +1403,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_footer_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js!./footer.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/footer.css");
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_cards_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js!./cards.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/cards.css");
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_fitxa_dades_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js!./fitxa_dades.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/fitxa_dades.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_paginacio_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js!./paginacio.css */ "./node_modules/css-loader/dist/cjs.js!./src/frontend/estils/paginacio.css");
 // Imports
+
 
 
 
@@ -1367,6 +1429,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_botons_css__WEBPA
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_footer_css__WEBPACK_IMPORTED_MODULE_9__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_cards_css__WEBPACK_IMPORTED_MODULE_10__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_fitxa_dades_css__WEBPACK_IMPORTED_MODULE_11__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_paginacio_css__WEBPACK_IMPORTED_MODULE_12__["default"]);
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css);"]);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `/*
@@ -1399,7 +1462,7 @@ a:visited,
 a:hover {
   text-decoration: underline;
 }
-`, "",{"version":3,"sources":["webpack://./src/frontend/estils/style.css"],"names":[],"mappings":"AAAA;;;;;;;;;CASC;;AAED,WAAW;;AAaX;EACE,4LAA4L;EAC5L,gBAAgB;EAChB,WAAW;EACX,SAAS;EACT,UAAU;EACV,sBAAsB;EACtB,SAAS;EACT,yBAAyB;EACzB,WAAW;AACb;;AAEA;;;EAGE,0BAA0B;AAC5B","sourcesContent":["/*\nTheme Name: ElliotFern\nTheme URI: https://elliotfern.com\nAuthor: Elliot Fernandez\nAuthor URI: https://elliotfern.com/\nDescription: Plantilla de tema pel web ElliotFern.com\nVersion: 1.1\nLicense: GNU General Public License v3 or later\nLicense URI: http://www.gnu.org/licenses/gpl-3.0.html\n*/\n\n/* HEADER */\n@import './header.css';\n@import './contenidor.css';\n@import './loginPage.css';\n@import './menuIntranet.css';\n@import './taules.css';\n@import './formulari.css';\n@import './botons.css';\n@import './footer.css';\n@import './cards.css';\n@import './fitxa_dades.css';\n@import url('https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css');\n\nbody {\n  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  line-height: 1.5;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  border: 0;\n  background-color: #cecece;\n  color: #333;\n}\n\na:link,\na:visited,\na:hover {\n  text-decoration: underline;\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/style.css"],"names":[],"mappings":"AAAA;;;;;;;;;CASC;;AAED,WAAW;;AAcX;EACE,4LAA4L;EAC5L,gBAAgB;EAChB,WAAW;EACX,SAAS;EACT,UAAU;EACV,sBAAsB;EACtB,SAAS;EACT,yBAAyB;EACzB,WAAW;AACb;;AAEA;;;EAGE,0BAA0B;AAC5B","sourcesContent":["/*\nTheme Name: ElliotFern\nTheme URI: https://elliotfern.com\nAuthor: Elliot Fernandez\nAuthor URI: https://elliotfern.com/\nDescription: Plantilla de tema pel web ElliotFern.com\nVersion: 1.1\nLicense: GNU General Public License v3 or later\nLicense URI: http://www.gnu.org/licenses/gpl-3.0.html\n*/\n\n/* HEADER */\n@import './header.css';\n@import './contenidor.css';\n@import './loginPage.css';\n@import './menuIntranet.css';\n@import './taules.css';\n@import './formulari.css';\n@import './botons.css';\n@import './footer.css';\n@import './cards.css';\n@import './fitxa_dades.css';\n@import './paginacio.css';\n@import url('https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css');\n\nbody {\n  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;\n  line-height: 1.5;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  border: 0;\n  background-color: #cecece;\n  color: #333;\n}\n\na:link,\na:visited,\na:hover {\n  text-decoration: underline;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2405,6 +2468,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
 /* harmony import */ var _utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/actualitzarDades */ "./src/frontend/utils/actualitzarDades.ts");
+/* harmony import */ var _pages_persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../pages/persona/fitxaPersona */ "./src/frontend/pages/persona/fitxaPersona.ts");
+/* harmony import */ var _services_api_construirTaula__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/api/construirTaula */ "./src/frontend/services/api/construirTaula.ts");
+
+
 
 
 const url = window.location.href;
@@ -2428,6 +2495,23 @@ function biblioteca() {
             });
         }
     }
+    else if (pageType[2] === 'fitxa-autor') {
+        (0,_pages_persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_2__.fitxaPersona)('/api/persones/get/?persona=', pageType[3], 'biblioteca-autor', function (data) {
+            (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_3__.construirTaula)('taula1', '/api/biblioteca/get/?type=autorLlibres&id=', data.id, ['Titol', 'Any', 'Accions'], function (fila, columna) {
+                if (columna.toLowerCase() === 'titol') {
+                    // Manejar el caso del título
+                    return '<a href="' + window.location.origin + '/gestio/biblioteca/fitxa-llibre/' + fila['slug'] + '">' + fila['titol'] + '</a>';
+                }
+                else if (columna.toLowerCase() === 'accions') {
+                    return `<button onclick="window.location.href='${window.location.origin}/gestio/biblioteca/modifica-llibre/${fila['slug']}'" class="button btn-petit">Modificar</button>`;
+                }
+                else {
+                    // Manejar otros casos
+                    return fila[columna.toLowerCase()];
+                }
+            });
+        });
+    }
 }
 
 
@@ -2448,6 +2532,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_cinema_llistatPelicules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/cinema/llistatPelicules */ "./src/frontend/components/cinema/llistatPelicules.ts");
 /* harmony import */ var _components_lecturaDadesForm_mostrarDades_connexioApiDades__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/lecturaDadesForm/mostrarDades/connexioApiDades */ "./src/frontend/components/lecturaDadesForm/mostrarDades/connexioApiDades.ts");
 /* harmony import */ var _components_cinema_llistatPeliculaActors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/cinema/llistatPeliculaActors */ "./src/frontend/components/cinema/llistatPeliculaActors.ts");
+/* harmony import */ var _persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../persona/fitxaPersona */ "./src/frontend/pages/persona/fitxaPersona.ts");
+/* harmony import */ var _services_api_construirTaula__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/api/construirTaula */ "./src/frontend/services/api/construirTaula.ts");
+
+
 
 
 
@@ -2457,16 +2545,6 @@ const url = window.location.href;
 const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_0__.getPageType)(url);
 function cinema() {
     if (pageType[2] === 'modifica-pelicula') {
-        // Inicialitzar l'editor Trix
-        /*
-        omplirDadesForm('/api/cinema/get/?pelicula=', idElement, 'peli', function (data) {
-          selectOmplirDades('/api/auxiliars/get/?type=directors', data[0].director, 'director', 'nomComplet');
-          selectOmplirDades('/api/auxiliars/get/?type=imgPelis', data[0].img, 'img', 'alt');
-          selectOmplirDades('/api/auxiliars/get/?type=generesPelis', data[0].genere, 'genere', 'genere_ca');
-          selectOmplirDades('/api/auxiliars/get/?type=llengues', data[0].lang, 'lang', 'idioma_ca');
-          selectOmplirDades('/api/auxiliars/get/?type=paisos', data[0].pais, 'pais', 'pais_cat');
-        });
-    */
         const peli = document.getElementById('peli');
         if (peli) {
             peli.addEventListener('submit', function (event) {
@@ -2576,6 +2654,94 @@ function cinema() {
             });
         }
     }
+    else if (pageType[2] === 'fitxa-actor') {
+        (0,_persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_5__.fitxaPersona)('/api/persones/get/?persona=', pageType[3], 'cinema-actor', function (data) {
+            (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_6__.construirTaula)('taula1', '/api/cinema/get/?actor-pelicules=', data.slug, ['Titol', 'Any', 'Rol'], function (fila, columna) {
+                if (columna.toLowerCase() === 'titol') {
+                    // Manejar el caso del título
+                    return `<a href="https://${window.location.host}/gestio/cinema/fitxa-pelicula/${fila['slug']}">${fila['titol']}</a>`;
+                }
+                else if (columna.toLowerCase() === 'any') {
+                    return `${fila['anyInici']}${fila['anyFi'] ? ' - ' + fila['anyFi'] : ''}`;
+                }
+                else if (columna.toLowerCase() === 'rol') {
+                    // Manejar otros casos
+                    return `${fila['role']}`;
+                }
+                else {
+                    // Manejar otros casos
+                    return fila[columna.toLowerCase()];
+                }
+            });
+            (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_6__.construirTaula)('taula2', '/api/cinema/get/?actor-series=', data.slug, ['Titol', 'Any', 'Rol'], function (fila, columna) {
+                if (columna.toLowerCase() === 'titol') {
+                    // Manejar el caso del título
+                    return `<a href="https://${window.location.host}/gestio/cinema/fitxa-serie/${fila['slug']}">${fila['titol']}</a>`;
+                }
+                else if (columna.toLowerCase() === 'any') {
+                    return `${fila['anyInici']}${fila['anyFi'] ? ' - ' + fila['anyFi'] : ''}`;
+                }
+                else if (columna.toLowerCase() === 'rol') {
+                    // Manejar otros casos
+                    return `${fila['role']}`;
+                }
+                else {
+                    // Manejar otros casos
+                    return fila[columna.toLowerCase()];
+                }
+            });
+        });
+    }
+    else if (pageType[2] === 'fitxa-director') {
+        (0,_persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_5__.fitxaPersona)('/api/persones/get/?persona=', pageType[3], 'cinema-director', function (data) {
+            (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_6__.construirTaula)('taula1', '/api/cinema/get/?directorPelicules=', data.id, ['', 'Titol', 'Any', 'Gènere'], function (fila, columna) {
+                if (columna.toLowerCase() === '') {
+                    // Manejar el caso del título
+                    return `<a id="pelicula-${fila['id']}" title="pelicula" href="${window.location.origin}/gestio/cinema/fitxa-pelicula/${fila['slug']}">
+                        <img src="https://media.elliot.cat/img/cinema-pelicula/${fila['nameImg']}.jpg" width="100" height="auto">
+                    </a>`;
+                }
+                else if (columna.toLowerCase() === 'titol') {
+                    // Manejar el caso del título
+                    return `<a href="https://${window.location.host}/gestio/cinema/fitxa-pelicula/${fila['slug']}">${fila['name']}</a>`;
+                }
+                else if (columna.toLowerCase() === 'any') {
+                    return `${fila['anyInici']}${fila['anyFi'] ? ' - ' + fila['anyFi'] : ''}`;
+                }
+                else if (columna.toLowerCase() === 'gènere') {
+                    // Manejar otros casos
+                    return `${fila['genere_ca']}`;
+                }
+                else {
+                    // Manejar otros casos
+                    return fila[columna.toLowerCase()];
+                }
+            });
+            (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_6__.construirTaula)('taula2', '/api/cinema/get/?directorSeries=', data.id, ['', 'Titol', 'Any', 'Gènere'], function (fila, columna) {
+                if (columna.toLowerCase() === '') {
+                    // Manejar el caso del título
+                    return `<a id="serie-${fila['id']}" title="serie" href="${window.location.origin}/gestio/cinema/fitxa-serie/${fila['slug']}">
+                        <img src="https://media.elliot.cat/img/cinema-serie/${fila['nameImg']}.jpg" width="100" height="auto">
+                    </a>`;
+                }
+                else if (columna.toLowerCase() === 'titol') {
+                    // Manejar el caso del título
+                    return `<a href="https://${window.location.host}/gestio/cinema/fitxa-serie/${fila['slug']}">${fila['name']}</a>`;
+                }
+                else if (columna.toLowerCase() === 'any') {
+                    return `${fila['anyInici']}${fila['anyFi'] ? ' - ' + fila['anyFi'] : ''}`;
+                }
+                else if (columna.toLowerCase() === 'gènere') {
+                    // Manejar otros casos
+                    return `${fila['genere_ca']}`;
+                }
+                else {
+                    // Manejar otros casos
+                    return fila[columna.toLowerCase()];
+                }
+            });
+        });
+    }
 }
 
 
@@ -2665,6 +2831,185 @@ function loginPage() {
 
 /***/ }),
 
+/***/ "./src/frontend/pages/persona/fitxaPersona.ts":
+/*!****************************************************!*\
+  !*** ./src/frontend/pages/persona/fitxaPersona.ts ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   fitxaPersona: () => (/* binding */ fitxaPersona)
+/* harmony export */ });
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+// Función para realizar la solicitud Axios a la API
+function fitxaPersona(url, id, tipus, callback) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const urlAjax = `${url}${id}`;
+        const mesosCatala = ['gener', 'febrer', 'març', 'abril', 'maig', 'juny', 'juliol', 'agost', 'setembre', 'octubre', 'novembre', 'desembre'];
+        try {
+            const response = yield fetch(urlAjax, {
+                method: 'GET',
+            });
+            if (!response.ok) {
+                throw new Error('Error en la sol·licitud AJAX');
+            }
+            const data = yield response.json();
+            callback(data);
+            // Asegúrate de que data sea un objeto o array adecuado
+            const data2 = Array.isArray(data) ? data[0] : data;
+            // Transformació de les dades
+            // 1. Imatge
+            const imgElement = document.getElementById('nameImg');
+            if (imgElement) {
+                imgElement.src = `https://media.elliot.cat/img/${tipus}/${data.nameImg}.jpg`;
+            }
+            const nomElement = document.getElementById('nom');
+            if (nomElement) {
+                nomElement.innerHTML = `${data.nom} ${data.cognoms}`;
+            }
+            // 2. Data creacio fitxa i actualitzacio
+            const dateElement = document.getElementById('dateCreated');
+            const dateElement2 = document.getElementById('dateModified');
+            if (dateElement) {
+                const dateObj = new Date(data.dateCreated);
+                const day = dateObj.getDate();
+                const month = dateObj.getMonth() + 1; // Los meses van de 0 a 11
+                const year = dateObj.getFullYear();
+                dateElement.textContent = `${day}/${month}/${year}`;
+            }
+            if (dateElement2) {
+                const dateObj = new Date(data.dateModified);
+                // Verifica si la fecha es válida
+                if (data2['dateModified'] == '0000-00-00') {
+                    dateElement2.textContent = '';
+                }
+                else if (data2['dateModified'] == data2['dateCreated']) {
+                    dateElement2.textContent = '';
+                }
+                else {
+                    const day = dateObj.getDate();
+                    const month = dateObj.getMonth() + 1;
+                    const year = dateObj.getFullYear();
+                    dateElement2.innerHTML = `| <strong> Darrera modificació: </strong> ${day}/${month}/${year}`;
+                }
+            }
+            // 3. Naixement
+            const anyNaixement = parseInt(data.anyNaixement, 10);
+            const diaNaixement = parseInt(data.diaNaixement);
+            const mesNaixement = parseInt(data.mesNaixement);
+            const anyDefuncio2 = data.anyDefuncio ? parseInt(data.anyDefuncio, 10) : null;
+            const diaDefuncio = parseInt(data.diaDefuncio);
+            const mesDefuncio = parseInt(data.mesDefuncio);
+            // Verificamos si el día o el mes son 0 o null, y en ese caso asignamos un string vacío ""
+            const diaMostrar = isNaN(diaNaixement) || diaNaixement === 0 || diaNaixement === null ? '' : diaNaixement.toString();
+            const mesMostrar = isNaN(mesNaixement) || mesNaixement === 0 || mesNaixement === null ? '' : mesNaixement.toString();
+            // Si tanto el día como el mes son válidos (mayores que 0), los incluimos en la fecha
+            // Ahora verificamos si ambos valores (día y mes) son válidos antes de construir la fecha
+            let dataNaixement = anyNaixement.toString(); // Por defecto solo mostramos el año
+            if (diaMostrar && mesMostrar) {
+                dataNaixement = `${diaMostrar} ${mesosCatala[parseInt(mesMostrar) - 1]} ${anyNaixement}`;
+            }
+            const anyDefuncio = parseInt(data.anyDefuncio, 10);
+            const anyActual = new Date().getFullYear();
+            // calcul de l'edat
+            let edad;
+            const fechaNacimiento = new Date(anyNaixement, mesNaixement - 1, diaNaixement); // mesNaixement - 1 porque los meses en JS empiezan desde 0
+            const fechaDefuncion = anyDefuncio ? new Date(anyDefuncio, mesDefuncio - 1, diaDefuncio) : null; // Lo mismo para la defunción
+            // Calculamos la fecha actual
+            const fechaActual = new Date();
+            const mesActual = fechaActual.getMonth(); // Los meses en JS van de 0 (enero) a 11 (diciembre)
+            const diaActual = fechaActual.getDate();
+            // Si no hay fecha de defunción, calculamos la edad con la fecha actual
+            if (!anyDefuncio) {
+                edad = anyActual - anyNaixement; // Edad base solo con el año
+                // Verificamos si el cumpleaños ya pasó este año
+                if (mesActual < fechaNacimiento.getMonth() || (mesActual === fechaNacimiento.getMonth() && diaActual < fechaNacimiento.getDate())) {
+                    edad--; // Si no ha pasado el cumpleaños, restamos un año
+                }
+            }
+            else {
+                // Si hay fecha de defunción, calculamos la edad con la fecha de defunción
+                edad = anyDefuncio - anyNaixement; // Edad base solo con el año
+                // Verificamos si la persona ya había cumplido años en la fecha de la defunción
+                if (mesDefuncio < fechaNacimiento.getMonth() || (mesDefuncio === fechaNacimiento.getMonth() && diaDefuncio < diaNaixement)) {
+                    edad--; // Si no había cumplido años antes de morir, restamos un año
+                }
+            }
+            // 4. Defunció
+            // Verificar si el día o mes de defunción son válidos
+            const diaMostrarDefuncio = isNaN(diaDefuncio) || diaDefuncio === 0 || diaDefuncio === null ? '' : diaDefuncio.toString();
+            const mesMostrarDefuncio = isNaN(mesDefuncio) || mesDefuncio === 0 || mesDefuncio === null ? '' : mesDefuncio.toString();
+            // Definir la variable `dataDefuncio`
+            let dataDefuncio = '';
+            if (anyDefuncio2) {
+                dataDefuncio = anyDefuncio.toString(); // Mostrar solo el año por defecto
+                if (diaMostrarDefuncio && mesMostrarDefuncio) {
+                    dataDefuncio = `${diaMostrarDefuncio} ${mesosCatala[parseInt(mesMostrarDefuncio) - 1]} ${anyDefuncio2}`; // Añadir día y mes si existen
+                }
+            }
+            // 5. Ciutats
+            const ciutatNaixement = data.ciutatNaixement ? ` (${data.ciutatNaixement})` : '';
+            const ciutatDefuncio = data.ciutatDefuncio ? ` (${data.ciutatDefuncio})` : '';
+            // Ara injectem tota la informació al div "quadre-detalls"
+            const quadreDetalls = document.querySelector('.quadre-detalls');
+            // Limpiar cualquier contenido previo
+            quadreDetalls.innerHTML = '';
+            const parrafosHTML = [];
+            // Primero Naixement
+            parrafosHTML.push({
+                label: 'Naixement: ',
+                value: `${dataNaixement} ${ciutatNaixement}` + (!anyDefuncio ? ` - ${edad} anys` : ''),
+            });
+            // Condicionalmente agregar la entrada de defunción si existe
+            if (anyDefuncio) {
+                // Si hay fecha de defunción, mostramos la etiqueta
+                parrafosHTML.push({
+                    label: 'Defunció: ',
+                    value: `${dataDefuncio} ${ciutatDefuncio} - ${edad} anys`, // Mostramos la fecha y edad
+                });
+            }
+            else {
+                // Si no hay fecha de defunción, no agregamos la etiqueta
+            }
+            // Luego el resto
+            parrafosHTML.push({
+                label: 'Gènere: ',
+                value: data.idSexe === 1 ? 'Home' : data.idSexe === 2 ? 'Dona' : 'Desconegut',
+            }, { label: 'Pais: ', value: data.pais_cat }, { label: 'Professió: ', value: data.professio_ca }, { label: 'Pàgina Viquipèdia: ', value: `<a href="${data.web}" target="_blank" title="Web">Enllaç extern</a>` }, { label: 'Biografia: ', value: data.descripcio || 'No disponible' });
+            // Recorremos el array y agregamos cada párrafo al div
+            parrafosHTML.forEach((item) => {
+                const p = document.createElement('p');
+                const strong = document.createElement('strong');
+                strong.textContent = item.label;
+                const span = document.createElement('span');
+                span.innerHTML = item.value; // Usamos innerHTML para insertar HTML en el caso del link
+                p.appendChild(strong);
+                p.appendChild(span);
+                quadreDetalls.appendChild(p);
+            });
+            // Ejecutar la función de devolución de llamada si se proporciona
+            if (typeof callback === 'function') {
+                callback(data);
+            }
+        }
+        catch (error) {
+            console.error('Error al parsear JSON:', error); // Muestra el error de parsing
+        }
+    });
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/pages/persona/persona.ts":
 /*!***********************************************!*\
   !*** ./src/frontend/pages/persona/persona.ts ***!
@@ -2725,6 +3070,84 @@ function vault() {
     if (pageType[1] === 'claus-privades') {
         (0,_components_vault_serveisVault__WEBPACK_IMPORTED_MODULE_1__.serveisVaultApi)();
     }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/services/api/construirTaula.ts":
+/*!*****************************************************!*\
+  !*** ./src/frontend/services/api/construirTaula.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   construirTaula: () => (/* binding */ construirTaula)
+/* harmony export */ });
+// Función para construir una tabla a partir de datos de una API
+function construirTaula(taulaId, apiUrl, id, columnas, callback) {
+    // Construir la URL completa con el ID
+    const url = apiUrl + id;
+    // Realizar la solicitud a la API
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+        .then((data) => {
+        // Comprobar si no hay datos o si el array está vacío "No rows"
+        if (data.error && data.error === 'No rows found') {
+            // Si no hay datos, mostrar el mensaje
+            const tablaContainer = document.getElementById(taulaId);
+            if (tablaContainer) {
+                tablaContainer.innerHTML = '<p>No hi ha cap informació disponible.</p>';
+            }
+            return; // Salir de la función
+        }
+        // Crear la tabla y su encabezado
+        const table = document.createElement('table');
+        table.classList.add('table', 'table-striped');
+        const thead = document.createElement('thead');
+        thead.classList.add('table-primary');
+        const trHead = document.createElement('tr');
+        columnas.forEach((columna) => {
+            const th = document.createElement('th');
+            th.textContent = columna;
+            trHead.appendChild(th);
+        });
+        thead.appendChild(trHead);
+        table.appendChild(thead);
+        // Crear el cuerpo de la tabla
+        const tbody = document.createElement('tbody');
+        data.forEach((fila) => {
+            // Definir el tipo 'any' para 'fila' ya que no sabemos la estructura exacta
+            const trBody = document.createElement('tr');
+            columnas.forEach((columna) => {
+                const td = document.createElement('td');
+                td.innerHTML = callback(fila, columna);
+                trBody.appendChild(td);
+            });
+            tbody.appendChild(trBody);
+        });
+        table.appendChild(tbody);
+        // Agregar la tabla al contenedor deseado
+        const tablaContainer = document.getElementById(taulaId);
+        if (tablaContainer) {
+            tablaContainer.innerHTML = '';
+            tablaContainer.appendChild(table);
+        }
+    })
+        .catch((error) => {
+        console.error('Error en la solicitud:', error);
+    });
 }
 
 
@@ -3096,7 +3519,7 @@ document.addEventListener('DOMContentLoaded', () => {
     else if (pageType[1] === 'adreces') {
         (0,_pages_adreces_adreces__WEBPACK_IMPORTED_MODULE_7__.adreces)();
     }
-    else if (pageType[1] === 'persona') {
+    else if (pageType[1] === 'base-dades-persones') {
         (0,_pages_persona_persona__WEBPACK_IMPORTED_MODULE_8__.persona)();
     }
 });

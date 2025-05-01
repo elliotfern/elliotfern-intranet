@@ -16,6 +16,7 @@ $base_routes = [
     APP_GESTIO . $url['clients']  => APP_INTRANET_DIR . APP_CLIENTS_DIR . 'index.php',
 
     // 04. Base dades Persones
+    APP_GESTIO . $url['persones'] => APP_INTRANET_DIR . APP_PERSONES_DIR . 'index.php',
     APP_GESTIO . $url['persones'] . '/nova-persona' => APP_INTRANET_DIR . APP_PERSONES_DIR . 'form-operacions-persona.php',
     APP_GESTIO . $url['persones'] . '/modifica-persona/{slug}' => APP_INTRANET_DIR . APP_PERSONES_DIR . 'form-operacions-persona.php',
 
@@ -175,6 +176,16 @@ $routes = [
     ],
 
     // 04. Base de dades persones
+    APP_GESTIO . $url['persones'] => [
+        'view' =>  APP_INTRANET_DIR . APP_PERSONES_DIR . 'index.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+
     APP_GESTIO . $url['persones'] . '/modifica-persona/{slug}' => [
         'view' =>  APP_INTRANET_DIR . APP_PERSONES_DIR . 'form-operacions-persona.php',
         'needs_session' => true,

@@ -124,11 +124,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         $autorSlug = $_GET['autorSlug'];
         global $conn;
         $data = array();
-        $stmt = $conn->prepare("SELECT a.id, a.cognoms, a.nom, p.pais_cat, a.anyNaixement, a.anyDefuncio, p.id AS idPais, o.professio_ca, i.nameImg, a.web, a.dateCreated, a.dateModified, a.descripcio, a.slug, a.img AS idImg, a.ocupacio AS idOcupacio, a.grup AS idGrup
+        $stmt = $conn->prepare("SELECT a.id, a.cognoms, a.nom, p.pais_cat, a.anyNaixement, a.anyDefuncio, p.id AS idPais, o.professio_ca, i.nameImg, a.web, a.dateCreated, a.dateModified, a.descripcio, a.slug, a.img AS idImg, a.ocupacio AS idOcupacio, a.grup AS idGrup,
+        a.sexe, a.mesNaixement, a.diaNaixement, a.mesDefuncio, a.diaDefuncio, c1.city AS ciutatNaixement, c2.city AS ciutatDefuncio, a.descripcioCast, a.descripcioEng, a.descripcioIt
                 FROM db_persones AS a
                 LEFT JOIN db_countries AS p ON a.paisAutor = p.id
                 LEFT JOIN aux_professions AS o ON a.ocupacio = o.id
                 LEFT JOIN db_img AS i ON a.img = i.id
+                LEFT JOIN db_cities AS c1 ON a.ciutatNaixement = c1.id
+                LEFT JOIN db_cities AS c2 ON a.ciutatDefuncio = c2.id
                 WHERE a.slug = :slug");
         $stmt->execute(['slug' => $autorSlug]);
 
@@ -521,6 +524,125 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
         // Recopilar los resultados
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Establecer el encabezado de respuesta a JSON
+        header('Content-Type: application/json');
+
+        // Devolver los datos en formato JSON
+        echo json_encode($data);
+        exit();
+
+        // 11) sexe
+        // ruta GET => "/api/biblioteca/auxiliars/?type=sexe"
+    } elseif ((isset($_GET['type']) && $_GET['type'] == 'sexe')) {
+
+        /** @var PDO $conn */
+        global $conn;
+        $query = "SELECT s.id, s.genereCa
+                    FROM aux_persones_genere AS s
+                    ORDER BY s.genereCa ASC";
+
+        // Preparar la consulta
+        $stmt = $conn->prepare($query);
+
+        // Ejecutar la consulta
+        $stmt->execute();
+
+        // Verificar si se encontraron resultados
+        if ($stmt->rowCount() === 0) {
+            echo json_encode(['error' => 'No rows found']);
+            exit();
+        }
+
+        // Recopilar los resultados
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Establecer el encabezado de respuesta a JSON
+        header('Content-Type: application/json');
+
+        // Devolver los datos en formato JSON
+        echo json_encode($data);
+        exit();
+
+        // 11) ciutats
+        // ruta GET => "/api/biblioteca/auxiliars/?type=ciutat"
+    } elseif ((isset($_GET['type']) && $_GET['type'] == 'ciutat')) {
+
+        /** @var PDO $conn */
+        global $conn;
+        $query = "SELECT c.id, c.city
+                    FROM db_cities AS c
+                    ORDER BY c.city ASC";
+
+        // Preparar la consulta
+        $stmt = $conn->prepare($query);
+
+        // Ejecutar la consulta
+        $stmt->execute();
+
+        // Verificar si se encontraron resultados
+        if ($stmt->rowCount() === 0) {
+            echo json_encode(['error' => 'No rows found']);
+            exit();
+        }
+
+        // Recopilar los resultados
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Establecer el encabezado de respuesta a JSON
+        header('Content-Type: application/json');
+
+        // Devolver los datos en formato JSON
+        echo json_encode($data);
+        exit();
+
+        // 11) calendari: dies
+        // ruta GET => "/api/biblioteca/auxiliars/?type=calendariDies"
+    } elseif ((isset($_GET['type']) && $_GET['type'] == 'calendariDies')) {
+        function obtenerDias()
+        {
+            $dias = [];
+            for ($i = 1; $i <= 31; $i++) {
+                $dias[] = [
+                    'id' => $i,
+                    'dia' => $i
+                ];
+            }
+            return $dias;
+        }
+
+        $data = obtenerDias();
+
+        // Establecer el encabezado de respuesta a JSON
+        header('Content-Type: application/json');
+
+        // Devolver los datos en formato JSON
+        echo json_encode($data);
+        exit();
+
+        // 11) calendari: mesos
+        // ruta GET => "/api/biblioteca/auxiliars/?type=calendariMesos"
+    } elseif ((isset($_GET['type']) && $_GET['type'] == 'calendariMesos')) {
+        function obtenerMesos()
+        {
+            $meses = [
+                ['id' => 1, 'mes' => 'Gener'],
+                ['id' => 2, 'mes' => 'Febrer'],
+                ['id' => 3, 'mes' => 'Març'],
+                ['id' => 4, 'mes' => 'Abril'],
+                ['id' => 5, 'mes' => 'Maig'],
+                ['id' => 6, 'mes' => 'Juny'],
+                ['id' => 7, 'mes' => 'Juliol'],
+                ['id' => 8, 'mes' => 'Agost'],
+                ['id' => 9, 'mes' => 'Setembre'],
+                ['id' => 10, 'mes' => 'Octubre'],
+                ['id' => 11, 'mes' => 'Novembre'],
+                ['id' => 12, 'mes' => 'Desembre']
+            ];
+            return $meses;
+        }
+
+        $data = obtenerMesos();
 
         // Establecer el encabezado de respuesta a JSON
         header('Content-Type: application/json');

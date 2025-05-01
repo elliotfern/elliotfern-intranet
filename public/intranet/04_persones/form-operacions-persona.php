@@ -26,6 +26,13 @@ if ($modificaBtn === 1) {
     selectOmplirDades("/api/biblioteca/get/?type=professio", "", "ocupacio", "professio_ca");
     selectOmplirDades("/api/biblioteca/get/?type=pais", "", "paisAutor", "pais_cat");
     selectOmplirDades("/api/biblioteca/get/?type=grup", "", "grup", "grup_ca");
+    selectOmplirDades("/api/biblioteca/get/?type=sexe", "", "sexe", "genereCa");
+    selectOmplirDades("/api/biblioteca/get/?type=ciutat", "", "ciutatNaixement", "city");
+    selectOmplirDades("/api/biblioteca/get/?type=ciutat", "", "ciutatDefuncio", "city");
+    selectOmplirDades("/api/biblioteca/get/?type=calendariDies", "", "diaNaixement", "dia");
+    selectOmplirDades("/api/biblioteca/get/?type=calendariDies", "", "diaDefuncio", "dia");
+    selectOmplirDades("/api/biblioteca/get/?type=calendariMesos", "", "mesNaixement", "mes");
+    selectOmplirDades("/api/biblioteca/get/?type=calendariMesos", "", "mesDefuncio", "mes");
   </script>
 <?php
 }
@@ -74,8 +81,29 @@ if ($modificaBtn === 1) {
     </div>
 
     <div class="col-md-4">
+      <label>Gènere:</label>
+      <select class="form-select" name="sexe" id="sexe">
+      </select>
+    </div>
+
+    <div class="col-md-4">
       <label>Pàgina web:</label>
       <input class="form-control" type="url" name="web" id="web" value="">
+    </div>
+
+    <div class="col-md-4">
+    </div>
+
+    <div class="col-md-4">
+      <label>Dia de naixement:</label>
+      <select class="form-select" name="diaNaixement" id="diaNaixement">
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label>Mes de naixement:</label>
+      <select class="form-select" name="mesNaixement" id="mesNaixement">
+      </select>
     </div>
 
     <div class="col-md-4">
@@ -84,8 +112,32 @@ if ($modificaBtn === 1) {
     </div>
 
     <div class="col-md-4">
+      <label>Dia de defunció:</label>
+      <select class="form-select" name="diaDefuncio" id="diaDefuncio">
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label>Mes de defunció:</label>
+      <select class="form-select" name="mesDefuncio" id="mesDefuncio">
+      </select>
+    </div>
+
+    <div class="col-md-4">
       <label>Any de defunció:</label>
       <input class="form-control" type="text" name="anyDefuncio" id="anyDefuncio" value="">
+    </div>
+
+    <div class="col-md-4">
+      <label>Ciutat naixement:</label>
+      <select class="form-select" name="ciutatNaixement" id="ciutatNaixement">
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label>Ciutat defunció:</label>
+      <select class="form-select" name="ciutatDefuncio" id="ciutatDefuncio">
+      </select>
     </div>
 
     <div class="col-md-4">
@@ -119,8 +171,25 @@ if ($modificaBtn === 1) {
     </div>
 
     <div class="col-complet">
-      <label for="AutDescrip" class="form-label">Descripció:</label>
-      <textarea class="form-control" id="descripcio" name="descripcio" rows="6"></textarea>
+      <label for="AutDescrip" class="form-label">Descripció (català):</label>
+      <textarea class="form-control" id="descripcio" name="descripcio" rows="10"></textarea>
+    </div>
+
+    <div class="col-complet">
+      <label for="AutDescrip" class="form-label">Descripció (castellà):</label>
+      <textarea class="form-control" id="descripcioCast" name="descripcioCast" rows="10"></textarea>
+    </div>
+
+
+    <div class="col-complet">
+      <label for="AutDescrip" class="form-label">Descripció (anglès):</label>
+      <textarea class="form-control" id="descripcioEng" name="descripcioEng" rows="10"></textarea>
+    </div>
+
+
+    <div class="col-complet">
+      <label for="AutDescrip" class="form-label">Descripció (italià):</label>
+      <textarea class="form-control" id="descripcioIt" name="descripcioIt" rows="10"></textarea>
     </div>
 
     <div class="container">
@@ -151,7 +220,7 @@ if ($modificaBtn === 1) {
 
 <script>
   function formUpdateAuthor(id) {
-    let urlAjax = "/api/biblioteca/get/?autorSlug=" + id;
+    let urlAjax = "/api/persones/get/?persona=" + id;
 
     fetch(urlAjax, {
         method: "GET",
@@ -159,6 +228,8 @@ if ($modificaBtn === 1) {
       .then(response => response.json())
       .then(data => {
         // Establecer valores en los campos del formulario
+
+        // sexe, ciutatNaixement, ciutatDefuncio,
         document.getElementById("nom").value = data.nom;
         document.getElementById("cognoms").value = data.cognoms;
         document.getElementById("slug").value = data.slug;
@@ -166,6 +237,9 @@ if ($modificaBtn === 1) {
         document.getElementById("anyNaixement").value = data.anyNaixement;
         document.getElementById("anyDefuncio").value = data.anyDefuncio;
         document.getElementById("descripcio").innerHTML = decodeURIComponent(data.descripcio);
+        document.getElementById("descripcioCast").innerHTML = decodeURIComponent(data.descripcioCast);
+        document.getElementById("descripcioEng").innerHTML = decodeURIComponent(data.descripcioEng);
+        document.getElementById("descripcioIt").innerHTML = decodeURIComponent(data.descripcioIt);
         document.getElementById("id").value = data.id;
 
         const h2Element = document.getElementById("authorUpdateTitle");
@@ -176,6 +250,13 @@ if ($modificaBtn === 1) {
         selectOmplirDades("/api/biblioteca/get/?type=professio", data.idOcupacio, "ocupacio", "professio_ca");
         selectOmplirDades("/api/biblioteca/get/?type=pais", data.idPais, "paisAutor", "pais_cat");
         selectOmplirDades("/api/biblioteca/get/?type=grup", data.idGrup, "grup", "grup_ca");
+        selectOmplirDades("/api/biblioteca/get/?type=sexe", data.idSexe, "sexe", "genereCa");
+        selectOmplirDades("/api/biblioteca/get/?type=ciutat", data.idCiutatNaixement, "ciutatNaixement", "city");
+        selectOmplirDades("/api/biblioteca/get/?type=ciutat", data.idCiutatDefuncio, "ciutatDefuncio", "city");
+        selectOmplirDades("/api/biblioteca/get/?type=calendariDies", data.diaNaixement, "diaNaixement", "dia");
+        selectOmplirDades("/api/biblioteca/get/?type=calendariDies", data.diaDefuncio, "diaDefuncio", "dia");
+        selectOmplirDades("/api/biblioteca/get/?type=calendariMesos", data.mesNaixement, "mesNaixement", "mes");
+        selectOmplirDades("/api/biblioteca/get/?type=calendariMesos", data.mesDefuncio, "mesDefuncio", "mes");
       })
       .catch(error => console.error("Error al obtener los datos:", error));
   }
@@ -196,6 +277,12 @@ if ($modificaBtn === 1) {
 
       // Netejar les opcions actuals
       selectElement.innerHTML = '';
+
+      // Afegir la opció predeterminada "Selecciona un gènere"
+      const defaultOption = document.createElement('option');
+      defaultOption.value = ''; // El valor predeterminat es un string vacío
+      defaultOption.textContent = 'Selecciona una opció';
+      selectElement.appendChild(defaultOption);
 
       // Afegir les noves opcions
       data.forEach((item) => {
