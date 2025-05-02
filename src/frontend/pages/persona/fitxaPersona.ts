@@ -190,11 +190,6 @@ export async function fitxaPersona(url: string, id: string, tipus: string, callb
       p.appendChild(span);
       quadreDetalls.appendChild(p);
     });
-
-    // Ejecutar la función de devolución de llamada si se proporciona
-    if (typeof callback === 'function') {
-      callback(data);
-    }
   } catch (error) {
     console.error('Error al parsear JSON:', error); // Muestra el error de parsing
   }

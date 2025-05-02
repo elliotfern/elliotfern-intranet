@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loginPage();
   } else if (pageType[1] === 'claus-privades') {
     vault();
-  } else if (pageType[1] === 'historia-oberta') {
+  } else if (pageType[1] === 'historia') {
     historiaOberta();
   } else if (pageType[1] === 'biblioteca') {
     biblioteca();

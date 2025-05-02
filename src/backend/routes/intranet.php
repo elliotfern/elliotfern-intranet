@@ -96,6 +96,8 @@ $base_routes = [
     // 15. Història
     APP_GESTIO . $url['historia'] => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'index.php',
     APP_GESTIO . $url['historia'] . '/cursos' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'cursos.php',
+    APP_GESTIO . $url['historia'] . '/fitxa-personatge/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-persona.php',
+    APP_GESTIO . $url['historia'] . '/fitxa-politic/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-politic.php',
 
     // 16. Auxiliars
     APP_GESTIO . $url['auxiliars'] => APP_INTRANET_DIR . APP_AUXILIARS_DIR . 'index.php',
@@ -640,6 +642,24 @@ $routes = [
 
     APP_GESTIO . $url['historia'] . '/cursos' => [
         'view' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'cursos.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['historia'] . '/fitxa-personatge/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-persona.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['historia'] . '/fitxa-politic/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-politic.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
