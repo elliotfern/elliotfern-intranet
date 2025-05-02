@@ -17,6 +17,7 @@ $base_routes = [
 
     // 04. Base dades Persones
     APP_GESTIO . $url['persones'] => APP_INTRANET_DIR . APP_PERSONES_DIR . 'index.php',
+    APP_GESTIO . $url['persones'] . '/llistat-persones' => APP_INTRANET_DIR . APP_PERSONES_DIR . 'index.php',
     APP_GESTIO . $url['persones'] . '/nova-persona' => APP_INTRANET_DIR . APP_PERSONES_DIR . 'form-operacions-persona.php',
     APP_GESTIO . $url['persones'] . '/modifica-persona/{slug}' => APP_INTRANET_DIR . APP_PERSONES_DIR . 'form-operacions-persona.php',
 
@@ -95,7 +96,9 @@ $base_routes = [
 
     // 15. Història
     APP_GESTIO . $url['historia'] => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'index.php',
-    APP_GESTIO . $url['historia'] . '/cursos' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'cursos.php',
+    APP_GESTIO . $url['historia'] . '/llistat-cursos' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'llistat-cursos.php',
+    APP_GESTIO . $url['historia'] . '/llistat-organitzacions' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'llistat-organitzacions.php',
+    APP_GESTIO . $url['historia'] . '/llistat-esdeveniments' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'llistat-esdeveniments.php',
     APP_GESTIO . $url['historia'] . '/fitxa-personatge/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-persona.php',
     APP_GESTIO . $url['historia'] . '/fitxa-politic/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-politic.php',
 
@@ -187,6 +190,14 @@ $routes = [
         'menu_intranet' => true
     ],
 
+    APP_GESTIO . $url['persones'] . '/llistat-persones' => [
+        'view' =>  APP_INTRANET_DIR . APP_PERSONES_DIR . 'index.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
 
     APP_GESTIO . $url['persones'] . '/modifica-persona/{slug}' => [
         'view' =>  APP_INTRANET_DIR . APP_PERSONES_DIR . 'form-operacions-persona.php',
@@ -640,8 +651,26 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    APP_GESTIO . $url['historia'] . '/cursos' => [
-        'view' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'cursos.php',
+    APP_GESTIO . $url['historia'] . '/llistat-cursos' => [
+        'view' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'llistat-cursos.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['historia'] . '/llistat-organitzacions' => [
+        'view' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'llistat-organitzacions.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['historia'] . '/llistat-esdeveniments' => [
+        'view' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'llistat-esdeveniments.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,

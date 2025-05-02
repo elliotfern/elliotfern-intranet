@@ -10,10 +10,12 @@ export function historiaOberta() {
   if (pageType[3] === 'modifica-article') {
   } else if (pageType[2] === 'fitxa-personatge') {
     fitxaPersona('/api/persones/get/?persona=', pageType[3], 'historia-persona', function (data) {
-      construirTaula('taula1', '/api/historia/get/?carrecsPersona=', data.id, ['Càrrec', 'Anys', 'Accions'], function (fila, columna) {
+      construirTaula('taula1', '/api/historia/get/?carrecsPersona=', data.id, ['Càrrec', 'Organització', 'Anys', 'Accions'], function (fila, columna) {
         if (columna.toLowerCase() === 'càrrec') {
           // Manejar el caso del título
           return fila['carrec'];
+        } else if (columna.toLowerCase() === 'organització') {
+          return '<a href="' + window.location.origin + '/gestio/historia/fitxa-organitzacio/' + fila['slug'] + '">' + fila['organitzacio'] + '</a>';
         } else if (columna.toLowerCase() === 'anys') {
           return `${fila['anys']} / ${fila['carrecFi']}`;
         } else if (columna.toLowerCase() === 'accions') {

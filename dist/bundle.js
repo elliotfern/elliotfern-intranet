@@ -2770,10 +2770,13 @@ function historiaOberta() {
     }
     else if (pageType[2] === 'fitxa-personatge') {
         (0,_persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_1__.fitxaPersona)('/api/persones/get/?persona=', pageType[3], 'historia-persona', function (data) {
-            (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_2__.construirTaula)('taula1', '/api/historia/get/?carrecsPersona=', data.id, ['Càrrec', 'Anys', 'Accions'], function (fila, columna) {
+            (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_2__.construirTaula)('taula1', '/api/historia/get/?carrecsPersona=', data.id, ['Càrrec', 'Organització', 'Anys', 'Accions'], function (fila, columna) {
                 if (columna.toLowerCase() === 'càrrec') {
                     // Manejar el caso del título
                     return fila['carrec'];
+                }
+                else if (columna.toLowerCase() === 'organització') {
+                    return '<a href="' + window.location.origin + '/gestio/historia/fitxa-organitzacio/' + fila['slug'] + '">' + fila['organitzacio'] + '</a>';
                 }
                 else if (columna.toLowerCase() === 'anys') {
                     return `${fila['anys']} / ${fila['carrecFi']}`;

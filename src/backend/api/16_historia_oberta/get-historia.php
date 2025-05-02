@@ -85,8 +85,9 @@ if (isset($_GET['type']) && $_GET['type'] == 'llistat-articles') {
 } else if (isset($_GET['carrecsPersona'])) {
     $id = $_GET['carrecsPersona'];
 
-    $query = "SELECT c.id, c.carrecNom AS carrec, c.carrecInici AS anys, c.carrecFi
+    $query = "SELECT c.id, c.carrecNom AS carrec, c.carrecInici AS anys, c.carrecFi, o.nomOrg AS organitzacio, o.slug
     FROM aux_persones_carrecs AS c
+    LEFT JOIN db_historia_organitzacions AS o ON c.idOrg = o.id
     WHERE c.idPersona = :id
     ORDER BY c.carrecInici";
 
@@ -120,6 +121,89 @@ if (isset($_GET['type']) && $_GET['type'] == 'llistat-articles') {
     INNER JOIN db_historia_esdeveniments AS e ON ep.idEsdev = e.id
     WHERE ep.idPersona = :id
     ORDER BY e.esdeDataIAny ASC";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+    // 2. Llistat d'esdeveniments
+    // ruta GET => "/api/historia/get/?llistatEsdeveniments"
+} else if (isset($_GET['llistatEsdeveniments'])) {
+    // Obtener los parámetros de filtro
+    $etapaFiltro = isset($_GET['etapa']) ? $_GET['etapa'] : '';
+    $subetapaFiltro = isset($_GET['subetapa']) ? $_GET['subetapa'] : '';
+
+    $query = "SELECT e.id, esdeNom, slug, esdeDataIDia, esdeDataIMes, esdeDataIAny, esdeDataFDia, esdeDataFMes, esdeDataFAny, s.nomSubEtapa, p.etapaNom, c.city
+    FROM db_historia_esdeveniments AS e
+    LEFT JOIN db_historia_sub_periode AS s ON e.esSubEtapa = s.id
+    LEFT JOIN db_historia_periode_historic AS p ON s.idEtapa = p.id
+    LEFT JOIN db_cities AS c ON e.esdeCiutat = c.id
+    WHERE 1";
+
+    if ($etapaFiltro) {
+        $query .= " AND p.id = :etapa";
+    }
+
+    if ($subetapaFiltro) {
+        $query .= " AND s.id = :subetapa";
+    }
+
+    // Eliminar la parte LIMIT y OFFSET
+    $query .= " ORDER BY e.esdeDataIAny DESC";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    // Vincular parámetros si es necesario
+    if ($etapaFiltro) {
+        $stmt->bindParam(':etapa', $etapaFiltro, PDO::PARAM_INT);
+    }
+    if ($subetapaFiltro) {
+        $stmt->bindParam(':subetapa', $subetapaFiltro, PDO::PARAM_INT);
+    }
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos y el total de eventos
+    echo json_encode([
+        'data' => $data,
+    ]);
+
+    // 2. Llistat de subetapes
+    // ruta GET => "/api/historia/get/?subEtapesEtapa=1"
+} else if (isset($_GET['subEtapesEtapa'])) {
+    $id = $_GET['subEtapesEtapa'];
+
+    $query = "SELECT s.id, s.nomSubEtapa
+    FROM db_historia_sub_periode AS s
+    WHERE s.idEtapa = :id
+    ORDER BY s.anyInici";
 
     // Preparar la consulta
     $stmt = $conn->prepare($query);
