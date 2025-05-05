@@ -25,11 +25,11 @@
         <option value="12">Història: mapa</option>
         <option value="15">Història: infografia</option>
         <option value="16">Història: cronologia</option>
+        <option value="10">Història: thumbnail</option>
         <option value="7">Cinema: sèrie tv</option>
         <option value="8">Cinema: pel·lícula</option>
         <option value="9">Cinema: actor</option>
         <option value="14">Cinema: director</option>
-        <option value="10">Història: thumbnail</option>
         <option value="11">Viatges: viatge</option>
         <option value="13">Blog</option>
       </select>

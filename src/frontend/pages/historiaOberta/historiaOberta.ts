@@ -40,5 +40,21 @@ export function historiaOberta() {
         }
       });
     });
+  } else if (pageType[2] === 'nou-esdeveniment') {
+    const form = document.getElementById('formEsdeveniment');
+    if (form) {
+      // Lanzar actualizador de datos
+      form.addEventListener('submit', function (event) {
+        transmissioDadesDB(event, 'POST', 'formEsdeveniment', '/api/historia/post/?esdeveniment');
+      });
+    }
+  } else if (pageType[2] === 'modifica-esdeveniment') {
+    const form = document.getElementById('formEsdeveniment');
+    if (form) {
+      // Lanzar actualizador de datos
+      form.addEventListener('submit', function (event) {
+        transmissioDadesDB(event, 'PUT', 'formEsdeveniment', '/api/historia/put/?esdeveniment');
+      });
+    }
   }
 }

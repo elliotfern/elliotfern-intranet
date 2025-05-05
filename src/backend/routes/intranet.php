@@ -101,6 +101,10 @@ $base_routes = [
     APP_GESTIO . $url['historia'] . '/llistat-esdeveniments' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'llistat-esdeveniments.php',
     APP_GESTIO . $url['historia'] . '/fitxa-personatge/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-persona.php',
     APP_GESTIO . $url['historia'] . '/fitxa-politic/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-politic.php',
+    APP_GESTIO . $url['historia'] . '/fitxa-esdeveniment/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-esdeveniment.php',
+
+    APP_GESTIO . $url['historia'] . '/nou-esdeveniment' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-esdeveniment.php',
+    APP_GESTIO . $url['historia'] . '/modifica-esdeveniment/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-esdeveniment.php',
 
     // 16. Auxiliars
     APP_GESTIO . $url['auxiliars'] => APP_INTRANET_DIR . APP_AUXILIARS_DIR . 'index.php',
@@ -689,6 +693,33 @@ $routes = [
 
     APP_GESTIO . $url['historia'] . '/fitxa-politic/{slug}' => [
         'view' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-politic.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['historia'] . '/fitxa-esdeveniment/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-esdeveniment.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['historia'] . '/nou-esdeveniment' => [
+        'view' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-esdeveniment.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['historia'] . '/modifica-esdeveniment/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-esdeveniment.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,

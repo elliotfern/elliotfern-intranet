@@ -128,7 +128,6 @@ if ($modificaBtn === 1) {
     <div class="col-md-12">
       <label>Crítica de la pel·lícula:</label>
       <textarea id="descripcio" name="descripcio" rows="4" cols="50" value=""> </textarea>
-
     </div>
 
     <div class="container" style="margin-top:25px">

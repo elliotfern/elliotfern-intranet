@@ -2758,8 +2758,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   historiaOberta: () => (/* binding */ historiaOberta)
 /* harmony export */ });
 /* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
-/* harmony import */ var _persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../persona/fitxaPersona */ "./src/frontend/pages/persona/fitxaPersona.ts");
-/* harmony import */ var _services_api_construirTaula__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/api/construirTaula */ "./src/frontend/services/api/construirTaula.ts");
+/* harmony import */ var _utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/actualitzarDades */ "./src/frontend/utils/actualitzarDades.ts");
+/* harmony import */ var _persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../persona/fitxaPersona */ "./src/frontend/pages/persona/fitxaPersona.ts");
+/* harmony import */ var _services_api_construirTaula__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/api/construirTaula */ "./src/frontend/services/api/construirTaula.ts");
+
 
 
 
@@ -2769,8 +2771,8 @@ function historiaOberta() {
     if (pageType[3] === 'modifica-article') {
     }
     else if (pageType[2] === 'fitxa-personatge') {
-        (0,_persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_1__.fitxaPersona)('/api/persones/get/?persona=', pageType[3], 'historia-persona', function (data) {
-            (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_2__.construirTaula)('taula1', '/api/historia/get/?carrecsPersona=', data.id, ['Càrrec', 'Organització', 'Anys', 'Accions'], function (fila, columna) {
+        (0,_persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_2__.fitxaPersona)('/api/persones/get/?persona=', pageType[3], 'historia-persona', function (data) {
+            (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_3__.construirTaula)('taula1', '/api/historia/get/?carrecsPersona=', data.id, ['Càrrec', 'Organització', 'Anys', 'Accions'], function (fila, columna) {
                 if (columna.toLowerCase() === 'càrrec') {
                     // Manejar el caso del título
                     return fila['carrec'];
@@ -2789,7 +2791,7 @@ function historiaOberta() {
                     return fila[columna.toLowerCase()];
                 }
             });
-            (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_2__.construirTaula)('taula2', '/api/historia/get/?esdevenimentsPersona=', data.id, ['Esdeveniment', 'Any', 'Accions'], function (fila, columna) {
+            (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_3__.construirTaula)('taula2', '/api/historia/get/?esdevenimentsPersona=', data.id, ['Esdeveniment', 'Any', 'Accions'], function (fila, columna) {
                 if (columna.toLowerCase() === 'esdeveniment') {
                     // Manejar el caso del título
                     return '<a href="' + window.location.origin + '/gestio/historia/fitxa-esdeveniment/' + fila['slug'] + '">' + fila['esdeveniment'] + '</a>';
@@ -2806,6 +2808,24 @@ function historiaOberta() {
                 }
             });
         });
+    }
+    else if (pageType[2] === 'nou-esdeveniment') {
+        const form = document.getElementById('formEsdeveniment');
+        if (form) {
+            // Lanzar actualizador de datos
+            form.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'formEsdeveniment', '/api/historia/post/?esdeveniment');
+            });
+        }
+    }
+    else if (pageType[2] === 'modifica-esdeveniment') {
+        const form = document.getElementById('formEsdeveniment');
+        if (form) {
+            // Lanzar actualizador de datos
+            form.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'formEsdeveniment', '/api/historia/put/?esdeveniment');
+            });
+        }
     }
 }
 

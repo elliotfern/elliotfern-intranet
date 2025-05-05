@@ -35,6 +35,8 @@ $base_routes = [
 
     // HISTORIA OBERTA
     '/api/historia/get' => 'src/backend/api/16_historia_oberta/get-historia.php',
+    '/api/historia/post' => 'src/backend/api/16_historia_oberta/post-historia.php',
+    '/api/historia/put' => 'src/backend/api/16_historia_oberta/put-historia.php',
 
     // AGENDA CONTACTES
     '/api/contactes/get' => 'src/backend/api/contactes/get-contactes.php',
@@ -241,6 +243,22 @@ $routes = [
     // HISTORIA OBERTA
     '/api/historia/get' => [
         'view' => 'src/backend/api/16_historia_oberta/get-historia.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    '/api/historia/post' => [
+        'view' => 'src/backend/api/16_historia_oberta/post-historia.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    '/api/historia/put' => [
+        'view' => 'src/backend/api/16_historia_oberta/put-historia.php',
         'needs_session' => false,
         'header_footer' => false,
         'header_menu_footer' => false,
