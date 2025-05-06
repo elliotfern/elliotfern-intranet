@@ -98,5 +98,21 @@ export function historiaOberta() {
         transmissioDadesDB(event, 'PUT', 'formPersonaCarrec', '/api/historia/put/?personaCarrec');
       });
     }
+  } else if (pageType[2] === 'modifica-organitzacio') {
+    const form = document.getElementById('formOrganitzacio');
+    if (form) {
+      // Lanzar actualizador de datos
+      form.addEventListener('submit', function (event) {
+        transmissioDadesDB(event, 'PUT', 'formOrganitzacio', '/api/historia/put/?organitzacio');
+      });
+    }
+  } else if (pageType[2] === 'nova-organitzacio') {
+    const form = document.getElementById('formOrganitzacio');
+    if (form) {
+      // Lanzar actualizador de datos
+      form.addEventListener('submit', function (event) {
+        transmissioDadesDB(event, 'POST', 'formOrganitzacio', '/api/historia/post/?organitzacio');
+      });
+    }
   }
 }

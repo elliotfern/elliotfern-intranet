@@ -574,7 +574,7 @@ if (isset($_GET['type']) && $_GET['type'] == 'llistat-articles') {
     $slug = $_GET['fitxaOrganitzacio'];
 
     $query = "SELECT o.id, o.nomOrg, o.slug, o.orgSig, o.dataFunda, o.dataDiss, ci.city, c.pais_cat, i.nameImg, o.dateCreated, o.dateModified,
-    sp.nomSubEtapa, ph.etapaNom, ot.nomTipus, ip.ideologia, i.alt
+    sp.nomSubEtapa, ph.etapaNom, ot.nomTipus, ip.ideologia, i.alt, o.nomOrgCast, o.nomOrgEng, o.nomOrgIt, o.orgPais, o.orgCiutat, o.orgSubEtapa, o.orgTipus, o.orgIdeologia, o.img
     FROM db_historia_organitzacions AS o
     LEFT JOIN db_countries AS c ON o.orgPais = c.id
     LEFT JOIN db_cities AS ci ON o.orgCiutat = ci.id
@@ -649,6 +649,85 @@ if (isset($_GET['type']) && $_GET['type'] == 'llistat-articles') {
     $stmt = $conn->prepare($query);
 
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+    // 5. Imatges organitzacions
+    // ruta GET => "/api/historia/get/?llistatImatgesOrganitzacions"
+} else if (isset($_GET['llistatImatgesOrganitzacions'])) {
+
+    $query = "SELECT i.id, i.alt
+    FROM db_img AS i
+    WHERE i.typeImg = 6";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+
+    // 5. Llistat ideologies
+    // ruta GET => "/api/historia/get/?llistatIdeologies"
+} else if (isset($_GET['llistatIdeologies'])) {
+
+    $query = "SELECT i.id, i.ideologia
+    FROM aux_historia_ideologies_politiques AS i
+    ORDER BY i.ideologia";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+    // 5. Tipus organitzacio
+    // ruta GET => "/api/historia/get/?llistatTipusOrganitzacio"
+} else if (isset($_GET['llistatTipusOrganitzacio'])) {
+
+    $query = "SELECT t.id, t.nomTipus
+    FROM db_historia_organitzacions_tipus AS t
+    ORDER BY t.nomTipus";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
 
     // Ejecutar la consulta
     $stmt->execute();

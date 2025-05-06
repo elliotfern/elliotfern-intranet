@@ -13,7 +13,7 @@
 
             <h1>Base de dades d'Història: llistat d'organitzacions</h1>
 
-            <button onclick="window.location.href='<?php echo APP_INTRANET . $url['persona']; ?>/nova-persona/'" class="button btn-gran btn-secondari">Afegir autor</button>
+            <button onclick="window.location.href='<?php echo APP_INTRANET . $url['historia']; ?>/nova-organitzacio/'" class="button btn-gran btn-secondari">Afegir organització</button>
 
             <div class="table-responsive">
                 <table class="table table-striped" id="authorsTable">
@@ -59,12 +59,12 @@
             <td>${author.pais_cat}</td>
             <td>${author.dataDiss && author.dataDiss !== '0' ? `${author.dataFunda} - ${author.dataDiss}` : `${author.dataFunda} - present`}</td>
             <td>
-              <a href="https://${window.location.host}/gestio/historia/modificacio-organitzacio/${author.slug}">
-                <button type="button" class="btn btn-sm btn-warning">Modifica</button>
+              <a href="https://${window.location.host}/gestio/historia/modifica-organitzacio/${author.slug}">
+                <button type="button" class="button btn-petit">Modifica</button>
               </a>
             </td>
             <td>
-              <button type="button" class="btn btn-sm btn-danger">Elimina</button>
+              <button type="button" class="button btn-petit">Elimina</button>
             </td>
           </tr>`;
                     });

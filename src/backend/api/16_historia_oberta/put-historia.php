@@ -301,6 +301,104 @@ if (isset($_GET['esdeveniment'])) {
         echo json_encode($response);
     }
 
+    // b) Inserir organitzacio
+} else if (isset($_GET['organitzacio'])) {
+
+    // Obtener el cuerpo de la solicitud PUT
+    $input_data = file_get_contents("php://input");
+
+    // Decodificar los datos JSON
+    $data = json_decode($input_data, true);
+
+    // Verificar si se recibieron datos
+    if ($data === null) {
+        // Error al decodificar JSON
+        header('HTTP/1.1 400 Bad Request');
+        echo json_encode(['error' => 'Error decoding JSON data']);
+        exit();
+    }
+
+    // Ahora puedes acceder a los datos como un array asociativo
+    $hasError = false; // Inicializamos la variable $hasError como false
+
+    $nomOrg = !empty($data['nomOrg']) ? data_input($data['nomOrg']) : ($hasError = true);
+    $nomOrgCast = !empty($data['nomOrgCast']) ? data_input($data['nomOrgCast']) : ($hasError = false);
+    $nomOrgEng = !empty($data['nomOrgEng']) ? data_input($data['nomOrgEng']) : ($hasError = false);
+    $nomOrgIt = !empty($data['nomOrgIt']) ? data_input($data['nomOrgIt']) : ($hasError = false);
+    $slug = !empty($data['slug']) ? data_input($data['slug']) : ($hasError = true);
+    $orgSig = !empty($data['orgSig']) ? data_input($data['orgSig']) : ($hasError = false);
+    $dataFunda = !empty($data['dataFunda']) ? data_input($data['dataFunda']) : ($hasError = true);
+    $dataDiss = !empty($data['dataDiss']) ? data_input($data['dataDiss']) : ($hasError = false);
+    $orgPais = !empty($data['orgPais']) ? data_input($data['orgPais']) : ($hasError = true);
+    $orgCiutat = !empty($data['orgCiutat']) ? data_input($data['orgCiutat']) : ($hasError = true);
+    $orgSubEtapa = !empty($data['orgSubEtapa']) ? data_input($data['orgSubEtapa']) : ($hasError = true);
+    $orgTipus = !empty($data['orgTipus']) ? data_input($data['orgTipus']) : ($hasError = true);
+    $orgIdeologia = !empty($data['orgIdeologia']) ? data_input($data['orgIdeologia']) : ($hasError = false);
+    $img = !empty($data['img']) ? data_input($data['img']) : ($hasError = true);
+    $id = !empty($data['id']) ? data_input($data['id']) : ($hasError = true);
+
+    $timestamp = date('Y-m-d');
+    $dateModified = $timestamp;
+
+    if (!$hasError) {
+        global $conn;
+        $sql = "UPDATE db_historia_organitzacions
+        SET nomOrg = :nomOrg,
+            nomOrgCast = :nomOrgCast,
+            nomOrgEng = :nomOrgEng,
+            nomOrgIt = :nomOrgIt,
+            slug = :slug,
+            orgSig = :orgSig,
+            dataFunda = :dataFunda,
+            dataDiss = :dataDiss,
+            orgPais = :orgPais,
+            orgCiutat = :orgCiutat,
+            orgSubEtapa = :orgSubEtapa,
+            orgTipus = :orgTipus,
+            orgIdeologia = :orgIdeologia,
+            img = :img,
+            dateCreated = :dateCreated,
+            dateModified = :dateModified
+            WHERE id = :id";
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bindParam(":nomOrg", $nomOrg, PDO::PARAM_STR);
+        $stmt->bindParam(":nomOrgCast", $nomOrgCast, PDO::PARAM_STR);
+        $stmt->bindParam(":nomOrgEng", $nomOrgEng, PDO::PARAM_STR);
+        $stmt->bindParam(":nomOrgIt", $nomOrgIt, PDO::PARAM_STR);
+        $stmt->bindParam(":slug", $slug, PDO::PARAM_STR);
+        $stmt->bindParam(":orgSig", $orgSig, PDO::PARAM_STR);
+        $stmt->bindParam(":dataFunda", $dataFunda, PDO::PARAM_STR);
+        $stmt->bindParam(":dataDiss", $dataDiss, PDO::PARAM_STR);
+        $stmt->bindParam(":orgPais", $orgPais, PDO::PARAM_INT);
+        $stmt->bindParam(":orgCiutat", $orgCiutat, PDO::PARAM_INT);
+        $stmt->bindParam(":orgSubEtapa", $orgSubEtapa, PDO::PARAM_INT);
+        $stmt->bindParam(":orgTipus", $orgTipus, PDO::PARAM_INT);
+        $stmt->bindParam(":orgIdeologia", $orgIdeologia, PDO::PARAM_INT);
+        $stmt->bindParam(":img", $img, PDO::PARAM_INT);
+        $stmt->bindParam(":dateCreated", $dateCreated, PDO::PARAM_STR);
+        $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
+        $stmt->bindParam(":id", $id, PDO::PARAM_STR);
+
+        if ($stmt->execute()) {
+            // response output
+            $response['status'] = 'success';
+            header("Content-Type: application/json");
+            echo json_encode($response);
+        } else {
+            // response output - data error
+            $response['status'] = 'error';
+            header("Content-Type: application/json");
+            echo json_encode($response);
+        }
+    } else {
+        // response output - data error
+        $response['status'] = 'error';
+
+        header("Content-Type: application/json");
+        echo json_encode($response);
+    }
     // si no hi ha cap endpoint valid, mostrar error:
 } else {
     // response output - data error

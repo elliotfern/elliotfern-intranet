@@ -2869,6 +2869,24 @@ function historiaOberta() {
             });
         }
     }
+    else if (pageType[2] === 'modifica-organitzacio') {
+        const form = document.getElementById('formOrganitzacio');
+        if (form) {
+            // Lanzar actualizador de datos
+            form.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'formOrganitzacio', '/api/historia/put/?organitzacio');
+            });
+        }
+    }
+    else if (pageType[2] === 'nova-organitzacio') {
+        const form = document.getElementById('formOrganitzacio');
+        if (form) {
+            // Lanzar actualizador de datos
+            form.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'formOrganitzacio', '/api/historia/post/?organitzacio');
+            });
+        }
+    }
 }
 
 

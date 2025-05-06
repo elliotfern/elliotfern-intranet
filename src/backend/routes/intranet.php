@@ -113,6 +113,9 @@ $base_routes = [
     APP_GESTIO . $url['historia'] . '/nou-carrec/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-persona-carrec.php',
     APP_GESTIO . $url['historia'] . '/modifica-persona-carrec/{id}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-persona-carrec.php',
 
+    APP_GESTIO . $url['historia'] . '/modifica-organitzacio/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-organitzacio.php',
+    APP_GESTIO . $url['historia'] . '/nova-organitzacio' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-organitzacio.php',
+
     // 16. Auxiliars
     APP_GESTIO . $url['auxiliars'] => APP_INTRANET_DIR . APP_AUXILIARS_DIR . 'index.php',
     APP_GESTIO . $url['auxiliars'] . '/nova-imatge' => APP_INTRANET_DIR . APP_AUXILIARS_DIR . 'imatges/form-inserir-imatge.php',
@@ -772,6 +775,24 @@ $routes = [
 
     APP_GESTIO . $url['historia'] . '/modifica-persona-carrec/{id}' => [
         'view' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-persona-carrec.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['historia'] . '/modifica-organitzacio/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-organitzacio.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['historia'] . '/nova-organitzacio' => [
+        'view' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-organitzacio.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
