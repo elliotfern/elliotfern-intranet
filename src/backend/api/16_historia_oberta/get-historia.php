@@ -256,7 +256,7 @@ if (isset($_GET['type']) && $_GET['type'] == 'llistat-articles') {
 } else if (isset($_GET['esdeveniment'])) {
     $slug = $_GET['esdeveniment'];
 
-    $query = "SELECT e.id, e.esdeNom, e.esdeNomCast, e.esdeNomEng, e.esdeNomIt, e.slug, e.esdeDataIDia, e.esdeDataIMes, e.esdeDataIAny, e.esdeDataFDia, e.esdeDataFMes, e.esdeDataFAny, e.esSubEtapa, e.esdeCiutat, e.dateCreated, e.dateModified, s.nomSubEtapa, p.etapaNom, c.city, co.pais_cat, e.img, i.nameImg, e.descripcio
+    $query = "SELECT e.id, e.esdeNom, e.esdeNomCast, e.esdeNomEng, e.esdeNomIt, e.slug, e.esdeDataIDia, e.esdeDataIMes, e.esdeDataIAny, e.esdeDataFDia, e.esdeDataFMes, e.esdeDataFAny, e.esSubEtapa, e.esdeCiutat, e.dateCreated, e.dateModified, s.nomSubEtapa, p.etapaNom, c.city, co.pais_cat, e.img, i.nameImg, e.descripcio, i.alt
     FROM db_historia_esdeveniments AS e
     LEFT JOIN db_historia_sub_periode AS s ON e.esSubEtapa = s.id
     LEFT JOIN db_historia_periode_historic AS p ON s.idEtapa = p.id
@@ -316,7 +316,7 @@ if (isset($_GET['type']) && $_GET['type'] == 'llistat-articles') {
 } else if (isset($_GET['personesEsdeveniments'])) {
     $id = $_GET['personesEsdeveniments'];
 
-    $query = "SELECT ep.id, CONCAT(ep.nom, ' ', ep.cognoms) AS nom, ep.slug
+    $query = "SELECT e.id, CONCAT(ep.nom, ' ', ep.cognoms) AS nom, ep.slug
     FROM db_historia_esdeveniment_persones AS e
     INNER JOIN db_persones AS ep ON ep.id = e.idPersona
     WHERE e.idEsdev = :id
@@ -347,7 +347,7 @@ if (isset($_GET['type']) && $_GET['type'] == 'llistat-articles') {
 } else if (isset($_GET['organitzacionsEsdeveniments'])) {
     $id = $_GET['organitzacionsEsdeveniments'];
 
-    $query = "SELECT org.id, org.nomOrg AS nom, org.slug
+    $query = "SELECT o.id, org.nomOrg AS nom, org.slug
     FROM db_historia_esdeveniment_organitzacio AS o
     INNER JOIN db_historia_organitzacions AS org ON org.id = o.idOrg
     WHERE o.idEsde = :id
@@ -369,6 +369,173 @@ if (isset($_GET['type']) && $_GET['type'] == 'llistat-articles') {
 
     // Recopilar los resultados
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+    // 4. Llistat Esdeveniments
+    // ruta GET => "/api/historia/get/?llistatEsdevenimentsSelect"
+} else if (isset($_GET['llistatEsdevenimentsSelect'])) {
+
+    $query = "SELECT e.id, e.esdeNom
+    FROM db_historia_esdeveniments AS e
+    ORDER BY e.esdeNom ASC";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+    // 4. Llistat persones
+    // ruta GET => "/api/historia/get/?llistatPersones"
+} else if (isset($_GET['llistatPersones'])) {
+
+    $query = "SELECT p.id, CONCAT(p.nom, ' ', p.cognoms) AS nom
+    FROM db_persones AS p
+    ORDER BY p.cognoms";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+
+    // 3. Llistat d'esdeveniments vinculats a una persona
+    // ruta GET => "/api/historia/get/?formEsdevenimentsPersona=234"
+} else if (isset($_GET['formEsdevenimentsPersona'])) {
+    $id = $_GET['formEsdevenimentsPersona'];
+
+    $query = "SELECT e.id, e.idEsdev, e.idPersona
+    FROM db_historia_esdeveniment_persones AS e
+    WHERE e.id = :id";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+    // 3. Llistat organitzacions
+    // ruta GET => "/api/historia/get/?llistatOrganitzacions"
+} else if (isset($_GET['llistatOrganitzacions'])) {
+    $id = $_GET['llistatOrganitzacions'];
+
+    $query = "SELECT o.id, o.nomOrg
+    FROM db_historia_organitzacions AS o";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+    // 3. Relació esdeveniment-organitzacions
+    // ruta GET => "/api/historia/get/?formEsdevenimentOrganitzacions"
+} else if (isset($_GET['formEsdevenimentOrganitzacions'])) {
+    $id = $_GET['formEsdevenimentOrganitzacions'];
+
+    $query = "SELECT o.id, o.idEsde, o.idOrg
+    FROM db_historia_esdeveniment_organitzacio AS o
+    WHERE o.id = :id";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+    // 3. Càrrec d'una persona
+    // ruta GET => "/api/historia/get/?personaCarrec="33"
+} else if (isset($_GET['personaCarrec'])) {
+    $id = $_GET['personaCarrec'];
+
+    $query = "SELECT c.id, c.idPersona, c.carrecNom, c.carrecNomCast, c.carrecNomEng, c.carrecNomIt, c.carrecInici, c.carrecFi, c.idOrg, p.nom, p.cognoms
+    FROM aux_persones_carrecs AS c
+    INNER JOIN db_persones AS p ON c.idPersona = p.id
+    WHERE c.id = :id";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Devolver los datos en formato JSON
     echo json_encode($data);

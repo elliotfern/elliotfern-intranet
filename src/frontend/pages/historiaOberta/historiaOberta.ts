@@ -19,7 +19,7 @@ export function historiaOberta() {
         } else if (columna.toLowerCase() === 'anys') {
           return `${fila['anys']} / ${fila['carrecFi']}`;
         } else if (columna.toLowerCase() === 'accions') {
-          return `<button onclick="window.location.href='${window.location.origin}/gestio/biblioteca/modifica-llibre/${fila['slug']}'" class="button btn-petit">Modificar</button>`;
+          return `<button onclick="window.location.href='${window.location.origin}/gestio/historia/modifica-persona-carrec/${fila['id']}'" class="button btn-petit">Modificar</button>`;
         } else {
           // Manejar otros casos
           return fila[columna.toLowerCase()];
@@ -33,7 +33,7 @@ export function historiaOberta() {
         } else if (columna.toLowerCase() === 'anys') {
           return `${fila['esdeDataIAny']}`;
         } else if (columna.toLowerCase() === 'accions') {
-          return `<button onclick="window.location.href='${window.location.origin}/gestio/biblioteca/modifica-llibre/${fila['slug']}'" class="button btn-petit">Modificar</button>`;
+          return `<button onclick="window.location.href='${window.location.origin}/gestio/historia/modifica-esdeveniment-persona/${fila['idEP']}'" class="button btn-petit">Modificar</button>`;
         } else {
           // Manejar otros casos
           return fila[columna.toLowerCase()];
@@ -54,6 +54,48 @@ export function historiaOberta() {
       // Lanzar actualizador de datos
       form.addEventListener('submit', function (event) {
         transmissioDadesDB(event, 'PUT', 'formEsdeveniment', '/api/historia/put/?esdeveniment');
+      });
+    }
+  } else if (pageType[2] === 'modifica-esdeveniment-persona') {
+    const form = document.getElementById('formEsdeveniment');
+
+    if (form) {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const submitter = event.submitter; // El botón que activó el envío
+        const metodo = submitter?.dataset?.method || 'POST'; // Valor por defecto: POST
+
+        transmissioDadesDB(event, metodo, 'formEsdeveniment', `/api/historia/${metodo.toLowerCase()}/?esdevenimentPersona`);
+      });
+    }
+  } else if (pageType[2] === 'modifica-esdeveniment-organitzacio') {
+    const form = document.getElementById('formEsdeveniment');
+
+    if (form) {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const submitter = event.submitter; // El botón que activó el envío
+        const metodo = submitter?.dataset?.method || 'POST'; // Valor por defecto: POST
+
+        transmissioDadesDB(event, metodo, 'formEsdeveniment', `/api/historia/${metodo.toLowerCase()}/?esdevenimentOrganitzacio`);
+      });
+    }
+  } else if (pageType[2] === 'nou-persona-carrec') {
+    const form = document.getElementById('formPersonaCarrec');
+    if (form) {
+      // Lanzar actualizador de datos
+      form.addEventListener('submit', function (event) {
+        transmissioDadesDB(event, 'POST', 'formPersonaCarrec', '/api/historia/post/?personaCarrec');
+      });
+    }
+  } else if (pageType[2] === 'modifica-persona-carrec') {
+    const form = document.getElementById('formPersonaCarrec');
+    if (form) {
+      // Lanzar actualizador de datos
+      form.addEventListener('submit', function (event) {
+        transmissioDadesDB(event, 'PUT', 'formPersonaCarrec', '/api/historia/put/?personaCarrec');
       });
     }
   }

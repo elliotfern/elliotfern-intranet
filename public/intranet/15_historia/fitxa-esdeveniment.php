@@ -21,6 +21,7 @@ $slug = $routeParams[0];
 
                 <div class='columna imatge'>
                     <img id="nameImg" src='' class='img-thumbnail' alt='Imatge' title='Imatge'>
+                    <p><span id="alt" style="font-size:12px"></span></p>
                 </div>
 
                 <div class="columna">
@@ -42,7 +43,7 @@ $slug = $routeParams[0];
 
             <hr>
             <h4>Persones vinculades a l'esdeveniment:</h4>
-            <button onclick="window.location.href='<?php echo APP_INTRANET . $url['historia']; ?>/modifica-esdeveniment/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Afegir persones a l'esdeveniment</button>
+            <button onclick="window.location.href='<?php echo APP_INTRANET . $url['historia']; ?>/modifica-esdeveniment-persona/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Afegir persones a l'esdeveniment</button>
 
             <div class="table-responsive">
                 <table id="taula1" class="table table-striped"></table>
@@ -50,7 +51,7 @@ $slug = $routeParams[0];
 
             <hr>
             <h4>Organitzacions vinculades a l'esdeveniment històric:</h4>
-            <button onclick="window.location.href='<?php echo APP_INTRANET . $url['historia']; ?>/modifica-esdeveniment/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Afegir organitzacions a l'esdeveniment</button>
+            <button onclick="window.location.href='<?php echo APP_INTRANET . $url['historia']; ?>/modifica-esdeveniment-organitzacio/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Afegir organitzacions a l'esdeveniment</button>
 
             <div class="table-responsive">
                 <table id="taula2" class="table table-striped"></table>
@@ -111,6 +112,7 @@ $slug = $routeParams[0];
                     document.getElementById('etapaNom').textContent = data.etapaNom;
                     document.getElementById('pais_cat').textContent = data.pais_cat;
                     document.getElementById('descripcio').textContent = data.descripcio;
+                    document.getElementById('alt').textContent = data.alt;
 
                     const dataInici = formatData(data.esdeDataIDia, data.esdeDataIMes, data.esdeDataIAny);
                     const dataFi = formatData(data.esdeDataFDia, data.esdeDataFMes, data.esdeDataFAny);
@@ -135,8 +137,8 @@ $slug = $routeParams[0];
 
                     }
 
-                    obtenerDatos("/api/historia/get/?personesEsdeveniments=" + data.id, "taula1", "Nom i cognoms", "personatge");
-                    obtenerDatos("/api/historia/get/?organitzacionsEsdeveniments=" + data.id, "taula2", "Organització", "organitzacio");
+                    obtenerDatos("/api/historia/get/?personesEsdeveniments=" + data.id, "taula1", "Nom i cognoms", "personatge", "persona");
+                    obtenerDatos("/api/historia/get/?organitzacionsEsdeveniments=" + data.id, "taula2", "Organització", "organitzacio", "organitzacio");
 
 
                 } catch (error) {
@@ -172,7 +174,7 @@ $slug = $routeParams[0];
     }
 
     // Función para obtener datos de la API y luego crear la tabla
-    function obtenerDatos(url, taula, columna1, urlFitxa) {
+    function obtenerDatos(url, taula, columna1, urlFitxa, urlFitxa2) {
         fetch(url)
             .then(response => {
                 if (!response.ok) {
@@ -182,14 +184,14 @@ $slug = $routeParams[0];
             })
             .then(data => {
                 // Llamamos a la función para crear la tabla con los datos obtenidos
-                crearTabla(data, taula, columna1, urlFitxa);
+                crearTabla(data, taula, columna1, urlFitxa, urlFitxa2);
             })
             .catch(error => {
                 console.error('Hubo un problema con la solicitud fetch:', error);
             });
     }
 
-    function crearTabla(datos, taula, columna1, urlFitxa) {
+    function crearTabla(datos, taula, columna1, urlFitxa, urlFitxa2) {
         // Obtener el div donde se insertará la tabla
         const taula1 = document.getElementById(taula);
 
@@ -235,11 +237,8 @@ $slug = $routeParams[0];
 
             // Columna "Accions" (ejemplo con botones de editar y eliminar)
             const columnaAccions = document.createElement('td');
-            const botonEditar = document.createElement('button');
-            botonEditar.textContent = 'Editar';
-            botonEditar.onclick = () => editarElemento(item); // Función para editar
-
-            columnaAccions.appendChild(botonEditar);
+            columnaAccions.innerHTML = `<a href="https://${window.location.host}/gestio/historia/modifica-esdeveniment-${urlFitxa2}/${item.id}">
+                <button type="button" class="button btn-petit">Modifica</button>`;
 
             fila.appendChild(columnaNomCognoms);
             fila.appendChild(columnaAccions);

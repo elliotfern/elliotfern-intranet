@@ -2784,7 +2784,7 @@ function historiaOberta() {
                     return `${fila['anys']} / ${fila['carrecFi']}`;
                 }
                 else if (columna.toLowerCase() === 'accions') {
-                    return `<button onclick="window.location.href='${window.location.origin}/gestio/biblioteca/modifica-llibre/${fila['slug']}'" class="button btn-petit">Modificar</button>`;
+                    return `<button onclick="window.location.href='${window.location.origin}/gestio/historia/modifica-persona-carrec/${fila['id']}'" class="button btn-petit">Modificar</button>`;
                 }
                 else {
                     // Manejar otros casos
@@ -2800,7 +2800,7 @@ function historiaOberta() {
                     return `${fila['esdeDataIAny']}`;
                 }
                 else if (columna.toLowerCase() === 'accions') {
-                    return `<button onclick="window.location.href='${window.location.origin}/gestio/biblioteca/modifica-llibre/${fila['slug']}'" class="button btn-petit">Modificar</button>`;
+                    return `<button onclick="window.location.href='${window.location.origin}/gestio/historia/modifica-esdeveniment-persona/${fila['idEP']}'" class="button btn-petit">Modificar</button>`;
                 }
                 else {
                     // Manejar otros casos
@@ -2824,6 +2824,48 @@ function historiaOberta() {
             // Lanzar actualizador de datos
             form.addEventListener('submit', function (event) {
                 (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'formEsdeveniment', '/api/historia/put/?esdeveniment');
+            });
+        }
+    }
+    else if (pageType[2] === 'modifica-esdeveniment-persona') {
+        const form = document.getElementById('formEsdeveniment');
+        if (form) {
+            form.addEventListener('submit', function (event) {
+                var _a;
+                event.preventDefault();
+                const submitter = event.submitter; // El botón que activó el envío
+                const metodo = ((_a = submitter === null || submitter === void 0 ? void 0 : submitter.dataset) === null || _a === void 0 ? void 0 : _a.method) || 'POST'; // Valor por defecto: POST
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, metodo, 'formEsdeveniment', `/api/historia/${metodo.toLowerCase()}/?esdevenimentPersona`);
+            });
+        }
+    }
+    else if (pageType[2] === 'modifica-esdeveniment-organitzacio') {
+        const form = document.getElementById('formEsdeveniment');
+        if (form) {
+            form.addEventListener('submit', function (event) {
+                var _a;
+                event.preventDefault();
+                const submitter = event.submitter; // El botón que activó el envío
+                const metodo = ((_a = submitter === null || submitter === void 0 ? void 0 : submitter.dataset) === null || _a === void 0 ? void 0 : _a.method) || 'POST'; // Valor por defecto: POST
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, metodo, 'formEsdeveniment', `/api/historia/${metodo.toLowerCase()}/?esdevenimentOrganitzacio`);
+            });
+        }
+    }
+    else if (pageType[2] === 'nou-persona-carrec') {
+        const form = document.getElementById('formPersonaCarrec');
+        if (form) {
+            // Lanzar actualizador de datos
+            form.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'formPersonaCarrec', '/api/historia/post/?personaCarrec');
+            });
+        }
+    }
+    else if (pageType[2] === 'modifica-persona-carrec') {
+        const form = document.getElementById('formPersonaCarrec');
+        if (form) {
+            // Lanzar actualizador de datos
+            form.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'formPersonaCarrec', '/api/historia/put/?personaCarrec');
             });
         }
     }

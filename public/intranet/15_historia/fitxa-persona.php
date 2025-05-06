@@ -30,6 +30,7 @@ $slug = $routeParams[0];
 
             <hr>
             <h4>Càrrecs/responsabilitats:</h4>
+            <button onclick="window.location.href='<?php echo APP_INTRANET . $url['historia']; ?>/nou-persona-carrec/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Afegir càrrec</button>
 
             <div class="table-responsive">
                 <table id="taula1" class="table table-striped"></table>

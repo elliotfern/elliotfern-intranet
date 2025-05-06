@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-// a) Inserir pelicula
+// a) Inserir esdeveniment
 if (isset($_GET['esdeveniment'])) {
 
     // Obtener el cuerpo de la solicitud PUT
@@ -92,6 +92,183 @@ if (isset($_GET['esdeveniment'])) {
         $stmt->bindParam(":descripcio", $descripcio, PDO::PARAM_STR);
         $stmt->bindParam(":dateCreated", $dateCreated, PDO::PARAM_STR);
         $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
+
+        if ($stmt->execute()) {
+            // response output
+            $response['status'] = 'success';
+            header("Content-Type: application/json");
+            echo json_encode($response);
+        } else {
+            // response output - data error
+            $response['status'] = 'error';
+            header("Content-Type: application/json");
+            echo json_encode($response);
+        }
+    } else {
+        // response output - data error
+        $response['status'] = 'error';
+
+        header("Content-Type: application/json");
+        echo json_encode($response);
+    }
+
+    // b) Inserir esdeveniment/persona
+} else if (isset($_GET['esdevenimentPersona'])) {
+
+    // Obtener el cuerpo de la solicitud PUT
+    $input_data = file_get_contents("php://input");
+
+    // Decodificar los datos JSON
+    $data = json_decode($input_data, true);
+
+    // Verificar si se recibieron datos
+    if ($data === null) {
+        // Error al decodificar JSON
+        header('HTTP/1.1 400 Bad Request');
+        echo json_encode(['error' => 'Error decoding JSON data']);
+        exit();
+    }
+
+    // Ahora puedes acceder a los datos como un array asociativo
+    $hasError = false; // Inicializamos la variable $hasError como false
+
+    $idEsdev     = !empty($data['idEsdev']) ? data_input($data['idEsdev']) : ($hasError = true);
+    $idPersona   = !empty($data['idPersona']) ? data_input($data['idPersona']) : ($hasError = true);
+
+    if (!$hasError) {
+        global $conn;
+        $sql = "INSERT INTO db_historia_esdeveniment_persones 
+        SET idEsdev = :idEsdev, 
+            idPersona = :idPersona";
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bindParam(":idEsdev", $idEsdev, PDO::PARAM_INT);
+        $stmt->bindParam(":idPersona", $idPersona, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            // response output
+            $response['status'] = 'success';
+            header("Content-Type: application/json");
+            echo json_encode($response);
+        } else {
+            // response output - data error
+            $response['status'] = 'error';
+            header("Content-Type: application/json");
+            echo json_encode($response);
+        }
+    } else {
+        // response output - data error
+        $response['status'] = 'error';
+
+        header("Content-Type: application/json");
+        echo json_encode($response);
+    }
+
+    // b) Inserir esdeveniment/organitzacio
+} else if (isset($_GET['esdevenimentOrganitzacio'])) {
+
+    // Obtener el cuerpo de la solicitud PUT
+    $input_data = file_get_contents("php://input");
+
+    // Decodificar los datos JSON
+    $data = json_decode($input_data, true);
+
+    // Verificar si se recibieron datos
+    if ($data === null) {
+        // Error al decodificar JSON
+        header('HTTP/1.1 400 Bad Request');
+        echo json_encode(['error' => 'Error decoding JSON data']);
+        exit();
+    }
+
+    // Ahora puedes acceder a los datos como un array asociativo
+    $hasError = false; // Inicializamos la variable $hasError como false
+
+    $idEsde  = !empty($data['idEsde']) ? data_input($data['idEsde']) : ($hasError = true);
+    $idOrg   = !empty($data['idOrg']) ? data_input($data['idOrg']) : ($hasError = true);
+
+    if (!$hasError) {
+        global $conn;
+        $sql = "INSERT INTO db_historia_esdeveniment_organitzacio 
+        SET idEsde = :idEsde, 
+            idOrg = :idOrg";
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bindParam(":idEsde", $idEsde, PDO::PARAM_INT);
+        $stmt->bindParam(":idOrg", $idOrg, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            // response output
+            $response['status'] = 'success';
+            header("Content-Type: application/json");
+            echo json_encode($response);
+        } else {
+            // response output - data error
+            $response['status'] = 'error';
+            header("Content-Type: application/json");
+            echo json_encode($response);
+        }
+    } else {
+        // response output - data error
+        $response['status'] = 'error';
+
+        header("Content-Type: application/json");
+        echo json_encode($response);
+    }
+
+    // b) Inserir persona / carrec
+} else if (isset($_GET['personaCarrec'])) {
+
+    // Obtener el cuerpo de la solicitud PUT
+    $input_data = file_get_contents("php://input");
+
+    // Decodificar los datos JSON
+    $data = json_decode($input_data, true);
+
+    // Verificar si se recibieron datos
+    if ($data === null) {
+        // Error al decodificar JSON
+        header('HTTP/1.1 400 Bad Request');
+        echo json_encode(['error' => 'Error decoding JSON data']);
+        exit();
+    }
+
+    // Ahora puedes acceder a los datos como un array asociativo
+    $hasError = false; // Inicializamos la variable $hasError como false
+
+    $idPersona = !empty($data['idPersona']) ? data_input($data['idPersona']) : ($hasError = true);
+    $carrecNom = !empty($data['carrecNom']) ? data_input($data['carrecNom']) : ($hasError = true);
+    $carrecNomCast = !empty($data['carrecNomCast']) ? data_input($data['carrecNomCast']) : ($hasError = false);
+    $carrecNomEng = !empty($data['carrecNomEng']) ? data_input($data['carrecNomEng']) : ($hasError = false);
+    $carrecNomIt = !empty($data['carrecNomIt']) ? data_input($data['carrecNomIt']) : ($hasError = false);
+    $carrecInici = !empty($data['carrecInici']) ? data_input($data['carrecInici']) : ($hasError = true);
+    $carrecFi = !empty($data['carrecFi']) ? data_input($data['carrecFi']) : ($hasError = false);
+    $idOrg = !empty($data['idOrg']) ? data_input($data['idOrg']) : ($hasError = true);
+
+    if (!$hasError) {
+        global $conn;
+        $sql = "INSERT INTO aux_persones_carrecs
+        SET idOrg = :idOrg,
+            idPersona = :idPersona,
+            carrecNom = :carrecNom,
+            carrecNomCast = :carrecNomCast,
+            carrecNomEng = :carrecNomEng,
+            carrecNomIt = :carrecNomIt,
+            carrecInici = :carrecInici,
+            carrecFi = :carrecFi";
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bindParam(":idPersona", $idPersona, PDO::PARAM_INT);
+        $stmt->bindParam(":carrecNom", $carrecNom, PDO::PARAM_STR);
+        $stmt->bindParam(":carrecNomCast", $carrecNomCast, PDO::PARAM_STR);
+        $stmt->bindParam(":carrecNomEng", $carrecNomEng, PDO::PARAM_STR);
+        $stmt->bindParam(":carrecNomIt", $carrecNomIt, PDO::PARAM_STR);
+        $stmt->bindParam(":carrecInici", $carrecInici, PDO::PARAM_STR);
+        $stmt->bindParam(":carrecFi", $carrecFi, PDO::PARAM_STR);
+        $stmt->bindParam(":idOrg", $idOrg, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
             // response output
