@@ -4,14 +4,14 @@ $slug = $routeParams[0];
 
 <div class="container">
     <div class="barraNavegacio">
-        <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['historia']; ?>">Història</a> > <a href="<?php echo APP_INTRANET . $url['historia']; ?>/llistat-esdeveniments">LListat esdeveniments històrics</a> </h6>
+        <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['historia']; ?>">Història</a> > <a href="<?php echo APP_INTRANET . $url['historia']; ?>/llistat-organitzacions">LListat organitzacions</a></h6>
     </div>
 
     <main>
         <div class="container contingut">
-            <h1>Esdeveniment: <span id="nom"></span></h1>
+            <h1>Organització: <span id="nom"></span></h1>
 
-            <button onclick="window.location.href='<?php echo APP_INTRANET . $url['historia']; ?>/modifica-esdeveniment/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Modifica fitxa</button>
+            <button onclick="window.location.href='<?php echo APP_INTRANET . $url['historia']; ?>/modifica-organitzacio/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Modifica fitxa</button>
 
             <div class="dadesFitxa">
                 <span id="dateCreated"></span> <span id="dateModified"></span>
@@ -26,33 +26,28 @@ $slug = $routeParams[0];
 
                 <div class="columna">
                     <div class="quadre-detalls">
-                        <p><strong>Data: </strong> <span id="data"></span></p>
+                        <p><strong>Data de fundació: </strong> <span id="dataFunda"></span></p>
+                        <p><strong>Data de dissolució: </strong> <span id="dataDiss"></span></p>
+                        <p><strong>Sigla: </strong> <span id="orgSig"></span></p>
                         <p><strong>Etapa històrica: </strong> <span id="etapaNom"></span></p>
                         <p><strong>Sub-etapa: </strong> <span id="nomSubEtapa"></span></p>
                         <p><strong>Ciutat: </strong> <span id="city"></span></p>
                         <p><strong>País: </strong> <span id="pais_cat"></span></p>
+                        <p><strong>Tipus d'organització: </strong> <span id="nomTipus"></span></p>
+                        <p><strong>Ideologia principal: </strong> <span id="ideologia"></span></p>
                     </div>
                 </div>
             </div>
 
             <hr>
-            <div class="container" style="padding:20px;background-color:#ececec;margin-top:25px;margin-bottom:25px">
-                <h4>Descripció dels esdeveniments:</h4>
-                <span id="descripcio"></span>
-            </div>
-
-            <hr>
-            <h4>Persones vinculades a l'esdeveniment:</h4>
-            <button onclick="window.location.href='<?php echo APP_INTRANET . $url['historia']; ?>/modifica-esdeveniment-persona/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Afegir persones a l'esdeveniment</button>
+            <h4>Esdeveniments vinculats a l'organització:</h4>
 
             <div class="table-responsive">
                 <table id="taula1" class="table table-striped"></table>
             </div>
 
             <hr>
-            <h4>Organitzacions vinculades a l'esdeveniment històric:</h4>
-            <button onclick="window.location.href='<?php echo APP_INTRANET . $url['historia']; ?>/modifica-esdeveniment-organitzacio/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Afegir organitzacions a l'esdeveniment</button>
-
+            <h4>Càrrecs vinculats amb l'organització:</h4>
             <div class="table-responsive">
                 <table id="taula2" class="table table-striped"></table>
             </div>
@@ -105,24 +100,31 @@ $slug = $routeParams[0];
                     }
 
                     // Actualizar el DOM con los datos recibidos
-                    document.getElementById('nom').textContent = data.esdeNom;
-                    document.getElementById('nameImg').src = `https://media.elliot.cat/img/historia-esdeveniment/${data.nameImg}.jpg`;
+                    document.getElementById('nom').textContent = data.nomOrg;
+                    document.getElementById('nameImg').src = `https://media.elliot.cat/img/historia-organitzacio/${data.nameImg}.jpg`;
                     document.getElementById('nomSubEtapa').textContent = data.nomSubEtapa;
                     document.getElementById('city').textContent = data.city;
                     document.getElementById('etapaNom').textContent = data.etapaNom;
                     document.getElementById('pais_cat').textContent = data.pais_cat;
-                    document.getElementById('descripcio').textContent = data.descripcio;
+                    document.getElementById('orgSig').textContent = data.orgSig;
                     document.getElementById('alt').textContent = data.alt;
+                    document.getElementById('nomTipus').textContent = data.nomTipus;
+                    document.getElementById('ideologia').textContent = data.ideologia;
 
-                    const dataInici = formatData(data.esdeDataIDia, data.esdeDataIMes, data.esdeDataIAny);
-                    const dataFi = formatData(data.esdeDataFDia, data.esdeDataFMes, data.esdeDataFAny);
+                    let dataFi = data.dataDiss;
 
-                    let dataFinal = dataInici;
-                    if (dataFi && dataFi !== dataInici) {
-                        dataFinal += ` - ${dataFi}`;
+                    // Comprobar si dataFinal es 0 o NULL
+                    if (dataFi === 0 || dataFi === null) {
+                        dataFi = `En funcionament`;
+                    } else {
+                        if (dataFi && dataFi !== data.dataFunda) {
+                            dataFi = `${data.dataDiss}`;
+                        }
                     }
 
-                    document.getElementById('data').textContent = dataFinal;
+                    document.getElementById('dataFunda').textContent = data.dataFunda;
+                    document.getElementById('dataDiss').textContent = dataFi;
+
                     const dateElement = document.getElementById('dateCreated');
                     const dateElement2 = document.getElementById('dateModified');
                     dateElement.innerHTML = `<strong>Aquesta fitxa ha estat creada el: </strong> ${fechaFormateada}`;
@@ -137,9 +139,8 @@ $slug = $routeParams[0];
 
                     }
 
-                    obtenerDatos("/api/historia/get/?personesEsdeveniments=" + data.id, "taula1", "Nom i cognoms", "persona", "persona");
-                    obtenerDatos("/api/historia/get/?organitzacionsEsdeveniments=" + data.id, "taula2", "Organització", "organitzacio", "organitzacio");
-
+                    obtenerDatos("/api/historia/get/?esdevenimentsOrganitzacio=" + data.id, "taula1", "Esdeveniment", "esdeveniment", "organitzacio");
+                    obtenerDatos("/api/historia/get/?carrecsPersonesOrganitzacio=" + data.id, "taula2", "Organització", "persona", "carrec");
 
                 } catch (error) {
                     console.error('Error al parsear JSON:', error);
@@ -151,7 +152,7 @@ $slug = $routeParams[0];
     }
 
     // Llamar a la función fetchApiData con la URL de la API y el slug del libro
-    fetchApiData("/api/historia/get/?esdeveniment=<?php echo $slug; ?>");
+    fetchApiData("/api/historia/get/?fitxaOrganitzacio=<?php echo $slug; ?>");
 
     function getMesCatalan(numero) {
         const mesos = [
@@ -217,10 +218,16 @@ $slug = $routeParams[0];
         const filaEncabezado = document.createElement('tr');
         const columnaNom = document.createElement('th');
         columnaNom.textContent = columna1;
+
+        const columnaAnys = document.createElement('th');
+        columnaAnys.textContent = 'Anys';
+
+
         const columnaAccions = document.createElement('th');
         columnaAccions.textContent = 'Accions';
 
         filaEncabezado.appendChild(columnaNom);
+        filaEncabezado.appendChild(columnaAnys);
         filaEncabezado.appendChild(columnaAccions);
         thead.appendChild(filaEncabezado);
 
@@ -235,12 +242,19 @@ $slug = $routeParams[0];
             const columnaNomCognoms = document.createElement('td');
             columnaNomCognoms.innerHTML = `<a href="${window.location.origin}/gestio/historia/fitxa-${urlFitxa}/${item.slug}">${item.nom}</a>`;
 
+            // Anys
+            const anys = document.createElement('td');
+            anys.innerHTML = item.any2 && item.any2 !== 0 ?
+                `${item.any1} - ${item.any2}` :
+                `${item.any1}`;
+
             // Columna "Accions" (ejemplo con botones de editar y eliminar)
             const columnaAccions = document.createElement('td');
-            columnaAccions.innerHTML = `<a href="https://${window.location.host}/gestio/historia/modifica-esdeveniment-${urlFitxa2}/${item.id}">
+            columnaAccions.innerHTML = `<a href="https://${window.location.host}/gestio/historia/modifica-${urlFitxa}-${urlFitxa2}/${item.id}">
                 <button type="button" class="button btn-petit">Modifica</button>`;
 
             fila.appendChild(columnaNomCognoms);
+            fila.appendChild(anys);
             fila.appendChild(columnaAccions);
             tbody.appendChild(fila);
         });

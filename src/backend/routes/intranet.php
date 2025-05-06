@@ -99,9 +99,11 @@ $base_routes = [
     APP_GESTIO . $url['historia'] . '/llistat-cursos' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'llistat-cursos.php',
     APP_GESTIO . $url['historia'] . '/llistat-organitzacions' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'llistat-organitzacions.php',
     APP_GESTIO . $url['historia'] . '/llistat-esdeveniments' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'llistat-esdeveniments.php',
-    APP_GESTIO . $url['historia'] . '/fitxa-personatge/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-persona.php',
+
+    APP_GESTIO . $url['historia'] . '/fitxa-persona/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-persona.php',
     APP_GESTIO . $url['historia'] . '/fitxa-politic/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-politic.php',
     APP_GESTIO . $url['historia'] . '/fitxa-esdeveniment/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-esdeveniment.php',
+    APP_GESTIO . $url['historia'] . '/fitxa-organitzacio/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-organitzacio.php',
 
     APP_GESTIO . $url['historia'] . '/nou-esdeveniment' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-esdeveniment.php',
     APP_GESTIO . $url['historia'] . '/modifica-esdeveniment/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-esdeveniment.php',
@@ -687,7 +689,7 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    APP_GESTIO . $url['historia'] . '/fitxa-personatge/{slug}' => [
+    APP_GESTIO . $url['historia'] . '/fitxa-persona/{slug}' => [
         'view' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-persona.php',
         'needs_session' => true,
         'header_footer' => false,
@@ -707,6 +709,15 @@ $routes = [
 
     APP_GESTIO . $url['historia'] . '/fitxa-esdeveniment/{slug}' => [
         'view' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-esdeveniment.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['historia'] . '/fitxa-organitzacio/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-organitzacio.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,

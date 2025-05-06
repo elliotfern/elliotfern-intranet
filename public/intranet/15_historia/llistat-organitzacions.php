@@ -20,9 +20,8 @@
                     <thead class="table-primary">
                         <tr>
                             <th></th>
-                            <th>Autor/a</th>
+                            <th>Organització</th>
                             <th>País</th>
-                            <th>Professió</th>
                             <th>Anys</th>
                             <th></th>
                             <th></th>
@@ -38,7 +37,7 @@
 
 <script>
     function authorsTableLibrary() {
-        const urlAjax = `https://${window.location.host}/api/biblioteca/get/?type=totsAutors`;
+        const urlAjax = `https://${window.location.host}/api/historia/get/?paginaOrganitzacions`;
 
         fetch(urlAjax)
             .then(response => {
@@ -53,26 +52,14 @@
                     data.forEach(author => {
                         html += `<tr>
             <td class="text-center">
-              <a id="${author.id}" title="Author page" href="./fitxa-autor/${author.slug}">
-                <img src="https://media.elliot.cat/img/biblioteca-autor/${author.nameImg}.jpg" style="height:70px">
-              </a>
-            </td>
+              <a id="${author.id}" title="Pàgina" href="https://${window.location.host}/gestio/historia/fitxa-organització/${author.slug}">
+                <img src="https://media.elliot.cat/img/historia-organitzacio/${author.nameImg}.jpg" style="height:70px">
+              </a></td>
+            <td><a id="${author.id}" title="Pàgina" href="https://${window.location.host}/gestio/historia/fitxa-organitzacio/${author.slug}">${author.nomOrg}<a></td>
+            <td>${author.pais_cat}</td>
+            <td>${author.dataDiss && author.dataDiss !== '0' ? `${author.dataFunda} - ${author.dataDiss}` : `${author.dataFunda} - present`}</td>
             <td>
-              <a id="${author.id}" title="Author page" href="./fitxa-autor/${author.slug}">
-                ${author.AutNom} ${author.AutCognom1}
-              </a>
-            </td>
-            <td>
-                ${author.country}
-            </td>
-            <td>
-                ${author.profession}
-            </td>
-            <td>
-             ${!author.yearDie ? author.yearBorn : `${author.yearBorn} - ${author.yearDie}`}
-            </td>
-            <td>
-              <a href="https://${window.location.host}/gestio/persona/modifica-persona/${author.slug}">
+              <a href="https://${window.location.host}/gestio/historia/modificacio-organitzacio/${author.slug}">
                 <button type="button" class="btn btn-sm btn-warning">Modifica</button>
               </a>
             </td>

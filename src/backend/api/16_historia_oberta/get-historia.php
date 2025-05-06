@@ -539,4 +539,129 @@ if (isset($_GET['type']) && $_GET['type'] == 'llistat-articles') {
 
     // Devolver los datos en formato JSON
     echo json_encode($data);
+
+    // 3. Llistat organitzacions
+    // ruta GET => "/api/historia/get/?paginaOrganitzacions"
+} else if (isset($_GET['paginaOrganitzacions'])) {
+
+    $query = "SELECT o.id, o.nomOrg, o.slug, o.orgSig, o.dataFunda, o.dataDiss, c.pais_cat, i.nameImg, o.dateCreated, o.dateModified
+    FROM db_historia_organitzacions AS o
+    LEFT JOIN db_countries AS c ON o.orgPais = c.id
+    LEFT JOIN db_img AS i ON o.img = i.id
+    ORDER BY o.dataFunda";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+    // 3. Pagina detalls organització
+    // ruta GET => "/api/historia/get/?fitxaOrganitzacio=primera-internacional"
+} else if (isset($_GET['fitxaOrganitzacio'])) {
+    $slug = $_GET['fitxaOrganitzacio'];
+
+    $query = "SELECT o.id, o.nomOrg, o.slug, o.orgSig, o.dataFunda, o.dataDiss, ci.city, c.pais_cat, i.nameImg, o.dateCreated, o.dateModified,
+    sp.nomSubEtapa, ph.etapaNom, ot.nomTipus, ip.ideologia, i.alt
+    FROM db_historia_organitzacions AS o
+    LEFT JOIN db_countries AS c ON o.orgPais = c.id
+    LEFT JOIN db_cities AS ci ON o.orgCiutat = ci.id
+    LEFT JOIN db_historia_sub_periode AS sp ON o.orgSubEtapa = sp.id
+    LEFT JOIN db_historia_periode_historic AS ph ON sp.idEtapa = ph.id
+    LEFT JOIN db_historia_organitzacions_tipus AS ot ON o.orgTipus = ot.id
+    LEFT JOIN aux_historia_ideologies_politiques AS ip ON o.orgIdeologia = ip.id
+    LEFT JOIN db_img AS i ON o.img = i.id
+    WHERE o.slug = :slug";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    $stmt->bindParam(':slug', $slug, PDO::PARAM_STR);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+    // 3. Pagina Esdeveniments/organitzacio
+    // ruta GET => "/api/historia/get/?esdevenimentsOrganitzacio=22"
+} else if (isset($_GET['esdevenimentsOrganitzacio'])) {
+    $id = $_GET['esdevenimentsOrganitzacio'];
+
+    $query = "SELECT e.esdeNom AS nom, e.slug, e.esdeDataIAny AS any1, e.esdeDataFAny AS any2, o.id
+    FROM db_historia_esdeveniment_organitzacio AS o
+    LEFT JOIN db_historia_esdeveniments AS e ON o.idEsde = e.id
+    WHERE o.idOrg = :id";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+    // 3. Pagina càrrecs persones/organitzacio
+    // ruta GET => "/api/historia/get/?carrecsPersonesOrganitzacio=22"
+} else if (isset($_GET['carrecsPersonesOrganitzacio'])) {
+    $id = $_GET['carrecsPersonesOrganitzacio'];
+
+    $query = "SELECT CONCAT(p.nom, ' ', p.cognoms, ' (', c.carrecNom, ')') AS nom, c.carrecInici AS any1, c.carrecFi AS any2, c.id, p.slug
+    FROM aux_persones_carrecs AS c
+    LEFT JOIN db_persones AS p ON c.idPersona = p.id
+    WHERE c.idOrg = :id";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
 }

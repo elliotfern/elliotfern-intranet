@@ -245,7 +245,7 @@ if (isset($_GET['esdeveniment'])) {
     $carrecNomIt = !empty($data['carrecNomIt']) ? data_input($data['carrecNomIt']) : ($hasError = false);
     $carrecInici = !empty($data['carrecInici']) ? data_input($data['carrecInici']) : ($hasError = true);
     $carrecFi = !empty($data['carrecFi']) ? data_input($data['carrecFi']) : ($hasError = false);
-    $idOrg = !empty($data['idOrg']) ? data_input($data['idOrg']) : ($hasError = true);
+    $idOrg = !empty($data['idOrg']) ? data_input($data['idOrg']) : ($hasError = false);
 
     if (!$hasError) {
         global $conn;

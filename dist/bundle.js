@@ -2770,7 +2770,7 @@ const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_0__.getPageType)(url
 function historiaOberta() {
     if (pageType[3] === 'modifica-article') {
     }
-    else if (pageType[2] === 'fitxa-personatge') {
+    else if (pageType[2] === 'fitxa-persona') {
         (0,_persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_2__.fitxaPersona)('/api/persones/get/?persona=', pageType[3], 'historia-persona', function (data) {
             (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_3__.construirTaula)('taula1', '/api/historia/get/?carrecsPersona=', data.id, ['Càrrec', 'Organització', 'Anys', 'Accions'], function (fila, columna) {
                 if (columna.toLowerCase() === 'càrrec') {

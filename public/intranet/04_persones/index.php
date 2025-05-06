@@ -144,7 +144,7 @@
                                 break;
                             case 4:
                                 dirImg = 'historia-persona';
-                                dirUrl = 'historia/fitxa-personatge';
+                                dirUrl = 'historia/fitxa-persona';
                                 break;
                             case 5:
                                 dirImg = 'politic';
