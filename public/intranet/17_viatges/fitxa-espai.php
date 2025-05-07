@@ -77,15 +77,22 @@ foreach ($data as $row) {
                     </div>
                 </div>
 
-                <hr>
-                <div class="container" style="padding:20px;background-color:#ececec;margin-top:25px;margin-bottom:25px">
-                    <h4>Descripció de l'espai</h4>
-                    <span id="descripcio"><?php echo $EspDescripcio ?></span>
-                </div>
+            </div>
 
-                <!-- Contenedor del mapa -->
-                <div id="map" style="width: 100%; height:500px;"></div>
+            <hr>
+            <div class="container" style="padding:20px;background-color:#ececec;margin-top:25px;margin-bottom:25px">
+                <h4>Descripció de l'espai</h4>
+                <span id="descripcio"><?php echo $EspDescripcio ?></span>
+            </div>
 
+            <!-- Contenedor del mapa -->
+            <div id="map" style="width: 100%; height:500px;"></div>
+
+            <hr>
+            <h4>Visites realitzades en aquest espai:</h4>
+
+            <div class="table-responsive">
+                <table id="taula1" class="table table-striped"></table>
             </div>
         </div>
     </main>
@@ -108,4 +115,114 @@ foreach ($data as $row) {
     L.marker([lat, lon]).addTo(map)
         .bindPopup("<b><?php echo $nom ?></b><br><?php echo $city ?>")
         .openPopup();
+
+    // altres operacions
+
+    obtenerDatos("/api/viatges/get/?llistatVisitesEspai=" + <?php echo $id; ?>, "taula1", "Viatge", "viatge", "organitzacio");
+
+    // Función para obtener datos de la API y luego crear la tabla
+    function obtenerDatos(url, taula, columna1, urlFitxa, urlFitxa2) {
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta de la API');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Llamamos a la función para crear la tabla con los datos obtenidos
+                crearTabla(data, taula, columna1, urlFitxa, urlFitxa2);
+            })
+            .catch(error => {
+                console.error('Hubo un problema con la solicitud fetch:', error);
+            });
+    }
+
+    function crearTabla(datos, taula, columna1, urlFitxa, urlFitxa2) {
+        // Obtener el div donde se insertará la tabla
+        const taula1 = document.getElementById(taula);
+
+        // Limpiar cualquier contenido previo en taula1 (por si se vuelve a cargar la tabla)
+        taula1.innerHTML = '';
+
+        // Comprobar si los datos están vacíos o si hay un mensaje de error
+        if (datos.length === 0 || datos.error === "No rows found") {
+            // Mostrar mensaje de que no hay datos
+            const mensaje = document.createElement('p');
+            mensaje.textContent = "No hi ha dades per mostrar";
+            taula1.appendChild(mensaje);
+            return; // Salir de la función sin crear la tabla
+        }
+
+        // Crear la tabla
+        const tabla = document.createElement('table');
+        tabla.classList.add('table', 'table-striped');
+
+        // Crear el encabezado de la tabla
+        const thead = document.createElement('thead');
+        thead.classList.add('table-primary');
+        const filaEncabezado = document.createElement('tr');
+        const columnaNom = document.createElement('th');
+        columnaNom.textContent = columna1;
+
+        const columnaAnys = document.createElement('th');
+        columnaAnys.textContent = 'Data';
+
+
+        const columnaAccions = document.createElement('th');
+        columnaAccions.textContent = 'Accions';
+
+        filaEncabezado.appendChild(columnaNom);
+        filaEncabezado.appendChild(columnaAnys);
+        filaEncabezado.appendChild(columnaAccions);
+        thead.appendChild(filaEncabezado);
+
+        // Crear el cuerpo de la tabla
+        const tbody = document.createElement('tbody');
+
+        // Llenar la tabla con los datos recibidos por la API
+        datos.forEach(item => {
+            const fila = document.createElement('tr');
+
+            // Columna "Nom i cognoms"
+            const columnaNomCognoms = document.createElement('td');
+            columnaNomCognoms.innerHTML = `<a href="${window.location.origin}/gestio/viatges/fitxa-${urlFitxa}/${item.slug}">${item.nom}</a>`;
+
+            // Anys
+            const anys = document.createElement('td');
+
+            // Convertir la fecha
+
+            // Array con los meses en catalán
+            const mesesCatalan = [
+                'gener', 'febrer', 'març', 'abril', 'maig', 'juny', 'juliol', 'agost', 'setembre', 'octubre', 'novembre', 'desembre'
+            ];
+
+            // Convertir la fecha
+            let fecha = new Date(item.any1);
+            let dia = ('0' + fecha.getDate()).slice(-2); // Obtener el día y asegurar que tenga 2 dígitos
+            let mes = mesesCatalan[fecha.getMonth()]; // Obtener el nombre del mes en catalán
+            let año = fecha.getFullYear(); // Obtener el año
+
+            let fechaFormateada = `${dia} ${mes} ${año}`; // Formato final
+            anys.innerHTML = `${fechaFormateada}`;
+
+            // Columna "Accions" (ejemplo con botones de editar y eliminar)
+            const columnaAccions = document.createElement('td');
+            columnaAccions.innerHTML = `<a href="https://${window.location.host}/gestio/viatges/modifica-${urlFitxa}-${urlFitxa2}/${item.id}">
+                <button type="button" class="button btn-petit">Modifica</button>`;
+
+            fila.appendChild(columnaNomCognoms);
+            fila.appendChild(anys);
+            fila.appendChild(columnaAccions);
+            tbody.appendChild(fila);
+        });
+
+        // Añadir el encabezado y el cuerpo de la tabla a la tabla principal
+        tabla.appendChild(thead);
+        tabla.appendChild(tbody);
+
+        // Añadir la tabla al div taula1
+        taula1.appendChild(tabla);
+    }
 </script>

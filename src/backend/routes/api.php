@@ -49,6 +49,8 @@ $base_routes = [
     // 04- Persones
     '/api/persones/get' => 'src/backend/api/04_persones/get-persones.php',
 
+    // 17. VIATGES
+    '/api/viatges/get' => 'src/backend/api/17_viatges/get-viatges.php',
 
 ];
 
@@ -308,6 +310,14 @@ $routes = [
         'apiSenseHTML' => true
     ],
 
+    // 17. VIATGES
+    '/api/viatges/get' => [
+        'view' => 'src/backend/api/17_viatges/get-viatges.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
 
 ];
 
