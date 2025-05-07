@@ -140,7 +140,7 @@ $slug = $routeParams[0];
                     }
 
                     obtenerDatos("/api/historia/get/?esdevenimentsOrganitzacio=" + data.id, "taula1", "Esdeveniment", "esdeveniment", "organitzacio");
-                    obtenerDatos("/api/historia/get/?carrecsPersonesOrganitzacio=" + data.id, "taula2", "Organització", "persona", "carrec");
+                    obtenerDatos("/api/historia/get/?carrecsPersonesOrganitzacio=" + data.id, "taula2", "Persona", "persona", "carrec");
 
                 } catch (error) {
                     console.error('Error al parsear JSON:', error);

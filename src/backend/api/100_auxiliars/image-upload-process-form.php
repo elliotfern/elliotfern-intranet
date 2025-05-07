@@ -102,15 +102,18 @@ if (!move_uploaded_file($file['tmp_name'], $targetFile)) {
 // Insertar datos en la base de datos
 try {
     $nameImg = pathinfo($uniqueName, PATHINFO_FILENAME);
-    $alt = htmlspecialchars($_POST['alt'] ?? '', ENT_QUOTES, 'UTF-8');
+
+    $nom = !empty($_POST['nom']) ? data_input($_POST['nom']) : ($hasError = true);
+    $alt = !empty($_POST['alt']) ? data_input($_POST['alt']) : ($hasError = true);
     $dateCreated = date('Y-m-d');
 
     // Usar una conexión global para PDO
     global $conn;
-    $sql = "INSERT INTO db_img (nameImg, typeImg, alt, dateCreated) 
-            VALUES (:nameImg, :typeImg, :alt, :dateCreated)";
+    $sql = "INSERT INTO db_img (nameImg, typeImg, alt, nom, dateCreated) 
+            VALUES (:nameImg, :typeImg, :alt, :nom, :dateCreated)";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":nameImg", $nameImg, PDO::PARAM_STR);
+    $stmt->bindParam(":nom", $nom, PDO::PARAM_STR);
     $stmt->bindParam(":typeImg", $type, PDO::PARAM_INT);
     $stmt->bindParam(":alt", $alt, PDO::PARAM_STR);
     $stmt->bindParam(":dateCreated", $dateCreated, PDO::PARAM_STR);

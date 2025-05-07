@@ -357,7 +357,6 @@ if (isset($_GET['esdeveniment'])) {
             orgTipus = :orgTipus,
             orgIdeologia = :orgIdeologia,
             img = :img,
-            dateCreated = :dateCreated,
             dateModified = :dateModified
             WHERE id = :id";
 
@@ -377,7 +376,6 @@ if (isset($_GET['esdeveniment'])) {
         $stmt->bindParam(":orgTipus", $orgTipus, PDO::PARAM_INT);
         $stmt->bindParam(":orgIdeologia", $orgIdeologia, PDO::PARAM_INT);
         $stmt->bindParam(":img", $img, PDO::PARAM_INT);
-        $stmt->bindParam(":dateCreated", $dateCreated, PDO::PARAM_STR);
         $stmt->bindParam(":dateModified", $dateModified, PDO::PARAM_STR);
         $stmt->bindParam(":id", $id, PDO::PARAM_STR);
 

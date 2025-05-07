@@ -13,7 +13,17 @@
 
   <form method="POST" action="" id="uploadImgForm" class="row g-3">
 
+    <?php $timestamp = date('Y-m-d'); ?>
+    <input type="hidden" name="dateCreated" id="dateCreated" value="'<?php echo $timestamp; ?>'">
+
     <div class="col-md-4">
+      <label>Nom:</label>
+      <input class="form-control" type="text" name="nom" id="nom">
+      <label style="color:#dc3545">* Obligatori </label>
+    </div>
+
+    <div class="col-md-4">
+      <label>Categoria de la imatge:</label>
       <select class="form-select" id="typeImg" name="typeImg">
         <option selected>Selecciona el tipus d'imatge</option>
         <option value="1">Biblioteca llibres: autor</option>
@@ -35,17 +45,25 @@
       </select>
     </div>
 
-    <?php $timestamp = date('Y-m-d'); ?>
-    <input type="hidden" name="dateCreated" id="dateCreated" value="'<?php echo $timestamp; ?>'">
-
     <div class="col-md-4">
-      <input class="form-control" type="text" name="alt" id="alt" placeholder="Image title">
-      <label style="color:#dc3545">* Obligatori </label>
+    </div>
+
+    <div class="col-md-12">
+      <label>Descripció de la imatge:</label>
+      <textarea id="alt" name="alt" rows="5" cols="50" value=""> </textarea>
     </div>
 
     <div class="col-md-4">
+      <label>Fitxer:</label>
       <input class="form-control" type="file" id="fileToUpload" name="fileToUpload">
     </div>
+
+    <div class="col-md-4">
+    </div>
+
+    <div class="col-md-4">
+    </div>
+
 
     <div class="container" style="margin-top:25px">
       <div class="row">

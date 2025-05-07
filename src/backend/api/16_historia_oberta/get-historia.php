@@ -229,9 +229,9 @@ if (isset($_GET['type']) && $_GET['type'] == 'llistat-articles') {
     // 5. Llistat subetapes
 } else if (isset($_GET['llistatSubEtapes'])) {
 
-    $query = "SELECT s.id, s.nomSubEtapa
+    $query = "SELECT s.id, CONCAT(s.anyInici, '-',  LEFT(s.nomSubEtapa, 30)) AS nomSubEtapa
     FROM db_historia_sub_periode AS s
-    ORDER BY s.nomSubEtapa ASC";
+    ORDER BY s.anyInici ASC";
 
     // Preparar la consulta
     $stmt = $conn->prepare($query);
@@ -613,7 +613,8 @@ if (isset($_GET['type']) && $_GET['type'] == 'llistat-articles') {
     $query = "SELECT e.esdeNom AS nom, e.slug, e.esdeDataIAny AS any1, e.esdeDataFAny AS any2, o.id
     FROM db_historia_esdeveniment_organitzacio AS o
     LEFT JOIN db_historia_esdeveniments AS e ON o.idEsde = e.id
-    WHERE o.idOrg = :id";
+    WHERE o.idOrg = :id
+    ORDER BY e.esdeDataIAny ASC";
 
     // Preparar la consulta
     $stmt = $conn->prepare($query);
@@ -643,7 +644,8 @@ if (isset($_GET['type']) && $_GET['type'] == 'llistat-articles') {
     $query = "SELECT CONCAT(p.nom, ' ', p.cognoms, ' (', c.carrecNom, ')') AS nom, c.carrecInici AS any1, c.carrecFi AS any2, c.id, p.slug
     FROM aux_persones_carrecs AS c
     LEFT JOIN db_persones AS p ON c.idPersona = p.id
-    WHERE c.idOrg = :id";
+    WHERE c.idOrg = :id
+    ORDER BY c.carrecInici";
 
     // Preparar la consulta
     $stmt = $conn->prepare($query);
@@ -669,9 +671,10 @@ if (isset($_GET['type']) && $_GET['type'] == 'llistat-articles') {
     // ruta GET => "/api/historia/get/?llistatImatgesOrganitzacions"
 } else if (isset($_GET['llistatImatgesOrganitzacions'])) {
 
-    $query = "SELECT i.id, i.alt
+    $query = "SELECT i.id, i.nom
     FROM db_img AS i
-    WHERE i.typeImg = 6";
+    WHERE i.typeImg = 6
+    ORDER BY i.nom DESC";
 
     // Preparar la consulta
     $stmt = $conn->prepare($query);
