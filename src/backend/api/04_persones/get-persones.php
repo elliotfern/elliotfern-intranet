@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         $autorSlug = $_GET['persona'];
         global $conn;
         $data = array();
-        $stmt = $conn->prepare("SELECT a.id, a.cognoms, a.nom, p.pais_cat, a.anyNaixement, a.anyDefuncio, p.id AS idPais, o.professio_ca, i.nameImg, a.web, a.dateCreated, a.dateModified, a.descripcio, a.slug, a.img AS idImg, a.ocupacio AS idOcupacio, a.grup AS idGrup,
+        $stmt = $conn->prepare("SELECT a.id, a.cognoms, a.nom, p.pais_cat, a.anyNaixement, a.anyDefuncio, p.id AS idPais, o.professio_ca, i.nameImg, i.alt, a.web, a.dateCreated, a.dateModified, a.descripcio, a.slug, a.img AS idImg, a.ocupacio AS idOcupacio, a.grup AS idGrup,
         a.sexe AS idSexe, a.mesNaixement, a.diaNaixement, a.mesDefuncio, a.diaDefuncio, c1.city AS ciutatNaixement, c2.city AS ciutatDefuncio, a.descripcioCast, a.descripcioEng, a.descripcioIt, a.ciutatNaixement AS idCiutatNaixement, a.ciutatDefuncio AS idCiutatDefuncio
                 FROM db_persones AS a
                 LEFT JOIN db_countries AS p ON a.paisAutor = p.id

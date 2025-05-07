@@ -21,6 +21,7 @@ $slug = $routeParams[0];
 
                 <div class='columna imatge'>
                     <img id="nameImg" src='' class='img-thumbnail' alt='Imatge' title='Imatge'>
+                    <p><span id="alt" style="font-size:12px"></span> </p>
                 </div>
 
                 <div class="columna">

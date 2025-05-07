@@ -17,6 +17,7 @@
 
                 <div class='columna imatge'>
                     <img id="nameImg" src='' class='img-thumbnail' alt='Imatge' title='Imatge'>
+                    <p><span id="alt"></span> </p>
                 </div>
 
                 <div class="columna">

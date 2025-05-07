@@ -36,8 +36,10 @@ export async function fitxaPersona(url: string, id: string, tipus: string, callb
     // Transformació de les dades
     // 1. Imatge
     const imgElement = document.getElementById('nameImg');
-    if (imgElement) {
+    const altElement = document.getElementById('alt');
+    if (imgElement && altElement) {
       (imgElement as HTMLImageElement).src = `https://media.elliot.cat/img/${tipus}/${data.nameImg}.jpg`;
+      altElement.innerHTML = `${data.alt}`;
     }
 
     const nomElement = document.getElementById('nom');

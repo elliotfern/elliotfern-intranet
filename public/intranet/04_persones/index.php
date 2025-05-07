@@ -24,6 +24,9 @@
                 <button class="filter-btn" id="filter-all" onclick="clearFilter()">Mostrar Tots</button>
             </div>
 
+            <!-- Campo de búsqueda -->
+            <input type="text" id="searchInput" placeholder="Buscar..." class="search-input">
+
             <style>
                 .filter-buttons {
                     text-align: center;
@@ -60,6 +63,15 @@
                     background-color: #007bff;
                     color: white;
                 }
+
+                .search-input {
+                    padding: 10px;
+                    margin-bottom: 20px;
+                    width: 100%;
+                    font-size: 16px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                }
             </style>
 
             <div class="table-responsive">
@@ -90,9 +102,9 @@
 <script>
     let currentPage = 1;
     const limit = 15;
-    let currentFilter = null; // Variable para almacenar el filtro actual
+    let allAuthors = []; // Variable para almacenar todos los autores
 
-    // Función principal para cargar la tabla
+    // Función para cargar la tabla
     function authorsTableLibrary(page = 1, group = null) {
         currentPage = page; // Actualiza la página actual
         currentFilter = group; // Establece el filtro actual
@@ -109,7 +121,7 @@
             document.getElementById('filter-all').classList.add('active');
         }
 
-        let urlAjax = `https://${window.location.host}/api/persones/get/?type=llistatPersones&page=${page}&limit=${limit}`;
+        let urlAjax = `https://${window.location.host}/api/persones/get/?type=llistatPersones&limit=5000`; // Cargar todos los datos
         if (group) {
             urlAjax += `&group=${group}`; // Si hay filtro de grupo, lo agregamos a la URL
         }
@@ -121,69 +133,13 @@
             })
             .then(data => {
                 try {
-                    let html = '';
-                    const totalPages = data.totalPages;
+                    allAuthors = data.data; // Guardar todos los autores
+                    // Filtrar por los autores seleccionados si es necesario
+                    let filteredAuthors = applyGroupFilter(allAuthors, currentFilter);
+                    displayAuthors(filteredAuthors, currentPage);
 
-                    // Construir las filas de la tabla con los datos
-                    data.data.forEach(author => {
-                        let dirImg = 'default-directory';
-                        let dirUrl = '';
-
-                        switch (author.grup) {
-                            case 1:
-                                dirImg = 'biblioteca-autor';
-                                dirUrl = 'biblioteca/fitxa-autor';
-                                break;
-                            case 2:
-                                dirImg = 'cinema-director';
-                                dirUrl = 'cinema/fitxa-director';
-                                break;
-                            case 3:
-                                dirImg = 'cinema-actor';
-                                dirUrl = 'cinema/fitxa-actor';
-                                break;
-                            case 4:
-                                dirImg = 'historia-persona';
-                                dirUrl = 'historia/fitxa-persona';
-                                break;
-                            case 5:
-                                dirImg = 'politic';
-                                dirUrl = 'historia/fitxa-politic';
-                                break;
-                        }
-
-                        const fullImgUrl = `https://media.elliot.cat/img/${dirImg}/${author.nameImg}.jpg`;
-                        const detailUrl = `https://${window.location.host}/gestio/${dirUrl}/${author.slug}`;
-                        const editUrl = `https://${window.location.host}/gestio/base-dades-persones/modifica-persona/${author.slug}`;
-
-                        html += `<tr>
-                        <td class="text-center">
-                            <a id="${author.id}" title="Author page" href="${detailUrl}">
-                                <img src="${fullImgUrl}" style="height:70px">
-                            </a>
-                        </td>
-                        <td>
-                            <a href="${detailUrl}">${author.AutNom} ${author.AutCognom1}</a>
-                        </td>
-                        <td>${author.country || ''}</td>
-                        <td>${author.profession || ''}</td>
-                        <td>${author.yearDie ? `${author.yearBorn} - ${author.yearDie}` : author.yearBorn}</td>
-                        <td>
-                            <a href="${editUrl}">
-                                <button type="button" class="button btn-petit">Modifica</button>
-                            </a>
-                        </td>
-                        <td>
-                            <button type="button" class="button btn-petit">Elimina</button>
-                        </td>
-                    </tr>`;
-                    });
-
-                    // Insertar las filas en la tabla
-                    document.querySelector('#authorsTable tbody').innerHTML = html;
-
-                    // Actualizar el paginador
-                    updatePagination(totalPages, currentPage);
+                    // Actualizar la paginación
+                    updatePagination(data.totalPages, currentPage);
 
                 } catch (error) {
                     console.error('Error al procesar los datos:', error);
@@ -192,18 +148,104 @@
             .catch(error => console.error('Error en la petición:', error));
     }
 
-    // Función para filtrar por grupo
-    function filterByGroup(group) {
-        authorsTableLibrary(1, group); // Llama a la función con el grupo seleccionado y página 1
+    // Función para aplicar el filtro por grupo
+    function applyGroupFilter(authors, group) {
+        if (group === null) return authors;
+        return authors.filter(author => author.grup === group);
     }
 
-    // Función para limpiar el filtro y mostrar todos los resultados
-    function clearFilter() {
-        authorsTableLibrary(1, null); // Llama a la función sin filtro
+    // Función para mostrar los autores en la tabla
+    function displayAuthors(authors, page = 1) {
+        const start = (page - 1) * limit;
+        const end = start + limit;
+        const authorsToShow = authors.slice(start, end); // Obtener solo los autores para la página actual
+
+        let html = '';
+        authorsToShow.forEach(author => {
+            let dirImg = 'default-directory';
+            let dirUrl = '';
+
+            switch (author.grup) {
+                case 1:
+                    dirImg = 'biblioteca-autor';
+                    dirUrl = 'biblioteca/fitxa-autor';
+                    break;
+                case 2:
+                    dirImg = 'cinema-director';
+                    dirUrl = 'cinema/fitxa-director';
+                    break;
+                case 3:
+                    dirImg = 'cinema-actor';
+                    dirUrl = 'cinema/fitxa-actor';
+                    break;
+                case 4:
+                    dirImg = 'historia-persona';
+                    dirUrl = 'historia/fitxa-persona';
+                    break;
+                case 5:
+                    dirImg = 'politic';
+                    dirUrl = 'historia/fitxa-politic';
+                    break;
+            }
+
+            const fullImgUrl = `https://media.elliot.cat/img/${dirImg}/${author.nameImg}.jpg`;
+            const detailUrl = `https://${window.location.host}/gestio/${dirUrl}/${author.slug}`;
+            const editUrl = `https://${window.location.host}/gestio/base-dades-persones/modifica-persona/${author.slug}`;
+
+            html += `<tr>
+        <td class="text-center">
+            <a id="${author.id}" title="Author page" href="${detailUrl}">
+                <img src="${fullImgUrl}" style="height:70px">
+            </a>
+        </td>
+        <td>
+            <a href="${detailUrl}">${author.AutNom} ${author.AutCognom1}</a>
+        </td>
+        <td>${author.country || ''}</td>
+        <td>${author.profession || ''}</td>
+        <td>${author.yearDie ? `${author.yearBorn} - ${author.yearDie}` : author.yearBorn}</td>
+        <td>
+            <a href="${editUrl}">
+                <button type="button" class="button btn-petit">Modifica</button>
+            </a>
+        </td>
+        <td>
+            <button type="button" class="button btn-petit">Elimina</button>
+        </td>
+    </tr>`;
+        });
+
+        // Insertar las filas en la tabla
+        document.querySelector('#authorsTable tbody').innerHTML = html;
     }
 
-    // Llamada inicial para cargar la primera página sin filtro
-    authorsTableLibrary(currentPage);
+    // Función para normalizar texto y eliminar acentos
+    function normalizeText(text) {
+        return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
+
+    // Función para filtrar la tabla por nombre o apellido
+    function filterTable() {
+
+        const query = document.getElementById('searchInput').value.toLowerCase(); // Texto de búsqueda
+        const normalizedQuery = normalizeText(query); // Normalizar la búsqueda
+
+        let filteredAuthors = allAuthors.filter(author => {
+            const fullName = `${author.AutNom} ${author.AutCognom1}`.toLowerCase();
+            const normalizedFullName = normalizeText(fullName); // Normalizar el nombre completo
+
+            return normalizedFullName.includes(normalizedQuery); // Compara el nombre sin acentos
+        });
+
+        // Aplicar el filtro de grupo si es necesario
+        filteredAuthors = applyGroupFilter(filteredAuthors, currentFilter);
+
+        // Mostrar los autores filtrados
+        displayAuthors(filteredAuthors, currentPage);
+    }
+
+    // Agregar evento de búsqueda en tiempo real
+    document.getElementById('searchInput').addEventListener('input', filterTable);
 
     // Función para actualizar la paginación
     function updatePagination(totalPages, currentPage) {
@@ -216,9 +258,22 @@
         for (let i = 1; i <= totalPages; i++) {
             const isActive = i === currentPage ? 'current-page' : '';
             paginationHtml += `<a href="javascript:void(0)" class="page-btn ${isActive}" 
-            onclick="authorsTableLibrary(${i}, ${currentFilter})">${i}</a>`;
+        onclick="authorsTableLibrary(${i}, ${currentFilter})">${i}</a>`;
         }
 
         paginationElement.innerHTML = paginationHtml;
     }
+
+    // Función para filtrar por grupo
+    function filterByGroup(group) {
+        authorsTableLibrary(1, group); // Llama a la función con el grupo seleccionado y página 1
+    }
+
+    // Función para limpiar el filtro y mostrar todos los resultados
+    function clearFilter() {
+        authorsTableLibrary(1, null); // Llama a la función sin filtro
+    }
+
+    // Llamada inicial para cargar todos los autores sin filtro ni paginación
+    authorsTableLibrary(currentPage);
 </script>

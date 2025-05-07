@@ -250,11 +250,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         global $conn;
         $data = array();
         $stmt = $conn->prepare(
-            "SELECT i.id, CONCAT(i.alt, ' (', t.name, ')') AS alt
+            "SELECT i.id, CONCAT(i.nom, ' (', t.name, ')') AS alt
             FROM db_img AS i
             LEFT JOIN db_img_type AS t ON i.typeImg = t.id
             WHERE i.typeImg IN (1, 5, 9, 14)
-            ORDER BY i.alt"
+            ORDER BY i.nom"
         );
         $stmt->execute();
 
