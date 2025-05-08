@@ -1,14 +1,27 @@
 export function formatData(inputDate: string): string {
-  // Analizar la fecha en formato 'YYYY-MM-DD HH:mm:ss'
-  const date = new Date(inputDate);
+  // Primero intentamos crear una fecha a partir del input
+  let date = new Date(inputDate);
 
-  // Extraer los componentes de la fecha
+  // Si la fecha no es válida, intentamos otros formatos
+  if (isNaN(date.getTime())) {
+    // Intenta parsear formato YYYY/MM/DD
+    date = new Date(inputDate.replace(/-/g, '/'));
+
+    // Si sigue siendo inválido, intentamos un timestamp
+    if (isNaN(date.getTime())) {
+      return 'Data no vàlida';
+    }
+  }
+
+  // Verifica si la fecha es de tipo '0000-00-00'
+  if (inputDate === '0000-00-00') {
+    return 'Data no vàlida';
+  }
+
+  // Extrae los componentes de la fecha
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = date.getFullYear();
 
-  // Formatear la fecha en formato 'DD-MM-YYYY'
-  const formattedDate = `${day}-${month}-${year}`;
-
-  return formattedDate;
+  return `${day}-${month}-${year}`;
 }

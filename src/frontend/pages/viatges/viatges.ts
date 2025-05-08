@@ -1,5 +1,7 @@
 import { getPageType } from '../../utils/urlPath';
 import { transmissioDadesDB } from '../../utils/actualitzarDades';
+import { taulaLlistatViatges } from './taulaLlistatViatges';
+import { taulaLlistatEspaisViatges } from './taulaLlistatEspaisViatge';
 
 const url = window.location.href;
 const pageType = getPageType(url);
@@ -21,5 +23,9 @@ export function viatges() {
         transmissioDadesDB(event, 'POST', 'formEspai', '/api/viatges/post/?espai');
       });
     }
+  } else if (pageType[2] === 'llistat-viatges') {
+    taulaLlistatViatges();
+  } else if (pageType[2] === 'fitxa-viatge') {
+    taulaLlistatEspaisViatges();
   }
 }

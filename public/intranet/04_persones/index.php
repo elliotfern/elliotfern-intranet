@@ -28,42 +28,6 @@
             <input type="text" id="searchInput" placeholder="Buscar..." class="search-input">
 
             <style>
-                .filter-buttons {
-                    text-align: center;
-                    margin-bottom: 20px;
-                    display: flex;
-                    flex-wrap: wrap;
-                    /* Permite que los botones se distribuyan en varias filas si es necesario */
-                    gap: 10px;
-                    /* Espacio entre los botones en cada fila */
-                }
-
-                .filter-btn {
-                    padding: 10px 20px;
-                    margin: 0 10px;
-                    font-size: 16px;
-                    border: 1px solid #007bff;
-                    background-color: #fff;
-                    color: #007bff;
-                    border-radius: 4px;
-                    cursor: pointer;
-                    transition: background-color 0.3s ease;
-                }
-
-                .filter-btn:hover {
-                    background-color: #007bff;
-                    color: white;
-                }
-
-                .filter-btn:active {
-                    transform: scale(0.95);
-                }
-
-                .active {
-                    background-color: #007bff;
-                    color: white;
-                }
-
                 .search-input {
                     padding: 10px;
                     margin-bottom: 20px;

@@ -19,16 +19,26 @@
 
 #pagination a:hover {
   background-color: #007bff;
-  color: white;
+  color: white !important;
 }
 
 #pagination a.current-page {
   background-color: #007bff;
-  color: white;
+  color: white !important;
   font-weight: bold;
   border: 1px solid #0056b3;
 }
 
 #pagination a:active {
   transform: scale(0.95);
+}
+
+#pagination a.pagination-link {
+  display: inline-block;
+  padding: 8px 12px;
+  margin: 0 5px;
+  text-decoration: none;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }

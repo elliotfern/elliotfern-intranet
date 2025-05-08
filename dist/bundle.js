@@ -135,7 +135,40 @@ button {
     width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */
   }
 }
-`, "",{"version":3,"sources":["webpack://./src/frontend/estils/botons.css"],"names":[],"mappings":"AAAA,0BAA0B;AAC1B;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,oBAAoB;AACtB;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,oBAAoB;AACtB;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,eAAe;AACjB;;AAEA;EACE,eAAe;EACf,YAAY;AACd;;AAEA;EACE,sBAAsB;EACtB,iBAAiB;EACjB,YAAY;AACd;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,YAAY;EACZ,kBAAkB;AACpB;;AAEA,mBAAmB;AACnB;EACE,WAAW;EACX,aAAa;EACb,kBAAkB;EAClB,eAAe;EACf,iCAAiC;EACjC,YAAY;EACZ,eAAe;AACjB;;AAEA,4BAA4B;AAC5B;EACE,yBAAyB,EAAE,SAAS;EACpC,mBAAmB;EACnB,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;EAC/C,YAAY;EACZ,qBAAqB;AACvB;;AAEA,kCAAkC;AAClC;EACE,sBAAsB;EACtB,eAAe;EACf,yBAAyB,EAAE,SAAS;EACpC,YAAY;EACZ,YAAY;EACZ,kBAAkB;EAClB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,iBAAiB;EACjB,iBAAiB;AACnB;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;AACjD;;AAEA,wFAAwF;AACxF;EACE;;IAEE,WAAW,EAAE,6DAA6D;EAC5E;AACF","sourcesContent":["/* Ajustes para el botón */\nbutton {\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n  padding: 0.6rem 1rem;\n}\n\n.button {\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n  padding: 0.6rem 1rem;\n}\n\n.btn {\n  padding: 10px 20px;\n  font-size: 16px;\n  text-align: center;\n  cursor: pointer;\n}\n\n.btn-gran {\n  font-size: 1rem;\n  border: none;\n}\n\n.btn-petit {\n  padding: 0.4rem 0.6rem;\n  font-size: 0.7rem;\n  border: none;\n}\n\n.btn-primari {\n  background-color: #081b2e;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-primari:hover {\n  background-color: #0056b3;\n  transform: scale(1.1);\n}\n\n.btn-secondari {\n  background-color: #b93a08;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-secondari:hover {\n  background-color: #d60a03;\n  transform: scale(1.1);\n}\n\n.btn-secondary {\n  background-color: #6c757d;\n  border: none;\n  color: white;\n  border-radius: 3px;\n}\n\n/* Botón de envío */\n.btn-color-negre {\n  width: 100%;\n  padding: 10px;\n  border-radius: 3px;\n  font-size: 16px;\n  background-color: rgb(43, 42, 42);\n  color: white;\n  cursor: pointer;\n}\n\n/* Botón Atrás (izquierda) */\n.btn-enrere {\n  background-color: #aaaaaa; /* Gris */\n  color: rgb(0, 0, 0);\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-enrere:hover {\n  background-color: #000000; /* Gris más oscuro */\n  color: white;\n  transform: scale(1.1);\n}\n\n/* Botón Crear factura (derecha) */\n.btn-primary {\n  padding: 0.8rem 1.5rem;\n  font-size: 1rem;\n  background-color: #007bff; /* Azul */\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n}\n\n.dreta {\n  text-align: right;\n  margin-left: auto;\n}\n\n.btn-primary:hover {\n  background-color: #0056b3; /* Azul más oscuro */\n}\n\n/* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */\n@media (max-width: 768px) {\n  .btn-back,\n  .btn-primary {\n    width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */\n  }\n}\n"],"sourceRoot":""}]);
+
+/* Botons filtre */
+.filter-buttons {
+  text-align: center;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid #007bff;
+  background-color: #fff;
+  color: #007bff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-btn:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.filter-btn:active {
+  transform: scale(0.95);
+}
+
+.filter-btn.active {
+  background-color: #007bff;
+  color: white;
+}`, "",{"version":3,"sources":["webpack://./src/frontend/estils/botons.css"],"names":[],"mappings":"AAAA,0BAA0B;AAC1B;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,oBAAoB;AACtB;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,oBAAoB;AACtB;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,eAAe;AACjB;;AAEA;EACE,eAAe;EACf,YAAY;AACd;;AAEA;EACE,sBAAsB;EACtB,iBAAiB;EACjB,YAAY;AACd;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,YAAY;EACZ,kBAAkB;AACpB;;AAEA,mBAAmB;AACnB;EACE,WAAW;EACX,aAAa;EACb,kBAAkB;EAClB,eAAe;EACf,iCAAiC;EACjC,YAAY;EACZ,eAAe;AACjB;;AAEA,4BAA4B;AAC5B;EACE,yBAAyB,EAAE,SAAS;EACpC,mBAAmB;EACnB,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;EAC/C,YAAY;EACZ,qBAAqB;AACvB;;AAEA,kCAAkC;AAClC;EACE,sBAAsB;EACtB,eAAe;EACf,yBAAyB,EAAE,SAAS;EACpC,YAAY;EACZ,YAAY;EACZ,kBAAkB;EAClB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,iBAAiB;EACjB,iBAAiB;AACnB;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;AACjD;;AAEA,wFAAwF;AACxF;EACE;;IAEE,WAAW,EAAE,6DAA6D;EAC5E;AACF;;AAEA,kBAAkB;AAClB;EACE,kBAAkB;EAClB,mBAAmB;EACnB,aAAa;EACb,eAAe;EACf,SAAS;AACX;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,yBAAyB;EACzB,sBAAsB;EACtB,cAAc;EACd,kBAAkB;EAClB,eAAe;EACf,sCAAsC;AACxC;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd;;AAEA;EACE,sBAAsB;AACxB;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd","sourcesContent":["/* Ajustes para el botón */\nbutton {\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n  padding: 0.6rem 1rem;\n}\n\n.button {\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n  padding: 0.6rem 1rem;\n}\n\n.btn {\n  padding: 10px 20px;\n  font-size: 16px;\n  text-align: center;\n  cursor: pointer;\n}\n\n.btn-gran {\n  font-size: 1rem;\n  border: none;\n}\n\n.btn-petit {\n  padding: 0.4rem 0.6rem;\n  font-size: 0.7rem;\n  border: none;\n}\n\n.btn-primari {\n  background-color: #081b2e;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-primari:hover {\n  background-color: #0056b3;\n  transform: scale(1.1);\n}\n\n.btn-secondari {\n  background-color: #b93a08;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-secondari:hover {\n  background-color: #d60a03;\n  transform: scale(1.1);\n}\n\n.btn-secondary {\n  background-color: #6c757d;\n  border: none;\n  color: white;\n  border-radius: 3px;\n}\n\n/* Botón de envío */\n.btn-color-negre {\n  width: 100%;\n  padding: 10px;\n  border-radius: 3px;\n  font-size: 16px;\n  background-color: rgb(43, 42, 42);\n  color: white;\n  cursor: pointer;\n}\n\n/* Botón Atrás (izquierda) */\n.btn-enrere {\n  background-color: #aaaaaa; /* Gris */\n  color: rgb(0, 0, 0);\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-enrere:hover {\n  background-color: #000000; /* Gris más oscuro */\n  color: white;\n  transform: scale(1.1);\n}\n\n/* Botón Crear factura (derecha) */\n.btn-primary {\n  padding: 0.8rem 1.5rem;\n  font-size: 1rem;\n  background-color: #007bff; /* Azul */\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n}\n\n.dreta {\n  text-align: right;\n  margin-left: auto;\n}\n\n.btn-primary:hover {\n  background-color: #0056b3; /* Azul más oscuro */\n}\n\n/* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */\n@media (max-width: 768px) {\n  .btn-back,\n  .btn-primary {\n    width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */\n  }\n}\n\n/* Botons filtre */\n.filter-buttons {\n  text-align: center;\n  margin-bottom: 20px;\n  display: flex;\n  flex-wrap: wrap;\n  gap: 10px;\n}\n\n.filter-btn {\n  padding: 10px 20px;\n  font-size: 16px;\n  border: 1px solid #007bff;\n  background-color: #fff;\n  color: #007bff;\n  border-radius: 4px;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n}\n\n.filter-btn:hover {\n  background-color: #007bff;\n  color: white;\n}\n\n.filter-btn:active {\n  transform: scale(0.95);\n}\n\n.filter-btn.active {\n  background-color: #007bff;\n  color: white;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1359,12 +1392,12 @@ ___CSS_LOADER_EXPORT___.push([module.id, `#pagination {
 
 #pagination a:hover {
   background-color: #007bff;
-  color: white;
+  color: white !important;
 }
 
 #pagination a.current-page {
   background-color: #007bff;
-  color: white;
+  color: white !important;
   font-weight: bold;
   border: 1px solid #0056b3;
 }
@@ -1372,7 +1405,17 @@ ___CSS_LOADER_EXPORT___.push([module.id, `#pagination {
 #pagination a:active {
   transform: scale(0.95);
 }
-`, "",{"version":3,"sources":["webpack://./src/frontend/estils/paginacio.css"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,gBAAgB;EAChB,aAAa;EACb,eAAe,EAAE,2EAA2E;EAC5F,SAAS,EAAE,2CAA2C;AACxD;;AAEA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,aAAa;EACb,qBAAqB;EACrB,cAAc;EACd,yBAAyB;EACzB,kBAAkB;EAClB,yBAAyB;AAC3B;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,iBAAiB;EACjB,yBAAyB;AAC3B;;AAEA;EACE,sBAAsB;AACxB","sourcesContent":["#pagination {\n  text-align: center;\n  margin-top: 20px;\n  display: flex;\n  flex-wrap: wrap; /* Permite que los botones se distribuyan en varias filas si es necesario */\n  gap: 10px; /* Espacio entre los botones en cada fila */\n}\n\n#pagination a {\n  display: inline-block;\n  padding: 8px 12px;\n  margin: 0 5px;\n  text-decoration: none;\n  color: #007bff;\n  border: 1px solid #007bff;\n  border-radius: 4px;\n  transition: all 0.3s ease;\n}\n\n#pagination a:hover {\n  background-color: #007bff;\n  color: white;\n}\n\n#pagination a.current-page {\n  background-color: #007bff;\n  color: white;\n  font-weight: bold;\n  border: 1px solid #0056b3;\n}\n\n#pagination a:active {\n  transform: scale(0.95);\n}\n"],"sourceRoot":""}]);
+
+#pagination a.pagination-link {
+  display: inline-block;
+  padding: 8px 12px;
+  margin: 0 5px;
+  text-decoration: none;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/paginacio.css"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,gBAAgB;EAChB,aAAa;EACb,eAAe,EAAE,2EAA2E;EAC5F,SAAS,EAAE,2CAA2C;AACxD;;AAEA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,aAAa;EACb,qBAAqB;EACrB,cAAc;EACd,yBAAyB;EACzB,kBAAkB;EAClB,yBAAyB;AAC3B;;AAEA;EACE,yBAAyB;EACzB,uBAAuB;AACzB;;AAEA;EACE,yBAAyB;EACzB,uBAAuB;EACvB,iBAAiB;EACjB,yBAAyB;AAC3B;;AAEA;EACE,sBAAsB;AACxB;;AAEA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,aAAa;EACb,qBAAqB;EACrB,yBAAyB;EACzB,kBAAkB;EAClB,yBAAyB;AAC3B","sourcesContent":["#pagination {\n  text-align: center;\n  margin-top: 20px;\n  display: flex;\n  flex-wrap: wrap; /* Permite que los botones se distribuyan en varias filas si es necesario */\n  gap: 10px; /* Espacio entre los botones en cada fila */\n}\n\n#pagination a {\n  display: inline-block;\n  padding: 8px 12px;\n  margin: 0 5px;\n  text-decoration: none;\n  color: #007bff;\n  border: 1px solid #007bff;\n  border-radius: 4px;\n  transition: all 0.3s ease;\n}\n\n#pagination a:hover {\n  background-color: #007bff;\n  color: white !important;\n}\n\n#pagination a.current-page {\n  background-color: #007bff;\n  color: white !important;\n  font-weight: bold;\n  border: 1px solid #0056b3;\n}\n\n#pagination a:active {\n  transform: scale(0.95);\n}\n\n#pagination a.pagination-link {\n  display: inline-block;\n  padding: 8px 12px;\n  margin: 0 5px;\n  text-decoration: none;\n  border: 1px solid #007bff;\n  border-radius: 4px;\n  transition: all 0.3s ease;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3159,6 +3202,111 @@ function vault() {
 
 /***/ }),
 
+/***/ "./src/frontend/pages/viatges/taulaLlistatEspaisViatge.ts":
+/*!****************************************************************!*\
+  !*** ./src/frontend/pages/viatges/taulaLlistatEspaisViatge.ts ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   taulaLlistatEspaisViatges: () => (/* binding */ taulaLlistatEspaisViatges)
+/* harmony export */ });
+/* harmony import */ var _services_api_taulaRender__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../services/api/taulaRender */ "./src/frontend/services/api/taulaRender.ts");
+/* harmony import */ var _utils_formataData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/formataData */ "./src/frontend/utils/formataData.ts");
+/* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
+
+
+
+const url = window.location.href;
+const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_2__.getPageType)(url);
+function taulaLlistatEspaisViatges() {
+    const slug = pageType[3];
+    (0,_services_api_taulaRender__WEBPACK_IMPORTED_MODULE_0__.renderDynamicTable)({
+        url: `https://${window.location.host}/api/viatges/get/?llistatEspaisViatge=${slug}`,
+        containerId: 'taulaLlistatEspaisViatge',
+        columns: [
+            {
+                header: 'Espai',
+                field: 'viatge',
+                render: (_, row) => `<a href="https://${window.location.host}/gestio/viatges/fitxa-espai/${row.slug}">${row.nom}</a>`,
+            },
+            { header: 'Ciutat', field: 'city' },
+            {
+                header: 'Data visita',
+                field: 'dataVisita',
+                render: (_, row) => {
+                    const inici = (0,_utils_formataData__WEBPACK_IMPORTED_MODULE_1__.formatData)(row.dataVisita);
+                    return `${inici}`;
+                },
+            },
+            {
+                header: 'Accions',
+                field: 'id',
+                render: (_, row) => `
+                    <a href="https://${window.location.host}/gestio/viatges/modifica-viatge/${row.id}">
+                        <button class="btn-petit">Modifica</button></a>`,
+            },
+        ],
+        filterKeys: ['viatge', 'city'],
+        filterByField: 'city',
+    });
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/pages/viatges/taulaLlistatViatges.ts":
+/*!***********************************************************!*\
+  !*** ./src/frontend/pages/viatges/taulaLlistatViatges.ts ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   taulaLlistatViatges: () => (/* binding */ taulaLlistatViatges)
+/* harmony export */ });
+/* harmony import */ var _services_api_taulaRender__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../services/api/taulaRender */ "./src/frontend/services/api/taulaRender.ts");
+/* harmony import */ var _utils_formataData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/formataData */ "./src/frontend/utils/formataData.ts");
+
+
+function taulaLlistatViatges() {
+    (0,_services_api_taulaRender__WEBPACK_IMPORTED_MODULE_0__.renderDynamicTable)({
+        url: `https://${window.location.host}/api/viatges/get/?llistatViatges`,
+        containerId: 'taulaLlistatViatges',
+        columns: [
+            {
+                header: 'Viatge',
+                field: 'viatge',
+                render: (_, row) => `<a href="https://${window.location.host}/gestio/viatges/fitxa-viatge/${row.slug}">${row.viatge}</a>`,
+            },
+            { header: 'Descripció', field: 'descripcio' },
+            { header: 'País', field: 'pais_cat' },
+            {
+                header: 'Data',
+                field: 'dataInici',
+                render: (_, row) => {
+                    const inici = (0,_utils_formataData__WEBPACK_IMPORTED_MODULE_1__.formatData)(row.dataInici);
+                    const fi = row.dataFi && row.dataFi !== '0' ? (0,_utils_formataData__WEBPACK_IMPORTED_MODULE_1__.formatData)(row.dataFi) : 'present';
+                    return `${inici} - ${fi}`;
+                },
+            },
+            {
+                header: 'Accions',
+                field: 'id',
+                render: (_, row) => `
+                    <a href="https://${window.location.host}/gestio/viatges/modifica-viatge/${row.id}">
+                        <button class="btn-petit">Modifica</button></a>`,
+            },
+        ],
+        filterKeys: ['viatge', 'descripcio'],
+        filterByField: 'pais_cat',
+    });
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/pages/viatges/viatges.ts":
 /*!***********************************************!*\
   !*** ./src/frontend/pages/viatges/viatges.ts ***!
@@ -3171,6 +3319,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
 /* harmony import */ var _utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/actualitzarDades */ "./src/frontend/utils/actualitzarDades.ts");
+/* harmony import */ var _taulaLlistatViatges__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./taulaLlistatViatges */ "./src/frontend/pages/viatges/taulaLlistatViatges.ts");
+/* harmony import */ var _taulaLlistatEspaisViatge__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./taulaLlistatEspaisViatge */ "./src/frontend/pages/viatges/taulaLlistatEspaisViatge.ts");
+
+
 
 
 const url = window.location.href;
@@ -3193,6 +3345,12 @@ function viatges() {
                 (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'formEspai', '/api/viatges/post/?espai');
             });
         }
+    }
+    else if (pageType[2] === 'llistat-viatges') {
+        (0,_taulaLlistatViatges__WEBPACK_IMPORTED_MODULE_2__.taulaLlistatViatges)();
+    }
+    else if (pageType[2] === 'fitxa-viatge') {
+        (0,_taulaLlistatEspaisViatge__WEBPACK_IMPORTED_MODULE_3__.taulaLlistatEspaisViatges)();
     }
 }
 
@@ -3271,6 +3429,145 @@ function construirTaula(taulaId, apiUrl, id, columnas, callback) {
     })
         .catch((error) => {
         console.error('Error en la solicitud:', error);
+    });
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/services/api/taulaRender.ts":
+/*!**************************************************!*\
+  !*** ./src/frontend/services/api/taulaRender.ts ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   renderDynamicTable: () => (/* binding */ renderDynamicTable)
+/* harmony export */ });
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+function renderDynamicTable(_a) {
+    return __awaiter(this, arguments, void 0, function* ({ url, columns, containerId, rowsPerPage = 15, filterKeys = [], filterByField }) {
+        const container = document.getElementById(containerId);
+        if (!container)
+            return console.error(`Contenedor #${containerId} no encontrado`);
+        const response = yield fetch(url);
+        const data = yield response.json();
+        let currentPage = 1;
+        let filteredData = [...data];
+        let activeButtonFilter = null;
+        // Crear input de búsqueda
+        const searchInput = document.createElement('input');
+        searchInput.style.marginBottom = '15px';
+        searchInput.placeholder = 'Cercar...';
+        // Crear contenedor de botones de filtro
+        const buttonContainer = document.createElement('div');
+        buttonContainer.className = 'filter-buttons';
+        // Crear tabla y elementos relacionados
+        const table = document.createElement('table');
+        table.classList.add('table', 'table-striped');
+        const thead = document.createElement('thead');
+        thead.classList.add('table-primary');
+        const tbody = document.createElement('tbody');
+        const pagination = document.createElement('div');
+        pagination.id = 'pagination';
+        table.append(thead, tbody);
+        // Normalizador para búsqueda
+        const normalizeText = (text) => text
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase();
+        function applyFilters() {
+            const search = normalizeText(searchInput.value);
+            filteredData = data.filter((row) => !activeButtonFilter || row[filterByField] === activeButtonFilter).filter((row) => (search.length === 0 ? true : filterKeys.some((key) => normalizeText(String(row[key])).includes(search))));
+            currentPage = 1;
+            renderTable();
+        }
+        function renderFilterButtons() {
+            if (!filterByField)
+                return;
+            let uniqueValues = Array.from(new Set(data.map((row) => row[filterByField]))).filter(Boolean);
+            // Ordenar alfabéticamente los valores únicos
+            uniqueValues = uniqueValues.sort((a, b) => a.localeCompare(b, 'ca', { sensitivity: 'base' }));
+            buttonContainer.innerHTML = '';
+            const allButton = document.createElement('button');
+            allButton.textContent = 'Tots';
+            allButton.className = 'filter-btn';
+            allButton.onclick = () => {
+                activeButtonFilter = null;
+                updateActiveButton(allButton);
+                applyFilters();
+            };
+            buttonContainer.appendChild(allButton);
+            uniqueValues.forEach((value) => {
+                const button = document.createElement('button');
+                button.textContent = value;
+                button.className = 'filter-btn';
+                button.onclick = () => {
+                    activeButtonFilter = value;
+                    updateActiveButton(button);
+                    applyFilters();
+                };
+                buttonContainer.appendChild(button);
+            });
+            // Establecer el botón "Tots" como activo por defecto
+            updateActiveButton(allButton);
+        }
+        function updateActiveButton(activeButton) {
+            const buttons = buttonContainer.querySelectorAll('.filter-btn');
+            buttons.forEach((btn) => btn.classList.remove('active'));
+            activeButton.classList.add('active');
+        }
+        function renderTable() {
+            // Cabecera
+            thead.innerHTML = `<tr>${columns.map((col) => `<th>${col.header}</th>`).join('')}</tr>`;
+            // Paginación
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const rowsToShow = filteredData.slice(start, end);
+            tbody.innerHTML = rowsToShow
+                .map((row) => `<tr>${columns
+                .map((col) => {
+                const value = row[col.field];
+                return `<td>${col.render ? col.render(value, row) : value}</td>`;
+            })
+                .join('')}</tr>`)
+                .join('');
+            const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+            pagination.innerHTML = '';
+            for (let i = 1; i <= totalPages; i++) {
+                const link = document.createElement('a');
+                link.textContent = i.toString();
+                link.href = '#';
+                link.className = 'pagination-link' + (i === currentPage ? ' current-page' : '');
+                link.onclick = (e) => {
+                    e.preventDefault();
+                    currentPage = i;
+                    renderTable();
+                };
+                pagination.appendChild(link);
+            }
+        }
+        // Eventos
+        searchInput.addEventListener('input', applyFilters);
+        // Render inicial
+        container.innerHTML = '';
+        container.appendChild(searchInput);
+        if (filterByField) {
+            container.appendChild(buttonContainer);
+            renderFilterButtons();
+        }
+        container.appendChild(table);
+        container.appendChild(pagination);
+        applyFilters(); // inicia renderizado con filtros aplicados
     });
 }
 
@@ -3469,15 +3766,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   formatData: () => (/* binding */ formatData)
 /* harmony export */ });
 function formatData(inputDate) {
-    // Analizar la fecha en formato 'YYYY-MM-DD HH:mm:ss'
-    const date = new Date(inputDate);
-    // Extraer los componentes de la fecha
+    // Primero intentamos crear una fecha a partir del input
+    let date = new Date(inputDate);
+    // Si la fecha no es válida, intentamos otros formatos
+    if (isNaN(date.getTime())) {
+        // Intenta parsear formato YYYY/MM/DD
+        date = new Date(inputDate.replace(/-/g, '/'));
+        // Si sigue siendo inválido, intentamos un timestamp
+        if (isNaN(date.getTime())) {
+            return 'Data no vàlida';
+        }
+    }
+    // Verifica si la fecha es de tipo '0000-00-00'
+    if (inputDate === '0000-00-00') {
+        return 'Data no vàlida';
+    }
+    // Extrae los componentes de la fecha
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
-    // Formatear la fecha en formato 'DD-MM-YYYY'
-    const formattedDate = `${day}-${month}-${year}`;
-    return formattedDate;
+    return `${day}-${month}-${year}`;
 }
 
 

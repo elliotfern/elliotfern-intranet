@@ -168,4 +168,64 @@ if (isset($_GET['llistatVisitesEspai'])) {
 
     // Devolver los datos en formato JSON
     echo json_encode($data);
+
+    // 6. Llistat de viatges
+    // ruta GET => "/api/viatges/get/?llistatViatges"
+} else if (isset($_GET['llistatViatges'])) {
+
+    $query = "SELECT l.id, l.viatge, l.descripcio, l.dataInici, l.dataFi, l.slug, l.pais, c.pais_cat
+            FROM db_viatges_llistat AS l
+            LEFT JOIN db_countries AS c ON l.pais = c.id
+            ORDER BY l.dataInici DESC";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+    // 6. Llistat espais visitats durant un viatge determinat
+    // ruta GET => "/api/viatges/get/?llistatEspaisViatge=perpinya"
+} else if (isset($_GET['llistatEspaisViatge'])) {
+    $slug = $_GET['llistatEspaisViatge'];
+
+    $query = "SELECT p.nom, p.id, v.dataVisita, c.city, p.slug
+            FROM db_travel_places_visited AS v
+            INNER JOIN db_viatges_llistat AS l ON v.idViatge = l.id
+            INNER JOIN db_travel_places AS p ON p.id = v.espId
+            INNER JOIN db_cities AS c ON c.id = idCiutat
+            WHERE l.slug = :slug
+            GROUP BY p.id
+            ORDER BY v.dataVisita";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':slug', $slug, PDO::PARAM_STR);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
 }

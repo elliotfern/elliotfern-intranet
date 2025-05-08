@@ -1,0 +1,155 @@
+type Column = {
+  header: string;
+  field: string;
+  render?: (value: any, row: any) => string;
+};
+
+type RenderTableOptions = {
+  url: string;
+  columns: Column[];
+  containerId: string;
+  rowsPerPage?: number;
+  filterKeys?: string[];
+  filterByField?: string;
+};
+
+export async function renderDynamicTable({ url, columns, containerId, rowsPerPage = 15, filterKeys = [], filterByField }: RenderTableOptions) {
+  const container = document.getElementById(containerId);
+  if (!container) return console.error(`Contenedor #${containerId} no encontrado`);
+
+  const response = await fetch(url);
+  const data: Record<string, any>[] = await response.json();
+
+  let currentPage = 1;
+  let filteredData = [...data];
+  let activeButtonFilter: string | null = null;
+
+  // Crear input de búsqueda
+  const searchInput = document.createElement('input');
+  searchInput.style.marginBottom = '15px';
+  searchInput.placeholder = 'Cercar...';
+
+  // Crear contenedor de botones de filtro
+  const buttonContainer = document.createElement('div');
+  buttonContainer.className = 'filter-buttons';
+
+  // Crear tabla y elementos relacionados
+  const table = document.createElement('table');
+  table.classList.add('table', 'table-striped');
+  const thead = document.createElement('thead');
+  thead.classList.add('table-primary');
+  const tbody = document.createElement('tbody');
+  const pagination = document.createElement('div');
+  pagination.id = 'pagination';
+
+  table.append(thead, tbody);
+
+  // Normalizador para búsqueda
+  const normalizeText = (text: string) =>
+    text
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+
+  function applyFilters() {
+    const search = normalizeText(searchInput.value);
+    filteredData = data.filter((row) => !activeButtonFilter || row[filterByField!] === activeButtonFilter).filter((row) => (search.length === 0 ? true : filterKeys.some((key) => normalizeText(String(row[key])).includes(search))));
+
+    currentPage = 1;
+    renderTable();
+  }
+
+  function renderFilterButtons() {
+    if (!filterByField) return;
+
+    let uniqueValues = Array.from(new Set(data.map((row) => row[filterByField]))).filter(Boolean);
+
+    // Ordenar alfabéticamente los valores únicos
+    uniqueValues = uniqueValues.sort((a, b) => a.localeCompare(b, 'ca', { sensitivity: 'base' }));
+
+    buttonContainer.innerHTML = '';
+
+    const allButton = document.createElement('button');
+    allButton.textContent = 'Tots';
+    allButton.className = 'filter-btn';
+    allButton.onclick = () => {
+      activeButtonFilter = null;
+      updateActiveButton(allButton);
+      applyFilters();
+    };
+    buttonContainer.appendChild(allButton);
+
+    uniqueValues.forEach((value) => {
+      const button = document.createElement('button');
+      button.textContent = value;
+      button.className = 'filter-btn';
+      button.onclick = () => {
+        activeButtonFilter = value;
+        updateActiveButton(button);
+        applyFilters();
+      };
+      buttonContainer.appendChild(button);
+    });
+
+    // Establecer el botón "Tots" como activo por defecto
+    updateActiveButton(allButton);
+  }
+
+  function updateActiveButton(activeButton: HTMLButtonElement) {
+    const buttons = buttonContainer.querySelectorAll('.filter-btn');
+    buttons.forEach((btn) => btn.classList.remove('active'));
+    activeButton.classList.add('active');
+  }
+
+  function renderTable() {
+    // Cabecera
+    thead.innerHTML = `<tr>${columns.map((col) => `<th>${col.header}</th>`).join('')}</tr>`;
+
+    // Paginación
+    const start = (currentPage - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    const rowsToShow = filteredData.slice(start, end);
+
+    tbody.innerHTML = rowsToShow
+      .map(
+        (row) =>
+          `<tr>${columns
+            .map((col) => {
+              const value = row[col.field];
+              return `<td>${col.render ? col.render(value, row) : value}</td>`;
+            })
+            .join('')}</tr>`
+      )
+      .join('');
+
+    const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+    pagination.innerHTML = '';
+    for (let i = 1; i <= totalPages; i++) {
+      const link = document.createElement('a');
+      link.textContent = i.toString();
+      link.href = '#';
+      link.className = 'pagination-link' + (i === currentPage ? ' current-page' : '');
+      link.onclick = (e) => {
+        e.preventDefault();
+        currentPage = i;
+        renderTable();
+      };
+      pagination.appendChild(link);
+    }
+  }
+
+  // Eventos
+  searchInput.addEventListener('input', applyFilters);
+
+  // Render inicial
+  container.innerHTML = '';
+  container.appendChild(searchInput);
+  if (filterByField) {
+    container.appendChild(buttonContainer);
+    renderFilterButtons();
+  }
+  container.appendChild(table);
+  container.appendChild(pagination);
+
+  applyFilters(); // inicia renderizado con filtros aplicados
+}
