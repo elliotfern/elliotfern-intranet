@@ -3159,6 +3159,46 @@ function vault() {
 
 /***/ }),
 
+/***/ "./src/frontend/pages/viatges/viatges.ts":
+/*!***********************************************!*\
+  !*** ./src/frontend/pages/viatges/viatges.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   viatges: () => (/* binding */ viatges)
+/* harmony export */ });
+/* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
+/* harmony import */ var _utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/actualitzarDades */ "./src/frontend/utils/actualitzarDades.ts");
+
+
+const url = window.location.href;
+const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_0__.getPageType)(url);
+function viatges() {
+    if (pageType[2] === 'modifica-espai') {
+        const autor = document.getElementById('formEspai');
+        if (autor) {
+            // Lanzar actualizador de datos
+            autor.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'formEspai', '/api/viatges/put/?espai');
+            });
+        }
+    }
+    else if (pageType[2] === 'nou-espai') {
+        const autor = document.getElementById('formEspai');
+        if (autor) {
+            // Lanzar actualizador de datos
+            autor.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'formEspai', '/api/viatges/post/?espai');
+            });
+        }
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/services/api/construirTaula.ts":
 /*!*****************************************************!*\
   !*** ./src/frontend/services/api/construirTaula.ts ***!
@@ -3572,6 +3612,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_biblioteca_biblioteca__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/biblioteca/biblioteca */ "./src/frontend/pages/biblioteca/biblioteca.ts");
 /* harmony import */ var _pages_adreces_adreces__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/adreces/adreces */ "./src/frontend/pages/adreces/adreces.ts");
 /* harmony import */ var _pages_persona_persona__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/persona/persona */ "./src/frontend/pages/persona/persona.ts");
+/* harmony import */ var _pages_viatges_viatges__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/viatges/viatges */ "./src/frontend/pages/viatges/viatges.ts");
+
 
 
 
@@ -3605,6 +3647,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     else if (pageType[1] === 'base-dades-persones') {
         (0,_pages_persona_persona__WEBPACK_IMPORTED_MODULE_8__.persona)();
+    }
+    else if (pageType[1] === 'viatges') {
+        (0,_pages_viatges_viatges__WEBPACK_IMPORTED_MODULE_9__.viatges)();
     }
 });
 

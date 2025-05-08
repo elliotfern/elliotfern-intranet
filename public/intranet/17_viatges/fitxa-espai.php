@@ -51,7 +51,7 @@ foreach ($data as $row) {
             <h1>Fitxa viatge</h1>
             <h2>Espai: <?php echo $nom; ?></h2>
 
-            <button onclick="window.location.href='<?php echo APP_INTRANET . $url['persona']; ?>/modifica-persona/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Modifica fitxa</button>
+            <button onclick="window.location.href='<?php echo APP_INTRANET . $url['viatges']; ?>/modifica-espai/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Modifica fitxa</button>
 
             <div class="dadesFitxa">
                 <strong>Aquesta fitxa ha estat creada el: </strong>
@@ -64,7 +64,7 @@ foreach ($data as $row) {
             <div class='fixaDades'>
 
                 <div class='columna imatge'>
-                    <img id="nameImg" src='<?php echo $nameImg ?>' class='img-thumbnail' alt='Imatge' title='Imatge'>
+                    <img id="nameImg" src='https://media.elliot.cat/img/viatge-espai/<?php echo $nameImg ?>.jpg' class='img-thumbnail' alt='Imatge' title='Imatge'>
                     <p><span id="alt" style="font-size:12px"><?php echo $alt ?></span></p>
                 </div>
 

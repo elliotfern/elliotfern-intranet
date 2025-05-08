@@ -51,7 +51,8 @@ $base_routes = [
 
     // 17. VIATGES
     '/api/viatges/get' => 'src/backend/api/17_viatges/get-viatges.php',
-
+    '/api/viatges/put' => 'src/backend/api/17_viatges/putt-viatges.php',
+    '/api/viatges/post' => 'src/backend/api/17_viatges/post-viatges.php',
 ];
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
@@ -313,6 +314,22 @@ $routes = [
     // 17. VIATGES
     '/api/viatges/get' => [
         'view' => 'src/backend/api/17_viatges/get-viatges.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    '/api/viatges/post' => [
+        'view' => 'src/backend/api/17_viatges/post-viatges.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    '/api/viatges/put' => [
+        'view' => 'src/backend/api/17_viatges/put-viatges.php',
         'needs_session' => false,
         'header_footer' => false,
         'header_menu_footer' => false,

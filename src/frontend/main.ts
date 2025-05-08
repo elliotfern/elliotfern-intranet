@@ -7,6 +7,7 @@ import { historiaOberta } from './pages/historiaOberta/historiaOberta';
 import { biblioteca } from './pages/biblioteca/biblioteca';
 import { adreces } from './pages/adreces/adreces';
 import { persona } from './pages/persona/persona';
+import { viatges } from './pages/viatges/viatges';
 
 const url = window.location.href;
 const pageType = getPageType(url);
@@ -27,5 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     adreces();
   } else if (pageType[1] === 'base-dades-persones') {
     persona();
+  } else if (pageType[1] === 'viatges') {
+    viatges();
   }
 });

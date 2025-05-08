@@ -125,6 +125,8 @@ $base_routes = [
     APP_GESTIO . $url['viatges'] . '/fitxa-viatge/{slug}' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'fitxa-viatge.php',
     APP_GESTIO . $url['viatges'] . '/fitxa-espai/{slug}' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'fitxa-espai.php',
 
+    APP_GESTIO . $url['viatges'] . '/modifica-espai/{slug}' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'form-espai.php',
+    APP_GESTIO . $url['viatges'] . '/nou-espai' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'form-espai.php',
 ];
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
@@ -840,6 +842,24 @@ $routes = [
 
     APP_GESTIO . $url['viatges'] . '/fitxa-espai/{slug}' => [
         'view' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'fitxa-espai.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['viatges'] . '/modifica-espai/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'form-espai.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['viatges'] . '/nou-espai' => [
+        'view' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'form-espai.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,

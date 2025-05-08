@@ -85,4 +85,87 @@ if (isset($_GET['llistatVisitesEspai'])) {
 
     // Devolver los datos en formato JSON
     echo json_encode($data);
+
+    // 3. Fitxa espai
+    // ruta GET => "/api/viatges/get/?fitxaEspai=palau-reial"
+} else if (isset($_GET['fitxaEspai'])) {
+    $slug = $_GET['fitxaEspai'];
+
+    $query = "SELECT p.id, p.nom, p.EspNomCast, p.EspNomEng, p.slug, p.EspNomIt, p.EspFundacio, p.EspDescripcio, p.EspDescripcioCast, p.EspDescripcioEng, p.EspDescripcioIt, p.EspTipus, p.EspWeb, p.idCiutat, c.city, a.TipusNom, p.img AS idImg, i.nom AS img, i.alt, i.nameImg, p.coordinades_longitud, p.coordinades_latitud, p.dateCreated, p.dateModified
+    FROM db_travel_places AS p
+    INNER JOIN db_cities AS c ON c.id = p.idCiutat
+    INNER JOIN db_travel_accommodation_type AS a ON p.EspTipus = a.id
+    LEFT JOIN db_img AS i ON p.img = i.id
+    WHERE p.slug = :slug";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    $stmt->bindParam(':slug', $slug, PDO::PARAM_STR);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+    // 4. Imatges espais
+    // ruta GET => "/api/viatges/get/?llistatImatgesEspais"
+} else if (isset($_GET['llistatImatgesEspais'])) {
+
+    $query = "SELECT i.id, i.nom
+    FROM db_img AS i
+    WHERE i.typeImg = 17";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+    // 4. Imatges espais
+    // ruta GET => "/api/viatges/get/?llistatTipusEspais"
+} else if (isset($_GET['llistatTipusEspais'])) {
+
+    $query = "SELECT t.id, t.TipusNom
+    FROM db_travel_accommodation_type AS t";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
 }

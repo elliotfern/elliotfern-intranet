@@ -41,6 +41,7 @@
         <option value="9">Cinema: actor</option>
         <option value="14">Cinema: director</option>
         <option value="11">Viatges: viatge</option>
+        <option value="17">Viatges: espai</option>
         <option value="13">Blog</option>
       </select>
     </div>

@@ -11,12 +11,17 @@ $slug = $routeParams[0];
         <div class="container contingut">
             <h1>Fitxa viatge</h1>
 
+            <p><button onclick="window.location.href='<?php echo APP_INTRANET . $url['viatges']; ?>/modifica-viatge/<?php echo $slug; ?>'" class="button btn-gran btn-secondari">Modifica viatge</button>
+
+                <button onclick="window.location.href='<?php echo APP_INTRANET . $url['viatges']; ?>/nou-espai'" class="button btn-gran btn-secondari">Afegeix espai</button>
+            </p>
+
             <?php
             // Preparar la consulta con placeholders
             $query = "SELECT p.nom, p.id, v.dataVisita, c.city, p.slug
             FROM db_travel_places_visited AS v
             INNER JOIN db_viatges_llistat AS l ON v.idViatge = l.id
-            INNER JOIN db_travel_places AS p ON p.id = v.EspId
+            INNER JOIN db_travel_places AS p ON p.id = v.espId
             INNER JOIN db_cities AS c ON c.id = idCiutat
             WHERE l.slug = :slug
             GROUP BY p.id
