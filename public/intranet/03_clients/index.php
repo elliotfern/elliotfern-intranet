@@ -1,14 +1,16 @@
-<?php
-echo '<h2>Hispano Atlantic Consulting Ltd - Accounting & CRM</h2>';
-echo '<h3>CRM Customers</h3>';
+    <div id="barraNavegacioContenidor"></div>
 
-echo "<p><button type='button' class='btn btn-light btn-sm' id='btnAddNewCostumer' onclick='btnCreateCustomer()' data-bs-toggle='modal' data-bs-target='#modalCreateCustomer'>Add new costumer</button></p>";
+    <?php
+    echo '<h2>Hispano Atlantic Consulting Ltd - Accounting & CRM</h2>';
+    echo '<h3>CRM Customers</h3>';
 
-echo "<hr>";
-echo "<p></p>";
+    echo "<p><button type='button' class='btn btn-light btn-sm' id='btnAddNewCostumer' onclick='btnCreateCustomer()' data-bs-toggle='modal' data-bs-target='#modalCreateCustomer'>Add new costumer</button></p>";
 
-echo '<div class="">';
-echo '<table class="table table-striped">
+    echo "<hr>";
+    echo "<p></p>";
+
+    echo '<div class="">';
+    echo '<table class="table table-striped">
         <thead class="">
         <tr>
             <th>Customer</th>

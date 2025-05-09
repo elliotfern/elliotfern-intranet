@@ -1,106 +1,18 @@
 <div class="container">
-
-    <div class="barraNavegacio">
-        <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['comptabilitat']; ?>">Comptabilitat</a> > <a href="<?php echo APP_INTRANET . $url['comptabilitat']; ?>/facturacio-clients">Facturació clients</a></h6>
-    </div>
+    <div id="barraNavegacioContenidor"></div>
 
     <main>
         <div class="container contingut">
             <h1>Comptabilitat: Facturació clients</h1>
 
-            <p><a href='./facturacio-clients/nova-factura'><button type='button' class='btn btn-light btn-sm' id='btnAddCustomerInvoice'>Create customer invoice</button></a></p>
+            <p><button onclick="window.location.href='<?php echo APP_INTRANET . $url['comptabilitat']; ?>/facturacio-clients/nova-factura'" class="button btn-gran btn-secondari">Crear factura</button></p>
 
-            <input type='hidden' id='url' value='https://elliot.cat' />
+            <div id="taulaLlistatFactures"></div>
 
-            <div class="table-responsive">
-                <table class="table table-striped" id="customersInvoices">
-                    <thead class="table-primary">
-                        <tr>
-                            <th>Num.</th>
-                            <th>Company</th>
-                            <th>Invoice date</th>
-                            <th>Concept</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Payment</th>
-                            <th>PDF</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-
-            </div>
         </div>
     </main>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', async function() {
-        async function fetchData() {
-            const urlAjax = "/api/accounting/get/?type=accounting-elliotfernandez-customers-invoices";
-
-            try {
-                const response = await fetch(urlAjax, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                const data = await response.json();
-                let html = '';
-
-                data.forEach(invoice => {
-                    const date = new Date(invoice.facData);
-                    const formattedDate = date.toLocaleDateString('en-GB', {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: 'numeric',
-                    });
-
-                    let statusButton = `<button type="button" class="btn-petit btn-primari">${invoice.estat}</button>`;
-                    html += `
-                    <tr>
-                        <td>
-                            <a id="${invoice.id}" title="Show invoice details" data-bs-toggle="modal" data-bs-target="#modalViewInvoiceC" href="#" onclick="viewDetailInvoicec(${invoice.id});return false;">
-                                ${invoice.id}/${invoice.yearInvoice}
-                            </a>
-                        </td>
-                        <td>
-                            ${invoice.clientEmpresa ? invoice.clientEmpresa : `${invoice.clientNom} ${invoice.clientCognoms}`}
-                        </td>
-                        <td>${formattedDate}</td>
-                        <td>${invoice.facConcepte}</td>
-                        <td>${invoice.facTotal}€</td>
-                        <td>${statusButton}</td>
-                        <td>${invoice.tipusNom}</td>
-                        <td>
-                            <button type="button" class="btn-petit btn-secondari" onclick="generatePDF(${invoice.id})" id="pdfButton${invoice.id}">PDF</button>
-                        </td>
-                        <td><button type="button">Update</button></td>
-                        <td><button type="button" id="btnUpdateBook" class="btn btn-sm btn-danger">Delete</button></td>
-                    </tr>
-                `;
-                });
-
-                document.querySelector('#customersInvoices tbody').innerHTML = html;
-
-            } catch (error) {
-                console.error('There was an error fetching the data:', error);
-            }
-        }
-
-        await fetchData();
-    });
-</script>
-</div>
-</div>
 
 <script>
     const generatePDF = async (invoiceId) => {

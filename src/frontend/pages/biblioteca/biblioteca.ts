@@ -2,11 +2,14 @@ import { getPageType } from '../../utils/urlPath';
 import { transmissioDadesDB } from '../../utils/actualitzarDades';
 import { fitxaPersona } from '../../pages/persona/fitxaPersona';
 import { construirTaula } from '../../services/api/construirTaula';
+import { taulaLlistatAutors } from './taulaLlistatAutors';
+import { getIsAdmin } from '../../services/auth/isAdmin';
+import { taulaLlistatLlibres } from './taulaLlistatLlibres';
 
 const url = window.location.href;
 const pageType = getPageType(url);
 
-export function biblioteca() {
+export async function biblioteca() {
   if (pageType[2] === 'modifica-llibre') {
     const llibre = document.getElementById('modificaLlibre');
     if (llibre) {
@@ -23,8 +26,19 @@ export function biblioteca() {
         transmissioDadesDB(event, 'POST', 'modificaLlibre', '/api/biblioteca/post/?llibre');
       });
     }
-  } else if (pageType[2] === 'fitxa-autor') {
-    fitxaPersona('/api/persones/get/?persona=', pageType[3], 'biblioteca-autor', function (data) {
+  } else if ([pageType[1], pageType[2]].includes('fitxa-autor')) {
+    const isAdmin = await getIsAdmin();
+    const url = window.location.href;
+    const pageType = getPageType(url);
+    let slug: string = '';
+
+    if (isAdmin) {
+      slug = pageType[3];
+    } else {
+      slug = pageType[2];
+    }
+
+    fitxaPersona('/api/persones/get/?persona=', slug, 'biblioteca-autor', function (data) {
       construirTaula('taula1', '/api/biblioteca/get/?type=autorLlibres&id=', data.id, ['Titol', 'Any', 'Accions'], function (fila, columna) {
         if (columna.toLowerCase() === 'titol') {
           // Manejar el caso del título
@@ -37,5 +51,9 @@ export function biblioteca() {
         }
       });
     });
+  } else if ([pageType[1], pageType[2]].includes('llistat-autors')) {
+    taulaLlistatAutors();
+  } else if ([pageType[1], pageType[2]].includes('llistat-llibres')) {
+    taulaLlistatLlibres();
   }
 }

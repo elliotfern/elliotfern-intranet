@@ -3,6 +3,8 @@ $base_routes = [
     // API INTRANET
     '/api/auth/login' => 'src/backend/api/00_auth/login.php',
     '/api/auth/registre' => 'src/backend/api/00_auth/registre.php',
+    'api/auth/get' => 'src/backend/api/00_auth/get-auth.php',
+
     '/api/vault/get' => 'src/backend/api/10_vault/get-vault.php',
 
     '/api/accounting/get' => 'src/backend/api/02_accounting/accounting.php',
@@ -68,6 +70,14 @@ $routes = [
 
     '/api/auth/registre' => [
         'view' => 'src/backend/api/00_auth/registre.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    '/api/auth/get' => [
+        'view' => 'src/backend/api/00_auth/get-auth.php',
         'needs_session' => false,
         'header_footer' => false,
         'header_menu_footer' => false,

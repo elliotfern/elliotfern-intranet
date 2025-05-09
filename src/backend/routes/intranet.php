@@ -128,7 +128,7 @@ $base_routes = [
 
     APP_GESTIO . $url['viatges'] . '/modifica-espai/{slug}' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'form-espai.php',
     APP_GESTIO . $url['viatges'] . '/nou-espai' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'form-espai.php',
-];
+]; 
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
 $routes = [

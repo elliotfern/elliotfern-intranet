@@ -14,6 +14,7 @@
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@types/eslint": "^9.6.1",
+    "@types/leaflet": "^1.9.17",
     "babel-loader": "^8.0.0",
     "css-loader": "^7.1.2",
     "style-loader": "^4.0.0",
@@ -36,6 +37,7 @@
   "homepage": "https://github.com/elliotfern/elliotfern-intranet#readme",
   "dependencies": {
     "bootstrap": "^5.3.3",
+    "leaflet": "^1.9.4",
     "quill": "^2.0.3",
     "tinymce": "^7.6.1",
     "trix": "^2.1.12"

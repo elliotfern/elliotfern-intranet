@@ -1,40 +1,61 @@
-import { renderDynamicTable } from '../../services/api/taulaRender';
+import { renderDynamicTable } from '../../components/renderTaula/taulaRender';
 import { formatData } from '../../utils/formataData';
 import { getPageType } from '../../utils/urlPath';
+import { getIsAdmin } from '../../services/auth/isAdmin';
+
+interface EspaiRow {
+  slug: string;
+  nom: string;
+  dataVisita: string;
+  id: number;
+}
 
 const url = window.location.href;
 const pageType = getPageType(url);
 
-export function taulaLlistatEspaisViatges() {
-  const slug: string = pageType[3];
+export async function taulaLlistatEspaisViatges() {
+  const isAdmin = await getIsAdmin();
+  let slug: string = '';
+  let gestioUrl: string = '';
+
+  if (isAdmin) {
+    slug = pageType[3];
+    gestioUrl = '/gestio';
+  } else {
+    slug = pageType[2];
+  }
+
+  const columns = [
+    {
+      header: 'Espai',
+      field: 'nom',
+      render: (_: unknown, row: EspaiRow) => `<a href="https://${window.location.host}${gestioUrl}/viatges/fitxa-espai/${row.slug}">${row.nom}</a>`,
+    },
+    { header: 'Ciutat', field: 'city' },
+    {
+      header: 'Data visita',
+      field: 'dataVisita',
+      render: (_: unknown, row: EspaiRow) => {
+        const inici = formatData(row.dataVisita);
+        return `${inici}`;
+      },
+    },
+  ];
+
+  if (isAdmin) {
+    columns.push({
+      header: 'Accions',
+      field: 'id',
+      render: (_: unknown, row: EspaiRow) => `
+         <a href="https://${window.location.host}/gestio/viatges/modifica-viatge/${row.id}"><button class="btn-petit">Modifica</button></a>`,
+    });
+  }
 
   renderDynamicTable({
     url: `https://${window.location.host}/api/viatges/get/?llistatEspaisViatge=${slug}`,
     containerId: 'taulaLlistatEspaisViatge',
-    columns: [
-      {
-        header: 'Espai',
-        field: 'viatge',
-        render: (_, row) => `<a href="https://${window.location.host}/gestio/viatges/fitxa-espai/${row.slug}">${row.nom}</a>`,
-      },
-      { header: 'Ciutat', field: 'city' },
-      {
-        header: 'Data visita',
-        field: 'dataVisita',
-        render: (_, row) => {
-          const inici = formatData(row.dataVisita);
-          return `${inici}`;
-        },
-      },
-      {
-        header: 'Accions',
-        field: 'id',
-        render: (_, row) => `
-                    <a href="https://${window.location.host}/gestio/viatges/modifica-viatge/${row.id}">
-                        <button class="btn-petit">Modifica</button></a>`,
-      },
-    ],
-    filterKeys: ['viatge', 'city'],
+    columns,
+    filterKeys: ['nom', 'city'],
     filterByField: 'city',
   });
 }

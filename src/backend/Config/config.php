@@ -5,8 +5,16 @@ define('BASE_URL', $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST']);
 define('APP_ROOT', $_SERVER['DOCUMENT_ROOT']);
 define('APP_GESTIO',  "/gestio");
 
-$base_url = BASE_URL . APP_GESTIO;
-define("APP_INTRANET", $base_url);
+$base_url = '';
+$isAdmin = isset($_COOKIE['user_id']) && $_COOKIE['user_id'] === '1';
+
+if ($isAdmin) {
+    $base_url = BASE_URL . APP_GESTIO;
+    define("APP_INTRANET", $base_url);
+} else {
+    $base_url = BASE_URL;
+    define("APP_INTRANET", $base_url);
+}
 
 // Variables del directori de fitxers
 define('APP_INTRANET_DIR',  "public/intranet/");

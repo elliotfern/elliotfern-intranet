@@ -27,8 +27,8 @@ export async function loginApi(event: any) {
 
       if (response.ok) {
         if (data.success) {
-          // Guardar el token en localStorage
-          localStorage.setItem('token', data.token);
+          // Guardar el token en una cookie segura
+          //localStorage.setItem('token', data.token);
 
           if (loginMessageOk && loginMessageErr) {
             // Mostrar mensaje de éxito

@@ -58,18 +58,19 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 // 1. Visites realizades en un espai
 // ruta GET => "/api/viatges/get/?llistatVisitesEspai"
 if (isset($_GET['llistatVisitesEspai'])) {
-    $id = $_GET['llistatVisitesEspai'];
+    $slug = $_GET['llistatVisitesEspai'];
 
     $query = "SELECT v.id, vl.slug, vl.viatge AS nom, v.dataVisita AS any1
     FROM db_travel_places_visited AS v
     INNER JOIN db_viatges_llistat AS vl ON v.idViatge = vl.id
-    WHERE v.espId = :id
+    INNER JOIN db_travel_places AS p ON v.espId = p.id
+    WHERE p.slug = :slug
     ORDER BY v.dataVisita ASC";
 
     // Preparar la consulta
     $stmt = $conn->prepare($query);
 
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->bindParam(':slug', $slug, PDO::PARAM_STR);
 
     // Ejecutar la consulta
     $stmt->execute();
@@ -225,6 +226,67 @@ if (isset($_GET['llistatVisitesEspai'])) {
 
     // Recopilar los resultados
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+    // 7. Detalls fitxa espai
+    // ruta GET => "/api/viatges/get/?fitxaEspaiDetalls=perpinya"
+} else if (isset($_GET['fitxaEspaiDetalls'])) {
+    $slug = $_GET['fitxaEspaiDetalls'];
+
+    $query = "SELECT p.id, p.nom, p.EspNomCast, p.EspNomEng, p.EspNomIt, p.EspFundacio, p.EspDescripcio, p.EspDescripcioCast, p.EspDescripcioEng, p.EspDescripcioIt, p.EspTipus, p.EspWeb, p.idCiutat, c.city, a.TipusNom, i.nom AS img, i.alt, i.nameImg, p.coordinades_longitud, p.coordinades_latitud, p.dateCreated, p.dateModified
+    FROM db_travel_places AS p
+    INNER JOIN db_cities AS c ON c.id = p.idCiutat
+    INNER JOIN db_travel_accommodation_type AS a ON p.EspTipus = a.id
+    LEFT JOIN db_img AS i ON p.img = i.id
+    WHERE p.slug = :slug";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':slug', $slug, PDO::PARAM_STR);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+    // 7. Detalls fitxa Viatge
+    // ruta GET => "/api/viatges/get/?fitxaViatgeDetalls=perpinya"
+} else if (isset($_GET['fitxaViatgeDetalls'])) {
+    $slug = $_GET['fitxaViatgeDetalls'];
+
+    $query = "SELECT v.id, v.viatge, v.slug, v.dateCreated, v.dateModified, c.pais_cat, i.nameImg, i.alt, v.dataInici, v.dataFi, v.descripcio
+    FROM db_viatges_llistat AS v
+    INNER JOIN db_countries AS c ON c.id = v.pais
+    LEFT JOIN db_img AS i ON v.img = i.id
+    WHERE v.slug = :slug";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':slug', $slug, PDO::PARAM_STR);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Devolver los datos en formato JSON
     echo json_encode($data);

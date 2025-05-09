@@ -42,6 +42,12 @@ export async function renderDynamicTable({ url, columns, containerId, rowsPerPag
   const pagination = document.createElement('div');
   pagination.id = 'pagination';
 
+  // Crear el numero total de registres
+  const totalRecords = document.createElement('div');
+  totalRecords.className = 'total-records';
+  totalRecords.style.marginTop = '15px';
+  totalRecords.style.fontSize = '12px';
+
   table.append(thead, tbody);
 
   // Normalizador para búsqueda
@@ -136,6 +142,7 @@ export async function renderDynamicTable({ url, columns, containerId, rowsPerPag
       };
       pagination.appendChild(link);
     }
+    totalRecords.textContent = `Número total de registres: ${filteredData.length}`;
   }
 
   // Eventos
@@ -149,6 +156,7 @@ export async function renderDynamicTable({ url, columns, containerId, rowsPerPag
     renderFilterButtons();
   }
   container.appendChild(table);
+  container.appendChild(totalRecords);
   container.appendChild(pagination);
 
   applyFilters(); // inicia renderizado con filtros aplicados

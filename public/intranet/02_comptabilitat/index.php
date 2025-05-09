@@ -1,8 +1,6 @@
 <div class="container">
 
-  <div class="barraNavegacio">
-    <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['comptabilitat']; ?>">Comptabilitat</a></h6>
-  </div>
+  <div id="barraNavegacioContenidor"></div>
 
   <main>
     <div class="container contingut">

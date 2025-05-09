@@ -2,6 +2,9 @@ import { getPageType } from '../../utils/urlPath';
 import { transmissioDadesDB } from '../../utils/actualitzarDades';
 import { taulaLlistatViatges } from './taulaLlistatViatges';
 import { taulaLlistatEspaisViatges } from './taulaLlistatEspaisViatge';
+import { fitxaEspai } from './fitxaEspai';
+import { taulaLlistatVisitesEspais } from './taulaLlistatVisitesEspais';
+import { fitxaViatge } from './fitxaViatge';
 
 const url = window.location.href;
 const pageType = getPageType(url);
@@ -23,9 +26,13 @@ export function viatges() {
         transmissioDadesDB(event, 'POST', 'formEspai', '/api/viatges/post/?espai');
       });
     }
-  } else if (pageType[2] === 'llistat-viatges') {
+  } else if ([pageType[1], pageType[2]].includes('llistat-viatges')) {
     taulaLlistatViatges();
-  } else if (pageType[2] === 'fitxa-viatge') {
+  } else if ([pageType[1], pageType[2]].includes('fitxa-viatge')) {
+    fitxaViatge();
     taulaLlistatEspaisViatges();
+  } else if ([pageType[1], pageType[2]].includes('fitxa-espai')) {
+    fitxaEspai(); // se ejecuta cuando Leaflet está cargado
+    taulaLlistatVisitesEspais();
   }
 }

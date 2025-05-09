@@ -58,7 +58,7 @@ if (isset($_GET['type']) && $_GET['type'] == 'accounting-customers') {
     echo json_encode($data);
 } elseif (isset($_GET['type']) && $_GET['type'] == 'accounting-elliotfernandez-customers-invoices') {
     global $conn;
-    $query = "SELECT ic.id, ic.idUser, ic.facConcepte, ic.facData, YEAR(ic.facData) AS yearInvoice,  ic.facDueDate, ic.facSubtotal, ic.facFees, ic.facTotal, ic.facVAT, ic.facIva, ic.facEstat, ic.facPaymentType, vt.ivaPercen, ist.estat, pt.tipusNom, c.clientNom, c.clientCognoms, c.clientEmpresa
+    $query = "SELECT ic.id, ic.idUser, ic.facConcepte, ic.facData, YEAR(ic.facData) AS yearInvoice, CONCAT('Any ', YEAR(ic.facData)) AS any, ic.facDueDate, ic.facSubtotal, ic.facFees, ic.facTotal, ic.facVAT, ic.facIva, ic.facEstat, ic.facPaymentType, vt.ivaPercen, ist.estat, pt.tipusNom, c.clientNom, c.clientCognoms, c.clientEmpresa
                 FROM db_accounting_soletrade_invoices_customers  AS ic
                 LEFT JOIN db_accounting_hispantic_vat_type AS vt ON ic.facIva = vt.id
                 LEFT JOIN db_accounting_hispantic_invoices_status AS ist ON ist.id = ic.facEstat

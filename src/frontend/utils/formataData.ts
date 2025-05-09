@@ -25,3 +25,16 @@ export function formatData(inputDate: string): string {
 
   return `${day}-${month}-${year}`;
 }
+
+export function formatDataCatala(inputDate: string): string {
+  // Array con los meses en catalán
+  const mesesCatalan = ['gener', 'febrer', 'març', 'abril', 'maig', 'juny', 'juliol', 'agost', 'setembre', 'octubre', 'novembre', 'desembre'];
+
+  // Convertir la fecha
+  let fecha = new Date(inputDate);
+  let day = ('0' + fecha.getDate()).slice(-2); // Obtener el día y asegurar que tenga 2 dígitos
+  let month = mesesCatalan[fecha.getMonth()]; // Obtener el nombre del mes en catalán
+  let year = fecha.getFullYear(); // Obtener el año
+
+  return `${day} ${month} ${year}`;
+}

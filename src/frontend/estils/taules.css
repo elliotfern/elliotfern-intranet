@@ -43,12 +43,6 @@
   border-bottom: 1px solid #ddd;
 }
 
-/* Bordes redondeados */
-.table th,
-.table td {
-  border-radius: 5px;
-}
-
 /* Celdas de acciones */
 .table td:last-child,
 .table th:last-child {
@@ -64,7 +58,6 @@
 @media (max-width: 768px) {
   .table-responsive {
     border: 1px solid #ddd;
-    border-radius: 8px;
   }
 
   .table {
