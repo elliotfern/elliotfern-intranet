@@ -4,15 +4,20 @@
 
 <div class="container">
 
-  <div class="barraNavegacio">
-    <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['cinema']; ?>">Arts escèniques, cinema i televisió</a> > <a href="<?php echo APP_INTRANET . $url['cinema']; ?>/llistat-actors">Llistat actors</a></h6>
-  </div>
+  <div id="barraNavegacioContenidor"></div>
 
   <main>
     <div class="container contingut">
       <h1>Arts escèniques, cinema i televisió: llistat d'actors/es</h1>
 
-      <button onclick="window.location.href='<?php echo APP_INTRANET . $url['persona']; ?>/nova-persona/'" class="button btn-gran btn-secondari">Crea nou actor/a</button>
+      <div id="isAdminButton" style="display: none;">
+        <?php if (isset($_COOKIE['user_id']) && $_COOKIE['user_id'] === '1') : ?>
+          <p>
+            <button onclick="window.location.href='<?php echo APP_INTRANET . $url['persona']; ?>/nova-persona/'" class="button btn-gran btn-secondari">Crea nou actor/a</button>
+          </p>
+        <?php endif; ?>
+      </div>
+
 
       <div class="table-responsive">
         <table class="table table-striped" id="actorsTable">

@@ -118,6 +118,8 @@ $base_routes = [
 
     // 16. Auxiliars
     APP_GESTIO . $url['auxiliars'] => APP_INTRANET_DIR . APP_AUXILIARS_DIR . 'index.php',
+    APP_GESTIO . $url['auxiliars'] . '/llistat-imatges' => APP_INTRANET_DIR . APP_AUXILIARS_DIR . 'imatges/llistat-imatges.php',
+
     APP_GESTIO . $url['auxiliars'] . '/nova-imatge' => APP_INTRANET_DIR . APP_AUXILIARS_DIR . 'imatges/form-inserir-imatge.php',
 
     // 17. Viatges
@@ -128,7 +130,7 @@ $base_routes = [
 
     APP_GESTIO . $url['viatges'] . '/modifica-espai/{slug}' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'form-espai.php',
     APP_GESTIO . $url['viatges'] . '/nou-espai' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'form-espai.php',
-]; 
+];
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
 $routes = [
@@ -806,6 +808,15 @@ $routes = [
     // 16. Auxiliars
     APP_GESTIO . $url['auxiliars'] => [
         'view' => APP_INTRANET_DIR . APP_AUXILIARS_DIR . 'index.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['auxiliars'] . '/llistat-imatges' => [
+        'view' => APP_INTRANET_DIR . APP_AUXILIARS_DIR . 'llistat-imatges.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,

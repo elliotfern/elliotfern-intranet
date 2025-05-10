@@ -1,10 +1,13 @@
-<div class="container contingut">
+<div class="container">
 
     <div id="barraNavegacioContenidor"></div>
 
     <main>
         <div class="container contingut">
-            <h1>Taules auxiliars</h1>
+
+            <h1>Base de dades Imatges</h1>
+            <h2>Llistat complert</h2>
+
             <div id="isAdminButton" style="display: none;">
                 <?php if (isset($_COOKIE['user_id']) && $_COOKIE['user_id'] === '1') : ?>
                     <p>
@@ -13,11 +16,7 @@
                 <?php endif; ?>
             </div>
 
-            <div class="alert alert-success quadre">
-                <ul class="llistat">
-                    <li><a href="<?php echo APP_INTRANET . $url['auxiliars']; ?>/llistat-imatges">Llistat d'imatges</a></li>
-                </ul>
-            </div>
+            <div id="taulaLlistatImatges"></div>
 
         </div>
     </main>

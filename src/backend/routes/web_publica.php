@@ -25,6 +25,19 @@ $base_routes = [
     $url['viatges'] . '/llistat-viatges' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'llistat-viatges.php',
     $url['viatges'] . '/fitxa-viatge/{slug}' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'fitxa-viatge.php',
     $url['viatges'] . '/fitxa-espai/{slug}' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'fitxa-espai.php',
+
+    // Cinema
+    $url['cinema'] . '/llistat-pelicules' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-pelicules.php',
+    $url['cinema'] . '/llistat-series' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-series.php',
+    $url['cinema'] . '/llistat-directors' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-directors.php',
+    $url['cinema'] . '/llistat-actors' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat.actors.php',
+    $url['cinema'] . '/llistat-obres-teatre' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-teatre.php',
+
+    $url['cinema'] . '/fitxa-actor/{slug}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-actor.php',
+    $url['cinema'] . '/fitxa-director{slug}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-director.php',
+    $url['cinema'] . '/fitxa-pelicula/{slug}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-pelicula.php',
+    $url['cinema'] . '/fitxa-serie/{slug}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-serie.php',
+    $url['cinema'] . '/fitxa-teatre/{slug}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-teatre.php',
 ];
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
@@ -129,6 +142,106 @@ $routes = [
 
     $url['viatges'] . '/fitxa-espai/{slug}' => [
         'view' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'fitxa-espai.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    // Cinema
+    $url['cinema'] => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'index.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    $url['cinema'] . '/llistat-pelicules' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-pelicules.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    $url['cinema'] . '/llistat-series' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-series.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    $url['cinema'] . '/llistat-directors' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-directors.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    $url['cinema'] . '/llistat-actors' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-actors.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    $url['cinema'] . '/llistat-obres-teatre' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-teatre.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    $url['cinema'] . '/fitxa-actor/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-actor.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    $url['cinema'] . '/fitxa-director/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-director.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    $url['cinema'] . '/fitxa-pelicula/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-pelicula.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    $url['cinema'] . '/fitxa-serie/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-serie.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    $url['cinema'] . '/fitxa-teatre/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-teatre.php',
         'needs_session' => false,
         'header_footer' => false,
         'header_menu_footer' => true,

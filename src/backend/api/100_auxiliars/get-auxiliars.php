@@ -131,6 +131,34 @@ if (isset($_GET['type']) && $_GET['type'] == 'directors') {
         $data[] = $users;
     }
     echo json_encode($data);
+
+
+    // Llistat complet imatges
+    // ruta GET => "/api/auxiliars/get/?llistatCompletImatges"
+} else if (isset($_GET['llistatCompletImatges'])) {
+
+    $query = "SELECT i.id, i.typeImg, i.nom, t.name, i.dateCreated, i.nameImg
+            FROM db_img AS i
+            LEFT JOIN db_img_type AS t ON i.typeImg = t.id
+            ORDER BY i.nom ASC";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
 } else {
     // Si 'type', 'id' o 'token' están ausentes o 'type' no es 'user' en la URL
     header('HTTP/1.1 403 Forbidden');

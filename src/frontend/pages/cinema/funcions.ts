@@ -1,17 +1,27 @@
 import { getPageType } from '../../utils/urlPath';
-import { selectOmplirDades } from '../../components/lecturaDadesForm/selectOmplirDades';
-import { omplirDadesForm } from '../../components/lecturaDadesForm/omplirDadesForm';
 import { transmissioDadesDB } from '../../utils/actualitzarDades';
-import { llistatPelicules } from '../../components/cinema/llistatPelicules';
 import { connexioApiDades } from '../../components/lecturaDadesForm/mostrarDades/connexioApiDades';
-import { llistatPeliculaActors } from '../../components/cinema/llistatPeliculaActors';
 import { fitxaPersona } from '../persona/fitxaPersona';
 import { construirTaula } from '../../services/api/construirTaula';
+import { taulaLlistatPelicules } from './taulaLlistatPelicules';
+import { getIsAdmin } from '../../services/auth/isAdmin';
 
-const url = window.location.href;
-const pageType = getPageType(url);
+export async function cinema() {
+  const url = window.location.href;
+  const pageType = getPageType(url);
 
-export function cinema() {
+  const isAdmin = await getIsAdmin();
+
+  let slug: string = '';
+  let gestioUrl: string = '';
+
+  if (isAdmin) {
+    slug = pageType[3];
+    gestioUrl = '/gestio';
+  } else {
+    slug = pageType[2];
+  }
+
   if (pageType[2] === 'modifica-pelicula') {
     const peli = document.getElementById('peli');
     if (peli) {
@@ -19,28 +29,8 @@ export function cinema() {
         transmissioDadesDB(event, 'PUT', 'peli', '/api/cinema/put/?type=pelicula');
       });
     }
-  } else if (pageType[2] === 'pelicules') {
-    llistatPelicules(10); // Pasar 10 como parámetro para mostrar todas las películas al cargar la página
-
-    // Manejar clic en los botones de tipo de contacto
-    document.querySelectorAll('button[data-tipus]').forEach((button) => {
-      button.addEventListener('click', (event) => {
-        const target = event.target as HTMLElement;
-        const tipus = target.getAttribute('data-tipus');
-        if (tipus) {
-          llistatPelicules(Number(tipus));
-
-          // Remover la clase 'active' de todos los botones
-          document.querySelectorAll('button[data-tipus]').forEach((btn) => {
-            btn.classList.remove('active');
-          });
-          // Agregar la clase 'active' solo al botón clicado
-          target.classList.add('active');
-        }
-      });
-    });
-  } else if (pageType[2] === 'fitxa-pelicula') {
-    connexioApiDades('/api/cinema/get/?pelicula=', pageType[3], 'img', 'cinema-pelicula', function (data) {
+  } else if ([pageType[1], pageType[2]].includes('fitxa-pelicula')) {
+    connexioApiDades('/api/cinema/get/?pelicula=', slug, 'img', 'cinema-pelicula', function (data) {
       // Actualiza el atributo href del enlace con el idDirector
       const directorUrl = document.getElementById('directorUrl') as HTMLAnchorElement;
       if (directorUrl) {
@@ -49,7 +39,7 @@ export function cinema() {
     });
 
     // author book
-    llistatPeliculaActors(pageType[3]);
+    // llistatPeliculaActors(pageType[3]);
   } else if (pageType[2] === 'modifica-serie') {
     const serie = document.getElementById('modificarSerie');
     if (serie) {
@@ -186,5 +176,7 @@ export function cinema() {
         }
       });
     });
+  } else if ([pageType[1], pageType[2]].includes('llistat-pelicules')) {
+    taulaLlistatPelicules();
   }
 }

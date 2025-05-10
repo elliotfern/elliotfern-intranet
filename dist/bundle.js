@@ -17440,150 +17440,6 @@ function barraNavegacio() {
 
 /***/ }),
 
-/***/ "./src/frontend/components/cinema/llistatPeliculaActors.ts":
-/*!*****************************************************************!*\
-  !*** ./src/frontend/components/cinema/llistatPeliculaActors.ts ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   llistatPeliculaActors: () => (/* binding */ llistatPeliculaActors)
-/* harmony export */ });
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-// author book
-function llistatPeliculaActors(id) {
-    return __awaiter(this, void 0, void 0, function* () {
-        let urlAjax = '/api/cinema/get/?actors-pelicula=' + id;
-        try {
-            // Obtener el token del localStorage
-            let token = localStorage.getItem('token');
-            // Realizar la solicitud fetch
-            let response = yield fetch(urlAjax, {
-                method: 'GET',
-                headers: {
-                    Accept: 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            if (!response.ok) {
-                throw new Error('Error en la sol·licitud AJAX');
-            }
-            let data = yield response.json();
-            let html = '';
-            for (let i = 0; i < data.length; i++) {
-                html += '<tr>';
-                html += '<td><a id="' + data[i].id + '" title="Actor" href="' + window.location.origin + '/gestio/cinema/fitxa-actor/' + data[i].slug + '"><img src="https://media.elliot.cat/img/cinema-actor/' + data[i].nameImg + '.jpg" alt="Imatge" width="auto" height="150"></a></td>';
-                html += '<td><a id="' + data[i].id + '" title="Actor" href="' + window.location.origin + '/gestio/cinema/fitxa-actor/' + data[i].slug + '">' + data[i].nom + ' ' + data[i].cognoms + '</a></td>';
-                html += '<td>' + data[i].role + '</td>';
-                html += '<td><a href="' + window.location.origin + '/gestio/cinema/modifica-actor-pelicula/' + data[i].idCast + '" class="btn btn-secondary btn-sm modificar-link">Modificar</a></td>';
-                html += '<td><button type="button" class="btn btn-sm btn-danger">Elimina</button></td>';
-                html += '</tr>';
-            }
-            // Actualizar el contenido del tbody
-            const tbody = document.querySelector('#booksAuthor tbody');
-            if (tbody) {
-                tbody.innerHTML = html;
-            }
-            else {
-                console.error('Elemento tbody no encontrado');
-            }
-        }
-        catch (error) {
-            console.error('Error al parsear JSON:', error); // Muestra el error de parsing
-        }
-    });
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/components/cinema/llistatPelicules.ts":
-/*!************************************************************!*\
-  !*** ./src/frontend/components/cinema/llistatPelicules.ts ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   llistatPelicules: () => (/* binding */ llistatPelicules)
-/* harmony export */ });
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-function llistatPelicules(tipus) {
-    return __awaiter(this, void 0, void 0, function* () {
-        // Si se selecciona "Tots", no pasamos ningún tipo de contacto como parámetro
-        let urlAjax = '/api/cinema/get/';
-        // Si 'tipus' es 10, añadir el parámetro adecuado a la URL
-        if (tipus === 10) {
-            urlAjax += '?pelicules';
-        }
-        else {
-            urlAjax += '?type=generes&generes=' + tipus;
-        }
-        try {
-            const response = yield fetch(urlAjax, {
-                method: 'GET',
-                headers: {
-                    Accept: 'application/json',
-                    Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
-                },
-            });
-            if (!response.ok) {
-                throw new Error('Error en la solicitud AJAX');
-            }
-            const data = yield response.json();
-            // Aquí puedes manejar los datos recibidos
-            // Modificaciones del DOM
-            let pelicules = '';
-            data.forEach((pelicula) => {
-                pelicules += `
-      <div class="col-sm-3 col-md-3 quadre">
-        <h6><span style="background-color:black;color:white;padding:5px;">${pelicula.genere_ca}</span></h6>
-    
-        <h3 class="links-contactes" style="margin-top: 15px;"> <a href="${window.location.origin}/gestio/cinema/fitxa-pelicula/${pelicula.slug}" title="Fitxa de la pel·lícula" >${pelicula.pelicula}</a></h3>`;
-                pelicules += `<p class="links-contactes autor"><strong>Director/a:</strong> <a href="${window.location.origin}/cinema/director/${pelicula.id}">${pelicula.nom} ${pelicula.cognoms}</a></p>`;
-                pelicules += `<p><strong>Any: </strong> ${pelicula.any}</p>`;
-                pelicules += `<p><strong>País: </strong> ${pelicula.pais_cat}</p>`;
-                pelicules += `<p><strong>Idioma original: </strong> ${pelicula.idioma_ca}</p>`;
-                pelicules += `
-        <p><button type='button' class='btn btn-light btn-sm'>${pelicula.genere_ca}</button></p>`;
-                pelicules += `
-        <a href="${window.location.origin}/cinema/modifica-pelicula/${pelicula.id}" class="btn btn-secondary btn-sm modificar-link">Modificar</a>
-        <button type='button' class='btn btn-dark btn-sm' onclick='eliminaContacte(${pelicula.id})'>Eliminar</button>
-        </div>`;
-            });
-            const peliculesContainer = document.getElementById('peliculesContainer');
-            if (peliculesContainer) {
-                peliculesContainer.innerHTML = pelicules;
-            }
-        }
-        catch (error) {
-            console.error('Error:', error);
-        }
-    });
-}
-
-
-/***/ }),
-
 /***/ "./src/frontend/components/lecturaDadesForm/mostrarDades/connexioApiDades.ts":
 /*!***********************************************************************************!*\
   !*** ./src/frontend/components/lecturaDadesForm/mostrarDades/connexioApiDades.ts ***!
@@ -18227,6 +18083,114 @@ function adreces() {
 
 /***/ }),
 
+/***/ "./src/frontend/pages/auxiliars/auxiliars.ts":
+/*!***************************************************!*\
+  !*** ./src/frontend/pages/auxiliars/auxiliars.ts ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   auxiliars: () => (/* binding */ auxiliars)
+/* harmony export */ });
+/* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
+/* harmony import */ var _taulaLlistatImatges__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./taulaLlistatImatges */ "./src/frontend/pages/auxiliars/taulaLlistatImatges.ts");
+
+
+const url = window.location.href;
+const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_0__.getPageType)(url);
+function auxiliars() {
+    if ([pageType[2]].includes('llistat-imatges')) {
+        (0,_taulaLlistatImatges__WEBPACK_IMPORTED_MODULE_1__.taulaLlistatImatges)();
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/pages/auxiliars/taulaLlistatImatges.ts":
+/*!*************************************************************!*\
+  !*** ./src/frontend/pages/auxiliars/taulaLlistatImatges.ts ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   taulaLlistatImatges: () => (/* binding */ taulaLlistatImatges)
+/* harmony export */ });
+/* harmony import */ var _components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/renderTaula/taulaRender */ "./src/frontend/components/renderTaula/taulaRender.ts");
+/* harmony import */ var _utils_formataData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/formataData */ "./src/frontend/utils/formataData.ts");
+/* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
+/* harmony import */ var _services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth/isAdmin */ "./src/frontend/services/auth/isAdmin.ts");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+
+const url = window.location.href;
+const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_2__.getPageType)(url);
+function taulaLlistatImatges() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const isAdmin = yield (0,_services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_3__.getIsAdmin)();
+        let slug = '';
+        let gestioUrl = '';
+        if (isAdmin) {
+            slug = pageType[3];
+            gestioUrl = '/gestio';
+        }
+        else {
+            slug = pageType[2];
+        }
+        const columns = [
+            {
+                header: '',
+                field: 'nameImg',
+                render: (_, row) => `<a id="${row.id}" title="Imatges detalls" href="https://${window.location.hostname}${gestioUrl}/auxiliars/fitxa-imatge/${row.id}"> <img src="https://media.elliot.cat/img/${row.name}/${row.nameImg}.jpg" alt="${row.nom}" width="60" height="auto"> </a>`,
+            },
+            {
+                header: 'Imatge',
+                field: 'nom',
+                render: (_, row) => `<a id="${row.id}" title="Imatges detalls" href="https://${window.location.hostname}${gestioUrl}/auxiliars/fitxa-imatge/${row.id}">${row.nom}</a>`,
+            },
+            { header: 'Tipus Imatge', field: 'name' },
+            {
+                header: 'Data creació',
+                field: 'dateCreated',
+                render: (_, row) => {
+                    return `${(0,_utils_formataData__WEBPACK_IMPORTED_MODULE_1__.formatData)(row.dateCreated)}`;
+                },
+            },
+        ];
+        if (isAdmin) {
+            columns.push({
+                header: 'Accions',
+                field: 'id',
+                render: (_, row) => `<a a id="${row.id}" title="Modifica" href="https://${window.location.hostname}${gestioUrl}/auxiliars/modifica-imatge/${row.id}"><button class="btn-petit">Modifica</button></a>`,
+            });
+        }
+        (0,_components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__.renderDynamicTable)({
+            url: `https://${window.location.host}/api/auxiliars/get/?llistatCompletImatges`,
+            containerId: 'taulaLlistatImatges',
+            columns,
+            filterKeys: ['nom'],
+            filterByField: 'name',
+        });
+    });
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/pages/biblioteca/biblioteca.ts":
 /*!*****************************************************!*\
   !*** ./src/frontend/pages/biblioteca/biblioteca.ts ***!
@@ -18483,219 +18447,301 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
 /* harmony import */ var _utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/actualitzarDades */ "./src/frontend/utils/actualitzarDades.ts");
-/* harmony import */ var _components_cinema_llistatPelicules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/cinema/llistatPelicules */ "./src/frontend/components/cinema/llistatPelicules.ts");
-/* harmony import */ var _components_lecturaDadesForm_mostrarDades_connexioApiDades__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/lecturaDadesForm/mostrarDades/connexioApiDades */ "./src/frontend/components/lecturaDadesForm/mostrarDades/connexioApiDades.ts");
-/* harmony import */ var _components_cinema_llistatPeliculaActors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/cinema/llistatPeliculaActors */ "./src/frontend/components/cinema/llistatPeliculaActors.ts");
-/* harmony import */ var _persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../persona/fitxaPersona */ "./src/frontend/pages/persona/fitxaPersona.ts");
-/* harmony import */ var _services_api_construirTaula__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/api/construirTaula */ "./src/frontend/services/api/construirTaula.ts");
+/* harmony import */ var _components_lecturaDadesForm_mostrarDades_connexioApiDades__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/lecturaDadesForm/mostrarDades/connexioApiDades */ "./src/frontend/components/lecturaDadesForm/mostrarDades/connexioApiDades.ts");
+/* harmony import */ var _persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../persona/fitxaPersona */ "./src/frontend/pages/persona/fitxaPersona.ts");
+/* harmony import */ var _services_api_construirTaula__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/api/construirTaula */ "./src/frontend/services/api/construirTaula.ts");
+/* harmony import */ var _taulaLlistatPelicules__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./taulaLlistatPelicules */ "./src/frontend/pages/cinema/taulaLlistatPelicules.ts");
+/* harmony import */ var _services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/auth/isAdmin */ "./src/frontend/services/auth/isAdmin.ts");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 
 
 
 
+
+
+
+function cinema() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const url = window.location.href;
+        const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_0__.getPageType)(url);
+        const isAdmin = yield (0,_services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_6__.getIsAdmin)();
+        let slug = '';
+        let gestioUrl = '';
+        if (isAdmin) {
+            slug = pageType[3];
+            gestioUrl = '/gestio';
+        }
+        else {
+            slug = pageType[2];
+        }
+        if (pageType[2] === 'modifica-pelicula') {
+            const peli = document.getElementById('peli');
+            if (peli) {
+                peli.addEventListener('submit', function (event) {
+                    (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'peli', '/api/cinema/put/?type=pelicula');
+                });
+            }
+        }
+        else if ([pageType[1], pageType[2]].includes('fitxa-pelicula')) {
+            (0,_components_lecturaDadesForm_mostrarDades_connexioApiDades__WEBPACK_IMPORTED_MODULE_2__.connexioApiDades)('/api/cinema/get/?pelicula=', slug, 'img', 'cinema-pelicula', function (data) {
+                // Actualiza el atributo href del enlace con el idDirector
+                const directorUrl = document.getElementById('directorUrl');
+                if (directorUrl) {
+                    directorUrl.href = `${window.location.origin}/gestio/cinema/fitxa-director/${data[0].slugDirector}`;
+                }
+            });
+            // author book
+            // llistatPeliculaActors(pageType[3]);
+        }
+        else if (pageType[2] === 'modifica-serie') {
+            const serie = document.getElementById('modificarSerie');
+            if (serie) {
+                // Lanzar actualizador de datos
+                serie.addEventListener('submit', function (event) {
+                    (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'modificarSerie', '/api/cinema/put/?serie');
+                });
+            }
+        }
+        else if (pageType[2] === 'nova-serie') {
+            const serie = document.getElementById('modificarSerie');
+            if (serie) {
+                // Lanzar actualizador de datos
+                serie.addEventListener('submit', function (event) {
+                    (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'modificarSerie', '/api/cinema/post/?serie');
+                });
+            }
+        }
+        else if (pageType[2] === 'modifica-pelicula') {
+            const serie = document.getElementById('modificarPeli');
+            if (serie) {
+                // Lanzar actualizador de datos
+                serie.addEventListener('submit', function (event) {
+                    (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'modificarPeli', '/api/cinema/put/?pelicula');
+                });
+            }
+        }
+        else if (pageType[2] === 'nova-pelicula') {
+            const serie = document.getElementById('modificarPeli');
+            if (serie) {
+                // Lanzar actualizador de datos
+                serie.addEventListener('submit', function (event) {
+                    (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'modificarPeli', '/api/cinema/post/?pelicula');
+                });
+            }
+        }
+        else if (pageType[2] === 'inserir-actor-pelicula') {
+            const serie = document.getElementById('inserirActorPelicula');
+            if (serie) {
+                // Lanzar actualizador de datos
+                serie.addEventListener('submit', function (event) {
+                    (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'inserirActorPelicula', '/api/cinema/post/?actorPelicula');
+                });
+            }
+        }
+        else if (pageType[2] === 'modifica-actor-pelicula') {
+            const serie = document.getElementById('inserirActorPelicula');
+            if (serie) {
+                // Lanzar actualizador de datos
+                serie.addEventListener('submit', function (event) {
+                    (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'inserirActorPelicula', '/api/cinema/put/?actorPelicula');
+                });
+            }
+        }
+        else if (pageType[2] === 'inserir-actor-serie') {
+            const serie = document.getElementById('inserirActorSerie');
+            if (serie) {
+                // Lanzar actualizador de datos
+                serie.addEventListener('submit', function (event) {
+                    (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'inserirActorSerie', '/api/cinema/post/?actorSerie');
+                });
+            }
+        }
+        else if (pageType[2] === 'modifica-actor-serie') {
+            const serie = document.getElementById('inserirActorSerie');
+            if (serie) {
+                // Lanzar actualizador de datos
+                serie.addEventListener('submit', function (event) {
+                    (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'inserirActorSerie', '/api/cinema/put/?actorSerie');
+                });
+            }
+        }
+        else if (pageType[2] === 'fitxa-actor') {
+            (0,_persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_3__.fitxaPersona)('/api/persones/get/?persona=', pageType[3], 'cinema-actor', function (data) {
+                (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_4__.construirTaula)('taula1', '/api/cinema/get/?actor-pelicules=', data.slug, ['Titol', 'Any', 'Rol'], function (fila, columna) {
+                    if (columna.toLowerCase() === 'titol') {
+                        // Manejar el caso del título
+                        return `<a href="https://${window.location.host}/gestio/cinema/fitxa-pelicula/${fila['slug']}">${fila['titol']}</a>`;
+                    }
+                    else if (columna.toLowerCase() === 'any') {
+                        return `${fila['anyInici']}${fila['anyFi'] ? ' - ' + fila['anyFi'] : ''}`;
+                    }
+                    else if (columna.toLowerCase() === 'rol') {
+                        // Manejar otros casos
+                        return `${fila['role']}`;
+                    }
+                    else {
+                        // Manejar otros casos
+                        return fila[columna.toLowerCase()];
+                    }
+                });
+                (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_4__.construirTaula)('taula2', '/api/cinema/get/?actor-series=', data.slug, ['Titol', 'Any', 'Rol'], function (fila, columna) {
+                    if (columna.toLowerCase() === 'titol') {
+                        // Manejar el caso del título
+                        return `<a href="https://${window.location.host}/gestio/cinema/fitxa-serie/${fila['slug']}">${fila['titol']}</a>`;
+                    }
+                    else if (columna.toLowerCase() === 'any') {
+                        return `${fila['anyInici']}${fila['anyFi'] ? ' - ' + fila['anyFi'] : ''}`;
+                    }
+                    else if (columna.toLowerCase() === 'rol') {
+                        // Manejar otros casos
+                        return `${fila['role']}`;
+                    }
+                    else {
+                        // Manejar otros casos
+                        return fila[columna.toLowerCase()];
+                    }
+                });
+            });
+        }
+        else if (pageType[2] === 'fitxa-director') {
+            (0,_persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_3__.fitxaPersona)('/api/persones/get/?persona=', pageType[3], 'cinema-director', function (data) {
+                (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_4__.construirTaula)('taula1', '/api/cinema/get/?directorPelicules=', data.id, ['', 'Titol', 'Any', 'Gènere'], function (fila, columna) {
+                    if (columna.toLowerCase() === '') {
+                        // Manejar el caso del título
+                        return `<a id="pelicula-${fila['id']}" title="pelicula" href="${window.location.origin}/gestio/cinema/fitxa-pelicula/${fila['slug']}">
+                        <img src="https://media.elliot.cat/img/cinema-pelicula/${fila['nameImg']}.jpg" width="100" height="auto">
+                    </a>`;
+                    }
+                    else if (columna.toLowerCase() === 'titol') {
+                        // Manejar el caso del título
+                        return `<a href="https://${window.location.host}/gestio/cinema/fitxa-pelicula/${fila['slug']}">${fila['name']}</a>`;
+                    }
+                    else if (columna.toLowerCase() === 'any') {
+                        return `${fila['anyInici']}${fila['anyFi'] ? ' - ' + fila['anyFi'] : ''}`;
+                    }
+                    else if (columna.toLowerCase() === 'gènere') {
+                        // Manejar otros casos
+                        return `${fila['genere_ca']}`;
+                    }
+                    else {
+                        // Manejar otros casos
+                        return fila[columna.toLowerCase()];
+                    }
+                });
+                (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_4__.construirTaula)('taula2', '/api/cinema/get/?directorSeries=', data.id, ['', 'Titol', 'Any', 'Gènere'], function (fila, columna) {
+                    if (columna.toLowerCase() === '') {
+                        // Manejar el caso del título
+                        return `<a id="serie-${fila['id']}" title="serie" href="${window.location.origin}/gestio/cinema/fitxa-serie/${fila['slug']}">
+                        <img src="https://media.elliot.cat/img/cinema-serie/${fila['nameImg']}.jpg" width="100" height="auto">
+                    </a>`;
+                    }
+                    else if (columna.toLowerCase() === 'titol') {
+                        // Manejar el caso del título
+                        return `<a href="https://${window.location.host}/gestio/cinema/fitxa-serie/${fila['slug']}">${fila['name']}</a>`;
+                    }
+                    else if (columna.toLowerCase() === 'any') {
+                        return `${fila['anyInici']}${fila['anyFi'] ? ' - ' + fila['anyFi'] : ''}`;
+                    }
+                    else if (columna.toLowerCase() === 'gènere') {
+                        // Manejar otros casos
+                        return `${fila['genere_ca']}`;
+                    }
+                    else {
+                        // Manejar otros casos
+                        return fila[columna.toLowerCase()];
+                    }
+                });
+            });
+        }
+        else if ([pageType[1], pageType[2]].includes('llistat-pelicules')) {
+            (0,_taulaLlistatPelicules__WEBPACK_IMPORTED_MODULE_5__.taulaLlistatPelicules)();
+        }
+    });
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/pages/cinema/taulaLlistatPelicules.ts":
+/*!************************************************************!*\
+  !*** ./src/frontend/pages/cinema/taulaLlistatPelicules.ts ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   taulaLlistatPelicules: () => (/* binding */ taulaLlistatPelicules)
+/* harmony export */ });
+/* harmony import */ var _components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/renderTaula/taulaRender */ "./src/frontend/components/renderTaula/taulaRender.ts");
+/* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
+/* harmony import */ var _services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth/isAdmin */ "./src/frontend/services/auth/isAdmin.ts");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 
 
 
 const url = window.location.href;
-const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_0__.getPageType)(url);
-function cinema() {
-    if (pageType[2] === 'modifica-pelicula') {
-        const peli = document.getElementById('peli');
-        if (peli) {
-            peli.addEventListener('submit', function (event) {
-                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'peli', '/api/cinema/put/?type=pelicula');
+const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_1__.getPageType)(url);
+function taulaLlistatPelicules() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const isAdmin = yield (0,_services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_2__.getIsAdmin)();
+        let slug = '';
+        let gestioUrl = '';
+        if (isAdmin) {
+            slug = pageType[3];
+            gestioUrl = '/gestio';
+        }
+        else {
+            slug = pageType[2];
+        }
+        const columns = [
+            {
+                header: 'Pel·lícula',
+                field: 'pelicula',
+                render: (_, row) => `<a id="${row.id}" title="Show movie details" href="https://${window.location.hostname}${gestioUrl}/cinema/fitxa-pelicula/${row.slug}">${row.pelicula}</a>`,
+            },
+            { header: 'Any', field: 'any' },
+            {
+                header: 'Director/a',
+                field: 'cognoms',
+                render: (_, row) => {
+                    return `${row.nom} ${row.cognoms}`;
+                },
+            },
+            { header: 'País', field: 'pais_cat' },
+            { header: 'Gènere', field: 'genere_ca' },
+        ];
+        if (isAdmin) {
+            columns.push({
+                header: 'Accions',
+                field: 'id',
+                render: (_, row) => `<a a id="${row.id}" title="Show movie details" href="https://${window.location.hostname}${gestioUrl}/cinema/modifica-pelicula/${row.slug}">Modifica</a>`,
             });
         }
-    }
-    else if (pageType[2] === 'pelicules') {
-        (0,_components_cinema_llistatPelicules__WEBPACK_IMPORTED_MODULE_2__.llistatPelicules)(10); // Pasar 10 como parámetro para mostrar todas las películas al cargar la página
-        // Manejar clic en los botones de tipo de contacto
-        document.querySelectorAll('button[data-tipus]').forEach((button) => {
-            button.addEventListener('click', (event) => {
-                const target = event.target;
-                const tipus = target.getAttribute('data-tipus');
-                if (tipus) {
-                    (0,_components_cinema_llistatPelicules__WEBPACK_IMPORTED_MODULE_2__.llistatPelicules)(Number(tipus));
-                    // Remover la clase 'active' de todos los botones
-                    document.querySelectorAll('button[data-tipus]').forEach((btn) => {
-                        btn.classList.remove('active');
-                    });
-                    // Agregar la clase 'active' solo al botón clicado
-                    target.classList.add('active');
-                }
-            });
+        (0,_components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__.renderDynamicTable)({
+            url: `https://${window.location.host}/api/cinema/get/?pelicules`,
+            containerId: 'taulaLlistatPelicules',
+            columns,
+            filterKeys: ['nom', 'cognoms', 'pelicula'],
+            filterByField: 'pais_cat',
         });
-    }
-    else if (pageType[2] === 'fitxa-pelicula') {
-        (0,_components_lecturaDadesForm_mostrarDades_connexioApiDades__WEBPACK_IMPORTED_MODULE_3__.connexioApiDades)('/api/cinema/get/?pelicula=', pageType[3], 'img', 'cinema-pelicula', function (data) {
-            // Actualiza el atributo href del enlace con el idDirector
-            const directorUrl = document.getElementById('directorUrl');
-            if (directorUrl) {
-                directorUrl.href = `${window.location.origin}/gestio/cinema/fitxa-director/${data[0].slugDirector}`;
-            }
-        });
-        // author book
-        (0,_components_cinema_llistatPeliculaActors__WEBPACK_IMPORTED_MODULE_4__.llistatPeliculaActors)(pageType[3]);
-    }
-    else if (pageType[2] === 'modifica-serie') {
-        const serie = document.getElementById('modificarSerie');
-        if (serie) {
-            // Lanzar actualizador de datos
-            serie.addEventListener('submit', function (event) {
-                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'modificarSerie', '/api/cinema/put/?serie');
-            });
-        }
-    }
-    else if (pageType[2] === 'nova-serie') {
-        const serie = document.getElementById('modificarSerie');
-        if (serie) {
-            // Lanzar actualizador de datos
-            serie.addEventListener('submit', function (event) {
-                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'modificarSerie', '/api/cinema/post/?serie');
-            });
-        }
-    }
-    else if (pageType[2] === 'modifica-pelicula') {
-        const serie = document.getElementById('modificarPeli');
-        if (serie) {
-            // Lanzar actualizador de datos
-            serie.addEventListener('submit', function (event) {
-                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'modificarPeli', '/api/cinema/put/?pelicula');
-            });
-        }
-    }
-    else if (pageType[2] === 'nova-pelicula') {
-        const serie = document.getElementById('modificarPeli');
-        if (serie) {
-            // Lanzar actualizador de datos
-            serie.addEventListener('submit', function (event) {
-                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'modificarPeli', '/api/cinema/post/?pelicula');
-            });
-        }
-    }
-    else if (pageType[2] === 'inserir-actor-pelicula') {
-        const serie = document.getElementById('inserirActorPelicula');
-        if (serie) {
-            // Lanzar actualizador de datos
-            serie.addEventListener('submit', function (event) {
-                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'inserirActorPelicula', '/api/cinema/post/?actorPelicula');
-            });
-        }
-    }
-    else if (pageType[2] === 'modifica-actor-pelicula') {
-        const serie = document.getElementById('inserirActorPelicula');
-        if (serie) {
-            // Lanzar actualizador de datos
-            serie.addEventListener('submit', function (event) {
-                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'inserirActorPelicula', '/api/cinema/put/?actorPelicula');
-            });
-        }
-    }
-    else if (pageType[2] === 'inserir-actor-serie') {
-        const serie = document.getElementById('inserirActorSerie');
-        if (serie) {
-            // Lanzar actualizador de datos
-            serie.addEventListener('submit', function (event) {
-                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'POST', 'inserirActorSerie', '/api/cinema/post/?actorSerie');
-            });
-        }
-    }
-    else if (pageType[2] === 'modifica-actor-serie') {
-        const serie = document.getElementById('inserirActorSerie');
-        if (serie) {
-            // Lanzar actualizador de datos
-            serie.addEventListener('submit', function (event) {
-                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__.transmissioDadesDB)(event, 'PUT', 'inserirActorSerie', '/api/cinema/put/?actorSerie');
-            });
-        }
-    }
-    else if (pageType[2] === 'fitxa-actor') {
-        (0,_persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_5__.fitxaPersona)('/api/persones/get/?persona=', pageType[3], 'cinema-actor', function (data) {
-            (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_6__.construirTaula)('taula1', '/api/cinema/get/?actor-pelicules=', data.slug, ['Titol', 'Any', 'Rol'], function (fila, columna) {
-                if (columna.toLowerCase() === 'titol') {
-                    // Manejar el caso del título
-                    return `<a href="https://${window.location.host}/gestio/cinema/fitxa-pelicula/${fila['slug']}">${fila['titol']}</a>`;
-                }
-                else if (columna.toLowerCase() === 'any') {
-                    return `${fila['anyInici']}${fila['anyFi'] ? ' - ' + fila['anyFi'] : ''}`;
-                }
-                else if (columna.toLowerCase() === 'rol') {
-                    // Manejar otros casos
-                    return `${fila['role']}`;
-                }
-                else {
-                    // Manejar otros casos
-                    return fila[columna.toLowerCase()];
-                }
-            });
-            (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_6__.construirTaula)('taula2', '/api/cinema/get/?actor-series=', data.slug, ['Titol', 'Any', 'Rol'], function (fila, columna) {
-                if (columna.toLowerCase() === 'titol') {
-                    // Manejar el caso del título
-                    return `<a href="https://${window.location.host}/gestio/cinema/fitxa-serie/${fila['slug']}">${fila['titol']}</a>`;
-                }
-                else if (columna.toLowerCase() === 'any') {
-                    return `${fila['anyInici']}${fila['anyFi'] ? ' - ' + fila['anyFi'] : ''}`;
-                }
-                else if (columna.toLowerCase() === 'rol') {
-                    // Manejar otros casos
-                    return `${fila['role']}`;
-                }
-                else {
-                    // Manejar otros casos
-                    return fila[columna.toLowerCase()];
-                }
-            });
-        });
-    }
-    else if (pageType[2] === 'fitxa-director') {
-        (0,_persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_5__.fitxaPersona)('/api/persones/get/?persona=', pageType[3], 'cinema-director', function (data) {
-            (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_6__.construirTaula)('taula1', '/api/cinema/get/?directorPelicules=', data.id, ['', 'Titol', 'Any', 'Gènere'], function (fila, columna) {
-                if (columna.toLowerCase() === '') {
-                    // Manejar el caso del título
-                    return `<a id="pelicula-${fila['id']}" title="pelicula" href="${window.location.origin}/gestio/cinema/fitxa-pelicula/${fila['slug']}">
-                        <img src="https://media.elliot.cat/img/cinema-pelicula/${fila['nameImg']}.jpg" width="100" height="auto">
-                    </a>`;
-                }
-                else if (columna.toLowerCase() === 'titol') {
-                    // Manejar el caso del título
-                    return `<a href="https://${window.location.host}/gestio/cinema/fitxa-pelicula/${fila['slug']}">${fila['name']}</a>`;
-                }
-                else if (columna.toLowerCase() === 'any') {
-                    return `${fila['anyInici']}${fila['anyFi'] ? ' - ' + fila['anyFi'] : ''}`;
-                }
-                else if (columna.toLowerCase() === 'gènere') {
-                    // Manejar otros casos
-                    return `${fila['genere_ca']}`;
-                }
-                else {
-                    // Manejar otros casos
-                    return fila[columna.toLowerCase()];
-                }
-            });
-            (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_6__.construirTaula)('taula2', '/api/cinema/get/?directorSeries=', data.id, ['', 'Titol', 'Any', 'Gènere'], function (fila, columna) {
-                if (columna.toLowerCase() === '') {
-                    // Manejar el caso del título
-                    return `<a id="serie-${fila['id']}" title="serie" href="${window.location.origin}/gestio/cinema/fitxa-serie/${fila['slug']}">
-                        <img src="https://media.elliot.cat/img/cinema-serie/${fila['nameImg']}.jpg" width="100" height="auto">
-                    </a>`;
-                }
-                else if (columna.toLowerCase() === 'titol') {
-                    // Manejar el caso del título
-                    return `<a href="https://${window.location.host}/gestio/cinema/fitxa-serie/${fila['slug']}">${fila['name']}</a>`;
-                }
-                else if (columna.toLowerCase() === 'any') {
-                    return `${fila['anyInici']}${fila['anyFi'] ? ' - ' + fila['anyFi'] : ''}`;
-                }
-                else if (columna.toLowerCase() === 'gènere') {
-                    // Manejar otros casos
-                    return `${fila['genere_ca']}`;
-                }
-                else {
-                    // Manejar otros casos
-                    return fila[columna.toLowerCase()];
-                }
-            });
-        });
-    }
+    });
 }
 
 
@@ -20244,6 +20290,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_comptabilitat_comptabilitat__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/comptabilitat/comptabilitat */ "./src/frontend/pages/comptabilitat/comptabilitat.ts");
 /* harmony import */ var _components_barraNavegacio_barraNavegacio__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/barraNavegacio/barraNavegacio */ "./src/frontend/components/barraNavegacio/barraNavegacio.ts");
 /* harmony import */ var _components_mostrarBotons_mostrarBoton__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/mostrarBotons/mostrarBoton */ "./src/frontend/components/mostrarBotons/mostrarBoton.ts");
+/* harmony import */ var _pages_auxiliars_auxiliars__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/auxiliars/auxiliars */ "./src/frontend/pages/auxiliars/auxiliars.ts");
+
 
 
 
@@ -20289,6 +20337,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     else if (pageType[1] === 'comptabilitat') {
         (0,_pages_comptabilitat_comptabilitat__WEBPACK_IMPORTED_MODULE_10__.comptabilitat)();
+    }
+    else if (pageType[1] === 'auxiliars') {
+        (0,_pages_auxiliars_auxiliars__WEBPACK_IMPORTED_MODULE_13__.auxiliars)();
     }
 });
 

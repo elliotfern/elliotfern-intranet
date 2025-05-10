@@ -11,6 +11,7 @@ import { viatges } from './pages/viatges/viatges';
 import { comptabilitat } from './pages/comptabilitat/comptabilitat';
 import { barraNavegacio } from './components/barraNavegacio/barraNavegacio';
 import { mostrarBotonsNomesAdmin } from './components/mostrarBotons/mostrarBoton';
+import { auxiliars } from './pages/auxiliars/auxiliars';
 
 const url = window.location.href;
 const pageType = getPageType(url);
@@ -38,5 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     viatges();
   } else if (pageType[1] === 'comptabilitat') {
     comptabilitat();
+  } else if (pageType[1] === 'auxiliars') {
+    auxiliars();
   }
 });
