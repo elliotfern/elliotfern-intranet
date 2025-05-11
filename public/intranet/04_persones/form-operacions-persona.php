@@ -171,25 +171,29 @@ if ($modificaBtn === 1) {
     </div>
 
     <div class="col-complet">
-      <label for="AutDescrip" class="form-label">Descripció (català):</label>
-      <textarea class="form-control" id="descripcio" name="descripcio" rows="10"></textarea>
+      <label for="descripcio" class="form-label">Descripció (català):</label>
+      <input id="descripcio" name="descripcio" type="hidden">
+      <trix-editor input="descripcio" class="trix-editor"></trix-editor>
     </div>
 
     <div class="col-complet">
       <label for="AutDescrip" class="form-label">Descripció (castellà):</label>
-      <textarea class="form-control" id="descripcioCast" name="descripcioCast" rows="10"></textarea>
+      <input id="descripcioCast" name="descripcioCast" type="hidden">
+      <trix-editor input="descripcioCast" class="trix-editor"></trix-editor>
     </div>
 
 
     <div class="col-complet">
       <label for="AutDescrip" class="form-label">Descripció (anglès):</label>
-      <textarea class="form-control" id="descripcioEng" name="descripcioEng" rows="10"></textarea>
+      <input id="descripcioEng" name="descripcioEng" type="hidden">
+      <trix-editor input="descripcioEng" class="trix-editor"></trix-editor>
     </div>
 
 
     <div class="col-complet">
       <label for="AutDescrip" class="form-label">Descripció (italià):</label>
-      <textarea class="form-control" id="descripcioIt" name="descripcioIt" rows="10"></textarea>
+      <input id="descripcioIt" name="descripcioIt" type="hidden">
+      <trix-editor input="descripcioIt" class="trix-editor"></trix-editor>
     </div>
 
     <div class="container">
@@ -236,10 +240,24 @@ if ($modificaBtn === 1) {
         document.getElementById("web").value = data.web;
         document.getElementById("anyNaixement").value = data.anyNaixement;
         document.getElementById("anyDefuncio").value = data.anyDefuncio;
-        document.getElementById("descripcio").innerHTML = decodeURIComponent(data.descripcio);
-        document.getElementById("descripcioCast").innerHTML = decodeURIComponent(data.descripcioCast);
-        document.getElementById("descripcioEng").innerHTML = decodeURIComponent(data.descripcioEng);
-        document.getElementById("descripcioIt").innerHTML = decodeURIComponent(data.descripcioIt);
+
+        document.getElementById("descripcio").value = decodeURIComponent(data.descripcio);
+        document.getElementById("descripcioCast").value = decodeURIComponent(data.descripcioCast);
+        document.getElementById("descripcioEng").value = decodeURIComponent(data.descripcioEng);
+        document.getElementById("descripcioIt").value = decodeURIComponent(data.descripcioIt);
+
+        // Luego, aseguramos que Trix cargue el contenido en los editores correspondientes
+        const trixEditor1 = document.querySelector('trix-editor[input="descripcio"]');
+        const trixEditor2 = document.querySelector('trix-editor[input="descripcioCast"]');
+        const trixEditor3 = document.querySelector('trix-editor[input="descripcioEng"]');
+        const trixEditor4 = document.querySelector('trix-editor[input="descripcioIt"]');
+
+        // Cargar el contenido en los editores
+        trixEditor1.editor.loadHTML(decodeURIComponent(data.descripcio));
+        trixEditor2.editor.loadHTML(decodeURIComponent(data.descripcioCast));
+        trixEditor3.editor.loadHTML(decodeURIComponent(data.descripcioEng));
+        trixEditor4.editor.loadHTML(decodeURIComponent(data.descripcioIt));
+
         document.getElementById("id").value = data.id;
 
         const h2Element = document.getElementById("authorUpdateTitle");

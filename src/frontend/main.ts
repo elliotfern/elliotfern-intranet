@@ -1,4 +1,7 @@
+import 'trix/dist/trix.css';
+import 'trix';
 import './estils/style.css';
+
 import { getPageType } from './utils/urlPath';
 import { cinema } from './pages/cinema/funcions';
 import { loginPage } from './pages/login/funcions';
@@ -12,6 +15,7 @@ import { comptabilitat } from './pages/comptabilitat/comptabilitat';
 import { barraNavegacio } from './components/barraNavegacio/barraNavegacio';
 import { mostrarBotonsNomesAdmin } from './components/mostrarBotons/mostrarBoton';
 import { auxiliars } from './pages/auxiliars/auxiliars';
+import { logout } from './services/login/logOutApi';
 
 const url = window.location.href;
 const pageType = getPageType(url);
@@ -19,6 +23,11 @@ const pageType = getPageType(url);
 document.addEventListener('DOMContentLoaded', () => {
   barraNavegacio();
   mostrarBotonsNomesAdmin();
+
+  const logoutButton = document.getElementById('logoutButton');
+  if (logoutButton) {
+    logoutButton.addEventListener('click', logout);
+  }
 
   console.log(pageType);
   if (pageType[1] === 'cinema' || pageType[0] === 'cinema') {

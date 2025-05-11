@@ -1,3 +1,12 @@
+import { getIsAdmin } from '../auth/isAdmin';
+
+function handleLogin() {
+  const isAdmin = localStorage.getItem('isAdmin');
+  if (isAdmin === 'false') {
+    localStorage.removeItem('isAdmin');
+  }
+}
+
 export async function loginApi(event: any) {
   event.preventDefault(); // Evitar el envío del formulario por defecto
 
@@ -27,8 +36,8 @@ export async function loginApi(event: any) {
 
       if (response.ok) {
         if (data.success) {
-          // Guardar el token en una cookie segura
-          //localStorage.setItem('token', data.token);
+          handleLogin();
+          getIsAdmin();
 
           if (loginMessageOk && loginMessageErr) {
             // Mostrar mensaje de éxito

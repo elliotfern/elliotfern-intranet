@@ -24,6 +24,7 @@ $slug = $routeParams[0];
             <div class='fixaDades'>
                 <div class='columna imatge'>
                     <img id="nameImg" src='' class='img-thumbnail' style='height:auto;width:auto;max-width:auto' alt='Imatge' title='Imatge'>
+                    <span id="alt"></span>
                 </div>
 
                 <div class="columna">

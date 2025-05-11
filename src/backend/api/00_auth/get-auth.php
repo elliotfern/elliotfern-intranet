@@ -25,4 +25,30 @@ if ((isset($_GET['isAdmin']))) {
         // Si no existeixen les cookies o el user_id no és 1, no és admin
         echo json_encode(['isAdmin' => false]);
     }
+} else if ((isset($_GET['logOut']))) {
+    // Verifica que el usuario esté autenticado
+    session_start();
+
+    $arr_cookie_options = array(
+        'expires' => time() - 3600,
+        'path' => '/',
+        'domain' => 'elliot.cat',
+        'secure' => true,         // igual que al crearlas
+        'httponly' => true,       // igual que al crearlas
+        'samesite' => 'Strict'    // igual que al crearlas
+    );
+
+    //Elimina les cookies
+    setcookie('token', '', $arr_cookie_options);
+    setcookie('user_id', '', $arr_cookie_options);
+    setcookie('user_type', '', $arr_cookie_options);
+
+    // Además, puedes destruir la sesión si estás utilizando sesiones en PHP
+    session_unset();    // Elimina todas las variables de sesión
+    session_destroy();  // Destruye la sesión
+
+    // Respuesta en formato JSON o redirige
+    echo json_encode(['message' => 'OK']);
+
+    exit;
 }

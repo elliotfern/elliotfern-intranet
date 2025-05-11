@@ -53,7 +53,7 @@ if (isset($_GET['autor'])) {
   $paisAutor = !empty($data['paisAutor']) ? data_input($data['paisAutor']) : ($hasError = true);
   $img = !empty($data['img']) ? data_input($data['img']) : ($hasError = true);
   $web = !empty($data['web']) ? data_input($data['web']) : ($hasError = false);
-  $descripcio = !empty($data['descripcio']) ? data_input($data['descripcio']) : ($hasError = true);
+
 
   $sexe = !empty($data['sexe']) ? data_input($data['sexe']) : ($hasError = true);
   $mesNaixement = !empty($data['mesNaixement']) ? data_input($data['mesNaixement']) : ($hasError = false);
@@ -62,6 +62,7 @@ if (isset($_GET['autor'])) {
   $diaDefuncio = !empty($data['diaDefuncio']) ? data_input($data['diaDefuncio']) : ($hasError = false);
   $ciutatNaixement = !empty($data['ciutatNaixement']) ? data_input($data['ciutatNaixement']) : ($hasError = false);
   $ciutatDefuncio = !empty($data['ciutatDefuncio']) ? data_input($data['ciutatDefuncio']) : ($hasError = false);
+  $descripcio = !empty($data['descripcio']) ? data_input($data['descripcio']) : ($hasError = true);
   $descripcioCast = !empty($data['descripcioCast']) ? data_input($data['descripcioCast']) : ($hasError = false);
   $descripcioEng = !empty($data['descripcioEng']) ? data_input($data['descripcioEng']) : ($hasError = false);
   $descripcioIt = !empty($data['descripcioIt']) ? data_input($data['descripcioIt']) : ($hasError = false);

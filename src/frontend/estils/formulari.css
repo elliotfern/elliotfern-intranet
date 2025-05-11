@@ -195,3 +195,8 @@ textarea:focus {
     /* Centra el texto en pantallas pequeñas */
   }
 }
+
+.trix-editor {
+  background-color: #ffffff !important;
+  height: 250px !important;
+}

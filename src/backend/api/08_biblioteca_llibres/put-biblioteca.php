@@ -53,7 +53,6 @@ if (isset($_GET['autor'])) {
   $web = isset($data['web']) ? data_input($data['web']) : ($hasError = true);
   $descripcio = isset($data['descripcio']) ? data_input($data['descripcio']) : ($hasError = true);
   $ocupacio = isset($data['ocupacio']) ? data_input($data['ocupacio']) : ($hasError = true);
-  $id = isset($data['id']) ? data_input($data['id']) : ($hasError = true);
   $slug = isset($data['slug']) ? data_input($data['slug']) : ($hasError = true);
   $grup = !empty($data['grup']) ? data_input($data['grup']) : ($hasError = true);
 
@@ -67,6 +66,8 @@ if (isset($_GET['autor'])) {
   $descripcioCast = !empty($data['descripcioCast']) ? data_input($data['descripcioCast']) : ($hasError = false);
   $descripcioEng = !empty($data['descripcioEng']) ? data_input($data['descripcioEng']) : ($hasError = false);
   $descripcioIt = !empty($data['descripcioIt']) ? data_input($data['descripcioIt']) : ($hasError = false);
+
+  $id = !empty($data['id']) ? data_input($data['id']) : ($hasError = false);
 
   $timestamp = date('Y-m-d');
   $dateModified = $timestamp;

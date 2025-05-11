@@ -69,7 +69,8 @@ export async function transmissioDadesDB(event: Event, tipus: string, formId: st
 
 function limpiarFormulario(formId: string) {
   const formulario = document.getElementById(formId) as HTMLFormElement;
-  const inputs = formulario.querySelectorAll('input, textarea, select');
+  const inputs = formulario.querySelectorAll('input, textarea, select, trix-editor');
+
   inputs.forEach((input) => {
     if (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement) {
       input.value = ''; // Limpiar el valor del campo
@@ -77,5 +78,17 @@ function limpiarFormulario(formId: string) {
     if (input instanceof HTMLSelectElement) {
       input.selectedIndex = 0; // Limpiar el select (poner el primer valor por defecto)
     }
+    if (input instanceof HTMLElement && input.tagName === 'TRIX-EDITOR') {
+      // Limpiar el editor Trix (Type Assertion)
+      const trixEditor = input as HTMLTrixEditorElement;
+      trixEditor.editor.loadHTML(''); // Limpiar el contenido del editor Trix
+    }
   });
+}
+
+// Declara el tipo extendido para TrixEditor
+interface HTMLTrixEditorElement extends HTMLElement {
+  editor: {
+    loadHTML: (html: string) => void;
+  };
 }

@@ -16,7 +16,7 @@
         ?>
 
         <form action="" method="post" id="loginForm">
-          <label for="username">Correu electrònic</label>
+          <label for="username">Usuari</label>
           <input type="text" name="username" id="username" class="form-ample-100">
           <br>
 

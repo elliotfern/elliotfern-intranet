@@ -17,7 +17,7 @@ export async function getIsAdmin() {
   // Retornamos el valor obtenido
   return isAdminFromApi;
 }
-
+ 
 export async function isAdminUser(): Promise<boolean> {
   try {
     // Cridem a l'endpoint que verifica si l'usuari és admin
