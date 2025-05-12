@@ -54,6 +54,8 @@ $base_routes = [
     $url['blog'] => APP_INTRANET_DIR . APP_BLOG_DIR . 'index.php',
     $url['blog'] . '/article/{slug}' => APP_INTRANET_DIR . APP_BLOG_DIR . 'fitxa-article.php',
 
+    // 14. Lector rss
+    $url['rss'] => APP_INTRANET_DIR . APP_RSS_DIR . 'index.php',
 ];
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
@@ -342,6 +344,16 @@ $routes = [
 
     $url['blog'] . '/article/{slug}' => [
         'view' => APP_INTRANET_DIR . APP_BLOG_DIR . 'fitxa-article.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    // 14. Lector rss
+    $url['rss'] => [
+        'view' => APP_INTRANET_DIR . APP_RSS_DIR . 'index.php',
         'needs_session' => false,
         'header_footer' => false,
         'header_menu_footer' => true,

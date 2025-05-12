@@ -17,6 +17,7 @@ import { mostrarBotonsNomesAdmin } from './components/mostrarBotons/mostrarBoton
 import { auxiliars } from './pages/auxiliars/auxiliars';
 import { logout } from './services/login/logOutApi';
 import { contactes } from './pages/contactes/contactes';
+import { lectorRss } from './pages/lectorRss/lectorRss';
 
 const url = window.location.href;
 const pageType = getPageType(url);
@@ -31,12 +32,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   console.log(pageType);
-  if (pageType[1] === 'cinema' || pageType[0] === 'cinema') {
-    cinema();
-  } else if (pageType[1] === 'entrada') {
+  if (pageType[1] === 'entrada') {
     loginPage();
   } else if (pageType[1] === 'claus-privades') {
     vault();
+  } else if (pageType[1] === 'comptabilitat') {
+    comptabilitat();
+  } else if (pageType[1] === 'auxiliars') {
+    auxiliars();
+  } else if (pageType[1] === 'agenda-contactes') {
+    contactes();
+
+    // Part accessible tant a usuaris com a visitants
+  } else if (pageType[1] === 'lector-rss' || pageType[0] === 'lector-rss') {
+    lectorRss();
   } else if (pageType[1] === 'historia' || pageType[0] === 'historia') {
     historiaOberta();
   } else if (pageType[1] === 'biblioteca' || pageType[0] === 'biblioteca') {
@@ -47,11 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     persona();
   } else if (pageType[1] === 'viatges' || pageType[0] === 'viatges') {
     viatges();
-  } else if (pageType[1] === 'comptabilitat') {
-    comptabilitat();
-  } else if (pageType[1] === 'auxiliars') {
-    auxiliars();
-  } else if (pageType[1] === 'agenda-contactes') {
-    contactes();
+  } else if (pageType[1] === 'cinema' || pageType[0] === 'cinema') {
+    cinema();
   }
 });

@@ -19888,6 +19888,168 @@ function historiaOberta() {
 
 /***/ }),
 
+/***/ "./src/frontend/pages/lectorRss/lectorFeeds.ts":
+/*!*****************************************************!*\
+  !*** ./src/frontend/pages/lectorRss/lectorFeeds.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   feeds: () => (/* binding */ feeds),
+/* harmony export */   lectorFeeds: () => (/* binding */ lectorFeeds)
+/* harmony export */ });
+const feeds = [
+    {
+        url: 'https://jaime.gomezobregon.com/feed',
+        buttonId: 'btnFeed1',
+        categoria: 'blogs',
+    },
+    {
+        url: 'https://www.vilaweb.cat/feed/',
+        buttonId: 'btnFeed2',
+        categoria: 'medios',
+    },
+    {
+        url: 'https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada',
+        buttonId: 'btnFeed3',
+        categoria: 'medios',
+    },
+    {
+        url: 'https://www.lavanguardia.com/rss/home.xml',
+        buttonId: 'btnFeed4',
+        categoria: 'medios',
+    },
+    {
+        url: 'https://feeds.bbci.co.uk/news/world/rss.xml',
+        buttonId: 'btnFeed5',
+        categoria: 'medios',
+    },
+    {
+        url: 'https://ara.cat/rss',
+        buttonId: 'btnFeed6',
+        categoria: 'medios',
+    },
+    {
+        url: 'https://thecheis.com/feed/',
+        buttonId: 'btnFeed7',
+        categoria: 'blogs',
+    },
+];
+function procesarXML(xml) {
+    const items = Array.from(xml.querySelectorAll('item'));
+    return items.map((item) => {
+        var _a, _b, _c, _d;
+        const title = ((_a = item.querySelector('title')) === null || _a === void 0 ? void 0 : _a.textContent) || 'Sin título';
+        const link = ((_b = item.querySelector('link')) === null || _b === void 0 ? void 0 : _b.textContent) || '#';
+        const description = ((_c = item.querySelector('description')) === null || _c === void 0 ? void 0 : _c.textContent) || '';
+        const pubDate = ((_d = item.querySelector('pubDate')) === null || _d === void 0 ? void 0 : _d.textContent) || '';
+        return {
+            title,
+            link,
+            description,
+            date: pubDate,
+        };
+    });
+}
+function lectorFeeds(url, targetElement) {
+    const container = document.getElementById(targetElement);
+    if (!container)
+        return;
+    container.innerHTML = '<p>Cargando...</p>';
+    fetch(`/api/lector-rss/get/?url=${encodeURIComponent(url)}`)
+        .then((response) => {
+        const contentType = response.headers.get('Content-Type');
+        if (contentType && contentType.includes('application/json')) {
+            return response.json();
+        }
+        else {
+            return response.text();
+        }
+    })
+        .then((data) => {
+        if (typeof data === 'string') {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(data, 'application/xml');
+            data = procesarXML(xmlDoc); // Asegúrate de que procesarXML devuelva FeedItem[]
+        }
+        let html = '<ul>';
+        data.forEach((item) => {
+            html += `
+          <li>
+              <a href="${item.link}" target="_blank">${item.title}</a>
+              <p><strong>${item.date}</strong></p>
+              <p>${item.description}</p>
+          </li>`;
+        });
+        html += '</ul>';
+        const container = document.getElementById(targetElement);
+        if (container) {
+            container.innerHTML = html;
+        }
+    })
+        .catch((error) => {
+        console.error(`Error al obtener el feed: ${url}`, error);
+        const container = document.getElementById(targetElement);
+        if (container) {
+            container.innerHTML = '<p>Error al cargar el feed.</p>';
+        }
+    });
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/pages/lectorRss/lectorRss.ts":
+/*!***************************************************!*\
+  !*** ./src/frontend/pages/lectorRss/lectorRss.ts ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   lectorRss: () => (/* binding */ lectorRss)
+/* harmony export */ });
+/* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
+/* harmony import */ var _lectorFeeds__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lectorFeeds */ "./src/frontend/pages/lectorRss/lectorFeeds.ts");
+
+
+const url = window.location.href;
+const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_0__.getPageType)(url);
+function lectorRss() {
+    if ([pageType[1], pageType[0]].includes('lector-rss')) {
+        _lectorFeeds__WEBPACK_IMPORTED_MODULE_1__.feeds.forEach((feed) => {
+            const button = document.getElementById(feed.buttonId);
+            if (button) {
+                button.addEventListener('click', () => {
+                    (0,_lectorFeeds__WEBPACK_IMPORTED_MODULE_1__.lectorFeeds)(feed.url, 'feed');
+                });
+            }
+        });
+        const btnBlogs = document.getElementById('btnBlogs');
+        const btnMedios = document.getElementById('btnMedios');
+        const grupoBlogs = document.getElementById('grupoBlogs');
+        const grupoMedios = document.getElementById('grupoMedios');
+        if (btnBlogs && grupoBlogs && grupoMedios) {
+            btnBlogs.addEventListener('click', () => {
+                grupoBlogs.classList.toggle('hidden');
+                grupoMedios.classList.add('hidden');
+            });
+        }
+        if (btnMedios && grupoMedios && grupoBlogs) {
+            btnMedios.addEventListener('click', () => {
+                grupoMedios.classList.toggle('hidden');
+                grupoBlogs.classList.add('hidden');
+            });
+        }
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/pages/login/funcions.ts":
 /*!**********************************************!*\
   !*** ./src/frontend/pages/login/funcions.ts ***!
@@ -21586,6 +21748,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_auxiliars_auxiliars__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/auxiliars/auxiliars */ "./src/frontend/pages/auxiliars/auxiliars.ts");
 /* harmony import */ var _services_login_logOutApi__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./services/login/logOutApi */ "./src/frontend/services/login/logOutApi.ts");
 /* harmony import */ var _pages_contactes_contactes__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/contactes/contactes */ "./src/frontend/pages/contactes/contactes.ts");
+/* harmony import */ var _pages_lectorRss_lectorRss__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/lectorRss/lectorRss */ "./src/frontend/pages/lectorRss/lectorRss.ts");
+
 
 
 
@@ -21614,14 +21778,24 @@ document.addEventListener('DOMContentLoaded', () => {
         logoutButton.addEventListener('click', _services_login_logOutApi__WEBPACK_IMPORTED_MODULE_16__.logout);
     }
     console.log(pageType);
-    if (pageType[1] === 'cinema' || pageType[0] === 'cinema') {
-        (0,_pages_cinema_funcions__WEBPACK_IMPORTED_MODULE_4__.cinema)();
-    }
-    else if (pageType[1] === 'entrada') {
+    if (pageType[1] === 'entrada') {
         (0,_pages_login_funcions__WEBPACK_IMPORTED_MODULE_5__.loginPage)();
     }
     else if (pageType[1] === 'claus-privades') {
         (0,_pages_vault_funcions__WEBPACK_IMPORTED_MODULE_6__.vault)();
+    }
+    else if (pageType[1] === 'comptabilitat') {
+        (0,_pages_comptabilitat_comptabilitat__WEBPACK_IMPORTED_MODULE_12__.comptabilitat)();
+    }
+    else if (pageType[1] === 'auxiliars') {
+        (0,_pages_auxiliars_auxiliars__WEBPACK_IMPORTED_MODULE_15__.auxiliars)();
+    }
+    else if (pageType[1] === 'agenda-contactes') {
+        (0,_pages_contactes_contactes__WEBPACK_IMPORTED_MODULE_17__.contactes)();
+        // Part accessible tant a usuaris com a visitants
+    }
+    else if (pageType[1] === 'lector-rss' || pageType[0] === 'lector-rss') {
+        (0,_pages_lectorRss_lectorRss__WEBPACK_IMPORTED_MODULE_18__.lectorRss)();
     }
     else if (pageType[1] === 'historia' || pageType[0] === 'historia') {
         (0,_pages_historiaOberta_historiaOberta__WEBPACK_IMPORTED_MODULE_7__.historiaOberta)();
@@ -21638,14 +21812,8 @@ document.addEventListener('DOMContentLoaded', () => {
     else if (pageType[1] === 'viatges' || pageType[0] === 'viatges') {
         (0,_pages_viatges_viatges__WEBPACK_IMPORTED_MODULE_11__.viatges)();
     }
-    else if (pageType[1] === 'comptabilitat') {
-        (0,_pages_comptabilitat_comptabilitat__WEBPACK_IMPORTED_MODULE_12__.comptabilitat)();
-    }
-    else if (pageType[1] === 'auxiliars') {
-        (0,_pages_auxiliars_auxiliars__WEBPACK_IMPORTED_MODULE_15__.auxiliars)();
-    }
-    else if (pageType[1] === 'agenda-contactes') {
-        (0,_pages_contactes_contactes__WEBPACK_IMPORTED_MODULE_17__.contactes)();
+    else if (pageType[1] === 'cinema' || pageType[0] === 'cinema') {
+        (0,_pages_cinema_funcions__WEBPACK_IMPORTED_MODULE_4__.cinema)();
     }
 });
 
