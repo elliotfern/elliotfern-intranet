@@ -44,8 +44,7 @@ export async function taulaLlistatAutors() {
       field: 'id',
       render: (_: unknown, row: ViatgeRow) => `
         <a href="https://${window.location.host}/gestio/base-dades-persones/modifica-persona/${row.slug}">
-            <button class="btn-petit">Modifica</button>
-        </a>`,
+           <button type="button" class="button btn-petit">Modifica</button></a>`,
     });
   }
 

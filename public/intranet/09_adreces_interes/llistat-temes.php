@@ -1,68 +1,18 @@
 <div class="container">
 
-    <div class="barraNavegacio">
-        <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['adreces']; ?>">Adreces d'interès</a> > <a href="<?php echo APP_INTRANET . $url['adreces']; ?>/llistat-temes">Llistat de temes</a></h6>
-    </div>
+    <div id="barraNavegacioContenidor"></div>
 
     <main>
         <div class="container">
-            <h1>Adreces d'interés: llistat de temes</h1>
-            <p>
-                <button onclick="window.location.href='<?php echo APP_INTRANET . $url['adreces']; ?>/nou-link/'" class="button btn-gran btn-secondari">Afegir enllaç</button>
+            <h1>Adreces d'interés: llistat temes</h1>
+            <?php if (isUserAdmin()) : ?>
+                <p>
+                    <button onclick="window.location.href='<?php echo APP_INTRANET . $url['adreces']; ?>/nou-link/'" class="button btn-gran btn-secondari">Afegir enllaç</button>
+                </p>
+            <?php endif; ?>
 
-            </p>
+            <div id="taulaLlistatCategories"></div>
 
-            <div class="table-responsive">
-                <table class="table table-striped" id="allTopicsList">
-                    <thead class="table-primary">
-                        <tr>
-                            <th>Tema &darr;</th>
-                            <th>Categoria</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-
-            </div>
         </div>
     </main>
 </div>
-
-<script>
-    allTopicsList();
-
-    async function allTopicsList() {
-        const urlAjax = "/api/adreces/get/?type=all-topics";
-
-        try {
-            // Realizar la solicitud fetch
-            const response = await fetch(urlAjax, {
-                method: 'GET',
-            });
-
-            // Verificar si la respuesta es exitosa
-            if (!response.ok) {
-                throw new Error('Error al realizar la solicitud');
-            }
-
-            const data = await response.json();
-
-            let html = '';
-            for (let i = 0; i < data.length; i++) {
-                html += '<tr>';
-
-                html += '<td><a href="./tema/' + data[i].idTema + '">' + data[i].tema + '</a></td>';
-
-                html += '<td><a href="./categoria/' + data[i].idGenre + '">' + data[i].genre + '</a></td>';
-
-                html += '</tr>';
-            }
-
-            // Inyectar el contenido HTML en el DOM
-            document.querySelector('#allTopicsList tbody').innerHTML = html;
-
-        } catch (error) {
-            console.error('Error al realizar la solicitud o al procesar los datos:', error);
-        }
-    }
-</script>

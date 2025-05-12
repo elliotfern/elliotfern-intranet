@@ -38,6 +38,22 @@ $base_routes = [
     $url['cinema'] . '/fitxa-pelicula/{slug}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-pelicula.php',
     $url['cinema'] . '/fitxa-serie/{slug}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-serie.php',
     $url['cinema'] . '/fitxa-teatre/{slug}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-teatre.php',
+
+    // 04. Base dades Persones
+    $url['persones'] => APP_INTRANET_DIR . APP_PERSONES_DIR . 'index.php',
+    $url['persones'] . '/llistat-persones' => APP_INTRANET_DIR . APP_PERSONES_DIR . 'index.php',
+
+    // 09. Adreces interes
+    $url['adreces'] => APP_INTRANET_DIR . APP_ADRECES_DIR . 'index.php',
+    $url['adreces'] . '/llistat-categories' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'llistat-categories.php',
+    $url['adreces'] . '/llistat-temes' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'llistat-temes.php',
+    $url['adreces'] . '/categoria/{id}' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'vista-categoria.php',
+    $url['adreces'] . '/tema/{id}' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'vista-tema.php',
+
+    // 13. Blog
+    $url['blog'] => APP_INTRANET_DIR . APP_BLOG_DIR . 'index.php',
+    $url['blog'] . '/article/{slug}' => APP_INTRANET_DIR . APP_BLOG_DIR . 'fitxa-article.php',
+
 ];
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
@@ -242,6 +258,90 @@ $routes = [
 
     $url['cinema'] . '/fitxa-teatre/{slug}' => [
         'view' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-teatre.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    // 04. Base de dades persones
+    $url['persones'] => [
+        'view' =>  APP_INTRANET_DIR . APP_PERSONES_DIR . 'index.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    $url['persones'] . '/llistat-persones' => [
+        'view' =>  APP_INTRANET_DIR . APP_PERSONES_DIR . 'index.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    // 09. Adreces interes
+    $url['adreces'] => [
+        'view' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'index.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    $url['adreces'] . '/llistat-categories' => [
+        'view' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'llistat-categories.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    $url['adreces'] . '/llistat-temes' => [
+        'view' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'llistat-temes.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    $url['adreces'] . '/categoria/{id}' => [
+        'view' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'vista-categoria.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    $url['adreces'] . '/tema/{id}' => [
+        'view' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'vista-tema.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    // 13. Blog
+    $url['blog'] => [
+        'view' => APP_INTRANET_DIR . APP_BLOG_DIR . 'index.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    $url['blog'] . '/article/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_BLOG_DIR . 'fitxa-article.php',
         'needs_session' => false,
         'header_footer' => false,
         'header_menu_footer' => true,

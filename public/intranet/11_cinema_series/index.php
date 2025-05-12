@@ -7,7 +7,7 @@
             <h1>Arts escèniques, cinema i televisió</h1>
 
             <div id="isAdminButton" style="display: none;">
-                <?php if (isset($_COOKIE['user_id']) && $_COOKIE['user_id'] === '1') : ?>
+                <?php if (isUserAdmin()) : ?>
                     <p>
                         <button onclick="window.location.href='<?php echo APP_INTRANET . $url['cinema']; ?>/nova-pelicula/'" class="button btn-gran btn-secondari">Afegir pel·lícula</button>
 

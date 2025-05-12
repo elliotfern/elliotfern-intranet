@@ -18664,6 +18664,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
 /* harmony import */ var _utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/actualitzarDades */ "./src/frontend/utils/actualitzarDades.ts");
+/* harmony import */ var _taulaLlistatCategories__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./taulaLlistatCategories */ "./src/frontend/pages/adreces/taulaLlistatCategories.ts");
+/* harmony import */ var _taulaLlistatAdrecesPerTema__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./taulaLlistatAdrecesPerTema */ "./src/frontend/pages/adreces/taulaLlistatAdrecesPerTema.ts");
+
+
 
 
 const url = window.location.href;
@@ -18687,6 +18691,166 @@ function adreces() {
             });
         }
     }
+    else if ([pageType[1], pageType[2]].includes('llistat-temes')) {
+        (0,_taulaLlistatCategories__WEBPACK_IMPORTED_MODULE_2__.taulaLlistatTemes)();
+    }
+    else if ([pageType[1], pageType[2]].includes('tema')) {
+        (0,_taulaLlistatAdrecesPerTema__WEBPACK_IMPORTED_MODULE_3__.taulaLlistatAdrecesPerTema)();
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/pages/adreces/taulaLlistatAdrecesPerTema.ts":
+/*!******************************************************************!*\
+  !*** ./src/frontend/pages/adreces/taulaLlistatAdrecesPerTema.ts ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   taulaLlistatAdrecesPerTema: () => (/* binding */ taulaLlistatAdrecesPerTema)
+/* harmony export */ });
+/* harmony import */ var _components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/renderTaula/taulaRender */ "./src/frontend/components/renderTaula/taulaRender.ts");
+/* harmony import */ var _utils_formataData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/formataData */ "./src/frontend/utils/formataData.ts");
+/* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
+/* harmony import */ var _services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth/isAdmin */ "./src/frontend/services/auth/isAdmin.ts");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+
+const url = window.location.href;
+const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_2__.getPageType)(url);
+function taulaLlistatAdrecesPerTema() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const isAdmin = yield (0,_services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_3__.getIsAdmin)();
+        let slug = '';
+        let gestioUrl = '';
+        if (isAdmin) {
+            slug = pageType[3];
+            gestioUrl = '/gestio';
+        }
+        else {
+            slug = pageType[2];
+        }
+        const columns = [
+            {
+                header: 'Enllaç',
+                field: 'tema',
+                render: (_, row) => {
+                    // Verificamos si `row.tema` tiene un valor
+                    if (row.tema) {
+                        const nomTema = document.getElementById('nomTema');
+                        if (nomTema) {
+                            nomTema.innerHTML = `Tema: ${row.tema}`;
+                        }
+                    }
+                    // Generamos el enlace con los valores de `row.nom` y `row.url`
+                    return `<a id="${row.idTema}" title="Enllaç" href="${row.url}" target="_blank">${row.nom}</a>`;
+                },
+            },
+            { header: 'Idioma', field: 'idioma_ca' },
+            { header: 'Tipus', field: 'type_ca' },
+            {
+                header: 'Data creació',
+                field: 'tema',
+                render: (_, row) => `${(0,_utils_formataData__WEBPACK_IMPORTED_MODULE_1__.formatData)(row.dateCreated)}`,
+            },
+        ];
+        if (isAdmin) {
+            columns.push({
+                header: 'Accions',
+                field: 'id',
+                render: (_, row) => `<a id="${row.idTema}" title="Modifica" href="https://${window.location.hostname}${gestioUrl}/adreces/modifica-link/${row.linkId}"><button type="button" class="button btn-petit">Modifica</button></a>`,
+            });
+        }
+        (0,_components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__.renderDynamicTable)({
+            url: `https://${window.location.host}/api/adreces/get/?type=topic&id=${slug}`,
+            containerId: 'taulaLlistatAdreces',
+            columns,
+            filterKeys: ['nom'],
+            filterByField: 'type_ca',
+        });
+    });
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/pages/adreces/taulaLlistatCategories.ts":
+/*!**************************************************************!*\
+  !*** ./src/frontend/pages/adreces/taulaLlistatCategories.ts ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   taulaLlistatTemes: () => (/* binding */ taulaLlistatTemes)
+/* harmony export */ });
+/* harmony import */ var _components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/renderTaula/taulaRender */ "./src/frontend/components/renderTaula/taulaRender.ts");
+/* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
+/* harmony import */ var _services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth/isAdmin */ "./src/frontend/services/auth/isAdmin.ts");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+const url = window.location.href;
+const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_1__.getPageType)(url);
+function taulaLlistatTemes() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const isAdmin = yield (0,_services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_2__.getIsAdmin)();
+        let slug = '';
+        let gestioUrl = '';
+        if (isAdmin) {
+            slug = pageType[3];
+            gestioUrl = '/gestio';
+        }
+        else {
+            slug = pageType[2];
+        }
+        const columns = [
+            {
+                header: 'Tema',
+                field: 'tema',
+                render: (_, row) => `<a id="${row.idTema}" title="Show category" href="https://${window.location.host}${gestioUrl}/adreces/tema/${row.idTema}">${row.tema}</a>`,
+            },
+            { header: 'Categoría', field: 'genre' },
+        ];
+        if (isAdmin) {
+            columns.push({
+                header: 'Accions',
+                field: 'id',
+                render: (_, row) => `<a id="${row.idTema}" title="Show movie details" href="https://${window.location.hostname}${gestioUrl}/adreces/modifica-tema/${row.slug}"><button type="button" class="button btn-petit">Modifica</button></a>`,
+            });
+        }
+        (0,_components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__.renderDynamicTable)({
+            url: `https://${window.location.host}/api/adreces/get/?type=all-topics`,
+            containerId: 'taulaLlistatCategories',
+            columns,
+            filterKeys: ['tema'],
+            filterByField: 'genre',
+        });
+    });
 }
 
 
@@ -18948,8 +19112,7 @@ function taulaLlistatAutors() {
                 field: 'id',
                 render: (_, row) => `
         <a href="https://${window.location.host}/gestio/base-dades-persones/modifica-persona/${row.slug}">
-            <button class="btn-petit">Modifica</button>
-        </a>`,
+           <button type="button" class="button btn-petit">Modifica</button></a>`,
             });
         }
         (0,_components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__.renderDynamicTable)({
@@ -19026,8 +19189,7 @@ function taulaLlistatLlibres() {
                 field: 'id',
                 render: (_, row) => `
         <a href="https://${window.location.host}/gestio/biblioteca/modifica-llibre/${row.slug}">
-            <button class="btn-petit">Modifica</button>
-        </a>`,
+            <button type="button" class="button btn-petit">Modifica</button></a>`,
             });
         }
         (0,_components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__.renderDynamicTable)({
@@ -19340,7 +19502,7 @@ function taulaLlistatPelicules() {
             columns.push({
                 header: 'Accions',
                 field: 'id',
-                render: (_, row) => `<a a id="${row.id}" title="Show movie details" href="https://${window.location.hostname}${gestioUrl}/cinema/modifica-pelicula/${row.slug}">Modifica</a>`,
+                render: (_, row) => `<a id="${row.id}" title="Show movie details" href="https://${window.location.hostname}${gestioUrl}/cinema/modifica-pelicula/${row.slug}"><button type="button" class="button btn-petit">Modifica</button></a>`,
             });
         }
         (0,_components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__.renderDynamicTable)({
@@ -19447,6 +19609,147 @@ function taulaFacturacioClients() {
         ],
         filterKeys: ['clientEmpresa', 'clientCognoms'],
         filterByField: 'any',
+    });
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/pages/contactes/contactes.ts":
+/*!***************************************************!*\
+  !*** ./src/frontend/pages/contactes/contactes.ts ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   contactes: () => (/* binding */ contactes)
+/* harmony export */ });
+/* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
+/* harmony import */ var _taulaLlistatContactes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./taulaLlistatContactes */ "./src/frontend/pages/contactes/taulaLlistatContactes.ts");
+
+
+const url = window.location.href;
+const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_0__.getPageType)(url);
+function contactes() {
+    if ([pageType[1]].includes('agenda-contactes')) {
+        (0,_taulaLlistatContactes__WEBPACK_IMPORTED_MODULE_1__.taulaLlistatContactes)();
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/pages/contactes/taulaLlistatContactes.ts":
+/*!***************************************************************!*\
+  !*** ./src/frontend/pages/contactes/taulaLlistatContactes.ts ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   taulaLlistatContactes: () => (/* binding */ taulaLlistatContactes)
+/* harmony export */ });
+/* harmony import */ var _components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/renderTaula/taulaRender */ "./src/frontend/components/renderTaula/taulaRender.ts");
+/* harmony import */ var _utils_formataData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/formataData */ "./src/frontend/utils/formataData.ts");
+/* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
+/* harmony import */ var _services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth/isAdmin */ "./src/frontend/services/auth/isAdmin.ts");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+
+const url = window.location.href;
+const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_2__.getPageType)(url);
+function taulaLlistatContactes() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const isAdmin = yield (0,_services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_3__.getIsAdmin)();
+        let slug = '';
+        let gestioUrl = '';
+        if (isAdmin) {
+            slug = pageType[3];
+            gestioUrl = '/gestio';
+        }
+        else {
+            slug = pageType[2];
+        }
+        const columns = [
+            {
+                header: 'Nom i cognoms',
+                field: 'cognoms',
+                render: (_, row) => `${row.nom} ${row.cognoms}`,
+            },
+            {
+                header: 'Dades contacte',
+                field: 'cognoms',
+                render: (_, row) => {
+                    // Inicializamos un array para almacenar los elementos válidos
+                    const contactLinks = [];
+                    // Verificamos si el correo electrónico no está vacío o es nulo y lo agregamos como enlace mailto
+                    if (row.email && row.email !== '') {
+                        contactLinks.push(`<a href="mailto:${row.email}">${row.email}</a>`);
+                    }
+                    // Verificamos si el teléfono 1 no está vacío o es nulo y lo agregamos como enlace tel:
+                    if (row.tel_1 && row.tel_1 !== '') {
+                        contactLinks.push(`<a href="tel:${row.tel_1}">${row.tel_1}</a>`);
+                    }
+                    // Verificamos si el teléfono 2 no está vacío o es nulo y lo agregamos como enlace tel:
+                    if (row.tel_2 && row.tel_2 !== '') {
+                        contactLinks.push(`<a href="tel:${row.tel_2}">${row.tel_2}</a>`);
+                    }
+                    // Verificamos si el teléfono 3 no está vacío o es nulo y lo agregamos como enlace tel:
+                    if (row.tel_3 && row.tel_3 !== '') {
+                        contactLinks.push(`<a href="tel:${row.tel_3}">${row.tel_3}</a>`);
+                    }
+                    // Si hay algún dato válido en el array, los unimos con " / " y los devolvemos
+                    if (contactLinks.length > 0) {
+                        return contactLinks.join(' / ');
+                    }
+                    else {
+                        return ''; // Si no hay datos, devolvemos una cadena vacía
+                    }
+                },
+            },
+            { header: 'Tipus', field: 'tipus' },
+            { header: 'País', field: 'country' },
+            {
+                header: 'Data naixement',
+                field: 'tema',
+                render: (_, row) => {
+                    // Verificamos si data_naixement tiene un valor válido (no null, no vacío)
+                    if (row.data_naixement && row.data_naixement !== null && row.data_naixement !== '') {
+                        return (0,_utils_formataData__WEBPACK_IMPORTED_MODULE_1__.formatNaixementEdat)(row.data_naixement); // Si es válido, mostramos la fecha formateada
+                    }
+                    else {
+                        return ''; // Si es null o vacío, no mostramos nada
+                    }
+                },
+            },
+        ];
+        if (isAdmin) {
+            columns.push({
+                header: 'Accions',
+                field: 'id',
+                render: (_, row) => `<a id="${row.idTema}" title="Modifica" href="https://${window.location.hostname}${gestioUrl}/agenda-contactes/modifica-contacte/${row.id}"><button type="button" class="button btn-petit">Modifica</button></a>`,
+            });
+        }
+        (0,_components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__.renderDynamicTable)({
+            url: `https://${window.location.host}/api/contactes/get/?contactes`,
+            containerId: 'taulaLlistatContactes',
+            columns,
+            filterKeys: ['nom', 'cognoms'],
+            filterByField: 'tipus',
+        });
     });
 }
 
@@ -19816,6 +20119,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
 /* harmony import */ var _utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/actualitzarDades */ "./src/frontend/utils/actualitzarDades.ts");
+/* harmony import */ var _taulaLlistatPersones__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./taulaLlistatPersones */ "./src/frontend/pages/persona/taulaLlistatPersones.ts");
+
 
 
 const url = window.location.href;
@@ -19839,6 +20144,133 @@ function persona() {
             });
         }
     }
+    else if ([pageType[1], pageType[0]].includes('base-dades-persones')) {
+        (0,_taulaLlistatPersones__WEBPACK_IMPORTED_MODULE_2__.taulaLlistatPersones)();
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/pages/persona/taulaLlistatPersones.ts":
+/*!************************************************************!*\
+  !*** ./src/frontend/pages/persona/taulaLlistatPersones.ts ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   taulaLlistatPersones: () => (/* binding */ taulaLlistatPersones)
+/* harmony export */ });
+/* harmony import */ var _components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/renderTaula/taulaRender */ "./src/frontend/components/renderTaula/taulaRender.ts");
+/* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
+/* harmony import */ var _services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth/isAdmin */ "./src/frontend/services/auth/isAdmin.ts");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+const url = window.location.href;
+const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_1__.getPageType)(url);
+function getDirInfoByGroup(grup) {
+    let dirImg = '';
+    let dirUrl = '';
+    switch (grup) {
+        case 1:
+            dirImg = 'biblioteca-autor';
+            dirUrl = 'biblioteca/fitxa-autor';
+            break;
+        case 2:
+            dirImg = 'cinema-director';
+            dirUrl = 'cinema/fitxa-director';
+            break;
+        case 3:
+            dirImg = 'cinema-actor';
+            dirUrl = 'cinema/fitxa-actor';
+            break;
+        case 4:
+            dirImg = 'historia-persona';
+            dirUrl = 'historia/fitxa-persona';
+            break;
+        case 5:
+            dirImg = 'politic';
+            dirUrl = 'historia/fitxa-politic';
+            break;
+        default:
+            dirImg = 'default';
+            dirUrl = 'default/fitxa';
+    }
+    return { dirImg, dirUrl };
+}
+function taulaLlistatPersones() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const isAdmin = yield (0,_services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_2__.getIsAdmin)();
+        let slug = '';
+        let gestioUrl = '';
+        if (isAdmin) {
+            slug = pageType[3];
+            gestioUrl = '/gestio';
+        }
+        else {
+            slug = pageType[2];
+        }
+        const columns = [
+            {
+                header: '',
+                field: 'nameImg',
+                render: (_, row) => {
+                    const { dirImg, dirUrl } = getDirInfoByGroup(row.grup);
+                    const detailUrl = `https://${window.location.host}${gestioUrl}/${dirUrl}/${row.slug}`;
+                    const fullImgUrl = `https://media.elliot.cat/img/${dirImg}/${row.nameImg}.jpg`;
+                    // Genera el enlace dinámico con la imagen
+                    return `<a id="${row.id}" title="Persona" href="${detailUrl}">
+              <img src="${fullImgUrl}" style="height:70px">
+            </a>`;
+                },
+            },
+            {
+                header: 'Nom i cognoms',
+                field: 'nom',
+                render: (_, row) => {
+                    const { dirImg, dirUrl } = getDirInfoByGroup(row.grup);
+                    // Genera el enlace dinámico sin la imagen
+                    return `<a id="${row.id}" title="${row.nom} ${row.cognoms}" 
+               href="https://${window.location.hostname}${gestioUrl}/${dirUrl}/${row.slug}">
+               ${row.nom} ${row.cognoms}
+            </a>`;
+                },
+            },
+            { header: 'País', field: 'pais_cat' },
+            { header: 'Professió', field: 'professio_ca' },
+            {
+                header: 'Anys',
+                field: 'yearBorn',
+                render: (_, row) => `${row.yearDie ? `${row.yearBorn} - ${row.yearDie}` : row.yearBorn}`,
+            },
+        ];
+        if (isAdmin) {
+            columns.push({
+                header: 'Accions',
+                field: 'id',
+                render: (_, row) => `<a id="${row.id}" title="Modifica" href="https://${window.location.hostname}${gestioUrl}/base-dades-persones/modifica-persona/${row.slug}"><button type="button" class="button btn-petit">Modifica</button></a>`,
+            });
+        }
+        (0,_components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__.renderDynamicTable)({
+            url: `https://${window.location.host}/api/persones/get/?type=llistatPersones`,
+            containerId: 'taulaLlistatPersones',
+            columns,
+            filterKeys: ['nom', 'cognoms'],
+            filterByField: 'grup_ca',
+        });
+    });
 }
 
 
@@ -20724,8 +21156,10 @@ function limpiarFormulario(formId) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   calculEdat: () => (/* binding */ calculEdat),
 /* harmony export */   formatData: () => (/* binding */ formatData),
-/* harmony export */   formatDataCatala: () => (/* binding */ formatDataCatala)
+/* harmony export */   formatDataCatala: () => (/* binding */ formatDataCatala),
+/* harmony export */   formatNaixementEdat: () => (/* binding */ formatNaixementEdat)
 /* harmony export */ });
 function formatData(inputDate) {
     // Primero intentamos crear una fecha a partir del input
@@ -20758,6 +21192,39 @@ function formatDataCatala(inputDate) {
     let month = mesesCatalan[fecha.getMonth()]; // Obtener el nombre del mes en catalán
     let year = fecha.getFullYear(); // Obtener el año
     return `${day} ${month} ${year}`;
+}
+function calculEdat(dataNaixement) {
+    // Validamos la fecha de nacimiento usando formatData
+    const fechaFormateada = formatData(dataNaixement);
+    // Si la fecha es inválida, devolvemos un mensaje de error
+    if (fechaFormateada === 'Data no vàlida') {
+        return 'Edat no disponible';
+    }
+    // Convertimos la fecha de nacimiento a un objeto Date
+    const nacimiento = new Date(dataNaixement);
+    // Obtenemos la fecha actual
+    const hoy = new Date();
+    // Calculamos la edad
+    let edad = hoy.getFullYear() - nacimiento.getFullYear();
+    // Ajustamos la edad si no ha pasado el cumpleaños este año
+    const mesNacimiento = nacimiento.getMonth();
+    const diaNacimiento = nacimiento.getDate();
+    if (hoy.getMonth() < mesNacimiento || (hoy.getMonth() === mesNacimiento && hoy.getDate() < diaNacimiento)) {
+        edad--;
+    }
+    return edad.toString();
+}
+function formatNaixementEdat(edat) {
+    // Primero formateamos la fecha de nacimiento
+    const fechaFormateada = formatDataCatala(edat);
+    // Si la fecha es inválida, no mostramos nada
+    if (fechaFormateada === 'Data no vàlida') {
+        return '';
+    }
+    // Luego calculamos la edad
+    const edad = calculEdat(edat);
+    // Devolvemos la fecha de nacimiento y la edad en el formato deseado
+    return `${fechaFormateada} (${edad} anys)`;
 }
 
 
@@ -21132,6 +21599,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_mostrarBotons_mostrarBoton__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/mostrarBotons/mostrarBoton */ "./src/frontend/components/mostrarBotons/mostrarBoton.ts");
 /* harmony import */ var _pages_auxiliars_auxiliars__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./pages/auxiliars/auxiliars */ "./src/frontend/pages/auxiliars/auxiliars.ts");
 /* harmony import */ var _services_login_logOutApi__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./services/login/logOutApi */ "./src/frontend/services/login/logOutApi.ts");
+/* harmony import */ var _pages_contactes_contactes__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/contactes/contactes */ "./src/frontend/pages/contactes/contactes.ts");
+
 
 
 
@@ -21174,10 +21643,10 @@ document.addEventListener('DOMContentLoaded', () => {
     else if (pageType[1] === 'biblioteca' || pageType[0] === 'biblioteca') {
         (0,_pages_biblioteca_biblioteca__WEBPACK_IMPORTED_MODULE_8__.biblioteca)();
     }
-    else if (pageType[1] === 'adreces') {
+    else if (pageType[1] === 'adreces' || pageType[0] === 'adreces') {
         (0,_pages_adreces_adreces__WEBPACK_IMPORTED_MODULE_9__.adreces)();
     }
-    else if (pageType[1] === 'base-dades-persones') {
+    else if (pageType[1] === 'base-dades-persones' || pageType[0] === 'base-dades-persones') {
         (0,_pages_persona_persona__WEBPACK_IMPORTED_MODULE_10__.persona)();
     }
     else if (pageType[1] === 'viatges' || pageType[0] === 'viatges') {
@@ -21188,6 +21657,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     else if (pageType[1] === 'auxiliars') {
         (0,_pages_auxiliars_auxiliars__WEBPACK_IMPORTED_MODULE_15__.auxiliars)();
+    }
+    else if (pageType[1] === 'agenda-contactes') {
+        (0,_pages_contactes_contactes__WEBPACK_IMPORTED_MODULE_17__.contactes)();
     }
 });
 

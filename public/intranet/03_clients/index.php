@@ -1,31 +1,25 @@
+<div class="container">
+
     <div id="barraNavegacioContenidor"></div>
 
-    <?php
-    echo '<h2>Hispano Atlantic Consulting Ltd - Accounting & CRM</h2>';
-    echo '<h3>CRM Customers</h3>';
+    <main>
+        <div class="container contingut">
+            <h1>Gestió de clients</h1>
+            <div id="isAdminButton" style="display: none;">
+                <?php if (isUserAdmin()) { ?>
+                    <p>
+                        <button onclick="window.location.href='<?php echo APP_INTRANET . $url['clients']; ?>/nou-client/'" class="button btn-gran btn-secondari">Afegir client</button>
+                    </p>
 
-    echo "<p><button type='button' class='btn btn-light btn-sm' id='btnAddNewCostumer' onclick='btnCreateCustomer()' data-bs-toggle='modal' data-bs-target='#modalCreateCustomer'>Add new costumer</button></p>";
+                    <div class="alert alert-success quadre">
+                        <ul class="llistat">
+                        </ul>
+                    </div>
 
-    echo "<hr>";
-    echo "<p></p>";
+                <?php } else {
+                    // Código que se ejecuta si la condición es falsa (opcional)
+                } ?>
 
-    echo '<div class="">';
-    echo '<table class="table table-striped">
-        <thead class="">
-        <tr>
-            <th>Customer</th>
-            <th>Company</th>
-            <th>Entry date</th>
-            <th>Status</th>
-            <th></th>
-            <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-       
-    </tr>
- </tbody>
-    </table>
-    </div>
-';
+            </div>
+    </main>
+</div>

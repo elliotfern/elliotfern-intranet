@@ -1,5 +1,6 @@
 import { getPageType } from '../../utils/urlPath';
 import { transmissioDadesDB } from '../../utils/actualitzarDades';
+import { taulaLlistatPersones } from './taulaLlistatPersones';
 
 const url = window.location.href;
 const pageType = getPageType(url);
@@ -21,5 +22,7 @@ export function persona() {
         transmissioDadesDB(event, 'POST', 'modificaAutor', '/api/biblioteca/post/?autor');
       });
     }
+  } else if ([pageType[1], pageType[0]].includes('base-dades-persones')) {
+    taulaLlistatPersones();
   }
 }

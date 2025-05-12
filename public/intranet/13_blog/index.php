@@ -1,30 +1,38 @@
-<main>
-    <div class="container">
-        <h2><a href="/gestio/blog">Blog</a> > <a href="/vault">Elliot</a></h2>
-        <p><a href='/gestio/vault/nova'><button type='button' class='btn btn-light btn-sm' id='btnAddVault'>Nou article</button></a></p>
+<div class="container">
 
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead class="table-primary">
-                    <tr>
-                        <th>Id</th>
-                        <th>Article</th>
-                        <th>Data publicació</th>
-                        <th>Tipus</th>
-                        <th>idioma</th>
-                        <th>Modifica</th>
-                        <th>Elimina</th>
-                    </tr>
-                </thead>
-                <tbody> <!-- Aquí se agregarán las filas dinámicamente -->
-                </tbody>
-            </table>
+    <div id="barraNavegacioContenidor"></div>
+
+    <main>
+        <div class="container contingut">
+            <h1>Blog</h1>
+
+            <?php if (isUserAdmin()) {
+                $urlGestio = "/gestio";
+            ?>
+                <p>
+                    <button onclick="window.location.href='<?php echo APP_INTRANET . $url['blog']; ?>/nou-article/'" class="button btn-gran btn-secondari">Nou article</button>
+                </p>
+            <?php
+            } else {
+                $urlGestio = "";
+            } ?>
+
+            <div id="filters" class="filter-buttons"></div>
+            <ul id="articleList" class="mb-3"></ul>
+            <div id="pagination"></div>
+
         </div>
+    </main>
 
+</div>
 
-    </div>
-</main>
 <script>
+    let allArticles = [];
+    let filteredArticles = [];
+    let currentPage = 1;
+    const pageSize = 15;
+    let currentFilterYear = null;
+
     async function fetchArticles() {
         const allowedOrigins = ['https://elliot.cat', 'https://historiaoberta.cat'];
         const currentOrigin = window.location.origin;
@@ -35,77 +43,133 @@
         }
 
         try {
-            const response = await fetch('/api/historia-oberta/get/?type=llistat-articles', {
+            const response = await fetch('/api/blog/get/?llistatArticles', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     'Origin': currentOrigin
                 },
-                credentials: 'include' // Incluir credenciales si es necesario
+                credentials: 'include'
             });
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            const articles = await response.json();
-            displayArticles(articles);
+            allArticles = await response.json();
+            filteredArticles = [...allArticles];
+            renderYearFilters(allArticles);
+            displayArticles();
         } catch (error) {
             console.error('Error fetching articles:', error);
         }
     }
 
-    function displayArticles(articles) {
-        const tbody = document.querySelector('.table tbody');
-        tbody.innerHTML = ''; // Limpiar el contenido existente
+    function renderYearFilters(articles) {
+        const years = [...new Set(articles.map(a => new Date(a.post_date).getFullYear()))].sort((a, b) => b - a);
+        const filtersDiv = document.getElementById('filters');
+        filtersDiv.innerHTML = '';
 
-        articles.forEach(article => {
-            const row = document.createElement('tr');
+        const allBtn = document.createElement('button');
+        allBtn.textContent = 'Tots';
+        allBtn.className = `filter-btn${currentFilterYear === null ? ' active' : ''}`;
+        allBtn.onclick = () => filterByYear(null);
+        filtersDiv.appendChild(allBtn);
 
-            const idCell = document.createElement('td');
-            idCell.textContent = article.id;
-            row.appendChild(idCell);
-
-            const titleCell = document.createElement('td');
-            titleCell.textContent = article.post_title;
-            row.appendChild(titleCell);
-
-            const dateCell = document.createElement('td');
-            dateCell.textContent = new Date(article.postData).toLocaleDateString();
-            row.appendChild(dateCell);
-
-            const typeCell = document.createElement('td');
-            typeCell.textContent = article.post_name; // Asumiendo que post_name es el tipo
-            row.appendChild(typeCell);
-
-            const idiomaCell = document.createElement('td');
-            idiomaCell.textContent = article.idioma; // Asumiendo que post_name es el tipo
-            row.appendChild(idiomaCell);
-
-            const modifyCell = document.createElement('td');
-            modifyCell.innerHTML = `<a href="/gestio/blog/modifica-article/${article.ID}"><button type="button" class="btn-primari btn-petit">Modifica</button></a>`;
-            row.appendChild(modifyCell);
-
-            const deleteCell = document.createElement('td');
-            deleteCell.innerHTML = `<button type="button" class="btn-secondari btn-petit " onclick="deleteArticle(${article.ID})">Elimina</button>`;
-            row.appendChild(deleteCell);
-
-            tbody.appendChild(row);
+        years.forEach(year => {
+            const yearBtn = document.createElement('button');
+            yearBtn.textContent = year;
+            yearBtn.className = `filter-btn${currentFilterYear === year ? ' active' : ''}`;
+            yearBtn.onclick = () => filterByYear(year);
+            filtersDiv.appendChild(yearBtn);
         });
     }
 
-    async function deleteArticle(id) {
-        try {
-            const response = await fetch(`URL_DE_TU_API/${id}`, {
-                method: 'DELETE',
-            });
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            fetchArticles(); // Refrescar la tabla después de eliminar
-        } catch (error) {
-            console.error('Error deleting article:', error);
+    function filterByYear(year) {
+        currentFilterYear = year;
+        currentPage = 1;
+        filteredArticles = year ?
+            allArticles.filter(a => new Date(a.post_date).getFullYear() === year) : [...allArticles];
+        renderYearFilters(allArticles);
+        displayArticles();
+    }
+
+    function displayArticles() {
+        const urlIsAdmin = "<?php echo $urlGestio; ?>";
+        const articleList = document.getElementById('articleList');
+        articleList.innerHTML = '';
+
+        const start = (currentPage - 1) * pageSize;
+        const end = start + pageSize;
+        const articlesToShow = filteredArticles.slice(start, end);
+
+        articlesToShow.forEach(article => {
+            const li = document.createElement('li');
+            li.className = 'article-item';
+            li.innerHTML = `
+        <h3><a href="https://${window.location.host}${urlIsAdmin}/blog/article/${article.slug}">${article.post_title}</a></h3>
+        <p><small>${new Date(article.post_date).toLocaleDateString()}</small></p>
+        ${article.post_excerpt ? `<p>${article.post_excerpt}</p>` : ''}
+        <p><strong>Categoria:</strong> ${article.tema_ca}</p>
+      `;
+            articleList.appendChild(li);
+        });
+
+        renderPagination();
+    }
+
+    function renderPagination() {
+        const pagination = document.getElementById('pagination');
+        pagination.innerHTML = '';
+
+        const totalPages = Math.ceil(filteredArticles.length / pageSize);
+        for (let i = 1; i <= totalPages; i++) {
+            const link = document.createElement('a');
+            link.textContent = i;
+            link.href = '#';
+            link.className = `pagination-link${i === currentPage ? ' current-page' : ''}`;
+            link.onclick = (e) => {
+                e.preventDefault();
+                currentPage = i;
+                displayArticles();
+            };
+            pagination.appendChild(link);
         }
     }
 
-    // Llamar a la función para cargar los artículos al cargar la página
     fetchArticles();
 </script>
+
+<style>
+    #articleList {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #articleList li {
+        border-bottom: 1px solid #ccc;
+        padding: 15px 0;
+    }
+
+    #articleList li:last-child {
+        border-bottom: none;
+    }
+
+    #articleList h3 {
+        margin: 0 0 5px;
+    }
+
+    #articleList p {
+        margin: 5px 0;
+    }
+
+    h3 {
+        text-align: left !important;
+    }
+
+    h3 a:link,
+    h3 a:visited,
+    h3 a:hover {
+        text-decoration: underline;
+        color: #cb3414 !important;
+    }
+</style>

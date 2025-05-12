@@ -49,7 +49,7 @@ export async function taulaLlistatPelicules() {
     columns.push({
       header: 'Accions',
       field: 'id',
-      render: (_: unknown, row: EspaiRow) => `<a a id="${row.id}" title="Show movie details" href="https://${window.location.hostname}${gestioUrl}/cinema/modifica-pelicula/${row.slug}">Modifica</a>`,
+      render: (_: unknown, row: EspaiRow) => `<a id="${row.id}" title="Show movie details" href="https://${window.location.hostname}${gestioUrl}/cinema/modifica-pelicula/${row.slug}"><button type="button" class="button btn-petit">Modifica</button></a>`,
     });
   }
 

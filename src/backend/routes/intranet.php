@@ -89,7 +89,9 @@ $base_routes = [
 
     // 13. Blog
     APP_GESTIO . $url['blog'] => APP_INTRANET_DIR . APP_BLOG_DIR . 'index.php',
+    APP_GESTIO . $url['blog'] . '/article/{slug}' => APP_INTRANET_DIR . APP_BLOG_DIR . 'fitxa-article.php',
     APP_GESTIO . $url['blog'] . '/modifica-article/{id}' => APP_INTRANET_DIR . APP_BLOG_DIR . 'modifica-article.php',
+    APP_GESTIO . $url['blog'] . '/nou-article' => APP_INTRANET_DIR . APP_BLOG_DIR . 'modifica-article.php',
 
     // 14. Lector rss
     APP_GESTIO . $url['rss'] => APP_INTRANET_DIR . APP_RSS_DIR . 'index.php',
@@ -634,6 +636,24 @@ $routes = [
     // 13. Blog
     APP_GESTIO . $url['blog'] => [
         'view' => APP_INTRANET_DIR . APP_BLOG_DIR . 'index.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['blog'] . '/article/{slug}' => [
+        'view' => APP_INTRANET_DIR . APP_BLOG_DIR . 'fitxa-article.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['blog'] . '/nou-article' => [
+        'view' => APP_INTRANET_DIR . APP_BLOG_DIR . 'modifica-article.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,

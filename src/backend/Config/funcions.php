@@ -7,6 +7,11 @@ use Firebase\JWT\Key;
 // Cargar variables de entorno desde .env
 $jwtSecret = $_ENV['TOKEN'];
 
+function isUserAdmin()
+{
+    return isset($_COOKIE['user_id']) && $_COOKIE['user_id'] === '1' && isset($_COOKIE['user_type']) && $_COOKIE['user_type'] === '1';
+}
+
 // Llamada a la API con token en los encabezados
 function hacerLlamadaAPI($url)
 {

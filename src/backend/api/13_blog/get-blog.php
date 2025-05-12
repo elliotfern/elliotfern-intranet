@@ -1,71 +1,73 @@
 <?php
 
-// Verificar si se proporciona un token en el encabezado de autorización
-$headers = getallheaders();
+// Configuración de cabeceras para aceptar JSON y responder JSON
+header("Content-Type: application/json");
+header("Access-Control-Allow-Origin: https://elliot.cat");
+header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Headers: Content-Type");
 
-if (isset($headers['Authorization'])) {
-    $token = str_replace('Bearer ', '', $headers['Authorization']);
-
-    // Verificar el token aquí según tus requerimientos
-    if (verificarToken($token)) {
-        // Token válido, puedes continuar con el código para obtener los datos del usuario
-
-        // 1) Llistat articles blog
-        // ruta GET => "/api/blog/get/?llistat-articles"
-        if (isset($_GET['llistat-articles'])) {
-            global $conn;
-            $data = array();
-            $stmt = $conn->prepare("SELECT b.id, b.post_type, b.post_title, b.post_date, id.idioma_ca, b.slug
-            FROM db_blog AS b
-            LEFT JOIN aux_idiomes AS id ON b.lang = id.id
-            ORDER BY b.id ASC");
-            $stmt->execute();
-            if($stmt->rowCount() === 0) echo ('No rows');
-                while($users = $stmt->fetch(PDO::FETCH_ASSOC) ){
-                    $data[] = $users;
-                }
-            echo json_encode($data);
-
-        // ruta articles slug
-        } elseif (isset($params['slugArticles'])) {
-            $slug = $params['slugArticles'];
-            global $conn;
-            $data = array();
-            $stmt = $conn->prepare("SELECT b.id, b.post_type, b.post_title, b.post_date, id.idioma_ca, b.slug, b.post_content
-            FROM db_blog AS b
-            LEFT JOIN aux_idiomes AS id ON b.lang = id.id
-            WHERE b.slug = :slug");
-            $stmt->execute(['slug' => $slug]);
-            
-            if ($stmt->rowCount() === 0) {
-                echo json_encode(null);  // Devuelve un objeto JSON nulo si no hay resultados
-            } else {
-                // Solo obtenemos la primera fila ya que parece ser una búsqueda por ID
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                echo json_encode($row);  // Codifica la fila como un objeto JSON
-            }
-
-        } else {
-            // Si 'type', 'id' o 'token' están ausentes o 'type' no es 'user' en la URL
-            http_response_code(403);
-            echo json_encode(['error' => 'Invalid request']);
-            exit();
-        }
-
-    } else {
-    // Token no válido
-    header('HTTP/1.1 403 Forbidden');
-    echo json_encode(['error' => 'Invalid token']);
+// Solo permitir POST
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    http_response_code(405);
+    echo json_encode(['error' => 'Method not allowed']);
     exit();
-    }
-
-} else {
-// No se proporcionó un token
-header('HTTP/1.1 403 Forbidden');
-echo json_encode(['error' => 'Access not allowed']);
-exit();
 }
 
-// Cerrar la conexión a la base de datos después de su uso
-$conn = null;
-?>
+
+// Llistat complet del blog
+// URL: /api/blog/get/?llistatArticles
+if (isset($_GET['llistatArticles'])) {
+    global $conn;
+
+    $query = "SELECT b.id, b.post_type, b.post_title, b.post_excerpt, b.lang, b.post_status, b.slug, b.categoria, b.post_date, b.post_modified, t.tema_ca
+        FROM db_blog AS b
+        LEFT JOIN aux_temes AS t ON b.categoria = t.id
+        ORDER BY b.post_date ASC";
+
+    $stmt = $conn->prepare($query);
+
+    $stmt->execute();
+
+    // Verificar si hay resultados antes de hacer fetch
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(["error" => "No rows found"]);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Enviar respuesta en formato JSON
+    echo json_encode($data);
+    // URL: /api/blog/get/?articleSlug=revolut    
+} else if (isset($_GET['articleSlug'])) {
+    $slug = $_GET['articleSlug'];
+    global $conn;
+
+    $query = "SELECT b.id, b.post_type, b.post_title, b.post_excerpt, b.lang, b.post_content, b.post_status, b.slug, b.categoria, b.post_date, b.post_modified, t.tema_ca
+        FROM db_blog AS b
+        LEFT JOIN aux_temes AS t ON b.categoria = t.id
+        WHERE b.slug = :slug";
+
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':slug', $slug, PDO::PARAM_STR);
+
+    $stmt->execute();
+
+    // Verificar si hay resultados antes de hacer fetch
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(["error" => "No rows found"]);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Enviar respuesta en formato JSON
+    echo json_encode($data);
+} else {
+    // No se proporcionó un token
+    header('HTTP/1.1 403 Forbidden');
+    echo json_encode(['error' => 'Access not allowed']);
+    exit();
+}

@@ -53,8 +53,7 @@ export async function taulaLlistatLlibres() {
       field: 'id',
       render: (_: unknown, row: ViatgeRow) => `
         <a href="https://${window.location.host}/gestio/biblioteca/modifica-llibre/${row.slug}">
-            <button class="btn-petit">Modifica</button>
-        </a>`,
+            <button type="button" class="button btn-petit">Modifica</button></a>`,
     });
   }
 

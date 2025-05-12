@@ -16,6 +16,7 @@ import { barraNavegacio } from './components/barraNavegacio/barraNavegacio';
 import { mostrarBotonsNomesAdmin } from './components/mostrarBotons/mostrarBoton';
 import { auxiliars } from './pages/auxiliars/auxiliars';
 import { logout } from './services/login/logOutApi';
+import { contactes } from './pages/contactes/contactes';
 
 const url = window.location.href;
 const pageType = getPageType(url);
@@ -40,9 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
     historiaOberta();
   } else if (pageType[1] === 'biblioteca' || pageType[0] === 'biblioteca') {
     biblioteca();
-  } else if (pageType[1] === 'adreces') {
+  } else if (pageType[1] === 'adreces' || pageType[0] === 'adreces') {
     adreces();
-  } else if (pageType[1] === 'base-dades-persones') {
+  } else if (pageType[1] === 'base-dades-persones' || pageType[0] === 'base-dades-persones') {
     persona();
   } else if (pageType[1] === 'viatges' || pageType[0] === 'viatges') {
     viatges();
@@ -50,5 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     comptabilitat();
   } else if (pageType[1] === 'auxiliars') {
     auxiliars();
+  } else if (pageType[1] === 'agenda-contactes') {
+    contactes();
   }
 });

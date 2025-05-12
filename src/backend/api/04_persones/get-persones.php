@@ -13,64 +13,31 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     if (isset($_GET['type']) && $_GET['type'] == 'llistatPersones') {
         global $conn;
 
-        // Obtener el número de página y el límite desde los parámetros GET, con valores por defecto
-        $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-        $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 15;
-        $offset = ($page - 1) * $limit;
-
-        // Filtrar por grupo (si se pasa el parámetro 'group')
-        $group = isset($_GET['group']) ? (int)$_GET['group'] : null;
-
         // Consulta SQL base
         $query = "SELECT 
-            a.id, a.nom AS AutNom, a.cognoms AS AutCognom1, a.slug, 
+            a.id, a.nom, a.cognoms, a.slug, 
             a.anyNaixement AS yearBorn, a.anyDefuncio AS yearDie, 
-            a.web AS AutWikipedia, c.pais_cat AS country, 
-            p.professio_ca AS profession, 
-            i.nameImg, a.grup
+            a.web, c.pais_cat, 
+            p.professio_ca,
+            i.nameImg, a.grup, g.grup_ca
         FROM db_persones AS a
         LEFT JOIN db_countries AS c ON a.paisAutor = c.id
         LEFT JOIN aux_professions AS p ON a.ocupacio = p.id
-        LEFT JOIN db_img AS i ON a.img = i.id";
-
-        // Si se pasa un filtro de grupo, agregarlo a la consulta
-        if ($group) {
-            $query .= " WHERE a.grup = :group";
-        }
-
-        // Añadir la paginación a la consulta
-        $query .= " ORDER BY a.cognoms LIMIT :limit OFFSET :offset";
+        LEFT JOIN db_img AS i ON a.img = i.id
+        LEFT JOIN aux_persones_grups AS g ON a.grup = g.id
+        WHERE a.visibilitat = 1
+        ORDER BY a.cognoms";
 
         // Preparar y ejecutar la consulta
         $stmt = $conn->prepare($query);
-        if ($group) {
-            $stmt->bindParam(':group', $group, PDO::PARAM_INT); // Bind del parámetro 'group' si está presente
-        }
-        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT); // Bind del parámetro 'limit'
-        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT); // Bind del parámetro 'offset'
+
         $stmt->execute();
 
         // Obtener los resultados
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // Contar el total de resultados para la paginación
-        $stmtCount = $conn->prepare("SELECT COUNT(*) AS total FROM db_persones" . ($group ? " WHERE grup = :group" : ""));
-        if ($group) {
-            $stmtCount->bindParam(':group', $group, PDO::PARAM_INT); // Bind del parámetro 'group' para el conteo
-        }
-        $stmtCount->execute();
-        $total = $stmtCount->fetch(PDO::FETCH_ASSOC)['total'];
-
-        // Calcular el total de páginas
-        $totalPages = ceil($total / $limit);
-
         // Enviar los resultados como JSON
-        echo json_encode([
-            'data' => $data,
-            'total' => $total,
-            'totalPages' => $totalPages,
-            'currentPage' => $page
-        ]);
+        echo json_encode($data);
     } elseif (isset($_GET['persona'])) {
         // ruta GET => "/api/persones/get/?persona=josep-fontana"
         $autorSlug = $_GET['persona'];

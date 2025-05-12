@@ -75,33 +75,21 @@ if (isset($_GET['type']) && $_GET['type'] == 'categories') {
     // ruta GET => "/api/links/?type=topic$id=11"
 } elseif ((isset($_GET['type']) && $_GET['type'] == 'topic') && (isset($_GET['id']))) {
 
-
     $id = $_GET['id'];
-    $page = isset($_GET['page']) ? intval($_GET['page']) : 1;  // Número de página, predeterminado: 1
-    $itemsPerPage = 10;  // Número de elementos por página
-
-    // Calcular el offset (desplazamiento)
-    $offset = ($page - 1) * $itemsPerPage;
 
     global $conn;
     $data = array();
-    $stmt = $conn->prepare("SELECT l.web AS url, l.nom, t.id AS idTema, t.tema_ca AS tema, l.id AS linkId, l.lang, i.idioma_ca, ty.id AS idType, ty.type_ca, g.categoria_ca AS genre, g.id AS idCategoria, total_enlaces.total_count, l.dateCreated
+    $stmt = $conn->prepare("SELECT l.web AS url, l.nom, t.id AS idTema, t.tema_ca AS tema, l.id AS linkId, l.lang, i.idioma_ca, ty.id AS idType, ty.type_ca, g.categoria_ca AS genre, g.id AS idCategoria, l.dateCreated
         FROM aux_temes AS t
         INNER JOIN aux_categories AS g ON t.idGenere = g.id
         INNER JOIN db_links AS l ON l.cat = t.id
         LEFT JOIN db_links_type AS ty ON ty.id = l.tipus
         LEFT JOIN aux_idiomes AS i ON l.lang = i.id
-        CROSS JOIN (
-            SELECT COUNT(*) AS total_count
-            FROM db_links
-            WHERE cat = :id
-        ) AS total_enlaces
         WHERE t.id = :id
-        ORDER BY l.nom ASC
-        LIMIT :limit OFFSET :offset");
+        ORDER BY l.nom ASC");
+
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->bindParam(':limit', $itemsPerPage, PDO::PARAM_INT);
-    $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+
     $stmt->execute();
 
     if ($stmt->rowCount() === 0) {
@@ -127,10 +115,11 @@ if (isset($_GET['type']) && $_GET['type'] == 'categories') {
             ORDER BY t.tema_ca ASC"
     );
     $stmt->execute();
-    if ($stmt->rowCount() === 0) echo ('No rows');
-    while ($users = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $data[] = $users;
-    }
+
+    // Obtener los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Enviar los resultados como JSON
     echo json_encode($data);
 
     // 4) Llistat de topics

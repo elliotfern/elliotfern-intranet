@@ -1,29 +1,19 @@
 <div class="container">
-    <div class="barraNavegacio">
-        <h6><a href="<?php echo APP_INTRANET; ?>">Intranet</a> > <a href="<?php echo APP_INTRANET . $url['adreces']; ?>">Adreces d'interès</a></h6>
-    </div>
+    <div id="barraNavegacioContenidor"></div>
 
     <main>
         <div class="container contingut">
             <h1>Adreces d'interés</h1>
-            <p>
-                <button onclick="window.location.href='<?php echo APP_INTRANET . $url['adreces']; ?>/nou-link/'" class="button btn-gran btn-secondari">Afegir enllaç</button>
-            </p>
+            <?php if (isUserAdmin()) : ?>
+                <p>
+                    <button onclick="window.location.href='<?php echo APP_INTRANET . $url['adreces']; ?>/nou-link/'" class="button btn-gran btn-secondari">Afegir enllaç</button>
+                </p>
+            <?php endif; ?>
 
             <div class="alert alert-success quadre">
-
                 <h4>Tots els enllaços segons:</h4>
                 <ul class="llistat">
-                    <li><a href="<?php echo APP_INTRANET . $url['adreces']; ?>/llistat-categories">Llistat de categories</a></li>
                     <li><a href="<?php echo APP_INTRANET . $url['adreces']; ?>/llistat-temes">Llistat de temes</a></li>
-                </ul>
-
-                <hr>
-
-                <h4>Programació i informàtica:</h4>
-                <ul class="llistat">
-                    <li><a href="<?php echo APP_INTRANET . $url['adreces']; ?>/categoria/18">Llenguatges de programació</a></li>
-                    <li><a href="<?php echo APP_INTRANET . $url['adreces']; ?>/categoria/3">Altres temes sobre tecnologia</a></li>
                 </ul>
 
                 <hr>

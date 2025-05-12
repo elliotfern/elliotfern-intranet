@@ -55,6 +55,11 @@ $base_routes = [
     '/api/viatges/get' => 'src/backend/api/17_viatges/get-viatges.php',
     '/api/viatges/put' => 'src/backend/api/17_viatges/putt-viatges.php',
     '/api/viatges/post' => 'src/backend/api/17_viatges/post-viatges.php',
+
+    // Blog
+    '/api/blog/get' => 'src/backend/api/13_blog/get-blog.php',
+    '/api/blog/post' => 'src/backend/api/13_blog/post-blog.php',
+    '/api/blog/put' => 'src/backend/api/13_blog/put-blog.php',
 ];
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
@@ -340,6 +345,31 @@ $routes = [
 
     '/api/viatges/put' => [
         'view' => 'src/backend/api/17_viatges/put-viatges.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    // Blog
+    '/api/blog/get' => [
+        'view' => 'src/backend/api/13_blog/get-blog.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    '/api/blog/post' => [
+        'view' => 'src/backend/api/13_blog/post-blog.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    '/api/blog/put' => [
+        'view' => 'src/backend/api/13_blog/put-blog.php',
         'needs_session' => false,
         'header_footer' => false,
         'header_menu_footer' => false,

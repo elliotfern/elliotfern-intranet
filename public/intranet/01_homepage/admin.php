@@ -1,9 +1,26 @@
-<main>
-    <div class="container">
+<div class="container">
 
-        <img src="<?php echo BASE_URL; ?>/public/img/logo-gran.png" alt="Logo" class="d-block mx-auto" width="468" height="auto">
+    <div id="barraNavegacioContenidor"></div>
 
-        <h3 style="margin-bottom:25px"></h3>
+    <main>
+        <div class="container contingut">
+            <h1>Intranet</h1>
+            <div id="isAdminButton" style="display: none;">
+                <?php if (isUserAdmin()) { ?>
+                    <p>
 
-    </div>
-</main>
+                    </p>
+
+                    <div class="alert alert-success quadre">
+                        <ul class="llistat">
+                            <li></li>
+                        </ul>
+                    </div>
+
+                <?php } else {
+                    // Código que se ejecuta si la condición es falsa (opcional)
+                } ?>
+
+            </div>
+    </main>
+</div>

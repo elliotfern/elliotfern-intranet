@@ -62,7 +62,7 @@ $post_excerpt = NULL;
 $lang = 1;
 $post_status = "publish";
 $slug = "microblogging-" . generateDate();
-$categoria = 1;
+$categoria = 137;
 $post_date = date("Y-m-d H:i:s");
 
 // Conectar a la base de datos con PDO (asegúrate de modificar los detalles de la conexión)

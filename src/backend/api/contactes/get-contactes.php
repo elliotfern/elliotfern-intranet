@@ -2,55 +2,32 @@
 
 
 // 1) Llistat contactes
-// ruta GET => "/api/contactes/get/?type=contactes&tipus=1"
-if (isset($_GET['type']) && $_GET['type'] == 'contactes' && isset($_GET['tipus'])) {
-    $tipus = $_GET['tipus'];
+// ruta GET => "/api/contactes/get/?type=contactes"
+if (isset($_GET['contactes'])) {
     global $conn;
 
-    if ($tipus == 0) {
-        $stmt = $conn->prepare(
-            "SELECT c.id, c.nom, c.cognoms, c.email, c.tel_1, c.tel_2, c.tel_3, c.data_naixement, c.web, t.tipus, p.pais_cat AS country, c.adreca
-                FROM db_contactes AS c
-                LEFT JOIN aux_contactes_tipus AS t ON c.tipus = t.id
-                LEFT JOIN db_countries AS p ON c.pais = p.id
-                ORDER BY c.cognoms ASC"
-        );
-    } else {
-        $stmt = $conn->prepare(
-            "SELECT c.id, c.nom, c.cognoms, c.email, c.tel_1, c.tel_2, c.tel_3, c.data_naixement, c.web, t.tipus, p.pais_cat AS country, c.adreca
-                FROM db_contactes AS c
-                LEFT JOIN aux_contactes_tipus AS t ON c.tipus = t.id
-                LEFT JOIN db_countries AS p ON c.pais = p.id
-                WHERE c.tipus = $tipus
-                ORDER BY c.cognoms ASC"
-        );
-    }
-    $data = array();
-
-    $stmt->execute();
-    if ($stmt->rowCount() === 0) echo ('No rows');
-    while ($users = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $data[] = $users;
-    }
-    echo json_encode($data);
-
-    // 2) Llistat contactes (tots : tipus 0)
-    // ruta GET => "/api/contactes/get/?type=contactes"
-} elseif (isset($_GET['type']) && $_GET['type'] == 'contactes') {
-    global $conn;
-    $data = array();
-    $stmt = $conn->prepare(
-        "SELECT c.id, c.nom, c.cognoms, c.email, c.tel_1, c.tel_2, c.tel_3, c.data_naixement, c.web, t.tipus, p.pais_cat AS country, c.adreca
+    $query = "SELECT c.id, c.nom, c.cognoms, c.email, c.tel_1, c.tel_2, c.tel_3, c.data_naixement, c.web, t.tipus, p.pais_cat AS country, c.adreca
             FROM db_contactes AS c
             LEFT JOIN aux_contactes_tipus AS t ON c.tipus = t.id
             LEFT JOIN db_countries AS p ON c.pais = p.id
-            ORDER BY c.cognoms ASC"
-    );
+            ORDER BY c.cognoms ASC";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    // Ejecutar la consulta
     $stmt->execute();
-    if ($stmt->rowCount() === 0) echo ('No rows');
-    while ($users = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $data[] = $users;
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
     }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
     echo json_encode($data);
 
     // 3) Contacte ID
