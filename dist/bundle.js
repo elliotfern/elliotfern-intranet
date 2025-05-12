@@ -18447,6 +18447,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   serveisVaultApi: () => (/* binding */ serveisVaultApi)
 /* harmony export */ });
+/* harmony import */ var _components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/renderTaula/taulaRender */ "./src/frontend/components/renderTaula/taulaRender.ts");
+/* harmony import */ var _utils_formataData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/formataData */ "./src/frontend/utils/formataData.ts");
+/* harmony import */ var _services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth/isAdmin */ "./src/frontend/services/auth/isAdmin.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -18456,90 +18459,78 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-// Función para obtener los datos de la API
+
+
+
 function serveisVaultApi() {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const response = yield fetch('https://elliot.cat/api/vault/get/?llistat_serveis');
-            if (!response.ok) {
-                throw new Error('Error al obtener los datos de la API');
-            }
-            // Recibimos la respuesta como texto
-            let responseText = yield response.text();
-            // Eliminar las comillas simples iniciales y finales
-            if (responseText.startsWith("'") && responseText.endsWith("'")) {
-                responseText = responseText.slice(1, -1); // Elimina las comillas simples del principio y el final
-            }
-            // Ahora, parseamos el JSON correctamente
-            let data = JSON.parse(responseText);
-            // Verifica si 'data' es un array
-            if (Array.isArray(data)) {
-                renderTable(data); // Llama a la función para renderizar la tabla
-            }
-            else {
-                console.error('Los datos no son un array');
-            }
+        const isAdmin = yield (0,_services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_2__.getIsAdmin)(); // Comprovar si és admin
+        let gestioUrl = '';
+        if (isAdmin) {
+            gestioUrl = '/gestio';
         }
-        catch (error) {
-            console.error('Error al parsear JSON:', error);
+        const columns = [
+            {
+                header: 'Servei',
+                field: 'servei',
+                render: (_, row) => `<a id="${row.id}" href="${row.web}" target="_blank">${row.servei}</a>`,
+            },
+            { header: 'Usuari', field: 'usuari' },
+            {
+                header: 'Contrasenya',
+                field: 'id',
+                render: (_, row) => `
+        <div class="input-group">
+          <input class="form-control input-petit" type="password" name="role" id="passw-${row.id}" value="*******" readonly>
+         <button type="button" class="btn-petit btn-primari show-pass-btn" data-id="${row.id}">Show</button>
+        </div>
+      `,
+            },
+            { header: 'Tipus', field: 'tipus' },
+            {
+                header: 'Data modificació',
+                field: 'dataVisita',
+                render: (_, row) => {
+                    const inici = (0,_utils_formataData__WEBPACK_IMPORTED_MODULE_1__.formatData)(row.dateModified);
+                    return `${inici}`;
+                },
+            },
+        ];
+        if (isAdmin) {
+            columns.push({
+                header: '',
+                field: 'id',
+                render: (_, row) => `
+        <a href="https://${window.location.host}${gestioUrl}/claus-privades/modifica-vault/${row.id}">
+           <button type="button" class="button btn-petit">Modifica</button></a>`,
+            });
+            columns.push({
+                header: '',
+                field: 'id',
+                render: (_, row) => `
+        <a href="https://${window.location.host}${gestioUrl}/claus-privades/modifica-vault/${row.id}">
+           <button type="button" class="btn-petit btn-secondari">Elimina</button></a>`,
+            });
         }
-    });
-}
-// Función para renderizar los datos en la tabla
-// Función para renderizar los datos en la tabla
-function renderTable(data) {
-    const tbody = document.querySelector('tbody'); // Seleccionamos el tbody de la tabla
-    tbody.innerHTML = ''; // Limpiamos el contenido actual de la tabla
-    // Iteramos sobre los datos y generamos una fila por cada registro
-    data.forEach((record) => {
-        const row = document.createElement('tr');
-        // Celda para "servei", con enlace
-        const serviceCell = document.createElement('td');
-        const serviceLink = document.createElement('a');
-        serviceLink.href = record.web; // Aquí asumes que "web" es el enlace
-        serviceLink.target = '_blank'; // Abre en una nueva pestaña
-        serviceLink.textContent = record.servei; // El nombre del servicio
-        serviceCell.appendChild(serviceLink); // Añadimos el enlace a la celda
-        row.appendChild(serviceCell);
-        const userCell = document.createElement('td');
-        userCell.textContent = record.usuari;
-        row.appendChild(userCell);
-        // Crear celda para la contraseña con el campo de input tipo password
-        const passwordCell = document.createElement('td');
-        const passwordInput = document.createElement('input');
-        passwordInput.type = 'password';
-        passwordInput.id = `passw-${record.id}`; // ID único para cada contraseña
-        passwordInput.value = '**********'; // Mostrar asteriscos
-        passwordInput.readOnly = true; // Deshabilitar edición
-        // Añadir la clase "input-petit"
-        passwordInput.classList.add('input-petit');
-        // Crear el botón "Show" para mostrar/ocultar la contraseña
-        const showButton = document.createElement('button');
-        showButton.type = 'button';
-        showButton.classList.add('btn-petit', 'btn-primari');
-        showButton.textContent = 'Show';
-        showButton.onclick = function () {
-            showPass(record.id);
-        };
-        // Añadir el campo de contraseña y el botón a la celda
-        passwordCell.appendChild(passwordInput);
-        passwordCell.appendChild(showButton);
-        row.appendChild(passwordCell);
-        const typeCell = document.createElement('td');
-        typeCell.textContent = record.tipus;
-        row.appendChild(typeCell);
-        const modifiedCell = document.createElement('td');
-        modifiedCell.textContent = record.dateModified;
-        row.appendChild(modifiedCell);
-        // Crear columnas vacías para los botones de acción
-        const editCell = document.createElement('td');
-        editCell.innerHTML = `<button class="btn-petit btn-primari">Editar</button>`;
-        row.appendChild(editCell);
-        const deleteCell = document.createElement('td');
-        deleteCell.innerHTML = `<button class="btn-petit btn-secondari">Eliminar</button>`;
-        row.appendChild(deleteCell);
-        // Añadir la fila completa al tbody
-        tbody.appendChild(row);
+        (0,_components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__.renderDynamicTable)({
+            url: `https://${window.location.host}/api/vault/get/?llistat_serveis`,
+            containerId: 'taulaLlistatVault',
+            columns,
+            filterKeys: ['servei'],
+            filterByField: 'tipus',
+        });
+        setTimeout(() => {
+            const buttons = document.querySelectorAll('.show-pass-btn');
+            buttons.forEach((button) => {
+                button.addEventListener('click', (event) => {
+                    const target = event.currentTarget;
+                    const id = parseInt(target.getAttribute('data-id') || '', 10);
+                    if (!isNaN(id)) {
+                        showPass(id);
+                    }
+                });
+            });
+        }, 500);
     });
 }
 // Función para mostrar/ocultar la contraseña
@@ -18568,12 +18559,7 @@ function showPass(id) {
                 inputField.value = data.password;
                 inputField.type = 'text';
                 // Copiar la contraseña al portapapeles
-                navigator.clipboard
-                    .writeText(data.password)
-                    .then(() => {
-                    console.log('Contraseña copiada al portapapeles');
-                })
-                    .catch((err) => {
+                navigator.clipboard.writeText(data.password).catch((err) => {
                     console.error('Error al copiar al portapapeles: ', err);
                 });
                 // Ocultar la contraseña después de 5 segundos
