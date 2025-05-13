@@ -75,18 +75,17 @@ export async function serveisVaultApi() {
     filterByField: 'tipus',
   });
 
-  setTimeout(() => {
-    const buttons = document.querySelectorAll('.show-pass-btn');
-    buttons.forEach((button) => {
-      button.addEventListener('click', (event) => {
-        const target = event.currentTarget as HTMLElement;
-        const id = parseInt(target.getAttribute('data-id') || '', 10);
-        if (!isNaN(id)) {
-          showPass(id);
-        }
-      });
-    });
-  }, 500);
+  document.getElementById('taulaLlistatVault')?.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement;
+
+    // Busca si se ha hecho clic en un botón con clase `.show-pass-btn`
+    if (target.classList.contains('show-pass-btn')) {
+      const id = parseInt(target.getAttribute('data-id') || '', 10);
+      if (!isNaN(id)) {
+        showPass(id);
+      }
+    }
+  });
 }
 
 // Función para mostrar/ocultar la contraseña

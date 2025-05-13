@@ -18464,6 +18464,7 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 function serveisVaultApi() {
     return __awaiter(this, void 0, void 0, function* () {
+        var _a;
         const isAdmin = yield (0,_services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_2__.getIsAdmin)(); // Comprovar si és admin
         let gestioUrl = '';
         if (isAdmin) {
@@ -18519,18 +18520,16 @@ function serveisVaultApi() {
             filterKeys: ['servei'],
             filterByField: 'tipus',
         });
-        setTimeout(() => {
-            const buttons = document.querySelectorAll('.show-pass-btn');
-            buttons.forEach((button) => {
-                button.addEventListener('click', (event) => {
-                    const target = event.currentTarget;
-                    const id = parseInt(target.getAttribute('data-id') || '', 10);
-                    if (!isNaN(id)) {
-                        showPass(id);
-                    }
-                });
-            });
-        }, 500);
+        (_a = document.getElementById('taulaLlistatVault')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', (event) => {
+            const target = event.target;
+            // Busca si se ha hecho clic en un botón con clase `.show-pass-btn`
+            if (target.classList.contains('show-pass-btn')) {
+                const id = parseInt(target.getAttribute('data-id') || '', 10);
+                if (!isNaN(id)) {
+                    showPass(id);
+                }
+            }
+        });
     });
 }
 // Función para mostrar/ocultar la contraseña
