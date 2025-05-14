@@ -19,7 +19,7 @@ class DatabaseAuthRepository implements AuthRepositoryInterface
     public function loginAuth(string $username, string $password): array
     {
         try {
-            $sql = "SELECT id, username, password FROM db_users WHERE username = :username";
+            $sql = "SELECT id, username, userType, password FROM db_users WHERE username = :username";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':username', $username, PDO::PARAM_STR);
             $stmt->execute();
@@ -35,7 +35,10 @@ class DatabaseAuthRepository implements AuthRepositoryInterface
                 $payload = [
                     'user_id' => $user['id'],
                     'username' => $user['username'],
-                    'kid' => 'key_api'
+                    'user_type' => $user['userType'],
+                    'kid' => 'key_api',
+                    'iat' => time(),
+                    'exp' => time() + 3600 // 1 hora de validez
                 ];
 
                 $jwt = JwtHelper::generateJwt($payload, $_ENV['TOKEN']); // Obtener la clave desde .env
@@ -50,18 +53,16 @@ class DatabaseAuthRepository implements AuthRepositoryInterface
                     'samesite' => 'Strict' // None || Lax  || Strict
                 );
 
-                setcookie('user_id', $user['id'], $arr_cookie_options);
                 setcookie('token', $jwt, $arr_cookie_options);
-                setcookie('user_type', "1", $arr_cookie_options);
 
                 return [
                     'success' => true,
-                    'message' => 'Login exitoso',
+                    'message' => 'Dades d\'usuari correctes',
                     'token' => $jwt
                 ];
             }
 
-            return ['success' => false, 'message' => 'Contraseña incorrecta'];
+            return ['success' => false, 'message' => 'Contrasenya incorrecta'];
         } catch (\PDOException $e) {
             error_log('Error al obtener las contraseñas: ' . $e->getMessage());
             return [];

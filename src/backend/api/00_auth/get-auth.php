@@ -1,5 +1,11 @@
 <?php
 
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
+// Cargar variables de entorno desde .env
+$jwtSecret = $_ENV['TOKEN'];
+
 // Check if the request method is GET
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     header('HTTP/1.1 405 Method Not Allowed');
@@ -10,21 +16,30 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 // 01. Ruta GET per comprobar si usuari està registrat o no
 // /api/auth/get/?isAdmin
 if ((isset($_GET['isAdmin']))) {
-    // Comprovem si les cookies 'token' i 'user_id' estan presents
-    if (isset($_COOKIE['token']) && isset($_COOKIE['user_id'])) {
-        $token = $_COOKIE['token']; // Cookie de token (HttpOnly)
-        $userId = $_COOKIE['user_id']; // Cookie de user_id
 
-        // Si el user_id és 1 (admin) i existeix el token, considerem l'usuari admin
-        if ($userId === '1') {
-            echo json_encode(['isAdmin' => true]);
-        } else {
-            echo json_encode(['isAdmin' => false]);
+    $token = getSanitizedCookie('token');
+
+    if (!empty($token)) {
+        try {
+            // Verifica y decodifica el token
+            $decoded = JWT::decode($token, new Key($jwtSecret, 'HS256'));
+
+            // Verifica si el usuario tiene permisos de administrador
+            if (
+                isset($decoded->user_type) &&
+                $decoded->user_type == 1 // Solo user_type 1 es admin
+            ) {
+                echo json_encode(['isAdmin' => true]);
+                exit;
+            }
+        } catch (Exception $e) {
+            // Token inválido, expirado o manipulado
+            error_log("JWT inválido: " . $e->getMessage());
         }
-    } else {
-        // Si no existeixen les cookies o el user_id no és 1, no és admin
-        echo json_encode(['isAdmin' => false]);
     }
+
+    // Si no cumple, no es admin
+    echo json_encode(['isAdmin' => false]);
 } else if ((isset($_GET['logOut']))) {
     // Verifica que el usuario esté autenticado
     session_start();
