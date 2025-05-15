@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   console.log(pageType);
-  if (pageType[1] === 'entrada') {
+  if (pageType[0] === 'entrada') {
     loginPage();
   } else if (pageType[1] === 'claus-privades') {
     vault();

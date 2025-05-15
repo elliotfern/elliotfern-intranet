@@ -18013,11 +18013,11 @@ function barraNavegacio() {
         let breadcrumbHtml = '<div class="barraNavegacio">';
         // Si el usuario es admin, mostramos "Intranet" y el enlace a la intranet
         if (isAdmin) {
-            breadcrumbHtml += `<h6><a href="https://elliot.cat/intranet">Intranet</a> > `;
+            breadcrumbHtml += `<h6><a href="${baseAdminUrl}">Intranet</a> > `;
         }
         else {
             // Si no es admin, mostramos "Inici" y el enlace a la página principal
-            breadcrumbHtml += `<h6><a href="https://elliot.cat">Inici</a> > `;
+            breadcrumbHtml += `<h6><a href="${baseUserUrl}">Inici</a> > `;
         }
         // Añadimos los enlaces de navegación basados en la URL actual
         if (urlParts.length > 0) {
@@ -21081,7 +21081,8 @@ function logout() {
             const data = yield response.json();
             if (data.message === 'OK') {
                 // Elimina la clave isAdmin en localStorage
-                localStorage.setItem('isAdmin', 'false');
+                localStorage.clear();
+                sessionStorage.clear();
                 // Redirige al usuario a la página "elliot.cat"
                 window.location.href = 'https://elliot.cat';
             }
@@ -21130,7 +21131,7 @@ function loginApi(event) {
     return __awaiter(this, void 0, void 0, function* () {
         event.preventDefault(); // Evitar el envío del formulario por defecto
         // Obtener los valores del formulario
-        const usernameInput = document.getElementById('username');
+        const usernameInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
         const loginMessageOk = document.getElementById('loginMessageOk');
         const loginMessageErr = document.getElementById('loginMessageErr');
@@ -21159,9 +21160,16 @@ function loginApi(event) {
                             loginMessageOk.innerHTML = data.message;
                             loginMessageErr.style.display = 'none';
                         }
-                        setTimeout(() => {
-                            window.location.href = '/gestio/admin';
-                        }, 3000);
+                        if (data.user_type === 1) {
+                            setTimeout(() => {
+                                window.location.href = '/gestio/admin';
+                            }, 3000);
+                        }
+                        else {
+                            setTimeout(() => {
+                                window.location.href = '/usuaris';
+                            }, 3000);
+                        }
                     }
                     else {
                         if (loginMessageOk && loginMessageErr) {
@@ -21777,7 +21785,7 @@ document.addEventListener('DOMContentLoaded', () => {
         logoutButton.addEventListener('click', _services_login_logOutApi__WEBPACK_IMPORTED_MODULE_16__.logout);
     }
     console.log(pageType);
-    if (pageType[1] === 'entrada') {
+    if (pageType[0] === 'entrada') {
         (0,_pages_login_funcions__WEBPACK_IMPORTED_MODULE_5__.loginPage)();
     }
     else if (pageType[1] === 'claus-privades') {

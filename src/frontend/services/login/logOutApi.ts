@@ -13,7 +13,8 @@ export async function logout() {
 
     if (data.message === 'OK') {
       // Elimina la clave isAdmin en localStorage
-      localStorage.setItem('isAdmin', 'false');
+      localStorage.clear();
+      sessionStorage.clear();
 
       // Redirige al usuario a la página "elliot.cat"
       window.location.href = 'https://elliot.cat';

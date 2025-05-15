@@ -11,12 +11,12 @@
         <!-- Navigation Menu -->
         <nav class="containerMenu menuHidden" id="navbarMenu">
             <ul>
-                <li><a href="/ca/homepage">Home</a></li>
-                <li><a href="/ca/about">About</a></li>
-                <li><a href="/ca/books">Books</a></li>
-                <li><a href="/ca/history-archives">History Archives</a></li>
+                <li><a href="/ca/homepage">Inici</a></li>
+                <li><a href="/ca/about">Sobre l'autor</a></li>
+                <li><a href="/ca/biblioteca">Biblioteca</a></li>
+                <li><a href="/ca/historia">Història</a></li>
                 <li><a href="/ca/blog">Blog</a></li>
-                <li><a href="/ca/links">Links</a></li>
+                <li><a href="/ca/adreces">Enllaços</a></li>
 
                 <!-- Languages Dropdown -->
                 <li class="dropdown">

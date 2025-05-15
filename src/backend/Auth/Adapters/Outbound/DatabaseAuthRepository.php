@@ -16,17 +16,17 @@ class DatabaseAuthRepository implements AuthRepositoryInterface
         $this->conn = $conn;
     }
 
-    public function loginAuth(string $username, string $password): array
+    public function loginAuth(string $email, string $password): array
     {
         try {
-            $sql = "SELECT id, username, userType, password FROM db_users WHERE username = :username";
+            $sql = "SELECT id, email, userType, password, nom, cognom FROM db_users WHERE email = :email";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (!$user) {
-                return ['success' => false, 'message' => 'Usuario no encontrado'];
+                return ['success' => false, 'message' => 'No hem trobat aquest usuari'];
             }
 
             // Verificar contraseña
@@ -34,11 +34,12 @@ class DatabaseAuthRepository implements AuthRepositoryInterface
                 // Crear el payload para el JWT
                 $payload = [
                     'user_id' => $user['id'],
-                    'username' => $user['username'],
+                    'email' => $user['email'],
+                    'nom' => $user['nom'] . ' ' . $user['cognom'],
                     'user_type' => $user['userType'],
                     'kid' => 'key_api',
                     'iat' => time(),
-                    'exp' => time() + 3600 // 1 hora de validez
+                    'exp' => time() + 604800,
                 ];
 
                 $jwt = JwtHelper::generateJwt($payload, $_ENV['TOKEN']); // Obtener la clave desde .env
@@ -58,7 +59,7 @@ class DatabaseAuthRepository implements AuthRepositoryInterface
                 return [
                     'success' => true,
                     'message' => 'Dades d\'usuari correctes',
-                    'token' => $jwt
+                    'user_type' => $user['userType'],
                 ];
             }
 

@@ -55,8 +55,6 @@ if ((isset($_GET['isAdmin']))) {
 
     //Elimina les cookies
     setcookie('token', '', $arr_cookie_options);
-    setcookie('user_id', '', $arr_cookie_options);
-    setcookie('user_type', '', $arr_cookie_options);
 
     // Además, puedes destruir la sesión si estás utilizando sesiones en PHP
     session_unset();    // Elimina todas las variables de sesión

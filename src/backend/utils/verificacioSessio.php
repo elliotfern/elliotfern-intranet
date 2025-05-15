@@ -22,7 +22,7 @@ function verificarSesion()
 
     // Verifica si la cookie del token existe y es válida
     if (!isset($_COOKIE['token'])) {
-        header('Location: /gestio/entrada'); // Redirige a login si no existe el token
+        header('Location: /entrada'); // Redirige a login si no existe el token
         exit();
     }
 
@@ -32,19 +32,18 @@ function verificarSesion()
         // Decodificar el token JWT
         $decoded = JWT::decode($token, new Key($jwtSecret, 'HS256'));
 
-        // Obtener user_id y user_type del payload
-        $userId = $decoded->user_id ?? null;
+        // Obtener user_type del payload
         $userType = $decoded->user_type ?? null;
 
         // Verificar si user_type es 1 (admin) o 2 (usuario regular)
         if (!in_array($userType, [1, 2])) {
-            header('Location: /gestio/entrada'); // Redirige si el user_type no es válido (no es admin ni usuario regular)
+            header('Location: /entrada'); // Redirige si el user_type no es válido (no es admin ni usuario regular)
             exit();
         }
     } catch (Exception $e) {
         // Si el token es inválido, ha expirado o no es manipulable
         error_log("Error al verificar sesión: " . $e->getMessage());
-        header('Location: /gestio/entrada'); // Redirige a login si el token no es válido
+        header('Location: /entrada'); // Redirige a login si el token no es válido
         exit();
     }
 }

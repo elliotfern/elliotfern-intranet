@@ -11,7 +11,9 @@ require_once __DIR__ . '/../Config/funcions.php';
 // Definir constantes de configuración
 define('BASE_URL', $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST']);
 define('APP_ROOT', $_SERVER['DOCUMENT_ROOT']);
+
 define('APP_GESTIO',  "/gestio");
+define('APP_AREA_USUARIS',  "/usuaris");
 
 $base_url = '';
 
@@ -26,7 +28,9 @@ if ($isAdmin) {
 }
 
 // Variables del directori de fitxers
-define('APP_INTRANET_DIR',  "public/intranet/");
+define('APP_INTRANET_DIR',  "public/area-privada-administradors/");
+define('APP_AREA_USUARIS_DIR',  "public/area-privada-usuaris/");
+
 define('APP_HOMEPAGE_DIR',  "01_homepage/");
 define('APP_COMPTABILITAT_DIR',  "02_comptabilitat/");
 define('APP_CLIENTS_DIR',  "03_clients/");
@@ -44,6 +48,7 @@ define('APP_RSS_DIR', '14_lector_rss/');
 define('APP_HISTORIA_DIR', '15_historia/');
 define('APP_AUXILIARS_DIR', '16_auxiliars/');
 define('APP_VIATGES_DIR', '17_viatges/');
+define('APP_USUARIS_DIR', '18_usuaris/');
 
 // definicio de url
 $url = [
@@ -64,4 +69,5 @@ $url = [
     'historia' => '/historia',
     'auxiliars' => '/auxiliars',
     'viatges' => '/viatges',
+    'usuaris' => '/gestio-usuaris',
 ];

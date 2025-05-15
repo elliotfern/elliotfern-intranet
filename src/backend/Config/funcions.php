@@ -35,3 +35,29 @@ function isUserAdmin(): bool
 
     return false;
 }
+
+function isUserUsuari(): bool
+{
+    // Cargar variables de entorno desde .env
+    $jwtSecret = $_ENV['TOKEN'];
+
+    if (!isset($_COOKIE['token'])) {
+        return false;
+    }
+
+    $token = trim($_COOKIE['token']);
+
+    try {
+        $decoded = JWT::decode($token, new Key($jwtSecret, 'HS256'));
+
+        // Comprobamos si el usuario es admin (user_type = 1)
+        if (isset($decoded->user_type) && ($decoded->user_type == 1 || $decoded->user_type == 2)) {
+            return true;
+        }
+    } catch (Exception $e) {
+        // Token inválido, expirado o manipulado
+        error_log("Error en isUserAdmin(): " . $e->getMessage());
+    }
+
+    return false;
+}

@@ -37,10 +37,10 @@ export async function barraNavegacio() {
 
   // Si el usuario es admin, mostramos "Intranet" y el enlace a la intranet
   if (isAdmin) {
-    breadcrumbHtml += `<h6><a href="https://elliot.cat/intranet">Intranet</a> > `;
+    breadcrumbHtml += `<h6><a href="${baseAdminUrl}">Intranet</a> > `;
   } else {
     // Si no es admin, mostramos "Inici" y el enlace a la página principal
-    breadcrumbHtml += `<h6><a href="https://elliot.cat">Inici</a> > `;
+    breadcrumbHtml += `<h6><a href="${baseUserUrl}">Inici</a> > `;
   }
 
   // Añadimos los enlaces de navegación basados en la URL actual

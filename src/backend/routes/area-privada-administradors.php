@@ -1,157 +1,24 @@
 <?php
 
-// Define las rutas base que quieres traducir
-$base_routes = [
-    // 01. Homepage - Entrada Pàgina login i homepage
-    APP_GESTIO . '/entrada' => APP_INTRANET_DIR . APP_HOMEPAGE_DIR . 'login.php',
-    APP_GESTIO . '/' => APP_INTRANET_DIR . APP_HOMEPAGE_DIR . 'admin.php',
-    APP_GESTIO . '/admin' => APP_INTRANET_DIR . APP_HOMEPAGE_DIR . 'admin.php',
-
-    // 02. Comptabilitat
-    APP_GESTIO . $url['comptabilitat'] => APP_INTRANET_DIR . APP_COMPTABILITAT_DIR . 'index.php',
-    APP_GESTIO . $url['comptabilitat'] . '/facturacio-clients' => APP_INTRANET_DIR . APP_COMPTABILITAT_DIR . 'erp-invoices-customers.php',
-    APP_GESTIO . $url['comptabilitat'] . '/facturacio-clients/nova-factura' => APP_INTRANET_DIR . APP_COMPTABILITAT_DIR . 'erp-invoices-customers-new.php',
-
-    // 03. Clients
-    APP_GESTIO . $url['clients']  => APP_INTRANET_DIR . APP_CLIENTS_DIR . 'index.php',
-
-    // 04. Base dades Persones
-    APP_GESTIO . $url['persones'] => APP_INTRANET_DIR . APP_PERSONES_DIR . 'index.php',
-    APP_GESTIO . $url['persones'] . '/llistat-persones' => APP_INTRANET_DIR . APP_PERSONES_DIR . 'index.php',
-    APP_GESTIO . $url['persones'] . '/nova-persona' => APP_INTRANET_DIR . APP_PERSONES_DIR . 'form-operacions-persona.php',
-    APP_GESTIO . $url['persones'] . '/modifica-persona/{slug}' => APP_INTRANET_DIR . APP_PERSONES_DIR . 'form-operacions-persona.php',
-
-    // 05. Programacio
-    APP_GESTIO . $url['programacio'] => APP_INTRANET_DIR . APP_PROGRAMACIO_DIR . 'index.php',
-    APP_GESTIO . $url['programacio'] . '/daw' => APP_INTRANET_DIR . APP_PROGRAMACIO_DIR . 'daw.php',
-    APP_GESTIO . $url['programacio'] . '/links' => APP_INTRANET_DIR . APP_PROGRAMACIO_DIR . 'links.php',
-    APP_GESTIO . $url['programacio'] . '/links/{id}' => APP_INTRANET_DIR . APP_PROGRAMACIO_DIR . 'links-detail.php',
-
-    // 06. Gestor projectes
-    APP_GESTIO . $url['projectes'] => APP_INTRANET_DIR . APP_PROJECTES_DIR . 'index.php',
-
-    // 07. Agenda contactes
-    APP_GESTIO . $url['contactes'] => APP_INTRANET_DIR . APP_CONTACTES_DIR . 'index.php',
-
-    // 08. Biblioteca llibres
-    APP_GESTIO . $url['biblioteca'] => APP_INTRANET_DIR . APP_BIBLIOTECA_DIR . 'index.php',
-    APP_GESTIO . $url['biblioteca'] . '/llistat-llibres' => APP_INTRANET_DIR . APP_BIBLIOTECA_DIR . 'vista-llistat-llibres.php',
-    APP_GESTIO . $url['biblioteca'] . '/llistat-autors' => APP_INTRANET_DIR . APP_BIBLIOTECA_DIR . 'vista-llistat-autors.php',
-    APP_GESTIO . $url['biblioteca']  . '/fitxa-llibre/{slug}' => APP_INTRANET_DIR . APP_BIBLIOTECA_DIR . 'vista-llibre.php',
-    APP_GESTIO . $url['biblioteca'] . '/fitxa-autor/{slug}' => APP_INTRANET_DIR . APP_BIBLIOTECA_DIR . 'vista-autor.php',
-    APP_GESTIO . $url['biblioteca'] . '/modifica-llibre/{slug}' => APP_INTRANET_DIR . APP_BIBLIOTECA_DIR .  'form-modifica-llibre.php',
-    APP_GESTIO . $url['biblioteca'] . '/nou-llibre' => APP_INTRANET_DIR . APP_BIBLIOTECA_DIR . 'form-modifica-llibre.php',
-
-    // 09. Adreces interes
-    APP_GESTIO . $url['adreces'] => APP_INTRANET_DIR . APP_ADRECES_DIR . 'index.php',
-    APP_GESTIO . $url['adreces'] . '/llistat-categories' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'llistat-categories.php',
-    APP_GESTIO . $url['adreces'] . '/llistat-temes' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'llistat-temes.php',
-    APP_GESTIO . $url['adreces'] . '/categoria/{id}' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'vista-categoria.php',
-    APP_GESTIO . $url['adreces'] . '/tema/{id}' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'vista-tema.php',
-    APP_GESTIO . $url['adreces'] . '/nou-link' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'modifica-link.php',
-    APP_GESTIO . $url['adreces'] . '/modifica-link/{id}' => APP_INTRANET_DIR . APP_ADRECES_DIR . 'modifica-link.php',
-
-    // 10. Claus access
-    APP_GESTIO . $url['vault'] => APP_INTRANET_DIR . APP_CLAUS_DIR . 'index.php',
-    APP_GESTIO . $url['vault'] . '/nova-clau' => APP_INTRANET_DIR . APP_CLAUS_DIR . 'nova-contrasenya.php',
-
-    // 11. Arts esceniques, cinema, televisio
-    APP_GESTIO . $url['cinema'] => APP_INTRANET_DIR . APP_CINEMA_DIR . 'index.php',
-
-    APP_GESTIO . $url['cinema'] . '/llistat-pelicules' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-pelicules.php',
-    APP_GESTIO . $url['cinema'] . '/llistat-series' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-series.php',
-    APP_GESTIO . $url['cinema'] . '/llistat-directors' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-directors.php',
-    APP_GESTIO . $url['cinema'] . '/llistat-actors' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat.actors.php',
-    APP_GESTIO . $url['cinema'] . '/llistat-obres-teatre' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-llistat-teatre.php',
-
-    APP_GESTIO . $url['cinema'] . '/fitxa-actor/{slug}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-actor.php',
-    APP_GESTIO . $url['cinema'] . '/fitxa-director{slug}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-director.php',
-    APP_GESTIO . $url['cinema'] . '/fitxa-pelicula/{slug}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-pelicula.php',
-    APP_GESTIO . $url['cinema'] . '/fitxa-serie/{slug}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-serie.php',
-    APP_GESTIO . $url['cinema'] . '/fitxa-teatre/{slug}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'vista-teatre.php',
-
-    APP_GESTIO . $url['cinema'] . '/nova-pelicula' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'form-pelicula.php',
-    APP_GESTIO . $url['cinema'] . '/modifica-pelicula/{id}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'form-pelicula.php',
-
-    APP_GESTIO . $url['cinema'] . '/nova-serie' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'form-serie.php',
-    APP_GESTIO . $url['cinema'] . '/modifica-serie/{id}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'form-serie.php',
-
-    APP_GESTIO . $url['cinema'] . '/inserir-actor-pelicula/{slug}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'form-actor-pelicula.php',
-    APP_GESTIO . $url['cinema'] . '/modifica-actor-pelicula/{slug}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'form-actor-pelicula.php',
-
-    APP_GESTIO . $url['cinema'] . '/inserir-actor-serie/{slug}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'form-actor-serie.php',
-    APP_GESTIO . $url['cinema'] . '/modifica-actor-serie/{slug}' => APP_INTRANET_DIR . APP_CINEMA_DIR . 'form-actor-serie.php',
-
-    // 12. Xarxes socials
-    APP_GESTIO . $url['xarxes'] =>  APP_INTRANET_DIR . APP_XARXES_DIR . 'index.php',
-    APP_GESTIO . $url['xarxes'] . '/mastodon' => APP_INTRANET_DIR . APP_XARXES_DIR . 'lector-mastodon.php',
-    APP_GESTIO . $url['xarxes'] . '/publica' => APP_INTRANET_DIR . APP_XARXES_DIR . 'nou-post.php',
-
-    // 13. Blog
-    APP_GESTIO . $url['blog'] => APP_INTRANET_DIR . APP_BLOG_DIR . 'index.php',
-    APP_GESTIO . $url['blog'] . '/article/{slug}' => APP_INTRANET_DIR . APP_BLOG_DIR . 'fitxa-article.php',
-    APP_GESTIO . $url['blog'] . '/modifica-article/{id}' => APP_INTRANET_DIR . APP_BLOG_DIR . 'modifica-article.php',
-    APP_GESTIO . $url['blog'] . '/nou-article' => APP_INTRANET_DIR . APP_BLOG_DIR . 'modifica-article.php',
-
-    // 14. Lector rss
-    APP_GESTIO . $url['rss'] => APP_INTRANET_DIR . APP_RSS_DIR . 'index.php',
-
-    // 15. Història
-    APP_GESTIO . $url['historia'] => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'index.php',
-    APP_GESTIO . $url['historia'] . '/llistat-cursos' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'llistat-cursos.php',
-    APP_GESTIO . $url['historia'] . '/llistat-organitzacions' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'llistat-organitzacions.php',
-    APP_GESTIO . $url['historia'] . '/llistat-esdeveniments' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'llistat-esdeveniments.php',
-
-    APP_GESTIO . $url['historia'] . '/fitxa-persona/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-persona.php',
-    APP_GESTIO . $url['historia'] . '/fitxa-politic/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-politic.php',
-    APP_GESTIO . $url['historia'] . '/fitxa-esdeveniment/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-esdeveniment.php',
-    APP_GESTIO . $url['historia'] . '/fitxa-organitzacio/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'fitxa-organitzacio.php',
-
-    APP_GESTIO . $url['historia'] . '/nou-esdeveniment' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-esdeveniment.php',
-    APP_GESTIO . $url['historia'] . '/modifica-esdeveniment/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-esdeveniment.php',
-
-    APP_GESTIO . $url['historia'] . '/modifica-esdeveniment-persona/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-esdeveniment-persona.php',
-    APP_GESTIO . $url['historia'] . '/modifica-esdeveniment-organitzacio/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-esdeveniment-organitzacio.php',
-    APP_GESTIO . $url['historia'] . '/nou-carrec/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-persona-carrec.php',
-    APP_GESTIO . $url['historia'] . '/modifica-persona-carrec/{id}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-persona-carrec.php',
-
-    APP_GESTIO . $url['historia'] . '/modifica-organitzacio/{slug}' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-organitzacio.php',
-    APP_GESTIO . $url['historia'] . '/nova-organitzacio' => APP_INTRANET_DIR . APP_HISTORIA_DIR . 'form-organitzacio.php',
-
-    // 16. Auxiliars
-    APP_GESTIO . $url['auxiliars'] => APP_INTRANET_DIR . APP_AUXILIARS_DIR . 'index.php',
-    APP_GESTIO . $url['auxiliars'] . '/llistat-imatges' => APP_INTRANET_DIR . APP_AUXILIARS_DIR . 'imatges/llistat-imatges.php',
-
-    APP_GESTIO . $url['auxiliars'] . '/nova-imatge' => APP_INTRANET_DIR . APP_AUXILIARS_DIR . 'imatges/form-inserir-imatge.php',
-
-    // 17. Viatges
-    APP_GESTIO . $url['viatges'] => APP_INTRANET_DIR . APP_VIATGES_DIR . 'index.php',
-    APP_GESTIO . $url['viatges'] . '/llistat-viatges' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'llistat-viatges.php',
-    APP_GESTIO . $url['viatges'] . '/fitxa-viatge/{slug}' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'fitxa-viatge.php',
-    APP_GESTIO . $url['viatges'] . '/fitxa-espai/{slug}' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'fitxa-espai.php',
-
-    APP_GESTIO . $url['viatges'] . '/modifica-espai/{slug}' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'form-espai.php',
-    APP_GESTIO . $url['viatges'] . '/nou-espai' => APP_INTRANET_DIR . APP_VIATGES_DIR . 'form-espai.php',
-];
+// Función que verifica si el usuario es Admin
+function checkIfAdmin()
+{
+    if (!isUserAdmin()) {
+        // Si no es admin, redirigimos al login o a una página de acceso denegado
+        header('Location: /entrada');
+        exit;
+    }
+}
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
 $routes = [
-    // 01. Homepage i acces intranet
-    APP_GESTIO . '/entrada' => [
-        'view' =>  APP_INTRANET_DIR . APP_HOMEPAGE_DIR . 'login.php',
-        'needs_session' => false,
-        'header_footer' => true,
-        'header_menu_footer' => false,
-        'apiSenseHTML' => false
-    ],
-
     APP_GESTIO => [
         'view' =>  APP_INTRANET_DIR . APP_HOMEPAGE_DIR . 'admin.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
         'apiSenseHTML' => false,
-        'menu_intranet' => true
+        'menu_intranet' => true,
     ],
 
     APP_GESTIO . '/admin' => [
@@ -908,9 +775,32 @@ $routes = [
         'menu_intranet' => true
     ],
 
+    // Gestió usuaris
+    APP_GESTIO . $url['usuaris'] => [
+        'view' => APP_INTRANET_DIR . APP_USUARIS_DIR . 'index.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['usuaris'] . '/llistat-usuaris' => [
+        'view' => APP_INTRANET_DIR . APP_USUARIS_DIR . 'llistat-usuaris.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
 ];
 
-// Unir rutas base con rutas específicas de idioma
-$routes = $routes + generateLanguageRoutes($base_routes, false);
+// Verificar si el usuario es admin antes de procesar las rutas privadas (admin)
+if (isset($_SERVER['REQUEST_URI']) && (strpos($_SERVER['REQUEST_URI'], APP_GESTIO . '/gestio') === 0 || strpos($_SERVER['REQUEST_URI'], APP_GESTIO) === 0)) {
+    // Comprobar si es admin antes de acceder a las rutas
+    checkIfAdmin();
+}
 
+// Devolver las rutas
 return $routes;

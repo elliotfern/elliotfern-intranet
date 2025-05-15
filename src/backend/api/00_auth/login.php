@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data = json_decode(file_get_contents('php://input'), true);
 
         if (isset($data['username']) && isset($data['password'])) {
-                $username = $data['username'];
+                $email = $data['username'];
                 $password = $data['password'];
         }
 
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $passwordController = new AuthController($vaultService);
 
         // Llamar al método getPasswords con el ID dinámico
-        $passwords = $passwordController->loginAuth($username, $password);
+        $passwords = $passwordController->loginAuth($email, $password);
 
         // Verificar que hemos obtenido un array de datos
         if (is_array($passwords)) {

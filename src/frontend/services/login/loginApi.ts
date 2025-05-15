@@ -11,7 +11,7 @@ export async function loginApi(event: any) {
   event.preventDefault(); // Evitar el envío del formulario por defecto
 
   // Obtener los valores del formulario
-  const usernameInput = document.getElementById('username') as HTMLInputElement;
+  const usernameInput = document.getElementById('email') as HTMLInputElement;
   const passwordInput = document.getElementById('password') as HTMLInputElement;
 
   const loginMessageOk = document.getElementById('loginMessageOk');
@@ -46,9 +46,15 @@ export async function loginApi(event: any) {
             loginMessageErr.style.display = 'none';
           }
 
-          setTimeout(() => {
-            window.location.href = '/gestio/admin';
-          }, 3000);
+          if (data.user_type === 1) {
+            setTimeout(() => {
+              window.location.href = '/gestio/admin';
+            }, 3000);
+          } else {
+            setTimeout(() => {
+              window.location.href = '/usuaris';
+            }, 3000);
+          }
         } else {
           if (loginMessageOk && loginMessageErr) {
             // Mostrar mensaje de éxito

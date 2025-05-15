@@ -6,12 +6,16 @@ $base_routes = [
     '/ca' => 'public/web-publica/index.php',
     '/homepage' => 'public/web-publica/index.php',
 
+
+    // 15. Entrada part privada
+    '/entrada' =>  'public/web-publica/autenticacio-usuaris/login.php',
+    '/nou-usuari' =>  'public/web-publica/autenticacio-usuaris/registre-usuari.php',
+
     // ARTICLES
     '/article/{slug}' => 'public/web-publica/article.php',
 
     // CURSOS
     '/course/{slug}' => 'public/web-publica/curs.php',
-
 
     // 08. Biblioteca llibres
     $url['biblioteca'] => APP_INTRANET_DIR . APP_BIBLIOTECA_DIR . 'index.php',
@@ -56,6 +60,7 @@ $base_routes = [
 
     // 14. Lector rss
     $url['rss'] => APP_INTRANET_DIR . APP_RSS_DIR . 'index.php',
+
 ];
 
 // Rutas principales sin idioma explícito (solo para el idioma por defecto)
@@ -66,6 +71,24 @@ $routes = [
         'needs_session' => false,
         'header_footer' => false,
         'header_menu_footer' => true,
+    ],
+
+    '/entrada' => [
+        'view' => 'public/web-publica/autenticacio-usuaris/login.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
+    ],
+
+    '/nou-usuari' => [
+        'view' => 'public/web-publica/autenticacio-usuaris/registre.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => true,
+        'apiSenseHTML' => false,
+        'menu_intranet' => false
     ],
 
     // ARTICLES
@@ -360,7 +383,6 @@ $routes = [
         'apiSenseHTML' => false,
         'menu_intranet' => false
     ],
-
 ];
 
 // Unir rutas base con rutas específicas de idioma

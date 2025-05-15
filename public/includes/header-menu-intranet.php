@@ -36,6 +36,8 @@
 
       <a href="<?php echo APP_INTRANET . $url['viatges']; ?>" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">17. Viatges</a>
 
+      <a href="<?php echo APP_INTRANET . $url['usuaris']; ?>" class="btn btn-success menuBtn w-100 w-md-auto" role="button" aria-disabled="false">18. Gestió usuaris</a>
+
     </div>
   </div>
 </div>
