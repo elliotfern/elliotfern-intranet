@@ -81,3 +81,44 @@ function checkReferer($allowedOrigin)
         exit();
     }
 }
+
+// Función para verificar el JWT
+function verificarJWT($token)
+{
+    // Se asume que tienes una función para decodificar el JWT
+    // y una clave secreta para verificar la firma (asegúrate de reemplazarla con la tuya)
+    $jwtSecret = $_ENV['TOKEN'];
+
+    try {
+        // Decodifica el JWT (usa una librería como Firebase JWT o alguna similar)
+        $decoded = JWT::decode($token, new Key($jwtSecret, 'HS256'));
+        return $decoded;
+    } catch (Exception $e) {
+        // Si el token es inválido
+        return null;
+    }
+}
+
+function verificaTipusUsuari()
+{
+    // Obtener el token de las cookies
+    $token = $_COOKIE['token'] ?? null;
+
+    if ($token) {
+        $usuario = verificarJWT($token);
+
+        if ($usuario) {
+            $user_type = $usuario->user_type; // Tipo de usuario en el JWT
+
+            // Dependiendo del tipo de usuario, redirige a una página diferente
+            if ($user_type == 1) { // Admin
+                header('Location: /gestio');
+            } elseif ($user_type == 2) { // User
+                header('Location: /usuaris');
+            }
+            // Si no es admin ni user, deja que continúe en la página actual
+        }
+    } else {
+        return;
+    }
+}

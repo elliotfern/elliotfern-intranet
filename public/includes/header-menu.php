@@ -12,11 +12,11 @@
         <nav class="containerMenu menuHidden" id="navbarMenu">
             <ul>
                 <li><a href="/ca/homepage">Inici</a></li>
-                <li><a href="/ca/about">Sobre l'autor</a></li>
-                <li><a href="/ca/biblioteca">Biblioteca</a></li>
+                <li><a href="/about">Sobre l'autor</a></li>
+                <li><a href="/biblioteca">Biblioteca</a></li>
                 <li><a href="/ca/historia">Història</a></li>
-                <li><a href="/ca/blog">Blog</a></li>
-                <li><a href="/ca/adreces">Enllaços</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/adreces">Enllaços</a></li>
 
                 <!-- Languages Dropdown -->
                 <li class="dropdown">

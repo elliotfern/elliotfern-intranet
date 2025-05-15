@@ -19,7 +19,7 @@
 
             <div class="alert alert-success quadre">
                 <ul class="llistat">
-                    <li> <a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>/llistat-llibres">Llistat de llibres</a></li>
+                    <li> <a href="<?php echo APP_INTRANET . $url['biblioteca']  ?>/llistat-llibres">Llistat de llibres</a></li>
                     <li><a href="<?php echo APP_INTRANET . $url['biblioteca']; ?>/llistat-autors">Llistat d'autors/es</a></li>
                 </ul>
             </div>

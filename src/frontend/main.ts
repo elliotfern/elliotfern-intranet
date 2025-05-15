@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (pageType[0] === 'entrada') {
     loginPage();
   } else if (pageType[0] === 'nou-usuari') {
-    console.log('hola');
     const autor = document.getElementById('formUsuari');
     if (autor) {
       // Lanzar actualizador de datos
