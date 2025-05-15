@@ -71,6 +71,17 @@ button {
   cursor: pointer;
 }
 
+/* Botón de envío */
+.btn-color-blau {
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+  font-size: 16px;
+  background-color: rgb(14, 14, 43);
+  color: white;
+  cursor: pointer;
+}
+
 /* Botón Atrás (izquierda) */
 .btn-enrere {
   background-color: #aaaaaa; /* Gris */

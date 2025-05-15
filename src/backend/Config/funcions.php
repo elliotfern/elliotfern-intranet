@@ -61,3 +61,23 @@ function isUserUsuari(): bool
 
     return false;
 }
+
+/**
+ * Verifica que la solicitud provenga del dominio permitido.
+ *
+ * @param string $allowedOrigin El dominio permitido.
+ * @return void
+ */
+function checkReferer($allowedOrigin)
+{
+    // Verificar que la cabecera 'Referer' esté presente y sea válida
+    if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], $allowedOrigin) === 0) {
+        // El Referer contiene la URL del dominio permitido
+        header("Access-Control-Allow-Origin: " . $allowedOrigin);
+    } else {
+        // Si la cabecera 'Referer' no es válida, denegar el acceso
+        header("HTTP/1.1 403 Forbidden");
+        echo json_encode(['error' => 'Accés no permés']);
+        exit();
+    }
+}

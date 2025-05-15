@@ -4,22 +4,15 @@
 
     <main>
         <div class="container contingut">
-            <h1>Gestió usuaris web</h1>
+            <?php if (isUserAdmin()) : ?>
+                <h1>Gestió usuaris web</h1>
+                <h2>Llistat usuaris</h2>
+                <p>
+                    <button onclick="window.location.href='<?php echo APP_INTRANET . $url['usuaris']; ?>/nou-usuari'" class="button btn-gran btn-secondari">Nou usuari</button>
+                </p>
 
-            <div id="isAdminButton" style="display: none;">
-                <?php if (isUserAdmin()) : ?>
-                    <p>
-                        <button onclick="window.location.href='<?php echo APP_INTRANET . $url['viatges']; ?>/nou-viatge'" class="button btn-gran btn-secondari">Nou usuari</button>
-                    </p>
-                <?php endif; ?>
-            </div>
-
-            <div class="alert alert-success quadre">
-                <ul class="llistat">
-                    <li> <a href="<?php echo APP_INTRANET . $url['usuaris']; ?>/llistat-usuaris">Llistat d'usuaris</a></li>
-                </ul>
-            </div>
-
+                <div id="taulaUsuaris"> </div>
         </div>
+    <?php endif; ?>
     </main>
 </div>

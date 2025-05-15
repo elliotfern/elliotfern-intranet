@@ -18,6 +18,9 @@ import { auxiliars } from './pages/auxiliars/auxiliars';
 import { logout } from './services/login/logOutApi';
 import { contactes } from './pages/contactes/contactes';
 import { lectorRss } from './pages/lectorRss/lectorRss';
+import { usuaris } from './pages/gestioUsuaris/usuaris';
+import { areaPrivadaUsuaris } from './pages/areaPrivadaUsuaris/funcions';
+import { transmissioDadesDB } from './utils/actualitzarDades';
 
 const url = window.location.href;
 const pageType = getPageType(url);
@@ -34,6 +37,15 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log(pageType);
   if (pageType[0] === 'entrada') {
     loginPage();
+  } else if (pageType[0] === 'nou-usuari') {
+    console.log('hola');
+    const autor = document.getElementById('formUsuari');
+    if (autor) {
+      // Lanzar actualizador de datos
+      autor.addEventListener('submit', function (event) {
+        transmissioDadesDB(event, 'POST', 'formUsuari', '/api/auth/post/usuari');
+      });
+    }
   } else if (pageType[1] === 'claus-privades') {
     vault();
   } else if (pageType[1] === 'comptabilitat') {
@@ -58,5 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
     viatges();
   } else if (pageType[1] === 'cinema' || pageType[0] === 'cinema') {
     cinema();
+  } else if (pageType[1] === 'gestio-usuaris') {
+    usuaris();
+  } else if (pageType[0] === 'usuaris') {
+    areaPrivadaUsuaris();
   }
 });

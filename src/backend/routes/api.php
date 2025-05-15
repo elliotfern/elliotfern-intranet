@@ -4,15 +4,7 @@
 $routes = [
     // API: Registre usuari / Login
     '/api/auth/login' => [
-        'view' => 'src/backend/api/00_auth/login.php',
-        'needs_session' => false,
-        'header_footer' => false,
-        'header_menu_footer' => false,
-        'apiSenseHTML' => true
-    ],
-
-    '/api/auth/registre' => [
-        'view' => 'src/backend/api/00_auth/registre.php',
+        'view' => 'src/backend/api/00_auth/get/get-login.php',
         'needs_session' => false,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -20,7 +12,47 @@ $routes = [
     ],
 
     '/api/auth/get' => [
-        'view' => 'src/backend/api/00_auth/get-auth.php',
+        'view' => 'src/backend/api/00_auth/get/get-auth.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    '/api/auth/get/usuaris' => [
+        'view' => 'src/backend/api/00_auth/get/get-usuaris.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    '/api/auth/get/usuari/{id}' => [
+        'view' => 'src/backend/api/00_auth/get/get-usuari.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    '/api/auth/post/usuari' => [
+        'view' => 'src/backend/api/00_auth/post/post-usuari.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    '/api/auth/put/usuari' => [
+        'view' => 'src/backend/api/00_auth/put/put-usuari.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    '/api/auth/get/nomUsuari' => [
+        'view' => 'src/backend/api/00_auth/get/get-nom-usuari.php',
         'needs_session' => false,
         'header_footer' => false,
         'header_menu_footer' => false,

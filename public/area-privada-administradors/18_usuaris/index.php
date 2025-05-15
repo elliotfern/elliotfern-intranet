@@ -9,7 +9,7 @@
             <div id="isAdminButton" style="display: none;">
                 <?php if (isUserAdmin()) : ?>
                     <p>
-                        <button onclick="window.location.href='<?php echo APP_INTRANET . $url['viatges']; ?>/nou-viatge'" class="button btn-gran btn-secondari">Nou usuari</button>
+                        <button onclick="window.location.href='<?php echo APP_INTRANET . $url['usuaris']; ?>/nou-usuari'" class="button btn-gran btn-secondari">Nou usuari</button>
                     </p>
                 <?php endif; ?>
             </div>

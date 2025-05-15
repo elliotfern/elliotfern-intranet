@@ -18841,6 +18841,77 @@ function taulaLlistatTemes() {
 
 /***/ }),
 
+/***/ "./src/frontend/pages/areaPrivadaUsuaris/funcions.ts":
+/*!***********************************************************!*\
+  !*** ./src/frontend/pages/areaPrivadaUsuaris/funcions.ts ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   areaPrivadaUsuaris: () => (/* binding */ areaPrivadaUsuaris)
+/* harmony export */ });
+/* harmony import */ var _nomUsuari__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./nomUsuari */ "./src/frontend/pages/areaPrivadaUsuaris/nomUsuari.ts");
+
+function areaPrivadaUsuaris() {
+    (0,_nomUsuari__WEBPACK_IMPORTED_MODULE_0__.nomUsuari)();
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/pages/areaPrivadaUsuaris/nomUsuari.ts":
+/*!************************************************************!*\
+  !*** ./src/frontend/pages/areaPrivadaUsuaris/nomUsuari.ts ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   nomUsuari: () => (/* binding */ nomUsuari)
+/* harmony export */ });
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+function nomUsuari() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const devDirectory = `https://${window.location.hostname}`;
+        const urlAjax = `${devDirectory}/api/auth/get/nomUsuari`;
+        const userDiv = document.getElementById('benvingudaUsuari');
+        if (userDiv) {
+            try {
+                const res = yield fetch(urlAjax, {
+                    credentials: 'include', // importante si la cookie "token" es HttpOnly
+                });
+                if (!res.ok) {
+                    console.warn('No se pudo obtener el usuario');
+                    return;
+                }
+                const data = yield res.json();
+                const welcomeMessage = data.nom ? `Hola, ${data.nom}` : 'Usuari desconegut';
+                userDiv.textContent = welcomeMessage;
+            }
+            catch (err) {
+                console.error('Error al obtener el usuario:', err);
+            }
+        }
+        else {
+            console.warn('Elemento #userDiv no encontrado');
+        }
+    });
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/pages/auxiliars/auxiliars.ts":
 /*!***************************************************!*\
   !*** ./src/frontend/pages/auxiliars/auxiliars.ts ***!
@@ -19736,6 +19807,119 @@ function taulaLlistatContactes() {
             filterByField: 'tipus',
         });
     });
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/pages/gestioUsuaris/taulaUsuaris.ts":
+/*!**********************************************************!*\
+  !*** ./src/frontend/pages/gestioUsuaris/taulaUsuaris.ts ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   taulaUsuaris: () => (/* binding */ taulaUsuaris)
+/* harmony export */ });
+/* harmony import */ var _components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/renderTaula/taulaRender */ "./src/frontend/components/renderTaula/taulaRender.ts");
+/* harmony import */ var _utils_formataData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/formataData */ "./src/frontend/utils/formataData.ts");
+/* harmony import */ var _services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth/isAdmin */ "./src/frontend/services/auth/isAdmin.ts");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+function taulaUsuaris() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const isAdmin = yield (0,_services_auth_isAdmin__WEBPACK_IMPORTED_MODULE_2__.getIsAdmin)();
+        const columns = [
+            {
+                header: 'Nom i cognoms',
+                field: 'nom',
+                render: (_, row) => `${row.nom} ${row.cognom}`,
+            },
+            { header: 'Email', field: 'email' },
+            { header: 'Tipus', field: 'tipus' },
+            {
+                header: 'Data alta',
+                field: 'dateCreated',
+                render: (_, row) => {
+                    const inici = (0,_utils_formataData__WEBPACK_IMPORTED_MODULE_1__.formatData)(row.dateCreated);
+                    return `${inici}`;
+                },
+            },
+        ];
+        if (isAdmin) {
+            columns.push({
+                header: 'Accions',
+                field: 'id',
+                render: (_, row) => `
+         <a href="https://${window.location.host}/gestio/gestio-usuaris/modifica-usuari/${row.id}"><button class="btn-petit">Modifica</button></a>`,
+            });
+        }
+        (0,_components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__.renderDynamicTable)({
+            url: `https://${window.location.host}/api/auth/get/usuaris`,
+            containerId: 'taulaUsuaris',
+            columns,
+            filterKeys: ['nom', 'cognom'],
+            filterByField: 'tipus',
+        });
+    });
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/pages/gestioUsuaris/usuaris.ts":
+/*!*****************************************************!*\
+  !*** ./src/frontend/pages/gestioUsuaris/usuaris.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   usuaris: () => (/* binding */ usuaris)
+/* harmony export */ });
+/* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
+/* harmony import */ var _taulaUsuaris__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./taulaUsuaris */ "./src/frontend/pages/gestioUsuaris/taulaUsuaris.ts");
+/* harmony import */ var _utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/actualitzarDades */ "./src/frontend/utils/actualitzarDades.ts");
+
+
+
+const url = window.location.href;
+const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_0__.getPageType)(url);
+function usuaris() {
+    if (pageType[2] === 'llistat-usuaris') {
+        (0,_taulaUsuaris__WEBPACK_IMPORTED_MODULE_1__.taulaUsuaris)();
+    }
+    else if (pageType[2] === 'modifica-usuari') {
+        const autor = document.getElementById('formUsuari');
+        if (autor) {
+            // Lanzar actualizador de datos
+            autor.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_2__.transmissioDadesDB)(event, 'PUT', 'formUsuari', '/api/auth/put/usuari');
+            });
+        }
+    }
+    else if (pageType[2] === 'nou-usuari') {
+        const autor = document.getElementById('formUsuari');
+        if (autor) {
+            // Lanzar actualizador de datos
+            autor.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_2__.transmissioDadesDB)(event, 'POST', 'formUsuari', '/api/auth/post/usuari');
+            });
+        }
+    }
 }
 
 
@@ -21756,6 +21940,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_login_logOutApi__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./services/login/logOutApi */ "./src/frontend/services/login/logOutApi.ts");
 /* harmony import */ var _pages_contactes_contactes__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./pages/contactes/contactes */ "./src/frontend/pages/contactes/contactes.ts");
 /* harmony import */ var _pages_lectorRss_lectorRss__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pages/lectorRss/lectorRss */ "./src/frontend/pages/lectorRss/lectorRss.ts");
+/* harmony import */ var _pages_gestioUsuaris_usuaris__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./pages/gestioUsuaris/usuaris */ "./src/frontend/pages/gestioUsuaris/usuaris.ts");
+/* harmony import */ var _pages_areaPrivadaUsuaris_funcions__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./pages/areaPrivadaUsuaris/funcions */ "./src/frontend/pages/areaPrivadaUsuaris/funcions.ts");
+/* harmony import */ var _utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./utils/actualitzarDades */ "./src/frontend/utils/actualitzarDades.ts");
+
+
+
 
 
 
@@ -21787,6 +21977,16 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(pageType);
     if (pageType[0] === 'entrada') {
         (0,_pages_login_funcions__WEBPACK_IMPORTED_MODULE_5__.loginPage)();
+    }
+    else if (pageType[0] === 'nou-usuari') {
+        console.log('hola');
+        const autor = document.getElementById('formUsuari');
+        if (autor) {
+            // Lanzar actualizador de datos
+            autor.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_21__.transmissioDadesDB)(event, 'POST', 'formUsuari', '/api/auth/post/usuari');
+            });
+        }
     }
     else if (pageType[1] === 'claus-privades') {
         (0,_pages_vault_funcions__WEBPACK_IMPORTED_MODULE_6__.vault)();
@@ -21821,6 +22021,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     else if (pageType[1] === 'cinema' || pageType[0] === 'cinema') {
         (0,_pages_cinema_funcions__WEBPACK_IMPORTED_MODULE_4__.cinema)();
+    }
+    else if (pageType[1] === 'gestio-usuaris') {
+        (0,_pages_gestioUsuaris_usuaris__WEBPACK_IMPORTED_MODULE_19__.usuaris)();
+    }
+    else if (pageType[0] === 'usuaris') {
+        (0,_pages_areaPrivadaUsuaris_funcions__WEBPACK_IMPORTED_MODULE_20__.areaPrivadaUsuaris)();
     }
 });
 
