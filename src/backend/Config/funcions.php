@@ -77,6 +77,7 @@ function checkReferer($allowedOrigin)
     } else {
         // Si la cabecera 'Referer' no es válida, denegar el acceso
         header("HTTP/1.1 403 Forbidden");
+        header("Content-Type: application/json");
         echo json_encode(['error' => 'Accés no permés']);
         exit();
     }
@@ -120,5 +121,84 @@ function verificaTipusUsuari()
         }
     } else {
         return;
+    }
+}
+
+function getData($query, $params = [], $single = false)
+{
+    global $conn;
+    /** @var PDO $conn */
+
+    try {
+        // Preparar la consulta
+        $stmt = $conn->prepare($query);
+
+        // Si hay parámetros, los vinculamos
+        if (!empty($params)) {
+            foreach ($params as $key => $value) {
+                $stmt->bindValue($key, $value);
+            }
+        }
+
+        // Ejecutar la consulta
+        $stmt->execute();
+
+        // Si esperamos un solo resultado, usamos fetch()
+        if ($single) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        } else {
+            // Si esperamos varios resultados, usamos fetchAll()
+            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        // Verificar si hay resultados
+        if ($row) {
+            return $row;
+        } else {
+            return ['status' => 'error', 'message' => 'No hi ha cap registre disponible.'];
+        }
+    } catch (PDOException $e) {
+        return ['status' => 'error', 'message' => 'Error a la consulta'];
+    }
+}
+
+function sanitizeNumeros($value, $fieldName = 'ID')
+{
+    // Validar que sea un número entero positivo (mayor que cero)
+    if (!filter_var($value, FILTER_VALIDATE_INT) || (int)$value <= 0) {
+        echo json_encode([
+            'status' => 'error',
+            'message' => "$fieldName invàlid, ha de ser un número enter positiu."
+        ]);
+        exit();
+    }
+    return (int)$value;
+}
+
+function sanitizeSlug($slug, $fieldName = 'slug')
+{
+    if ($slug) {
+        // Eliminar caracteres no permitidos
+        $slug = preg_replace('/[^a-zA-Z0-9-_]/', '', $slug);
+
+        // Sanitizar para salida HTML (opcional pero recomendable)
+        $slug = htmlspecialchars($slug, ENT_QUOTES, 'UTF-8');
+
+        // Verificar que no quedó vacío
+        if (empty($slug)) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => "El valor de $fieldName no es válido."
+            ]);
+            exit;
+        }
+
+        return $slug;
+    } else {
+        echo json_encode([
+            'status' => 'error',
+            'message' => "Falta el parámetro $fieldName."
+        ]);
+        exit;
     }
 }

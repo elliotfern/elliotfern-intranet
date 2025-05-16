@@ -43,7 +43,7 @@
 
 <script>
   function authorsTableLibrary() {
-    const urlAjax = `https://${window.location.host}/api/cinema/get/?directors`;
+    const urlAjax = `https://${window.location.host}/api/cinema/get/directors`;
 
     fetch(urlAjax)
       .then(response => {

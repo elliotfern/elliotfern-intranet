@@ -12,6 +12,8 @@ require_once __DIR__ . '/../Config/funcions.php';
 define('BASE_URL', $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST']);
 define('APP_ROOT', $_SERVER['DOCUMENT_ROOT']);
 
+define('APP_DOMAIN', 'https://elliot.cat');
+
 define('APP_GESTIO',  "/gestio");
 define('APP_AREA_USUARIS',  "/usuaris");
 

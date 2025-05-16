@@ -1320,6 +1320,17 @@ button {
   cursor: pointer;
 }
 
+/* Botón de envío */
+.btn-color-blau {
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+  font-size: 16px;
+  background-color: rgb(14, 14, 43);
+  color: white;
+  cursor: pointer;
+}
+
 /* Botón Atrás (izquierda) */
 .btn-enrere {
   background-color: #aaaaaa; /* Gris */
@@ -1394,7 +1405,8 @@ button {
 .filter-btn.active {
   background-color: #007bff;
   color: white;
-}`, "",{"version":3,"sources":["webpack://./src/frontend/estils/botons.css"],"names":[],"mappings":"AAAA,0BAA0B;AAC1B;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,oBAAoB;AACtB;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,oBAAoB;AACtB;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,eAAe;AACjB;;AAEA;EACE,eAAe;EACf,YAAY;AACd;;AAEA;EACE,sBAAsB;EACtB,iBAAiB;EACjB,YAAY;AACd;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,YAAY;EACZ,kBAAkB;AACpB;;AAEA,mBAAmB;AACnB;EACE,WAAW;EACX,aAAa;EACb,kBAAkB;EAClB,eAAe;EACf,iCAAiC;EACjC,YAAY;EACZ,eAAe;AACjB;;AAEA,4BAA4B;AAC5B;EACE,yBAAyB,EAAE,SAAS;EACpC,mBAAmB;EACnB,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;EAC/C,YAAY;EACZ,qBAAqB;AACvB;;AAEA,kCAAkC;AAClC;EACE,sBAAsB;EACtB,eAAe;EACf,yBAAyB,EAAE,SAAS;EACpC,YAAY;EACZ,YAAY;EACZ,kBAAkB;EAClB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,iBAAiB;EACjB,iBAAiB;AACnB;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;AACjD;;AAEA,wFAAwF;AACxF;EACE;;IAEE,WAAW,EAAE,6DAA6D;EAC5E;AACF;;AAEA,kBAAkB;AAClB;EACE,kBAAkB;EAClB,mBAAmB;EACnB,aAAa;EACb,eAAe;EACf,SAAS;AACX;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,yBAAyB;EACzB,sBAAsB;EACtB,cAAc;EACd,kBAAkB;EAClB,eAAe;EACf,sCAAsC;AACxC;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd;;AAEA;EACE,sBAAsB;AACxB;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd","sourcesContent":["/* Ajustes para el botón */\nbutton {\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n  padding: 0.6rem 1rem;\n}\n\n.button {\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n  padding: 0.6rem 1rem;\n}\n\n.btn {\n  padding: 10px 20px;\n  font-size: 16px;\n  text-align: center;\n  cursor: pointer;\n}\n\n.btn-gran {\n  font-size: 1rem;\n  border: none;\n}\n\n.btn-petit {\n  padding: 0.4rem 0.6rem;\n  font-size: 0.7rem;\n  border: none;\n}\n\n.btn-primari {\n  background-color: #081b2e;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-primari:hover {\n  background-color: #0056b3;\n  transform: scale(1.1);\n}\n\n.btn-secondari {\n  background-color: #b93a08;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-secondari:hover {\n  background-color: #d60a03;\n  transform: scale(1.1);\n}\n\n.btn-secondary {\n  background-color: #6c757d;\n  border: none;\n  color: white;\n  border-radius: 3px;\n}\n\n/* Botón de envío */\n.btn-color-negre {\n  width: 100%;\n  padding: 10px;\n  border-radius: 3px;\n  font-size: 16px;\n  background-color: rgb(43, 42, 42);\n  color: white;\n  cursor: pointer;\n}\n\n/* Botón Atrás (izquierda) */\n.btn-enrere {\n  background-color: #aaaaaa; /* Gris */\n  color: rgb(0, 0, 0);\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-enrere:hover {\n  background-color: #000000; /* Gris más oscuro */\n  color: white;\n  transform: scale(1.1);\n}\n\n/* Botón Crear factura (derecha) */\n.btn-primary {\n  padding: 0.8rem 1.5rem;\n  font-size: 1rem;\n  background-color: #007bff; /* Azul */\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n}\n\n.dreta {\n  text-align: right;\n  margin-left: auto;\n}\n\n.btn-primary:hover {\n  background-color: #0056b3; /* Azul más oscuro */\n}\n\n/* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */\n@media (max-width: 768px) {\n  .btn-back,\n  .btn-primary {\n    width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */\n  }\n}\n\n/* Botons filtre */\n.filter-buttons {\n  text-align: center;\n  margin-bottom: 20px;\n  display: flex;\n  flex-wrap: wrap;\n  gap: 10px;\n}\n\n.filter-btn {\n  padding: 10px 20px;\n  font-size: 16px;\n  border: 1px solid #007bff;\n  background-color: #fff;\n  color: #007bff;\n  border-radius: 4px;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n}\n\n.filter-btn:hover {\n  background-color: #007bff;\n  color: white;\n}\n\n.filter-btn:active {\n  transform: scale(0.95);\n}\n\n.filter-btn.active {\n  background-color: #007bff;\n  color: white;\n}"],"sourceRoot":""}]);
+}
+`, "",{"version":3,"sources":["webpack://./src/frontend/estils/botons.css"],"names":[],"mappings":"AAAA,0BAA0B;AAC1B;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,oBAAoB;AACtB;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,oBAAoB;AACtB;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,kBAAkB;EAClB,eAAe;AACjB;;AAEA;EACE,eAAe;EACf,YAAY;AACd;;AAEA;EACE,sBAAsB;EACtB,iBAAiB;EACjB,YAAY;AACd;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB;EACzB,qBAAqB;AACvB;;AAEA;EACE,yBAAyB;EACzB,YAAY;EACZ,YAAY;EACZ,kBAAkB;AACpB;;AAEA,mBAAmB;AACnB;EACE,WAAW;EACX,aAAa;EACb,kBAAkB;EAClB,eAAe;EACf,iCAAiC;EACjC,YAAY;EACZ,eAAe;AACjB;;AAEA,mBAAmB;AACnB;EACE,WAAW;EACX,aAAa;EACb,kBAAkB;EAClB,eAAe;EACf,iCAAiC;EACjC,YAAY;EACZ,eAAe;AACjB;;AAEA,4BAA4B;AAC5B;EACE,yBAAyB,EAAE,SAAS;EACpC,mBAAmB;EACnB,2DAA2D,EAAE,qBAAqB;AACpF;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;EAC/C,YAAY;EACZ,qBAAqB;AACvB;;AAEA,kCAAkC;AAClC;EACE,sBAAsB;EACtB,eAAe;EACf,yBAAyB,EAAE,SAAS;EACpC,YAAY;EACZ,YAAY;EACZ,kBAAkB;EAClB,eAAe;EACf,kBAAkB;AACpB;;AAEA;EACE,iBAAiB;EACjB,iBAAiB;AACnB;;AAEA;EACE,yBAAyB,EAAE,oBAAoB;AACjD;;AAEA,wFAAwF;AACxF;EACE;;IAEE,WAAW,EAAE,6DAA6D;EAC5E;AACF;;AAEA,kBAAkB;AAClB;EACE,kBAAkB;EAClB,mBAAmB;EACnB,aAAa;EACb,eAAe;EACf,SAAS;AACX;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,yBAAyB;EACzB,sBAAsB;EACtB,cAAc;EACd,kBAAkB;EAClB,eAAe;EACf,sCAAsC;AACxC;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd;;AAEA;EACE,sBAAsB;AACxB;;AAEA;EACE,yBAAyB;EACzB,YAAY;AACd","sourcesContent":["/* Ajustes para el botón */\nbutton {\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n  padding: 0.6rem 1rem;\n}\n\n.button {\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n  padding: 0.6rem 1rem;\n}\n\n.btn {\n  padding: 10px 20px;\n  font-size: 16px;\n  text-align: center;\n  cursor: pointer;\n}\n\n.btn-gran {\n  font-size: 1rem;\n  border: none;\n}\n\n.btn-petit {\n  padding: 0.4rem 0.6rem;\n  font-size: 0.7rem;\n  border: none;\n}\n\n.btn-primari {\n  background-color: #081b2e;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-primari:hover {\n  background-color: #0056b3;\n  transform: scale(1.1);\n}\n\n.btn-secondari {\n  background-color: #b93a08;\n  color: white;\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-secondari:hover {\n  background-color: #d60a03;\n  transform: scale(1.1);\n}\n\n.btn-secondary {\n  background-color: #6c757d;\n  border: none;\n  color: white;\n  border-radius: 3px;\n}\n\n/* Botón de envío */\n.btn-color-negre {\n  width: 100%;\n  padding: 10px;\n  border-radius: 3px;\n  font-size: 16px;\n  background-color: rgb(43, 42, 42);\n  color: white;\n  cursor: pointer;\n}\n\n/* Botón de envío */\n.btn-color-blau {\n  width: 100%;\n  padding: 10px;\n  border-radius: 3px;\n  font-size: 16px;\n  background-color: rgb(14, 14, 43);\n  color: white;\n  cursor: pointer;\n}\n\n/* Botón Atrás (izquierda) */\n.btn-enrere {\n  background-color: #aaaaaa; /* Gris */\n  color: rgb(0, 0, 0);\n  transition: transform 0.3s ease, background-color 0.3s ease; /* Transición suave */\n}\n\n.btn-enrere:hover {\n  background-color: #000000; /* Gris más oscuro */\n  color: white;\n  transform: scale(1.1);\n}\n\n/* Botón Crear factura (derecha) */\n.btn-primary {\n  padding: 0.8rem 1.5rem;\n  font-size: 1rem;\n  background-color: #007bff; /* Azul */\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n  text-align: center;\n}\n\n.dreta {\n  text-align: right;\n  margin-left: auto;\n}\n\n.btn-primary:hover {\n  background-color: #0056b3; /* Azul más oscuro */\n}\n\n/* En pantallas más pequeñas (móviles), los botones deben apilarse uno encima del otro */\n@media (max-width: 768px) {\n  .btn-back,\n  .btn-primary {\n    width: 100%; /* Los botones ocuparán todo el ancho en pantallas pequeñas */\n  }\n}\n\n/* Botons filtre */\n.filter-buttons {\n  text-align: center;\n  margin-bottom: 20px;\n  display: flex;\n  flex-wrap: wrap;\n  gap: 10px;\n}\n\n.filter-btn {\n  padding: 10px 20px;\n  font-size: 16px;\n  border: 1px solid #007bff;\n  background-color: #fff;\n  color: #007bff;\n  border-radius: 4px;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n}\n\n.filter-btn:hover {\n  background-color: #007bff;\n  color: white;\n}\n\n.filter-btn:active {\n  transform: scale(0.95);\n}\n\n.filter-btn.active {\n  background-color: #007bff;\n  color: white;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -19318,11 +19330,11 @@ function cinema() {
             }
         }
         else if ([pageType[1], pageType[2]].includes('fitxa-pelicula')) {
-            (0,_components_lecturaDadesForm_mostrarDades_connexioApiDades__WEBPACK_IMPORTED_MODULE_2__.connexioApiDades)('/api/cinema/get/?pelicula=', slug, 'img', 'cinema-pelicula', function (data) {
+            (0,_components_lecturaDadesForm_mostrarDades_connexioApiDades__WEBPACK_IMPORTED_MODULE_2__.connexioApiDades)('/api/cinema/get/pelicula?slug=', slug, 'img', 'cinema-pelicula', function (data) {
                 // Actualiza el atributo href del enlace con el idDirector
                 const directorUrl = document.getElementById('directorUrl');
                 if (directorUrl) {
-                    directorUrl.href = `${window.location.origin}/gestio/cinema/fitxa-director/${data[0].slugDirector}`;
+                    directorUrl.href = `${window.location.origin}/gestio/cinema/fitxa-director/${data.slugDirector}`;
                 }
             });
             // author book
@@ -19402,7 +19414,7 @@ function cinema() {
         }
         else if (pageType[2] === 'fitxa-actor') {
             (0,_persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_3__.fitxaPersona)('/api/persones/get/?persona=', pageType[3], 'cinema-actor', function (data) {
-                (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_4__.construirTaula)('taula1', '/api/cinema/get/?actor-pelicules=', data.slug, ['Titol', 'Any', 'Rol'], function (fila, columna) {
+                (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_4__.construirTaula)('taula1', '/api/cinema/get/actor-pelicules?slug=', data.slug, ['Titol', 'Any', 'Rol'], function (fila, columna) {
                     if (columna.toLowerCase() === 'titol') {
                         // Manejar el caso del título
                         return `<a href="https://${window.location.host}/gestio/cinema/fitxa-pelicula/${fila['slug']}">${fila['titol']}</a>`;
@@ -19419,7 +19431,7 @@ function cinema() {
                         return fila[columna.toLowerCase()];
                     }
                 });
-                (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_4__.construirTaula)('taula2', '/api/cinema/get/?actor-series=', data.slug, ['Titol', 'Any', 'Rol'], function (fila, columna) {
+                (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_4__.construirTaula)('taula2', '/api/cinema/get/actor-series?slug=', data.slug, ['Titol', 'Any', 'Rol'], function (fila, columna) {
                     if (columna.toLowerCase() === 'titol') {
                         // Manejar el caso del título
                         return `<a href="https://${window.location.host}/gestio/cinema/fitxa-serie/${fila['slug']}">${fila['titol']}</a>`;
@@ -19440,7 +19452,7 @@ function cinema() {
         }
         else if (pageType[2] === 'fitxa-director') {
             (0,_persona_fitxaPersona__WEBPACK_IMPORTED_MODULE_3__.fitxaPersona)('/api/persones/get/?persona=', pageType[3], 'cinema-director', function (data) {
-                (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_4__.construirTaula)('taula1', '/api/cinema/get/?directorPelicules=', data.id, ['', 'Titol', 'Any', 'Gènere'], function (fila, columna) {
+                (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_4__.construirTaula)('taula1', '/api/cinema/get/directorPelicules?id=', data.id, ['', 'Titol', 'Any', 'Gènere'], function (fila, columna) {
                     if (columna.toLowerCase() === '') {
                         // Manejar el caso del título
                         return `<a id="pelicula-${fila['id']}" title="pelicula" href="${window.location.origin}/gestio/cinema/fitxa-pelicula/${fila['slug']}">
@@ -19463,7 +19475,7 @@ function cinema() {
                         return fila[columna.toLowerCase()];
                     }
                 });
-                (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_4__.construirTaula)('taula2', '/api/cinema/get/?directorSeries=', data.id, ['', 'Titol', 'Any', 'Gènere'], function (fila, columna) {
+                (0,_services_api_construirTaula__WEBPACK_IMPORTED_MODULE_4__.construirTaula)('taula2', '/api/cinema/get/directorSeries?id=', data.id, ['', 'Titol', 'Any', 'Gènere'], function (fila, columna) {
                     if (columna.toLowerCase() === '') {
                         // Manejar el caso del título
                         return `<a id="serie-${fila['id']}" title="serie" href="${window.location.origin}/gestio/cinema/fitxa-serie/${fila['slug']}">
@@ -19562,7 +19574,7 @@ function taulaLlistatPelicules() {
             });
         }
         (0,_components_renderTaula_taulaRender__WEBPACK_IMPORTED_MODULE_0__.renderDynamicTable)({
-            url: `https://${window.location.host}/api/cinema/get/?pelicules`,
+            url: `https://${window.location.host}/api/cinema/get/pelicules`,
             containerId: 'taulaLlistatPelicules',
             columns,
             filterKeys: ['nom', 'cognoms', 'pelicula'],
@@ -21120,7 +21132,7 @@ function construirTaula(taulaId, apiUrl, id, columnas, callback) {
     })
         .then((data) => {
         // Comprobar si no hay datos o si el array está vacío "No rows"
-        if (data.error && data.error === 'No rows found') {
+        if (data.status === 'error') {
             // Si no hay datos, mostrar el mensaje
             const tablaContainer = document.getElementById(taulaId);
             if (tablaContainer) {
@@ -21979,7 +21991,6 @@ document.addEventListener('DOMContentLoaded', () => {
         (0,_pages_login_funcions__WEBPACK_IMPORTED_MODULE_5__.loginPage)();
     }
     else if (pageType[0] === 'nou-usuari') {
-        console.log('hola');
         const autor = document.getElementById('formUsuari');
         if (autor) {
             // Lanzar actualizador de datos

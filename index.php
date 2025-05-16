@@ -45,11 +45,6 @@ if (empty($language)) {
     }
 }
 
-// Establecer la cookie del idioma
-setcookie('language', $language, time() + 3600 * 24 * 30, '/');  // 30 días
-$_COOKIE['language'] = $language;
-
-
 // Cargar las traducciones correspondientes al idioma
 $translations = require __DIR__ . "/src/backend/locales/{$language}.php";
 

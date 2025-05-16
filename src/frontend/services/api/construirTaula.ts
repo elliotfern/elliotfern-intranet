@@ -21,7 +21,7 @@ export function construirTaula(taulaId: string, apiUrl: string, id: string, colu
     })
     .then((data) => {
       // Comprobar si no hay datos o si el array está vacío "No rows"
-      if (data.error && data.error === 'No rows found') {
+      if (data.status === 'error') {
         // Si no hay datos, mostrar el mensaje
         const tablaContainer = document.getElementById(taulaId);
         if (tablaContainer) {

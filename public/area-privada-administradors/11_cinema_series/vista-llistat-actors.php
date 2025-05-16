@@ -42,7 +42,7 @@
 
 <script>
   function authorsTableLibrary() {
-    const urlAjax = `https://${window.location.host}/api/cinema/get/?actors`;
+    const urlAjax = `https://${window.location.host}/api/cinema/get/actors`;
 
     fetch(urlAjax)
       .then(response => {

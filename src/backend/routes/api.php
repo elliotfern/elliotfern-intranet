@@ -127,7 +127,7 @@ $routes = [
     ],
 
     // BD CINEMA
-    '/api/cinema/get' => [
+    '/api/cinema/get/{slug}' => [
         'view' => 'src/backend/api/11_cinema/get-cinema.php',
         'needs_session' => false,
         'header_footer' => false,

@@ -54,7 +54,7 @@ export async function taulaLlistatPelicules() {
   }
 
   renderDynamicTable({
-    url: `https://${window.location.host}/api/cinema/get/?pelicules`,
+    url: `https://${window.location.host}/api/cinema/get/pelicules`,
     containerId: 'taulaLlistatPelicules',
     columns,
     filterKeys: ['nom', 'cognoms', 'pelicula'],

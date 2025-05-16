@@ -30,11 +30,11 @@ export async function cinema() {
       });
     }
   } else if ([pageType[1], pageType[2]].includes('fitxa-pelicula')) {
-    connexioApiDades('/api/cinema/get/?pelicula=', slug, 'img', 'cinema-pelicula', function (data) {
+    connexioApiDades('/api/cinema/get/pelicula?slug=', slug, 'img', 'cinema-pelicula', function (data) {
       // Actualiza el atributo href del enlace con el idDirector
       const directorUrl = document.getElementById('directorUrl') as HTMLAnchorElement;
       if (directorUrl) {
-        directorUrl.href = `${window.location.origin}/gestio/cinema/fitxa-director/${data[0].slugDirector}`;
+        directorUrl.href = `${window.location.origin}/gestio/cinema/fitxa-director/${data.slugDirector}`;
       }
     });
 
@@ -106,7 +106,7 @@ export async function cinema() {
     }
   } else if (pageType[2] === 'fitxa-actor') {
     fitxaPersona('/api/persones/get/?persona=', pageType[3], 'cinema-actor', function (data) {
-      construirTaula('taula1', '/api/cinema/get/?actor-pelicules=', data.slug, ['Titol', 'Any', 'Rol'], function (fila, columna) {
+      construirTaula('taula1', '/api/cinema/get/actor-pelicules?slug=', data.slug, ['Titol', 'Any', 'Rol'], function (fila, columna) {
         if (columna.toLowerCase() === 'titol') {
           // Manejar el caso del título
           return `<a href="https://${window.location.host}/gestio/cinema/fitxa-pelicula/${fila['slug']}">${fila['titol']}</a>`;
@@ -120,7 +120,7 @@ export async function cinema() {
           return fila[columna.toLowerCase()];
         }
       });
-      construirTaula('taula2', '/api/cinema/get/?actor-series=', data.slug, ['Titol', 'Any', 'Rol'], function (fila, columna) {
+      construirTaula('taula2', '/api/cinema/get/actor-series?slug=', data.slug, ['Titol', 'Any', 'Rol'], function (fila, columna) {
         if (columna.toLowerCase() === 'titol') {
           // Manejar el caso del título
           return `<a href="https://${window.location.host}/gestio/cinema/fitxa-serie/${fila['slug']}">${fila['titol']}</a>`;
@@ -137,7 +137,7 @@ export async function cinema() {
     });
   } else if (pageType[2] === 'fitxa-director') {
     fitxaPersona('/api/persones/get/?persona=', pageType[3], 'cinema-director', function (data) {
-      construirTaula('taula1', '/api/cinema/get/?directorPelicules=', data.id, ['', 'Titol', 'Any', 'Gènere'], function (fila, columna) {
+      construirTaula('taula1', '/api/cinema/get/directorPelicules?id=', data.id, ['', 'Titol', 'Any', 'Gènere'], function (fila, columna) {
         if (columna.toLowerCase() === '') {
           // Manejar el caso del título
           return `<a id="pelicula-${fila['id']}" title="pelicula" href="${window.location.origin}/gestio/cinema/fitxa-pelicula/${fila['slug']}">
@@ -156,7 +156,7 @@ export async function cinema() {
           return fila[columna.toLowerCase()];
         }
       });
-      construirTaula('taula2', '/api/cinema/get/?directorSeries=', data.id, ['', 'Titol', 'Any', 'Gènere'], function (fila, columna) {
+      construirTaula('taula2', '/api/cinema/get/directorSeries?id=', data.id, ['', 'Titol', 'Any', 'Gènere'], function (fila, columna) {
         if (columna.toLowerCase() === '') {
           // Manejar el caso del título
           return `<a id="serie-${fila['id']}" title="serie" href="${window.location.origin}/gestio/cinema/fitxa-serie/${fila['slug']}">

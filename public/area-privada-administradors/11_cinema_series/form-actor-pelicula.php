@@ -105,8 +105,8 @@ if ($modificaBtn === 1) {
 </div>
 
 <script>
-    function formInserir(id) {
-        let urlAjax = "/api/cinema/get/?pelicula=" + id;
+    function formInserir(slug) {
+        let urlAjax = "/api/cinema/get/pelicula?slug=" + slug;
 
         fetch(urlAjax, {
                 method: "GET",
@@ -114,13 +114,13 @@ if ($modificaBtn === 1) {
             .then(response => response.json())
             .then(data => {
                 // Establecer valores en los campos del formulario
-                const newContent = "Pel·lícula: " + data[0].pelicula;
+                const newContent = "Pel·lícula: " + data.pelicula;
                 const h2Element = document.getElementById('titolPelicula');
                 h2Element.innerHTML = newContent;
 
                 // Llenar selects con opciones
-                auxiliarSelect("/api/cinema/get/?pelicules", data[0].id, "idMovie", "pelicula");
-                auxiliarSelect("/api/cinema/get/?actors", "", "idActor", "nomComplet");
+                auxiliarSelect("/api/cinema/get/pelicules", data.id, "idMovie", "pelicula");
+                auxiliarSelect("/api/cinema/get/actors", "", "idActor", "nomComplet");
 
             })
             .catch(error => console.error("Error al obtener los datos:", error));
@@ -135,16 +135,16 @@ if ($modificaBtn === 1) {
             .then(response => response.json())
             .then(data => {
                 // Establecer valores en los campos del formulario
-                const newContent = "Pel·lícula: " + data[0].pelicula;
+                const newContent = "Pel·lícula: " + data.pelicula;
                 const h2Element = document.getElementById('titolPelicula');
                 h2Element.innerHTML = newContent;
 
-                document.getElementById("role").value = data[0].role;
-                document.getElementById("id").value = data[0].id;
+                document.getElementById("role").value = data.role;
+                document.getElementById("id").value = data.id;
 
                 // Llenar selects con opciones
-                auxiliarSelect("/api/cinema/get/?pelicules", data[0].idMovie, "idMovie", "pelicula");
-                auxiliarSelect("/api/cinema/get/?actors", data[0].idActor, "idActor", "nomComplet");
+                auxiliarSelect("/api/cinema/get/pelicules", data.idMovie, "idMovie", "pelicula");
+                auxiliarSelect("/api/cinema/get/actors", data.idActor, "idActor", "nomComplet");
 
             })
             .catch(error => console.error("Error al obtener los datos:", error));

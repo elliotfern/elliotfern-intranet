@@ -68,16 +68,11 @@
     let urlAjax = "/api/cinema/get/";
 
     if (tipus === 10) {
-      urlAjax += "?series";
-    } else {
-      urlAjax += "?type=generes&generes=" + tipus;
+      urlAjax += "series";
     }
 
     fetch(urlAjax, {
         method: "GET",
-        headers: {
-          "Authorization": "Bearer " + localStorage.getItem("token"),
-        },
       })
       .then((response) => response.json())
       .then((data) => {
