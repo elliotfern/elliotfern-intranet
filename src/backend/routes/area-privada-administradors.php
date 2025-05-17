@@ -1,5 +1,13 @@
 <?php
 
+// Configuración por defecto para rutas que requieren sesión, sin header_footer, con header_menu_footer
+$defaultProtectedConfig = [
+    'needs_session' => true,
+    'header_footer' => false,
+    'header_menu_footer' => true,
+    'apiSenseHTML' => false
+];
+
 // Función que verifica si el usuario es Admin
 function checkIfAdmin()
 {
@@ -10,25 +18,15 @@ function checkIfAdmin()
     }
 }
 
-// Rutas principales sin idioma explícito (solo para el idioma por defecto)
 $routes = [
-    APP_GESTIO => [
-        'view' =>  APP_INTRANET_DIR . APP_HOMEPAGE_DIR . 'admin.php',
-        'needs_session' => true,
-        'header_footer' => false,
-        'header_menu_footer' => false,
-        'apiSenseHTML' => false,
-        'menu_intranet' => true,
-    ],
 
-    APP_GESTIO . '/admin' => [
-        'view' =>  APP_INTRANET_DIR . APP_HOMEPAGE_DIR . 'admin.php',
-        'needs_session' => true,
-        'header_footer' => false,
-        'header_menu_footer' => false,
-        'apiSenseHTML' => false,
-        'menu_intranet' => true
-    ],
+    APP_GESTIO => array_merge($defaultProtectedConfig, [
+        'view' => APP_INTRANET_DIR . APP_HOMEPAGE_DIR . '/admin.php'
+    ]),
+
+    APP_GESTIO . '/admin' => array_merge($defaultProtectedConfig, [
+        'view' => APP_INTRANET_DIR . APP_HOMEPAGE_DIR . '/admin.php'
+    ]),
 
     // 02. Comptabilitat
     APP_GESTIO . $url['comptabilitat'] => [
@@ -300,8 +298,17 @@ $routes = [
         'menu_intranet' => true
     ],
 
-    APP_GESTIO . $url['vault'] . '/nova-clau' => [
-        'view' => APP_INTRANET_DIR . APP_CLAUS_DIR . 'nova-contrasenya.php',
+    APP_GESTIO . $url['vault'] . '/nou-vault' => [
+        'view' => APP_INTRANET_DIR . APP_CLAUS_DIR . 'form-clau.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
+    APP_GESTIO . $url['vault'] . '/modifica-vault/{id}' => [
+        'view' => APP_INTRANET_DIR . APP_CLAUS_DIR . 'form-clau.php',
         'needs_session' => true,
         'header_footer' => false,
         'header_menu_footer' => false,
@@ -811,6 +818,18 @@ $routes = [
         'apiSenseHTML' => false,
         'menu_intranet' => true
     ],
+
+    // RADIO ONLINE
+
+    APP_GESTIO . $url['radio'] => [
+        'view' => APP_INTRANET_DIR . APP_RADIO_DIR . 'index.php',
+        'needs_session' => true,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => false,
+        'menu_intranet' => true
+    ],
+
 
 ];
 

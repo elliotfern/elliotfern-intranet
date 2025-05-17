@@ -25,11 +25,8 @@ if (isset($_GET['llistat_serveis'])) {
     // Pasar el servicio correctamente a VaultController
     $passwordController = new VaultController($vaultService);
 
-    // Obtener el user_id
-    $userId = isset($_GET['user_id']) ? (int)$_GET['user_id'] : 31;
-
     // Llamar al método getPasswords con el ID dinámico
-    $passwords = $passwordController->getPasswords($userId);
+    $passwords = $passwordController->getPasswords();
 
     // Verificar que hemos obtenido un array de datos
     header('Content-Type: application/json');
@@ -68,6 +65,60 @@ if (isset($_GET['llistat_serveis'])) {
         // Si no se ha obtenido un array, devolver un error en formato JSON
         echo json_encode(["error" => "No se encontraron contraseñas"]);
     }
+
+    // Verificar si se ha recibido un parámetro válido
+} else if (isset($_GET['serveiId'])) {
+    $id = $_GET['serveiId'];
+
+    $query = "SELECT v.id, v.servei, v.usuari, v.tipus, v.web, v.notes
+    FROM db_vault AS v
+    WHERE v.id = :id";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
+
+
+    // Verificar si se ha recibido un parámetro válido
+} else if (isset($_GET['tipusServeis'])) {
+
+    $query = "SELECT v.id, v.tipus
+    FROM db_vault_type AS v
+    ORDER BY v.tipus";
+
+    // Preparar la consulta
+    $stmt = $conn->prepare($query);
+
+    // Ejecutar la consulta
+    $stmt->execute();
+
+    // Verificar si se encontraron resultados
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['error' => 'No rows found']);
+        exit;
+    }
+
+    // Recopilar los resultados
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Devolver los datos en formato JSON
+    echo json_encode($data);
 } else {
     echo json_encode(['error' => 'Invalid ID']);
 }

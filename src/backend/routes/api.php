@@ -68,6 +68,22 @@ $routes = [
         'apiSenseHTML' => true
     ],
 
+    '/api/vault/post' => [
+        'view' => 'src/backend/api/10_vault/post-vault.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
+    '/api/vault/put' => [
+        'view' => 'src/backend/api/10_vault/put-vault.php',
+        'needs_session' => false,
+        'header_footer' => false,
+        'header_menu_footer' => false,
+        'apiSenseHTML' => true
+    ],
+
     // API COMPTABILITAT ERP
     '/api/accounting/proxy' => [
         'view' => 'src/backend/api/02_accounting/proxy.php',

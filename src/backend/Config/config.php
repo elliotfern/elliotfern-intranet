@@ -51,6 +51,7 @@ define('APP_HISTORIA_DIR', '15_historia/');
 define('APP_AUXILIARS_DIR', '16_auxiliars/');
 define('APP_VIATGES_DIR', '17_viatges/');
 define('APP_USUARIS_DIR', '18_usuaris/');
+define('APP_RADIO_DIR', '19_radio/');
 
 // definicio de url
 $url = [
@@ -72,4 +73,5 @@ $url = [
     'auxiliars' => '/auxiliars',
     'viatges' => '/viatges',
     'usuaris' => '/gestio-usuaris',
+    'radio' => '/radio',
 ];

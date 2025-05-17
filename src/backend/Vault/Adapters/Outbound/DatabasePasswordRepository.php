@@ -15,16 +15,14 @@ class DatabasePasswordRepository implements PasswordRepositoryInterface
         $this->conn = $conn;
     }
 
-    public function getPasswords(int $vaultId): array
+    public function getPasswords(): array
     {
         try {
             $sql = "SELECT v.id, v.servei, v.usuari, t.tipus, v.web, v.dateModified 
             FROM db_vault AS v
             LEFT JOIN db_vault_type AS t ON v.tipus = t.id
-            WHERE client = :vaultId
             ORDER BY v.servei ASC";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':vaultId', $vaultId, PDO::PARAM_INT);
             $stmt->execute();
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $results;

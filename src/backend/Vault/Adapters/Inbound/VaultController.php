@@ -15,10 +15,10 @@ class VaultController
     }
 
     // Método para obtener las contraseñas de un "vault" (bóveda)
-    public function getPasswords(int $vaultId)
+    public function getPasswords()
     {
         // Llamamos al servicio VaultService para obtener las contraseñas
-        $passwords = $this->vaultService->getPasswords($vaultId);
+        $passwords = $this->vaultService->getPasswords();
 
         // Verificar que estamos recibiendo un array
         if (!is_array($passwords)) {

@@ -20632,6 +20632,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _utils_urlPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/urlPath */ "./src/frontend/utils/urlPath.ts");
 /* harmony import */ var _components_vault_serveisVault__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/vault/serveisVault */ "./src/frontend/components/vault/serveisVault.ts");
+/* harmony import */ var _utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/actualitzarDades */ "./src/frontend/utils/actualitzarDades.ts");
+
 
 
 const url = window.location.href;
@@ -20639,6 +20641,24 @@ const pageType = (0,_utils_urlPath__WEBPACK_IMPORTED_MODULE_0__.getPageType)(url
 function vault() {
     if (pageType[1] === 'claus-privades') {
         (0,_components_vault_serveisVault__WEBPACK_IMPORTED_MODULE_1__.serveisVaultApi)();
+    }
+    if (pageType[2] === 'modifica-vault') {
+        const autor = document.getElementById('modificaVault');
+        if (autor) {
+            // Lanzar actualizador de datos
+            autor.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_2__.transmissioDadesDB)(event, 'PUT', 'modificaVault', '/api/vault/put/?clau');
+            });
+        }
+    }
+    else if (pageType[2] === 'nou-vault') {
+        const autor = document.getElementById('modificaVault');
+        if (autor) {
+            // Lanzar actualizador de datos
+            autor.addEventListener('submit', function (event) {
+                (0,_utils_actualitzarDades__WEBPACK_IMPORTED_MODULE_2__.transmissioDadesDB)(event, 'POST', 'modificaVault', '/api/vault/post/?clau');
+            });
+        }
     }
 }
 
